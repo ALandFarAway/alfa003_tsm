@@ -6,17 +6,21 @@ void main()
 	 int nNumber = GetLocalInt(oMod, "omega_boat_number");
 	 string sName = "Rowboat #" + IntToString(nNumber);
 	 int nStart = GetLocalInt(oDM, "omega_temp_boat");
+	 string sStartEnd = "Start";
 	 string sBoat = "tsm_rowboat";
 	if(nStart == 0)
 		{nNumber++;
 		 SetLocalInt(oMod,"omega_boat_number", nNumber);
 		 }
-	if(nStart == 3)
+	if(nStart == 1)
+		{sStartEnd = "Destination";}
+	if(nStart == 2)
 		{sBoat = "tsm_rowboat_via";
+		sStartEnd = "Via Point";
 		}
 		 
 	object oBoat = CreateObject(OBJECT_TYPE_PLACEABLE, sBoat, lLocation);
 	SetFirstName(oBoat, sName);
-	SendMessageToAllDMs("Created " + GetName(oBoat));
+	SendMessageToAllDMs("Created " + GetName(oBoat) + " " + sStartEnd);
 	
 }		

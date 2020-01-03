@@ -63,17 +63,20 @@ void main() {
 		
 
  //rowboats 	
-if(FindSubString(GetTag(OBJECT_SELF), "tsm_plc_rowboat") != -1)
-	 {object oBoater = GetLocalObject(OBJECT_SELF, "oBoater");
+if(GetTag(OBJECT_SELF) == "tsm_rowboat")
+	 {SendMessageToAllDMs("TSM Rowboat Used");
+	 object oBoater = GetLocalObject(OBJECT_SELF, "oBoater");
 	  if(oBoater == OBJECT_INVALID)
 	  	{oBoater = GetLastUsedBy();
 		 SetLocalObject(OBJECT_SELF, "oBoater", oBoater);
 		 }
+	  SendMessageToAllDMs("TSM Rowboat oBoater is " + GetName(oBoater));
 	  object oBoater2 = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	  while(oBoater2 != OBJECT_INVALID)
 	  	{if(oBoater2 != oBoater)
 			{SetLocalObject(OBJECT_SELF, "oBoater2", oBoater2);
-			 break;
+			 SendMessageToAllDMs("TSM Rowboat oBoater2 is " + GetName(oBoater2));
+	  		  break;
 			 }
 		   oBoater2 = GetNextObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	  	}
@@ -81,7 +84,8 @@ if(FindSubString(GetTag(OBJECT_SELF), "tsm_plc_rowboat") != -1)
 	  while(oBoater3 != OBJECT_INVALID)
 	  	{if((oBoater3 != oBoater) && (oBoater3 != oBoater2))
 			{SetLocalObject(OBJECT_SELF, "oBoater3", oBoater3);
-			 break;
+			 SendMessageToAllDMs("TSM Rowboat oBoater3 is " + GetName(oBoater3));
+	  		 break;
 			 }
 		   oBoater3 = GetNextObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	  	}
@@ -101,17 +105,19 @@ if(FindSubString(GetTag(OBJECT_SELF), "tsm_plc_rowboat") != -1)
 			{oDestination = GetNearestObjectByTag(GetTag(OBJECT_SELF), OBJECT_SELF, 1);
 			 SetLocalObject(OBJECT_SELF, "oDestination", oDestination);
 			}
-	  	   
+	  SendMessageToAllDMs("TSM Rowboat oDestination is " + GetName(oDestination));
+	  		 	   
 	  object oVia = GetLocalObject(OBJECT_SELF, "oVia");
 	  if(oVia == OBJECT_INVALID)
 			{oVia = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_via", OBJECT_SELF, 1);
+			 SendMessageToAllDMs("A. oVia = " + GetName(oVia));
 			 int iVia = 1;
 		     while(iVia <= 5)
-				{object oViaObject = GetLocalObject(oBoatPrime, GetName(oVia));
-				 if(GetLocalObject(oBoatPrime, GetName(oVia)) != oVia)
+				{if(GetLocalObject(oBoatPrime, GetName(oVia)) != oVia)
 					{SetLocalObject(OBJECT_SELF, "oVia", oVia);
 					 SetLocalObject(oBoatPrime, GetName(oVia), oVia);
 					 AssignCommand(oBoatPrime, DelayCommand(15.0, SetLocalObject(oBoatPrime, GetName(oVia), OBJECT_INVALID)));
+					 SendMessageToAllDMs("B. iVia = " + IntToString(iVia) + " oVia = " + GetName(oVia));
 					 break;
 					 }
 				 else
@@ -120,7 +126,8 @@ if(FindSubString(GetTag(OBJECT_SELF), "tsm_plc_rowboat") != -1)
 					 	{oVia = OBJECT_INVALID;}
 					 else
 					 	{oVia = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_via", OBJECT_SELF, iVia);
-					 	}
+					 	 SendMessageToAllDMs("C. iVia = " + IntToString(iVia) + " oVia = " + GetName(oVia));
+					    }
 					}
 				}
 			}

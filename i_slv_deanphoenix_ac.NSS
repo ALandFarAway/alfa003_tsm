@@ -18,8 +18,9 @@ void main()
  	effect eGlimmer = EffectVisualEffect(VFX_DUR_PIXIEDUST, FALSE);
     effect eSummon = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_1, FALSE);
     
-	if(GetName(GetItemActivator()) == "Wynna")
-        {SetLocalObject(GetModule(), "oWynna", GetItemActivator());}
+	if((GetName(GetItemActivator()) == "Wynna") || (FindSubString(GetName(GetItemActivator()), "Wynna", 0) != -1))
+        {SendMessageToAllDMs(GetName(GetItemActivator()) + " activated Carved Phoenix");
+		 SetLocalObject(GetModule(), "oWynna", GetItemActivator());}
         {}
     SetLocalObject(OBJECT_SELF, "oNPC", oNPC);
 
