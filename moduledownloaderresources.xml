@@ -510,7 +510,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7ECDDEEC68D58FFE6695E0B61C5188D49BFC5670" downloadHash="C431891F1CBD47A38304C05636B447F999C0EC04" name="6d_ext_silverymoon_south.trx" dlsize="3634914" size="19285046" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9BE7613110D4E3267DF05ABCBEC7FBA725C33A35" downloadHash="090D28080FF00C5C9F926E8134726FA9AE88DEBE" name="6d_ext_silverymoon_south.trx" dlsize="3628983" size="19289870" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
