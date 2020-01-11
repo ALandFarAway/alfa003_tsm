@@ -63,7 +63,7 @@ void main() {
 		
 
  //rowboats 	
-if(GetTag(OBJECT_SELF) == "tsm_rowboat")
+if((GetTag(OBJECT_SELF) == "tsm_rowboat") || (FindSubString(GetTag(OBJECT_SELF), "plc_rowboat", 0)!= -1))
 	 {SendMessageToAllDMs("TSM Rowboat Used");
 	 object oBoater = GetLocalObject(OBJECT_SELF, "oBoater");
 	  if(oBoater == OBJECT_INVALID)
