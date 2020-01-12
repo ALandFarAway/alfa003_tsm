@@ -261,7 +261,7 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 					  bbs_add_notice(oMyBBS, sMaster, sSchool + " Classes", "Elementary " +sSchool + "--" + sTime100 + "; Standard " +sSchool + "--" + sTime200 + "; Advanced " +sSchool + "--" +sTime300 + "; Senior " +sSchool + "--" +sTime400, "", GetTag(oMyBBS));
 					 
 					  sSchool = "Enchantment";
-					  sMaster = "Master Silverbrook";
+					  sMaster = "Master Elestari";
 					  sTime100 = "1900";
 					  sTime200 = "0900";
 					  sTime300 = "0600";
@@ -269,7 +269,7 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 					  bbs_add_notice(oMyBBS, sMaster, sSchool + " Classes", "Elementary " +sSchool + "--" + sTime100 + "; Standard " +sSchool + "--" + sTime200 + "; Advanced " +sSchool + "--" +sTime300 + "; Senior " +sSchool + "--" +sTime400, "", GetTag(oMyBBS));
 					  
 					  sSchool = "Evocation";
-					  sMaster = "Master Arcadavera";
+					  sMaster = "Mistress Gertrun";
 					  sTime100 = "When there's time to burn";
 					  sTime200 = "Moments of truth";
 					  sTime300 = "Seasonally in discontent";
@@ -469,6 +469,9 @@ if((GetIsPC(oStudent)) && (GetLocalInt(oStudent, "Classes") != 1))
 	 if(GetCampaignString("SLV_UNI", "DeanDragonGreeted" + GetName(oStudent), oStudent) != "Yes")
 	    {SetLocalString(oStudent, "DeanDragonGreeted" + GetName(oStudent), "Yes");
 		}
+	 if(GetCampaignString("SLV_UNI", "DeanSphinxGreeted" + GetName(oStudent), oStudent) != "Yes")
+	    {SetLocalString(oStudent, "DeanSphinxGreeted" + GetName(oStudent), "Yes");
+		}
 	
 	}   	 
 } 
@@ -498,6 +501,20 @@ if((GetIsPC(oStudent)) && (GetLocalInt(oStudent, "Classes") != 1))
 		int nUseable = GetUseableFlag(oBookcase);
 		if(nUseable == FALSE)
 			{if(GetItemPossessedBy(oStudent, "slv_deanphoenix") != OBJECT_INVALID)
+				{SetUseableFlag(oBookcase, TRUE);
+				 }
+			}
+		}
+		
+		if((GetTag(OBJECT_SELF) == "slv_vala_secret_sphinx") && ((GetIsPC(oStudent)) || (GetIsDMPossessed(oStudent))))
+			{object oBookcase = GetLocalObject(OBJECT_SELF, "oBookcase");
+		 if(oBookcase == OBJECT_INVALID)
+		 	{oBookcase = GetObjectByTag("slv_vala_bookcase_sphinx");
+			 SetLocalObject(OBJECT_SELF, "oBookcase", oBookcase);
+			 }
+		int nUseable = GetUseableFlag(oBookcase);
+		if(nUseable == FALSE)
+			{if(GetItemPossessedBy(oStudent, "slv_deansphinx") != OBJECT_INVALID)
 				{SetUseableFlag(oBookcase, TRUE);
 				 }
 			}

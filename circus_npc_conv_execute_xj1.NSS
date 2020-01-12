@@ -23,8 +23,19 @@ void main()
 	
 	//Water Genasi Acrobat	
 	if((GetTag(OBJECT_SELF) == "003_cr_circus_jenny") && (GetTag(GetArea(OBJECT_SELF)) == "003_travelling_circus_int_bigtp"))
-			{	object oXavier = GetObjectByTag("003_cr_firegen_xavier", 0);
-		 			  object oJenny = OBJECT_SELF;
+			{object oXavier = GetObjectByTag("003_cr_firegen_xavier", 0);
+		 			  object oArea = GetArea(oXavier);
+					  int nMusicDay = MusicBackgroundGetDayTrack(oArea);
+			          int nMusicNight = MusicBackgroundGetNightTrack(oArea);
+			          int nElfsong = MusicBackgroundGetBattleTrack(oArea);
+			          int nHour = GetTimeHour();
+					  string sMusicDay = IntToString(nMusicDay);
+					  string sMusicNight = IntToString(nMusicNight);
+					  string sElfsong = IntToString(nElfsong);
+					  AssignCommand(oXavier, ActionSpeakString("Elfsong Int is " + sElfsong + "and MusicDay Int is" + sMusicDay + "and MusicNight Int is " + sMusicNight + ".", TALKVOLUME_TALK));
+					  
+					  string sHour = IntToString(nHour);
+					  object oJenny = OBJECT_SELF;
 					  object oHide=GetWaypointByTag("hiding_wp");
 					  object oJenny2 = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_circus_jenny", GetLocation(oHide));
 					  object oMephit = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_deanphoenix_firemeph", GetLocation(oHide));
@@ -33,9 +44,7 @@ void main()
 					  int nBonus=10;
 					  int nPerform = nPerformRandom + nBonus;
 					  int nPerform2 = nPerformRandom2 + nBonus;
-					  AssignCommand(oXavier, ActionSpeakString("*OOC: The Ringmaster rolls " + IntToString(nPerform) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
-					  DelayCommand(2.0, ActionSpeakString("*OOC: The Acrobat rolls " + IntToString(nPerform2) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
-			
+					  
 					  object oLute = GetItemPossessedBy(oXavier, "abr_it_msc_lute");
 					  object oDagger = GetItemPossessedBy(oJenny, "abr_it_wpn_dagger_as");
 					  object oLadderCenterWestUp = GetWaypointByTag("003_plc_circus_ladder_cw_up_WP");
@@ -124,12 +133,26 @@ void main()
 					  DelayCommand(20.0, AssignCommand(oXavier, ActionSpeakString("*Speaks rhythmically, in a deep, resonant voice.*", TALKVOLUME_TALK)));
 					   */
 					   
+					  AssignCommand(oXavier, ActionSpeakString("Changing background music to " + sElfsong + " now.", TALKVOLUME_TALK));
+					  MusicBackgroundChangeDay(oArea, nElfsong);
+					  MusicBackgroundChangeNight(oArea, nElfsong);
+					  MusicBackgroundPlay(oArea);
+					  DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("Changing background music to Day Music which is int " + sMusicDay + " now.", TALKVOLUME_TALK)));
+					  DelayCommand(11.0, AssignCommand(oArea, MusicBackgroundChangeDay(oArea, nMusicDay)));
+					  DelayCommand(12.0, AssignCommand(oArea, MusicBackgroundPlay(oArea)));
 					  
+					  DelayCommand(20.0, AssignCommand(oXavier, ActionSpeakString("Changing background music to Night Music which is int " + sMusicNight + " now.", TALKVOLUME_TALK)));
+					  DelayCommand(21.0, AssignCommand(oArea, MusicBackgroundChangeDay(oArea, nMusicNight)));
+					  DelayCommand(22.0, AssignCommand(oArea, MusicBackgroundPlay(oArea)));
+					  
+					  
+					  //AssignCommand(oXavier, ActionSpeakString("*OOC: The Ringmaster rolls " + IntToString(nPerform) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
 					  AssignCommand(oJenny, ActionSpeakString("*Stretches.*", TALKVOLUME_TALK));
+					  DelayCommand(2.0, ActionSpeakString("*OOC: The Acrobat rolls " + IntToString(nPerform2) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
 					  DelayCommand(2.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_WILDSHAPE, 1.0, 2.0)));
 					  DelayCommand(2.0, AssignCommand(oJenny, ActionWait(1.0)));
 					  DelayCommand(5.0, AssignCommand(oXavier, ActionSpeakString("The time, ladies and gentleman, may be yesterday or a hundred years past.", TALKVOLUME_TALK)));
-					  DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("The place, though, quite certainly, is a secluded cove in the warm tropical waters of the Lake of Steam.", TALKVOLUME_TALK)));
+					  //DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("The place, though, quite certainly, is a secluded cove in the warm tropical waters of the Lake of Steam.", TALKVOLUME_TALK)));
 					  DelayCommand(10.0, AssignCommand(oJenny, SetFacing(DIRECTION_EAST, FALSE)));
 					  
 					  int nPC = 1;
@@ -157,7 +180,8 @@ void main()
 					  DelayCommand(26.0, AssignCommand(oMephit, SetFacing(DIRECTION_WEST, FALSE)));
 					  
 					  DelayCommand(28.0, ActionCreateWynPlacedEffect("circus_fx_spotlight", lLadderCenterEastUp)); 
-				 	  DelayCommand(30.0, AssignCommand(oXavier, ActionSpeakString("There lived three sisters, daughters of the waters.", TALKVOLUME_TALK)));
+				 	  DelayCommand(28.0, AssignCommand(oMephit, ActionCastFakeSpellAtObject(SPELL_FLAME_STRIKE, OBJECT_SELF, PROJECTILE_PATH_TYPE_DEFAULT)));
+					  DelayCommand(30.0, AssignCommand(oXavier, ActionSpeakString("There lived three sisters, daughters of the waters.", TALKVOLUME_TALK)));
 					  DelayCommand(33.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_LOOPING_DANCE01, 1.0, 2.0)));
 					  DelayCommand(33.0, AssignCommand(oJenny, ActionWait(2.0)));
 					  DelayCommand(35.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_LOOPING_DANCE01, 1.0, 2.0)));
