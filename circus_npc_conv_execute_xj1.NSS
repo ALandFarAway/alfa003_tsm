@@ -25,14 +25,14 @@ void main()
 	if((GetTag(OBJECT_SELF) == "003_cr_circus_jenny") && (GetTag(GetArea(OBJECT_SELF)) == "003_travelling_circus_int_bigtp"))
 			{object oXavier = GetObjectByTag("003_cr_firegen_xavier", 0);
 		 			  object oArea = GetArea(oXavier);
-					  int nMusicDay = MusicBackgroundGetDayTrack(oArea);
-			          int nMusicNight = MusicBackgroundGetNightTrack(oArea);
-			          int nElfsong = MusicBackgroundGetBattleTrack(oArea);
+					 // int nMusicDay = MusicBackgroundGetDayTrack(oArea);
+			         // int nMusicNight = MusicBackgroundGetNightTrack(oArea);
+			         // int nElfsong = MusicBackgroundGetBattleTrack(oArea);
 			          int nHour = GetTimeHour();
-					  string sMusicDay = IntToString(nMusicDay);
-					  string sMusicNight = IntToString(nMusicNight);
-					  string sElfsong = IntToString(nElfsong);
-					  AssignCommand(oXavier, ActionSpeakString("Elfsong Int is " + sElfsong + "and MusicDay Int is" + sMusicDay + "and MusicNight Int is " + sMusicNight + ".", TALKVOLUME_TALK));
+					 // string sMusicDay = IntToString(nMusicDay);
+					 // string sMusicNight = IntToString(nMusicNight);
+					 // string sElfsong = IntToString(nElfsong);
+					 // AssignCommand(oXavier, ActionSpeakString("Elfsong Int is " + sElfsong + "and MusicDay Int is" + sMusicDay + "and MusicNight Int is " + sMusicNight + ".", TALKVOLUME_TALK));
 					  
 					  string sHour = IntToString(nHour);
 					  object oJenny = OBJECT_SELF;
@@ -102,57 +102,23 @@ void main()
 					  object oFountainBall=GetObjectByTag("fountain_collball");
 					  int nAppearance=GetAppearanceType(oJenny);
 					 
-					  /*DelayCommand(3.0, AssignCommand(oJenny, SetFacing(DIRECTION_SOUTH, FALSE)));
-					  DelayCommand(4.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 2.0)));
-					  DelayCommand(4.0, AssignCommand(oJenny, ActionWait(2.0)));
-					  DelayCommand(6.0, AssignCommand(oJenny, ActionForceMoveToLocation(lLadderCenterWestDown, TRUE, 30.0)));
-					  DelayCommand(7.0, AssignCommand(oJenny, SetFacing(DIRECTION_SOUTH, FALSE)));
-					  DelayCommand(9.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE, 1.0, 2.0)));
-					  DelayCommand(9.0, AssignCommand(oJenny, ActionWait(1.0)));
-					  DelayCommand(10.0, AssignCommand(oJenny, SetFacing(DIRECTION_NORTH, FALSE)));
-					  DelayCommand(9.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0)));
-					  DelayCommand(9.0, AssignCommand(oJenny, ActionWait(1.0)));
-					  DelayCommand(9.0, AssignCommand(oXavier, SetFacing(DIRECTION_SOUTH, FALSE)));
-					  DelayCommand(10.0, AssignCommand(oJenny, ActionSpeakString("*Climbs.*", TALKVOLUME_TALK)));
-					  DelayCommand(10.0, AssignCommand(oXavier, ActionCastSpellAtObject(SPELL_JOYFUL_NOISE, oXavier, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-					  DelayCommand(11.0, AssignCommand(oXavier, ActionEquipItem(oLute, INVENTORY_SLOT_RIGHTHAND)));
-					  DelayCommand(12.0, AssignCommand(oJenny, ActionJumpToLocation(lLadderCenterWestUp)));
-					  
-					  DelayCommand(13.0, AssignCommand(oXavier, ActionPlayAnimation(ANIMATION_LOOPING_GUITARPLAY, 1.0, 3.0)));
-			 		  DelayCommand(13.0, AssignCommand(oXavier, PlaySound("as_cv_lute1", FALSE)));
-			          DelayCommand(13.5, AssignCommand(oXavier, ActionWait(3.0)));
-					  DelayCommand(13.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0)));
-					  DelayCommand(13.0, AssignCommand(oJenny, ActionWait(1.0)));
-					  DelayCommand(14.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_LOOPING_GET_LOW, 1.0, 2.0)));
-					  DelayCommand(14.0, AssignCommand(oJenny, ActionWait(1.0)));
-					  DelayCommand(14.0, AssignCommand(oXavier, ActionPlayAnimation(ANIMATION_LOOPING_GUITARPLAY, 1.0, 3.0)));
-			 		  DelayCommand(14.0, AssignCommand(oXavier, PlaySound("as_cv_lute1", FALSE)));
-			          DelayCommand(14.0, AssignCommand(oXavier, ActionWait(3.0)));
-					  DelayCommand(16.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_DRUMIDLEFIDGET, 1.0, 2.0)));
-					  DelayCommand(16.0, AssignCommand(oJenny, ActionWait(1.0)));
-					  DelayCommand(20.0, AssignCommand(oXavier, ActionSpeakString("*Speaks rhythmically, in a deep, resonant voice.*", TALKVOLUME_TALK)));
-					   */
-					   
-					  AssignCommand(oXavier, ActionSpeakString("Changing background music to " + sElfsong + " now.", TALKVOLUME_TALK));
-					  MusicBackgroundChangeDay(oArea, nElfsong);
-					  MusicBackgroundChangeNight(oArea, nElfsong);
-					  MusicBackgroundPlay(oArea);
-					  DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("Changing background music to Day Music which is int " + sMusicDay + " now.", TALKVOLUME_TALK)));
-					  DelayCommand(11.0, AssignCommand(oArea, MusicBackgroundChangeDay(oArea, nMusicDay)));
-					  DelayCommand(12.0, AssignCommand(oArea, MusicBackgroundPlay(oArea)));
-					  
-					  DelayCommand(20.0, AssignCommand(oXavier, ActionSpeakString("Changing background music to Night Music which is int " + sMusicNight + " now.", TALKVOLUME_TALK)));
-					  DelayCommand(21.0, AssignCommand(oArea, MusicBackgroundChangeDay(oArea, nMusicNight)));
-					  DelayCommand(22.0, AssignCommand(oArea, MusicBackgroundPlay(oArea)));
+	  
+					 // AssignCommand(oXavier, ActionSpeakString("Changing background music to " + sElfsong + " now.", TALKVOLUME_TALK));
+					 // MusicBackgroundChangeDay(oArea, nElfsong);
+					 // MusicBackgroundChangeNight(oArea, nElfsong);
+					 // MusicBackgroundPlay(oArea);
+					 // DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("Changing background music to Day Music which is int " + sMusicDay + " now.", TALKVOLUME_TALK)));
+					 // DelayCommand(11.0, AssignCommand(oArea, MusicBackgroundChangeDay(oArea, nMusicDay)));
+				 	 // DelayCommand(12.0, AssignCommand(oArea, MusicBackgroundPlay(oArea)));
 					  
 					  
-					  //AssignCommand(oXavier, ActionSpeakString("*OOC: The Ringmaster rolls " + IntToString(nPerform) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
+					  AssignCommand(oXavier, ActionSpeakString("*OOC: The Ringmaster rolls " + IntToString(nPerform) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
 					  AssignCommand(oJenny, ActionSpeakString("*Stretches.*", TALKVOLUME_TALK));
 					  DelayCommand(2.0, ActionSpeakString("*OOC: The Acrobat rolls " + IntToString(nPerform2) + " on a Perform Check for this performance.*", TALKVOLUME_TALK));
 					  DelayCommand(2.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_FIREFORGET_WILDSHAPE, 1.0, 2.0)));
 					  DelayCommand(2.0, AssignCommand(oJenny, ActionWait(1.0)));
 					  DelayCommand(5.0, AssignCommand(oXavier, ActionSpeakString("The time, ladies and gentleman, may be yesterday or a hundred years past.", TALKVOLUME_TALK)));
-					  //DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("The place, though, quite certainly, is a secluded cove in the warm tropical waters of the Lake of Steam.", TALKVOLUME_TALK)));
+					  DelayCommand(10.0, AssignCommand(oXavier, ActionSpeakString("The place, though, quite certainly, is a secluded cove in the warm tropical waters of the Lake of Steam.", TALKVOLUME_TALK)));
 					  DelayCommand(10.0, AssignCommand(oJenny, SetFacing(DIRECTION_EAST, FALSE)));
 					  
 					  int nPC = 1;
@@ -178,10 +144,11 @@ void main()
 					  DelayCommand(23.0, AssignCommand(oXavier, ActionSpeakString("To the lake he came, a prince of thieves, of fiery laugh and no domain.", TALKVOLUME_TALK)));
 					  DelayCommand(25.0, AssignCommand(oMephit, ActionJumpToLocation(lLadderCenterEastUp)));
 					  DelayCommand(26.0, AssignCommand(oMephit, SetFacing(DIRECTION_WEST, FALSE)));
+					  DelayCommand(27.0, AssignCommand(oMephit, ActionCastSpellAtObject(SPELL_EAGLES_SPLENDOR, oMephit, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 					  
 					  DelayCommand(28.0, ActionCreateWynPlacedEffect("circus_fx_spotlight", lLadderCenterEastUp)); 
-				 	  DelayCommand(28.0, AssignCommand(oMephit, ActionCastFakeSpellAtObject(SPELL_FLAME_STRIKE, OBJECT_SELF, PROJECTILE_PATH_TYPE_DEFAULT)));
-					  DelayCommand(30.0, AssignCommand(oXavier, ActionSpeakString("There lived three sisters, daughters of the waters.", TALKVOLUME_TALK)));
+				 	  DelayCommand(30.0, AssignCommand(oXavier, ActionSpeakString("There lived three sisters, daughters of the waters.", TALKVOLUME_TALK)));
+					  DelayCommand(31.0, AssignCommand(oMephit, ActionCastFakeSpellAtObject(SPELL_FLAME_STRIKE, oMephit, PROJECTILE_PATH_TYPE_DEFAULT)));
 					  DelayCommand(33.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_LOOPING_DANCE01, 1.0, 2.0)));
 					  DelayCommand(33.0, AssignCommand(oJenny, ActionWait(2.0)));
 					  DelayCommand(35.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_LOOPING_DANCE01, 1.0, 2.0)));
@@ -192,6 +159,12 @@ void main()
 					  DelayCommand(42.0, AssignCommand(oJenny, ActionPlayAnimation(ANIMATION_LOOPING_DANCE02, 1.0, 5.0)));
 					  DelayCommand(42.0, AssignCommand(oJenny, ActionWait(3.0)));
 					  DelayCommand(45.0, AssignCommand(oXavier, ActionSpeakString("The third and most beautiful his heart did rule.", TALKVOLUME_TALK)));
+					  
+					  //DelayCommand(47.0, AssignCommand(oXavier, ActionSpeakString("Changing background music to Night Music which is int " + sMusicNight + " now.", TALKVOLUME_TALK)));
+					  DelayCommand(47.0, AssignCommand(oArea, MusicBackgroundChangeDay(oArea, 472)));
+					  DelayCommand(48.0, AssignCommand(oArea, MusicBackgroundChangeNight(oArea, 472)));
+					  DelayCommand(49.0, AssignCommand(oArea, MusicBackgroundPlay(oArea)));
+					  
 					  
 					  DelayCommand(46.0, AssignCommand(oXavier, ActionPlayAnimation(ANIMATION_LOOPING_GUITARPLAY, 1.0, 3.0)));
 			 		  DelayCommand(46.0, AssignCommand(oXavier, PlaySound("as_cv_lute1", FALSE)));
@@ -544,6 +517,7 @@ void main()
 					  DelayCommand(374.0, AssignCommand(oJenny, SetFacing(DIRECTION_WEST, FALSE)));
 					  DelayCommand(375.0, AssignCommand(oJenny, ActionJumpToLocation(lHighwireCartwheel3)));
 					  DelayCommand(376.0, AssignCommand(oJenny, SetFacing(DIRECTION_SOUTH, FALSE)));
+					  DelayCommand(376.0, AssignCommand(oArea, MusicBackgroundStop(oArea)));
 					  DelayCommand(375.0, AssignCommand(oMephit, ActionJumpToLocation(lHighwireCartwheel2)));
 					  DelayCommand(377.0, AssignCommand(oMephit, ActionJumpToLocation(lHighwireCartwheel3)));
 					  DelayCommand(377.0, AssignCommand(oJenny, ActionSpeakString("*Backflips off highwire*", TALKVOLUME_TALK)));

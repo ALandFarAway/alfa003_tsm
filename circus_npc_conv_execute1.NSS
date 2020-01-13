@@ -144,7 +144,7 @@ void main()
 			 DelayCommand(5.0, AssignCommand(oBeardedLady, ActionSpeakString("Ready!", TALKVOLUME_TALK)));
 		     DelayCommand(10.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
 			 }
-		else if((nIncrement > 0) && (nIncrement < 10)) 
+		else if(nIncrement < 10)
 			 {
 			 if(nIncrement==1)
 			 	{lDagger=lDagger1;}
@@ -171,14 +171,23 @@ void main()
 			 ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f);
 			 ActionWait(4.0);
 			 DelayCommand(3.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger));
+			 
+			 nIncrement++;
+			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
+			 DelayCommand(6.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
 			 }
-		else if(nIncrement==10)
+		
+		if(nIncrement==10)
 			 {DelayCommand(1.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 1.0));
 		  	 DelayCommand(1.5, AssignCommand(oBeardedLady, ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 1.0)));
 		  	 DelayCommand(2.0, ActionSpeakString("Not a scratch on her, nor a hair shaved!", TALKVOLUME_TALK));
 		     DelayCommand(4.0, ActionForceMoveToObject(oDaggerTarget, FALSE, 1.0));
+			 nIncrement++;
+			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
+			 DelayCommand(10.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
 			 }
-		else if(nIncrement==11)
+		
+		if(nIncrement==11)
 		 	{DestroyObject(oDagger1);
 			 DestroyObject(oDagger2);
 			 DestroyObject(oDagger3);
@@ -192,17 +201,6 @@ void main()
 			 SetLocalInt(OBJECT_SELF, "nIncrement", 0);
 		 	 DelayCommand(3.0, ActionMoveToLocation(lDaggerStart, FALSE));
 			 }	
-		 if(nIncrement<10)
-		 	{nIncrement++;
-			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
-			 DelayCommand(6.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
-			 }
-		 else if(nIncrement==10)
-		 	{nIncrement++;
-			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
-			 DelayCommand(10.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
-			 }
-			 
 		}
 			
 	//Fortune Teller
