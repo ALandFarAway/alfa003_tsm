@@ -84,16 +84,25 @@ void main()
 		 object oToken=CreateItemOnObject("003_it_slv_teleport", oUser, 1);
 		 DelayCommand(2.0, SetIdentified(oToken, TRUE));
 		 DelayCommand(2.5, AssignCommand(oUser, ActionJumpToLocation(lGoTo)));
-
+ 
 		 if(GetTag(OBJECT_SELF) == "slv_el_earth")
 		 	{if(ACR_RetrieveQuestState("slv_deandragon_e_earth", oUser) == 1)
 				 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_e_earth", 2, oUser, FALSE, FALSE, FALSE, 0);
 					 DelayCommand(15.0, SendMessageToPC(oUser, "You have been transported to what appears to be a sealed cavern beneath the earth. Dirt trickles from the ceiling at any loud noise and the rattle of falling rocks may be heard in the darkness. There appears to be no way out...except to dig."));
 					 }
+			 if(ACR_RetrieveQuestState("slv_deansphinx_e_earth", oUser) == 1)
+				 	{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e_earth", 2, oUser, FALSE, FALSE, FALSE, 0);
+					 DelayCommand(15.0, SendMessageToPC(oUser, "You have been transported to what appears to be a sealed cavern beneath the earth. Dirt trickles from the ceiling at any loud noise and the rattle of falling rocks may be heard in the darkness. There appears to be no way out...except to dig."));
+					 }
+			
 			}			 
 		if(GetTag(OBJECT_SELF) == "slv_el_water")
 		 	{if(ACR_RetrieveQuestState("slv_deandragon_e_water", oUser) == 1)
 				 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_e_water", 2, oUser, FALSE, FALSE, FALSE, 0);
+					 DelayCommand(15.0, SendMessageToPC(oUser, "You have teleported to the test of water to find yourself in a cavernous pit filled with water. Stalagtites and stalagtites of blue rock project from the surface of the water. Some of those outcroppings glitter with blue gems! But how do you get to them?"));
+					 }
+			 if(ACR_RetrieveQuestState("slv_deansphinx_e_water", oUser) == 1)
+				 	{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e_water", 2, oUser, FALSE, FALSE, FALSE, 0);
 					 DelayCommand(15.0, SendMessageToPC(oUser, "You have teleported to the test of water to find yourself in a cavernous pit filled with water. Stalagtites and stalagtites of blue rock project from the surface of the water. Some of those outcroppings glitter with blue gems! But how do you get to them?"));
 					 }
 			}			 
@@ -119,6 +128,10 @@ void main()
 			 if(ACR_RetrieveQuestState("slv_deandragon_e_air", oUser) == 1)
 				 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_e_air", 2, oUser, FALSE, FALSE, FALSE, 0);
 					 }
+					 
+			 if(ACR_RetrieveQuestState("slv_deansphinx_e_air", oUser) == 1)
+				 	{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e_air", 2, oUser, FALSE, FALSE, FALSE, 0);
+					 }
 				
 			if(GetLocalInt(oUser, "ColdRep") == 0)
 					{SetLocalInt(oUser, "ColdRep", 1);
@@ -137,6 +150,11 @@ void main()
 				 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_e_fire", 2, oUser, FALSE, FALSE, FALSE, 0);
 					 DelayCommand(15.0, SendMessageToPC(oUser, "The first thing you notice is the heat. It isn't merely HOT. The temperature is a living, swollen, suffocating creature that wraps you in its folds at the same time it crawls inside and turns your bones molten. Sweat springs out, all over your skin, but it will do little to cool you. Without protection, you will fry."));
 			 		 }
+			if(ACR_RetrieveQuestState("slv_deansphinx_e_fire", oUser) == 1)
+				 	{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e_fire", 2, oUser, FALSE, FALSE, FALSE, 0);
+					 DelayCommand(15.0, SendMessageToPC(oUser, "The first thing you notice is the heat. It isn't merely HOT. The temperature is a living, swollen, suffocating creature that wraps you in its folds at the same time it crawls inside and turns your bones molten. Sweat springs out, all over your skin, but it will do little to cool you. Without protection, you will fry."));
+			 		 }
+			 
 			 }
 		}
 		

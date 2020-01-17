@@ -58,8 +58,14 @@ void main()
 	string sArea = GetTag(GetArea(oCaster));
 	
 
-			
-	
+if(nSpellId == SPELL_LIGHT) 	
+	{if(GetTag(oCaster) == "abr_cr_ou_ravid")
+		{SendMessageToPC(oTarget, "You feel a tingling burst of energy!");
+		 AssignCommand(oCaster,SpeakString("*Lashes out with its tail*", TALKVOLUME_TALK)); 
+		 AssignCommand(oCaster, ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		 RemoveEffect(oTarget, EffectVisualEffect(VFX_DUR_LIGHT,0));
+		 }	
+	}
 
 if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetTag(GetArea(oCaster)), "5h_") != -1)|| (FindSubString(GetTag(GetArea(oCaster)), "6f_") != -1) || ((FindSubString(GetTag(GetArea(oCaster)), "5g_") != -1) && (FindSubString(GetTag(GetArea(oCaster)), "felbarr") == -1))  )
 	{if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 

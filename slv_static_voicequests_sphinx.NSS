@@ -134,66 +134,66 @@ string sTryAgain = "Do you wish to receive, submit or use a keyword to enter?  Y
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("O! for a muse of fire, that would ascend the brightest heaven of invention.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "G") || (sQuest == "g")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_g") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("He made a human figure of unliving material, and left a small aperture in the lesser brain in which he laid that which binds all living things. The clod immediately arose and was a man…", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "H") || (sQuest == "h")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_h") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("No monster more baneful than these, no fiercer plague or wrath of the gods ever rose from the waves. Maiden faces have these birds, foulest filth they drop, clawed hands are theirs, and faces ever gaunt with hunger . . .", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "I") || (sQuest == "i")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_i") != OBJECT_INVALID))
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Illusions commend themselves to us because they save us pain and allow us to enjoy pleasure instead. We must therefore accept it without complaint when they sometimes collide with a bit of reality against which they are dashed to pieces.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "J") || (sQuest == "j")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_j") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("The magician thanked him who spoke, and having seen the palace knew that it had been raised by the jann of the lamp, and became half mad with rage.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "K") || (sQuest == "k")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_k") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Ye miners call it cobalt : the dwarves call it the black devil, and the old devil’s hag, old and black kobel, which by their witchcraft do injury to people and to their cattle.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "L") || (sQuest == "l")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_l") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Fenrir, however, inspired too much fear in them for them to let him out from under their watchful eyes. Only Tyr, the indefatigable upholder of law and honor, dared to approach the werewolf to feed him.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "M") || (sQuest == "m")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_m") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Following his instructions, she gave the hero a ball of thread as he entered. He fastened this to the door and let it trail behind him as he went in. He came across the Minotauros in the furthest section of the labyrinth, killed him with jabs of his fist, and then made his way out again by pulling himself along the thread.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "N") || (sQuest == "n")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_n") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("But sail upon the wind of lamentation, my friends, and about your head row with your hands' rapid stroke in conveyance of the dead, that stroke which always causes the sacred slack-sailed, black-clothed ship to pass to the unseen land, the sunless land that receives all men.", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("For this pale, fatal-eyed woman, with the green weeds, looked like a birth from some cold sedgy stream, the daughter of an aged river.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "O") || (sQuest == "o")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_o") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("The Orcs reeled and screamed and cast aside both sword and spear. Like a black smoke driven by a mounting wind they fled. Wailing they passed under the waiting shadow of the trees; and from that shadow none ever came again.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "P") || (sQuest == "p")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_p") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Now the Phoenix's bright eye grows dim and the pupil becomes palsied by the frost of years...", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "Q") || (sQuest == "q")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_q") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("The feather whence the pen was shaped that traced the lives of these good men, dropped from an archon’s wing.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "R") || (sQuest == "r"))&& (GetItemPossessedBy(oStudent, "slv_deansphinx_r") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("For many hours the immediate vicinity of the low framework upon which I lay, had been literally swarming with rats. They were wild, bold, ravenous; their red eyes glaring upon me as if they waited but for motionlessness on my part to make me their prey.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "S") || (sQuest == "s")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_s") != OBJECT_INVALID))
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("The sage does not hoard. The more he helps others, the more he benefits himself. The more he gives to others, the more he gets himself.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "T") || (sQuest == "t")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_t") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Some of my kin look just like trees now, and need something great to rouse them; and they speak only in whispers. But some of my trees are limb-lithe, and many can talk to me.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "U") || (sQuest == "u")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_u") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Up then under are for you, new dimensions of the 'U'. Identify a friendship true; most familiar has the clue. Friends you'll slumber or subdue; other creatures blast to goo. (In your pocket's something new.)", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("The bridge will only take you halfway there, to those mysterious lands you long to see. Through gypsy camps and swirling Uthgardt fair, and moonlit woods where unicorns run free. So come and walk awhile with me and share the twisting trails and wondrous worlds I've known. But this bridge will only take you halfway there. The last few steps you have to take alone.", TALKVOLUME_TALK)));
                      CreateItemOnObject("slv_key_roof", oStudent, 1);
 					 }
                else if (((sQuest == "V") || (sQuest == "v")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_v") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("They say sad rivers swelled with their own tears—naiads and dryads with dishevelled hair wore garments of dark color. His torn limbs were scattered in strange places. Rauvin then received his head and harp—and, wonderful! While his loved harp was floating down the stream, it mourned for him beyond my power to tell. His tongue though lifeless, uttered a mournful sound.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "W") || (sQuest == "w")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_w") != OBJECT_INVALID))
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("After these years, a helping hand? O goddess, what guile is hidden here? A raft, you say, to cross the Western Ocean, rough water, and unknown? Seaworthy ships that glory in god's wind will never cross it. I take no raft you grudge me out to sea. Or yield me first a great oath, if I do, to work no more enchantment to my harm.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "X") || (sQuest == "x")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_x") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Ashes to ashes. Dust to dust.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "Y") || (sQuest == "y")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_y") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Let us beware lest the cursed cur prevent us even from the nethermost hell from delivering the goddess by his furious howling, just as he did when on earth.", TALKVOLUME_TALK)));
                      CreateItemOnObject("slv_key_roof", oStudent, 1);
 					 }
                else if (((sQuest == "Z") || (sQuest == "z")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_z") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Their flesh will rot while they are still standing on their feet, their eyes will rot in their sockets, and their tongues will rot in their mouths.", TALKVOLUME_TALK)));
                     }
                else {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Proper preparation is the first step in any research project.  Did you follow intructions?  Do you wish to receive or submit a project?", TALKVOLUME_TALK)));
                      SetLocalInt(oStudent, "Improper", 1);
