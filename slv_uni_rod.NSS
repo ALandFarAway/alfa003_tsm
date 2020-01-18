@@ -22,7 +22,7 @@ void main()
 	
 
  if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) )
-		{if((IsStudentEnrolledInSilvyUniversity(oStudent)) && (GetIsPC(oStudent)))
+		{if((IsStudentEnrolledInSilvyUniversity(oStudent)) && (GetIsPC(oStudent)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
 		    {SendMessageToPC(oDM, "***");
 			SendMessageToPC(oDM, "ALL COURSE INFO FOR " + GetName(oStudent) + ":");
 			SendMessageToPC(oDM, "Elementary Abjuration = " + GetCampaignString("SLV_UNI", "Elementary AbjurationInfo", oStudent));
@@ -75,8 +75,8 @@ void main()
 	        string sCapitalLetter = GetSubString(sCapitals, iABC, 1);
 	        string sSmallLetter = GetSubString(sSmalls, iABC, 1);
 	        while(iABC < 27)
-	         	{if(ACR_RetrieveQuestState("slv_deandragon_" + sSmallLetter,  oStudent) > 0)
-					{SendMessageToPC(oDM, "DeanDragon " + sCapitalLetter + " = " + IntToString(ACR_RetrieveQuestState("slv_deandragon_" + sSmallLetter, oStudent)));
+	         	{if(ACR_RetrieveQuestState("slv_deansphinx_" + sSmallLetter,  oStudent) > 0)
+					{SendMessageToPC(oDM, "DeanSphinx " + sCapitalLetter + " = " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sSmallLetter, oStudent)));
 					}
 				iABC++;
 				sCapitalLetter = GetSubString(sCapitals, iABC, 1);
