@@ -1692,7 +1692,8 @@
   </resource>
   <resource type="Hak" hash="AF61A08EC96F1C46967D5A880238C9D69D51A026" downloadHash="C187EF970AFA2E9515BE0EAA58EEEF5C8007B85E" name="alfa_fx2.hak" dlsize="99911248" size="146785353" critical="false" exclude="false" urlOverride="">
     <server-ref>
-      <string>0</string>
+      <string>1</string>
+      <string>3</string>
     </server-ref>
   </resource>
 </content>
