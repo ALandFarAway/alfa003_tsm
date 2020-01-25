@@ -58,7 +58,7 @@ void main()
 		 SetLocalInt(oMyDoorTrig, "Unlocked", 0);
 		 
 		 }	
-   else if ((GetLastSpell() == SPELL_KNOCK) && (GetDistanceBetween(oStudent, OBJECT_SELF) < 10.0) && ((sName == "") || (sName == "Empty")))
+   else if (((GetLastSpell() == SPELL_KNOCK)|| (GetLastSpell() == SPELL_GREASE)|| (GetLastSpell() == SPELL_CURE_MINOR_WOUNDS)|| (GetLastSpell() == SPELL_DAZE)|| (GetLastSpell() == SPELL_FLARE)) && (GetDistanceBetween(oStudent, OBJECT_SELF) < 10.0) && ((sName == "") || (sName == "Empty")))
 		{SetLocalInt(oMyDoorTrig, "Unlocked", 1);
 		 SetFirstName(OBJECT_SELF, "Dormitory: " + GetName(oStudent));
 		 SetLocalString(oArea, GetName(oMyDoorTrig) + "_Owner", GetName(oStudent));

@@ -204,7 +204,7 @@ if(GetTag(OBJECT_SELF) == "slv_dorm")
 					 }
 				}
 				
-			else if((((sOwner == "") || (sOwner == "Empty")) && ((GetLevelByClass(CLASS_TYPE_WIZARD, oStudent) >= 1) || (GetLevelByClass(CLASS_TYPE_SORCERER, oStudent) >= 1) ))	|| (GetItemPossessedBy(oStudent, sOwner + "_slv_key") != OBJECT_INVALID))
+			else if (((sOwner == "") || (sOwner == "Empty")) && ((GetLevelByClass(CLASS_TYPE_WIZARD, oStudent) >= 1) || (GetLevelByClass(CLASS_TYPE_SORCERER, oStudent) >= 1)  || (GetLevelByClass(CLASS_TYPE_BARD, oStudent) >= 1))	|| (GetItemPossessedBy(oStudent, sOwner + "_slv_key") != OBJECT_INVALID))
 				{SetLocked(oMyDoor, FALSE);
 		         ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGo, oMyDoor, 3.0);
 		         SetLocalInt(OBJECT_SELF, "Unlocked", 1);
@@ -220,9 +220,9 @@ if(GetTag(OBJECT_SELF) == "slv_dorm")
 				 } 
 			else if ((sOwner != "") && (GetName(OBJECT_SELF) != "Dean_Dorm_1")&& (sOwner != "Dean Vihuel") && (sOwner != "Dr. Augustine") && (FindSubString(GetName(OBJECT_SELF), "MH") != -1))
 				 {SetLocked(oMyDoor, TRUE);
-		         SetLocalInt(OBJECT_SELF, "Unlocked", 0);
-		         AssignCommand(oMyDoor, SpeakString("Welcome. " + sOwner + " is in."));
-				 } 	 
+		          SetLocalInt(OBJECT_SELF, "Unlocked", 0);
+		          AssignCommand(oMyDoor, SpeakString("Welcome. " + sOwner + " is in."));
+				} 	 
 			 						
 			}
 			
