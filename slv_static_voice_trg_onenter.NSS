@@ -116,7 +116,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e") && (ACR_RetrieveQuestState("slv_d
 	}
 
 //deanddragon_e_air
-if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && (ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2))
+if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2)))
  	{object oMyIce = GetLocalObject(OBJECT_SELF, "oMyIce");
 	 if(oMyIce == OBJECT_INVALID)
 	 	{oMyIce = GetObjectByTag("slv_deandragon_e_ice");
@@ -125,7 +125,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && (ACR_RetrieveQues
 	 SetUseableFlag(oMyIce, TRUE);
 	}
 	
-if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringObject()) != "003_cr_slv_deanvoice_phoenix"))
+/*if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringObject()) != "003_cr_slv_deanvoice_phoenix"))
 	  {object oMyWP = GetLocalObject(OBJECT_SELF, "oMyWP");
 	   if(oMyWP == OBJECT_INVALID)
 		 	{oMyWP = GetWaypointByTag("slv_el_air_wp4");
@@ -167,7 +167,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringOb
 			 DelayCommand(75.0, ExecuteScript("slv_static_voice_cr_pc", oStudent));
 			}
 	   }
-	
+	*/
 
 	 if((GetTag(OBJECT_SELF) == "slv_deandragon_e_flightend") && (GetIsPC(GetEnteringObject())))
  	 	{object oCollWP = GetLocalObject(OBJECT_SELF, "oCollWP");

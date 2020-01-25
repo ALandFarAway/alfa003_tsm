@@ -12,36 +12,30 @@ void main()
 		}
     
     object oStudent = GetItemActivatedTarget();
-	string sQuestInc = GetLocalString(oDM, "quest_inc");
-	string sQuestDec = GetLocalString(oDM, "quest_dec");
-	
-	
+	string sQuestSchool = GetLocalString(oDM, "slv_uni_school_quests");
+	string sQuestLevel = GetLocalString(oDM, "slv_uni_level_quests");
+	int nQuestUpDown = GetLocalInt(oDM, "slv_uni_updown_quests");
+	string sQuest = ("slv_" + sQuestSchool + sQuestLevel);
 	
 	
 
 //Change Quest States
 	
-if(sQuestInc != "")
-		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)))
-			{int nQuestState= ACR_RetrieveQuestState(sQuestInc,  oStudent);
-			 SendMessageToPC(oDM, sQuestInc + " = " + IntToString(ACR_RetrieveQuestState(sQuestInc, oStudent)) + " for " + GetName(oStudent));
-			 ACR_AddPersistentJournalQuestEntry(sQuestInc, nQuestState +1, oStudent, 0, 0, 0, 0);
-			 SendMessageToPC(oDM, sQuestInc + " changed to " + IntToString(ACR_RetrieveQuestState(sQuestInc, oStudent)) + " for " + GetName(oStudent));
-			 SetLocalString(oStudent, sQuestInc, "");
-			}
+if(sQuest != "")
+		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM))  || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
+			{int nQuestStateBefore= ACR_RetrieveQuestState(sQuest,  oStudent);
+			 int nQuestStateAfter = nQuestStateBefore + nQuestUpDown;
+			 SendMessageToPC(oDM, sQuest + " = " + IntToString(ACR_RetrieveQuestState(sQuest, oStudent)) + " for " + GetName(oStudent));
+			 if(nQuestUpDown < 0)
+			 	{ACR_RemovePersistentJournalQuestEntry(sQuest, oStudent, 0, 0);}
+			 DelayCommand(1.0, ACR_AddPersistentJournalQuestEntry(sQuest, nQuestStateAfter, oStudent, 0, 0, 0, 0));
+			 SendMessageToPC(oDM, sQuest + " changed to " + IntToString(ACR_RetrieveQuestState(sQuest, oStudent)) + " for " + GetName(oStudent));
+			 SetLocalString(oDM, "slv_uni_school_quests", "");
+			 SetLocalString(oDM, "slv_uni_level_quests", "");
+			 SetLocalInt(oDM, "slv_uni_updown_quests", 0);
+			 }
 		}
-			
-	else if(sQuestDec != "")
-		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)))
-			{int nQuestState= ACR_RetrieveQuestState(sQuestDec,  oStudent);
-			 int nNewState = nQuestState-1;
-			 SendMessageToPC(oDM, sQuestDec + " = " + IntToString(ACR_RetrieveQuestState(sQuestDec, oStudent)) + " for " + GetName(oStudent));
-			 ACR_RemovePersistentJournalQuestEntry(sQuestDec, oStudent, 0, 0);
-			 DelayCommand(1.0, ACR_AddPersistentJournalQuestEntry(sQuestDec, nNewState, oStudent, 0, 0, 0, 0));
-			 DelayCommand(2.0, SendMessageToPC(oDM, sQuestDec + " changed to " + IntToString(ACR_RetrieveQuestState(sQuestDec, oStudent)) + " for " + GetName(oStudent)));
-			 DelayCommand(3.0, SetLocalString(oStudent, sQuestDec, ""));
-			}
-		}
+		
 	
 
 }

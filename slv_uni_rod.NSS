@@ -21,7 +21,7 @@ void main()
 	
 	
 
- if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) )
+ if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1) )
 		{if((IsStudentEnrolledInSilvyUniversity(oStudent)) && (GetIsPC(oStudent)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
 		    {SendMessageToPC(oDM, "***");
 			SendMessageToPC(oDM, "ALL COURSE INFO FOR " + GetName(oStudent) + ":");
@@ -68,8 +68,8 @@ void main()
 			}
 			
 			
-	//Anybody can be in the Dean's Quest, student or not
-	int iABC = 0;
+		//Retrieve Dean's Quest quest states
+			int iABC = 0;
 	        string sCapitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	        string sSmalls = "abcdefghijklmnopqrstuvwxyz";
 	        string sCapitalLetter = GetSubString(sCapitals, iABC, 1);
@@ -83,7 +83,7 @@ void main()
 	        	sSmallLetter = GetSubString(sSmalls, iABC, 1);
 	        	}
 			
-			
+		//Toggle walk off/on for NPCs	
 		float fDistance = GetDistanceBetweenLocations(lStudent, GetLocation(oDM));
 		SendMessageToPC(oDM, "Distance to " + GetName(oStudent) + " = " + FloatToString(fDistance));
 		SendMessageToPC(oDM, "Time-- " + IntToString(GetTimeHour()) + ":" + IntToString(GetTimeMinute()));
@@ -123,7 +123,10 @@ void main()
 		
 		
 		SetLocalInt(oDM, "Group_Walk", 0);
-	if(GetIsLocationValid(lCreate) == TRUE)
+
+		
+		//Create NPCs that are not slaved to their Uni spawn times but will self destroy in two hours.
+		if(GetIsLocationValid(lCreate) == TRUE)
 		{string sResRef;
 		 int iResRef = GetLocalInt(oDM, "Uni_NPC");
 		 if(iResRef != 0)

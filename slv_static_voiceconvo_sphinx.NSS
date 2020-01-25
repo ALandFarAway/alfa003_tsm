@@ -73,7 +73,7 @@ void main()
              sMiddleName2 = GetName(oStudent);
              }
 	
-	if((nMatch >= 5061) && (nMatch <= 5063) && (ACR_RetrieveQuestState("slv_deansphinx_e_air", oPC) == 2))
+	if((nMatch >= 5061) && (nMatch <= 5063) && (ACR_RetrieveQuestState("slv_deansphinx_e_air", oPC) == 2) && (GetTag(GetArea(OBJECT_SELF)) == "5b_ext_frosthills_glacier"))
 		{if(GetLocalObject(oPC, "oMyListener") == OBJECT_SELF)
 			{object oCollWP = GetLocalObject(OBJECT_SELF, "oCollWP");
 			 if(oCollWP == OBJECT_INVALID)
@@ -245,16 +245,7 @@ void main()
         while(iABC < 27)
           {if((nMatch == nKeyword) &&  ((sQuest == sCapitalLetter) || (sQuest == sSmallLetter)))
             {AssignCommand(oSphinx, SpeakString("Very good.  I shall record you as having collected all the information to discuss with my Master.", TALKVOLUME_TALK));
-             if((sQuest == "R") || (sQuest == "r") || (sQuest == "J")|| (sQuest == "j"))
-			 	{DelayCommand(5.0, AssignCommand(oSphinx, SpeakString("Oh and something else for you. Of this answer you'll need two, for a hidden subtext clue, not the big clue that you'll view.", TALKVOLUME_TALK)));
- 				if((sQuest == "J") || (sQuest == "j"))
-				 	{DelayCommand(10.0, AssignCommand(oSphinx, SpeakString("Mercy me and on you too! Listen up or else you'll rue...when looking back and on review, need revealed as two TIMES two?", TALKVOLUME_TALK)));
-	 				}
-				}
-			 if((sQuest == "V") || (sQuest == "v"))
-			 	{DelayCommand(5.0, AssignCommand(oSphinx, SpeakString("Very simple, yes? From this you may learn two things. The first: simplicity can be more difficult than complexity when it is a change from procedure. The second: simple and fast are just as effective as learned and detailed when executed properly.", TALKVOLUME_TALK)));
- 				}
-			 int iQuestState = ACR_RetrieveQuestState("slv_deansphinx_" + GetStringLowerCase(sQuest), oStudent);
+             int iQuestState = ACR_RetrieveQuestState("slv_deansphinx_" + GetStringLowerCase(sQuest), oStudent);
 			 if(GetCampaignString("SLV_UNI", "SphinxQuest" + sQuest, oStudent) != "Completed")
 				 {ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + GetStringLowerCase(sQuest), iQuestState +1, oStudent, FALSE, FALSE, FALSE, 100);
 				 SetCampaignString("SLV_UNI", "SphinxQuest" + sQuest, "Completed", oStudent);

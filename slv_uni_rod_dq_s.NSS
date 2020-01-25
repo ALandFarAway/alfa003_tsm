@@ -27,7 +27,7 @@ if(sDQInc != "")
 			 SendMessageToPC(oDM, "deansphinx " + sDQInc + " = " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQInc, oStudent)) + " for " + GetName(oStudent));
 			 ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + sDQInc, nQuestState +1, oStudent, 0, 0, 0, 0);
 			 SendMessageToPC(oDM, "deansphinx " + sDQInc + " changed to " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQInc, oStudent)) + " for " + GetName(oStudent));
-			 SetLocalString(oStudent, "deanquest_inc", "");
+			 SetLocalString(oDM, "deanquest_inc", "");
 			}
 		}
 			
@@ -39,9 +39,20 @@ if(sDQInc != "")
 			 ACR_RemovePersistentJournalQuestEntry("slv_deansphinx_" + sDQDec, oStudent, 0, 0);
 			 DelayCommand(1.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + sDQDec, nNewState, oStudent, 0, 0, 0, 0));
 			 DelayCommand(2.0, SendMessageToPC(oDM, "deansphinx " + sDQDec + " changed to " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQDec, oStudent)) + " for " + GetName(oStudent)));
-			 DelayCommand(3.0, SetLocalString(oStudent, "deanquest_dec", ""));
+			 DelayCommand(3.0, SetLocalString(oDM, "deanquest_dec", ""));
 			}
 		}
 	
-
+	if((FindSubString(GetName(oDM), "Wynna", 0) != -1)&&  (FindSubString(GetName(oStudent), "Wynna", 0) != -1))
+		{int nGiveGold = GetLocalInt(oDM, "TestPCGold");
+		 int nGiveXP = GetLocalInt(oDM, "TestPCXP");
+		 if(nGiveGold == 1)
+		 	{GiveGoldToCreature(oStudent, 500, TRUE);
+			 SetLocalInt(oDM, "TestPCGold", 0);}
+		 if(nGiveXP == 1)
+		 	{GiveXPToCreature(oStudent, 1000);
+			 SetLocalInt(oDM, "TestPCXP", 0);
+			 }
+		 }
+		
 }
