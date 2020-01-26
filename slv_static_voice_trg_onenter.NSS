@@ -103,22 +103,6 @@ void main()
 	 }
 	
 
-//deanddragon_e 			
-if((GetTag(OBJECT_SELF) == "slv_deandragon_e") && (ACR_RetrieveQuestState("slv_deandragon_e", GetEnteringObject()) > 0)&& (ACR_RetrieveQuestState("slv_deandragon_e", GetEnteringObject()) < 8))
- 	{object oIncinderWP = GetLocalObject(OBJECT_SELF, "oIncinderWP");
-	 if(oIncinderWP == OBJECT_INVALID)
-	 	{oIncinderWP = GetWaypointByTag("slv_deansdragon_e_incinder");
-		 SetLocalObject(OBJECT_SELF, "oIncinderWP", oIncinderWP);
-		}
-	 object oMyIncinder = GetLocalObject(OBJECT_SELF, "oMyIncinder");
-	 if(oMyIncinder == OBJECT_INVALID)
-	 	{oMyIncinder = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_incinder2", GetLocation(oIncinderWP));
-		 SetLocalObject(OBJECT_SELF, "oMyIncinder", oMyIncinder);
-	 	 DestroyObject(oMyIncinder, 600.00);
-		 DelayCommand(600.0, SetLocalObject(OBJECT_SELF, "oMyIncinder", OBJECT_INVALID));
-	 	 SendMessageToPC(GetEnteringObject(), "The smell of brimstone and the muted crackle of flames attract your eye to the creature flapping before the Weave Shrine.");
-		 } 
-	}
 
 //deanddragon_e_air & deansphinx_e_air && deansphinx a
 if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_a", GetEnteringObject()) == 6 )))

@@ -157,6 +157,9 @@ void main()
 			 if(iResRef == 9)
 				{sResRef = "003_cr_slv_belad";
 				}
+			  if(iResRef == 10)
+				{sResRef = "003_cr_slv_incinder2";
+				}
 			 if(iResRef == 21)
 				{sResRef = "003_cr_slv_profabj";
 				}
