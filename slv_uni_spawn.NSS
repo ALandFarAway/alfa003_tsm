@@ -56,7 +56,7 @@ if((GetTag(OBJECT_SELF) != "003_cr_slv_registrar") && (GetTag(OBJECT_SELF) != "0
 			
 	struct SilvyUniversityCourseInfo sInfo;
 		 
-	if(GetTag(OBJECT_SELF) == "003_cr_slv_registrar")
+	if((GetTag(OBJECT_SELF) == "003_cr_slv_registrar") || (GetIsDM(OBJECT_SELF)) || (GetIsDMPossessed(OBJECT_SELF))  || (FindSubString(GetName(OBJECT_SELF), "Wynna", 0) != -1))
 		{sSchool = GetLocalString(OBJECT_SELF, "sSchool");
 		 if(sSchool == "Abjuration")
 		 	{SetSilvyUniversitySchool(SilvyUniversitySchoolAbjuration);

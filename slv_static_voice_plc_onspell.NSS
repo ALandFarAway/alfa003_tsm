@@ -22,7 +22,7 @@ void main()
 		 object oQuester = GetLocalObject(OBJECT_SELF, "oQuester");
 		 if(oQuester == OBJECT_INVALID)
 			{oQuester = GetLastSpellCaster();}
-		 if(iSpell == SPELL_RAY_OF_FROST)
+		 if((iSpell == SPELL_RAY_OF_FROST) || (iSpell == SPELL_CONE_OF_COLD)|| (iSpell == SPELL_LESSER_ORB_OF_COLD)|| (iSpell == SPELL_ICE_DAGGER) )
 			{SetLocalInt(OBJECT_SELF, "Frozen", 1);
 			 SendMessageToPC(oQuester, "The fruit gleams, immediately crystalized in a casing of ice.");
 			 }

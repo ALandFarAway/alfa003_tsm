@@ -23,6 +23,9 @@ void main()
 		  if(ACR_RetrieveQuestState("slv_deandragon_d", oTaker) == 6)
 				{ACR_AddPersistentJournalQuestEntry("slv_deandragon_d", 7, oTaker);
 				}
+		 if(ACR_RetrieveQuestState("slv_dragonberry", oTaker) == 3)
+				{ACR_AddPersistentJournalQuestEntry("slv_dragonberry", 4, oTaker);
+				}
 			
 		  }
 					

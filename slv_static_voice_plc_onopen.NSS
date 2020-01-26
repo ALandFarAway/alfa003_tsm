@@ -51,7 +51,8 @@ void main()
 			 }	
 		if((oKnife != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Frozen") == 1) && (GetLocalInt(oQuester, "BlessedWeapon") == 1))
 			{SendMessageToPC(oQuester, "You use a surgically sharp, blessed knife to slice the frozen clusters of fruit from the bush. The berries actually seem to plump up beneath the frost at the touch of the blade.");
-			 object oBerries = CreateItemOnObject("003_it_food_dragonberry", OBJECT_SELF, 2);
+			 int nRandom = Random(4);
+			 object oBerries = CreateItemOnObject("003_it_food_dragonberry", OBJECT_SELF, nRandom);
 			 SetLocalObject(oQuester, GetTag(OBJECT_SELF) + "_berries", oBerries);
 			 }
 		SetUseableFlag(OBJECT_SELF, FALSE);

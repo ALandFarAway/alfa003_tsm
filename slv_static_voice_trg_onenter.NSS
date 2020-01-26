@@ -39,40 +39,45 @@ void main()
 //deandragon quests
 
 //deanddragon_b 
- if((GetTag(OBJECT_SELF) == "fey_chocolate_activate") && (ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) >= 5)&& (ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) <= 6))
- 	{object oMyTree = GetLocalObject(OBJECT_SELF, "oMyTree");
-	 if(oMyTree == OBJECT_INVALID)
-	 	{oMyTree = GetObjectByTag("fey_chocolate_tree");
-		 SetLocalObject(OBJECT_SELF, "oMyTree", oMyTree);
-		} 
-	 object oWP = GetLocalObject(OBJECT_SELF, "oWP");
-	 if(oWP == OBJECT_INVALID)
-		{oWP = GetNearestObjectByTag("ACR_SPAWN_WP", OBJECT_SELF);
-		 SetLocalObject(OBJECT_SELF, "oWP", oWP);
+ if(GetTag(OBJECT_SELF) == "fey_chocolate_activate") 
+ 	{
+	 if(((ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) >= 5)&& (ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) <= 6)) || ((ACR_RetrieveQuestState("slv_deansphinx_b", GetEnteringObject()) >= 1)&& (ACR_RetrieveQuestState("slv_deansphinx_b", GetEnteringObject()) <= 6)))
+	 	{object oMyTree = GetLocalObject(OBJECT_SELF, "oMyTree");
+		 if(oMyTree == OBJECT_INVALID)
+		 	{oMyTree = GetObjectByTag("fey_chocolate_tree");
+			 SetLocalObject(OBJECT_SELF, "oMyTree", oMyTree);
+			} 
+		 object oWP = GetLocalObject(OBJECT_SELF, "oWP");
+		 if(oWP == OBJECT_INVALID)
+			{oWP = GetNearestObjectByTag("ACR_SPAWN_WP", OBJECT_SELF);
+			 SetLocalObject(OBJECT_SELF, "oWP", oWP);
+			}
+		object oFlute = GetLocalObject(OBJECT_SELF, "flute");
+		if(oFlute == OBJECT_INVALID)
+			{oFlute = GetObjectByTag("fey_dance_flute");
+			 SetLocalObject(OBJECT_SELF, "flute", oFlute);
+			 }
+		if(GetLocalInt(OBJECT_SELF, "Spawned") == 0)
+			{SetUseableFlag(oMyTree, TRUE);
+		     SoundObjectPlay(oFlute);
+			 SendMessageToPC(GetEnteringObject(), "A faint musical piping blows on the breeze. The urge to dance is almost irresistable.");
+			 if(ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) == 5)
+			 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_b", 6, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);}
+			 if((ACR_RetrieveQuestState("slv_deansphinx_b", GetEnteringObject()) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_b", GetEnteringObject()) <= 7))
+			 	{CreateItemOnObject("slv_deansphinx_b_essence", oMyTree, 3);}
+			 ACR_SpawnGroup("fey_quest", oWP);
+			 ACR_ForceSpawn(oWP);
+			 SetLocalInt(OBJECT_SELF, "Spawned", 1);
+			 DelayCommand(600.0, SetLocalInt(OBJECT_SELF, "Spawned", 0));
+			 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 0), ActionRandomWalk()));
+			 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 1), ActionRandomWalk()));
+			 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 2), ActionRandomWalk()));
+			 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 0), ActionRandomWalk()));
+			 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 1), ActionRandomWalk()));
+			 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 2), ActionRandomWalk()));
+			 }
 		}
-	object oFlute = GetLocalObject(OBJECT_SELF, "flute");
-	if(oFlute == OBJECT_INVALID)
-		{oFlute = GetObjectByTag("fey_dance_flute");
-		 SetLocalObject(OBJECT_SELF, "flute", oFlute);
-		 }
-	if(GetLocalInt(OBJECT_SELF, "Spawned") == 0)
-		{SetUseableFlag(oMyTree, TRUE);
-	     SoundObjectPlay(oFlute);
-		 SendMessageToPC(GetEnteringObject(), "A faint musical piping blows on the breeze. The urge to dance is almost irresistable.");
-		 ACR_AddPersistentJournalQuestEntry("slv_deandragon_b", 6, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
-		 ACR_SpawnGroup("fey_quest", oWP);
-		 ACR_ForceSpawn(oWP);
-		 SetLocalInt(OBJECT_SELF, "Spawned", 1);
-		 DelayCommand(600.0, SetLocalInt(OBJECT_SELF, "Spawned", 0));
-		 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 0), ActionRandomWalk()));
-		 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 1), ActionRandomWalk()));
-		 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 2), ActionRandomWalk()));
-		 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 0), ActionRandomWalk()));
-		 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 1), ActionRandomWalk()));
-		 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 2), ActionRandomWalk()));
-		 }
-	}
-	
+	}	
 
 //deanddragon_d 	
  if((GetTag(OBJECT_SELF) == "deandragon_berry_bump") && (ACR_RetrieveQuestState("slv_deandragon_d", GetEnteringObject()) >= 4)&& (ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) <= 5))
@@ -115,15 +120,17 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e") && (ACR_RetrieveQuestState("slv_d
 		 } 
 	}
 
-//deanddragon_e_air
-if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2)))
+//deanddragon_e_air & deansphinx_e_air && deansphinx a
+if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_a", GetEnteringObject()) == 6 )))
  	{object oMyIce = GetLocalObject(OBJECT_SELF, "oMyIce");
 	 if(oMyIce == OBJECT_INVALID)
 	 	{oMyIce = GetObjectByTag("slv_deandragon_e_ice");
 		 SetLocalObject(OBJECT_SELF, "oMyIce", oMyIce);
 		} 
 	 SetUseableFlag(oMyIce, TRUE);
-	}
+	 if(ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2)
+	 	{CreateItemOnObject("slv_deansphinx_a_essence", oMyIce, 2);}
+	 }
 	
 /*if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringObject()) != "003_cr_slv_deanvoice_phoenix"))
 	  {object oMyWP = GetLocalObject(OBJECT_SELF, "oMyWP");

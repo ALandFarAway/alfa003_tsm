@@ -27,6 +27,9 @@ void main()
 					{if(ACR_RetrieveQuestState("slv_deandragon_d", oHarvester) == 5)
 						{ACR_AddPersistentJournalQuestEntry("slv_deandragon_d", 6, oHarvester);
 						}
+					if(ACR_RetrieveQuestState("slv_dragonberry", oHarvester) == 2)
+						{ACR_AddPersistentJournalQuestEntry("slv_dragonberry", 3, oHarvester);
+						}
 					SetLocalString(oHarvester, "Thorns", "In");
 					 if(GetLocalString(oHarvester, "Thorns") == "In")	 
 					 	{if(GetHasSpellEffect(SPELL_MAGE_ARMOR, oHarvester)) 
