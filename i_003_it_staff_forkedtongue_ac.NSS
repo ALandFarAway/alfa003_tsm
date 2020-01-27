@@ -5,8 +5,7 @@
 void main()
 {
              
-//OnActivate Script for the quest reward Staff of the Forked Tongue for Wynna's Dean Dragon quest of 2009 -- 2010
-	object oItem = GetItemActivated();
+//OnActivate Script for the quest reward Staff of the Forked Tongue for Wynna's Dean Sphinx quest of 2020
     object oUser = GetItemActivator();
     object oDragon = GetItemActivatedTarget();
     effect eGlimmer = EffectVisualEffect(VFX_DUR_PIXIEDUST, FALSE);

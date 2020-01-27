@@ -75,7 +75,12 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 		 if((iTotalWeight >= 28) && (oXorn != OBJECT_INVALID))	
 			 {SetLocalInt(OBJECT_SELF, "TotalWeight", 0);
 			 object oXornBodyWP = GetWaypointByTag("xorn_arm_1");
-			 		 
+			 	
+		if(GetTag(oItem)!="slv_tra200_alloy")
+		 	 	{AssignCommand(oXorn, ActionSpeakString("Is not Aurroneous's gift. Bring gift. I will take you.", TALKVOLUME_TALK));
+			 	 CreateObject(OBJECT_TYPE_ITEM, "slv_deansphinx_x_essence", GetLocation(OBJECT_SELF));
+				}
+					 
 			 AssignCommand(oXorn, ActionSpeakString("*Drops away through the stone floor without leaving a mark.", TALKVOLUME_TALK));
 			 effect eDust = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION, FALSE);
 			 effect eStone = EffectVisualEffect(VFX_COM_CHUNK_STONE_MEDIUM, FALSE);
@@ -86,6 +91,9 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 			 DelayCommand(3.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eDust, GetLocation(oXornBodyWP)));
 			 DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oXornBodyWP)));
 		 
+			 
+		if((ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5) || (ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5))
+			 {
 			 location lUser = GetLocation(oUser);
 			 object oDisgorged = GetLocalObject(OBJECT_SELF, "oDisgorged");
 			 if(oDisgorged == OBJECT_INVALID)
@@ -102,8 +110,13 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 		 	 	{oDisgorged = GetWaypointByTag("xorn_disgorge_sundabar");
 				 SetLocalObject(OBJECT_SELF, "oDisgorged", oDisgorged);
 				 }
-			if(ACR_RetrieveQuestState("slv_deandragon_j", oUser) == 5)
+			
+		    if(ACR_RetrieveQuestState("slv_deandragon_j", oUser) == 5) 
 		 	 	{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 6, oUser, FALSE, FALSE, FALSE, FALSE));
+				 object oJorun = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_sundabar_jorun", GetLocation(oJorunWP), FALSE);
+				}
+			if(ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5)
+		 	 	{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_j", 6, oUser, FALSE, FALSE, FALSE, FALSE));
 				 object oJorun = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_sundabar_jorun", GetLocation(oJorunWP), FALSE);
 				}
 				
@@ -142,8 +155,8 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 				 DelayCommand(26.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oDisgorged)));
 				 DelayCommand(35.0, AssignCommand(oXorn, ActionJumpToLocation(GetLocation(oXornBodyWP))));
 				 DelayCommand(28.0, SetLocalInt(oMyTrigger, "Xorn", 0));
-				 DelayCommand(40.0, SendMessageToPC(oUser, "You travelled for what seemed an eternity and might have been fifteen minutes, but have no idea how far you have come. Movement in the trees reveals a dwarf, watching your arrival without surprise."));
-				 
+				 DelayCommand(40.0, SendMessageToPC(oUser, "You travelled for what seemed an eternity and might have been fifteen minutes, but have no idea how far you have come."));
+				 }
 			
 			 }
 		 

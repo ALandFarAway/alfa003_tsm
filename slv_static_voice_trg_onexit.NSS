@@ -33,7 +33,7 @@ void main()
 	
 //deandragon quests
  if((GetTag(OBJECT_SELF) == "fey_chocolate_activate") && (GetLocalInt(OBJECT_SELF, "SpawnedExit") != 1))  
-	 {if((ACR_RetrieveQuestState("slv_deandragon_b", GetExitingObject()) == 6)|| (ACR_RetrieveQuestState("slv_deandragon_b", GetExitingObject()) == 7))
+	 {if((ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) >= 1)|| (ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) < 7))
 	 	{SetLocalInt(OBJECT_SELF, "SpawnedExit", 1);
 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "SpawnedExit", 0));
 		 object oWP = GetWaypointByTag("TM_Moonwood_North_Meet_1_WP");
@@ -54,7 +54,7 @@ void main()
 			 SetLocalObject(OBJECT_SELF, "oWP", oWP);
 			}
 		 
-	  if((ACR_RetrieveQuestState("slv_deandragon_b", GetExitingObject()) == 6)|| (ACR_RetrieveQuestState("slv_deandragon_b", GetExitingObject()) == 7))
+	  if((ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) >= 1)|| (ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) < 7))
 	 	{SetLocalInt(OBJECT_SELF, "Spawned", 1);
 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "Spawned", 0));
 		 object oFlute = GetLocalObject(OBJECT_SELF, "flute");
@@ -100,7 +100,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e") && (ACR_RetrieveQuestState("slv_d
 	SetLocalObject(OBJECT_SELF, "oMyIncinder", OBJECT_INVALID);
 	 }
 
-if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && (ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 1))
+if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetExitingObject()) >= 1))
  	{object oMyIce = GetLocalObject(OBJECT_SELF, "oMyIce");
 	 if(oMyIce == OBJECT_INVALID)
 	 	{oMyIce = GetObjectByTag("slv_deandragon_e_ice");
@@ -110,7 +110,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && (ACR_RetrieveQues
 	 SetUseableFlag(oMyIce, FALSE);
 	 }
 	
-if((GetTag(OBJECT_SELF) == "deandragon_firetrap_activate") && (ACR_RetrieveQuestState("slv_deandragon_e_fire", GetEnteringObject()) >= 1))
+if((GetTag(OBJECT_SELF) == "deandragon_firetrap_activate") && (ACR_RetrieveQuestState("slv_deansphinx_e_fire", GetExitingObject()) >= 1))
  	{object oMyTrap = GetLocalObject(OBJECT_SELF, "oMyTrap");
 	 if(oMyTrap == OBJECT_INVALID)
 	 	{oMyTrap = GetObjectByTag("slv_deandragon_e_firetrap");

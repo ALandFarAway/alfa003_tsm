@@ -51,7 +51,7 @@ void main() {
 
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -66,7 +66,7 @@ void main() {
 
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -80,7 +80,7 @@ void main() {
 	
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -95,7 +95,7 @@ void main() {
 
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -109,10 +109,10 @@ void main() {
 
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -124,13 +124,13 @@ void main() {
 	
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-           ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+           ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 3:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -138,27 +138,27 @@ void main() {
     
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-           ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+           ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 3:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;}	
     
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-           ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+           ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 3:
             ACR_SpawnObject("003_cr_fy_jermlaine_quest", OBJECT_TYPE_CREATURE);
@@ -166,16 +166,16 @@ void main() {
     
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-           ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+           ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;
         case 3:
-            ACR_SpawnObject("003_cr_hu_brownie_quest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_slv_dq_b_creature", OBJECT_TYPE_CREATURE);
             break;}	
     
 				

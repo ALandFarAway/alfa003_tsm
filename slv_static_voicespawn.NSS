@@ -253,13 +253,13 @@ void main()
 	         SetListenPattern(OBJECT_SELF, "**Concluded**", 5036);
 	         SetListenPattern(OBJECT_SELF, "**Defines**", 5037);
 	         SetListenPattern(OBJECT_SELF, "**Essences**", 5038);
-	         SetListenPattern(OBJECT_SELF, "**For**", 5039);
+	         SetListenPattern(OBJECT_SELF, "**Favoring**", 5039);
 	         SetListenPattern(OBJECT_SELF, "**Grand**", 5040);
 	         SetListenPattern(OBJECT_SELF, "**Harmonious**", 5041);
 	         SetListenPattern(OBJECT_SELF, "**Insights**", 5042);
-	         SetListenPattern(OBJECT_SELF, "**Joyfully**", 5043);
-	         SetListenPattern(OBJECT_SELF, "**Knowing**", 5044);
-	         SetListenPattern(OBJECT_SELF, "**Life**", 5045);
+	         SetListenPattern(OBJECT_SELF, "**Joining**", 5043);
+	         SetListenPattern(OBJECT_SELF, "**Keyed**", 5044);
+	         SetListenPattern(OBJECT_SELF, "**Lives**", 5045);
 	         SetListenPattern(OBJECT_SELF, "**Monstrous**", 5046);
 	         SetListenPattern(OBJECT_SELF, "**Name**", 5047);
 	         SetListenPattern(OBJECT_SELF, "**Opens**", 5048);

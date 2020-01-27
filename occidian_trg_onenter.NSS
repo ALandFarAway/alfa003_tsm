@@ -41,7 +41,7 @@ void main()
 		  	{if(GetLocalInt(OBJECT_SELF, "Xorn") != 1)
 				{SetLocalInt(OBJECT_SELF, "Xorn", 1);
 				 object oXornArm1WP = GetWaypointByTag("xorn_arm_1");
-				 object oXorn = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_xorn_occ", GetLocation(oXornArm1WP), FALSE);
+				 object oXorn = CreateObject(OBJECT_TYPE_CREATURE, "003_slv_dq_x_creature", GetLocation(oXornArm1WP), FALSE);
 				 SetLocalObject(OBJECT_SELF, "oXorn", oXorn);
 				 DelayCommand(1.0, AssignCommand(oXorn, ActionSpeakString("*A creature slides up out of the ground without a ripple in the earth.", TALKVOLUME_TALK)));
 				 DelayCommand(8.0, AssignCommand(oXorn, ActionSpeakString("The bargain was struck. We honor the bargain. Place two stone of sustainance into the feeding orifice.", TALKVOLUME_TALK)));

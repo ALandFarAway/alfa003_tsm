@@ -15,8 +15,11 @@ void main()
 	object oArea = GetArea(oTaker);
 	
 	if((GetTag(oItem) == "slv_deansphinx_a_essence") && (GetIsPC(oTaker)))
-        {if((ACR_RetrieveQuestState("slv_deansphinx_a", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_b", oTaker) <= 7))
+        {if((ACR_RetrieveQuestState("slv_deansphinx_a", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_a", oTaker) <= 7))
 				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_a", 7, oTaker);
+				}
+		 if((ACR_RetrieveQuestState("slv_deansphinx_e_air", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_e_air", oTaker) <= 3))
+				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e_air", 3, oTaker);
 				}
 			
 		  }

@@ -64,14 +64,17 @@ void main()
 			 if(ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) == 5)
 			 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_b", 6, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);}
 			 if((ACR_RetrieveQuestState("slv_deansphinx_b", GetEnteringObject()) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_b", GetEnteringObject()) <= 7))
-			 	{CreateItemOnObject("slv_deansphinx_b_essence", oMyTree, 3);}
+			 	{CreateItemOnObject("slv_deansphinx_b_essence", oMyTree, 3);
+				 CreateItemOnObject("slv_dq_bowl_create_food", oMyTree, 3);
+				 SendMessageToPC(GetEnteringObject(), "A leathery pod lies across the roots of the tree, as if just harvested. Beneath it, something silver gleams.");
+	 	 		}
 			 ACR_SpawnGroup("fey_quest", oWP);
 			 ACR_ForceSpawn(oWP);
 			 SetLocalInt(OBJECT_SELF, "Spawned", 1);
 			 DelayCommand(600.0, SetLocalInt(OBJECT_SELF, "Spawned", 0));
-			 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 0), ActionRandomWalk()));
-			 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 1), ActionRandomWalk()));
-			 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_cr_hu_brownie_quest", oWP, 2), ActionRandomWalk()));
+			 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_slv_dq_b_creature", oWP, 0), ActionRandomWalk()));
+			 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_slv_dq_b_creature", oWP, 1), ActionRandomWalk()));
+			 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_slv_dq_b_creature", oWP, 2), ActionRandomWalk()));
 			 DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 0), ActionRandomWalk()));
 			 DelayCommand(4.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 1), ActionRandomWalk()));
 			 DelayCommand(5.0, AssignCommand(GetNearestObjectByTag("003_cr_fy_jermlaine_quest", oWP, 2), ActionRandomWalk()));
@@ -79,29 +82,6 @@ void main()
 		}
 	}	
 
-//deanddragon_d 	
- if((GetTag(OBJECT_SELF) == "deandragon_berry_bump") && (ACR_RetrieveQuestState("slv_deandragon_d", GetEnteringObject()) >= 4)&& (ACR_RetrieveQuestState("slv_deandragon_b", GetEnteringObject()) <= 5))
- 	{object oBerry1 = GetLocalObject(OBJECT_SELF, "oBerry1");
-	 if(oBerry1 == OBJECT_INVALID)	
-	 	{oBerry1 = GetObjectByTag("deandragon_e_dragonberry");
-		 SetLocalObject(OBJECT_SELF, "oBerry1", oBerry1);
-		 }	
-	 object oBerry2 = GetLocalObject(OBJECT_SELF, "oBerry2");
-	 if(oBerry2 == OBJECT_INVALID)	
-	 	{oBerry2 = GetObjectByTag("deandragon_e_dragonberry2");
-		 SetLocalObject(OBJECT_SELF, "oBerry2", oBerry2);
-		 }	
-	 ACR_AddPersistentJournalQuestEntry("slv_deandragon_d", 5, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
-	 if(ACR_RetrieveQuestState("slv_deandragon_d", GetEnteringObject()) == 4)
-	 	{SetUseableFlag(oBerry1, TRUE);
-		 SetUseableFlag(oBerry2, FALSE);
-		}
-	 if(ACR_RetrieveQuestState("slv_deandragon_d", GetEnteringObject()) == 5)
-	 	{SetUseableFlag(oBerry1, FALSE);
-		 SetUseableFlag(oBerry2, TRUE);
-		}
-	 }
-	
 
 
 //deanddragon_e_air & deansphinx_e_air && deansphinx a
@@ -178,7 +158,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQue
 		}	 
 	 
 //deanddragon_e_fire
-if((GetTag(OBJECT_SELF) == "deandragon_firetrap_activate") && (GetIsPC(GetEnteringObject())) && (ACR_RetrieveQuestState("slv_deandragon_e_fire", GetEnteringObject()) >=1))
+if((GetTag(OBJECT_SELF) == "deandragon_firetrap_activate") && (GetIsPC(GetEnteringObject())) && (ACR_RetrieveQuestState("slv_deansphinx_e_fire", GetEnteringObject()) >=1))
  	{object oMyTrap = GetLocalObject(OBJECT_SELF, "oMyTrap");
 	 if(oMyTrap == OBJECT_INVALID)
 	 	{oMyTrap = GetObjectByTag("slv_deandragon_e_firetrap");
