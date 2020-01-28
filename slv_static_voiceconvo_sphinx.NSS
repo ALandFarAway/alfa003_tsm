@@ -117,7 +117,7 @@ void main()
 			 DestroyObject(oMyCollisionBox);
 			 SetLocalObject(oCollWP, "oMyCollisionBox", OBJECT_INVALID);
 			 DelayCommand(6.0, AssignCommand(oPC, ActionForceMoveToObject(oCollWP, TRUE, 0.0)));
-			 DelayCommand(7.0, ActionJumpToObject(oEndWP, FALSE));
+			 DelayCommand(7.0, AssignCommand(oPC, ActionJumpToObject(oEndWP, FALSE)));
 			 DelayCommand(10.0, SendMessageToPC(oPC, "Gravity rights itself and you immediately plunge towards the icy glacier!"));
 			 DelayCommand(10.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oEndWP))));
 			 DelayCommand(12.0, SendMessageToPC(oPC, "At the height of two tall men above the ice, however, your descent abruptly slows. You land upon the glacier with the gentleness of a falling snowflake."));

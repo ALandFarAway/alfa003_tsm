@@ -200,6 +200,23 @@ if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetT
 		 SetLocalInt(GetItemPossessor(oTarget), "BlessedWeapon", 1);
 		}
 	
+	//Feather Fall over Frost Hills Glacier
+	if((GetTag(GetArea(oCaster)) == "5b_ext_frosthills_glacier") && (nSpellId == SPELL_FEATHER_FALL ))
+	 	{ object oCollWP = GetWaypointByTag("slv_deansphinx_e_air_collboxWP");
+		 object oMyCollisionBox  = GetObjectByTag("slv_deansphinx_e_air_collbox");
+		 object oEndWP = GetWaypointByTag("slv_deansphinx_e_flight_WP");
+			  
+	
+			SetLocalInt(oCaster, "Gravity", 1);
+			 DelayCommand(600.0, SetLocalInt(oCaster, "Gravity", 0));
+			 DestroyObject(oMyCollisionBox);
+			 SetLocalObject(oCollWP, "oMyCollisionBox", OBJECT_INVALID);
+			 DelayCommand(10.0, SendMessageToPC(oCaster, "Gravity rights itself and you immediately begin dropping towards the glacier at a controlled rate."));
+			 DelayCommand(10.0, AssignCommand(oCaster, ActionJumpToLocation(GetLocation(oEndWP))));
+			 DelayCommand(15.0, SendMessageToPC(oCaster, "You land upon the glacier with the gentleness of a falling snowflake."));
+			  }
+	
+		
 	//Standard Evocation	 
 	 if((GetTag(GetArea(oCaster)) == "6d_int_silvy_ladycol_class_lvl") && (nSpellId == SPELL_FLARE) && (GetTag(oTarget) == "slv_evo200_poisoncircle"))
 	 	   {object oMyPoisonCircle = GetObjectByTag("slv_evo200_poisoncircle");
