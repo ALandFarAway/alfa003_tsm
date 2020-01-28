@@ -95,7 +95,8 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQue
 	 if(ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2)
 	 	{CreateItemOnObject("slv_deansphinx_a_essence", oMyIce, 2);}
 	 }
-	
+		 
+	 	 
 /*if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringObject()) != "003_cr_slv_deanvoice_phoenix"))
 	  {object oMyWP = GetLocalObject(OBJECT_SELF, "oMyWP");
 	   if(oMyWP == OBJECT_INVALID)

@@ -779,6 +779,9 @@ if((GetTag(OBJECT_SELF) == "slv_dragonquest_init")  && (GetLocalInt(oStudent, "D
 			 if((ACR_RetrieveQuestState("slv_deandragon_e", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deandragon_e_earth", oStudent) < 3))
 			 	{SetUseableFlag(oTeleport, TRUE);
 				}
+			 if((ACR_RetrieveQuestState("slv_deansphinx_e_earth", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deansphinx_e_earth", oStudent) < 3))
+			 	{SetUseableFlag(oTeleport, TRUE);
+				}
 			 }
 			
 		if((GetTag(OBJECT_SELF) == "MH_Air") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))
@@ -791,7 +794,10 @@ if((GetTag(OBJECT_SELF) == "slv_dragonquest_init")  && (GetLocalInt(oStudent, "D
 			 if((ACR_RetrieveQuestState("slv_deandragon_e", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deandragon_e_air", oStudent) < 3))
 			 	{SetUseableFlag(oTeleport, TRUE);
 				}
-			 }
+		 	if((ACR_RetrieveQuestState("slv_deansphinx_e_air", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deansphinx_e_air", oStudent) < 3))
+			 	{SetUseableFlag(oTeleport, TRUE);
+				}
+			  }
 			
 		if((GetTag(OBJECT_SELF) == "MH_Fire") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))
 	  		{object oTeleport = GetLocalObject(OBJECT_SELF, "oTeleport");
@@ -801,6 +807,9 @@ if((GetTag(OBJECT_SELF) == "slv_dragonquest_init")  && (GetLocalInt(oStudent, "D
 				 }
 			 SendMessageToPC(oStudent, "These flames exhude neither heat nor even light beyond their own flickering tendrils. Their mesmerizing dance, however, takes on more and more meaning the longer you watch. It would be easy to become lost in the elemental power of pure, rarified Fire.");
 			 if((ACR_RetrieveQuestState("slv_deandragon_e", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deandragon_e_fire", oStudent) < 4))
+			 	{SetUseableFlag(oTeleport, TRUE);
+				}
+			 if((ACR_RetrieveQuestState("slv_deansphinx_e_fire", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deansphinx_e_fire", oStudent) < 3))
 			 	{SetUseableFlag(oTeleport, TRUE);
 				}
 			 }
@@ -813,6 +822,9 @@ if((GetTag(OBJECT_SELF) == "slv_dragonquest_init")  && (GetLocalInt(oStudent, "D
 				 }
 			 SendMessageToPC(oStudent, "Rippling, ephemeral and never still, this Water pours from nowhere to splash upon the floor. It makes no pool, however, and though it seems to bead on your skin and run in rivulets over your scalp and into your mouth, the moment you step away you are again dry.");
 			 if((ACR_RetrieveQuestState("slv_deandragon_e", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deandragon_e_water", oStudent) < 3))
+			 	{SetUseableFlag(oTeleport, TRUE);
+				}
+			 if((ACR_RetrieveQuestState("slv_deansphinx_e_water", oStudent) > 0) && (ACR_RetrieveQuestState("slv_deansphinx_e_water", oStudent) < 3))
 			 	{SetUseableFlag(oTeleport, TRUE);
 				}
 			 }

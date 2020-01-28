@@ -22,10 +22,10 @@ void main()
 		}
 		
 	if(FindSubString(GetTag(OBJECT_SELF), "xyz_mirror", 0) != -1)
-		{SendMessageToPC(oPC, "Mytag=" + GetTag(OBJECT_SELF));
+		{//SendMessageToPC(oPC, "Mytag=" + GetTag(OBJECT_SELF));
 		 object oGo = GetWaypointByTag(GetTag(OBJECT_SELF) + "_wp");
 		 location lGo = GetLocation(oGo);
-		 SendMessageToPC(oPC, "Desttag=" + GetTag(oGo));
+		 //SendMessageToPC(oPC, "Desttag=" + GetTag(oGo));
 		 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(lGo)));
 		}
 	
