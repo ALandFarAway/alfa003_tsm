@@ -41,7 +41,7 @@ void main()
 								{oMyListener = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_deanvoice_phoenix", GetLocation(OBJECT_SELF));}
 	   						 SetLocalObject(OBJECT_SELF, "oMyListener", oMyListener);
 							 }
-					 if(nRepCold == 3) {
+					 if((nRepCold == 3) && (GetLocalInt(OBJECT_SELF, "Gravity") == 0)) {
 						 object oGoTo2 = GetLocalObject(OBJECT_SELF, "oGoTo2");
 						 if(oGoTo2 == OBJECT_INVALID)
 							 	{oGoTo2 = GetWaypointByTag("slv_el_air_wp2");
@@ -81,9 +81,12 @@ void main()
 						 DelayCommand(5.0, AssignCommand(OBJECT_SELF, ActionJumpToLocation(lGoTo3)));
 				 	     DelayCommand(10.0, SendMessageToPC(OBJECT_SELF, "Gravity rights itself. It seems the antigravity spell has ended and you begin a plunge towards the icy glacier!"));
 						 DelayCommand(15.0, AssignCommand(OBJECT_SELF, ActionJumpToLocation(lGoTo2)));
-				 	     DelayCommand(20.0, SendMessageToPC(OBJECT_SELF, "At the height of two tall men above the ice, however, your descent abruptly slows. You land upon the glacier with the gentleness of a falling snowflake."));
+				 	     DelayCommand(20.0, SendMessageToPC(OBJECT_SELF, "At the height of two tall men above the ice, however, your descent abruptly slows. You land upon the glacier with a crunch of ice and a painful thud, but without fatal force."));
 				 		 DelayCommand(25.0, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oEndWP))));
-					}
+						 DelayCommand(26.0, ACR_ApplyNLDDamageToCreature(OBJECT_SELF, d6()));
+						 DelayCommand(27.0, ACR_NLD_ReportTotal(OBJECT_SELF, OBJECT_SELF, 0));
+							
+						 }
 							 
 					if(FindSubString(GetName(GetItemInSlot(INVENTORY_SLOT_CLOAK, OBJECT_SELF)), "Greatcloak") != -1)
 						{//SendMessageToPC(OBJECT_SELF, "Cloak Slot = " +  GetName(GetItemInSlot(INVENTORY_SLOT_CLOAK, OBJECT_SELF)));
@@ -146,5 +149,39 @@ void main()
 					  }
 					
 			 
-			
+		//deandragon_e_water create/destroy water weird loop
+	
+			if(GetLocalInt(OBJECT_SELF, "WaterRep") == 1)
+				{float fTimeLoop = 30.0;
+				 int nRep = GetLocalInt(OBJECT_SELF, "nRepWater");
+				 object oMyWaterWeirdDestroy = GetNearestObjectByTag("003_slv_dq_w_creature", OBJECT_SELF, 1); 
+				 DestroyObject(oMyWaterWeirdDestroy);
+				 object oSwim = GetNearestObjectByTag("alfa_swim_hard", OBJECT_SELF, Random(8));
+				 object oMyWaterWeirdNew = CreateObject(OBJECT_TYPE_CREATURE, "003_slv_dq_w_creature", GetLocation(oSwim));
+				 string sWaterWeirdCall= "";
+				 if(nRep == 1)
+				 	{sWaterWeirdCall = "*A liquid song rises above the sound of splashing water for a moment, from somewhere in the chamber.* What solid dross comes into my refuge?";}
+				 if(nRep == 2)
+				 	{sWaterWeirdCall = "Have you come to take me, too?";}
+				 if(nRep == 3)
+				 	{sWaterWeirdCall = "I am not so weak as my sister.";}
+				 if(nRep == 4)
+				 	{sWaterWeirdCall = "You will drown here, thief and abductor. What you seek will be your doom.";}
+				 if(nRep == 5)
+				 	{sWaterWeirdCall = "I knew that you would be drawn back here, evil one. I foresaw it.";}
+				 if(nRep == 6)
+				 	{sWaterWeirdCall = "That she did not divine your death for you tells me she still resists you.";}
+				
+				DelayCommand(5.0, AssignCommand(oMyWaterWeirdNew, ActionSpeakString(sWaterWeirdCall, TALKVOLUME_TALK)));
+				if(nRep < 10) {
+					 nRep ++;
+					 SetLocalInt(OBJECT_SELF, "nRepWater", nRep);
+					 DelayCommand(fTimeLoop, ExecuteScript("slv_static_voice_cr_pc", OBJECT_SELF));
+					 }
+				 if(nRep >= 10) {
+				 	SetLocalInt(OBJECT_SELF, "nRepWater", 0);
+					SetLocalInt(OBJECT_SELF, "WaterRep", 0);
+					DestroyObject(oMyWaterWeirdNew, 7200.0);
+					}
+				 }
 }

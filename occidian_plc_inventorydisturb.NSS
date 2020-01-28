@@ -92,7 +92,7 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 			 DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oXornBodyWP)));
 		 
 			 
-		if((ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5) || (ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5))
+		if((ACR_RetrieveQuestState("slv_deansphinx_e_earth", oUser) >= 1) || (ACR_RetrieveQuestState("slv_deansphinx_x", oUser) >= 6)|| (ACR_RetrieveQuestState("slv_deansphinx_j", oUser) >= 1))
 			 {
 			 location lUser = GetLocation(oUser);
 			 object oDisgorged = GetLocalObject(OBJECT_SELF, "oDisgorged");
@@ -115,16 +115,13 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 		 	 	{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 6, oUser, FALSE, FALSE, FALSE, FALSE));
 				 object oJorun = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_sundabar_jorun", GetLocation(oJorunWP), FALSE);
 				}
-			if(ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5)
-		 	 	{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_j", 6, oUser, FALSE, FALSE, FALSE, FALSE));
-				 object oJorun = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_sundabar_jorun", GetLocation(oJorunWP), FALSE);
-				}
 				
 			 object oPartyMember=GetFirstFactionMember(oUser);
 			 effect eParalyze = EffectParalyze();
 				 while(oPartyMember!=OBJECT_INVALID)
 				 {if(ACR_RetrieveQuestState("slv_deandragon_j", oPartyMember) != 0) 
-		 	 		{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 6, oPartyMember, FALSE, FALSE, FALSE, FALSE));}
+		 	 		{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 6, oPartyMember, FALSE, FALSE, FALSE, FALSE));
+					}
 				 ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eDust, GetLocation(oPartyMember));
 				 ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oPartyMember));
 				 DelayCommand(7.0, SendMessageToPC(oPartyMember, "You have been swallowed by a Xorn! Rock presses you from all sides. You cannot breath, nor even expand your ribcage. It is exactly like being buried alive."));
@@ -155,7 +152,7 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 				 DelayCommand(26.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oDisgorged)));
 				 DelayCommand(35.0, AssignCommand(oXorn, ActionJumpToLocation(GetLocation(oXornBodyWP))));
 				 DelayCommand(28.0, SetLocalInt(oMyTrigger, "Xorn", 0));
-				 DelayCommand(40.0, SendMessageToPC(oUser, "You travelled for what seemed an eternity and might have been fifteen minutes, but have no idea how far you have come."));
+				 //DelayCommand(40.0, SendMessageToPC(oUser, "You travelled for what seemed an eternity and might have been fifteen minutes, but have no idea how far you have come."));
 				 }
 			
 			 }

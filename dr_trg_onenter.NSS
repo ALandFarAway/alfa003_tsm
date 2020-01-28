@@ -411,7 +411,13 @@ if(GetTag(OBJECT_SELF) == "dr_swimsucceeded_trg")
 	 }
  
 if((GetTag(OBJECT_SELF) == "slv_deandragon_e_water_3") && (GetLocalInt(OBJECT_SELF, "Triggered") != 1))
-	{SetLocalInt(OBJECT_SELF, "Triggered", 1);
+	{
+	SetLocalInt(GetEnteringObject(), "WaterRep", 1);
+	object oMyWaterWeird = GetNearestObjectByTag("003_slv_dq_w_creature", GetEnteringObject(),1);
+	DelayCommand(5.0, AssignCommand(oMyWaterWeird, ActionSpeakString("*Pours off a rock and into the water with a splash, and vanishes beneath the surface.*", TALKVOLUME_TALK)));
+	DelayCommand(6.0, ExecuteScript("slv_static_voice_cr_pc", GetEnteringObject()));
+	
+	SetLocalInt(OBJECT_SELF, "Triggered", 1);
 	object oVein1 = GetObjectByTag("elemental_watergem_vein_1");
 	object oVein2 = GetObjectByTag("elemental_watergem_vein_2");
 	object oVein3 = GetObjectByTag("elemental_watergem_vein_3");

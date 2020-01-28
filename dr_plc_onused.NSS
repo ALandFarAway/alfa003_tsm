@@ -409,8 +409,8 @@ void main() {
 			 SetLocalObject(OBJECT_SELF, "oSuccess", oSuccess);
 			}
 	  int nRising = GetLocalInt(oMasterWP, "nRising");
-	  if((GetAbilityScore(GetLastUsedBy(), ABILITY_STRENGTH) >= 17) || (GetLocalInt(OBJECT_SELF, "Greased") == 1))
-	  	{if((GetAbilityScore(GetLastUsedBy(), ABILITY_STRENGTH) >= 17) && (GetLocalInt(GetLastUsedBy(), "StrMsg") != 1))
+	  if((GetAbilityScore(GetLastUsedBy(), ABILITY_STRENGTH) >= 16) || (GetLocalInt(OBJECT_SELF, "Greased") == 1))
+	  	{if((GetAbilityScore(GetLastUsedBy(), ABILITY_STRENGTH) >= 16) && (GetLocalInt(GetLastUsedBy(), "StrMsg") != 1))
 			{SendMessageToPC(GetLastUsedBy(), "By throwing all your strength into it, you are able to force the lever to move.");
 		 	 SetLocalInt(GetLastUsedBy(), "StrMsg", 1);
 			 }

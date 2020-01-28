@@ -50,8 +50,10 @@ void main()
     ACR_TriggerOnEnter();
 
     // Custom code goes here.
-	if(ACR_RetrieveQuestState("bg_jaffee_oozyichor", GetEnteringObject()) == 1) {
-	    
+	int nTriggered = GetLocalInt(OBJECT_SELF, "Triggered");
+	if((nTriggered != 1) && (ACR_RetrieveQuestState("bg_jaffee_oozyichor", GetEnteringObject()) == 1)) {
+	    SetLocalInt(OBJECT_SELF, "Triggered", 1);
+		DelayCommand(43200.0, SetLocalInt(OBJECT_SELF, "Triggered", 0));
 		object oCurrentWP = GetFirstObjectInArea(GetArea(OBJECT_SELF));
 		while(oCurrentWP != OBJECT_INVALID)
 			{

@@ -93,8 +93,18 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQue
 		} 
 	 SetUseableFlag(oMyIce, TRUE);
 	 if(ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2)
-	 	{CreateItemOnObject("slv_deansphinx_a_essence", oMyIce, 2);}
-	 }
+	 	{CreateItemOnObject("slv_deansphinx_a_essence", oMyIce, 1);
+		 CreateItemOnObject("slv_deansphinx_a_essence", oMyIce, 1);
+		 CreateItemOnObject("slv_deansphinx_a_essence", oMyIce, 1);
+		}
+	
+	object oMyArrowhawk1 = GetNearestObjectByTag("003_slv_dq_a_creature", GetEnteringObject(),1);
+	object oMyArrowhawk2 = GetNearestObjectByTag("003_slv_dq_a_creature", GetEnteringObject(),2);
+	object oMyArrowhawk3 = GetNearestObjectByTag("003_slv_dq_a_creature", GetEnteringObject(),3);
+	object oMyArrowhawk4 = GetNearestObjectByTag("003_slv_dq_a_creature", GetEnteringObject(),4);
+	AssignCommand(oMyArrowhawk1, ActionSpeakString("*Chirps in agitation", TALKVOLUME_TALK));
+	DelayCommand(IntToFloat(Random(10)), AssignCommand(oMyArrowhawk1, ActionSpeakString("*Swoops overhead, with a keening shriek.*", TALKVOLUME_TALK))); }
+	DelayCommand(IntToFloat(Random(10)+10), AssignCommand(oMyArrowhawk2, ActionSpeakString("*Swoops overhead, dive bombing anybody in reach.*", TALKVOLUME_TALK))); }
 		 
 	 	 
 /*if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringObject()) != "003_cr_slv_deanvoice_phoenix"))
@@ -169,8 +179,8 @@ if((GetTag(OBJECT_SELF) == "deandragon_firetrap_activate") && (GetIsPC(GetEnteri
 	 if(GetLocalInt(OBJECT_SELF, "MephitMsg") !=1)
 	 	{SendMessageToPC(GetEnteringObject(), "The mephits dive into the mouth of the trap, vanishing from sight except for a glow between the teeth of the dragon-shaped fire trap!");
 	 	 SetLocalInt(OBJECT_SELF, "MephitMsg", 1);
-		 object oMephit1 = GetNearestObjectByTag("003_cr_mephit_fire", OBJECT_SELF, 1);
-		 object oMephit2 = GetNearestObjectByTag("003_cr_mephit_fire", OBJECT_SELF, 2);
+		 object oMephit1 = GetNearestObjectByTag("003_slv_dq_f_creature", OBJECT_SELF, 1);
+		 object oMephit2 = GetNearestObjectByTag("003_slv_dq_f_creature", OBJECT_SELF, 2);
 		 DestroyObject(oMephit1);
 		 DestroyObject(oMephit2);	 
 		}

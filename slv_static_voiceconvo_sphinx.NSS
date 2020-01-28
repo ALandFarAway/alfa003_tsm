@@ -73,7 +73,7 @@ void main()
              sMiddleName2 = GetName(oStudent);
              }
 	
-	if((nMatch >= 5061) && (nMatch <= 5063) && (ACR_RetrieveQuestState("slv_deansphinx_e_air", oPC) == 2) && (GetTag(GetArea(OBJECT_SELF)) == "5b_ext_frosthills_glacier"))
+	if((nMatch >= 5063) && (nMatch <= 5068) && (ACR_RetrieveQuestState("slv_deansphinx_e_air", oPC) >= 2) && (GetTag(GetArea(OBJECT_SELF)) == "5b_ext_frosthills_glacier"))
 		{if(GetLocalObject(oPC, "oMyListener") == OBJECT_SELF)
 			{object oCollWP = GetLocalObject(OBJECT_SELF, "oCollWP");
 			 if(oCollWP == OBJECT_INVALID)
@@ -90,16 +90,28 @@ void main()
 			 	{oEndWP = GetWaypointByTag("slv_deansphinx_e_flight_WP");
 				 SetLocalObject(OBJECT_SELF, "oEndWP", oEndWP);
 				}
-			 string sDeity = GetStringUpperCase(GetDeity(oPC)) + ".";
-			 string sFollowUp = GetStringUpperCase(GetDeity(oPC)) + " WOULD REWARD YOUR FAITHFULNESS. A MAGE SHOULD BE AWARE OF DIVINE MAGIC, EITHER AS FRIEND OR FOE.";
-			 if(nMatch == 5062)
+			  string sDeity;
+			  string sFollowUp;
+			  
+		     if(nMatch == 5063)
+			 	{sDeity = GetStringUpperCase(GetDeity(oPC)) + ".";
+			     sFollowUp = GetStringUpperCase(GetDeity(oPC)) + " WOULD REWARD YOUR FAITHFULNESS. A MAGE SHOULD BE AWARE OF DIVINE MAGIC, EITHER AS FRIEND OR FOE.";
+			   }
+			 if(nMatch == 5064)
 			 	{sDeity = "THE QUEEN OF THE COLD.";
 				 sFollowUp = "SHE WOULD REMEMBER YOUR SERVITUDE....AS SHOULD YOU.";
 				 }
-			 if(nMatch == 5063)
+			 if(nMatch == 5065)
 			 	{sDeity = "THE GODDESS OF MAGIC.";
 				 sFollowUp = "MYSTRA'S POWER OVER MAGIC IS ABSOLUTE, AND HER MERCY VAST.";
 				 }
+			  if((nMatch == 5066) || (nMatch == 5067) || (nMatch == 5068))
+			 	{sDeity = "YOUR ARCANE ABILITY TO FALL AS SOFTLY AS A FEATHER.";
+				 sFollowUp = "";
+				 }
+			 
+			 SetLocalInt(oPC, "Gravity", 1);
+			 DelayCommand(600.0, SetLocalInt(oPC, "Gravity", 0));
 			 SpeakString("*A powerful voice speaks in your mind, inaudible, although you have no doubt that any nearby can also 'hear' it. It does not shake you as a god's voice would. It does not feel deific, but merely powerful.*");
 			 DelayCommand(5.0, SpeakString("YOU HAVE SHOWN WISDOM IN CALLING ON " + sDeity));
 			 DestroyObject(oMyCollisionBox);

@@ -139,7 +139,7 @@ void main()
 					 DelayCommand(20.0, AssignCommand(oUser, ActionJumpToLocation(lGoTo2)));
 			 	     DelayCommand(30.5, SendMessageToPC(oUser, "You continue to fall upward helplessly, clearly in the grip of some arcane trap. It feels as if gravity has reversed!"));
 					 DelayCommand(35.0, AssignCommand(oUser, ActionJumpToLocation(lGoTo3)));
-			 	     DelayCommand(40.5, SendMessageToPC(oUser, "You continue to fall upward helplessly, away from the snow and ice that glitter as if strewn with diamonds."));
+			 	     DelayCommand(40.5, SendMessageToPC(oUser, "The fall doesn't stop, rising away from the snow and ice that glitter as if strewn with diamonds. Winds howl in the ice chasms around you, but you seem somehow protected from the worst of the gale."));
 					 DelayCommand(45.0, AssignCommand(oUser, ActionJumpToLocation(lGoTo4)));
 			 	     DelayCommand(50.5, SendMessageToPC(oUser, "You stop suddenly, as if you had hit an incorporeal barrier. Oscillating gently, you hang suspended 1000 meters in the air! You can only hope that gravity doesn't right itself, because a fall back DOWN from this height would maim or kill you before the cold has a chance to."));
 					 DelayCommand(61.0, ExecuteScript("slv_static_voice_cr_pc", oUser));
