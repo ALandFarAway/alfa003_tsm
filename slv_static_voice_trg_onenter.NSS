@@ -85,7 +85,7 @@ void main()
 
 
 //deanddragon_e_air & deansphinx_e_air && deansphinx a
-if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_a", GetEnteringObject()) == 6 )))
+if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && (ACR_RetrieveQuestState("slv_deandragon_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_e_air", GetEnteringObject()) == 2) || (ACR_RetrieveQuestState("slv_deansphinx_a", GetEnteringObject()) == 6 ))
  	{object oMyIce = GetLocalObject(OBJECT_SELF, "oMyIce");
 	 if(oMyIce == OBJECT_INVALID)
 	 	{oMyIce = GetObjectByTag("slv_deandragon_e_ice");
@@ -103,8 +103,9 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice_activate") && ((ACR_RetrieveQue
 	object oMyArrowhawk3 = GetNearestObjectByTag("003_slv_dq_a_creature", GetEnteringObject(),3);
 	object oMyArrowhawk4 = GetNearestObjectByTag("003_slv_dq_a_creature", GetEnteringObject(),4);
 	AssignCommand(oMyArrowhawk1, ActionSpeakString("*Chirps in agitation", TALKVOLUME_TALK));
-	DelayCommand(IntToFloat(Random(10)), AssignCommand(oMyArrowhawk1, ActionSpeakString("*Swoops overhead, with a keening shriek.*", TALKVOLUME_TALK))); }
-	DelayCommand(IntToFloat(Random(10)+10), AssignCommand(oMyArrowhawk2, ActionSpeakString("*Swoops overhead, dive bombing anybody in reach.*", TALKVOLUME_TALK))); }
+	DelayCommand(IntToFloat(Random(10)), AssignCommand(oMyArrowhawk1, ActionSpeakString("*Swoops overhead, with a keening shriek.*", TALKVOLUME_TALK))); 
+	DelayCommand(IntToFloat(Random(10)+10), AssignCommand(oMyArrowhawk2, ActionSpeakString("*Swoops overhead, dive bombing anybody in reach.*", TALKVOLUME_TALK))); 
+	}
 		 
 	 	 
 /*if((GetTag(OBJECT_SELF) == "slv_deandragon_e_listener") && (GetTag(GetEnteringObject()) != "003_cr_slv_deanvoice_phoenix"))
