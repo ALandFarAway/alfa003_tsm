@@ -29,7 +29,7 @@ void main(string sVariable, string sChange, string sTarget)
 {
     object oTarg = GetTarget(sTarget, TARGET_OBJECT_SELF);
 	if (GetIsObjectValid(oTarg) == FALSE) 
-		PrintString("ga_local_int: " + sTarget + " is invalid");
+		{	PrintString("ga_local_int: " + sTarget + " is invalid");}
 
 	int nOldValue = GetLocalInt(oTarg, sVariable);
 	int nNewValue = CalcNewIntValue(nOldValue, sChange);
