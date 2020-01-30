@@ -41,7 +41,8 @@ void main()
 								{oMyListener = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_deanvoice_phoenix", GetLocation(OBJECT_SELF));}
 	   						 SetLocalObject(OBJECT_SELF, "oMyListener", oMyListener);
 							 }
-					 if((nRepCold == 3) && (GetLocalInt(OBJECT_SELF, "Gravity") == 0)) {
+					 if((nRepCold == 3) && (GetLocalInt(OBJECT_SELF, "Gravity") == 0)) 
+					 	{
 						 object oGoTo2 = GetLocalObject(OBJECT_SELF, "oGoTo2");
 						 if(oGoTo2 == OBJECT_INVALID)
 							 	{oGoTo2 = GetWaypointByTag("slv_el_air_wp2");
@@ -111,12 +112,15 @@ void main()
 					SetLocalInt(OBJECT_SELF, "Survival", 0);
 					nRepCold++;
 					SetLocalInt(OBJECT_SELF, "nRepCold", nRepCold);
-					if(GetTag(GetArea(OBJECT_SELF)) == "5b_ext_frosthills_glacier")
+					if((GetTag(GetArea(OBJECT_SELF)) == "5b_ext_frosthills_glacier")&& (nRepCold < 25))
 						{DelayCommand(fTimeLoop, ExecuteScript("slv_static_voice_cr_pc", OBJECT_SELF));}
+					if(GetTag(GetArea(OBJECT_SELF)) != "5b_ext_frosthills_glacier")
+						{SetLocalInt(OBJECT_SELF, "ColdRep", 0);}
 					}
 				 else {SetLocalInt(OBJECT_SELF, "ColdRep", 0);
 				 	   SetLocalInt(OBJECT_SELF, "nRepCold", 0);
-					  }
+					  }	
+				 
 					
 				
 				
@@ -142,6 +146,8 @@ void main()
 						SetLocalInt(OBJECT_SELF, "nRepHot", nRep);
 							if(FindSubString(GetTag(GetArea(OBJECT_SELF)), "everfire", 0))
 								{DelayCommand(fTimeLoop, ExecuteScript("slv_static_voice_cr_pc", OBJECT_SELF));}
+						    if(!FindSubString(GetTag(GetArea(OBJECT_SELF)), "everfire", 0))
+								{SetLocalInt(OBJECT_SELF, "HeatRep", 0);}
 						}
 			
 				 else {SetLocalInt(OBJECT_SELF, "HeatRep", 0);
@@ -159,18 +165,26 @@ void main()
 				 object oSwim = GetNearestObjectByTag("alfa_swim_hard", OBJECT_SELF, Random(8));
 				 object oMyWaterWeirdNew = CreateObject(OBJECT_TYPE_CREATURE, "003_slv_dq_w_creature", GetLocation(oSwim));
 				 string sWaterWeirdCall= "";
-				 if(nRep == 1)
+				 if(nRep == 0)
 				 	{sWaterWeirdCall = "*A liquid song rises above the sound of splashing water for a moment, from somewhere in the chamber.* What solid dross comes into my refuge?";}
-				 if(nRep == 2)
+				 if(nRep == 1)
 				 	{sWaterWeirdCall = "Have you come to take me, too?";}
-				 if(nRep == 3)
+				 if(nRep == 2)
 				 	{sWaterWeirdCall = "I am not so weak as my sister.";}
-				 if(nRep == 4)
+				 if(nRep == 3)
 				 	{sWaterWeirdCall = "You will drown here, thief and abductor. What you seek will be your doom.";}
-				 if(nRep == 5)
+				 if(nRep == 4)
 				 	{sWaterWeirdCall = "I knew that you would be drawn back here, evil one. I foresaw it.";}
-				 if(nRep == 6)
+				 if(nRep == 5)
 				 	{sWaterWeirdCall = "That she did not divine your death for you tells me she still resists you.";}
+				if(nRep == 6)
+				 	{sWaterWeirdCall = "Come and get me, too, if you seek a stronger diviner. I am right here. Step into my pool. *Laughs a high and tinkling laughter*";}
+				if(nRep == 7)
+				 	{sWaterWeirdCall = "All you must do is pull the lever to raise the water level enough to swim to me.";}
+				if(nRep == 8)
+				 	{sWaterWeirdCall = "Come. I am waiting for you.";}
+				if(nRep == 9)
+				 	{sWaterWeirdCall = "*Falls silent, watching you, water flowing unceasingly to make her shape, splashing on the rocks in a white spray.*";}
 				
 				DelayCommand(5.0, AssignCommand(oMyWaterWeirdNew, ActionSpeakString(sWaterWeirdCall, TALKVOLUME_TALK)));
 				if(nRep < 10) {

@@ -30,9 +30,12 @@ void main()
 	object oWP2b = GetWaypointByTag("slv_deandragon_g_2");
 	object oWP1b = GetWaypointByTag("slv_deandragon_g_1");
 	
-	if((GetTag(oTarget) == "003_cr_slv_deandragon_golem") && (GetDistanceBetween(oUser, oTarget) <= 5.0))
+	if(((GetTag(oTarget) == "003_cr_slv_deandragon_golem")|| (GetTag(oTarget) == "003_slv_dq_g_creature")) && (GetDistanceBetween(oUser, oTarget) <= 5.0))
 	   {if(ACR_RetrieveQuestState("slv_deandragon_g", oUser) == 2)
 				{ACR_AddPersistentJournalQuestEntry("slv_deandragon_g", 3, oUser, 0, 0, 0, 0);
+				}
+		if(ACR_RetrieveQuestState("slv_deansphinx_g", oUser) == 2)
+				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_g", 3, oUser, 0, 0, 0, 0);
 				}
 		AssignCommand(oTarget, ActionSpeakString("Actuator detected. Minimum usage distance compliance. Command valid. Return to creator.", TALKVOLUME_TALK));
 		AssignCommand(oTarget, ActionJumpToLocation(GetLocation(oWP11)));
@@ -91,4 +94,5 @@ void main()
 	else if((GetTag(oTarget) == "003_cr_slv_deandragon_golem") && (GetDistanceBetween(oUser, oTarget) > 5.0))
 	   {AssignCommand(oTarget, ActionSpeakString("Actuator detected. Minimum usage distance exceeded. Command invalid.", TALKVOLUME_TALK));
 		}
+
 }

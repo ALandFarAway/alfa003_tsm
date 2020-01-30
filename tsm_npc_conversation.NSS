@@ -4,7 +4,7 @@
 
 void main()
 {   ACR_CreatureOnConversation();
-
+ 
 
     object oPC = GetLastSpeaker();
 
@@ -54,8 +54,8 @@ void main()
 					 SetLocalObject(oCollWP, "oStatue", oStatue);
 					 SendMessageToPC(oPC, "The statue silently slides sideways and the wall section before you drops into the floor.");
 					 DelayCommand(59.0, SetLocalInt(oCollWP, "SyluneOpen", 2));
-					 DelayCommand(60.0, ExecuteScript("tsm_cr_onconvo", OBJECT_SELF));
-					}
+					 DelayCommand(60.0, ExecuteScript("tsm_npc_conversation", OBJECT_SELF));
+					 }
 					
 			else if (GetLocalInt(oCollWP, "SyluneOpen")== 2)
 				   {SetLocalInt(oCollWP, "SyluneOpen", 0);

@@ -202,9 +202,9 @@ if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetT
 			 DelayCommand(600.0, SetLocalInt(oCaster, "Gravity", 0));
 			 DestroyObject(oMyCollisionBox);
 			 SetLocalObject(oCollWP, "oMyCollisionBox", OBJECT_INVALID);
-			 DelayCommand(10.0, SendMessageToPC(oCaster, "Gravity rights itself and you immediately begin dropping towards the glacier at a controlled rate."));
-			 DelayCommand(10.0, AssignCommand(oCaster, ActionJumpToLocation(GetLocation(oEndWP))));
-			 DelayCommand(15.0, SendMessageToPC(oCaster, "You land upon the glacier with the gentleness of a falling snowflake."));
+			 DelayCommand(5.0, SendMessageToPC(oCaster, "Gravity rights itself and you immediately begin dropping towards the glacier at a controlled rate."));
+			 DelayCommand(5.0, AssignCommand(oCaster, ActionJumpToLocation(GetLocation(oEndWP))));
+			 DelayCommand(10.0, SendMessageToPC(oCaster, "You land upon the glacier with the gentleness of a falling snowflake."));
 			  }
 	
 		

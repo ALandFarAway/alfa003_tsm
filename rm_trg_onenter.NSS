@@ -100,16 +100,8 @@ object oQuester=GetEnteringObject();
 				}	
 			}
 		}
-//	}
-
-//if((GetTag(OBJECT_SELF) == "rm_scout_s04") && (GetIsPC(oQuester)) && (GetLocalInt(OBJECT_SELF, "Triggered") !=1))
- //	{SetLocalInt(OBJECT_SELF, "Triggered", 1);
-//	if(ACR_RetrieveQuestState("rm_scout_04", oQuester) == 1)
-//		{SendMessageToPC(oQuester, "You hear the scratching of claws on stone from the dark recesses of the cave. Some wild animal has taken up residence. Your scouting job is done. You may return to Kadalion.");
-//	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_04", 2, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
-//		 object oWolfSpawn = GetWaypointByTag("rm_scout_04_wp");
-//		CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_an_wild_dogwolf", GetLocation(oWolfSpawn));
-	//	}	
 	}
+
+
 	
 }

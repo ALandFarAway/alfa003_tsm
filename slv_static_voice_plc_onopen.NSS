@@ -8,7 +8,7 @@
 #include "acr_spawn_i"
 
 
-
+object oPC = GetLastOpenedBy();
 
 
 
@@ -57,6 +57,29 @@ void main()
 			 }
 		SetUseableFlag(OBJECT_SELF, FALSE);
 		}
+		
+		
+	//Deansphinx e air ice boulder with arrowhawk eggs
+	if(GetTag(OBJECT_SELF) == "slv_deandragon_e_ice") 
+	   {object oMyArrowhawk1 = GetNearestObjectByTag("003_slv_dq_a_creature", oPC, 1);
+		object oMyArrowhawk2 = GetNearestObjectByTag("003_slv_dq_a_creature", oPC, 2);
+		object oMyArrowhawk3 = GetNearestObjectByTag("003_slv_dq_a_creature", oPC, 3);
+		object oMyArrowhawk4 = GetNearestObjectByTag("003_slv_dq_a_creature", oPC, 4);
+		AssignCommand(oMyArrowhawk1, ActionSpeakString("*Shrieks a warning cry*", TALKVOLUME_TALK));
+		AssignCommand(oMyArrowhawk1, ActionMoveToLocation(GetLocation(oPC), TRUE));
+		AssignCommand(oMyArrowhawk2, ActionMoveToLocation(GetLocation(oPC), TRUE));
+		AssignCommand(oMyArrowhawk3, ActionMoveToLocation(GetLocation(oPC), TRUE));
+		AssignCommand(oMyArrowhawk4, ActionMoveToLocation(GetLocation(oPC), TRUE));
+		
+		if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_NONE, OBJECT_SELF))
+			{SendMessageToPC(oPC, "Your sharp reflexes allow you to climb up close enough to reach for an egg before they are blown away.");
+			}
+		else 
+			{SendMessageToPC(oPC, "You slip on the icy boulder, clambering after the eggs. Some of them blow away!");
+			 DestroyObject(GetFirstItemInInventory(OBJECT_SELF), 2.0);
+			}
+		}
+
 		
 //deandragon_e_fire trap disabling and container unlocking
 	if(GetTag(OBJECT_SELF) == "slv_deandragon_e_firetrap") 

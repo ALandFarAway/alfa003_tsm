@@ -267,7 +267,7 @@ void main()
 		}
 				
 //deandragon k leomund secure shelter doors
-		SpeakString("Called Use", TALKVOLUME_TALK);
+		//SpeakString("Called Use", TALKVOLUME_TALK);
 	
 	if((GetTag(OBJECT_SELF) == "leomund_shelter_door") && (GetLocked(OBJECT_SELF)==FALSE))
 		{SpeakString("Tagged Use", TALKVOLUME_TALK);

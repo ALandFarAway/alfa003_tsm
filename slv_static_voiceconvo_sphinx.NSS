@@ -111,7 +111,7 @@ void main()
 				 }
 			 
 			 SetLocalInt(oPC, "Gravity", 1);
-			 DelayCommand(600.0, SetLocalInt(oPC, "Gravity", 0));
+			 DelayCommand(3600.0, SetLocalInt(oPC, "Gravity", 0));
 			 SpeakString("*A powerful voice speaks in your mind, inaudible, although you have no doubt that any nearby can also 'hear' it. It does not shake you as a god's voice would. It does not feel deific, but merely powerful.*");
 			 DelayCommand(5.0, SpeakString("YOU HAVE SHOWN WISDOM IN CALLING ON " + sDeity));
 			 DestroyObject(oMyCollisionBox);

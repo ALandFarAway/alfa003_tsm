@@ -406,7 +406,7 @@ if((GetTag(OBJECT_SELF) == "sm_sylune_listener") && ((GetIsPC(GetEnteringObject(
 						 	 SetLocalObject(GetModule(), "oStorm", oStorm);
 							 }
 					  }
-				 if(ACR_RetrieveQuestState("slv_deandragon_h", GetEnteringObject()) >= 4) 
+				 if((ACR_RetrieveQuestState("slv_deandragon_h", GetEnteringObject()) >= 4)|| (ACR_RetrieveQuestState("slv_deansphinx_h", GetEnteringObject()) >= 4)) 
 				 	{DelayCommand(10.0, AssignCommand(oStorm, ActionSpeakString("Well, well. Greetings, indeed. Welcome to the Hall of Greetings at the High Palace. *The warm, feminine voice is similar, if not the same, as the one that granted one-time passage through the portal from the catacombs.", TALKVOLUME_TALK)));
 					 DelayCommand(13.0, AssignCommand(oStorm, ActionStartConversation(GetEnteringObject(), "sm_silverhand_storm")));
 					}

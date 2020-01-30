@@ -424,8 +424,8 @@ void main() {
 		 	 {if(GetLocalInt(oMasterWP, "ClatterMsg") != 1)
 				  {SetLocalInt(oMasterWP, "ClatterMsg", 1);
 				   if((GetName(OBJECT_SELF) == "Rusty Lever") || (GetName(OBJECT_SELF) == "Dented Lever"))
-				 	{SpeakString("*With the clattering groan of an ancient but still functioning mechanism, the drainage grate rises swiftly, revealing itself as the top of a massive metal door!*" , TALKVOLUME_TALK);
-			 	  	 DelayCommand(3.0, SpeakString("*The rattling of chains may be heard, but the workings of the door must be buried in solid rock to either side of the grooves in the walls that let it slide upward.*", TALKVOLUME_TALK));
+				 	{SpeakString("* The lever locks into its new position and cannot be budged. With the clattering groan of an ancient but still functioning mechanism, the drainage grate rises swiftly, revealing itself as the top of a massive metal door!*" , TALKVOLUME_TALK);
+			 	  	 DelayCommand(3.0, SpeakString("*The rattling of chains may be heard, but the workings of the door are buried in solid rock to either side of the grooves in the walls that let it slide upward.*", TALKVOLUME_TALK));
 					 }
 				   if(GetName(OBJECT_SELF) == "Tarnished Lever")
 				 	{SpeakString("*Somewhere, the rattling of chains may be heard, and the groaning of stressed metal. The drumming of water suddenly becomes louder, as if now enclosed.*", TALKVOLUME_TALK);

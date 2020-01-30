@@ -291,7 +291,7 @@ void main()
 	         }
 		 }
 		 
-		if(GetTag(OBJECT_SELF)== "003_cr_slv_deandragon_golem")
+		if((GetTag(OBJECT_SELF)== "003_cr_slv_deandragon_golem") || (GetTag(OBJECT_SELF)== "003_slv_dq_g_creature"))
         	{int iInc = GetLocalInt(OBJECT_SELF, "iInc");
 			 if(iInc == 0)
 			 	{iInc = 1;}
@@ -300,7 +300,7 @@ void main()
 			if(iInc < 12)
 				{SetLocalInt(OBJECT_SELF, "iInc", iInc);
 				 iInc = GetLocalInt(OBJECT_SELF, "iInc");
-				 object oWaypoint = GetWaypointByTag("WP_" + GetTag(OBJECT_SELF) +"_" + IntToString(iInc));
+				 object oWaypoint = GetWaypointByTag("WP_003_cr_slv_deandragon_golem_" + IntToString(iInc));
 				 ClearAllActions(TRUE);
 				 if(iInc > 9)
 				 	{ActionJumpToLocation(GetLocation(oWaypoint));} 

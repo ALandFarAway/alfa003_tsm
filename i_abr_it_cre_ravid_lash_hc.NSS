@@ -18,11 +18,11 @@ void main()
    oSpellTarget = GetSpellTargetObject();
    oItem        =  GetSpellCastItem();
 
-  if(GetTag(oItem) == "abr_it_cre_ravid_lash")
-		{SendMessageToPC(oSpellTarget, "You feel a tingling burst of energy!");
+  
+		 SendMessageToPC(oSpellTarget, "You feel a tingling burst of energy!");
 		 AssignCommand(oSpellOrigin,SpeakString("*Lashes out with its tail*", TALKVOLUME_TALK)); 
 		 AssignCommand(oSpellOrigin, ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, oSpellTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-		 }	 
+		  
   
 	
 	 

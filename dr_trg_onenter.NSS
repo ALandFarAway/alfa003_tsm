@@ -418,6 +418,7 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_water_3") && (GetLocalInt(OBJECT_SE
 	DelayCommand(6.0, ExecuteScript("slv_static_voice_cr_pc", GetEnteringObject()));
 	
 	SetLocalInt(OBJECT_SELF, "Triggered", 1);
+	DelayCommand(43200.0, SetLocalInt(OBJECT_SELF, "Triggered", 0));
 	object oVein1 = GetObjectByTag("elemental_watergem_vein_1");
 	object oVein2 = GetObjectByTag("elemental_watergem_vein_2");
 	object oVein3 = GetObjectByTag("elemental_watergem_vein_3");
