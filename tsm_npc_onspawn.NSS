@@ -8,7 +8,7 @@ void main()
 {
 	     
          
-	if(GetTag(OBJECT_SELF)== "003_cr_helm_cyrthol")
+	if(GetTag(OBJECT_SELF)== "003_cr_lath_cyrthol")
         { 	 
          AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
     	 SetListenPattern(OBJECT_SELF, "**Sylune**", 6001);

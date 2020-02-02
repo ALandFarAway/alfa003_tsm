@@ -4,6 +4,9 @@
 
 #include "acr_placeable_i"
 #include "acr_xp_i"
+#include "acr_skills_i"
+#include "acr_hazards_i"
+#include "acr_movement_i"
 
 
 // float GetNormalizedDirection(float fDirection):
@@ -91,5 +94,25 @@ void main()
 			 SendMessageToPC(oUser, "You winch a bucket of sand up from the waterside trench.");
 			 }  
 		}	 
-									
+
+if(GetTag(OBJECT_SELF) == "wands_cave_pool_rocks")
+	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+	 object oSwimExit = GetObjectByTag("wands_cave_river_exit");
+	 SendMessageToPC(oUser, "You wade into the pool.");		 
+	 SetLocalInt(OBJECT_SELF, "ACR_SWIM_DC", 10);
+	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
+	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to swim a long, dark tunnel, conserving breath. A gentle current aids your swim.");
+		}
+	 else if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
+	 	{ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSwimDmg, oUser);
+		 SendMessageToPC(oUser, "The swim is long, and dark. Once into the narrow tunnel, though, you must continue. You feel your breath growing short when at last you see a lightening in the water ahead. You exit onto a sandy shore, dizzy and somewhat scraped up.");
+		}
+	 else {ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSwimDmg, oUser);
+		   ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSwimDmg, oUser);
+		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Trapped in a cramped, lightless tunnel filled with water, you can only go on, and finally emerge onto a sandy shore, bruised, battered and nearly unconscious from lack of air.");
+		}
+	DelayCommand(2.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+		
+		}		
+											
 }

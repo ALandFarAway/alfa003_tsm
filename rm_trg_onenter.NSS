@@ -52,6 +52,7 @@ void main()
     // Custom code goes here.
 	
 object oQuester=GetEnteringObject();
+object oPC=GetEnteringObject();
 //Rivermoot Exterior one-liner scripts.
  if(GetTag(OBJECT_SELF) == "rm_swordrock")
  	{SendMessageToPC(GetEnteringObject(), "This rock is a monument to the dead, roughly chiselled with the names of fallen warriors.");}
@@ -102,6 +103,11 @@ object oQuester=GetEnteringObject();
 		}
 	}
 
+ if((GetTag(OBJECT_SELF) == "rm_wands_cave_pool_trigger") && (GetLocalInt(oPC, "rm_wands_pool_msg")))
+ 	{SetLocalInt(oPC, "rm_wands_pool_msg", 1);
+	 DelayCommand(3600.0, SetLocalInt(oPC, "rm_wands_pool_msg", 0));
+	 SendMessageToPC(GetEnteringObject(), "The surface of the pool is covered in scum and floating mats of cave vegetation, rocking gently. There appears to be a hole in the bottom of the pool, and at least the beginnings of a passage. Diving in to explore will mean swimming, for an unknown amount of time. To attempt it, lower yourself in with the rocking handhold.");
+	 }
 
 	
 }

@@ -9,64 +9,64 @@ void main()
     object oPC = GetLastSpeaker();
 
 
-    if(GetTag(OBJECT_SELF) == "003_cr_helm_cyrthol") 
+    if(GetTag(OBJECT_SELF) == "003_cr_lath_cyrthol") 
 			   {int nMatch = GetListenPatternNumber();
 			    object oCollWP = GetLocalObject(OBJECT_SELF, "oCollWP");
 				if(oCollWP == OBJECT_INVALID)
-					 	{oCollWP = GetObjectByTag("003_door_sylune_collwp_obj");
+					 	{oCollWP = GetObjectByTag("003_door_sylune_collwp");
 						 SetLocalObject(OBJECT_SELF, "oCollWP", oCollWP);
 						}
-				object oStatue = GetLocalObject(oCollWP, "oStatue");
+				object oStatue = GetLocalObject(OBJECT_SELF, "oStatue");
 			    if(oStatue == OBJECT_INVALID)
 					 	{oStatue = GetObjectByTag("003_door_sylune_statue");
-						 SetLocalObject(oCollWP, "oStatue", oStatue);
+						 SetLocalObject(OBJECT_SELF, "oStatue", oStatue);
 						}
-				location lStatueWP = GetLocalLocation(oCollWP, "lStatueWP");
-			    if(GetLocalInt(oCollWP, "lStatueWP") == 0)
+				location lStatueWP = GetLocalLocation(OBJECT_SELF, "lStatueWP");
+			    if(GetLocalInt(OBJECT_SELF, "lStatueWP") == 0)
 					 	{lStatueWP = GetLocation(oStatue);
-						 SetLocalLocation(oCollWP, "lStatueWP", lStatueWP);
+						 SetLocalLocation(OBJECT_SELF, "lStatueWP", lStatueWP);
 						}
-				object oStatueWP2 = GetLocalObject(oCollWP, "oStatueWP2");
+				object oStatueWP2 = GetLocalObject(OBJECT_SELF, "oStatueWP2");
 			    if(oStatueWP2 == OBJECT_INVALID)
-					 	{oStatueWP2 = GetObjectByTag("003_door_sylune_WP2_obj");
-						 SetLocalObject(oCollWP, "oStatueWP2", oStatueWP2);
+					 	{oStatueWP2 = GetObjectByTag("003_door_sylune_WP2");
+						 SetLocalObject(OBJECT_SELF, "oStatueWP2", oStatueWP2);
 						}
-				object oWall= GetLocalObject(oCollWP, "oWall");
+				object oWall= GetLocalObject(OBJECT_SELF, "oWall");
 			    if(oWall == OBJECT_INVALID)
 					 	{oWall = GetObjectByTag("003_door_sylune_wall");
-						 SetLocalObject(oCollWP, "oWall", oWall);
+						 SetLocalObject(OBJECT_SELF, "oWall", oWall);
 						}
-			    object oMyCollisionBox = GetLocalObject(oCollWP, "oMyCollisionBox");
+			    object oMyCollisionBox = GetLocalObject(OBJECT_SELF, "oMyCollisionBox");
 				if(oMyCollisionBox == OBJECT_INVALID)
 					 	{oMyCollisionBox = GetObjectByTag("003_door_sylune_collbox");
-						 SetLocalObject(oCollWP, "oMyCollisionBox", oMyCollisionBox);
+						 SetLocalObject(OBJECT_SELF, "oMyCollisionBox", oMyCollisionBox);
 						}
 				
-			if((nMatch == 6001)  && (GetLocalInt(oCollWP, "SyluneOpen") == 0) )
-					{SetLocalInt(oCollWP, "SyluneOpen", 1);
+			if((nMatch == 6001)  && (GetLocalInt(OBJECT_SELF, "SyluneOpen") == 0) )
+					{SetLocalInt(OBJECT_SELF, "SyluneOpen", 1);
 					 DestroyObject(oMyCollisionBox);
-					 SetLocalObject(oCollWP, "oMyCollisionBox", OBJECT_INVALID);
+					 SetLocalObject(OBJECT_SELF, "oMyCollisionBox", OBJECT_INVALID);
 					 DestroyObject(oWall);
-					 SetLocalObject(oCollWP, "oWall", OBJECT_INVALID);
+					 SetLocalObject(OBJECT_SELF, "oWall", OBJECT_INVALID);
 					 DestroyObject(oStatue);
-					 SetLocalObject(oCollWP, "oStatue", OBJECT_INVALID);
+					 SetLocalObject(OBJECT_SELF, "oStatue", OBJECT_INVALID);
 					 oStatue = CreateObject(OBJECT_TYPE_PLACEABLE, "003_door_sylune_statue", GetLocation(oStatueWP2));
-					 SetLocalObject(oCollWP, "oStatue", oStatue);
+					 SetLocalObject(OBJECT_SELF, "oStatue", oStatue);
 					 SendMessageToPC(oPC, "The statue silently slides sideways and the wall section before you drops into the floor.");
-					 DelayCommand(59.0, SetLocalInt(oCollWP, "SyluneOpen", 2));
+					 DelayCommand(59.0, SetLocalInt(OBJECT_SELF, "SyluneOpen", 2));
 					 DelayCommand(60.0, ExecuteScript("tsm_npc_conversation", OBJECT_SELF));
 					 }
 					
-			else if (GetLocalInt(oCollWP, "SyluneOpen")== 2)
-				   {SetLocalInt(oCollWP, "SyluneOpen", 0);
+			else if (GetLocalInt(OBJECT_SELF, "SyluneOpen")== 2)
+				   	{SetLocalInt(OBJECT_SELF, "SyluneOpen", 0);
 					 oMyCollisionBox = CreateObject(OBJECT_TYPE_PLACEABLE, "003_door_sylune_collbox", GetLocation(oCollWP));
-					 SetLocalObject(oCollWP, "oMyCollisionBox", oMyCollisionBox);
+					 SetLocalObject(OBJECT_SELF, "oMyCollisionBox", oMyCollisionBox);
 					 oWall = CreateObject(OBJECT_TYPE_PLACEABLE, "003_door_sylune_wall", GetLocation(oCollWP));
-					  SetLocalObject(oCollWP, "oWall", oWall);
+					 SetLocalObject(OBJECT_SELF, "oWall", oWall);
 					 DestroyObject(oStatue);
-					 SetLocalObject(oCollWP, "oStatue", OBJECT_INVALID);
+					 SetLocalObject(OBJECT_SELF, "oStatue", OBJECT_INVALID);
 				 	 oStatue = CreateObject(OBJECT_TYPE_PLACEABLE, "003_door_sylune_statue", lStatueWP);
-					 SetLocalObject(oCollWP, "oStatue", oStatue);
+					 SetLocalObject(OBJECT_SELF, "oStatue", oStatue);
 					  }
 		 }
 	
@@ -124,6 +124,13 @@ void main()
 			  SpeakString(sName + ".", TALKVOLUME_TALK);
 			  DelayCommand(5.0, SpeakString(sName + " declines. Your signature has been noted.", TALKVOLUME_TALK));
 			  if(((nMatch == 6002) || (nMatch == 6004)) && (ACR_RetrieveQuestState("slv_deandragon_h", oPC) >= 4) && (ACR_RetrieveQuestState("slv_deandragon_h", oPC) <= 5))
+				 	{DelayCommand(7.5, SpeakString("*A new voice speaks, more feminine, and somehow more 'real'.", TALKVOLUME_TALK));
+					 DelayCommand(10.0, SpeakString("One-time passage is granted, I think, to those who wish it. All aspects of the traveller will be noted: divine signature of deific powers and arcane signature of all Weave contact. Recent memories will be divined. If you accept these terms and wish to travel, touch the Headstone within one minute.", TALKVOLUME_TALK));
+					 SetLocalInt(oMyHeadstone, "Active", 1);
+					 DelayCommand(60.0, SetLocalInt(oMyHeadstone, "Active", 0));
+					 }  
+				
+			if(((nMatch == 6002) || (nMatch == 6004)) && (ACR_RetrieveQuestState("slv_deansphinx_h", oPC) >= 5))
 				 	{DelayCommand(7.5, SpeakString("*A new voice speaks, more feminine, and somehow more 'real'.", TALKVOLUME_TALK));
 					 DelayCommand(10.0, SpeakString("One-time passage is granted, I think, to those who wish it. All aspects of the traveller will be noted: divine signature of deific powers and arcane signature of all Weave contact. Recent memories will be divined. If you accept these terms and wish to travel, touch the Headstone within one minute.", TALKVOLUME_TALK));
 					 SetLocalInt(oMyHeadstone, "Active", 1);
@@ -230,6 +237,9 @@ void main()
 							 
 							 
 					  if(ACR_RetrieveQuestState("slv_deandragon_h", oPC) == 4)
+								{DelayCommand(195.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_h", 5, oPC));
+								}
+					  if(ACR_RetrieveQuestState("slv_deansphinx_h", oPC) == 4)
 								{DelayCommand(195.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_h", 5, oPC));
 								}
 					}
