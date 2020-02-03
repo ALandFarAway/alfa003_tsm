@@ -21,7 +21,10 @@ void main()
 		 if((ACR_RetrieveQuestState("slv_deansphinx_e_earth", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_e_earth", oTaker) <= 3))
 				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e_earth", 3, oTaker);
 				}
-			
+		 if((ACR_RetrieveQuestState("slv_deansphinx_e_air", oTaker) == 3) && (ACR_RetrieveQuestState("slv_deansphinx_e_earth", oTaker) == 3) && (ACR_RetrieveQuestState("slv_deansphinx_e_fire", oTaker) == 3) && (ACR_RetrieveQuestState("slv_deansphinx_e_water", oTaker) == 3))
+				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_e", 3, oTaker);
+				}	
+		 	
 		  }
 					
 

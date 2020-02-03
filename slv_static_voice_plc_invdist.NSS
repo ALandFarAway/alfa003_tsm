@@ -2,13 +2,16 @@
 
 
 #include "acr_placeable_i"
+#include "acr_quest_i"
 
 void main()
 {
 	ACR_PlaceableOnDisturbed();
     object oItem = GetInventoryDisturbItem();
 	object oUser = GetLastDisturbed();
-		
+	effect eGlimmer = EffectVisualEffect(VFX_DUR_PIXIEDUST, FALSE);
+    effect eSoothing = EffectVisualEffect(VFX_DUR_SOOTHING_LIGHT, FALSE);
+	    
 	
 		 
 if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice") && (GetInventoryDisturbType() == INVENTORY_DISTURB_TYPE_REMOVED))
@@ -27,4 +30,65 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice") && (GetInventoryDisturbType()
 		ChangeToStandardFaction(oMyArrowhawk5, STANDARD_FACTION_HOSTILE);
 		ChangeToStandardFaction(oMyArrowhawk6, STANDARD_FACTION_HOSTILE);
 		}
+
+if((GetTag(OBJECT_SELF) == "vala_sphinx") && (GetInventoryDisturbType() == INVENTORY_DISTURB_TYPE_ADDED))
+	{if(FindSubString(GetTag(oItem), "slv_deansphinx_", 0) != -1)
+		{object oItemOne = GetFirstItemInInventory(OBJECT_SELF);
+		 while (oItemOne != OBJECT_INVALID)
+		 	{string sItemOne = GetTag(oItemOne);
+			 object oItemNext = GetNextItemInInventory(OBJECT_SELF);
+			 while (oItemNext != OBJECT_INVALID)
+			 	{string sItemNext = GetTag(oItemNext);
+				 if((sItemOne == sItemNext + "_essence") || (sItemNext == sItemOne + "_essence")) 
+					 {ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlimmer, OBJECT_SELF, 10.0);
+	                  DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoothing, OBJECT_SELF, 10.0));
+					  object oBook;
+					  object oEssence;
+					  if(FindSubString(sItemOne, "_essence", 0) != -1)
+					  	{object oEssence = oItemOne;
+						 if(FindSubString(sItemOne, sItemNext, 0) != -1)
+						 	{object oBook = oItemNext;}
+						}
+					  if(FindSubString(sItemNext, "_essence", 0) != -1)
+					  	{object oEssence = oItemNext;
+						 if(FindSubString(sItemNext, sItemOne, 0) != -1)
+						 	{object oBook = oItemOne;}
+						}
+						
+					 string sBookName = GetName(oBook);
+					 string sEssenceName = GetName(oEssence);
+					 string sQuestAlpha = GetStringLeft(sBookName,1);
+					 string sBookDescription = GetDescription(oBook);
+					 string sQuest = "slv_deansphinx_" + sQuestAlpha;
+					 ActionSpeakString(sEssenceName + " has been appended to the draft page for " + sBookName + ". This revision completes this entry.", TALKVOLUME_TALK);
+					 SetDescription(oBook, "This is the final draft of the '" + sQuestAlpha + "'Entry of the 'Bestiary of the Marches'. It carries the shimmering image of a " +sBookName + ".          " + sBookDescription);
+					 int nEnd;
+					 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "I")|| (sQuestAlpha == "J")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))
+					 	{nEnd = 9;}
+					 if((sQuestAlpha == "E")|| (sQuestAlpha == "M"))
+					 	{nEnd = 5;}
+					 if((sQuestAlpha == "G") || (sQuestAlpha == "H")|| (sQuestAlpha == "N")|| (sQuestAlpha == "O")|| (sQuestAlpha == "Q")|| (sQuestAlpha == "R")|| (sQuestAlpha == "S"))
+					 	{nEnd = 7;}
+					 if(sQuestAlpha == "L")
+					 	{nEnd = 10;}
+					 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
+					 	{nEnd = 4;}
+					 if(sQuestAlpha == "T")
+					 	{nEnd = 3;}
+					 if(sQuestAlpha == "U")
+					 	{nEnd = 6;}
+					 
+					if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
+					 	{ACR_AddPersistentJournalQuestEntry(sQuest, ACR_RetrieveQuestState(sQuest, oUser) +1, oUser, FALSE, FALSE, FALSE, 0);
+						 }
+			
+					 
+					 
+					 }
+				 }
+			 }
+		}
+	 else {ActionSpeakString("This item is not part of any oracular divination.", TALKVOLUME_TALK);}
+	}		
+
 }
