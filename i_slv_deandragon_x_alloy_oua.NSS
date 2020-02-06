@@ -20,7 +20,7 @@ void main()
 	vector vGem = Vector(vReceiver.x, vReceiver.y, vReceiver.z + 3.0);
 	location lGem = Location(GetArea(oReceiver), vGem, 0.0); 
 	
-	if((GetDistanceBetween(oStudent, oXorn) > 0.0) && (GetDistanceBetween(oStudent, oXorn) < 30.0))
+	if((GetDistanceBetween(oStudent, oXorn) > 0.0) && (GetDistanceBetween(oStudent, oXorn) < 30.0) && (ACR_RetrieveQuestState("slv_deandragon_x", oStudent) == 5))
 		{AssignCommand(oXorn, ActionSpeakString("*Digs itself out of sight, through the floor leaving only a pile of excreted rubble.", TALKVOLUME_TALK));
 		effect eDust = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION, FALSE);
 		effect eStone = EffectVisualEffect(VFX_COM_CHUNK_STONE_MEDIUM, FALSE);
@@ -41,7 +41,7 @@ void main()
 			  SetLocalObject(OBJECT_SELF, "oDisgorged", oDisgorged);
 			 }
 			 
-		SendMessageToPC(oStudent, GetTag(oDisgorged));
+		//SendMessageToPC(oStudent, GetTag(oDisgorged));
 			
 		if((ACR_RetrieveQuestState("slv_deandragon_x", oStudent) == 4) || (ACR_RetrieveQuestState("slv_deandragon_x", oStudent) == 5)) 
 		 	{DelayCommand(30.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_x", 5, oStudent, FALSE, FALSE, FALSE, FALSE));

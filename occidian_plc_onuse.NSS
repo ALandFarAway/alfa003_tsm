@@ -70,9 +70,15 @@ void main()
 			 if(ACR_RetrieveQuestState("slv_deandragon_j", oUser) == 4)
 			 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 5, oUser, FALSE, FALSE, FALSE, FALSE);
 				 }
-			if(ACR_RetrieveQuestState("slv_deandragon_x", oUser) == 4)
+			 if(ACR_RetrieveQuestState("slv_deandragon_x", oUser) == 5)
 			 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_x", 5, oUser, FALSE, FALSE, FALSE, FALSE);
-				 }}
+				 }
+			 if(ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 5)
+			 	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 6, oUser, FALSE, FALSE, FALSE, FALSE);
+				 }
+			 
+			}
+			
 		}
 		
  //Rope swings to tree platforms

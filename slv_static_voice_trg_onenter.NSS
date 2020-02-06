@@ -207,6 +207,7 @@ if((GetTag(OBJECT_SELF) == "003_cr_slv_deandragon_j_3") && (GetIsPC(GetEnteringO
  	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 4, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 	 }
 
+
 // Deandragon_K toggle on archway with inscription
 	if((GetTag(OBJECT_SELF) == "deandragon_k_inscription") && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
  	 {object oMyGateway = GetLocalObject(OBJECT_SELF, "oMyGateway");
@@ -497,12 +498,16 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_x") && (ACR_RetrieveQuestState("slv_d
 		}
 	 
 	 // Xorn appearance for Deandragon_x
-	 if((GetTag(OBJECT_SELF) == "slv_deandragon_x_elderxorn")  && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
-		  	{object oXornWP=GetWaypointByTag("slv_deandragon_x_xornlava_wp");
+	 if((GetTag(OBJECT_SELF) == "slv_deansphinx_x_elderxorn")  && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
+		  	{
+			object oJannWP=GetWaypointByTag("slv_deansphinx_j_jann");
+			object oJann = CreateObject(OBJECT_TYPE_CREATURE, "003_slv_dq_j_creature", GetLocation(oJannWP));
+						 
+			object oXornWP=GetWaypointByTag("slv_deandragon_x_xornlava_wp");
 			 if(GetLocalInt(GetEnteringObject(), "Xorn_Summoned") == 1)
 			 	{SetLocalInt(OBJECT_SELF, "Xorn_Summoned", 1);}
 			 
-			 if(GetItemPossessedBy(GetEnteringObject(), "slv_deandragon_x_alloy") != OBJECT_INVALID) 
+			 if(GetItemPossessedBy(GetEnteringObject(), "slv_deansphinx_x_alloy") != OBJECT_INVALID) 
 		 	 	{if(GetLocalInt(OBJECT_SELF, "Xorn_Summoned") == 1)
 					{if(GetLocalInt(OBJECT_SELF, "Xorn") != 1)
 						{SetLocalInt(OBJECT_SELF, "Xorn", 1);

@@ -80,7 +80,7 @@ void main() {
 		 if(GetLocalInt(OBJECT_SELF, "Active") == 1)
 		 	{DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Active", 0));
 			 object oPortalTo = GetLocalObject(OBJECT_SELF, "oPortalTo");
-			 if((ACR_RetrieveQuestState("slv_deandragon_h", oPC) >= 4) && (GetTag(GetArea(OBJECT_SELF)) == "6d_int_silvy_catacombs_1"))
+			 if((ACR_RetrieveQuestState("slv_deansphinx_h", oPC) >= 5) && (GetTag(GetArea(OBJECT_SELF)) == "6d_int_silvy_catacombs_1"))
 				{object oStormWP = GetLocalObject(OBJECT_SELF, "oStormWP");
 			     if(oStormWP == OBJECT_INVALID)
 				 	{oStormWP = GetWaypointByTag("storm_sylune_WP");

@@ -92,7 +92,7 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 			 DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oXornBodyWP)));
 		 
 			 
-		if((ACR_RetrieveQuestState("slv_deansphinx_e_earth", oUser) >= 1) || (ACR_RetrieveQuestState("slv_deansphinx_x", oUser) >= 6)|| (ACR_RetrieveQuestState("slv_deansphinx_j", oUser) >= 1))
+		if((ACR_RetrieveQuestState("slv_deansphinx_e_earth", oUser) >= 1) || (ACR_RetrieveQuestState("slv_deansphinx_x", oUser) >= 6)|| (ACR_RetrieveQuestState("slv_deansphinx_j", oUser) >= 5))
 			 {
 			 location lUser = GetLocation(oUser);
 			 object oDisgorged = GetLocalObject(OBJECT_SELF, "oDisgorged");
@@ -116,11 +116,19 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 				 object oJorun = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_sundabar_jorun", GetLocation(oJorunWP), FALSE);
 				}
 				
+			if(ACR_RetrieveQuestState("slv_deansphinx_j", oUser) == 6) 
+		 	 	{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_j", 7, oUser, FALSE, FALSE, FALSE, FALSE));
+				 object oJorun = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_sundabar_jorun", GetLocation(oJorunWP), FALSE);
+				}
+				
 			 object oPartyMember=GetFirstFactionMember(oUser);
 			 effect eParalyze = EffectParalyze();
 				 while(oPartyMember!=OBJECT_INVALID)
 				 {if(ACR_RetrieveQuestState("slv_deandragon_j", oPartyMember) != 0) 
 		 	 		{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_j", 6, oPartyMember, FALSE, FALSE, FALSE, FALSE));
+					}
+				 if(ACR_RetrieveQuestState("slv_deansphinx_j", oPartyMember) != 0) 
+		 	 		{DelayCommand(10.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_j", 7, oPartyMember, FALSE, FALSE, FALSE, FALSE));
 					}
 				 ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eDust, GetLocation(oPartyMember));
 				 ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oPartyMember));

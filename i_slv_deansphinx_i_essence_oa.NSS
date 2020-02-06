@@ -1,5 +1,5 @@
 //Silvy Uni Item onAcquire.  
-//Wynna February 2020
+//Wynna February 2008
 
 
 #include "acr_items_i"
@@ -14,12 +14,14 @@ void main()
 	object oItem = GetModuleItemAcquired();
 	object oArea = GetArea(oTaker);
 	
-	if((GetTag(oItem) == "slv_deansphinx_d_essence") && (GetIsPC(oTaker)))
-        {if((ACR_RetrieveQuestState("slv_deansphinx_d", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_d", oTaker) <= 7))
-				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_d", 7, oTaker);
+	if((GetTag(oItem) == "slv_deansphinx_i_essence") && (GetIsPC(oTaker)))
+        {if((ACR_RetrieveQuestState("slv_deansphinx_i", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_i", oTaker) <= 7))
+				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_i", 7, oTaker);
 				}
 			
 		  }
+		 	
+		  
 					
 
 }			  

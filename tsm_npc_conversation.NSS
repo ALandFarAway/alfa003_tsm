@@ -240,7 +240,7 @@ void main()
 								{DelayCommand(195.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_h", 5, oPC));
 								}
 					  if(ACR_RetrieveQuestState("slv_deansphinx_h", oPC) == 4)
-								{DelayCommand(195.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_h", 5, oPC));
+								{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_h", 5, oPC);
 								}
 					}
 			}

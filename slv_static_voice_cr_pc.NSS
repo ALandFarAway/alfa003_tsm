@@ -144,7 +144,7 @@ void main()
 						SetLocalInt(OBJECT_SELF, "Survival", 0);
 						nRep++;
 						SetLocalInt(OBJECT_SELF, "nRepHot", nRep);
-							if(FindSubString(GetTag(GetArea(OBJECT_SELF)), "everfire", 0))
+							if((FindSubString(GetTag(GetArea(OBJECT_SELF)), "everfire", 0) != -1) || (FindSubString(GetTag(GetArea(OBJECT_SELF)), "lavatube", 0) != -1))
 								{DelayCommand(fTimeLoop, ExecuteScript("slv_static_voice_cr_pc", OBJECT_SELF));}
 						    if(!FindSubString(GetTag(GetArea(OBJECT_SELF)), "everfire", 0))
 								{SetLocalInt(OBJECT_SELF, "HeatRep", 0);}

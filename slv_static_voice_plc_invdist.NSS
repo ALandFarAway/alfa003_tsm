@@ -63,12 +63,14 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx") && (GetInventoryDisturbType() == INVEN
 					 ActionSpeakString(sEssenceName + " has been appended to the draft page for " + sBookName + ". This revision completes this entry.", TALKVOLUME_TALK);
 					 SetDescription(oBook, "This is the final draft of the '" + sQuestAlpha + "'Entry of the 'Bestiary of the Marches'. It carries the shimmering image of a " +sBookName + ".          " + sBookDescription);
 					 int nEnd;
-					 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "I")|| (sQuestAlpha == "J")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))
+					 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "H")|| (sQuestAlpha == "I")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))
 					 	{nEnd = 9;}
 					 if((sQuestAlpha == "E")|| (sQuestAlpha == "M"))
 					 	{nEnd = 5;}
-					 if((sQuestAlpha == "G") || (sQuestAlpha == "H")|| (sQuestAlpha == "N")|| (sQuestAlpha == "O")|| (sQuestAlpha == "Q")|| (sQuestAlpha == "R")|| (sQuestAlpha == "S"))
+					 if((sQuestAlpha == "G") || (sQuestAlpha == "N")|| (sQuestAlpha == "O")|| (sQuestAlpha == "Q")|| (sQuestAlpha == "R")|| (sQuestAlpha == "S"))
 					 	{nEnd = 7;}
+					 if(sQuestAlpha == "J")
+					 	{nEnd = 11;}
 					 if(sQuestAlpha == "L")
 					 	{nEnd = 10;}
 					 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
@@ -79,7 +81,8 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx") && (GetInventoryDisturbType() == INVEN
 					 	{nEnd = 6;}
 					 
 					if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
-					 	{ACR_AddPersistentJournalQuestEntry(sQuest, ACR_RetrieveQuestState(sQuest, oUser) +1, oUser, FALSE, FALSE, FALSE, 0);
+					 	{int nXP= GetJournalQuestExperience(sQuest); 
+						 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, nXP);
 						 }
 			
 					 

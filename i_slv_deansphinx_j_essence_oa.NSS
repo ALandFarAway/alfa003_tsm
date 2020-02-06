@@ -14,12 +14,14 @@ void main()
 	object oItem = GetModuleItemAcquired();
 	object oArea = GetArea(oTaker);
 	
-	if((GetTag(oItem) == "slv_deansphinx_d_essence") && (GetIsPC(oTaker)))
-        {if((ACR_RetrieveQuestState("slv_deansphinx_d", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_d", oTaker) <= 7))
-				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_d", 7, oTaker);
+	if((GetTag(oItem) == "slv_deansphinx_j_essence") && (GetIsPC(oTaker)))
+        {if((ACR_RetrieveQuestState("slv_deansphinx_j", oTaker) >= 1) && (ACR_RetrieveQuestState("slv_deansphinx_j", oTaker) <= 8))
+				{ACR_AddPersistentJournalQuestEntry("slv_deansphinx_j", 8, oTaker);
 				}
 			
 		  }
+		 	
+		  
 					
 
 }			  
