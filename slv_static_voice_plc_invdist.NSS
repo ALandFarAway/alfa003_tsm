@@ -37,9 +37,10 @@ if(((GetTag(OBJECT_SELF) == "vala_sphinx") || (GetTag(OBJECT_SELF) == "slv_vala_
 		{object oItemOne = GetFirstItemInInventory(OBJECT_SELF);
 		 while (oItemOne != OBJECT_INVALID)
 		 	{string sItemOne = GetTag(oItemOne);
-			 object oItemNext = GetNextItemInInventory(OBJECT_SELF);
+			 object oItemNext = GetFirstItemInInventory(OBJECT_SELF);
 			 while (oItemNext != OBJECT_INVALID)
-			 	{string sItemNext = GetTag(oItemNext);
+			 	{
+				 string sItemNext = GetTag(oItemNext);
 				 if((sItemOne == sItemNext + "_essence") || (sItemNext == sItemOne + "_essence")) 
 					 {ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlimmer, OBJECT_SELF, 10.0);
 	                  DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoothing, OBJECT_SELF, 10.0));
@@ -89,7 +90,9 @@ if(((GetTag(OBJECT_SELF) == "vala_sphinx") || (GetTag(OBJECT_SELF) == "slv_vala_
 					 
 					 
 					 }
+				 oItemNext = GetNextItemInInventory(OBJECT_SELF);
 				 }
+			 oItemOne = GetNextItemInInventory(OBJECT_SELF);
 			 }
 		}
 	 else {ActionSpeakString("This item is not part of any oracular divination.", TALKVOLUME_TALK);}
