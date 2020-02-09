@@ -104,14 +104,14 @@ if(GetTag(OBJECT_SELF) == "wands_cave_pool_rocks")
 	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to swim a long, dark tunnel, conserving breath. A gentle current aids your swim.");
 		}
 	 else if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
-	 	{ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSwimDmg, oUser);
+	 	{ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 		 SendMessageToPC(oUser, "The swim is long, and dark. Once into the narrow tunnel, though, you must continue. You feel your breath growing short when at last you see a lightening in the water ahead. You exit onto a sandy shore, dizzy and somewhat scraped up.");
 		}
-	 else {ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSwimDmg, oUser);
-		   ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSwimDmg, oUser);
+	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
+		   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Trapped in a cramped, lightless tunnel filled with water, you can only go on, and finally emerge onto a sandy shore, bruised, battered and nearly unconscious from lack of air.");
 		}
-	DelayCommand(2.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+	DelayCommand(5.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 		
 		}		
 											

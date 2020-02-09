@@ -88,7 +88,17 @@ void main()
 			DelayCommand(12.5, SetLocalString(oMyDoor, "Unlocked", ""));
             	}
 		
-				
+		
+		if((GetTag(oStudent) == "slv_proc_arizmazul") && (FindSubString(GetTag(oMyDoor), "Div") != -1))
+			{ActionUnlockObject(oMyDoor);
+            ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnock, oMyDoor, 2.0);
+            SetLocalString(oMyDoor, "Unlocked", "Normally");
+            ActionOpenDoor(oMyDoor);
+			DelayCommand(10.0, ActionCloseDoor(oMyDoor));
+			DelayCommand(12.0, SetLocked(oMyDoor, TRUE));
+			DelayCommand(12.5, SetLocalString(oMyDoor, "Unlocked", ""));
+            	}
+						
 //Deandragon T	Transmutation Door trigger	
 		if(((ACR_RetrieveQuestState("slv_deandragon_t", oStudent) == 1) && (FindSubString(GetTag(oMyDoor), "Tra") != -1) && (GetLocalObject(OBJECT_SELF, "oTQuest") != oStudent)))
 			{

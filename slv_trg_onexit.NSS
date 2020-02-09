@@ -472,11 +472,17 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 		 	{oBookcase = GetObjectByTag("slv_vala_bookcase_sphinx");
 			 SetLocalObject(OBJECT_SELF, "oBookcase", oBookcase);
 			 }
+		 object oSphinxBust = GetLocalObject(OBJECT_SELF, "oSphinxBust");
+			 if(oSphinxBust == OBJECT_INVALID)
+			 	{oSphinxBust = GetObjectByTag("vala_sphinx");
+				 SetLocalObject(OBJECT_SELF, "oSphinxBust", oSphinxBust);
+				 }
 		int nUseable = GetUseableFlag(oBookcase);
 		if(nUseable == TRUE)
 			{if(GetItemPossessedBy(oStudent, "slv_deansphinx") != OBJECT_INVALID)
 				{if(GetIsOpen(oBookcase) == FALSE)
 					{SetUseableFlag(oBookcase, FALSE);
+					SetUseableFlag(oSphinxBust, FALSE);
 					}
 				 else
 				 	{DelayCommand(600.0, SetUseableFlag(oBookcase, FALSE));

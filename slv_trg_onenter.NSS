@@ -508,14 +508,20 @@ if((GetIsPC(oStudent)) && (GetLocalInt(oStudent, "Classes") != 1))
 		
 		if((GetTag(OBJECT_SELF) == "slv_vala_secret_sphinx") && ((GetIsPC(oStudent)) || (GetIsDMPossessed(oStudent))))
 			{object oBookcase = GetLocalObject(OBJECT_SELF, "oBookcase");
-		 if(oBookcase == OBJECT_INVALID)
-		 	{oBookcase = GetObjectByTag("slv_vala_bookcase_sphinx");
-			 SetLocalObject(OBJECT_SELF, "oBookcase", oBookcase);
-			 }
+			 if(oBookcase == OBJECT_INVALID)
+			 	{oBookcase = GetObjectByTag("slv_vala_bookcase_sphinx");
+				 SetLocalObject(OBJECT_SELF, "oBookcase", oBookcase);
+				 }
+			object oSphinxBust = GetLocalObject(OBJECT_SELF, "oSphinxBust");
+			 if(oSphinxBust == OBJECT_INVALID)
+			 	{oSphinxBust = GetObjectByTag("vala_sphinx");
+				 SetLocalObject(OBJECT_SELF, "oSphinxBust", oSphinxBust);
+				 }
 		int nUseable = GetUseableFlag(oBookcase);
 		if(nUseable == FALSE)
 			{if(GetItemPossessedBy(oStudent, "slv_deansphinx") != OBJECT_INVALID)
 				{SetUseableFlag(oBookcase, TRUE);
+				 SetUseableFlag(oSphinxBust, TRUE);
 				 }
 			}
 		}
@@ -655,7 +661,6 @@ if((GetIsPC(oStudent)) && (GetLocalInt(oStudent, "Classes") != 1))
 		 object oMap = CreateObject(OBJECT_TYPE_PLACEABLE, "slv_map", GetLocation(oMapWP), FALSE);
 		 SetLocalObject(OBJECT_SELF, "Map", oMap);
  		 }	  		       	
-
 //initializes local Dragonquest variables from p-variables
 if((GetTag(OBJECT_SELF) == "slv_dragonquest_init")  && (GetLocalInt(oStudent, "DragonQ_Init") != 1) && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))
 	  	{
@@ -741,6 +746,7 @@ if((GetTag(OBJECT_SELF) == "slv_dragonquest_init")  && (GetLocalInt(oStudent, "D
 		{SetLocalString(oStudent, "DragonquestZ", "Open");
 		}
 	}
+	
 
 	
 	if((GetTag(OBJECT_SELF) == "MH_Grove") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))

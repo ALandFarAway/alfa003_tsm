@@ -31,7 +31,8 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice") && (GetInventoryDisturbType()
 		ChangeToStandardFaction(oMyArrowhawk6, STANDARD_FACTION_HOSTILE);
 		}
 
-if((GetTag(OBJECT_SELF) == "vala_sphinx") && (GetInventoryDisturbType() == INVENTORY_DISTURB_TYPE_ADDED))
+		
+if(((GetTag(OBJECT_SELF) == "vala_sphinx") || (GetTag(OBJECT_SELF) == "slv_vala_bookcase_sphinx")) && (GetInventoryDisturbType() == INVENTORY_DISTURB_TYPE_ADDED))
 	{if(FindSubString(GetTag(oItem), "slv_deansphinx_", 0) != -1)
 		{object oItemOne = GetFirstItemInInventory(OBJECT_SELF);
 		 while (oItemOne != OBJECT_INVALID)

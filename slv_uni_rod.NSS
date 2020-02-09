@@ -229,6 +229,9 @@ void main()
 			 if(iResRef == 44)
 				{sResRef = "003_cr_slv_evelyn";
 				}	
+			  if(iResRef == 45)
+				{sResRef = "slv_proc_arizmazul";
+				}	
 			  	
 			 object oCreate = CreateObject(OBJECT_TYPE_CREATURE, sResRef, lCreate, FALSE, sResRef + "_Wand");
 			 SetLocalInt(oDM, "Uni_NPC", 0);

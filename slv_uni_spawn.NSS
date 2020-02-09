@@ -163,7 +163,7 @@ if((GetTag(OBJECT_SELF) != "003_cr_slv_registrar") && (GetTag(OBJECT_SELF) != "0
 		 SetSilvyUniversitySchool(SilvyUniversitySchoolConjuration);
   		}
 		 
-	if((FindSubString(GetTag(OBJECT_SELF), "div") != -1) || (GetTag(OBJECT_SELF) == "003_cr_slv_dean"))
+	if((FindSubString(GetTag(OBJECT_SELF), "div") != -1) || (GetTag(OBJECT_SELF) == "003_cr_slv_dean")  || (GetTag(OBJECT_SELF) == "slv_proc_arizmazul"))
 		{sSchool = "Divination";
 		 oDown = GetWaypointByTag("Divination2_Down_AT");
 		 oDowned = GetWaypointByTag("Divination2_Down_AT_WP");
