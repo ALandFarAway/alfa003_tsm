@@ -43,52 +43,75 @@ if(((GetTag(OBJECT_SELF) == "vala_sphinx") || (GetTag(OBJECT_SELF) == "slv_vala_
 				 string sItemNext = GetTag(oItemNext);
 				 if((sItemOne == sItemNext + "_essence") || (sItemNext == sItemOne + "_essence")) 
 					 {ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlimmer, OBJECT_SELF, 10.0);
-	                  DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoothing, OBJECT_SELF, 10.0));
-					  object oBook;
-					  object oEssence;
+	                  DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoothing, OBJECT_SELF, 10.0));
+					  
 					  if(FindSubString(sItemOne, "_essence", 0) != -1)
-					  	{object oEssence = oItemOne;
-						 if(FindSubString(sItemOne, sItemNext, 0) != -1)
-						 	{object oBook = oItemNext;}
-						}
-					  if(FindSubString(sItemNext, "_essence", 0) != -1)
-					  	{object oEssence = oItemNext;
-						 if(FindSubString(sItemNext, sItemOne, 0) != -1)
-						 	{object oBook = oItemOne;}
-						}
+					  	{//object oEssence = oItemOne;
+						 string sEssenceName = GetName(oItemOne);
+						 //object oBook = oItemNext;
+						 string sBookName = GetName(oItemNext);
+						 string sQuestAlpha = GetStringLeft(sBookName,1);
+						 string sBookDescription = GetDescription(oItemNext);
+						 string sQuest = "slv_deansphinx_" + GetStringLowerCase(sQuestAlpha);
+						 ActionSpeakString(sBookName + " essence has been appended to the draft page for " + sBookName + ". This revision completes this entry.", TALKVOLUME_TALK);
+						 SetDescription(oItemNext, "This is the final draft of the '" + sQuestAlpha + "'Entry of the 'Bestiary of the Marches'. It carries the shimmering image of a " +sBookName + ".          " + sBookDescription);
+						 int nEnd;
+						 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "H")|| (sQuestAlpha == "I")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))
+						 	{nEnd = 9;}
+						 if((sQuestAlpha == "E")|| (sQuestAlpha == "M"))
+						 	{nEnd = 5;}
+						 if((sQuestAlpha == "G") || (sQuestAlpha == "N")|| (sQuestAlpha == "O")|| (sQuestAlpha == "Q")|| (sQuestAlpha == "R")|| (sQuestAlpha == "S"))
+						 	{nEnd = 7;}
+						 if(sQuestAlpha == "J")
+						 	{nEnd = 11;}
+						 if(sQuestAlpha == "L")
+						 	{nEnd = 10;}
+						 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
+						 	{nEnd = 4;}
+						 if(sQuestAlpha == "T")
+						 	{nEnd = 3;}
+						 if(sQuestAlpha == "U")
+						 	{nEnd = 6;}
+						 
+						if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
+						 	{int nXP= GetJournalQuestExperience(sQuest); 
+							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, nXP);
+							 }
+					 }
 						
-					 string sBookName = GetName(oBook);
-					 string sEssenceName = GetName(oEssence);
-					 string sQuestAlpha = GetStringLeft(sBookName,1);
-					 string sBookDescription = GetDescription(oBook);
-					 string sQuest = "slv_deansphinx_" + sQuestAlpha;
-					 ActionSpeakString(sEssenceName + " has been appended to the draft page for " + sBookName + ". This revision completes this entry.", TALKVOLUME_TALK);
-					 SetDescription(oBook, "This is the final draft of the '" + sQuestAlpha + "'Entry of the 'Bestiary of the Marches'. It carries the shimmering image of a " +sBookName + ".          " + sBookDescription);
-					 int nEnd;
-					 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "H")|| (sQuestAlpha == "I")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))
-					 	{nEnd = 9;}
-					 if((sQuestAlpha == "E")|| (sQuestAlpha == "M"))
-					 	{nEnd = 5;}
-					 if((sQuestAlpha == "G") || (sQuestAlpha == "N")|| (sQuestAlpha == "O")|| (sQuestAlpha == "Q")|| (sQuestAlpha == "R")|| (sQuestAlpha == "S"))
-					 	{nEnd = 7;}
-					 if(sQuestAlpha == "J")
-					 	{nEnd = 11;}
-					 if(sQuestAlpha == "L")
-					 	{nEnd = 10;}
-					 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
-					 	{nEnd = 4;}
-					 if(sQuestAlpha == "T")
-					 	{nEnd = 3;}
-					 if(sQuestAlpha == "U")
-					 	{nEnd = 6;}
-					 
-					if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
-					 	{int nXP= GetJournalQuestExperience(sQuest); 
-						 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, nXP);
-						 }
-			
-					 
-					 
+					  if(FindSubString(sItemNext, "_essence", 0) != -1)
+					   {//object oEssence = oItemNext;
+						//object oBook = oItemOne;
+						string sBookName = GetName(oItemOne);
+						string sEssenceName = GetName(oItemNext);
+						string sQuestAlpha = GetStringLeft(sBookName,1);
+						string sBookDescription = GetDescription(oItemOne);
+						string sQuest = "slv_deansphinx_" + sQuestAlpha;
+						ActionSpeakString(sEssenceName + " has been appended to the draft page for " + sBookName + ". This revision completes this entry.", TALKVOLUME_TALK);
+						SetDescription(oItemOne, "This is the final draft of the '" + sQuestAlpha + "'Entry of the 'Bestiary of the Marches'. It carries the shimmering image of a " +sBookName + ".          " + sBookDescription);
+						 int nEnd;
+						 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "H")|| (sQuestAlpha == "I")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))
+						 	{nEnd = 9;}
+						 if((sQuestAlpha == "E")|| (sQuestAlpha == "M"))
+						 	{nEnd = 5;}
+						 if((sQuestAlpha == "G") || (sQuestAlpha == "N")|| (sQuestAlpha == "O")|| (sQuestAlpha == "Q")|| (sQuestAlpha == "R")|| (sQuestAlpha == "S"))
+						 	{nEnd = 7;}
+						 if(sQuestAlpha == "J")
+						 	{nEnd = 11;}
+						 if(sQuestAlpha == "L")
+						 	{nEnd = 10;}
+						 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
+						 	{nEnd = 4;}
+						 if(sQuestAlpha == "T")
+						 	{nEnd = 3;}
+						 if(sQuestAlpha == "U")
+						 	{nEnd = 6;}
+						 
+						if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
+						 	{int nXP= GetJournalQuestExperience(sQuest); 
+							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, nXP);
+							 }
+						}
 					 }
 				 oItemNext = GetNextItemInInventory(OBJECT_SELF);
 				 }
