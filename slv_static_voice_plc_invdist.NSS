@@ -35,18 +35,23 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_e_ice") && (GetInventoryDisturbType()
 if(((GetTag(OBJECT_SELF) == "vala_sphinx") || (GetTag(OBJECT_SELF) == "slv_vala_bookcase_sphinx")) && (GetInventoryDisturbType() == INVENTORY_DISTURB_TYPE_ADDED))
 	{if(FindSubString(GetTag(oItem), "slv_deansphinx_", 0) != -1)
 		{object oItemOne = GetFirstItemInInventory(OBJECT_SELF);
+		 string sItemOneName = GetName(oItemOne);
+		 string sItemOne = GetTag(oItemOne);
+		 ActionSpeakString("sItemOneName = "  + sItemOneName, TALKVOLUME_TALK);
+						
 		 while (oItemOne != OBJECT_INVALID)
-		 	{string sItemOne = GetTag(oItemOne);
-			 object oItemNext = GetFirstItemInInventory(OBJECT_SELF);
+		 	{object oItemNext = GetFirstItemInInventory(OBJECT_SELF);
 			 while (oItemNext != OBJECT_INVALID)
-			 	{
-				 string sItemNext = GetTag(oItemNext);
+			 	{string sItemNextName = GetName(oItemNext);
+				 ActionSpeakString("sItemNextName = "  + sItemNextName, TALKVOLUME_TALK);
+		         string sItemNext = GetTag(oItemNext);
 				 if((sItemOne == sItemNext + "_essence") || (sItemNext == sItemOne + "_essence")) 
 					 {ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlimmer, OBJECT_SELF, 10.0);
 	                  DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoothing, OBJECT_SELF, 10.0));
 					  
 					  if(FindSubString(sItemOne, "_essence", 0) != -1)
-					  	{//object oEssence = oItemOne;
+					  	{ActionSpeakString("ItemOne is the essence and its tag = "  + sItemOne, TALKVOLUME_TALK);
+						//object oEssence = oItemOne;
 						 string sEssenceName = GetName(oItemOne);
 						 //object oBook = oItemNext;
 						 string sBookName = GetName(oItemNext);
@@ -82,6 +87,7 @@ if(((GetTag(OBJECT_SELF) == "vala_sphinx") || (GetTag(OBJECT_SELF) == "slv_vala_
 					  if(FindSubString(sItemNext, "_essence", 0) != -1)
 					   {//object oEssence = oItemNext;
 						//object oBook = oItemOne;
+						ActionSpeakString("ItemNext is the essence and its tag = "  + sItemNext, TALKVOLUME_TALK);
 						string sBookName = GetName(oItemOne);
 						string sEssenceName = GetName(oItemNext);
 						string sQuestAlpha = GetStringLeft(sBookName,1);
