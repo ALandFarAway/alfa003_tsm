@@ -13,7 +13,10 @@ if(GetTag(OBJECT_SELF) == "003_cr_slv_profcon")
 if(GetTag(OBJECT_SELF) == "003_cr_slv_profdiv")
   {oScroll = CreateItemOnObject("abr_scroll_3_seeinvis", GetPCSpeaker(), 1);}
 
-if(GetTag(OBJECT_SELF) == "003_cr_slv_profenc")
+if(GetTag(OBJECT_SELF) == "003_cr_slv_dean")
+  {oScroll = CreateItemOnObject("abr_scroll_3_seeinvis", GetPCSpeaker(), 1);}
+
+  if(GetTag(OBJECT_SELF) == "003_cr_slv_profenc")
   {oScroll = CreateItemOnObject("abr_scroll_2_touchidiocy", GetPCSpeaker(), 1);}
 
 if(GetTag(OBJECT_SELF) == "003_cr_slv_profevo")

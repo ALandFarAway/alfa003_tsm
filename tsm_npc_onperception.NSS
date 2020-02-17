@@ -73,14 +73,14 @@ void main()
 				}
 			}
 	
-  if((Random(4)==1) && (GetLocalInt(OBJECT_SELF, "Spoken") != 1) & (FindSubString(GetTag(OBJECT_SELF), "03_silvy_commoner") != -1))
+  if((Random(3)==1) && (GetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF)) != 1) && (FindSubString(GetTag(OBJECT_SELF), "03_silvy_commoner") != -1))
   	{
 	if((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))
 		{return;}
 	else {
 	
 	object oNearest = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
-	 if((!GetIsDM(oNearest)) && (!GetIsPC(oNearest)) &&(GetDistanceBetween(OBJECT_SELF, oNearest) < 5.0 ) )
+	 if((!GetIsDM(oNearest)) && (!GetIsPC(oNearest)) &&(GetDistanceBetween(OBJECT_SELF, oNearest) < 10.0 ) )
 		 {ActionForceMoveToObject(oNearest, FALSE, 1.0, 30.0);
 		 
 		  DelayCommand(3.0, AssignCommand(oNearest, SetFacingPoint(GetPositionFromLocation(GetLocation(OBJECT_SELF)))));
@@ -93,48 +93,48 @@ void main()
 	    else
 	     {sDay = "evening.";}
     	
-		string sHeardFrom = "him";
+		string sHeardFrom = "He";
 		int nRandomHeardFrom = Random(21);
 		if(nRandomHeardFrom == 1)
-			{sHeardFrom = "her";}
+			{sHeardFrom = "She";}
 		if(nRandomHeardFrom == 2)
-			{sHeardFrom = "my son";}
+			{sHeardFrom = "My son";}
 		if(nRandomHeardFrom == 3)
-			{sHeardFrom = "my daughter";}
+			{sHeardFrom = "My daughter";}
 		if(nRandomHeardFrom == 4)
-			{sHeardFrom = "my sister";}
+			{sHeardFrom = "My sister";}
 		if(nRandomHeardFrom == 5)
-			{sHeardFrom = "my brother";}
+			{sHeardFrom = "My brother";}
 		if(nRandomHeardFrom == 6)
-			{sHeardFrom = "my mother";}
+			{sHeardFrom = "My mother";}
 		if(nRandomHeardFrom == 7)
-			{sHeardFrom = "my father";}
+			{sHeardFrom = "My father";}
 		if(nRandomHeardFrom == 8)
-			{sHeardFrom = "my grandmother";}
+			{sHeardFrom = "My grandmother";}
 		if(nRandomHeardFrom == 9)
-			{sHeardFrom = "my grandfather";}
+			{sHeardFrom = "My grandfather";}
 		if(nRandomHeardFrom == 10)
-			{sHeardFrom = "my children";}
+			{sHeardFrom = "My children";}
 		if(nRandomHeardFrom == 11)
-			{sHeardFrom = "the constables";}
+			{sHeardFrom = "The constables";}
 		if(nRandomHeardFrom == 12)
-			{sHeardFrom = "a Knight in Silver";}
+			{sHeardFrom = "A Knight in Silver";}
 		if(nRandomHeardFrom == 13)
-			{sHeardFrom = "a spellguard";}
+			{sHeardFrom = "A spellguard";}
 		if(nRandomHeardFrom == 14)
-			{sHeardFrom = "a shopkeeper";}
+			{sHeardFrom = "A shopkeeper";}
 		if(nRandomHeardFrom == 15)
 			{sHeardFrom = "Katrinia";}
 		if(nRandomHeardFrom == 16)
 			{sHeardFrom = "Myra";}
 		if(nRandomHeardFrom == 17)
-			{sHeardFrom = "a scribe at the Vault of Sages";}
+			{sHeardFrom = "A scribe at the Vault of Sages";}
 		if(nRandomHeardFrom == 18)
-			{sHeardFrom = "a student at the Lady's College";}
+			{sHeardFrom = "A student at the Lady's College";}
 		if(nRandomHeardFrom == 19)
-			{sHeardFrom = "someone who works at the Palace";}
+			{sHeardFrom = "Someone who works at the Palace";}
 		if(nRandomHeardFrom == 20)
-			{sHeardFrom = "a guard at the city gate over there";}
+			{sHeardFrom = "A guard at the city gate over there";}
 		
 		string sRandomMonster = "monsters";
 		int nRandomMonster = Random(20);
@@ -222,7 +222,6 @@ void main()
 		if(nRandomCity == 20)
 			{sRandomCity = "the high peaks of the Nether Mountains";}
 		
-		SetLocalInt(OBJECT_SELF, "Spoken", 1);  	   
 		if(nRandomPerception < 10)
 			{ActionPlayAnimation(ANIMATION_FIREFORGET_GREETING, 1.0);
 			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
@@ -236,7 +235,15 @@ void main()
 			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
 			}
 		else if(nRandomPerception < 35)
-			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " said somebody saw " + sRandomMonster + " near " + sRandomCity, TALKVOLUME_TALK));
+			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Did you hear? " + sHeardFrom + " said somebody saw " + sRandomMonster + " near " + sRandomCity, TALKVOLUME_TALK));
+			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
+			}
+		else if(nRandomPerception < 40)
+			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " got hired on at the circus.", TALKVOLUME_TALK));
+			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
+			}
+		else if(nRandomPerception < 45)
+			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " saw some of those acts when it was passing through " + sRandomCity + ".", TALKVOLUME_TALK));
 			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
 			}
 		}  

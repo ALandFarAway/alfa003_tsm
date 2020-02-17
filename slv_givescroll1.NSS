@@ -14,6 +14,9 @@ if(GetTag(OBJECT_SELF) == "003_cr_slv_profcon")
 if(GetTag(OBJECT_SELF) == "003_cr_slv_profdiv")
   {oScroll = CreateItemOnObject("abr_scroll_1_identify", GetPCSpeaker(), 1);}
 
+ if(GetTag(OBJECT_SELF) == "003_cr_slv_dean")
+  {oScroll = CreateItemOnObject("abr_scroll_1_identify", GetPCSpeaker(), 1);}
+
 if(GetTag(OBJECT_SELF) == "003_cr_slv_profenc")
   {oScroll = CreateItemOnObject("abr_scroll_1_chrmperson", GetPCSpeaker(), 1);}
 
