@@ -17,7 +17,7 @@ void main()
 	float fSongLength = IntToFloat(nSongLengthInt + 6);
     
 	if((FindSubString(GetTag(oTarget), "kobold") != -1) || (FindSubString(GetTag(oTarget), "lizard") != -1)  || (FindSubString(GetTag(oTarget), "snake") != -1))
-	  {AssignCommand(oUser, ActionSpeakString("Charm will last BardLevel" + IntToString(nBardLevel) + " x Skill Level" + IntToString(nPerformSkill) + " which is " + FloatToString(fSongLength), TALKVOLUME_TALK));
+	  {AssignCommand(oUser, ActionSpeakString("Charm will last 6 seconds + BardLevel" + IntToString(nBardLevel) + " x Perform Wind Instruments Skill Level" + IntToString(nPerformSkill) + " which is " + FloatToString(fSongLength), TALKVOLUME_TALK));
 	   ActionCastFakeSpellAtObject(SPELL_CHARM_MONSTER, oTarget, PROJECTILE_PATH_TYPE_DEFAULT);
 	   ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardsong, oUser, fSongLength);	
 	   ApplyEffectToObject(DURATION_TYPE_INSTANT, eCharm, oTarget);	
