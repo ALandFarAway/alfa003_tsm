@@ -14,13 +14,13 @@ void main()
     object oPC = GetLastSpellCaster();
 	int nSpell=GetLastSpell();
     	
-	 if((nSpell==41) || (nSpell==94) || (nSpell==67))
-			{string sRealResRef=GetLocalString(OBJECT_SELF, "menagerie_real_resref");
+	 
+			string sRealResRef=GetLocalString(OBJECT_SELF, "menagerie_real_resref");
 			 string sReveal = GetLocalString(OBJECT_SELF, "menagerie_real_animal");
 			 object oRealSelf = CreateObject(OBJECT_TYPE_CREATURE, sRealResRef, GetLocation(OBJECT_SELF));
 			 ActionSpeakString(sReveal, TALKVOLUME_TALK);
 			 DestroyObject(OBJECT_SELF, 3.0);
-			 }
+			 
 		
 
        	   	  

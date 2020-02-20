@@ -80,12 +80,14 @@ void main()
 	else {
 	
 	object oNearest = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
-	 if((!GetIsDM(oNearest)) && (!GetIsPC(oNearest)) &&(GetDistanceBetween(OBJECT_SELF, oNearest) < 10.0 ) )
+	 if((!GetIsDM(oNearest)) && (!GetIsPC(oNearest)) &&(GetDistanceBetween(OBJECT_SELF, oNearest) < 20.0 ) )
 		 {ActionForceMoveToObject(oNearest, FALSE, 1.0, 30.0);
-		 
 		  DelayCommand(3.0, AssignCommand(oNearest, SetFacingPoint(GetPositionFromLocation(GetLocation(OBJECT_SELF)))));
 		  DelayCommand(3.2, SetFacingPoint(GetPositionFromLocation(GetLocation(oNearest))));
-	     }
+	      DelayCommand(10.0, AssignCommand(oNearest, SetFacingPoint(GetPositionFromLocation(GetLocation(OBJECT_SELF)))));
+		  DelayCommand(10.2, SetFacingPoint(GetPositionFromLocation(GetLocation(oNearest))));
+	      DelayCommand(11.0, ActionWait(30.0));
+		  }
 		int nRandomPerception = Random(200);
 		string sDay;
 	    if(GetIsDay())
@@ -222,31 +224,28 @@ void main()
 		if(nRandomCity == 20)
 			{sRandomCity = "the high peaks of the Nether Mountains";}
 		
-		if(nRandomPerception < 10)
-			{ActionPlayAnimation(ANIMATION_FIREFORGET_GREETING, 1.0);
-			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
-			}
-		else if(nRandomPerception < 20)
-			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Hello.", TALKVOLUME_TALK));
-			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
-			}
-		else if(nRandomPerception < 30)
-			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Good " + sDay + ".", TALKVOLUME_TALK));
-			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
-			}
-		else if(nRandomPerception < 35)
-			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Did you hear? " + sHeardFrom + " said somebody saw " + sRandomMonster + " near " + sRandomCity, TALKVOLUME_TALK));
-			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
-			}
-		else if(nRandomPerception < 40)
-			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " got hired on at the circus.", TALKVOLUME_TALK));
-			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
-			}
-		else if(nRandomPerception < 45)
-			{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " saw some of those acts when it was passing through " + sRandomCity + ".", TALKVOLUME_TALK));
-			 SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
-			}
-		}  
+		if(nRandomPerception < 65) {
+			SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
+			if(nRandomPerception < 10)
+				{ActionPlayAnimation(ANIMATION_FIREFORGET_GREETING, 1.0);
+				 }
+			else if(nRandomPerception < 30)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Hello.", TALKVOLUME_TALK));
+				 }
+			else if(nRandomPerception < 50)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Good " + sDay + ".", TALKVOLUME_TALK));
+				 }
+			else if(nRandomPerception < 55)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("Did you hear? " + sHeardFrom + " said somebody saw " + sRandomMonster + " near " + sRandomCity, TALKVOLUME_TALK));
+				 }
+			else if(nRandomPerception < 60)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " got hired on at the circus.", TALKVOLUME_TALK));
+				 }
+			else if(nRandomPerception < 65)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " saw some of those acts when it was passing through " + sRandomCity + ".", TALKVOLUME_TALK));
+				 }
+			} 
+		} 
 	}			
 			
 }

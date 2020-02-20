@@ -146,7 +146,7 @@ string sTryAgain = "Do you wish to receive, submit or use a keyword to enter?  Y
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("The magician thanked him who spoke, and having seen the palace knew that it had been raised by the jann of the lamp, and became half mad with rage.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "K") || (sQuest == "k")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_k") != OBJECT_INVALID))
-                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Ye miners call it cobalt : the dwarves call it the black devil, and the old devil’s hag, old and black kobel, which by their witchcraft do injury to people and to their cattle.", TALKVOLUME_TALK)));
+                    {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Old King Kobold was a merry old soul, and a merry old soul was he. He called for his pipe and he called for his drum and he called for his fiddlers three.", TALKVOLUME_TALK)));
                     }
                else if (((sQuest == "L") || (sQuest == "l")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_l") != OBJECT_INVALID))
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Fenrir, however, inspired too much fear in them for them to let him out from under their watchful eyes. Only Tyr, the indefatigable upholder of law and honor, dared to approach the werewolf to feed him.", TALKVOLUME_TALK)));
