@@ -73,11 +73,8 @@ void main()
 				}
 			}
 	
-  if((Random(3)==1) && (GetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF)) != 1) && (FindSubString(GetTag(OBJECT_SELF), "03_silvy_commoner") != -1))
-  	{
-	if((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))
-		{return;}
-	else {
+  if((Random(3)==1) && (GetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF)) != 1) && (FindSubString(GetTag(OBJECT_SELF), "03_silvy_commoner") != -1) && (GetIsPC(oPerceived))) 
+	{
 	
 	object oNearest = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
 	 if((!GetIsDM(oNearest)) && (!GetIsPC(oNearest)) &&(GetDistanceBetween(OBJECT_SELF, oNearest) < 20.0 ) )
@@ -245,7 +242,7 @@ void main()
 				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " saw some of those acts when it was passing through " + sRandomCity + ".", TALKVOLUME_TALK));
 				 }
 			} 
-		} 
+		
 	}			
 			
 }
