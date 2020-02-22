@@ -143,6 +143,8 @@ void main()
 		     DelayCommand(2.0, ActionUnequipItem(oDaggerInv));
 			 DelayCommand(5.0, AssignCommand(oBeardedLady, ActionSpeakString("Ready!", TALKVOLUME_TALK)));
 		     DelayCommand(10.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
+			 nIncrement++;
+			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
 			 }
 		else if(nIncrement < 10)
 			 {

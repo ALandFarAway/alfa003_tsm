@@ -221,7 +221,7 @@ void main()
 		if(nRandomCity == 20)
 			{sRandomCity = "the high peaks of the Nether Mountains";}
 		
-		if(nRandomPerception < 65) {
+		if(nRandomPerception < 69) {
 			SetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF), 1);
 			if(nRandomPerception < 10)
 				{ActionPlayAnimation(ANIMATION_FIREFORGET_GREETING, 1.0);
@@ -240,6 +240,12 @@ void main()
 				 }
 			else if(nRandomPerception < 65)
 				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " saw some of those acts when it was passing through " + sRandomCity + ".", TALKVOLUME_TALK));
+				 }
+			else if(nRandomPerception < 67)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString("I heard an imp escaped from the circus last night and is loose in the city!", TALKVOLUME_TALK));
+				 }
+			else if(nRandomPerception < 69)
+				{DelayCommand(IntToFloat(Random(5)), ActionSpeakString(sHeardFrom + " said that the Palace sent investigators to the circus for some reason!", TALKVOLUME_TALK));
 				 }
 			} 
 		
