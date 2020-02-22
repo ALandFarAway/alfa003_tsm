@@ -104,105 +104,76 @@ void main()
 		 location lBeardedStart=GetLocation(GetWaypointByTag("bearded_start_wp"));
 		 location lDagger;
 		 object oDagger1WP = GetWaypointByTag("circus_dagger1_wp");
-		 object oDagger1 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger1WP, 1);
 		 location lDagger1 = GetLocation(oDagger1WP);
 		 object oDagger2WP = GetWaypointByTag("circus_dagger2_wp");
-		 object oDagger2 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger2WP, 1);
 		 location lDagger2 = GetLocation(oDagger2WP);
 		 object oDagger3WP = GetWaypointByTag("circus_dagger3_wp");
-		 object oDagger3 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger3WP, 1);
 		 location lDagger3 = GetLocation(oDagger3WP);
 		 object oDagger4WP = GetWaypointByTag("circus_dagger4_wp");
-		 object oDagger4 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger4WP, 1);
 		 location lDagger4 = GetLocation(oDagger4WP);
 		 object oDagger5WP = GetWaypointByTag("circus_dagger5_wp");
-		 object oDagger5 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger5WP, 1);
 		 location lDagger5 = GetLocation(oDagger1WP);
 		 object oDagger6WP = GetWaypointByTag("circus_dagger6_wp");
-		 object oDagger6 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger6WP, 1);
 		 location lDagger6 = GetLocation(oDagger6WP);
 		 object oDagger7WP = GetWaypointByTag("circus_dagger7_wp");
-		 object oDagger7 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger7WP, 1);
 		 location lDagger7 = GetLocation(oDagger7WP);
 		 object oDagger8WP = GetWaypointByTag("circus_dagger8_wp");
-		 object oDagger8 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger8WP, 1);
 		 location lDagger8 = GetLocation(oDagger8WP);
 		 object oDagger9WP = GetWaypointByTag("circus_dagger9_wp");
-		 object oDagger9 = GetNearestObjectByTag("003_plc_circus_dagger", oDagger9WP, 1);
 		 location lDagger9 = GetLocation(oDagger9WP);
 		  
-		 object oDaggerInv = GetItemPossessedBy(OBJECT_SELF, "abr_it_wpn_dagger_as");
 		 object oDaggerTarget = GetObjectByTag("003_plc_circus_target_dagger", 0);
 		 object oBeardedLady = GetObjectByTag("003_cr_circus_bearded_lady", 0);
 		 int nIncrement= GetLocalInt(OBJECT_SELF, "nIncrement");
 		 
-		 if(nIncrement==0) 
-			 {
+		if(nIncrement == 0) {
 			 ActionMoveToLocation(lDaggerThrow, FALSE);
 			 DelayCommand(1.0, ActionSpeakString("Are you ready, my dear?", TALKVOLUME_TALK));
-		     DelayCommand(2.0, ActionUnequipItem(oDaggerInv));
-			 DelayCommand(5.0, AssignCommand(oBeardedLady, ActionSpeakString("Ready!", TALKVOLUME_TALK)));
-		     DelayCommand(10.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
-			 nIncrement++;
-			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
-			 }
-		else if(nIncrement < 10)
-			 {
-			 if(nIncrement==1)
-			 	{lDagger=lDagger1;}
-			 if(nIncrement==2)
-			 	{lDagger=lDagger2;}
-			 if(nIncrement==3)
-			 	{lDagger=lDagger3;}
-			 if(nIncrement==4)
-			 	{lDagger=lDagger4;}
-			 if(nIncrement==5)
-			 	{lDagger=lDagger5;}
-			 if(nIncrement==6)
-			 	{lDagger=lDagger6;}
-			 if(nIncrement==7)
-			 	{lDagger=lDagger7;}
-			 if(nIncrement==8)
-			 	{lDagger=lDagger8;}
-			 if(nIncrement==9)
-			 	{lDagger=lDagger9;}
-			 ActionMoveToLocation(lDaggerThrow, FALSE);
-			 SetFacing(315.0, FALSE);
-			 AssignCommand(oBeardedLady, ActionMoveToLocation(lBeardedStart, FALSE));
-			 AssignCommand(oBeardedLady, SetFacing(135.0, FALSE));
-			 ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f);
-			 ActionWait(4.0);
-			 DelayCommand(3.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger));
-			 
-			 nIncrement++;
-			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
-			 DelayCommand(6.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
+		     DelayCommand(5.0, AssignCommand(oBeardedLady, ActionSpeakString("Ready!", TALKVOLUME_TALK)));
+		      
+			 DelayCommand(6.0, ActionMoveToLocation(lDaggerThrow, FALSE));
+			 DelayCommand(8.0, SetFacing(315.0, FALSE));
+			 DelayCommand(6.0, AssignCommand(oBeardedLady, ActionMoveToLocation(lBeardedStart, FALSE)));
+			 DelayCommand(8.0, AssignCommand(oBeardedLady, SetFacing(135.0, FALSE)));
+			 DelayCommand(10.0, ActionSpeakString("Hurls daggers one by one, outlining the bearded lady in wicked steel blades.", TALKVOLUME_TALK));
+		     
+			 DelayCommand(10.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(11.0,  ActionCreateWynPlace("003_plc_circus_dagger" , lDagger1));
+			 DelayCommand(15.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(16.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger2));
+			 DelayCommand(20.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(21.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger3));
+			 DelayCommand(25.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(26.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger4));
+			 DelayCommand(30.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(31.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger5));
+			 DelayCommand(35.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(36.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger6));
+			 DelayCommand(40.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(41.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger7));
+			 DelayCommand(45.0, ReallyPlayCustomAnimation(OBJECT_SELF, "*1attack01", 0, 1.0f));
+			 DelayCommand(46.0, ActionCreateWynPlace("003_plc_circus_dagger" , lDagger8));
+			 SetLocalInt(OBJECT_SELF, "nIncrement", 1);
+			 DelayCommand(50.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
 			 }
 		
-		if(nIncrement==10)
-			 {DelayCommand(1.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 1.0));
+		if(nIncrement==1)
+			{DelayCommand(1.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 1.0));
 		  	 DelayCommand(1.5, AssignCommand(oBeardedLady, ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 1.0)));
 		  	 DelayCommand(2.0, ActionSpeakString("Not a scratch on her, nor a hair shaved!", TALKVOLUME_TALK));
 		     DelayCommand(4.0, ActionForceMoveToObject(oDaggerTarget, FALSE, 1.0));
-			 nIncrement++;
-			 SetLocalInt(OBJECT_SELF, "nIncrement", nIncrement);
-			 DelayCommand(10.0, ExecuteScript("circus_npc_conv_execute1", OBJECT_SELF));
-			 }
-		
-		if(nIncrement==11)
-		 	{DestroyObject(oDagger1);
-			 DestroyObject(oDagger2);
-			 DestroyObject(oDagger3);
-			 DestroyObject(oDagger4);
-			 DestroyObject(oDagger5);
-			 DestroyObject(oDagger6);
-			 DestroyObject(oDagger7);
-			 DestroyObject(oDagger8);
-			 DestroyObject(oDagger9);
-			 DestroyObject(GetNearestObjectByTag("003_plc_circus_dagger", OBJECT_SELF, 1));
 			 SetLocalInt(OBJECT_SELF, "nIncrement", 0);
-		 	 DelayCommand(3.0, ActionMoveToLocation(lDaggerStart, FALSE));
-			 }	
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger1, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger2, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger3, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger4, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger5, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger6, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger7, 1 ));
+			 DestroyObject(GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lDagger8, 1 ));
+			 SetLocalInt(OBJECT_SELF, "nIncrement", 0);
+		 	 DelayCommand(10.0, ActionMoveToLocation(lDaggerStart, FALSE));
+			 }
 		}
 			
 	//Fortune Teller
