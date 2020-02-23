@@ -50,15 +50,20 @@ void main()
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nCLWMem = GetHasSpell(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF);
 	int nCMWMem = GetHasSpell(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF);
-	int nCLW_Remaining = GetLocalInt(OBJECT_SELF, "CLW_Remaining");
+	int nCLWRemaining = GetLocalInt(OBJECT_SELF, "CLWRemaining");
 	
     if(GetLocalInt(OBJECT_SELF, "CLWSpellsInit") == 0)
 		{SetLocalInt(OBJECT_SELF, "CLWSpellsInit", 1);
-		 nCLW_Remaining = nCLWMem;
+		 nCLWRemaining = nCLWMem;
+		 SetLocalInt(OBJECT_SELF, "CLWRemaining", nCLWRemaining);
+		 ActionSpeakString("Init CLW", TALKVOLUME_TALK);
+		 ActionSpeakString("CLWMem =" + IntToString(nCLWMem), TALKVOLUME_TALK);
+		 ActionSpeakString("CLWRemaining =" + IntToString(GetLocalInt(OBJECT_SELF, "CLWRemaining")), TALKVOLUME_TALK);
 		 }
 		
 	object oCLW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion01");
 	object oCMW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion02");
+	effect eCLW = EffectHeal(Random(8));
 	int nCleric = GetLevelByClass(CLASS_TYPE_CLERIC, OBJECT_SELF);
 	int nBard = GetLevelByClass(CLASS_TYPE_BARD, OBJECT_SELF);
 	int nDruid = GetLevelByClass(CLASS_TYPE_DRUID, OBJECT_SELF);
@@ -78,15 +83,18 @@ void main()
 	
 	
 	if(nCurrentHP < nMaxHP/2)
-		{ if(nCLW_Remaining > 0)
+		{ if(nCLWRemaining > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized/" + IntToString(nCLW_Remaining) + " Remaining", TALKVOLUME_TALK);
-				 SetLocalInt(OBJECT_SELF, "CLW_Remaining", nCLW_Remaining - 1);
+				 ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized/" + IntToString(nCLWRemaining) + " Remaining", TALKVOLUME_TALK);
+				 SetLocalInt(OBJECT_SELF, "CLW_Remaining", nCLWRemaining - 1);
 				 }
 		  else if(oCLW != OBJECT_INVALID)
 		  		{EventActivateItem(oCLW, GetLocation(OBJECT_SELF), OBJECT_SELF);
  				 ActionSpeakString("Drinks a Cure Light Wounds Potion", TALKVOLUME_TALK);
-				}
+				 DestroyObject(oCLW, 0.0, TRUE);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF); 
+				 ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 1.0);
+				 }
 		  else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 ActionSpeakString("Casts Cure Moderate Wounds", TALKVOLUME_TALK);
