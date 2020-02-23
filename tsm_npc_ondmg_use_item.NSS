@@ -52,18 +52,11 @@ void main()
 	int nCMWMem = GetHasSpell(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF);
 	int nCLWRemaining = GetLocalInt(OBJECT_SELF, "CLWRemaining");
 	
-    if(GetLocalInt(OBJECT_SELF, "CLWSpellsInit") == 0)
-		{SetLocalInt(OBJECT_SELF, "CLWSpellsInit", 1);
-		 nCLWRemaining = nCLWMem;
-		 SetLocalInt(OBJECT_SELF, "CLWRemaining", nCLWRemaining);
-		 ActionSpeakString("Init CLW", TALKVOLUME_TALK);
-		 ActionSpeakString("CLWMem =" + IntToString(nCLWMem), TALKVOLUME_TALK);
-		 ActionSpeakString("CLWRemaining =" + IntToString(GetLocalInt(OBJECT_SELF, "CLWRemaining")), TALKVOLUME_TALK);
-		 }
-		
+    	
 	object oCLW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion01");
 	object oCMW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion02");
-	effect eCLW = EffectHeal(Random(8));
+	effect eCLW = EffectHeal(4);
+	effect eCLWFX = EffectVisualEffect(VFX_IMP_HEAD_HEAL, FALSE);
 	int nCleric = GetLevelByClass(CLASS_TYPE_CLERIC, OBJECT_SELF);
 	int nBard = GetLevelByClass(CLASS_TYPE_BARD, OBJECT_SELF);
 	int nDruid = GetLevelByClass(CLASS_TYPE_DRUID, OBJECT_SELF);
@@ -83,17 +76,18 @@ void main()
 	
 	
 	if(nCurrentHP < nMaxHP/2)
-		{ if(nCLWRemaining > 0)
+		{ if(nCLWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized/" + IntToString(nCLWRemaining) + " Remaining", TALKVOLUME_TALK);
-				 SetLocalInt(OBJECT_SELF, "CLW_Remaining", nCLWRemaining - 1);
+				 ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized", TALKVOLUME_TALK);
 				 }
 		  else if(oCLW != OBJECT_INVALID)
-		  		{EventActivateItem(oCLW, GetLocation(OBJECT_SELF), OBJECT_SELF);
+		  		{//EventActivateItem(oCLW, GetLocation(OBJECT_SELF), OBJECT_SELF);
  				 ActionSpeakString("Drinks a Cure Light Wounds Potion", TALKVOLUME_TALK);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF, 0.0f); 
+				 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCLWFX, OBJECT_SELF, 2.0f); 
+				 //ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0);
+				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
 				 DestroyObject(oCLW, 0.0, TRUE);
-				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF); 
-				 ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 1.0);
 				 }
 		  else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
