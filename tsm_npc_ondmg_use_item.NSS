@@ -55,8 +55,11 @@ void main()
     	
 	object oCLW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion01");
 	object oCMW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion02");
-	effect eCLW = EffectHeal(4);
-	effect eCLWFX = EffectVisualEffect(VFX_IMP_HEAD_HEAL, FALSE);
+	int nCLWHeal = Random(8);
+	effect eCLW = EffectHeal(nCLWHeal);
+	int nCMWHeal = Random(8) + Random(8);
+	effect eCMW = EffectHeal(nCMWHeal);
+	effect eCLWFX = EffectVisualEffect(VFX_IMP_SUPER_HEROISM);
 	int nCleric = GetLevelByClass(CLASS_TYPE_CLERIC, OBJECT_SELF);
 	int nBard = GetLevelByClass(CLASS_TYPE_BARD, OBJECT_SELF);
 	int nDruid = GetLevelByClass(CLASS_TYPE_DRUID, OBJECT_SELF);
@@ -78,13 +81,13 @@ void main()
 	if(nCurrentHP < nMaxHP/2)
 		{ if(nCLWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized", TALKVOLUME_TALK);
+				 //ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized", TALKVOLUME_TALK);
 				 }
 		  else if(oCLW != OBJECT_INVALID)
 		  		{//EventActivateItem(oCLW, GetLocation(OBJECT_SELF), OBJECT_SELF);
- 				 ActionSpeakString("Drinks a Cure Light Wounds Potion", TALKVOLUME_TALK);
-				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF, 0.0f); 
-				 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCLWFX, OBJECT_SELF, 2.0f); 
+ 				 ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF); 
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
 				 //ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0);
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
 				 DestroyObject(oCLW, 0.0, TRUE);
@@ -94,9 +97,12 @@ void main()
 				 ActionSpeakString("Casts Cure Moderate Wounds", TALKVOLUME_TALK);
 				}
 		 else if(oCMW != OBJECT_INVALID)
-		  		{EventActivateItem(oCMW, GetLocation(OBJECT_SELF), OBJECT_SELF);
-				 ActionSpeakString("Drinks a Cure Moderate Wounds Potion", TALKVOLUME_TALK);
-				}
+		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCMW, OBJECT_SELF); 
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
+				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
+				 DestroyObject(oCMW, 0.0, TRUE);
+				 }
 		  
 			}
 	
