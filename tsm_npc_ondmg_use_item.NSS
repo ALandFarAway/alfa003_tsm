@@ -50,6 +50,13 @@ void main()
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nCLWMem = GetHasSpell(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF);
 	int nCMWMem = GetHasSpell(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF);
+	int nCLW_Remaining = GetLocalInt(OBJECT_SELF, "CLW_Remaining");
+	
+    if(GetLocalInt(OBJECT_SELF, "CLWSpellsInit") == 0)
+		{SetLocalInt(OBJECT_SELF, "CLWSpellsInit", 1);
+		 nCLW_Remaining = nCLWMem;
+		 }
+		
 	object oCLW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion01");
 	object oCMW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion02");
 	int nCleric = GetLevelByClass(CLASS_TYPE_CLERIC, OBJECT_SELF);
@@ -71,10 +78,11 @@ void main()
 	
 	
 	if(nCurrentHP < nMaxHP/2)
-		{ if(nCLWMem > 0)
+		{ if(nCLW_Remaining > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts Cure Light Wounds", TALKVOLUME_TALK);
-				}
+				 ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized/" + IntToString(nCLW_Remaining) + " Remaining", TALKVOLUME_TALK);
+				 SetLocalInt(OBJECT_SELF, "CLW_Remaining", nCLW_Remaining - 1);
+				 }
 		  else if(oCLW != OBJECT_INVALID)
 		  		{EventActivateItem(oCLW, GetLocation(OBJECT_SELF), OBJECT_SELF);
  				 ActionSpeakString("Drinks a Cure Light Wounds Potion", TALKVOLUME_TALK);
