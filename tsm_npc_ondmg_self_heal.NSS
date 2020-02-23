@@ -50,9 +50,7 @@ void main()
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nCLWMem = GetHasSpell(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF);
 	int nCMWMem = GetHasSpell(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF);
-	int nCLWRemaining = GetLocalInt(OBJECT_SELF, "CLWRemaining");
-	
-    	
+	 	
 	object oCLW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion01");
 	object oCMW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion02");
 	int nCLWHeal = Random(8);
@@ -78,24 +76,20 @@ void main()
 		{nDomainLevel = nRanger;}
 	
 	
-	if(nCurrentHP < nMaxHP/2)
+	if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) && (Random(2) == 1))|| ((nCurrentHP < nMaxHP/5))) 
 		{ if(nCLWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 //ActionSpeakString("Casts Cure Light Wounds " + IntToString(nCLWMem) + " Memorized", TALKVOLUME_TALK);
 				 }
 		  else if(oCLW != OBJECT_INVALID)
-		  		{//EventActivateItem(oCLW, GetLocation(OBJECT_SELF), OBJECT_SELF);
- 				 ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF); 
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
-				 //ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0);
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
 				 DestroyObject(oCLW, 0.0, TRUE);
 				 }
 		  else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts Cure Moderate Wounds", TALKVOLUME_TALK);
-				}
+				 }
 		 else if(oCMW != OBJECT_INVALID)
 		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCMW, OBJECT_SELF); 
