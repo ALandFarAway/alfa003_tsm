@@ -185,7 +185,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B4A1D9C7F371D468D9BFB2578E1197A2DAA0085B" downloadHash="6C654F65FEB7028620756BD30F02AEA823BF95CE" name="6d_ext_silverymoon_northeast.trx" dlsize="3631516" size="17409224" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8EB666292169FA52B07A40224D24E7BD1D141FDE" downloadHash="9CF1CB53BDF74850256B451A52E1B990D7B278D9" name="6d_ext_silverymoon_northeast.trx" dlsize="3607095" size="17397167" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1694,6 +1694,11 @@
     <server-ref>
       <string>1</string>
       <string>3</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="87391AF436BA94C320863B299C5E1A2CCC653C2E" downloadHash="CBC35951C44990BD2C7130BBE9EFA307BF1AAF09" name="6d_int_silvy_ne_leanders.trx" dlsize="50220" size="50913" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
     </server-ref>
   </resource>
 </content>
