@@ -900,7 +900,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F982B207AA969E46C9A831DCF79D987F94EA1FFF" downloadHash="BED020A74967156C18B4A5AB199F9A3833D814EF" name="6d_int_silvy_vaultsages.trx" dlsize="382331" size="385279" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="E560ED7A3F9A570CD061C165D6B6F4251021715D" downloadHash="966900A43D675D9E371097D01052E649D3E9B5B0" name="6d_int_silvy_vaultsages.trx" dlsize="380915" size="383526" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1697,6 +1697,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="F410C999D367D995756DEBA7EA9BA507C7CCC583" downloadHash="3A3832E0A23CABC132ED1C0F1DFDF776C0FA23B5" name="6d_int_silvy_ne_leanders.trx" dlsize="50062" size="50721" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="AA6FFB5D2C684007EDFC5FF1495E5788048E9E4B" downloadHash="C9C128D4B1CAFA30280250A625FC654C49B0E0C5" name="6d_int_silvy_vaultsages_bsmt.trx" dlsize="320621" size="339360" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
