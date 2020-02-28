@@ -72,7 +72,25 @@ void main()
 					 }
 				}
 			}
-	
+	if((Random(10)==1) && GetIsEnemy(oPerceived, OBJECT_SELF) && ((FindSubString(GetTag(OBJECT_SELF), "deneir") != -1) || (FindSubString(GetTag(OBJECT_SELF), "vos_scribe") != -1)) && (GetIsPC(oPerceived))) 
+		{string sLibrary = "";
+		 int nRandLibrary = Random(4);
+		 if (nRandLibrary == 1) {
+			 sLibrary = "Shhhhh!";
+			 }
+		 else if (nRandLibrary == 2) {
+			 sLibrary = "You haven't paid your copying fees!";
+			 }
+		 else if (nRandLibrary == 3) {
+			 sLibrary = "No books may be taken from this area!";
+			 }
+		 else if (nRandLibrary == 4) {
+			 sLibrary = "I said, keep your voice *down*!";
+			 }
+		
+		ActionSpeakString(sLibrary, TALKVOLUME_TALK);
+		}
+			
   if((Random(3)==1) && (GetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF)) != 1) && (FindSubString(GetTag(OBJECT_SELF), "03_silvy_commoner") != -1) && (GetIsPC(oPerceived))) 
 	{
 	
