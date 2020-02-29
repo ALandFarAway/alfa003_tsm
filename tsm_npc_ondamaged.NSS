@@ -66,4 +66,10 @@ void main()
 				 SetLocalInt(oSubdue, "kis_combat_03_win", GetLocalInt(oSubdue, "kis_combat_03_win") +1);
 				}
 			 }
+			 
+		if(((FindSubString(GetTag(OBJECT_SELF), "deneir") != -1) || (FindSubString(GetTag(OBJECT_SELF), "vos_scribe") != -1)) && (GetIsEnemy(GetLastDamager())) && (GetIsPC(GetLastDamager()))) 
+			{effect eKnockdown = EffectKnockdown();
+			 ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, OBJECT_SELF, 600.0);
+			 }
 }

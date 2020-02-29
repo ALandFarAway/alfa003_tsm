@@ -73,6 +73,25 @@ void main()
 				}
 			}
 	
+ if((Random(10)==1) && ((FindSubString(GetTag(OBJECT_SELF), "deneir") != -1) || (FindSubString(GetTag(OBJECT_SELF), "vos_scribe") != -1)) && (GetIsEnemy(oPerceived)) && (GetIsPC(oPerceived))) 
+	{string sLibrary = "";
+	 int nRandLib = Random(4);
+	 if(nRandLib == 1) {
+	  	sLibrary = "Shhhh!";
+		}
+	 else if(nRandLib == 2) {
+	  	sLibrary = "You have overdue scribing fees!";
+		}
+	 else if(nRandLib == 3) {
+	  	sLibrary = "No materials may be taken from the Vault!";
+		}
+	  else if(nRandLib == 4) {
+	  	sLibrary = "I said, keep your voice down!";
+		}
+	
+	}			
+			
+			
   if((Random(3)==1) && (GetLocalInt(oPerceived, "Perceived" + GetTag(OBJECT_SELF)) != 1) && (FindSubString(GetTag(OBJECT_SELF), "03_silvy_commoner") != -1) && (GetIsPC(oPerceived))) 
 	{
 	
