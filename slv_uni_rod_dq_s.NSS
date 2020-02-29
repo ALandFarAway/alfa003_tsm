@@ -14,8 +14,10 @@ void main()
     object oStudent = GetItemActivatedTarget();
 	string sDQInc = GetLocalString(oDM, "deanquest_inc");
 	string sDQDec = GetLocalString(oDM, "deanquest_dec");
-	
-	
+	int nDQParty = GetLocalInt(oDM, "deanquest_party");
+	string sDQParty = "";
+	if(nDQParty == 1)
+		{string sDQParty = " Party";}
 	
 	
 
@@ -24,10 +26,11 @@ void main()
 if(sDQInc != "")
 		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
 			{int nQuestState= ACR_RetrieveQuestState("slv_deansphinx_" + sDQInc,  oStudent);
-			 SendMessageToPC(oDM, "deansphinx " + sDQInc + " = " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQInc, oStudent)) + " for " + GetName(oStudent));
-			 ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + sDQInc, nQuestState +1, oStudent, 0, 0, 0, 0);
+			 SendMessageToPC(oDM, "deansphinx " + sDQInc + " = " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQInc, oStudent)) + " for " + GetName(oStudent) + sDQParty);
+			 ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + sDQInc, nQuestState +1, oStudent, nDQParty, 0, 0, 0);
 			 SendMessageToPC(oDM, "deansphinx " + sDQInc + " changed to " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQInc, oStudent)) + " for " + GetName(oStudent));
 			 SetLocalString(oDM, "deanquest_inc", "");
+			 SetLocalInt(oDM, "deanquest_party", 0);
 			}
 		}
 			
@@ -37,9 +40,10 @@ if(sDQInc != "")
 			 int nNewState = nQuestState-1;
 			 SendMessageToPC(oDM, "deansphinx " + sDQDec + " = " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQDec, oStudent)) + " for " + GetName(oStudent));
 			 ACR_RemovePersistentJournalQuestEntry("slv_deansphinx_" + sDQDec, oStudent, 0, 0);
-			 DelayCommand(1.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + sDQDec, nNewState, oStudent, 0, 0, 0, 0));
-			 DelayCommand(2.0, SendMessageToPC(oDM, "deansphinx " + sDQDec + " changed to " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQDec, oStudent)) + " for " + GetName(oStudent)));
+			 DelayCommand(1.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + sDQDec, nNewState, oStudent, nDQParty, 0, 0, 0));
+			 DelayCommand(2.0, SendMessageToPC(oDM, "deansphinx " + sDQDec + " changed to " + IntToString(ACR_RetrieveQuestState("slv_deansphinx_" + sDQDec, oStudent)) + " for " + GetName(oStudent) + sDQParty));
 			 DelayCommand(3.0, SetLocalString(oDM, "deanquest_dec", ""));
+			 SetLocalInt(oDM, "deanquest_party", 0);
 			}
 		}
 	

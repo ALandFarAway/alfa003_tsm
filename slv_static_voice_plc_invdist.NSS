@@ -134,14 +134,14 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 						 if(sQuestAlpha == "Z")
 						 	{sKeyword = "Zoological";}
 						 	
-						if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd -1 )
+						/*if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd -1 )
 						 	{int nXP= GetJournalQuestExperience(sQuest); 
 							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd -1, oUser, TRUE, FALSE, FALSE, 0);
 							 }
-						
+						*/
 						if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
-						 	{int nXP= GetJournalQuestExperience(sQuest); 
-							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, nXP);
+						 	{//int nXP= GetJournalQuestExperience(sQuest); 
+							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, 100);
 							 SendMessageToPC(oUser, "You hear a voice speak directly into your mind. It whispers a single word.");
 							 SendMessageToPC(oUser, "The word is: " +sKeyword + ".");
 							 }
@@ -233,14 +233,13 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 						 if(sQuestAlpha == "Z")
 						 	{sKeyword = "Zoological";}
 						 	
-						if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd -1 )
+						/*if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd -1 )
 						 	{int nXP= GetJournalQuestExperience(sQuest); 
 							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd -1, oUser, TRUE, FALSE, FALSE, 0);
 							 }
-						
+						*/
 						if(ACR_RetrieveQuestState(sQuest, oUser)< nEnd)
-						 	{int nXP= GetJournalQuestExperience(sQuest); 
-							 ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, nXP);
+						 	{ACR_AddPersistentJournalQuestEntry(sQuest, nEnd, oUser, TRUE, FALSE, FALSE, 100);
 							 SendMessageToPC(oUser, "You hear a voice speak directly into your mind. It whispers a single word.");
 							 SendMessageToPC(oUser, "The word is: " +sKeyword + ".");
 							 }
