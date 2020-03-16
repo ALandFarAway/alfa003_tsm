@@ -72,7 +72,7 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 						 if(sQuestAlpha == "J")
 						 	{nEnd = 11;}
 						 if(sQuestAlpha == "L")
-						 	{nEnd = 10;}
+						 	{nEnd = 11;}
 						 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
 						 	{nEnd = 4;}
 						 if(sQuestAlpha == "T")
@@ -171,7 +171,7 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 						 if(sQuestAlpha == "J")
 						 	{nEnd = 11;}
 						 if(sQuestAlpha == "L")
-						 	{nEnd = 10;}
+						 	{nEnd = 11;}
 						 if((sQuestAlpha == "P") || (sQuestAlpha == "Y") || (sQuestAlpha == "Z"))
 						 	{nEnd = 4;}
 						 if(sQuestAlpha == "T")

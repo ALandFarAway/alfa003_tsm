@@ -31,7 +31,7 @@ void main()
 			 
 	if(GetTag(oTarget)=="003_cr_un_doomguide")
 		{SetPlotFlag(oTarget, FALSE);
-		 if((ACR_RetrieveQuestState("slv_deandragon_l", oStudent) == 6)|| (GetIsDMPossessed(oStudent)))
+		 if((ACR_RetrieveQuestState("slv_deansphinx_l", oStudent) == 7)|| (GetIsDMPossessed(oStudent)))
 			{ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eParalyze, oTarget, 18.0);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSymbol, oTarget, 18.0);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePurge, oTarget, 25.0);
@@ -40,8 +40,8 @@ void main()
 			DelayCommand(10.0, AssignCommand(oTarget, ActionSpeakString("*Tattering, beginning to fade already, it slowly removes its hands from around its throat.", TALKVOLUME_TALK)));
 			DelayCommand(15.0, AssignCommand(oTarget, ActionSpeakString("*In a voice that all present hear in their own language, it speaks.* THANK YOU. I AM FREE TO GO HOME.", TALKVOLUME_TALK)));
 			DelayCommand(20.0, AssignCommand(oTarget, ActionSpeakString("*It shreds in the wind, and blows away.*", TALKVOLUME_TALK)));
-			if(ACR_RetrieveQuestState("slv_deandragon_l", oStudent) == 6)
-				{DelayCommand(20.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_l", 7, oStudent, FALSE, FALSE, FALSE, FALSE));}
+			if(ACR_RetrieveQuestState("slv_deansphinx_l", oStudent) == 7)
+				{DelayCommand(20.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_l", 8, oStudent, FALSE, FALSE, FALSE, FALSE));}
 		 	DestroyObject(oTarget, 22.0);
 			}
 		}

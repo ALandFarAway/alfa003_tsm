@@ -389,7 +389,7 @@ if((GetTag(OBJECT_SELF) == "003_cr_slv_deandragon_j_3") && (GetIsPC(GetEnteringO
 	 }
 	 
 //deanphoenix_l
-if((GetTag(OBJECT_SELF)== "deandragon_l_mapnote") && (ACR_RetrieveQuestState("slv_deandragon_l", GetEnteringObject()) == 3) && (GetLocalInt(OBJECT_SELF, "Cave_Mapped") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
+if((GetTag(OBJECT_SELF)== "deandragon_l_mapnote") && (ACR_RetrieveQuestState("slv_deansphinx_l", GetEnteringObject()) == 4) && (GetLocalInt(OBJECT_SELF, "Cave_Mapped") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
  	 {
 	int nEnabled = TRUE;
 	string sMapPinTag = GetLocalString(OBJECT_SELF, "MAP_NOTE_TAG");
@@ -401,18 +401,19 @@ if((GetTag(OBJECT_SELF)== "deandragon_l_mapnote") && (ACR_RetrieveQuestState("sl
 	SetMapPinEnabled (oMapPin, nEnabled);
 	}
 	
-if((GetTag(OBJECT_SELF)== "deandragon_l_ghost") && (ACR_RetrieveQuestState("slv_deandragon_l", GetEnteringObject()) >= 3) && (ACR_RetrieveQuestState("slv_deandragon_l", GetEnteringObject()) <= 5)&& (GetLocalInt(OBJECT_SELF, "Doomguide_Ghost") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
+if((GetTag(OBJECT_SELF)== "deandragon_l_ghost") && (ACR_RetrieveQuestState("slv_deansphinx_l", GetEnteringObject()) >= 3) && (ACR_RetrieveQuestState("slv_deandragon_l", GetEnteringObject()) <= 5)&& (GetLocalInt(OBJECT_SELF, "Doomguide_Ghost") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
  	 {
 	object oGhostOld = GetObjectByTag("003_cr_un_doomguide",0);
 	DestroyObject(oGhostOld);
 	object oGhost = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_doomguide", GetLocation(GetEnteringObject()), TRUE, "");
-	if(ACR_RetrieveQuestState("slv_deandragon_l", GetEnteringObject()) == 3)
-		{DelayCommand(2.0, AssignCommand(oGhost, ActionSpeakString("*A breeze steals across your skin. The air glimmers, and an ethereal figure appears.")));}
+	if(ACR_RetrieveQuestState("slv_deansphinx_l", GetEnteringObject()) == 4)
+		{DelayCommand(2.0, AssignCommand(oGhost, ActionSpeakString("*A breeze steals across your skin. The air glimmers, and an ethereal figure appears.")));
+		 DelayCommand(3.0, AssignCommand(oGhost, ActionStartConversation(GetEnteringObject(), "", FALSE, FALSE, FALSE, FALSE)));
+		}
 	else
 		{DelayCommand(2.0, AssignCommand(oGhost, ActionSpeakString("*A breeze steals across your skin.")));}
 	SetLocalInt(OBJECT_SELF, "Doomguide_Ghost", 1);
 	DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "Doomguide_Ghost", 0));
-	DelayCommand(3.0, AssignCommand(oGhost, ActionStartConversation(GetEnteringObject(), "", FALSE, FALSE, FALSE, FALSE)));
 	object oGhostEnd = GetWaypointByTag("slv_deandragon_l_ghost_end");
 	DelayCommand(5.0, AssignCommand(oGhost, ActionMoveToLocation(GetLocation(oGhostEnd))));
 	}

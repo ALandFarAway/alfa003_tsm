@@ -15,11 +15,11 @@ void main()
 	object oBox = GetModuleItemLostBy();
 	object oArea = GetArea(oTaker);
 	
-	if((GetTag(oItem) == "slv_deandragon_l_bg_asx") && (ACR_RetrieveQuestState("slv_deandragon_l", oTaker) >= 5) && (ACR_RetrieveQuestState("slv_deandragon_l", oTaker) <= 6) && ((GetIsPC(oTaker)) || (GetIsDMPossessed(oTaker))))
+	if((GetTag(oItem) == "slv_deandragon_l_bg_asx") && (ACR_RetrieveQuestState("slv_deansphinx_l", oTaker) >= 5) && (ACR_RetrieveQuestState("slv_deansphinx_l", oTaker) <= 6) && ((GetIsPC(oTaker)) || (GetIsDMPossessed(oTaker))))
        {if(GetTag(GetModuleItemLostBy())=="slv_plc_skel_deandragon_l")
 			{SendMessageToPC(oTaker, "You have found a hollow wooden rod inscribed with wavy lines on this body.");}
-		if(ACR_RetrieveQuestState("slv_deandragon_l", oTaker) == 5)
-			{DelayCommand(20.0, ACR_AddPersistentJournalQuestEntry("slv_deandragon_l", 6, oTaker, FALSE, FALSE, FALSE, FALSE));}
+		if(ACR_RetrieveQuestState("slv_deansphinx_l", oTaker) == 6)
+			{DelayCommand(20.0, ACR_AddPersistentJournalQuestEntry("slv_deansphinx_l", 7, oTaker, FALSE, FALSE, FALSE, FALSE));}
 		object oGhostOld = GetObjectByTag("003_cr_un_doomguide",0);
 		DestroyObject(oGhostOld);
 		object oGhost = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_doomguide", GetLocation(oTaker));
