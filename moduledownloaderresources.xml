@@ -185,7 +185,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8EB666292169FA52B07A40224D24E7BD1D141FDE" downloadHash="9CF1CB53BDF74850256B451A52E1B990D7B278D9" name="6d_ext_silverymoon_northeast.trx" dlsize="3607095" size="17397167" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="37648E5430CCD82B8C6B189FA17D05E9F2526E35" downloadHash="905C5FB9C8D51B3C0F28A18929EB1342219B2780" name="6d_ext_silverymoon_northeast.trx" dlsize="3627769" size="17411131" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1675,7 +1675,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B651F5997C8F23A51DEB492CA8F2B4AE2388A648" downloadHash="6191F762CF1ED4DE685D97217EAB04F78B05CDAE" name="6d_int_silvy_hh_vreldas.trx" dlsize="126984" size="127860" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="44DA1EB471200F759ED4B9D483F6FBE32CA6583F" downloadHash="9FE66A108DC81737B2CDF142D333E3B7F374F294" name="6d_int_silvy_hh_vreldas.trx" dlsize="129895" size="130737" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1702,6 +1702,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="AA6FFB5D2C684007EDFC5FF1495E5788048E9E4B" downloadHash="C9C128D4B1CAFA30280250A625FC654C49B0E0C5" name="6d_int_silvy_vaultsages_bsmt.trx" dlsize="320621" size="339360" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="3B4A8010458F1F0A904789DA9B0BA883EA2EA7DF" downloadHash="BB0841A30848610D4F0238A2F580139A841A234B" name="6d_int_silvy_hallowhar_places.trx" dlsize="75983" size="76481" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
