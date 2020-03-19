@@ -1711,4 +1711,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="AEB0EBCB3F6AAF9643A57C78E3075750905B1B69" downloadHash="1C553B95BDC4BF43DBD02F7A19DC80284D0953BD" name="7d_ext_silverwood1_3_farm_fields.trx" dlsize="5807167" size="25177232" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
