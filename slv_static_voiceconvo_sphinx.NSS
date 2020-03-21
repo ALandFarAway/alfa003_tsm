@@ -209,6 +209,11 @@ void main()
          SetLocalInt(oStudent, "DeanSphinxConversation", 2);
          DelayCommand(1.0, ExecuteScript("slv_static_voicequests_sphinx", OBJECT_SELF));
         }
+   else if((nMatch == 5069) && (GetIsObjectValid(oPC)) && (oPC == oStudent) && (sCampaignNamedSphinx == "Yes") && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) && (GetLocalInt(oStudent, "DeanSphinxConversation") == 1))
+        {SetLocalString(OBJECT_SELF, "QuestSubmitAssignString", GetMatchedSubstring(1));
+         SetLocalInt(oStudent, "DeanSphinxConversation", 2);
+         DelayCommand(1.0, ExecuteScript("slv_static_voicequests_sphinx", OBJECT_SELF));
+        }
 		
 
    else if((nMatch == 5998) && (GetIsObjectValid(oPC)) && (oPC == oStudent) && (sCampaignNamedSphinx == "Yes") && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) && (GetLocalInt(oStudent, "DeanSphinxConversation") == 0))

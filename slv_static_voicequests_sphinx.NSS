@@ -82,13 +82,13 @@ void main()
 
 
 
-string sTryAgain = "Do you wish to receive, submit or use a keyword to enter?  You may at any time use the word 'reschedule' to end our conversation.";
+string sTryAgain = "Do you wish to receive a project?  You may at any time use the word 'reschedule' to end our conversation.";
 
       if((GetLocalInt(oStudent, "DeanSphinxConversation") == 1) && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) )
-         {AssignCommand(oSphinx, SpeakString("The key to this door is knowledge.  Do you wish to receive or submit an assignment, or simply enter?", TALKVOLUME_TALK));
+         {AssignCommand(oSphinx, SpeakString("The key to this door is knowledge.  Do you wish to receive an assignment?", TALKVOLUME_TALK));
           }
 
-     else if((GetLocalInt(oStudent, "DeanSphinxConversation") == 2) && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) && ((GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "receive") || (GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "Receive")))
+     else if((GetLocalInt(oStudent, "DeanSphinxConversation") == 2) && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) && ((GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "receive") || (GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "Receive") || (GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "recieve")|| (GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "Recieve")))
          {
           AssignCommand(oSphinx, SpeakString("Very well.  Choose one text on which to be tested, and hold it tightly.  When you are ready to begin, speak the title.", TALKVOLUME_TALK));
           SetLocalInt(oStudent, "QuestAssignmentOpen", 1);
@@ -195,7 +195,7 @@ string sTryAgain = "Do you wish to receive, submit or use a keyword to enter?  Y
                else if (((sQuest == "Z") || (sQuest == "z")) && (GetItemPossessedBy(oStudent, "slv_deansphinx_z") != OBJECT_INVALID))
                     {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Their flesh will rot while they are still standing on their feet, their eyes will rot in their sockets, and their tongues will rot in their mouths.", TALKVOLUME_TALK)));
                     }
-               else {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Proper preparation is the first step in any research project.  Did you follow intructions?  Do you wish to receive or submit a project?", TALKVOLUME_TALK)));
+               else {DelayCommand(3.0, AssignCommand(oSphinx, SpeakString("Proper preparation is the first step in any research project.  Did you follow instructions?  Do you wish to receive a project?", TALKVOLUME_TALK)));
                      SetLocalInt(oStudent, "Improper", 1);
                     }
 
@@ -204,8 +204,8 @@ string sTryAgain = "Do you wish to receive, submit or use a keyword to enter?  Y
               if(GetLocalInt(oStudent, "Improper") != 1)
                     {SetCampaignString("SLV_UNI", "SphinxQuest" + GetStringUpperCase(sQuest), "Open", oStudent);
                      ACR_AddPersistentJournalQuestEntry("slv_deansphinx_" + GetStringLowerCase(sQuest), 1, oStudent, FALSE, FALSE, FALSE, 0);
-					 DelayCommand(10.0, AssignCommand(oSphinx, SpeakString("Farewell for now. I look forward to hearing the keyword upon completion of your task.", TALKVOLUME_TALK)));
-                     DelayCommand(30.0, AssignCommand(oSphinx, SpeakString("I will become inanimate in 10 seconds.  I look forward to speaking to you about what you learn.", TALKVOLUME_TALK)));
+					 DelayCommand(10.0, AssignCommand(oSphinx, SpeakString("Farewell for now. I look forward to binding the essence to the draft page upon completion of your task.", TALKVOLUME_TALK)));
+                     DelayCommand(30.0, AssignCommand(oSphinx, SpeakString("I will become inanimate in 10 seconds.", TALKVOLUME_TALK)));
                      DelayCommand(40.0, SetLocalInt(oStudent, "QuestAssignmentOpen", 0));
                      DelayCommand(40.0, SetLocalInt(oStudent, "DeanSphinxConversation", 0));
                      DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlimmer, oSphinx, 10.0));

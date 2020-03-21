@@ -283,6 +283,7 @@ void main()
 	         SetListenPattern(OBJECT_SELF, "**Feather Fall**", 5066);
 	         SetListenPattern(OBJECT_SELF, "**feather fall**", 5067);
 	         SetListenPattern(OBJECT_SELF, "**Feather fall**", 5068);
+			 SetListenPattern(OBJECT_SELF, "**recieve**", 5069);
 	         SetListenPattern(OBJECT_SELF, "**Yes**", 5998);
 	         SetListenPattern(OBJECT_SELF, "**No**", 5999);
 	         SetListenPattern(OBJECT_SELF, "**", 6000);
