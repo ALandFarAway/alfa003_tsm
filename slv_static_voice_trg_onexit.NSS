@@ -54,7 +54,7 @@ void main()
 			 SetLocalObject(OBJECT_SELF, "oWP", oWP);
 			}
 		 
-	  if((ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) >= 1)|| (ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) < 7))
+	  if((ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) >= 1)&& (ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) < 7))
 	 	{SetLocalInt(OBJECT_SELF, "Spawned", 1);
 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "Spawned", 0));
 		 object oFlute = GetLocalObject(OBJECT_SELF, "flute");

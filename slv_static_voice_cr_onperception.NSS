@@ -58,10 +58,11 @@ void main()
 {
     ACR_CreatureOnPerception();
 	//Quest B
-	if(((GetTag(OBJECT_SELF) == "003_cr_hu_brownie_quest") || (GetTag(OBJECT_SELF) == "003_cr_fy_jermlaine_quest")) && (GetIsPC(GetLastPerceived())))
+	if(((GetTag(OBJECT_SELF) == "003_slv_dq_b_creature") || (GetTag(OBJECT_SELF) == "003_cr_fy_jermlaine_quest")) && (GetIsPC(GetLastPerceived())))
 		{SpeakString("Flee! Take the ripe pods!", TALKVOLUME_TALK);
-		 SendMessageToPC(GetLastPerceived(), "The fey dash for the large tree, collecting fallen pods, then vanishes!");
-		 DestroyObject(OBJECT_SELF, 2.0);
+		 DelayCommand(2.0, SpeakString("The fey dash for the large tree, collecting fallen pods, then vanish!", TALKVOLUME_TALK));
+		 SendMessageToPC(GetLastPerceived(), "The fey dash for the large tree, collecting fallen pods, then vanish!");
+		 DestroyObject(OBJECT_SELF, 4.0);
 		 object oFlute = GetLocalObject(OBJECT_SELF, "flute");
 		 if(oFlute == OBJECT_INVALID)
 			{oFlute = GetObjectByTag("fey_dance_flute");

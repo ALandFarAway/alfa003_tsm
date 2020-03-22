@@ -62,15 +62,15 @@ object oPC=GetEnteringObject();
 	 SetLocalInt(GetEnteringObject(), "wyvern", 1);
 	}
 
- if(GetTag(OBJECT_SELF) == "rm_scout_05_01_trig") 
+ if(GetTag(OBJECT_SELF) == "rm_scout_05_se_trig") 
  	{if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 1)
 		{SendMessageToPC(oQuester, "You can see the padlock on the crypts, solidly and reassuringly locked tight. This vantage completes the view from the southeast corner. Scout the other corners.");
 	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 2, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 		 }
 	}
 		
- if((GetTag(OBJECT_SELF) == "rm_scout_05_trig") && (GetIsPC(oQuester)) && (GetLocalInt(OBJECT_SELF, "Triggered") !=1))
- 	{SetLocalInt(OBJECT_SELF, "Triggered", 1);
+ if(((GetTag(OBJECT_SELF) == "rm_scout_05_sw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_nw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_ne_trig") ) && (GetIsPC(oQuester)) && (GetLocalString(oQuester, "Triggered") != GetTag(OBJECT_SELF)))
+ 	{SetLocalString(oQuester, "Triggered", GetTag(OBJECT_SELF));
 	if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 2)
 		{SendMessageToPC(oQuester, "You have scouted the first corner of the Wendover Crypts grounds.");
 	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 3, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
@@ -84,17 +84,84 @@ object oPC=GetEnteringObject();
 	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 5, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 		 }
 		 
+	int nHour = GetTimeHour();
+	int nUndeadAtWP = 15;
+	if((nHour >= 18) || (nHour <= 6))
+		{nUndeadAtWP = 50;}
 	int nSpawnChance=Random(100);
-	if(nSpawnChance<50)
-		{if(GetLocalInt(GetArea(OBJECT_SELF), "nSpawned")==0)
-			{SetLocalInt(GetArea(OBJECT_SELF), "nSpawned", 1);
+	if(nSpawnChance<80)
+		{if(GetLocalInt(GetArea(OBJECT_SELF), "nZombies")==0)
+			{SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 1);
+			 DelayCommand(60.0, SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 0));
 			 int nInc=1;
 			 for(nInc=1; nInc<10; nInc++)
 				{object oUndeadSpawn = GetObjectByTag("wc_undead_create_wp", nInc);
 				 if(oUndeadSpawn != OBJECT_INVALID)
 					{int nRandom = Random(100)+1;
-					 if(nRandom < 33)
-					 	{CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_un_zombie02", GetLocation(oUndeadSpawn));
+					 if(nRandom < nUndeadAtWP)
+					 	{int nRandomUndeadLow = Random(18);
+						 string sUndeadKind = "abr_cr_un_zombie01";
+						 if(nRandomUndeadLow == 2)
+						 	{sUndeadKind = "abr_cr_un_zombie02";}
+						 else if(nRandomUndeadLow == 3)
+						 	{sUndeadKind = "abr_cr_un_zombie03";}
+						 else if(nRandomUndeadLow == 4)
+						 	{sUndeadKind = "abr_cr_un_zombie04";}
+						 else if(nRandomUndeadLow == 5)
+						 	{sUndeadKind = "abr_cr_un_skeleton01";}
+						 else if(nRandomUndeadLow == 6)
+						 	{sUndeadKind = "abr_cr_un_skeleton02";}
+						 else if(nRandomUndeadLow == 7)
+						 	{sUndeadKind = "abr_cr_un_skeleton03";}
+						 else if(nRandomUndeadLow == 8)
+						 	{sUndeadKind = "abr_cr_un_skeleton04";}
+						 else if(nRandomUndeadLow == 9)
+						 	{sUndeadKind = "abr_cr_un_skeleton_defender01";}
+						 else if(nRandomUndeadLow == 10)
+						 	{sUndeadKind = "abr_cr_un_skeleton_defender02";}
+						 else if(nRandomUndeadLow == 11)
+						 	{sUndeadKind = "abr_cr_un_skeleton_defender03";}
+						 else if(nRandomUndeadLow == 12)
+						 	{sUndeadKind = "abr_cr_un_skeleton_dwarf";}
+						 else if(nRandomUndeadLow == 13)
+						 	{sUndeadKind = "abr_cr_un_skeleton_elf";}
+						 else if(nRandomUndeadLow == 14)
+						 	{sUndeadKind = "abr_cr_un_skeleton_gnome";}
+						 else if(nRandomUndeadLow == 15)
+						 	{sUndeadKind = "abr_cr_un_skeleton_halfling";}
+						 else if(nRandomUndeadLow == 16)
+						 	{sUndeadKind = "abr_cr_un_skeleton_halforc";}
+						 else if(nRandomUndeadLow == 17)
+						 	{sUndeadKind = "abr_cr_un_ghoul";}
+						 else if(nRandomUndeadLow == 18)
+						 	{sUndeadKind = "abr_cr_un_allip_01";}
+						
+						if((nHour >= 18) || (nHour <= 6))
+							{int nRandomUndeadMed = Random(4);
+							 if(nRandomUndeadMed == 1)
+							 	{int nRandomUndeadMedKind = Random(8);
+								 if(nRandomUndeadMedKind == 1)
+								 	{sUndeadKind = "abr_cr_un_zombie_militia01";}
+								 else if(nRandomUndeadMedKind == 2)
+								 	{sUndeadKind = "abr_cr_un_zombie_militia02";}
+								 else if(nRandomUndeadMedKind == 3)
+								 	{sUndeadKind = "abr_cr_un_zombie_militia03";}
+								 else if(nRandomUndeadMedKind == 4)
+								 	{sUndeadKind = "abr_cr_un_zombie_militia04";}
+								 else if(nRandomUndeadMedKind == 5)
+								 	{sUndeadKind = "abr_cr_un_zombie_soldier01";}
+								 else if(nRandomUndeadMedKind == 6)
+								 	{sUndeadKind = "abr_cr_un_zombie_soldier02";}
+								 else if(nRandomUndeadMedKind == 7)
+								 	{sUndeadKind = "abr_cr_un_zombie_soldier03";}
+								 else if(nRandomUndeadMedKind == 8)
+								 	{sUndeadKind = "abr_cr_un_zombie_soldier04";}
+								 
+								}
+							
+							}
+						 
+						 CreateObject(OBJECT_TYPE_CREATURE, sUndeadKind, GetLocation(oUndeadSpawn));
 						 SendMessageToPC(oQuester, "The dead rise!");
 					     }
 					}	

@@ -68,8 +68,42 @@ void main() {
 		case 5:
             ACR_SpawnObject("abr_cr_hu_kobold_wiz", OBJECT_TYPE_CREATURE);
             break;
-}			
+		}	
+		
+	switch(Random(5)) {
+        case 0:
+            ACR_SpawnObject("abr_cr_hu_koboldbard2", OBJECT_TYPE_CREATURE);
+            break;
+        case 1:
+            ACR_SpawnObject("abr_cr_hu_koboldlieutenant", OBJECT_TYPE_CREATURE);
+            break;
+        case 2:
+            ACR_SpawnObject("abr_cr_hu_koboldroughneck", OBJECT_TYPE_CREATURE);
+            break;
+        case 3:
+            ACR_SpawnObject("abr_cr_hu_koboldshaman", OBJECT_TYPE_CREATURE);
+            break;
+        case 4:
+            ACR_SpawnObject("abr_cr_hu_koboldranger", OBJECT_TYPE_CREATURE);
+            break;}		
+		
 	
+		switch(Random(5)) {
+        case 0:
+            ACR_SpawnObject("abr_cr_hu_koboldelite01", OBJECT_TYPE_CREATURE);
+            break;
+        case 1:
+            ACR_SpawnObject("abr_cr_hu_koboldelite02", OBJECT_TYPE_CREATURE);
+            break;
+        case 2:
+            ACR_SpawnObject("abr_cr_hu_koboldelite03", OBJECT_TYPE_CREATURE);
+            break;
+        case 3:
+            ACR_SpawnObject("abr_cr_hu_koboldelite04", OBJECT_TYPE_CREATURE);
+            break;
+        case 4:
+            ACR_SpawnObject("abr_cr_hu_koboldelite05", OBJECT_TYPE_CREATURE);
+            break;}		
 
    
 }

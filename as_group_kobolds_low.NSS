@@ -67,7 +67,7 @@ void main() {
             break;}			
 			
 	
-	switch(Random(5)) {
+	switch(Random(7)) {
         case 0:
             ACR_SpawnObject("abr_cr_hu_koboldrunt01", OBJECT_TYPE_CREATURE);
             break;
@@ -84,21 +84,21 @@ void main() {
             ACR_SpawnObject("abr_cr_hu_koboldrunt05", OBJECT_TYPE_CREATURE);
             break;}
 			
-	switch(Random(5)) {
+	switch(Random(7)) {
         case 0:
             ACR_SpawnObject("abr_cr_hu_koboldscout01", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-            ACR_SpawnObject("abr_cr_hu_koboldscout02", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_koboldscout05", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("abr_cr_hu_koboldscout03", OBJECT_TYPE_CREATURE);
             break;
         case 3:
-            ACR_SpawnObject("abr_cr_hu_koboldscout04", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_koboldranger", OBJECT_TYPE_CREATURE);
             break;
         case 4:
-            ACR_SpawnObject("abr_cr_hu_koboldscout05", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_koboldwitchdoctor", OBJECT_TYPE_CREATURE);
             break;}			
 	
 
