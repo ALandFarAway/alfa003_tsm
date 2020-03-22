@@ -50,13 +50,21 @@ void main()
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nCLWMem = GetHasSpell(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF);
 	int nCMWMem = GetHasSpell(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF);
+	int nCSWMem = GetHasSpell(SPELL_CURE_SERIOUS_WOUNDS, OBJECT_SELF);
+	int nCCWMem = GetHasSpell(SPELL_CURE_SERIOUS_WOUNDS, OBJECT_SELF);
 	 	
 	object oCLW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion01");
 	object oCMW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion02");
+	object oCSW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion03");
+	object oCCW = GetItemPossessedBy(OBJECT_SELF, "abr_it_mpotion04");
 	int nCLWHeal = Random(8);
 	effect eCLW = EffectHeal(nCLWHeal);
 	int nCMWHeal = Random(8) + Random(8);
 	effect eCMW = EffectHeal(nCMWHeal);
+	int nCSWHeal = Random(8) + Random(8) + Random(8);
+	effect eCSW = EffectHeal(nCSWHeal);
+	int nCCWHeal = Random(8) + Random(8) + Random(8) + Random(8);
+	effect eCCW = EffectHeal(nCCWHeal);
 	effect eCLWFX = EffectVisualEffect(VFX_IMP_SUPER_HEROISM);
 	int nCleric = GetLevelByClass(CLASS_TYPE_CLERIC, OBJECT_SELF);
 	int nBard = GetLevelByClass(CLASS_TYPE_BARD, OBJECT_SELF);
@@ -90,12 +98,33 @@ void main()
 		  else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 }
-		 else if(oCMW != OBJECT_INVALID)
+		  else if(oCMW != OBJECT_INVALID)
 		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCMW, OBJECT_SELF); 
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
 				 DestroyObject(oCMW, 0.0, TRUE);
+				 }
+		  
+		  else if(nCSWMem > 0)
+				{ActionCastSpellAtObject(SPELL_CURE_SERIOUS_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 }
+		  else if(oCSW != OBJECT_INVALID)
+		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCSW, OBJECT_SELF); 
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
+				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
+				 DestroyObject(oCSW, 0.0, TRUE);
+				 }
+		  else if(nCCWMem > 0)
+				{ActionCastSpellAtObject(SPELL_CURE_CRITICAL_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 }
+		  else if(oCCW != OBJECT_INVALID)
+		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCCW, OBJECT_SELF); 
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
+				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
+				 DestroyObject(oCCW, 0.0, TRUE);
 				 }
 		  
 			}
