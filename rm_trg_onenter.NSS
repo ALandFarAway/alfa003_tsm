@@ -71,33 +71,45 @@ object oPC=GetEnteringObject();
 		
  if(((GetTag(OBJECT_SELF) == "rm_scout_05_sw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_nw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_ne_trig") ) && (GetIsPC(oQuester)) && (GetLocalString(oQuester, "Triggered") != GetTag(OBJECT_SELF)))
  	{SetLocalString(oQuester, "Triggered", GetTag(OBJECT_SELF));
+	SendMessageToAllDMs(GetTag(OBJECT_SELF) + " triggered onenter by " + GetName(oQuester) + " with entering quest state of " + IntToString(ACR_RetrieveQuestState("rm_scout_05", oQuester )));
 	if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 2)
-		{SendMessageToPC(oQuester, "You have scouted the first corner of the Wendover Crypts grounds.");
+		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 2");
+	     SendMessageToPC(oQuester, "You have scouted the first corner of the Wendover Crypts grounds.");
 	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 3, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 		 }
 	else if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 3)
-		{SendMessageToPC(oQuester, "You have scouted the second corner of the Wendover Crypts grounds.");
+		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 3");
+	     SendMessageToPC(oQuester, "You have scouted the second corner of the Wendover Crypts grounds.");
 	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 4, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 		 }
 	else if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 4)
-		{SendMessageToPC(oQuester, "You have scouted the last corner of the Wendover Crypts grounds. Return to Kadalion.");
+		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 4");
+	     SendMessageToPC(oQuester, "You have scouted the last corner of the Wendover Crypts grounds. Return to Kadalion.");
 	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 5, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 		 }
+		 
+	SendMessageToAllDMs(GetTag(OBJECT_SELF) + " - " + GetName(oQuester) + " should have been advanced to previous quest state +1. Reading quest state of " + IntToString(ACR_RetrieveQuestState("rm_scout_05", oQuester )));
 		 
 	int nHour = GetTimeHour();
 	int nUndeadAtWP = 15;
 	if((nHour >= 18) || (nHour <= 6))
 		{nUndeadAtWP = 50;}
 	int nSpawnChance=Random(100);
+	SendMessageToAllDMs("Wendover Exterior nSpawnChance = " + IntToString(nSpawnChance) + " To spawn, must be < 80%");
 	if(nSpawnChance<80)
-		{if(GetLocalInt(GetArea(OBJECT_SELF), "nZombies")==0)
-			{SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 1);
+		{SendMessageToAllDMs("nSpawnChance < 80%");
+	     if(GetLocalInt(GetArea(OBJECT_SELF), "nZombies")==0)
+			{SendMessageToAllDMs("60 second delay on spawnability starting. Hour is " + IntToString(nHour) + " nUndeadAtWP possibility is " + IntToString(nUndeadAtWP) + "%" );
+	         SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 1);
 			 DelayCommand(60.0, SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 0));
 			 int nInc=1;
 			 for(nInc=1; nInc<10; nInc++)
 				{object oUndeadSpawn = GetObjectByTag("wc_undead_create_wp", nInc);
 				 if(oUndeadSpawn != OBJECT_INVALID)
-					{int nRandom = Random(100)+1;
+					{
+					int nRandom = Random(100)+1;
+					SendMessageToAllDMs(IntToString(nInc) + " " + GetTag(oUndeadSpawn) + " Spawn percent = " + IntToString(nRandom));
+					
 					 if(nRandom < nUndeadAtWP)
 					 	{int nRandomUndeadLow = Random(18);
 						 string sUndeadKind = "abr_cr_un_zombie01";
@@ -136,8 +148,11 @@ object oPC=GetEnteringObject();
 						 else if(nRandomUndeadLow == 18)
 						 	{sUndeadKind = "abr_cr_un_allip_01";}
 						
+						SendMessageToAllDMs("Waypoint " + IntToString(nInc) + " will spawn RandomUndeadLow - " + sUndeadKind);
+						 
 						if((nHour >= 18) || (nHour <= 6))
-							{int nRandomUndeadMed = Random(4);
+							{SendMessageToAllDMs("It's night! There is a 25% chance Low Undead will be changed to Med Undead");
+							 int nRandomUndeadMed = Random(4);
 							 if(nRandomUndeadMed == 1)
 							 	{int nRandomUndeadMedKind = Random(8);
 								 if(nRandomUndeadMedKind == 1)
@@ -156,6 +171,8 @@ object oPC=GetEnteringObject();
 								 	{sUndeadKind = "abr_cr_un_zombie_soldier03";}
 								 else if(nRandomUndeadMedKind == 8)
 								 	{sUndeadKind = "abr_cr_un_zombie_soldier04";}
+								 
+									SendMessageToAllDMs("25% chance triggered. Low Undead replaced by Med Undead - " + sUndeadKind);
 								 
 								}
 							
