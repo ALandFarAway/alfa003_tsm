@@ -62,35 +62,14 @@ object oPC=GetEnteringObject();
 	 SetLocalInt(GetEnteringObject(), "wyvern", 1);
 	}
 
- if(GetTag(OBJECT_SELF) == "rm_scout_05_se_trig") 
- 	{if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 1)
-		{SendMessageToPC(oQuester, "You can see the padlock on the crypts, solidly and reassuringly locked tight. This vantage completes the view from the southeast corner. Scout the other corners.");
-	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 2, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
+ if((GetTag(OBJECT_SELF) == "rm_scout_05_se_trig") && (ACR_RetrieveQuestState("rm_scout_05", oQuester) >= 1) && (ACR_RetrieveQuestState("rm_scout_05", oQuester) <= 4))
+ 	{SendMessageToPC(oQuester, "You can see the padlock on the crypts, solidly and reassuringly locked tight. This vantage completes the view from the southeast corner. Scout the other corners.");
+	 	 
+	if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 1)
+		{ACR_AddPersistentJournalQuestEntry("rm_scout_05", 2, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
 		 }
-	}
-		
- if(((GetTag(OBJECT_SELF) == "rm_scout_05_sw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_nw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_ne_trig") ) && (GetIsPC(oQuester)) && (GetLocalString(oQuester, "Triggered") != GetTag(OBJECT_SELF)))
- 	{SetLocalString(oQuester, "Triggered", GetTag(OBJECT_SELF));
-	SendMessageToAllDMs(GetTag(OBJECT_SELF) + " triggered onenter by " + GetName(oQuester) + " with entering quest state of " + IntToString(ACR_RetrieveQuestState("rm_scout_05", oQuester )));
-	if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 2)
-		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 2");
-	     SendMessageToPC(oQuester, "You have scouted the first corner of the Wendover Crypts grounds.");
-	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 3, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
-		 }
-	else if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 3)
-		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 3");
-	     SendMessageToPC(oQuester, "You have scouted the second corner of the Wendover Crypts grounds.");
-	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 4, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
-		 }
-	else if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 4)
-		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 4");
-	     SendMessageToPC(oQuester, "You have scouted the last corner of the Wendover Crypts grounds. Return to Kadalion.");
-	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 5, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
-		 }
-		 
-	SendMessageToAllDMs(GetTag(OBJECT_SELF) + " - " + GetName(oQuester) + " should have been advanced to previous quest state +1. Reading quest state of " + IntToString(ACR_RetrieveQuestState("rm_scout_05", oQuester )));
-		 
-	int nHour = GetTimeHour();
+
+	 int nHour = GetTimeHour();
 	int nUndeadAtWP = 15;
 	if((nHour >= 18) || (nHour <= 6))
 		{nUndeadAtWP = 50;}
@@ -99,9 +78,9 @@ object oPC=GetEnteringObject();
 	if(nSpawnChance<80)
 		{SendMessageToAllDMs("nSpawnChance < 80%");
 	     if(GetLocalInt(GetArea(OBJECT_SELF), "nZombies")==0)
-			{SendMessageToAllDMs("60 second delay on spawnability starting. Hour is " + IntToString(nHour) + " nUndeadAtWP possibility is " + IntToString(nUndeadAtWP) + "%" );
+			{SendMessageToAllDMs("60 minute delay on spawnability starting. Hour is " + IntToString(nHour) + " nUndeadAtWP possibility is " + IntToString(nUndeadAtWP) + "%" );
 	         SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 1);
-			 DelayCommand(60.0, SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 0));
+			 DelayCommand(3600.0, SetLocalInt(GetArea(OBJECT_SELF), "nZombies", 0));
 			 int nInc=1;
 			 for(nInc=1; nInc<10; nInc++)
 				{object oUndeadSpawn = GetObjectByTag("wc_undead_create_wp", nInc);
@@ -153,6 +132,7 @@ object oPC=GetEnteringObject();
 						if((nHour >= 18) || (nHour <= 6))
 							{SendMessageToAllDMs("It's night! There is a 25% chance Low Undead will be changed to Med Undead");
 							 int nRandomUndeadMed = Random(4);
+							 SendMessageToAllDMs("nRandomUndeadMed = " + IntToString(nRandomUndeadMed));
 							 if(nRandomUndeadMed == 1)
 							 	{int nRandomUndeadMedKind = Random(8);
 								 if(nRandomUndeadMedKind == 1)
@@ -184,6 +164,34 @@ object oPC=GetEnteringObject();
 					}	
 				}	
 			}
+		}	 
+		 
+		 
+	}
+		
+ if(((GetTag(OBJECT_SELF) == "rm_scout_05_sw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_nw_trig")|| (GetTag(OBJECT_SELF) == "rm_scout_05_ne_trig") ) && (GetIsPC(oQuester)) && (GetLocalString(oQuester, "Triggered") != GetTag(OBJECT_SELF)))
+ 	{if((ACR_RetrieveQuestState("rm_scout_05", oQuester) == 2) || (ACR_RetrieveQuestState("rm_scout_05", oQuester) == 3) || (ACR_RetrieveQuestState("rm_scout_05", oQuester) == 4)) {
+	
+	SetLocalString(oQuester, "Triggered", GetTag(OBJECT_SELF));
+	SendMessageToAllDMs(GetTag(OBJECT_SELF) + " triggered onenter by " + GetName(oQuester) + " with entering quest state of " + IntToString(ACR_RetrieveQuestState("rm_scout_05", oQuester )));
+	if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 2)
+		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 2");
+	     SendMessageToPC(oQuester, "You have scouted one corner of the Wendover Crypts grounds.");
+	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 3, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
+		 }
+	else if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 3)
+		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 3");
+	     SendMessageToPC(oQuester, "You have scouted a second corner of the Wendover Crypts grounds.");
+	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 4, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
+		 }
+	else if(ACR_RetrieveQuestState("rm_scout_05", oQuester) == 4)
+		{SendMessageToAllDMs(GetTag(OBJECT_SELF) + " confirming " + GetName(oQuester) + " with quest state 4");
+	     SendMessageToPC(oQuester, "You have scouted the last corner of the Wendover Crypts grounds. Return to Kadalion.");
+	 	 ACR_AddPersistentJournalQuestEntry("rm_scout_05", 5, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);
+		 }
+		 
+	SendMessageToAllDMs(GetTag(OBJECT_SELF) + " - " + GetName(oQuester) + " should have been advanced to previous quest state +1. Reading quest state of " + IntToString(ACR_RetrieveQuestState("rm_scout_05", oQuester )));
+		 
 		}
 	}
 
