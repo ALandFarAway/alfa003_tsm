@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F2524ACF5F4EC915B7D9AB932B4D69E09684D3C0" downloadHash="7092CB83B74AC363A7F9327F63D30F894BF72BCC" name="5h_ext_sundabar.trx" dlsize="4229003" size="18324759" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7598754A10C459A96E4293183FEA9500B782F063" downloadHash="4882D3B328F24965C06E6B08DEAFC6333DFA7519" name="5h_ext_sundabar.trx" dlsize="4195020" size="18269210" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -300,7 +300,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="834863EC14C3E32EE6975FA815B56AA0ED994F54" downloadHash="AAB9880136AE744D285D19244F6ED8B303438A08" name="5h_int_sundabar_temple_tormtyr.trx" dlsize="33212" size="33230" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="769CA3C87C452D1EAF03A737E5B997E0D5AA853A" downloadHash="5F472258B40046A0BE56A405A78E3C07C1465527" name="5h_int_sundabar_temple_tormtyr.trx" dlsize="34562" size="34611" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
