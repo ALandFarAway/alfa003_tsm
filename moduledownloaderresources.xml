@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F2524ACF5F4EC915B7D9AB932B4D69E09684D3C0" downloadHash="7092CB83B74AC363A7F9327F63D30F894BF72BCC" name="5h_ext_sundabar.trx" dlsize="4229003" size="18324759" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7598754A10C459A96E4293183FEA9500B782F063" downloadHash="4882D3B328F24965C06E6B08DEAFC6333DFA7519" name="5h_ext_sundabar.trx" dlsize="4195020" size="18269210" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -300,7 +300,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="834863EC14C3E32EE6975FA815B56AA0ED994F54" downloadHash="AAB9880136AE744D285D19244F6ED8B303438A08" name="5h_int_sundabar_temple_tormtyr.trx" dlsize="33212" size="33230" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="769CA3C87C452D1EAF03A737E5B997E0D5AA853A" downloadHash="5F472258B40046A0BE56A405A78E3C07C1465527" name="5h_int_sundabar_temple_tormtyr.trx" dlsize="34562" size="34611" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -590,7 +590,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="86C1CC7ECFBAF30498353B27D72B00878C320FE6" downloadHash="5045731AEDD479B425E93F3AC2010F260DBB4680" name="6e_ext_khelb_silvypass_west.trx" dlsize="4175061" size="16638035" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="04C8B09827AC9D38419BAD60406A9B8DAB9FAEC0" downloadHash="773EC9C6ED4042742A4ACDA4150829DAAC60A1CB" name="6e_ext_khelb_silvypass_west.trx" dlsize="4188341" size="16646336" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1716,12 +1716,17 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="3C2B0E77368A5F63B61F3BC8E5AEF84F0796E60A" downloadHash="F8A99A55438E88E72FA8D2C41C915F2104CD7FF0" name="6d_int_silvy_hallowhar_hkroost.trx" dlsize="125368" size="126648" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="82E70CAF8971E2A7BA3BA89F229467FF3E1E168C" downloadHash="27E690C5E7F3DCAECAADC9E65EF1E854218BF933" name="6d_int_silvy_hallowhar_hkroost.trx" dlsize="253000" size="298212" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="44DA1EB471200F759ED4B9D483F6FBE32CA6583F" downloadHash="9FE66A108DC81737B2CDF142D333E3B7F374F294" name="6d_int_silvy_hallowhar_vreldas.trx" dlsize="129895" size="130737" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="C9A17BB0C7CF99826C8B00BF209AB30992F26915" downloadHash="641DCC1C8E9C18DFC4847B961DD8D61D9757ACE4" name="6e_int_khelb_town_int.trx" dlsize="244203" size="248057" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
