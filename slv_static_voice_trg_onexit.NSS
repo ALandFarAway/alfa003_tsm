@@ -38,10 +38,8 @@ void main()
 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "SpawnedExit", 0));
 		 object oWP = GetWaypointByTag("TM_Moonwood_North_Meet_1_WP");
 			 
-		 object oClown1=CreateObject(OBJECT_TYPE_CREATURE, "003_cr_circus_clown_sling", GetLocation(oWP));
 		 object oClown2=CreateObject(OBJECT_TYPE_CREATURE, "003_cr_circus_clown_sling", GetLocation(oWP));
 		 object oClown3=CreateObject(OBJECT_TYPE_CREATURE, "003_cr_circus_clown_club", GetLocation(oWP));
-		 DelayCommand(5.0, AssignCommand(oClown1, ActionForceMoveToObject(GetExitingObject(), TRUE, 1.0f, 30.0f))); 
 		 DelayCommand(5.0, AssignCommand(oClown2, ActionForceMoveToObject(GetExitingObject(), TRUE, 1.0f, 30.0f))); 
 		 DelayCommand(5.0, AssignCommand(oClown3, ActionForceMoveToObject(GetExitingObject(), TRUE, 1.0f, 30.0f))); 
 		}
