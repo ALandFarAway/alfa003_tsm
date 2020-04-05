@@ -86,7 +86,7 @@ void main()
 	if(GetTag(OBJECT_SELF) == "TM_Holdfast") 
 		{object oPartyMember = GetFirstFactionMember(oTraveller, TRUE);
 		 while (oPartyMember != OBJECT_INVALID)
-		 	{if(((GetIsSkillSuccessful(oPartyMember, SKILL_SPOT, 25, FALSE)) && (GetIsSkillSuccessful(oPartyMember, SKILL_SEARCH, 25, FALSE)))  || (GetLevelByClass(CLASS_TYPE_HARPER, oPartyMember) > 0))
+		 	{if(((GetIsSkillSuccessful(oPartyMember, SKILL_SPOT, 25, FALSE)) && (GetIsSkillSuccessful(oPartyMember, SKILL_SEARCH, 25, FALSE)))  || (GetLevelByClass(CLASS_TYPE_HARPER, oPartyMember) > 0) || (GetIsDM(oTraveller)))
 				{if(GetLocalInt(GetArea(OBJECT_SELF), "HoldfastPLC") != 1)
 					{object oHoldfastWP = GetLocalObject(OBJECT_SELF, "holdfast_plc_wp");
 		             if(oHoldfastWP == OBJECT_INVALID)
@@ -97,10 +97,10 @@ void main()
 				 	 SetLocalInt(GetArea(OBJECT_SELF), "HoldfastPLC", 1);
 					 DelayCommand(60.0, SetLocalInt(GetArea(OBJECT_SELF), "HoldfastPLC", 0));
 					 }
-				 SendMessageToPC(oPartyMember, "You come across an old, moss-covered stone tower, hidden from view. The door swings open at a touch.");
+				 SendMessageToPC(oPartyMember, "You come across a well-hidden stone door, concealed in the cliff. The door swings open at a touch.");
 		 		 }
 			else if(GetLocalInt(GetArea(OBJECT_SELF), "HoldfastPLC") == 1)
-				{SendMessageToPC(oPartyMember, "One of your party members has discovered an old, moss-covered stone tower, hidden from view. The door swings open at a touch.");
+				{SendMessageToPC(oPartyMember, "One of your party members has discovered awell-hidden stone door, concealed in the cliff. The door swings open at a touch.");
 		 		 }
 			oPartyMember = GetNextFactionMember(oTraveller, TRUE);
 			}
