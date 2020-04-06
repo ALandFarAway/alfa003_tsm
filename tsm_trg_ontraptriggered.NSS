@@ -55,11 +55,13 @@ void main()
 	
 	
 	if(GetTag(OBJECT_SELF) == "003_trap_spike_minor")
-		{SendMessageToPC(GetEnteringObject(), "Gotcha!");
+		{//SendMessageToPC(GetEnteringObject(), "Gotcha!");
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0));
-		 if(!ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_TRAP))
-		 	{DoTrapSpike(d6(2));}
-		 DelayCommand(2.0, AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 0.5)));
+		 if(ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_TRAP))
+		 	{}
+		 else
+			 {DoTrapSpike(d6(2));}
+		 DelayCommand(2.0, AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0)));
 		 
 		 }
 }
