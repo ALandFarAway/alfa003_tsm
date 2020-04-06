@@ -48,9 +48,18 @@ void main()
     ACR_TriggerOnTrapTriggered();
 
     // Custom code goes here.
+	object oPlaceable = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_plc", OBJECT_SELF, 1);
+	SendMessageToAllDMs("OBJECT_SELF = " + GetTag(OBJECT_SELF));
+	SendMessageToAllDMs("oPlaceable = " + GetTag(oPlaceable));
+	SendMessageToAllDMs("EnteringObject = " + GetName(GetEnteringObject()));
 	
-	if(GetTag(OBJECT_SELF) == "003_trap_plc_spike_minor")
+	
+	if(GetTag(OBJECT_SELF) == "003_trap_spike_minor")
 		{SendMessageToPC(GetEnteringObject(), "Gotcha!");
-		//DoTrapSpike(d6(2));
-		}
+		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0));
+		 if(!ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_TRAP))
+		 	{DoTrapSpike(d6(2));}
+		 DelayCommand(2.0, AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 0.5)));
+		 
+		 }
 }
