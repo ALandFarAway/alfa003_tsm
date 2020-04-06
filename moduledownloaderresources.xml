@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7598754A10C459A96E4293183FEA9500B782F063" downloadHash="4882D3B328F24965C06E6B08DEAFC6333DFA7519" name="5h_ext_sundabar.trx" dlsize="4195020" size="18269210" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0A7D671063BC7F8E6B5E7066F559A41B359DEE8E" downloadHash="5FBC48C2613E4CFEC2DCDC07248FE629DA256EAF" name="5h_ext_sundabar.trx" dlsize="4600540" size="18665497" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1727,6 +1727,16 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="C9A17BB0C7CF99826C8B00BF209AB30992F26915" downloadHash="641DCC1C8E9C18DFC4847B961DD8D61D9757ACE4" name="6e_int_khelb_town_int.trx" dlsize="244203" size="248057" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="BAEA9AA2A05E5F8E1B0F7511013BB5D6DA0E324A" downloadHash="9079F041FD6D6A9EE579AC8930E86496F04FAA49" name="5h_ext_sundabar_altlook.trx" dlsize="4331351" size="18402395" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="554CC47789F9399E5C4F99E093330855A368A952" downloadHash="92CFB95EB762110A731EBED45227F163C2365693" name="5h_int_sundabar_shops.trx" dlsize="140248" size="142244" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
