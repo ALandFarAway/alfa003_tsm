@@ -59,9 +59,9 @@ void main()
 	
 	
 
-	SendMessageToAllDMs("oCaster = " + GetTag(oCaster));
-	SendMessageToAllDMs("oTarget = " + GetName(oTarget));
-	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
+	//SendMessageToAllDMs("oCaster = " + GetTag(oCaster));
+	//SendMessageToAllDMs("oTarget = " + GetName(oTarget));
+	//SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
 	
 		
 	
