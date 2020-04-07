@@ -49,21 +49,38 @@ void main()
 
     // Custom code goes here.
 	object oPlaceable = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_plc", OBJECT_SELF, 1);
-    SendMessageToAllDMs("OBJECT_SELF = " + GetTag(OBJECT_SELF));
-	SendMessageToAllDMs("oPlaceable = " + GetTag(oPlaceable));
-	SendMessageToAllDMs("EnteringObject = " + GetName(GetEnteringObject()));
+   	int nReflexDC = GetLocalInt(OBJECT_SELF, "ACR_TRAP_SAVE_DC");
+	int nDiceType = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_TYPE");
+	int nDiceNumber = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_NUMBER");
 	
+	SendMessageToAllDMs("nReflexDC = " + IntToString(nReflexDC));
+	SendMessageToAllDMs("nDiceType = " + IntToString(nDiceType));
+	SendMessageToAllDMs("nDiceNumber = " + IntToString(nDiceNumber));
+	
+	int nDamage;
+	if(nDiceType == 4)
+		{nDamage = d4(nDiceNumber);} 
+	if(nDiceType == 6)
+		{nDamage = d6(nDiceNumber);} 
+	if(nDiceType == 8)
+		{nDamage = d8(nDiceNumber);} 
+	if(nDiceType == 10)
+		{nDamage = d10(nDiceNumber);} 
+	if(nDiceType == 12)
+		{nDamage = d12(nDiceNumber);} 
+	if(nDiceType == 20)
+		{nDamage = d20(nDiceNumber);} 
+	
+	SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
+	
+	effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 	
 	if(GetTag(OBJECT_SELF) == "003_trap_spike_minor")
-		{//SendMessageToPC(GetEnteringObject(), "Gotcha!");
-		 object oPlaceableClosed = CreateObject(OBJECT_TYPE_PLACEABLE,"003_trap_spike_minor_plc", GetLocation(oPlaceable));
-		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 2.0));
-		 //if(ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_TRAP))
-		 //	{}
-		// else
-			// {DoTrapSpike(d6(2));}
+		{AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 2.0));
+		 if(ReflexSave(GetEnteringObject(), nReflexDC, SAVING_THROW_TYPE_TRAP))
+		 	{}
+		 else
+			 {ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, GetEnteringObject()); }
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
-		 
-		 DestroyObject(oPlaceable, 10.0); 
 		 }
 }
