@@ -49,19 +49,21 @@ void main()
 
     // Custom code goes here.
 	object oPlaceable = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_plc", OBJECT_SELF, 1);
-	SendMessageToAllDMs("OBJECT_SELF = " + GetTag(OBJECT_SELF));
+    SendMessageToAllDMs("OBJECT_SELF = " + GetTag(OBJECT_SELF));
 	SendMessageToAllDMs("oPlaceable = " + GetTag(oPlaceable));
 	SendMessageToAllDMs("EnteringObject = " + GetName(GetEnteringObject()));
 	
 	
 	if(GetTag(OBJECT_SELF) == "003_trap_spike_minor")
 		{//SendMessageToPC(GetEnteringObject(), "Gotcha!");
-		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0));
-		 if(ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_TRAP))
-		 	{}
-		 else
-			 {DoTrapSpike(d6(2));}
-		 DelayCommand(2.0, AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0)));
+		 object oPlaceableClosed = CreateObject(OBJECT_TYPE_PLACEABLE,"003_trap_spike_minor_plc", GetLocation(oPlaceable));
+		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 2.0));
+		 //if(ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_TRAP))
+		 //	{}
+		// else
+			// {DoTrapSpike(d6(2));}
+		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
 		 
+		 DestroyObject(oPlaceable, 10.0); 
 		 }
 }

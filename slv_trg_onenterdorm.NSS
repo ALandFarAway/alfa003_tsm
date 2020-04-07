@@ -352,6 +352,12 @@ if((GetTag(OBJECT_SELF) == "slv_dorm_in") && ((GetIsPC(oStudent))|| (GetIsDMPoss
 			
 	    object oMyRoof=GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Roof");
 	    DestroyObject(oMyRoof);
+		
+		if(GetName(OBJECT_SELF) == "Abj_dorm_1_in")
+			{object oAbjRoof=GetObjectByTag("Abj_Dorm_1_Roof");
+	    	 DestroyObject(oAbjRoof);
+			}
+	
 			 
 	}
 	
