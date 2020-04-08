@@ -48,6 +48,7 @@ void main()
     ACR_TriggerOnTrapTriggered();
 
     // Custom code goes here.
+	object oVictim = GetEnteringObject();
 	object oPlaceable = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_plc", OBJECT_SELF, 1);
    	int nReflexDC = GetLocalInt(OBJECT_SELF, "ACR_TRAP_SAVE_DC");
 	int nDiceType = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_TYPE");
@@ -56,6 +57,10 @@ void main()
 	SendMessageToAllDMs("nReflexDC = " + IntToString(nReflexDC));
 	SendMessageToAllDMs("nDiceType = " + IntToString(nDiceType));
 	SendMessageToAllDMs("nDiceNumber = " + IntToString(nDiceNumber));
+	
+	SendMessageToPC(oVictim, "nReflexDC = " + IntToString(nReflexDC));
+	SendMessageToPC(oVictim, "nDiceType = " + IntToString(nDiceType));
+	SendMessageToPC(oVictim, "nDiceNumber = " + IntToString(nDiceNumber));
 	
 	int nDamage;
 	if(nDiceType == 4)
@@ -72,15 +77,17 @@ void main()
 		{nDamage = d20(nDiceNumber);} 
 	
 	SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
+	SendMessageToPC(oVictim, "nDamage = " + IntToString(nDamage));
 	
-	effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 	
-	if(GetTag(OBJECT_SELF) == "003_trap_spike_minor")
-		{AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 2.0));
-		 if(ReflexSave(GetEnteringObject(), nReflexDC, SAVING_THROW_TYPE_TRAP))
+	
+	if(GetTag(OBJECT_SELF) == "003_trap_custom_spike_minor")
+		{effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
+		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
+		 if(ReflexSave(oVictim, nReflexDC, SAVING_THROW_TYPE_TRAP))
 		 	{}
 		 else
-			 {ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, GetEnteringObject()); }
+			 {ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); }
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
 		 }
 }
