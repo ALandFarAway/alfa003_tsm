@@ -1741,4 +1741,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="E75F31FC551A58237F80B74B8ADA1EF3F7A7A0ED" downloadHash="F661EFFDA4ACAEFCE2CEE45B8524CE1C6544FF26" name="6e_ext_nether_foothills_new.trx" dlsize="4922206" size="22365070" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
