@@ -78,9 +78,7 @@ void main()
 	
 	SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
 	SendMessageToPC(oVictim, "nDamage = " + IntToString(nDamage));
-	
-	
-	
+		
 	if(GetTag(OBJECT_SELF) == "003_trap_custom_spike_minor")
 		{effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));

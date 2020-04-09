@@ -395,7 +395,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="AC285BD00B227E1FBECE2FEC9C8461CC02416513" downloadHash="668D5256148750AD3139AF5D0992486BE5FC87A3" name="6e_ext_nether_junction.trx" dlsize="862645" size="7409601" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0175B0CA16C090E6DAAE3535EA729E9BEC9F3D81" downloadHash="B97E6ABF93E13E6D50673C60FE3B99D86D5F2641" name="6e_ext_nether_junction.trx" dlsize="1302670" size="9643713" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -845,7 +845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F996F1EDCDA0872DAFDF760713E3C3EDC07E72A1" downloadHash="65F4DB2666BDDD7DE6B0D6BE7906B9F97A9481D9" name="6e_ext_nether_flying_griffon.trx" dlsize="878910" size="6783557" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="76537AB84773174B34D1CF679B3352C07F5FC0D6" downloadHash="42FD49F751F9A90367661B22E2C8BA5596CAE5BE" name="6e_ext_nether_flying_griffon.trx" dlsize="1021605" size="7878038" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
