@@ -1185,7 +1185,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="05903DEBF4B524412DEA407EF900C3ADD4E3CF2A" downloadHash="A4148637AD3C2084D47867243BCE8DD506E3F1F8" name="6e_ext_nether_slopes.trx" dlsize="2790447" size="15753293" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="645022DAF49D17B4F30113959DBD7F136556E48E" downloadHash="9EDE2179CA5702D10DA4D7D49BB129A5C6DCF688" name="6e_ext_nether_slopes.trx" dlsize="2793168" size="15753496" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1742,6 +1742,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="E29CAE6B2BD48DA37B883188B8E22287CC759201" downloadHash="B3090C3F4A60E7D6F7CD2321981ACD7C00B4A57F" name="6e_ext_nether_foothills_new.trx" dlsize="4903856" size="22362429" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="7399C0B17801E7FE3DD8C65C98388D2AB702FA61" downloadHash="FDFF4D6AF57E78D87D1EFFBD9EAB48322C696B0B" name="6e_ext_nether_slopes_new.trx" dlsize="2683403" size="15680255" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
