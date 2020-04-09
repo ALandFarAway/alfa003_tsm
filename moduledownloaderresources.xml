@@ -530,7 +530,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8232FC5F1EA22564CB5FA24C7720D2BF17572694" downloadHash="F3CCD21359AF34C2AD4725A208CECBBF266722CD" name="6e_ext_nether_foothills.trx" dlsize="4107920" size="18586945" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8E9C900EDF99CA3EC69900B97A50F96D57DB782E" downloadHash="9F773042A2BB5EB057F2F3EFF2305A1F19E01C3E" name="6e_ext_nether_foothills.trx" dlsize="4488850" size="20362368" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
