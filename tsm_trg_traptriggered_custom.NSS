@@ -54,13 +54,13 @@ void main()
 	int nDiceType = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_TYPE");
 	int nDiceNumber = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_NUMBER");
 	
-	SendMessageToAllDMs("nReflexDC = " + IntToString(nReflexDC));
-	SendMessageToAllDMs("nDiceType = " + IntToString(nDiceType));
-	SendMessageToAllDMs("nDiceNumber = " + IntToString(nDiceNumber));
+	//SendMessageToAllDMs("nReflexDC = " + IntToString(nReflexDC));
+	//SendMessageToAllDMs("nDiceType = " + IntToString(nDiceType));
+	//SendMessageToAllDMs("nDiceNumber = " + IntToString(nDiceNumber));
 	
-	SendMessageToPC(oVictim, "nReflexDC = " + IntToString(nReflexDC));
-	SendMessageToPC(oVictim, "nDiceType = " + IntToString(nDiceType));
-	SendMessageToPC(oVictim, "nDiceNumber = " + IntToString(nDiceNumber));
+	//SendMessageToPC(oVictim, "nReflexDC = " + IntToString(nReflexDC));
+	//SendMessageToPC(oVictim, "nDiceType = " + IntToString(nDiceType));
+	//SendMessageToPC(oVictim, "nDiceNumber = " + IntToString(nDiceNumber));
 	
 	int nDamage;
 	if(nDiceType == 4)
@@ -76,8 +76,8 @@ void main()
 	if(nDiceType == 20)
 		{nDamage = d20(nDiceNumber);} 
 	
-	SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
-	SendMessageToPC(oVictim, "nDamage = " + IntToString(nDamage));
+	//SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
+	//SendMessageToPC(oVictim, "nDamage = " + IntToString(nDamage));
 		
 	if(GetTag(OBJECT_SELF) == "003_trap_custom_spike_minor")
 		{effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
