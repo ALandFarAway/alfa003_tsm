@@ -420,7 +420,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B4E4C61975B96C14DFC35B0AEF56BF312396C174" downloadHash="FFC0178FAA9C9D821F72AC57314F6FA3DCCCE651" name="6e_ext_silvypass_west_hkn.trx" dlsize="2408439" size="12738507" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="93B71A3AC96B832DF5C52E6C0122490E1664659A" downloadHash="6F16418CAD20688A1E8B855C57324E7D7B636879" name="6e_ext_silvypass_west_hkn.trx" dlsize="2412210" size="12737862" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
