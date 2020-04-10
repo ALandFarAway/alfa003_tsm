@@ -420,7 +420,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4EC0F1345BAE3723AE15E99F08067F67DC5C603E" downloadHash="126DB0DC123FDCF967228D909AFA12728B8E2541" name="6e_ext_silvypass_west_hkn.trx" dlsize="1428501" size="8701282" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C2A389AFC35CF04453E9D0D008AB888E865C09D0" downloadHash="90640EAFDBF19BCFD8E0601473E98E90C45EF654" name="6e_ext_silvypass_west_hkn.trx" dlsize="1437571" size="8702014" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1746,7 +1746,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7399C0B17801E7FE3DD8C65C98388D2AB702FA61" downloadHash="FDFF4D6AF57E78D87D1EFFBD9EAB48322C696B0B" name="6e_ext_nether_slopes_new.trx" dlsize="2683403" size="15680255" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D2BF2BADA81A53CCA0163A1ECCA1A023815D7DA1" downloadHash="AA188B7BFDBFFF9908E40E3569D5F898A4BE9C06" name="6e_ext_nether_slopes_new.trx" dlsize="3114022" size="17389785" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
