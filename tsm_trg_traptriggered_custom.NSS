@@ -49,19 +49,14 @@ void main()
 
     // Custom code goes here.
 	object oVictim = GetEnteringObject();
-	object oPlaceable = GetNearestObjectByTag(GetTag(OBJECT_SELF) + "_plc", OBJECT_SELF, 1);
-   	int nReflexDC = GetLocalInt(OBJECT_SELF, "ACR_TRAP_SAVE_DC");
+	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
+	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
+	string sPlaceableString=GetLocalString(OBJECT_SELF, "PLACEABLE_TAG");
+	object oPlaceable = GetNearestObjectByTag(sPlaceableString, OBJECT_SELF,1);
+    int nReflexDC = GetLocalInt(OBJECT_SELF, "ACR_TRAP_SAVE_DC");
 	int nDiceType = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_TYPE");
 	int nDiceNumber = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_NUMBER");
 	
-	
-	//SendMessageToAllDMs("nReflexDC = " + IntToString(nReflexDC));
-	//SendMessageToAllDMs("nDiceType = " + IntToString(nDiceType));
-	//SendMessageToAllDMs("nDiceNumber = " + IntToString(nDiceNumber));
-	
-	//SendMessageToPC(oVictim, "nReflexDC = " + IntToString(nReflexDC));
-	//SendMessageToPC(oVictim, "nDiceType = " + IntToString(nDiceType));
-	//SendMessageToPC(oVictim, "nDiceNumber = " + IntToString(nDiceNumber));
 	
 	int nDamage;
 	if(nDiceType == 4)
@@ -77,18 +72,18 @@ void main()
 	if(nDiceType == 20)
 		{nDamage = d20(nDiceNumber);} 
 	
-	//SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
-	//SendMessageToPC(oVictim, "nDamage = " + IntToString(nDamage));
 		
 	if(GetTag(OBJECT_SELF) == "003_trap_custom_spike_minor")
 		{effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 		 effect eStopMoving = EffectParalyze(10, SAVING_THROW_REFLEX, TRUE);
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
 		 if(ReflexSave(oVictim, nReflexDC, SAVING_THROW_TYPE_TRAP))
-		 	{}
+		 	{SendMessageToPC(oVictim, sMessageSuccess);
+			}
 		 else
 			 {ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); 
 			  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eStopMoving, oVictim, 1.0); 
+			  SendMessageToPC(oVictim, sMessageFail);
 			  }
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
 		 }

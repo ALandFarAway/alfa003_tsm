@@ -55,16 +55,16 @@ void main()
 	object oPC = GetEnteringObject();
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
-	string sDestroyObject=GetLocalString(OBJECT_SELF, "DESTROY_TAG");
-	object oDestroy = GetNearestObjectByTag(sDestroyObject, OBJECT_SELF,1);
+	string sPlaceableString=GetLocalString(OBJECT_SELF, "PLACEABLE_TAG");
+	object oPlaceable = GetNearestObjectByTag(sPlaceableString, OBJECT_SELF,1);
     int nSkillName = GetLocalInt(OBJECT_SELF, "SKILL_NAME_INT");
 	int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 		 
- if((GetTag(OBJECT_SELF) == "003_tr_skillcheck_srchdest") && (oDestroy != OBJECT_INVALID))
+ if((GetTag(OBJECT_SELF) == "003_tr_skillcheck_srchdest") && (oPlaceable != OBJECT_INVALID))
 		{if(GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1)
-			{	 if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
+			{if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 			 	{SendMessageToPC(oPC, sMessageSuccess);
-				 DestroyObject(oDestroy);
+				 DestroyObject(oPlaceable);
 			 	}
 			  else {SendMessageToPC(oPC, sMessageFail);}
 			  
