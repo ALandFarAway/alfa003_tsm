@@ -54,6 +54,7 @@ void main()
 	int nDiceType = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_TYPE");
 	int nDiceNumber = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_NUMBER");
 	
+	
 	//SendMessageToAllDMs("nReflexDC = " + IntToString(nReflexDC));
 	//SendMessageToAllDMs("nDiceType = " + IntToString(nDiceType));
 	//SendMessageToAllDMs("nDiceNumber = " + IntToString(nDiceNumber));
@@ -81,11 +82,14 @@ void main()
 		
 	if(GetTag(OBJECT_SELF) == "003_trap_custom_spike_minor")
 		{effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
+		 effect eStopMoving = EffectParalyze(10, SAVING_THROW_REFLEX, TRUE);
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
 		 if(ReflexSave(oVictim, nReflexDC, SAVING_THROW_TYPE_TRAP))
 		 	{}
 		 else
-			 {ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); }
+			 {ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); 
+			  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eStopMoving, oVictim, 1.0); 
+			  }
 		 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
 		 }
 }
