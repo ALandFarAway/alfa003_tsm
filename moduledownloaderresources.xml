@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="038B73867B5F3D5B6D90AE7BC8396156A9DA8DBF" downloadHash="883DC72356AC9A9D23D6810AE518CD8349EE9850" name="5h_ext_sundabar.trx" dlsize="4950456" size="20404444" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="F5D5472871959023FFF93D5C9DD3A5C2A3BF55EF" downloadHash="E7F79A84E5F931E8AE43C7CB038743340DB0B71B" name="5h_ext_sundabar.trx" dlsize="4983256" size="20431296" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1736,7 +1736,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="64AC96DF1051D23A503E406FAA7A368B8B0B2FFF" downloadHash="3CF7D6D5AFB4DB7FF7EED17ABF8CDE0F5E2E4D3B" name="5h_int_sundabar_shops.trx" dlsize="171882" size="174652" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9D38B486C2B2E5B9FB7B4BBA3634E9E08A82A253" downloadHash="2DF9987203C95BF2A843A5017B91B42E0326BEC2" name="5h_int_sundabar_shops.trx" dlsize="366373" size="371912" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1747,6 +1747,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="D2BF2BADA81A53CCA0163A1ECCA1A023815D7DA1" downloadHash="AA188B7BFDBFFF9908E40E3569D5F898A4BE9C06" name="6e_ext_nether_slopes_new.trx" dlsize="3114022" size="17389785" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="2F5E55AFA698F9B5035ED54AEE360C1650B3BEC5" downloadHash="77E444C336048BD1C58C2C852121F54D5EB1BF23" name="5h_int_sundabar_maidenmidnight.trx" dlsize="113418" size="113927" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
