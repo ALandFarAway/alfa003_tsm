@@ -850,7 +850,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A1D20E9F314ED9D2E586CF09A14DD8E8DA50ACFA" downloadHash="3F5FFF706709DF5BC832C670A27071BDDCA31D41" name="6f_ext_silverymoon_pass.trx" dlsize="1203102" size="7334775" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8E7EAB438B44ABACFD2EC6D973D457558B50C368" downloadHash="AEC853674228E1CDD92561D3F78140BA1956EFF9" name="6f_ext_silverymoon_pass.trx" dlsize="1723383" size="10697979" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
