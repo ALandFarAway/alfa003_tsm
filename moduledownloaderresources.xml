@@ -970,7 +970,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8CF50EB0D5260AC2F1DF10C6CC772164BD591447" downloadHash="1C915ACE25E1C523BD2A68BF9770C064D266771F" name="5b_ext_settlestone.trx" dlsize="6510862" size="27235051" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1D67F57BDA62C580B14F1EA6CB9AE898B24CEBB4" downloadHash="61995A2CAB9F47DD676A0F60A9040E5EF156F812" name="5b_ext_settlestone.trx" dlsize="6465548" size="27199469" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
