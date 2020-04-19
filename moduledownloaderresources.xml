@@ -1756,12 +1756,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B6EFD86DFC069DCE4D051ADDD03FE3FE28487C74" downloadHash="3BF3A29F24B7CD433744442E99DD992E16B37C6D" name="6b_ext_wendover_estate.trx" dlsize="1859039" size="8152297" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FC485E91C27E8EB1BCB73765FE064902B0647881" downloadHash="7F89B497490CF8EA9E10BF9079C8D967B25794DE" name="6b_ext_wendover_estate.trx" dlsize="1857003" size="8151841" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CAB47D549FE18A260017A48E997D913ECF16B9C2" downloadHash="BDD58E273158B2F146DB51194F8ED3588E666D9E" name="6b_ext_highway2_north_to_wend.trx" dlsize="2760388" size="16497444" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A01F410B82048D94EAD2415499E9A8B7CF9E7D03" downloadHash="08B5249F27D5B00070C3F62FB5B74D685778036D" name="6b_ext_highway2_north_to_wend.trx" dlsize="2800822" size="16475176" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
