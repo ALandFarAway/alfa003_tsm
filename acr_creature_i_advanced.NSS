@@ -12,7 +12,7 @@
 //  Description
 //  This script handles events executed on all creatures, either PCs or NPCs.
 //
-//  http://www.alandfaraway.org/docs/Technical/ACR2Creatures
+//  http://www.alandfaraway.info/docs/Technical/ACR2Creatures
 //
 //  Revision History
 //  2006/11/01  Cipher  Added calls to VFX functions
