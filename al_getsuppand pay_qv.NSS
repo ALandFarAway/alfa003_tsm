@@ -1,4 +1,4 @@
-// Argent Legion Supply Quest to Quarevaerr, pay and exp
+// Argent Legion Supply Quest to Quaervarr, pay and exp
 #include "acr_db_persist_i"
 #include "acr_xp_i"
 void main()
