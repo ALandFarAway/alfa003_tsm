@@ -40,7 +40,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F2BB06F2ABE2546F2ED36B33403B876FCDEDA9DF" downloadHash="42ECFC599201939A176F69DE604EB8E588BAC5FD" name="5h_int_sundabar_maidenmidnight.trx" dlsize="156574" size="157505" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="31E8632BF3F3996E6CEBE15FEFFF9E771F570397" downloadHash="E73CD2C4AFAE2A946D3B6BC996BA08318E50493B" name="5h_int_sundabar_maidenmidnight.trx" dlsize="158993" size="160246" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -150,7 +150,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F5D5472871959023FFF93D5C9DD3A5C2A3BF55EF" downloadHash="E7F79A84E5F931E8AE43C7CB038743340DB0B71B" name="5h_ext_sundabar.trx" dlsize="4983256" size="20431296" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3A1BC500165635E67ACAF9A6F89AF21A242B8B3D" downloadHash="8DA2070AD9B46D0CAE45CFC419583AADEE479E33" name="5h_ext_sundabar.trx" dlsize="4987508" size="20428213" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1575,7 +1575,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="3DA1CCB56AD0AFB8FB7ABC6DE959C612687EDAB3" downloadHash="BFF25A58E5309A9B2385CFC964E8D9E376DA6D15" name="6b_ext_highway2_north_to_wend.trx" dlsize="2759140" size="16505568" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3DDE49ADE70AAF2A341639FCD167F3B46AC690D8" downloadHash="D3DE9557D588AD2E8CF1451969AA66D4431D5493" name="6b_ext_highway2_north_to_wend.trx" dlsize="2774357" size="16510205" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
