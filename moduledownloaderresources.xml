@@ -40,7 +40,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="31E8632BF3F3996E6CEBE15FEFFF9E771F570397" downloadHash="E73CD2C4AFAE2A946D3B6BC996BA08318E50493B" name="5h_int_sundabar_maidenmidnight.trx" dlsize="158993" size="160246" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B9FEA32BEC93E1FAEAC0AD20E9D9BC28BDF400E3" downloadHash="A5DA9CAFE25DE4B8C5F7D105D37CFC04533A504C" name="5h_int_sundabar_maidenmidnight.trx" dlsize="159043" size="160242" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -150,7 +150,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="3A1BC500165635E67ACAF9A6F89AF21A242B8B3D" downloadHash="8DA2070AD9B46D0CAE45CFC419583AADEE479E33" name="5h_ext_sundabar.trx" dlsize="4987508" size="20428213" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0412D8DEC929FBBBBF8B2352A91FBA1A9B939826" downloadHash="F141499806B5BEF13C8CBEEE5305EAC385D5285E" name="5h_ext_sundabar.trx" dlsize="4973946" size="20415839" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1565,7 +1565,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5A593AB8BFDE8630D307FF476E7BBB17FEEBAF8D" downloadHash="E7E304B761C2FAA6805C30FCE9BAC989D51986B8" name="5h_int_sundabar_malshym_ground.trx" dlsize="68563" size="68888" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A7D20A42B3A954D80194D37415B480B0639A55DD" downloadHash="A008E1D5AA34838217AEB02F64CB27B1455EFCC1" name="5h_int_sundabar_malshym_ground.trx" dlsize="64504" size="64756" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1631,6 +1631,11 @@
     </server-ref>
   </resource>
   <resource type="Tlk" hash="7A3DFDDA24A27417C56CD9FE6D10119F9C3CBFE1" downloadHash="17E716FD0A0F84AE69237DC2C4E585E4DAD5757D" name="alfa_acr02.tlk" dlsize="150804" size="1200684" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="8028A17702FF9B1F48B2DBAB6A4C599D559A5E51" downloadHash="F1927711824C53798529BFFD53C72F791C8E4773" name="5h_int_sundabar_taverns.trx" dlsize="116430" size="117683" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
