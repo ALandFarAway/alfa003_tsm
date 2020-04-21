@@ -1640,4 +1640,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="5C59903B772A2456880A3C8058E421A7B6716140" downloadHash="AA8713F6500B1C3974F0689815408BC594AE2516" name="6b_ext_highway2_wendcrypt_tm.trx" dlsize="1861385" size="8150019" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
