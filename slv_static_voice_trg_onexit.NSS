@@ -32,11 +32,11 @@ void main()
     // Custom code goes here.
 	
 //deandragon quests
- if((GetTag(OBJECT_SELF) == "003_circus_clown_spawn") && (GetLocalInt(OBJECT_SELF, "SpawnedExit") != 1))  
-	 {if(((ACR_RetrieveQuestState("slv_deansphinx_a", GetExitingObject()) >= 1)&& (ACR_RetrieveQuestState("slv_deansphinx_a", GetExitingObject()) < 8)) || ((ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) >= 1)&& (ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) < 7)))
+ if((GetTag(OBJECT_SELF) == "fey_chocolate_activate") && (GetLocalInt(OBJECT_SELF, "SpawnedExit") != 1))  
+	 {if((ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) >= 1)|| (ACR_RetrieveQuestState("slv_deansphinx_b", GetExitingObject()) < 7))
 	 	{SetLocalInt(OBJECT_SELF, "SpawnedExit", 1);
 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "SpawnedExit", 0));
-		 object oWP = GetNearestObjectByTag("003_circus_clown_wp");
+		 object oWP = GetWaypointByTag("TM_Moonwood_North_Meet_1_WP");
 			 
 		 object oClown2=CreateObject(OBJECT_TYPE_CREATURE, "003_cr_circus_clown_sling", GetLocation(oWP));
 		 object oClown3=CreateObject(OBJECT_TYPE_CREATURE, "003_cr_circus_clown_club", GetLocation(oWP));
