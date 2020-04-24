@@ -74,11 +74,21 @@ void main() {
 
 	switch(Random(4)) {
         case 0:
-            ACR_SpawnObject("abr_cr_ab_willowisp_small", OBJECT_TYPE_CREATURE);
-            break;
-       case 1:
             ACR_SpawnObject("003_cr_el_air", OBJECT_TYPE_CREATURE);
             break;
+       case 1:
+            ACR_SpawnObject("abr_cr_mephit_ice", OBJECT_TYPE_CREATURE);
+            break;
          }
+		 
+	switch(Random(4)) {
+        case 0:
+            ACR_SpawnObject("abr_cr_mephit_ice", OBJECT_TYPE_CREATURE);
+            break;
+       case 1:
+            ACR_SpawnObject("abr_cr_mephit_ice", OBJECT_TYPE_CREATURE);
+            break;
+         }
+  
   
 }
