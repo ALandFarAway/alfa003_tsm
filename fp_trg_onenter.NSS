@@ -80,33 +80,15 @@ void main()
 //Frost Hills Glacier Ice Climb
 if(GetTag(OBJECT_SELF) == "iceclimb_trig")
 	{SendMessageToPC(GetEnteringObject(), "Slippery handholds offer treacherous purchase.");
-		if(ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_NONE, GetAreaOfEffectCreator()) > 0)
+		if(ReflexSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_NONE, OBJECT_SELF) > 0)
 			{SendMessageToPC(GetEnteringObject(), "You climb safely.");
 			}
 		else{SendMessageToPC(GetEnteringObject(), "You slip, injuring yourself!");
 			effect eSlip = EffectDamage(d4(1), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+			effect eKnockdownIce = EffectKnockdown();
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdownIce, GetEnteringObject(), 3.0);
 			ApplyEffectToObject(DURATION_TYPE_INSTANT, eSlip, GetEnteringObject());
 			}
 	}
 	
-if(GetTag(OBJECT_SELF) == "colddamage_trig")
-	{int iToggle = GetLocalInt(GetEnteringObject(), "iToggle");
-	 if(iToggle == 0)
-		 {if(GetLocalInt(GetEnteringObject(), "Ice tunnel") == 0)
-		 	{SendMessageToPC(GetEnteringObject(), "You walk beneath an icy roof, in a tunnel bored smoothly through the glacier!");
-			 SetLocalInt(GetEnteringObject(), "Ice tunnel", 1);
-			 }
-		  if(FortitudeSave(GetEnteringObject(), 15, SAVING_THROW_TYPE_NONE, GetAreaOfEffectCreator()) > 0)
-				{SendMessageToPC(GetEnteringObject(), "Cold numbs your skin and bites at your lungs with every breath.");
-				}
-			else{SendMessageToPC(GetEnteringObject(), "Glacial cold takes its toll!");
-				effect eCold = EffectDamage(d4(1), DAMAGE_TYPE_COLD, DAMAGE_POWER_NORMAL, FALSE);
-				ApplyEffectToObject(DURATION_TYPE_INSTANT, eCold, GetEnteringObject());
-				}
-			DelayCommand(30.0, ExecuteScript("fp_trg_onenter", OBJECT_SELF));
-			}
-		else
-			{SendMessageToPC(GetEnteringObject(), "The cold eases its icy grasp.");
-			}
-		}
 }
