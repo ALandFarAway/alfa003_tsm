@@ -1520,7 +1520,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="768074602DF32FBF5298D2FCA47543174AA4C971" downloadHash="CA401490EF05356B87BC647C92DEAF98376E3030" name="6b_ext_highway2_wendcrypt_tm.trx" dlsize="1772714" size="7157792" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="92D4A28836468DB90CAC45FEE62EB29DFD32C024" downloadHash="DDA89F14120BE5BF779C9248E183C047C566B82F" name="6b_ext_highway2_wendcrypt_tm.trx" dlsize="4095026" size="17975830" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
