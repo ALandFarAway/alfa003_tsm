@@ -1756,4 +1756,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="FD4781C4A0DF0AD4CA36842350246E4371BD54CE" downloadHash="2376254CC16DED337B12C64617DBD5BE7133295D" name="7d_ext_river_rauvin.trx" dlsize="550827" size="12316055" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
