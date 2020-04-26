@@ -87,7 +87,7 @@
   <resource type="Hak" hash="184AB73D239BBC8BC47D36753C78F8777556F27F" downloadHash="DE05744EB437DEC97A2C9ED159E54F4C96DF8EBE" name="alfa2_templates.hak" dlsize="192709" size="8692869" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
-      <string>3</string>
+      <string>2</string>
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="FFAC353A03AC712498201DC38E98D1F519940560" downloadHash="804CC66E4ED247659707010873B21544D7FBD6F5" name="5h_sundabar_everfire_rift_c.trx" dlsize="2308234" size="14989004" critical="false" exclude="false" urlOverride="">
@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="2F53E977A8405B4095E11758F7239E06D9125950" downloadHash="346F09CEC524B7FB4C11D62B95E85342F34EB279" name="5h_ext_sundabar.trx" dlsize="4999460" size="20453251" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0412D8DEC929FBBBBF8B2352A91FBA1A9B939826" downloadHash="F141499806B5BEF13C8CBEEE5305EAC385D5285E" name="5h_ext_sundabar.trx" dlsize="4973946" size="20415839" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1620,7 +1620,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5A593AB8BFDE8630D307FF476E7BBB17FEEBAF8D" downloadHash="E7E304B761C2FAA6805C30FCE9BAC989D51986B8" name="5h_int_sundabar_malshym_ground.trx" dlsize="68563" size="68888" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A7D20A42B3A954D80194D37415B480B0639A55DD" downloadHash="A008E1D5AA34838217AEB02F64CB27B1455EFCC1" name="5h_int_sundabar_malshym_ground.trx" dlsize="64504" size="64756" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1751,12 +1751,17 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="2F5E55AFA698F9B5035ED54AEE360C1650B3BEC5" downloadHash="77E444C336048BD1C58C2C852121F54D5EB1BF23" name="5h_int_sundabar_maidenmidnight.trx" dlsize="113418" size="113927" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D8F49DC43866489D234930C7CD933B0644865583" downloadHash="9F152C4ADD4B1891F6AF0F7BBB888E2D996B91B5" name="5h_int_sundabar_maidenmidnight.trx" dlsize="193961" size="194823" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="FD4781C4A0DF0AD4CA36842350246E4371BD54CE" downloadHash="2376254CC16DED337B12C64617DBD5BE7133295D" name="7d_ext_river_rauvin.trx" dlsize="550827" size="12316055" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="92B9337DA47288A4EAC53B3E3EE88B79C588F1D0" downloadHash="DABCF63918636DAEDE834A729A57819739352C7C" name="5h_int_sundabar_taverns.trx" dlsize="132137" size="133090" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
