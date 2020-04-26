@@ -1355,7 +1355,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="25F1E2FCC94C5A2EDD4921CECDA4E95F76CEC83D" downloadHash="FEB0A6E0689AD95324CD6B42B9B9A96864E5FF51" name="4c_ext_surbrin_vale_north.trx" dlsize="5659288" size="25950561" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7D88D504FCB340F7339CBB755B49737043517099" downloadHash="228A30F66B226DD027DD2283C23A29AF2D558BF9" name="4c_ext_surbrin_vale_north.trx" dlsize="5653508" size="25948535" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1530,7 +1530,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CFB78B79CAF824144D3FCBDF61DBF043DB5ED664" downloadHash="B8963C8FE8924AA8CB666E00D8ED707A8A18F6B1" name="4c_ext_north_of_wintersedge.trx" dlsize="6903835" size="32980740" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2C4358AA6C23DBC034ACC6630B10C86A3E229FF7" downloadHash="397FB5AF119CB91BC46F2E60BE53331531C0EA34" name="4c_ext_north_of_wintersedge.trx" dlsize="6889570" size="32965621" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

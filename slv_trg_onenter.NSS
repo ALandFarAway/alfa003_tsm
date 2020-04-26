@@ -602,7 +602,7 @@ if((GetIsPC(oStudent)) && (GetLocalInt(oStudent, "Classes") != 1))
 		  }
 		  
 	//Lights/snuffs torches on approach	
-	if((GetTag(OBJECT_SELF) == "slv_light") && (GetLocalInt(OBJECT_SELF, "Lit") != 1) && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))
+/*	if((GetTag(OBJECT_SELF) == "slv_light") && (GetLocalInt(OBJECT_SELF, "Lit") != 1) && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))
 		{SendMessageToPC(oStudent, "A candle begins to glow.");
 		 object oFlame = GetNearestObjectByTag("slv_flame", OBJECT_SELF, 1);
 		 object oCandleLit = CreateObject(OBJECT_TYPE_LIGHT, "lt_slv_candle", GetLocation(oFlame), FALSE);
@@ -619,7 +619,7 @@ if((GetIsPC(oStudent)) && (GetLocalInt(oStudent, "Classes") != 1))
 		 DestroyObject(oCandleFlame);
 		 SetLocalInt(OBJECT_SELF, "Lit", 0);
 		 }	 
-	
+	*/
 	//Enables usable bookorder quill on approach	
 		 
 	if((GetTag(OBJECT_SELF) == "slv_bookorder_quill") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent))))

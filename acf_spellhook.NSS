@@ -200,7 +200,7 @@ if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetT
 		}
 	
 	//Feather Fall over Frost Hills Glacier
-	if((GetTag(GetArea(oCaster)) == "5b_ext_frosthills_glacier") && (nSpellId == SPELL_FEATHER_FALL ))
+	if((GetTag(GetArea(oCaster)) == "5b_ext_frosthills_glacier") && (nSpellId == SPELL_FEATHER_FALL ) && (GetItemPossessedBy(oCaster, "003_it_slv_teleport")!= OBJECT_INVALID))
 	 	{ object oCollWP = GetWaypointByTag("slv_deansphinx_e_air_collboxWP");
 		 object oMyCollisionBox  = GetObjectByTag("slv_deansphinx_e_air_collbox");
 		 object oEndWP = GetWaypointByTag("slv_deansphinx_e_flight_WP");
