@@ -1163,7 +1163,7 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 			 	{oTeleport = GetObjectByTag("slv_el_earth");
 				 SetLocalObject(OBJECT_SELF, "oTeleport", oTeleport);
 				 }
-			DelayCommand(300.0,  SetUseableFlag(oTeleport, FALSE));
+			DelayCommand(30.0,  SetUseableFlag(oTeleport, FALSE));
 			 }
 	if((GetTag(OBJECT_SELF) == "MH_Air") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent)))&& (ACR_RetrieveQuestState("slv_deansphinx_e", oStudent) > 0))
 	  		{object oTeleport = GetLocalObject(OBJECT_SELF, "oTeleport");
@@ -1171,7 +1171,7 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 			 	{oTeleport = GetObjectByTag("slv_el_air");
 				 SetLocalObject(OBJECT_SELF, "oTeleport", oTeleport);
 				 }
-			 DelayCommand(300.0, SetUseableFlag(oTeleport, FALSE));
+			 DelayCommand(30.0, SetUseableFlag(oTeleport, FALSE));
 			 }
 			
 		if((GetTag(OBJECT_SELF) == "MH_Fire") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent)))&& (ACR_RetrieveQuestState("slv_deansphinx_e", oStudent) > 0))
@@ -1180,7 +1180,7 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 			 	{oTeleport = GetObjectByTag("slv_el_fire");
 				 SetLocalObject(OBJECT_SELF, "oTeleport", oTeleport);
 				 }
-			 DelayCommand(300.0, SetUseableFlag(oTeleport, FALSE));
+			 DelayCommand(30.0, SetUseableFlag(oTeleport, FALSE));
 			}
 			
 		if((GetTag(OBJECT_SELF) == "MH_Water") && ((GetIsPC(oStudent))|| (GetIsDMPossessed(oStudent)))&& (ACR_RetrieveQuestState("slv_deansphinx_e", oStudent) > 0))
@@ -1189,7 +1189,7 @@ if((GetStringLeft(GetTag(OBJECT_SELF), 6) == "slv_in") && (GetTag(oStudent) != "
 			 	{oTeleport = GetObjectByTag("slv_el_water");
 				 SetLocalObject(OBJECT_SELF, "oTeleport", oTeleport);
 				 }
-			 DelayCommand(300.0, SetUseableFlag(oTeleport, FALSE));
+			 DelayCommand(30.0, SetUseableFlag(oTeleport, FALSE));
 			 }
 									
 }
