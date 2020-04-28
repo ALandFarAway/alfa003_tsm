@@ -1771,4 +1771,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="2D5848226EC1F5C07F797C965F37BBE5BA9D534B" downloadHash="F9242F1A013DF673BB708BEB0AFF978057BABC92" name="7f_ext_everlund.trx" dlsize="486634" size="11236934" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
