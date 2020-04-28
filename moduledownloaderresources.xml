@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0412D8DEC929FBBBBF8B2352A91FBA1A9B939826" downloadHash="F141499806B5BEF13C8CBEEE5305EAC385D5285E" name="5h_ext_sundabar.trx" dlsize="4973946" size="20415839" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="CF45CDA8151CA91D9DB33EDFB782FCCE7D35D081" downloadHash="D96472F3CC9C34F3BA598F63319B3601E9F3F693" name="5h_ext_sundabar.trx" dlsize="4983204" size="20426700" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1751,7 +1751,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="D8F49DC43866489D234930C7CD933B0644865583" downloadHash="9F152C4ADD4B1891F6AF0F7BBB888E2D996B91B5" name="5h_int_sundabar_maidenmidnight.trx" dlsize="193961" size="194823" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="47D0EFF360CA1E1A68355897A6F323A8631E59CB" downloadHash="61E1C8DEE462C6D89186576A2A8B6A6E05A9D70F" name="5h_int_sundabar_maidenmidnight.trx" dlsize="195951" size="196927" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1761,7 +1761,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="92B9337DA47288A4EAC53B3E3EE88B79C588F1D0" downloadHash="DABCF63918636DAEDE834A729A57819739352C7C" name="5h_int_sundabar_taverns.trx" dlsize="132137" size="133090" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7812F1AB749407E29DB753AE603062CFD3C0760B" downloadHash="AD21A9D24DA9623D08B8ED5B314B8B20BF44A8CF" name="5h_int_sundabar_taverns.trx" dlsize="214542" size="216455" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
