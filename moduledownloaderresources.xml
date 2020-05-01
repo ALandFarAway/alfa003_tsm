@@ -1783,7 +1783,7 @@
     </server-ref>
   </resource>
   <resource type="Hak" hash="D3926B5258E62852F697B758AB01A908718F20AD" downloadHash="027F85203DDEBE2016FD1AC4D0F6E75A363B3EF1" name="alfa_placeables3.hak" dlsize="341027303" size="1815794338" critical="false" exclude="false" urlOverride="">
-   <server-ref>
+    <server-ref>
       <string>1</string>
       <string>2</string>
     </server-ref>
