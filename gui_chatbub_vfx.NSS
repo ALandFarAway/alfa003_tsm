@@ -1,4 +1,4 @@
-#include "x0_i0_spells"
+/*#include "x0_i0_spells"
 
 const string LIST_SEP_CHAR = ",";
 const string WILDCARD_CHAR = "*";
