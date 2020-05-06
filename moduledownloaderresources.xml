@@ -940,7 +940,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="90AD9C4D0FEEE3A46F213830C09295EC6B7E4121" downloadHash="A9B1E64A5FC6B3BC11ACEA15AD8C1F20FEE10960" name="6d_int_silvy_brightblades.trx" dlsize="141807" size="144720" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FD3E090E1EDFCEFC308FFD9B8D8E3C14D249FC5B" downloadHash="4C0B90DFA482C83B73D06E95CDC8354440EEE2E6" name="6d_int_silvy_brightblades.trx" dlsize="147299" size="148246" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
