@@ -1766,7 +1766,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6CC3843C2014C0B84D01E1213D20C4976C0EB770" downloadHash="7A416BC1E7B9D0BC4B371154C99A298B6DA46241" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="4476662" size="25204988" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B82EECE488D7852FCD4B3E87D76F64A88764422E" downloadHash="5F907D2C86AF828584129028545512A31E07A728" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5163435" size="25753287" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
