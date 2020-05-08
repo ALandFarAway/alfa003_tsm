@@ -1200,7 +1200,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="87CB0C5E8E6E1EEE3B6BF18DF420CA82CCE56BEE" downloadHash="258AB720C75CACB511A247824BDF6D794CBC1026" name="5b_int_frosthills_glacier_snkg.trx" dlsize="318765" size="458230" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7506F20A614D83F11A9EA2391045C000B9D06E86" downloadHash="8107F49E5CA88E78D16542298DFD41DD97682AC1" name="5b_int_frosthills_glacier_snkg.trx" dlsize="326969" size="466158" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1766,7 +1766,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0FEACACE0BA36BD500D2A4537638E4E11F030050" downloadHash="D4DB9BF8FBE2535114DCB3615CC6D34B932456C8" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="4182575" size="25206512" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6CC3843C2014C0B84D01E1213D20C4976C0EB770" downloadHash="7A416BC1E7B9D0BC4B371154C99A298B6DA46241" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="4476662" size="25204988" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
