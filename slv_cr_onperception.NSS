@@ -46,10 +46,12 @@ void main()
    	if(GetTag(OBJECT_SELF) == "003_cr_bookwyrm_bae") 
 			{object oBae = GetLastPerceived();
 			 string sBaeName = GetName(oBae);
+			 ActionSpeakString(sBaeName, TALKVOLUME_TALK);
 			 if(GetIsPC(oBae))
 				{if((FindSubString(sBaeName, "Bae", 0) != -1) || (FindSubString(sBaeName, "Wynna", 0) != -1))
 				 	{
-					 ActionForceMoveToObject(oBae, TRUE, 0.0);
+					 DelayCommand(1.0, ActionForceMoveToLocation(GetLocation(oBae), FALSE, 30.0));
+					 //ActionForceMoveToObject(oBae, TRUE, 0.0);
 					 }
 				}
 			}
@@ -57,6 +59,7 @@ void main()
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_studgen1") 
 			{object oOlivus = GetLastPerceived();
 			 string sOlivusName = GetName(oOlivus);
+			 ActionSpeakString(OlivusName, TALKVOLUME_TALK);
 			 int nHiOlivus = GetLocalInt(OBJECT_SELF, "Olivus");
 			 if(GetIsPC(oOlivus))
 				{if((FindSubString(sOlivusName, "Olivu", 0) != -1) || (FindSubString(sOlivusName, "Wynna", 0) != -1))
