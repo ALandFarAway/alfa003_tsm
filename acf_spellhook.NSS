@@ -62,8 +62,7 @@ if(nSpellId == 3073) {
 	SendMessageToAllDMs("oCaster = " + GetName(oCaster));
 	SendMessageToAllDMs("oTarget = " + GetName(oTarget));
 	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
-	vector vOrigin = Vector(0.0, 0.0, 0.0);
-	object oPortal = GetFirstObjectInShape(SHAPE_CONE, 20.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_PLACEABLE, vOrigin);
+	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE);
 	int nCasterLevel = GetCasterLevel(oCaster);
 	while(oPortal != OBJECT_INVALID) {
 		if(GetTag(oPortal) == "003_portal_plc") {
@@ -113,7 +112,7 @@ if(nSpellId == 3073) {
 			else {DelayCommand(6.0, SendMessageToPC(oCaster, "1 You have failed a caster level check and will learn no more about this portal!")); 
 			break;}
 		}
-		oPortal = GetNextObjectInShape(SHAPE_CONE, 20.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_PLACEABLE, vOrigin);	
+		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE);	
 	}
 }
 	
