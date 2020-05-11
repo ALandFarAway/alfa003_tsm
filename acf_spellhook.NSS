@@ -59,11 +59,100 @@ void main()
 	
 	
 if(nSpellId == 3073) {
-	SendMessageToAllDMs("oCaster = " + GetTag(oCaster));
+	SendMessageToAllDMs("oCaster = " + GetName(oCaster));
 	SendMessageToAllDMs("oTarget = " + GetName(oTarget));
 	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
+	vector vOrigin = Vector(0.0, 0.0, 0.0);
+	object oPortal = GetFirstObjectInShape(SHAPE_CONE, 20.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_PLACEABLE, vOrigin);
+	int nCasterLevel = GetCasterLevel(oCaster);
+	while(oPortal != OBJECT_INVALID) {
+		if(GetTag(oPortal) == "003_portal_plc") {
+			int nPortalDisc = GetLocalInt(oPortal, "PORTAL_DISCOVERED");
+			SetUseableFlag(oPortal, TRUE);
+			float fPortalSize = GetLocalFloat(oPortal, "PORTAL_SIZE");
+			string sPortalLocation = GetLocalString(oPortal, "PORTAL_LOCATION");
+			string sPortalCommand = GetLocalString(oPortal, "PORTAL_COMMAND");
+			string sPortalCirc = GetLocalString(oPortal, "PORTAL_CIRCUMSTANCE");
+			string sPortalDirection = GetLocalString(oPortal, "PORTAL_DIRECTION");
+			string sPortalProps = GetLocalString(oPortal, "PORTAL_PROPERTIES");
+			string sPortalDest = GetLocalString(oPortal, "PORTAL_DESTINATION");
+			string sPortalFunc = GetLocalString(oPortal, "PORTAL_FUNCTIONALITY");
+			SetLocalInt(oPortal, "PORTAL_DISCOVERED", 1);
+			SendMessageToPC(oCaster, "A portal exists within 60 feet!");
+			if(d20(1) + nCasterLevel >= 17) {
+				DelayCommand(6.0, SendMessageToPC(oCaster, "The portal is approximately " + IntToString(FloatToInt(fPortalSize)) + " feet in diameter. " + sPortalLocation));
+				if(d20(1) + nCasterLevel >= 17) {
+					DelayCommand(12.0, SendMessageToPC(oCaster, "The portal's command word is: " + sPortalCommand));
+					if(d20(1) + nCasterLevel >= 17) {
+						DelayCommand(18.0, SendMessageToPC(oCaster, "The portal's special circumstances are: " + sPortalCirc));
+						if(d20(1) + nCasterLevel >= 17) {
+							DelayCommand(24.0, SendMessageToPC(oCaster, "The portal's directionality is: " + sPortalDirection));
+							if(d20(1) + nCasterLevel >= 17) {
+								DelayCommand(30.0, SendMessageToPC(oCaster, "The portal's other properties are: " + sPortalProps));
+								if(d20(1) + nCasterLevel >= 17) {
+									DelayCommand(36.0, SendMessageToPC(oCaster, "The portal's destination is: " + sPortalDest));
+									if(d20(1) + nCasterLevel >= 17) {DelayCommand(42.0, SendMessageToPC(oCaster,"The portal's functionality is: " +  sPortalFunc));}
+									else {DelayCommand(42.0, SendMessageToPC(oCaster, "7 You have failed a caster level check and will learn no more about this portal!")); 
+									break;}
+									}
+								else {DelayCommand(36.0, SendMessageToPC(oCaster, "6 You have failed a caster level check and will learn no more about this portal!"));
+								break;}
+								}
+							 else {DelayCommand(30.0, SendMessageToPC(oCaster, "5 You have failed a caster level check and will learn no more about this portal!")); 
+							break;}
+							}
+						else {DelayCommand(24.0, SendMessageToPC(oCaster, "4 You have failed a caster level check and will learn no more about this portal!")); 
+						break;}
+						}
+				    else {DelayCommand(18.0, SendMessageToPC(oCaster, "3 You have failed a caster level check and will learn no more about this portal!")); 
+					break;}
+					}
+				else {DelayCommand(12.0, SendMessageToPC(oCaster, "2 You have failed a caster level check and will learn no more about this portal!")); 
+				break;}
+				}
+			else {DelayCommand(6.0, SendMessageToPC(oCaster, "1 You have failed a caster level check and will learn no more about this portal!")); 
+			break;}
+		}
+		oPortal = GetNextObjectInShape(SHAPE_CONE, 20.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_PLACEABLE, vOrigin);	
 	}
+}
+	
 		
+if(nSpellId == 283) {
+	SendMessageToAllDMs("oCaster = " + GetName(oCaster));
+	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
+	SendMessageToAllDMs("oTarget = " + GetName(oTarget));
+	effect eKnockdown = EffectKnockdown();
+	int nSlamDmg = d6(1) + 1;
+	effect eSlam = EffectDamage(nSlamDmg, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
+	effect eImpact = EffectVisualEffect(VFX_IMP_PULSE_WIND);
+    object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+	while(oPC != OBJECT_INVALID) {
+		SendMessageToAllDMs("oPC = " + GetName(oPC));
+		if(oPC != oCaster) {
+		if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_NONE, OBJECT_SELF) > 0)
+				{SendMessageToPC(oPC, "You avoid flying debris.");
+				SendMessageToAllDMs(GetName(oPC) + " avoids flying debris.");
+				}
+		else{SendMessageToPC(oPC, "You are cut by flying debris!");
+		     SendMessageToAllDMs(GetName(oPC) + " is cut by flying debris for " + IntToString(nSlamDmg) + "hp." );
+				
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, eSlam, oPC);
+				if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_NONE, OBJECT_SELF) > 0)
+					{SendMessageToPC(oPC, "You stay on your feet against forceful winds.");
+					 SendMessageToAllDMs(GetName(oPC) + " stays on their feet against forceful winds.");
+					}
+				else{SendMessageToPC(oPC, "Strong winds knock you down!");
+					SendMessageToAllDMs(GetName(oPC) + " is knocked down by forceful winds.");
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 3.0);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eImpact, oPC);
+	    			SendMessageToAllDMs(GetName(oPC) + " stays on their feet against forceful winds.");
+					}
+				}
+			}
+		oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+	}
+}
 	
 
 if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetTag(GetArea(oCaster)), "5h_") != -1)|| (FindSubString(GetTag(GetArea(oCaster)), "6f_") != -1) || ((FindSubString(GetTag(GetArea(oCaster)), "5g_") != -1) && (FindSubString(GetTag(GetArea(oCaster)), "felbarr") == -1))  )

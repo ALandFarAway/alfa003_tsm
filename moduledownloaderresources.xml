@@ -1200,7 +1200,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7506F20A614D83F11A9EA2391045C000B9D06E86" downloadHash="8107F49E5CA88E78D16542298DFD41DD97682AC1" name="5b_int_frosthills_glacier_snkg.trx" dlsize="326969" size="466158" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4862F18B36F59EC566BF61D218B18550742EB14B" downloadHash="E3E109C3FDF07EB08B9DFA5C2B88E704AC500B32" name="5b_int_frosthills_glacier_snkg.trx" dlsize="338775" size="478052" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
