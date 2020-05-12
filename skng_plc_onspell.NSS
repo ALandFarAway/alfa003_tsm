@@ -20,14 +20,14 @@ void main()
     object oCorpse = GetNearestObjectByTag("skng_plc_corpse_mh", OBJECT_SELF, 1);
 	string sCreateAirCr = "003_cr_el_air";
 	int nRandCreate = Random(5);
-	if((nRandCreate = 3) || (nRandCreate = 4))
+	if((nRandCreate == 3) || (nRandCreate == 4))
 		{sCreateAirCr = "abr_cr_mephit_ice";}
-	if(nRandCreate = 5)
+	if(nRandCreate == 5)
 		{sCreateAirCr = "003_slv_dq_a_creature";}
 	
 	
 	//FrostHills Glacier Destroying Corrupted Portal
-	if(GetTag(OBJECT_SELF)=="skng_gl_portal_orb") {
+	if((GetTag(OBJECT_SELF)=="skng_gl_portal_orb") && (oCaster != OBJECT_SELF)) {
 	    
 		if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
 			|| nSpellId == SPELL_BURNING_HANDS || nSpellId == SPELL_FLAME_STRIKE || nSpellId == SPELL_GREATER_FIREBURST  || nSpellId == SPELL_INCENDIARY_CLOUD ||nSpellId == SPELL_INFERNO || nSpellId == SPELL_INFINITE_RANGE_FIREBALL 
