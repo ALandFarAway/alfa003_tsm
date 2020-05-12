@@ -43,25 +43,26 @@
 //
 void main()
 {
-   	if(GetTag(OBJECT_SELF) == "003_cr_bookwyrm_bae") 
+   	if((GetTag(OBJECT_SELF) == "003_cr_bookwyrm_bae") && (GetLocalInt(GetLastPerceived(), "Perceived" + GetTag(OBJECT_SELF)) != 1))
 			{object oBae = GetLastPerceived();
 			 string sBaeName = GetName(oBae);
 			 ActionSpeakString(sBaeName, TALKVOLUME_TALK);
-			 if(GetIsPC(oBae))
+			 if((GetIsPC(oBae)) || (GetIsDMPossessed(oBae)))
 				{if((FindSubString(sBaeName, "Bae", 0) != -1) || (FindSubString(sBaeName, "Wynna", 0) != -1))
 				 	{
 					 DelayCommand(1.0, ActionForceMoveToLocation(GetLocation(oBae), FALSE, 30.0));
 					 //ActionForceMoveToObject(oBae, TRUE, 0.0);
 					 }
 				}
+			SetLocalInt(oBae, "Perceived" + GetTag(OBJECT_SELF), 1);
 			}
 			
-	if(GetTag(OBJECT_SELF) == "003_cr_slv_studgen1") 
+	if((GetTag(OBJECT_SELF) == "003_cr_slv_studgen1")  && (GetLocalInt(GetLastPerceived(), "Perceived" + GetTag(OBJECT_SELF)) != 1))
 			{object oOlivus = GetLastPerceived();
 			 string sOlivusName = GetName(oOlivus);
-			 ActionSpeakString(OlivusName, TALKVOLUME_TALK);
+			 ActionSpeakString(sOlivusName, TALKVOLUME_TALK);
 			 int nHiOlivus = GetLocalInt(OBJECT_SELF, "Olivus");
-			 if(GetIsPC(oOlivus))
+			 if((GetIsPC(oOlivus)) || (GetIsDMPossessed(oOlivus)))
 				{if((FindSubString(sOlivusName, "Olivu", 0) != -1) || (FindSubString(sOlivusName, "Wynna", 0) != -1))
 				 	{if(nHiOlivus == 0) {
 					 	ActionForceMoveToObject(oOlivus, TRUE, 3.0);
@@ -71,6 +72,7 @@ void main()
 						}
 					}
 				}
+			SetLocalInt(oOlivus, "Perceived" + GetTag(OBJECT_SELF), 1);
 			}
 
 }
