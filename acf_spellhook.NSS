@@ -78,33 +78,44 @@ if(nSpellId == 3073) {
 			string sPortalFunc = GetLocalString(oPortal, "PORTAL_FUNCTIONALITY");
 			SetLocalInt(oPortal, "PORTAL_DISCOVERED", 1);
 			SendMessageToPC(oCaster, "A portal exists within 60 feet! " + sPortalLocation);
-			if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=1)) {
+			if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=1)) 
+				{
 					DelayCommand(6.0, SendMessageToPC(oCaster, sPortalCommand));
-					if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=2)) {
+					 if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=2)) 
+					 {
 						DelayCommand(12.0, SendMessageToPC(oCaster, sPortalCirc));
-						if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=3)) {
+				        if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=3)) 
+						{
 							DelayCommand(18.0, SendMessageToPC(oCaster, sPortalDirection));
-							if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=4)) {
+						    if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=4)) 
+							{
 								DelayCommand(24.0, SendMessageToPC(oCaster, sPortalProps));
-								if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=5)) {
+								if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=5)) 
+								{
 									DelayCommand(30.0, SendMessageToPC(oCaster, sPortalDest));
-									if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=6)) {DelayCommand(42.0, SendMessageToPC(oCaster,"The portal's functionality is: " +  sPortalFunc));}
-									else {DelayCommand(30.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
-									break;}
-									}
-								else {DelayCommand(24.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!"));
-								break;}
+								    if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=6)) 
+									 {
+										DelayCommand(36.0, SendMessageToPC(oCaster, sPortalFunc));
+										}
+									 else {DelayCommand(36.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+									 break;}
 								}
-							 else {DelayCommand(18.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
-							break;}
+								else {DelayCommand(30.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+								break;}
 							}
-						else {DelayCommand(12.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
-						break;}
+							else {DelayCommand(24.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!"));
+							break;}
 						}
-				    else {DelayCommand(6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
-					break;}
+						else {DelayCommand(18.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+						break;}
 					}
+					else {DelayCommand(12.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+					break;}
 				}
+			else {DelayCommand(6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+			break;} 
+			
+		}
 			
 		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE);	
 	}
