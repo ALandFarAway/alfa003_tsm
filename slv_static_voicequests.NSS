@@ -82,10 +82,10 @@ void main()
 
 
 
-string sTryAgain = "Do you wish to receive, submit or use a keyword to enter?  You may at any time use the word 'reschedule' to end our conversation.";
+string sTryAgain = " Do you wish to receive an assignment? Speak the word 'receive'. You may also at any time use the word 'reschedule' to end our conversation.";
 
       if((GetLocalInt(oStudent, "DeanDragonConversation") == 1) && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) )
-         {AssignCommand(oDragon, SpeakString("The key to this door is knowledge.  Do you wish to receive or submit an assignment, or simply enter?", TALKVOLUME_TALK));
+         {AssignCommand(oDragon, SpeakString("The key to this door is knowledge.  Do you wish to receive an assignment? Speak the word 'receive'.", TALKVOLUME_TALK));
           }
 
      else if((GetLocalInt(oStudent, "DeanDragonConversation") == 2) && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) && ((GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "receive") || (GetLocalString(OBJECT_SELF, "QuestSubmitAssignString") == "Receive")))

@@ -82,7 +82,7 @@ void main()
 
 
 
-string sTryAgain = "Do you wish to receive a project?  You may at any time use the word 'reschedule' to end our conversation.";
+string sTryAgain = " Do you wish to receive an assignment? Speak the word 'receive'. You may also at any time use the word 'reschedule' to end our conversation.";
 
       if((GetLocalInt(oStudent, "DeanSphinxConversation") == 1) && (GetLocalInt(oStudent, "QuestAssignmentOpen") < 1) )
          {AssignCommand(oSphinx, SpeakString("The key to this door is knowledge.  Do you wish to receive an assignment?", TALKVOLUME_TALK));

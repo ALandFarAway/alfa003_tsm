@@ -159,7 +159,7 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 						string sPreposition = "";
 						if((sQuestAlpha == "A") || (sQuestAlpha == "E") || (sQuestAlpha == "I")|| (sQuestAlpha == "O")|| (sQuestAlpha == "U"))
 						 	{sPreposition = "n";}
-						 ActionSpeakString(sEssenceName + " has been appended to the draft page for " + sBookName + ". This revision completes this entry.", TALKVOLUME_TALK);
+						 ActionSpeakString(sEssenceName + " has been appended to the draft page for " + sBookName + ". The essence has been arcanely attached. The physical vessel of the essence is returned to you to do with as you wish.", TALKVOLUME_TALK);
 						 SetDescription(oItemOne, "This is the final draft of the '" + sQuestAlpha + "'Entry of the 'Bestiary of the Marches'. It carries the shimmering image of a " + sPreposition + " " +sBookName + ".          " + sBookDescription);
 						 int nEnd;
 						 if((sQuestAlpha == "A") || (sQuestAlpha == "B")|| (sQuestAlpha == "C")|| (sQuestAlpha == "D")|| (sQuestAlpha == "F")|| (sQuestAlpha == "H")|| (sQuestAlpha == "I")|| (sQuestAlpha == "W")|| (sQuestAlpha == "X"))

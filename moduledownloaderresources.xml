@@ -1800,4 +1800,9 @@
       <string>2</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="72784169E67A60A4D01AADF15FB49E034A62DB5A" downloadHash="C6389AED520D5E886140807BA464498A00609271" name="5c_int_moonwood_cave.trx" dlsize="217535" size="220999" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>

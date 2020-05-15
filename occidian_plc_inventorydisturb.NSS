@@ -78,7 +78,7 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 			 	
 		if(GetTag(oItem)!="slv_tra200_alloy")
 		 	 	{AssignCommand(oXorn, ActionSpeakString("Is not Aurroneous's gift. Bring gift. I will take you.", TALKVOLUME_TALK));
-			 	 CreateObject(OBJECT_TYPE_ITEM, "slv_deansphinx_x_essence", GetLocation(OBJECT_SELF));
+			 	 //CreateObject(OBJECT_TYPE_ITEM, "slv_deansphinx_x_essence", GetLocation(OBJECT_SELF));
 				}
 					 
 			 AssignCommand(oXorn, ActionSpeakString("*Drops away through the stone floor without leaving a mark.", TALKVOLUME_TALK));
