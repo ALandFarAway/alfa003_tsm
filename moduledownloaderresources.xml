@@ -650,7 +650,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="358CE5482330735DE8907FC305848680758CAAC1" downloadHash="0CA23B00429FFC1B468CFF13AF6C82E1EFBE9515" name="7d_int_silverwood_cave1.trx" dlsize="173332" size="175255" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4EE63136DD0A41D34EE05B238CFC576B95D55B30" downloadHash="0DA68C0107B1882AC5C14ABD360620FEE02330A4" name="7d_int_silverwood_cave1.trx" dlsize="174531" size="176817" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -775,7 +775,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="92453F636439BDF22BDCE7D1EE261C3DB986F065" downloadHash="E93343606B8001A2C44CEAC729E4D0D94046AEF4" name="7d_ext_silverwood4_0.trx" dlsize="4784623" size="21413264" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9102ED82FD04E471E5184E9779AACCDBB0F1DB5E" downloadHash="1BC26E27D551058758A73CA955B3B8767C2B9084" name="7d_ext_silverwood4_0.trx" dlsize="4786126" size="21414271" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

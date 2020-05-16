@@ -56,27 +56,7 @@ void main() {
         case 1:
             ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
             break;
-        case 2:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;}			
-	
-
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;
-        case 1:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;
-        case 2:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;}			
+        }			
 	
 	switch(Random(4)) {
         case 0:
@@ -85,56 +65,36 @@ void main() {
         case 1:
             ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
             break;
-        case 2:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;}			
+        }			
 	
 
+	switch(Random(4)) {
+        case 0:
+            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
+            break;
+        case 1:
+            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
+            break;
+        }			
+
+	switch(Random(4)) {
+        case 0:
+            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
+            break;
+        case 1:
+            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
+            break;
+        }			
+	
+	
 	switch(Random(4)) {
         case 0:
             ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
             break;
-        case 2:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;}			
-
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;
-        case 1:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;
-        case 2:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;}			
-	
-	
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;
-        case 1:
-           ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
-            break;
-        case 2:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;}	
+        }	
     
 	switch(Random(4)) {
         case 0:
@@ -143,69 +103,28 @@ void main() {
         case 1:
            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
             break;
-        case 2:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
+        }	
+    
+	switch(Random(4)) {
+        case 0:
+            ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
             break;
-        case 3:
+        case 1:
+           ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
+            break;
+       }	
+    
+	switch(Random(4)) {
+        case 0:
             ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
-            break;}	
-    
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-           ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
+           ACR_SpawnObject("003_cr_fy_jermlaine", OBJECT_TYPE_CREATURE);
             break;
-        case 2:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;}	
+        }	
     
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
-            break;
-        case 1:
-           ACR_SpawnObject("003_cr_hu_brownie", OBJECT_TYPE_CREATURE);
-            break;
-        case 2:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("003_cr_fy_pixie", OBJECT_TYPE_CREATURE);
-            break;}	
-    
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 1:
-           ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 2:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;}	
-    
+
 			
-	switch(Random(4)) {
-        case 0:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 1:
-           ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 2:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;
-        case 3:
-            ACR_SpawnObject("abr_cr_ab_willowisp", OBJECT_TYPE_CREATURE);
-            break;}	
-    
+
   
 }
