@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CF45CDA8151CA91D9DB33EDFB782FCCE7D35D081" downloadHash="D96472F3CC9C34F3BA598F63319B3601E9F3F693" name="5h_ext_sundabar.trx" dlsize="4983204" size="20426700" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="CBD78F7EA22FC9F8E82125A88B6954DFEE4FE7C7" downloadHash="3A80CB29C0F456C3DC2BDF5BFB1F197E8595E14F" name="5h_ext_sundabar.trx" dlsize="4988489" size="20431911" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1777,7 +1777,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7812F1AB749407E29DB753AE603062CFD3C0760B" downloadHash="AD21A9D24DA9623D08B8ED5B314B8B20BF44A8CF" name="5h_int_sundabar_taverns.trx" dlsize="214542" size="216455" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="92F73D7A5E2801BBB15BFF2462897B5C72B22B02" downloadHash="5D0C0EFE310B08DA2E55DF3F01E5523D16B351BC" name="5h_int_sundabar_taverns.trx" dlsize="214286" size="216221" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
