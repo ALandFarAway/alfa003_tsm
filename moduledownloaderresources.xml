@@ -1777,7 +1777,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8EAFDD6A168D43E89A6BEA2CF66F22E0FBD7A0AB" downloadHash="C4F81850295ABF76F01D7E2BE7D41E65EEC736CE" name="5h_int_sundabar_taverns.trx" dlsize="284786" size="286740" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="730224F1E5A9C320E20E921FB97C6C182236FB39" downloadHash="294D58C1A83698AF8F3C8210354BF9B5E2B92D98" name="5h_int_sundabar_taverns.trx" dlsize="285584" size="287539" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
