@@ -1782,7 +1782,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B82EECE488D7852FCD4B3E87D76F64A88764422E" downloadHash="5F907D2C86AF828584129028545512A31E07A728" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5163435" size="25753287" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8A763FA5624C22C06FCE7C953519C015B7B46807" downloadHash="0CACCA34E7209AC05E310F721DC826D575C4739A" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5257328" size="25786749" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
