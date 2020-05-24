@@ -1505,7 +1505,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4401886FF36A538C315DC84E05372F328EE177C3" downloadHash="F4D7A3D9AB125590BF74C98632BF213E9BE729C4" name="watery cave.trx" dlsize="1288881" size="13831865" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DBED277599D545F10674984D04EDD4B8C115EB2F" downloadHash="4401038866572C501C67A04452E58D1691612A2B" name="watery cave.trx" dlsize="1296693" size="13983313" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
