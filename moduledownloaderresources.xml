@@ -1140,7 +1140,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="18B26DE79AE5A1934AC2A1D4B6C0C9A418230144" downloadHash="EF9098C427887C6777F84D8361F0488C4F55B8F9" name="6d_ext_highway2_meteor_tm.trx" dlsize="3263853" size="14612368" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A532FF45739031D26BD8CBA6CEA69914AA062C34" downloadHash="2C9C95316B22046658FD5E5D18A453744D95DEFC" name="6d_ext_highway2_meteor_tm.trx" dlsize="3233503" size="14592421" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1505,7 +1505,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="609A8F8913B8A7A0B5B79C91B4E743E62D52076F" downloadHash="002070E845F1D4E4C51345E9061EA2CBC7AD03D1" name="watery cave.trx" dlsize="1205035" size="11897280" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4401886FF36A538C315DC84E05372F328EE177C3" downloadHash="F4D7A3D9AB125590BF74C98632BF213E9BE729C4" name="watery cave.trx" dlsize="1288881" size="13831865" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1782,7 +1782,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8A763FA5624C22C06FCE7C953519C015B7B46807" downloadHash="0CACCA34E7209AC05E310F721DC826D575C4739A" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5257328" size="25786749" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9DF1DDB7CD977055BFC28F974332BB53A3F9D72D" downloadHash="4FEB9B5BB079A56413DE8750C08F3944388832F0" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5250462" size="25781767" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

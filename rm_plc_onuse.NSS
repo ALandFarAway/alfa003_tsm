@@ -97,22 +97,40 @@ void main()
 
 if(GetTag(OBJECT_SELF) == "wands_cave_pool_rocks")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-	 object oSwimExit = GetObjectByTag("wands_cave_river_exit");
-	 SendMessageToPC(oUser, "You wade into the pool.");		 
-	 SetLocalInt(OBJECT_SELF, "ACR_SWIM_DC", 10);
+	 object oSwimExit = GetObjectByTag("wands_cave_underground_river_wp");
+	 SendMessageToPC(oUser, "You wade into the pool and dive into a deceptively strong current that pours into a hole! This pool is a backwater of a much larger underground reservoir and you are swept down into it!");		 
 	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
-	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to swim a long, dark tunnel, conserving breath. A gentle current aids your swim.");
+	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to a pocket of air, treading water.");
 		}
 	 else if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
 	 	{ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		 SendMessageToPC(oUser, "The swim is long, and dark. Once into the narrow tunnel, though, you must continue. You feel your breath growing short when at last you see a lightening in the water ahead. You exit onto a sandy shore, dizzy and somewhat scraped up.");
+		 SendMessageToPC(oUser, "The current tumbles you momentarily against a rocky surface. You feel your breath growing short when at last you find your way to a pocket of air.");
 		}
 	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 		   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Trapped in a cramped, lightless tunnel filled with water, you can only go on, and finally emerge onto a sandy shore, bruised, battered and nearly unconscious from lack of air.");
+		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Tumbling in a lightless cavern filled with water, you finally bob to the surface, bruised and battered.");
 		}
 	DelayCommand(5.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 		
-		}		
+		}
+
+if(GetTag(OBJECT_SELF) == "wands_cave_reservoir_enter") 
+	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+	 object oSwimExit = GetObjectByTag("6b_int_wands_cave_river_exit_wp");
+	 SendMessageToPC(oUser, "You swim up against a strong current that pushes against you!");		 
+	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
+	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to the surface, dragging yourself out of a lapping pool.");
+		}
+	 else if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
+	 	{ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
+		 SendMessageToPC(oUser, "The current slams you against the walls of a tunnel, luckily as short as it is narrow. You drag yourself out, a little worse for wear.");
+		}
+	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
+		   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
+		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. You finally find your way to the surface, bruised and battered.");
+		}
+	DelayCommand(5.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+		
+		}			
 											
 }
