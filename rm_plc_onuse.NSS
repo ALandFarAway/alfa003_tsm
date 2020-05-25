@@ -102,15 +102,10 @@ if(GetTag(OBJECT_SELF) == "wands_cave_pool_rocks")
 	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
 	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to a pocket of air, treading water.");
 		}
-	 else if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
-	 	{ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		 SendMessageToPC(oUser, "The current tumbles you momentarily against a rocky surface. You feel your breath growing short when at last you find your way to a pocket of air.");
-		}
 	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Tumbling in a lightless cavern filled with water, you finally bob to the surface, bruised and battered.");
 		}
-	DelayCommand(5.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+	DelayCommand(3.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 		
 		}
 
@@ -121,15 +116,10 @@ if(GetTag(OBJECT_SELF) == "wands_cave_reservoir_enter")
 	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
 	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to the surface, dragging yourself out of a lapping pool.");
 		}
-	 else if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
-	 	{ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		 SendMessageToPC(oUser, "The current slams you against the walls of a tunnel, luckily as short as it is narrow. You drag yourself out, a little worse for wear.");
-		}
 	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. You finally find your way to the surface, bruised and battered.");
 		}
-	DelayCommand(5.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+	DelayCommand(3.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 		
 		}			
 											

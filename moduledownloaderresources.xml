@@ -1090,7 +1090,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="EC16CA1EB6C9CFDABCAF212C975C5A33A0C3F4E2" downloadHash="81E6258302AF2FEF9A12523CBFBFB6F007ABD211" name="cave .trx" dlsize="1411720" size="1448733" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0737106CE405D0DC472A8E0EE1E559244F77C785" downloadHash="19C58593B51D46C850FC5B8D8CFF7AC0E34CE7C0" name="cave .trx" dlsize="1413224" size="1449081" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1505,7 +1505,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DBED277599D545F10674984D04EDD4B8C115EB2F" downloadHash="4401038866572C501C67A04452E58D1691612A2B" name="watery cave.trx" dlsize="1296693" size="13983313" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="77A009AA0D4391C93BDFA5BDF0E571B7AD445474" downloadHash="5D9067CE6D097376D304AF058AAC38A04D0EB6F1" name="watery cave.trx" dlsize="1358054" size="14046197" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
