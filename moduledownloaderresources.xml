@@ -1290,7 +1290,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="60BF8D514D541A63E708C41F5EF9876E977B9332" downloadHash="5AAF98D4C567822B792A61AA233F8B9A8A3FE688" name="5b_ext_frosthills_road.trx" dlsize="4211093" size="21469129" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A24FE684009F1EB92EC73F36935F335F1C2D58B4" downloadHash="9A6554A32D9D0F82D87AAE3893B8DAC2318A846B" name="5b_ext_frosthills_road.trx" dlsize="4197146" size="21467016" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
