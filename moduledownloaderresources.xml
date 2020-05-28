@@ -210,7 +210,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="AC72EF7F9D36781BCF8C6A831FA266D451133A6B" downloadHash="78674007D6C288EEC9AB631248654ACAD7DDAE24" name="5d_int_quaervarr_whistling_stag.trx" dlsize="238318" size="282382" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="E90C45DFDF71F23D311145A1D846EFDA20E5E445" downloadHash="31346432D26AF24CCC254DE29F9E12D2AD1D3CE2" name="5d_int_quaervarr_whistling_stag.trx" dlsize="238129" size="282383" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -640,7 +640,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="184905EDDF3FFCC59EC6C99630A62A323997EE90" downloadHash="94993852B2651E78F35301C382EA47DE9FF5CD17" name="5d_ext_moonwood_quaervarr.trx" dlsize="9476122" size="28765636" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="96DD3BE0A9212DDE5653BA24F51105E1B89DE575" downloadHash="A1874EE74261FA2C3213A681190DFFD9AE371986" name="5d_ext_moonwood_quaervarr.trx" dlsize="9410398" size="28689787" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -745,7 +745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="940FC82A3474763946AB7764D3B9DA9824F8782B" downloadHash="38DF90D90B470FE480C7ABE9F25369CA382C4F9E" name="5c_ext_moonwood_north.trx" dlsize="2224616" size="11460038" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C76523A222E056FF3103A3630E206E2C0FF81E3D" downloadHash="51BE5861C8BBBEF952DF28494B40C57E255F4BD8" name="5c_ext_moonwood_north.trx" dlsize="2239663" size="11467809" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1090,7 +1090,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0737106CE405D0DC472A8E0EE1E559244F77C785" downloadHash="19C58593B51D46C850FC5B8D8CFF7AC0E34CE7C0" name="cave .trx" dlsize="1413224" size="1449081" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EFC64F82C05D521BD27D7D8B39D8955ADC6A1BF9" downloadHash="2D616881369564DF1BB38D81021CCFCEF6D7A67D" name="cave .trx" dlsize="1299687" size="1649766" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
