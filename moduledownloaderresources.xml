@@ -1340,7 +1340,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E3E666032CAA37FCC6485471F71E3E25BB386EB9" downloadHash="6EA0C33AF19955FA8B806CC5FE43BDDBC444767A" name="5d_int_quaervarr_argent_post.trx" dlsize="22970" size="23028" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6C6EE23A8E9EF422ACB1D897342BA8CCF64ABC11" downloadHash="9CFB1FB6C849DD81171468DEB2B4B0EFE9CF0E7C" name="5d_int_quaervarr_argent_post.trx" dlsize="9403" size="9393" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1782,7 +1782,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9DF1DDB7CD977055BFC28F974332BB53A3F9D72D" downloadHash="4FEB9B5BB079A56413DE8750C08F3944388832F0" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5250462" size="25781767" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8EC794073D2C33745182E4538F4AD883657F79A9" downloadHash="F490C82FDD5BCA8CE6F79EB9555C7126154A09A9" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5275244" size="25811017" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
