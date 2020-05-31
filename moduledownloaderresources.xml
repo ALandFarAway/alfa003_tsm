@@ -570,7 +570,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5E071A3CE2424E0C34F84639823149DCDC7926CA" downloadHash="AA3FB81094B305AB58C5C2681F258CB3CFAE303B" name="7d_ext_silverwood4_1.trx" dlsize="4932552" size="22620214" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="82A6678479D1401762906AB6555799FF3E1D2CE5" downloadHash="608102B2673D12C2631BF9C7C6D02C4679224EA1" name="7d_ext_silverwood4_1.trx" dlsize="6229150" size="27751968" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1821,6 +1821,16 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="72784169E67A60A4D01AADF15FB49E034A62DB5A" downloadHash="C6389AED520D5E886140807BA464498A00609271" name="5c_int_moonwood_cave.trx" dlsize="217535" size="220999" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="E4CDF1414FE268BF11ACAED59E34A90C52593A37" downloadHash="04C0CA321C786907EED40E6FC18F86831CC0C422" name="7e_ext_rauvin_evld_rd.trx" dlsize="1036459" size="17932328" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="627495A331BCEF6634DA24D607F88E7CCB7D5CDF" downloadHash="C070EBEB231D7874EE761220BBAC4BF81ED58768" name="8e_ext_highforest_north.trx" dlsize="1054418" size="17945008" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
