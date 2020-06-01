@@ -210,7 +210,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="AC72EF7F9D36781BCF8C6A831FA266D451133A6B" downloadHash="78674007D6C288EEC9AB631248654ACAD7DDAE24" name="5d_int_quaervarr_whistling_stag.trx" dlsize="238318" size="282382" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="E90C45DFDF71F23D311145A1D846EFDA20E5E445" downloadHash="31346432D26AF24CCC254DE29F9E12D2AD1D3CE2" name="5d_int_quaervarr_whistling_stag.trx" dlsize="238129" size="282383" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -570,7 +570,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5E071A3CE2424E0C34F84639823149DCDC7926CA" downloadHash="AA3FB81094B305AB58C5C2681F258CB3CFAE303B" name="7d_ext_silverwood4_1.trx" dlsize="4932552" size="22620214" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="82A6678479D1401762906AB6555799FF3E1D2CE5" downloadHash="608102B2673D12C2631BF9C7C6D02C4679224EA1" name="7d_ext_silverwood4_1.trx" dlsize="6229150" size="27751968" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -640,7 +640,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="184905EDDF3FFCC59EC6C99630A62A323997EE90" downloadHash="94993852B2651E78F35301C382EA47DE9FF5CD17" name="5d_ext_moonwood_quaervarr.trx" dlsize="9476122" size="28765636" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="96DD3BE0A9212DDE5653BA24F51105E1B89DE575" downloadHash="A1874EE74261FA2C3213A681190DFFD9AE371986" name="5d_ext_moonwood_quaervarr.trx" dlsize="9410398" size="28689787" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -745,7 +745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="940FC82A3474763946AB7764D3B9DA9824F8782B" downloadHash="38DF90D90B470FE480C7ABE9F25369CA382C4F9E" name="5c_ext_moonwood_north.trx" dlsize="2224616" size="11460038" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C76523A222E056FF3103A3630E206E2C0FF81E3D" downloadHash="51BE5861C8BBBEF952DF28494B40C57E255F4BD8" name="5c_ext_moonwood_north.trx" dlsize="2239663" size="11467809" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1090,7 +1090,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0737106CE405D0DC472A8E0EE1E559244F77C785" downloadHash="19C58593B51D46C850FC5B8D8CFF7AC0E34CE7C0" name="cave .trx" dlsize="1413224" size="1449081" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EFC64F82C05D521BD27D7D8B39D8955ADC6A1BF9" downloadHash="2D616881369564DF1BB38D81021CCFCEF6D7A67D" name="cave .trx" dlsize="1299687" size="1649766" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1290,7 +1290,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="60BF8D514D541A63E708C41F5EF9876E977B9332" downloadHash="5AAF98D4C567822B792A61AA233F8B9A8A3FE688" name="5b_ext_frosthills_road.trx" dlsize="4211093" size="21469129" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A24FE684009F1EB92EC73F36935F335F1C2D58B4" downloadHash="9A6554A32D9D0F82D87AAE3893B8DAC2318A846B" name="5b_ext_frosthills_road.trx" dlsize="4197146" size="21467016" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1340,7 +1340,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E3E666032CAA37FCC6485471F71E3E25BB386EB9" downloadHash="6EA0C33AF19955FA8B806CC5FE43BDDBC444767A" name="5d_int_quaervarr_argent_post.trx" dlsize="22970" size="23028" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6C6EE23A8E9EF422ACB1D897342BA8CCF64ABC11" downloadHash="9CFB1FB6C849DD81171468DEB2B4B0EFE9CF0E7C" name="5d_int_quaervarr_argent_post.trx" dlsize="9403" size="9393" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1782,7 +1782,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9DF1DDB7CD977055BFC28F974332BB53A3F9D72D" downloadHash="4FEB9B5BB079A56413DE8750C08F3944388832F0" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5250462" size="25781767" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8EC794073D2C33745182E4538F4AD883657F79A9" downloadHash="F490C82FDD5BCA8CE6F79EB9555C7126154A09A9" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5275244" size="25811017" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1821,6 +1821,16 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="72784169E67A60A4D01AADF15FB49E034A62DB5A" downloadHash="C6389AED520D5E886140807BA464498A00609271" name="5c_int_moonwood_cave.trx" dlsize="217535" size="220999" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="E4CDF1414FE268BF11ACAED59E34A90C52593A37" downloadHash="04C0CA321C786907EED40E6FC18F86831CC0C422" name="7e_ext_rauvin_evld_rd.trx" dlsize="1036459" size="17932328" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="627495A331BCEF6634DA24D607F88E7CCB7D5CDF" downloadHash="C070EBEB231D7874EE761220BBAC4BF81ED58768" name="8e_ext_highforest_north.trx" dlsize="1054418" size="17945008" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
