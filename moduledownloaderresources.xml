@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="3EFDF19D635BF2E956112E6589A394261D8B3DB6" downloadHash="14793E6F924F811726229F2387980B8C949528F8" name="5h_ext_sundabar.trx" dlsize="5165281" size="20598975" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B7588D91AA5908BBBA3F7F7F15B505F3C1C31360" downloadHash="6F935FD3A16C4655623135E427681036EE3329C9" name="5h_ext_sundabar.trx" dlsize="5162392" size="20594338" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1700,7 +1700,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="85A4FDAFD3724B6021AE075A3215A6FEE79EF635" downloadHash="366BD5E4A314B058B1DF874113DCB92669099414" name="6d_int_silvy_nw_keys.trx" dlsize="12431" size="12411" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B589F958AAD3B7D8F649ED5BA2AFF2E07165B852" downloadHash="DC2E5B0F6B2E3F26533534F097D32222946E1F68" name="6d_int_silvy_nw_keys.trx" dlsize="12727" size="12706" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1752,7 +1752,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="075344248C8756CFDA3BFDDEAA81374B91A58628" downloadHash="DE39BA1F0D341347808645535B74E389418EF7D9" name="5h_int_sundabar_shops.trx" dlsize="455845" size="463123" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B9BB70541C51F7A4EB6CF24884E8D888F724F8CF" downloadHash="41020A0DE2A0932842AA0116131E52514E7502BD" name="5h_int_sundabar_shops.trx" dlsize="455008" size="462862" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
