@@ -1825,12 +1825,17 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="030E90E8C2DA69C1CACAFBB6F03B509F846A46FC" downloadHash="938E64753BFBBC534D16AF482D122F1C278DFE8B" name="7e_ext_rauvin_evld_rd.trx" dlsize="3559360" size="19837986" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="70DB631912CDB729D4BA6175CA2A172274629CF2" downloadHash="2EBEFD3E347966A04738300563D78D1AC6EC542A" name="7e_ext_rauvin_evld_rd.trx" dlsize="3566129" size="19844747" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="627495A331BCEF6634DA24D607F88E7CCB7D5CDF" downloadHash="C070EBEB231D7874EE761220BBAC4BF81ED58768" name="8e_ext_highforest_north.trx" dlsize="1054418" size="17945008" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="E17CF8816F8CE29EC0B54C25EB6032E0FCBDEA83" downloadHash="1159E8A7EE9BEB21EE83BE1E3B786E324197B09D" name="8e_ext_highforest_northwest.trx" dlsize="1052158" size="17945008" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
