@@ -1782,7 +1782,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="58E793BECFBAF0A5569312BD203A4670667006E1" downloadHash="412FB69E8EB05581BA7D8E4BB9BA744E861FEF0A" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5610428" size="26104012" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9B1EE8CD5D3DB3A6756424655823651435AABC71" downloadHash="FDE8DAD18D1CC8F32A6CE9A5D77EA4875222B21F" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5518590" size="25989543" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1825,7 +1825,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="ACF6059BA6EA27FEC732BB325EC7ACE4C53D1F68" downloadHash="E6451A97A5F6C7748FB78A29FBFC5D7D416398DA" name="7e_ext_rauvin_evld_rd.trx" dlsize="2314906" size="19288072" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="030E90E8C2DA69C1CACAFBB6F03B509F846A46FC" downloadHash="938E64753BFBBC534D16AF482D122F1C278DFE8B" name="7e_ext_rauvin_evld_rd.trx" dlsize="3559360" size="19837986" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
