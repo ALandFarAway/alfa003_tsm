@@ -68,7 +68,6 @@ if(nSpellId == 3073) {
 			if(GetObjectType(oPortal) == OBJECT_TYPE_PLACEABLE) {
 				SetUseableFlag(oPortal, TRUE);
 				}
-			float fPortalSize = GetLocalFloat(oPortal, "PORTAL_SIZE");
 			string sPortalLocation = GetLocalString(oPortal, "PORTAL_LOCATION");
 			string sPortalCommand = GetLocalString(oPortal, "PORTAL_COMMAND");
 			string sPortalCirc = GetLocalString(oPortal, "PORTAL_CIRCUMSTANCE");
@@ -78,7 +77,7 @@ if(nSpellId == 3073) {
 			string sPortalFunc = GetLocalString(oPortal, "PORTAL_FUNCTIONALITY");
 			SetLocalInt(oPortal, "PORTAL_DISCOVERED", 1);
 			SendMessageToPC(oCaster, "A portal has been discovered within 60 feet! " + sPortalLocation);
-			SendMessageToAllDMs(GetName(oCaster) + " has discovered a portal.");
+			SendMessageToAllDMs(GetName(oCaster) + " has discovered a portal." + sPortalLocation);
 			if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=1)) 
 				{   SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalCommand);
 					DelayCommand(6.0, SendMessageToPC(oCaster, sPortalCommand));
