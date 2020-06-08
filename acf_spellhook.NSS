@@ -80,8 +80,8 @@ if(nSpellId == 3073) {
 				SendMessageToPC(oCaster, "You have discovered a portal within 60 feet! " + sPortalLocation);
 				}
 			else {
-				SendMessageToPC(oCaster, "You have discovered another portal within 60 feet! " + sPortalLocation);
 				fResultsDelay = GetLocalFloat(oCaster, "AnalyzePortalFloatDelay");
+				DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have discovered another portal within 60 feet! " + sPortalLocation));
 				}
 			SendMessageToAllDMs(GetName(oCaster) + " has discovered a portal. " + sPortalLocation + " He will learn the following information in increments of 6 seconds:");
 			if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=1)) 
@@ -89,54 +89,54 @@ if(nSpellId == 3073) {
 					SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
 					fResultsDelay = fResultsDelay + 6.0;
 					DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalCommand));
-					if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=2)) 
+					if(d20(1) + nCasterLevel >= 17) 
 					 {  SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalCirc);
 						SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
 					    fResultsDelay = fResultsDelay + 6.0;
 					    DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalCirc));
-				        if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=3)) 
+				        if(d20(1) + nCasterLevel >= 17)
 						{   SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalDirection);
 							SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
 					        fResultsDelay = fResultsDelay + 6.0;
 					        DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalDirection));
-						    if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=4)) 
+						    if(d20(1) + nCasterLevel >= 17)
 							{   SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalProps);
 								SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
 					            fResultsDelay = fResultsDelay + 6.0;
 					            DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalProps));
-								if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=5)) 
+								if(d20(1) + nCasterLevel >= 17) 
 								{   SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalDest);
 									SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
 					                fResultsDelay = fResultsDelay + 6.0;
 					                DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalDest));
-								    if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=6)) 
+								    if(d20(1) + nCasterLevel >= 17) 
 									 {  SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalFunc);
 										SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
 					                    fResultsDelay = fResultsDelay + 6.0;
 					                    DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalFunc));
 										}
 									 else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-									 	   DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+									 	   DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
 									 break;}
 								}
 								else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-								      DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+								      DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
 								break;}
 							}
 							else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-								  DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!"));
+								  DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!"));
 							break;}
 						}
 						else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-							  DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+							  DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
 						break;}
 					}
 					else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-						  DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+						  DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
 					break;}
 				}
 			else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-				  DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
+				  DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
 			break;} 
 			
 		}
