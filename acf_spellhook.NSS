@@ -65,10 +65,7 @@ if(nSpellId == 3073) {
 	int nPortalNumber = 0;
 	while(oPortal != OBJECT_INVALID) {
 		if((GetTag(oPortal) == "003_portal_plc") || (GetTag(oPortal) == "003_portal_trg")) {
-			nPortalNumber++;
-			int nResultsDelay = 0;
-			if(nPortalNumber != 1)
-				{nResultsDelay = 42 * nPortalNumber;}
+			int nResultsDelay = 42 * nPortalNumber;
 			float fResultsDelay = IntToFloat(nResultsDelay);
 			int nPortalDisc = GetLocalInt(oPortal, "PORTAL_DISCOVERED");
 			if(GetObjectType(oPortal) == OBJECT_TYPE_PLACEABLE) {
@@ -82,7 +79,12 @@ if(nSpellId == 3073) {
 			string sPortalDest = GetLocalString(oPortal, "PORTAL_DESTINATION");
 			string sPortalFunc = GetLocalString(oPortal, "PORTAL_FUNCTIONALITY");
 			SetLocalInt(oPortal, "PORTAL_DISCOVERED", 1);
-			SendMessageToPC(oCaster, "A portal has been discovered within 60 feet! " + sPortalLocation);
+			if(nPortalNumber == 0) {
+				SendMessageToPC(oCaster, "You have discovered a portal within 60 feet! " + sPortalLocation);
+				}
+			else {
+				SendMessageToPC(oCaster, "You have discovered another portal within 60 feet! " + sPortalLocation);
+				}
 			SendMessageToAllDMs(GetName(oCaster) + " has discovered a portal. " + sPortalLocation + " He will learn the following information in increments of 6 seconds:");
 			if((d20(1) + nCasterLevel >= 17) && (nCasterLevel >=1)) 
 				{   SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalCommand);
@@ -130,6 +132,7 @@ if(nSpellId == 3073) {
 		}
 			
 		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE);	
+		nPortalNumber++;
 	}
 }
 	
