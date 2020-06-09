@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F4DBE33D0CA35F444F88A853D3B1AD7E98232882" downloadHash="A168976ABD11895D8B14B25304D453D9FD42D10D" name="5h_ext_sundabar.trx" dlsize="5170107" size="20596841" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="29CBF7A2904A7E87C7B12B3721F2EEE5B4C60FE1" downloadHash="A067B61788FF395DF9F71C91DA3408B6DC282E4B" name="5h_ext_sundabar.trx" dlsize="5197765" size="20626216" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -525,7 +525,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="BB0EB657D6643F5BB1E2198700A0B2A7EB0A2465" downloadHash="A4424FAE6D84BAEEAEF353A9884124D1F835173D" name="6d_ext_silverymoon_south.trx" dlsize="3695376" size="19338107" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="05AAD3906FD3A366BB13A7EDCBF613502CE9E1F2" downloadHash="CDD081FEA4E3F482C9C7EA8EEA1EEA3F8C730727" name="6d_ext_silverymoon_south.trx" dlsize="3609451" size="19227885" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -640,7 +640,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="96DD3BE0A9212DDE5653BA24F51105E1B89DE575" downloadHash="A1874EE74261FA2C3213A681190DFFD9AE371986" name="5d_ext_moonwood_quaervarr.trx" dlsize="9410398" size="28689787" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8953FD9418823E7E0B105E74C97ABFD7D1031AC8" downloadHash="F7689CED603C079A43949BE704FD81B6C7931621" name="5d_ext_moonwood_quaervarr.trx" dlsize="9425304" size="28701769" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -745,7 +745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C76523A222E056FF3103A3630E206E2C0FF81E3D" downloadHash="51BE5861C8BBBEF952DF28494B40C57E255F4BD8" name="5c_ext_moonwood_north.trx" dlsize="2239663" size="11467809" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="F943DAADB49B5E70F97E240D51169C1E21CC88F9" downloadHash="9E47E85B3823E0CDEDC7EF8E7AD00FF82FB7F359" name="5c_ext_moonwood_north.trx" dlsize="2268380" size="11500813" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -860,7 +860,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="76537AB84773174B34D1CF679B3352C07F5FC0D6" downloadHash="42FD49F751F9A90367661B22E2C8BA5596CAE5BE" name="6e_ext_nether_flying_griffon.trx" dlsize="1021605" size="7878038" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8303DA33A7A040DA5874C59EEC2398D8436C2E00" downloadHash="6BCD804E20A70EA5A4208EC0B3FC4CD0F7163AB5" name="6e_ext_nether_flying_griffon.trx" dlsize="1003844" size="7862638" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1090,7 +1090,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="EFC64F82C05D521BD27D7D8B39D8955ADC6A1BF9" downloadHash="2D616881369564DF1BB38D81021CCFCEF6D7A67D" name="cave .trx" dlsize="1299687" size="1649766" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4553562970E8A2AF14AF447C898668CC2B43C859" downloadHash="103898F2B516F22ABC8E164E61EEBF707373A460" name="cave .trx" dlsize="1511037" size="1857151" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1752,7 +1752,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C0655DC6823AF6BD195F9FF79CFB91CE76698B21" downloadHash="97CCCD69813B467C1F9E5D220BC5176541529550" name="5h_int_sundabar_shops.trx" dlsize="453937" size="461264" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0C45D5066ED90DDF7A639A218A252A8DA682F398" downloadHash="7914C21B93E57734577885799F5D9094975A85AD" name="5h_int_sundabar_shops.trx" dlsize="486924" size="494898" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1831,6 +1831,16 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="627495A331BCEF6634DA24D607F88E7CCB7D5CDF" downloadHash="C070EBEB231D7874EE761220BBAC4BF81ED58768" name="8e_ext_highforest_north.trx" dlsize="1054418" size="17945008" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="66E6319ADB1DECE39496E6ECDA3E4E67FFC77215" downloadHash="3510C43D52E6341AECCA68433CE54D08EA80309C" name="5d_ext_moonwood_ruins_elven.trx" dlsize="2052192" size="13822086" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="10516EF73F32CD79E2631DA9767170D2B66E79A1" downloadHash="648B44D31E3FF2CA5307F8BCE9D8ED372D4B5AB4" name="5h_int_sundabar_digs_boarding.trx" dlsize="476376" size="930875" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
