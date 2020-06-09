@@ -19,10 +19,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "acr_spellhook_i"
+#include "x0_i0_position"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+const float NUMBER_OF_COMPASS_DIRECTIONS = 16.0;
+const float HALF_COMPASS_ANGLE = 360.0/(NUMBER_OF_COMPASS_DIRECTIONS * 2.0);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Structures //////////////////////////////////////////////////////////////////
@@ -36,9 +40,66 @@
 // Function Prototypes /////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+string GetCompassDirectionOfAngle(float fAngle);
+
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+string GetCompassDirectionOfAngle(float fAngle)
+{
+    /* Takes an angle 0.0 -> 360.0
+       and returns its corresponding
+       compass direction
+    */
+    if (fAngle < HALF_COMPASS_ANGLE || fAngle > HALF_COMPASS_ANGLE * 31) {
+        return "north";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 3) {
+        return "north-northeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 5) {
+        return "northeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 7) {
+        return "east-northeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 9) {
+        return "east";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 11) {
+        return "east-southeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 13) {
+        return "southeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 15) {
+        return "south-southeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 17) {
+        return "south";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 19) {
+        return "south-southwest";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 21) {
+        return "southwest";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 23) {
+        return "west-southwest";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 25) {
+        return "west";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 27) {
+        return "west-northwest";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 29) {
+        return "northwest";
+    }
+    return "north-northwest";
+}
+
 
 void main()
 {
@@ -78,13 +139,29 @@ if(nSpellId == 3073) {
 			string sPortalProps = GetLocalString(oPortal, "PORTAL_PROPERTIES");
 			string sPortalDest = GetLocalString(oPortal, "PORTAL_DESTINATION");
 			string sPortalFunc = GetLocalString(oPortal, "PORTAL_FUNCTIONALITY");
+            string sPortalCompassDirection = GetCompassDirectionOfAngle(
+                GetAngleBetweenObjects(oCaster, oPortal)
+            );
 			if(nPortalNumber == 0) {
-				SendMessageToPC(oCaster, "You have discovered a portal within 60 feet! " + sPortalLocation);
+				SendMessageToPC(
+                    oCaster,
+                    "You have discovered a portal within 60 feet! " +
+                    "It is approximately to the " + sPortalCompassDirection + "." + 
+                    sPortalLocation
+                );
 				}
 			else {
 				fResultsDelay = GetLocalFloat(oCaster, "AnalyzePortalFloatDelay") + 6.0;
 				SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
-				DelayCommand(fResultsDelay, SendMessageToPC(oCaster, "You have discovered another portal within 60 feet! " + sPortalLocation));
+				DelayCommand(
+                    fResultsDelay,
+                    SendMessageToPC(
+                        oCaster,
+                        "You have discovered another portal within 60 feet! " + 
+                        "It is approximately to the " + sPortalCompassDirection + "." + 
+                        sPortalLocation
+                    )
+                );
 				}
 			SendMessageToAllDMs(GetName(oCaster) + " has discovered a portal. " + sPortalLocation + " He will learn the following information in increments of 6 seconds:");
 			int nCLCheck;
