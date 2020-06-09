@@ -146,7 +146,7 @@ if(nSpellId == 3073) {
 				SendMessageToPC(
                     oCaster,
                     "You have discovered a portal within 60 feet! " +
-                    "It is approximately to the " + sPortalCompassDirection + "." + 
+                    "It is " + sPortalCompassDirection + " of your position." + 
                     sPortalLocation
                 );
 				}
@@ -158,7 +158,7 @@ if(nSpellId == 3073) {
                     SendMessageToPC(
                         oCaster,
                         "You have discovered another portal within 60 feet! " + 
-                        "It is approximately to the " + sPortalCompassDirection + "." + 
+                        "It is " + sPortalCompassDirection + " of your position." + 
                         sPortalLocation
                     )
                 );
