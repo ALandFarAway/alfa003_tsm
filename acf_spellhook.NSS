@@ -122,11 +122,11 @@ void main()
 if(nSpellId == 3073) {
 
     SendMessageToAllDMs(GetName(oCaster) + " is casting Analyze Portal");
-	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_TRIGGER);
 	int nCasterLevel = GetCasterLevel(oCaster);
 	int nPortalNumber = 0;
 	float fResultsDelay = 0.0;			
 	SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", 0.0);
+	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_TRIGGER);
 	while(oPortal != OBJECT_INVALID) {
 		if((GetTag(oPortal) == "003_portal_plc") || (GetTag(oPortal) == "003_portal_trg")) {
 			if(GetObjectType(oPortal) == OBJECT_TYPE_PLACEABLE) {
@@ -146,7 +146,7 @@ if(nSpellId == 3073) {
 				SendMessageToPC(
                     oCaster,
                     "You have discovered a portal within 60 feet! " +
-                    "It is " + sPortalCompassDirection + " of your position." + 
+                    "It is " + sPortalCompassDirection + " of your position. " + 
                     sPortalLocation
                 );
 				}
@@ -158,12 +158,18 @@ if(nSpellId == 3073) {
                     SendMessageToPC(
                         oCaster,
                         "You have discovered another portal within 60 feet! " + 
-                        "It is " + sPortalCompassDirection + " of your position." + 
+                        "It is " + sPortalCompassDirection + " of your position. " + 
                         sPortalLocation
                     )
                 );
 				}
-			SendMessageToAllDMs(GetName(oCaster) + " has discovered a portal. " + sPortalLocation + " He will learn the following information in increments of 6 seconds:");
+			SendMessageToAllDMs(
+				GetName(oCaster) + 
+				" has discovered a portal. " + 
+				" It is " + sPortalCompassDirection + " of the PC. " +
+				sPortalLocation + 
+				" The PC will also learn the following information in increments of 6 seconds:"
+				);
 			int nCLCheck;
 			string sPortalVariable;
 			for(nCLCheck = 0; nCLCheck < 6; nCLCheck++) {
@@ -255,10 +261,10 @@ if(nSpellId == 3073) {
 				  DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal!")); 
 			break;} */
 			
+		nPortalNumber++;	
 		}
 			
 		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE);	
-		nPortalNumber++;
 	}
 }
 	
