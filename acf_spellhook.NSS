@@ -53,51 +53,51 @@ string GetCompassDirectionOfAngle(float fAngle)
        compass direction
     */
     if (fAngle < HALF_COMPASS_ANGLE || fAngle > HALF_COMPASS_ANGLE * 31) {
-        return "north";
-    }
-    else if (fAngle < HALF_COMPASS_ANGLE * 3) {
-        return "north-northeast";
-    }
-    else if (fAngle < HALF_COMPASS_ANGLE * 5) {
-        return "northeast";
-    }
-    else if (fAngle < HALF_COMPASS_ANGLE * 7) {
-        return "east-northeast";
-    }
-    else if (fAngle < HALF_COMPASS_ANGLE * 9) {
         return "east";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 11) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 3) {
         return "east-southeast";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 13) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 5) {
         return "southeast";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 15) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 7) {
         return "south-southeast";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 17) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 9) {
         return "south";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 19) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 11) {
         return "south-southwest";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 21) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 13) {
         return "southwest";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 23) {
-        return "west-southwest";
+    else if (fAngle < HALF_COMPASS_ANGLE * 15) {
+        return "west-southeast";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 25) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 17) {
         return "west";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 27) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 19) {
         return "west-northwest";
     }
-    else if (fAngle < HALF_COMPASS_ANGLE * 29) {
+    else if (fAngle < HALF_COMPASS_ANGLE * 21) {
         return "northwest";
     }
-    return "north-northwest";
+    else if (fAngle < HALF_COMPASS_ANGLE * 23) {
+        return "north-northwest";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 25) {
+        return "north";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 27) {
+        return "north-northeast";
+    }
+    else if (fAngle < HALF_COMPASS_ANGLE * 29) {
+        return "northeast";
+    }
+    return "east-northeast";
 }
 
 
