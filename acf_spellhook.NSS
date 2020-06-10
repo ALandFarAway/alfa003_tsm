@@ -112,7 +112,7 @@ string GetCompassDirectionOfBearing(float fDegrees)
 }
 
 
-string GetCompassDirectionOfAngle(string fAngle)
+string GetCompassDirectionOfAngle(float fAngle)
 {
     /* Takes an angle from degrees (0.0 -> 360.0)
      * where 0.0 is the positive X-axis and 90.0
