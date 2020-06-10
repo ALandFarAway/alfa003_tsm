@@ -1825,12 +1825,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="70DB631912CDB729D4BA6175CA2A172274629CF2" downloadHash="2EBEFD3E347966A04738300563D78D1AC6EC542A" name="7e_ext_rauvin_evld_rd.trx" dlsize="3566129" size="19844747" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4C8811DBF59E97850C9BCEDFCA72018FED6CBFAC" downloadHash="A3BCABB5A8E27778644EE1C88D9809FD0D21BB27" name="7e_ext_rauvin_evld_rd.trx" dlsize="3566045" size="19838508" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="627495A331BCEF6634DA24D607F88E7CCB7D5CDF" downloadHash="C070EBEB231D7874EE761220BBAC4BF81ED58768" name="8e_ext_highforest_north.trx" dlsize="1054418" size="17945008" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="F83F8D3C0F20B98E3CF85012C25F7AE3E1EA3B04" downloadHash="FEB418938007EEEBF10089CEA97ED55763ACCEC1" name="8e_ext_highforest_north.trx" dlsize="1125767" size="17954820" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E4B2790987281ED01404A6123927EF842A4B5426" downloadHash="1157E837A72DB0FDC368D6914BD19AF61F5A96FA" name="8e_ext_highforest_northwest.trx" dlsize="1855788" size="18381244" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="513EB8E65A98A8BC77F70EB76C631C6F9A0CB120" downloadHash="C512AEFC7AE83F84CD711FA83932C9EED4166F83" name="8e_ext_highforest_northwest.trx" dlsize="2653960" size="18719614" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

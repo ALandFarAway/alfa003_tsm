@@ -140,7 +140,7 @@ void main()
 	effect eFailure = EffectSpellFailure(100);
 	string sArea = GetTag(GetArea(oCaster));
 	
-	
+
 if(nSpellId == 3073) {
 
     SendMessageToAllDMs(GetName(oCaster) + " is casting Analyze Portal");
@@ -232,11 +232,11 @@ if(nSpellId == 3073) {
 		nPortalNumber++;	
 		}
 			
-		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE);	
+		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_TRIGGER);	
 	}
 }
 	
-		
+/*			
 if(nSpellId == 283) {
 	SendMessageToAllDMs("oCaster = " + GetName(oCaster));
 	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
@@ -272,7 +272,7 @@ if(nSpellId == 283) {
 		oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
 	}
 }
-	
+*/	
 
 if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetTag(GetArea(oCaster)), "5h_") != -1)|| (FindSubString(GetTag(GetArea(oCaster)), "6f_") != -1) || ((FindSubString(GetTag(GetArea(oCaster)), "5g_") != -1) && (FindSubString(GetTag(GetArea(oCaster)), "felbarr") == -1))  )
 	{if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
