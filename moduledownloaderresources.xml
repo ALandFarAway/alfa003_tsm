@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5465D848C0163B290DF4B53E94F834A513D40877" downloadHash="8453DAA30693E40AA2864AB83A9131FA3E92139E" name="5h_ext_sundabar.trx" dlsize="5185739" size="20617118" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="19ABD4201B0A032B52D59E986714B78FAA9F4D0D" downloadHash="739E5ABEB4B0F8D6FDCBD403AB86B21FEB81E187" name="5h_ext_sundabar.trx" dlsize="5200919" size="20619754" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1846,6 +1846,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="E17CF8816F8CE29EC0B54C25EB6032E0FCBDEA83" downloadHash="1159E8A7EE9BEB21EE83BE1E3B786E324197B09D" name="8e_ext_highforest_northwest.trx" dlsize="1052158" size="17945008" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="96564BF54AB8EDFF91E208CAB263E0589E1808A9" downloadHash="98F940B95D45CE0FE11F52E2296F8ED9EF6E0D4E" name="5h_int_sundabar_woodworkers.trx" dlsize="33503" size="33770" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
