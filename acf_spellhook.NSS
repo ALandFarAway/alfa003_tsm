@@ -141,7 +141,7 @@ void main()
 	string sArea = GetTag(GetArea(oCaster));
 	
 
-if(nSpellId == 3073) {
+/*if(nSpellId == 3073) {
 
     SendMessageToAllDMs(GetName(oCaster) + " is casting Analyze Portal");
 	int nCasterLevel = GetCasterLevel(oCaster);
@@ -236,7 +236,7 @@ if(nSpellId == 3073) {
 	}
 }
 	
-/*			
+			
 if(nSpellId == 283) {
 	SendMessageToAllDMs("oCaster = " + GetName(oCaster));
 	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
