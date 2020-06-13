@@ -17,7 +17,7 @@ void main()
 	string sStaticQuestTag = GetLocalString(oDM, "wand_static_change");
 	
 
-//University Rod Change Dean's Quest States
+//University Rod Change TSM Static Quest States
 	
 if(nStaticInc != 0)
 		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
