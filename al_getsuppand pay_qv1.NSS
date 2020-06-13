@@ -15,7 +15,7 @@ void main()
 	   
 	   ACR_SetPersistentInt(GetPCSpeaker(), "qv_supply", nRepeat);
 	   oSupply = GetItemPossessedBy(oPC, "militarysuppliesqv");
-	   GiveGoldToCreature(oPC, 75);
+	   GiveGoldToCreature(oPC, 50);
 	   ACR_AwardStaticQuestXP(oPC, "003_argntlgn_qvsupply", 75/nRepeat);
 	   DestroyObject( oSupply);
 	   ACR_SetPersistentInt(GetPCSpeaker(), "alsupply", 0);

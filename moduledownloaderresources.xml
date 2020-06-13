@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="749248FF675851A5E78EE01A036BA1F7A03A77F5" downloadHash="0173832DA80272FE287E35F59D11955093C3B5A0" name="8e_ext_highforest_northwest.trx" dlsize="2637566" size="19238188" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A5363005C7B25125886C989D24D57BF94E9D6D36" downloadHash="35BD46A37B714397D28445CC9B17B2D7A623695C" name="8e_ext_highforest_northwest.trx" dlsize="3201901" size="20383958" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
