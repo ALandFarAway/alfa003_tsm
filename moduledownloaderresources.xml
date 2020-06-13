@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="19ABD4201B0A032B52D59E986714B78FAA9F4D0D" downloadHash="739E5ABEB4B0F8D6FDCBD403AB86B21FEB81E187" name="5h_ext_sundabar.trx" dlsize="5200919" size="20619754" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="AD84048ADAA53D390A0C7A246E4271CDDE338751" downloadHash="D05DFC38973FB55A6B79BA953012F4A83DC4C892" name="5h_ext_sundabar.trx" dlsize="5184752" size="20617168" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1752,7 +1752,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A9846C698E5D5E5D8422CA3709FE2086F2C4E988" downloadHash="9FAE80AC5E92D1E137FB05EFF3A9E5676A9B6BF1" name="5h_int_sundabar_shops.trx" dlsize="502218" size="509515" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FD27182DB188E75E0E5D7521D72A7679634CE79D" downloadHash="9FABCAE4A63AF1546080B253AAA36D0A59CAC72A" name="5h_int_sundabar_shops.trx" dlsize="526821" size="534753" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1850,7 +1850,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="96564BF54AB8EDFF91E208CAB263E0589E1808A9" downloadHash="98F940B95D45CE0FE11F52E2296F8ED9EF6E0D4E" name="5h_int_sundabar_woodworkers.trx" dlsize="33503" size="33770" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1D8150CA0F998C5D9EA50DA83235068A96A2543F" downloadHash="34B67B7BC5CF2FCF79D01FF4C3BEB57AC32BC0E7" name="5h_int_sundabar_woodworkers.trx" dlsize="41556" size="41980" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
