@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <resource type="Tlk" hash="DEA75D510B59F7B6DBF195DBEA889EF280375DD6" downloadHash="75F63F982032F4DC04865CEA99E58E402B403B68" name="alfa_acr02.tlk" dlsize="150764" size="1200614" critical="false" exclude="false" urlOverride="">
+  <resource type="Tlk" hash="93FBDDC55181F1518B7CAA26318DE0AA24F2BFC5" downloadHash="3464AA0858BD8E531DC552E45667353DF4D30F98" name="alfa_acr02.tlk" dlsize="150297" size="1199117" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="B55D7DE81F3D561F957197CB7746FDEAA7DB710F" downloadHash="38C844A37DF9EA20B36CD41B8EF7EE60BC101AC3" name="alfa2_2da.hak" dlsize="483114" size="29730054" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="F4D462488225ADC202492FCEFAEDAF217E164DFF" downloadHash="525AF26EFC348F27E3A6D21F3479E6B0BE6C8626" name="alfa2_2da.hak" dlsize="483799" size="29730928" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="1D9D2C2F121CF2E23A8031179AFDC946DBF4BD62" downloadHash="A835A9D71424F94789DFF8373AF74915DDBF2F5D" name="alfa2_acr.hak" dlsize="4124392" size="135479946" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="3AC82AFE36AA17DC020C5AC07446A00D989F67B8" downloadHash="5FED277DC3CC737E01D9BA8F596CE3A2D976AF06" name="alfa2_acr.hak" dlsize="4145189" size="140986916" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
@@ -28,7 +28,7 @@
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="9C81FCC3D3EA50DE944312A937C0B5F99D4D5A6B" downloadHash="4B2D324B9A0EDB257F42AD6D89DB3E8A899DB89A" name="alfa2_gui.hak" dlsize="10140411" size="43273548" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="BC8D8646CAC1C50048AFD5BAC4143D9DB9E39136" downloadHash="E709F2B384687A134F1F884866334A6C64ADFE35" name="alfa2_gui.hak" dlsize="10140809" size="43279645" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
@@ -98,7 +98,7 @@
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="184AB73D239BBC8BC47D36753C78F8777556F27F" downloadHash="DE05744EB437DEC97A2C9ED159E54F4C96DF8EBE" name="alfa2_templates.hak" dlsize="192709" size="8692869" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="70170EC14771F728913333EDCB264EFA52A4AAA6" downloadHash="2370CF4D7B55DF9FC98ED0631F00C676B33DBD4E" name="alfa2_templates.hak" dlsize="193938" size="8703655" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="19ABD4201B0A032B52D59E986714B78FAA9F4D0D" downloadHash="739E5ABEB4B0F8D6FDCBD403AB86B21FEB81E187" name="5h_ext_sundabar.trx" dlsize="5200919" size="20619754" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B348A5A1E4900ED732223AC570F2B10A66B65861" downloadHash="2EC609448C81145136C82242F8532EDC2EB0A64F" name="5h_ext_sundabar.trx" dlsize="5209569" size="20617951" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -315,7 +315,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="769CA3C87C452D1EAF03A737E5B997E0D5AA853A" downloadHash="5F472258B40046A0BE56A405A78E3C07C1465527" name="5h_int_sundabar_temple_tormtyr.trx" dlsize="34562" size="34611" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B9A7940D7A9CA315801C06AD1CE17C8063B2821F" downloadHash="136979CF8663C7450F619C3069F1B1780B2D4B13" name="5h_int_sundabar_temple_tormtyr.trx" dlsize="36996" size="37018" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -535,7 +535,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="269AEDDAB4980187677FECED6E65A22D189EB7E1" downloadHash="5FC9AB8821B6763DDD0716073588924A9D13870C" name="5h_int_sundabar_firestar_chariot.trx" dlsize="176627" size="177270" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DD9C6D5CA5E8BE4C4EB2ECA0146D0969FC59A76D" downloadHash="551110347306B40C248CE7C9CD99AAC60ED1AF2C" name="5h_int_sundabar_firestar_chariot.trx" dlsize="161173" size="162609" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -925,7 +925,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6C26FF7477A106756804F2AF6971A4B3767B91AE" downloadHash="EB0B5073A54466F8ECD849A5E4843DB57EF1A71D" name="5h_int_sundabar_temple_helm.trx" dlsize="24452" size="24496" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0B1916CEF614A662479C239426457261D6485806" downloadHash="9CC29C82DC1650B0E3939818A19A8A8ECB5EBCE7" name="5h_int_sundabar_temple_helm.trx" dlsize="24386" size="24436" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1315,7 +1315,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CD165AB43BD4ED6B8515235B2268CE0290A0223C" downloadHash="742DF9D466CD3ED58B8398E65B97ED86D2379C83" name="5h_int_sundabar_trumpet.trx" dlsize="84989" size="85284" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="AADD30C6BABF18A85616BE0AE520AD86F4768023" downloadHash="39DAE67AAC7E61685ED891DD44A79F2BA5309F65" name="5h_int_sundabar_trumpet.trx" dlsize="293311" size="382836" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1635,7 +1635,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A7D20A42B3A954D80194D37415B480B0639A55DD" downloadHash="A008E1D5AA34838217AEB02F64CB27B1455EFCC1" name="5h_int_sundabar_malshym_ground.trx" dlsize="64504" size="64756" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="70A896AE3FB4D392662ACFA34BCAC09BA9540179" downloadHash="8A5AB969406ACF68225AC8159EBF536C485F0489" name="5h_int_sundabar_malshym_ground.trx" dlsize="64453" size="64682" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1660,7 +1660,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8BDB48B0CE8641CF36778DDA1B3660F15CD6B634" downloadHash="53B3E5978C697DDED6C1243B0B583A57F2B4F923" name="003_admin.trx" dlsize="42451" size="43043" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C5DDB4146CD769BBC96182988335BC475CC7B98B" downloadHash="6E36CC35B856F147279B8BE0468D78601BFA29B6" name="003_admin.trx" dlsize="43436" size="44021" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1752,7 +1752,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A9846C698E5D5E5D8422CA3709FE2086F2C4E988" downloadHash="9FAE80AC5E92D1E137FB05EFF3A9E5676A9B6BF1" name="5h_int_sundabar_shops.trx" dlsize="502218" size="509515" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FD27182DB188E75E0E5D7521D72A7679634CE79D" downloadHash="9FABCAE4A63AF1546080B253AAA36D0A59CAC72A" name="5h_int_sundabar_shops.trx" dlsize="526821" size="534753" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1792,7 +1792,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="49E07B8B65238E8F6D63322FADED68EE8BB197AA" downloadHash="E318B54E945C14F63E1D02D0492CA4EFD9A8B0EC" name="alfa_items2.hak" dlsize="286085829" size="1045851864" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="6FA42503B0AF202CEDFD8E56032A8A0D106F55F6" downloadHash="D28B2DD07FD1561F52E3CA44025B33C210DA1EE2" name="alfa_items2.hak" dlsize="395150620" size="1387014174" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
@@ -1806,7 +1806,7 @@
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="9B58C82B541A73B348A7A5BC1E718CC40D67EB09" downloadHash="A126E0B42BBE418EB5A250EEB3AA525642E959B6" name="alfa_placeables4.hak" dlsize="83272897" size="280339642" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="5778B6CB0D4E660D8C67C6DBC68F61737B760B77" downloadHash="AD0CD1792A41C36B812E2DC1F1AEF3A5BF8A40FF" name="alfa_placeables4.hak" dlsize="87019128" size="292257511" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
@@ -1850,7 +1850,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="96564BF54AB8EDFF91E208CAB263E0589E1808A9" downloadHash="98F940B95D45CE0FE11F52E2296F8ED9EF6E0D4E" name="5h_int_sundabar_woodworkers.trx" dlsize="33503" size="33770" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1D8150CA0F998C5D9EA50DA83235068A96A2543F" downloadHash="34B67B7BC5CF2FCF79D01FF4C3BEB57AC32BC0E7" name="5h_int_sundabar_woodworkers.trx" dlsize="41556" size="41980" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="87F830A46852B02AB12F9A3C2B4A2FD286993586" downloadHash="1F3CED23FC64E1E8738846FCE9DF6D7E439D59A9" name="5h_int_sundabar_baldivers.trx" dlsize="182278" size="184124" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
