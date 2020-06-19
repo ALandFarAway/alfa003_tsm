@@ -775,7 +775,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="31737A57BE3A32F75E598017F40B9FC0C63F5737" downloadHash="60E2E29AAF0EC43F67B053F8994F11755D7CF731" name="6d_ext_silverymoon_surround.trx" dlsize="9980856" size="30001721" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="152F6548ECB0813F12E6AF2D97A6D420333A3C7B" downloadHash="BE217F33C1ADBFC7056EACEC6CD62476938ED400" name="6d_ext_silverymoon_surround.trx" dlsize="9972282" size="29993776" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A5363005C7B25125886C989D24D57BF94E9D6D36" downloadHash="35BD46A37B714397D28445CC9B17B2D7A623695C" name="8e_ext_highforest_northwest.trx" dlsize="3201901" size="20383958" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3D0291CF681F75FEA5F325F224E0811B0CEA0A2E" downloadHash="683D3307C4A084E2158A466772F987F1E48A4B49" name="8e_ext_highforest_northwest.trx" dlsize="4064082" size="21878914" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
