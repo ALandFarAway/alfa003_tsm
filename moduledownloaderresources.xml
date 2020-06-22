@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="3D0291CF681F75FEA5F325F224E0811B0CEA0A2E" downloadHash="683D3307C4A084E2158A466772F987F1E48A4B49" name="8e_ext_highforest_northwest.trx" dlsize="4064082" size="21878914" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4A54008BA18A4AE8AB701A6FA0F1BEE37840D83E" downloadHash="38E3638405DC55BCCE1E6B5D4CF5F4C0F0574024" name="8e_ext_highforest_northwest.trx" dlsize="4295297" size="22095764" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1856,6 +1856,26 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="87F830A46852B02AB12F9A3C2B4A2FD286993586" downloadHash="1F3CED23FC64E1E8738846FCE9DF6D7E439D59A9" name="5h_int_sundabar_baldivers.trx" dlsize="182278" size="184124" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="779B354524BC65C9FD5EB26400472D3E1561EEFE" downloadHash="D7FFF43337E8C7CFA721E40BB8ECAA1C536FBD37" name="8e_int_highforest_olostins_hold.trx" dlsize="1065468" size="3992797" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="C04F47088677E950EA0F122DA62933A080C528D0" downloadHash="182C4A4EED6EBCB80749DD525DFFD5FDFE307B7D" name="8e_int_highforest_oh_troll.trx" dlsize="49218" size="50597" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="52F4545E0A8777A6308C46C780558D7DC062486B" downloadHash="84006726FFA86EC30D4A73A29F5B7F5DB4A82C5F" name="8e_int_highforest_oh_flagon.trx" dlsize="48891" size="50229" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="52C873D69D1418ADA5297222EA907600F3A20835" downloadHash="B26BE3B6853247F1D07FE4439E1556B1B08932E1" name="8e_int_highforest_oh_lathander.trx" dlsize="48976" size="50372" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
