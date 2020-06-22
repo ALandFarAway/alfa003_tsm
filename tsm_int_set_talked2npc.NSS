@@ -37,7 +37,7 @@ void main(string sVariable, string sChange, string sTarget)
 	SetLocalInt(oTarg, sVariable, nNewValue);
 	
     //PrintString(sTarget + "'s variable " + sVariable + " is now set to " + IntToString(nNewValue) );
-}
+//}
 
 
 /*#include "nwnx_sql"
@@ -46,6 +46,6 @@ void main()
 
 object oPC = GetPCSpeaker();
 
-SetPersistentInt(oPC, "rm_kadalion", 1, 0, "pwdata");
+SetPersistentInt(oPC, "rm_kadalion", 1, 0, "pwdata");*/
 
 }
