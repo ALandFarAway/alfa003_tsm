@@ -200,7 +200,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F4EF5897837241E64DFBC63A21A2B80E556B7D2A" downloadHash="C5DE52DC2160DFB57CEBD3AE61712AB2C8D5D87C" name="6d_ext_silverymoon_northeast.trx" dlsize="3949965" size="18568216" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0A60C91AAEAE95DC7E86DDDC40C9552F1412EA8C" downloadHash="DDC19A9A611BAE983A4A1DF06112EC548858F9F1" name="6d_ext_silverymoon_northeast.trx" dlsize="3970355" size="18571869" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -210,7 +210,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E90C45DFDF71F23D311145A1D846EFDA20E5E445" downloadHash="31346432D26AF24CCC254DE29F9E12D2AD1D3CE2" name="5d_int_quaervarr_whistling_stag.trx" dlsize="238129" size="282383" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8863175C22CCAA28D15EAFC1FE3BF9C195BF7DD5" downloadHash="1723A29A6C6E03A85F8A1EA3B78CF744048BF1A8" name="5d_int_quaervarr_whistling_stag.trx" dlsize="196695" size="240818" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -485,7 +485,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="747334FC314B2F6B806E7E713D7B9644134BE89D" downloadHash="4FB4B2AB11B43ABC357BC19231B526037C249551" name="5g_int_auvandell_silverlode1.trx" dlsize="78046" size="78192" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="53FB4DAD00C43FF1DECD558A4CA7F447AD9790F6" downloadHash="C10C2E826B91672186A6F051FE1A6686AF888BE9" name="5g_int_auvandell_silverlode1.trx" dlsize="76002" size="76146" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -695,7 +695,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F5E0C92AC9F4BE54612A2724D3D1DFF18E9421CE" downloadHash="4BF6E6896FAE6DEACA2890E7530E7108D7D50F0A" name="5g_int_auvandell_silverlode2.trx" dlsize="83527" size="84131" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EDA776C2BEF8494C4A6ACFDBD706EF2122A2719C" downloadHash="E44E23F53ACAF054B5A776764F5A61E3BA5CC189" name="5g_int_auvandell_silverlode2.trx" dlsize="81304" size="81916" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -775,7 +775,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="152F6548ECB0813F12E6AF2D97A6D420333A3C7B" downloadHash="BE217F33C1ADBFC7056EACEC6CD62476938ED400" name="6d_ext_silverymoon_surround.trx" dlsize="9972282" size="29993776" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="F76CAC93BEA5117C038056D21887B935FC8ED08F" downloadHash="6E3056BA102EE0A449CE4397F756C505B509C5A5" name="6d_ext_silverymoon_surround.trx" dlsize="9958326" size="29986680" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -820,7 +820,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5179F43B852B6B775A74617C70D10054CFE72637" downloadHash="22EB347DD1AD61EA01FF7F2AAAA032CBE70DC89D" name="5c_ext_moonwood wintersedge.trx" dlsize="4300696" size="24314686" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D424163642B9543047D310751E1F4D4BE3E2C229" downloadHash="98AB9515B376B0B97750950AE712F627E4781BB5" name="5c_ext_moonwood wintersedge.trx" dlsize="4294552" size="24311856" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1070,7 +1070,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="88B7D9D02A6311080696EEACB5D13546A9BE0963" downloadHash="1CA413CC313601EF550FD2D203AB74FF805929D3" name="5g_ext_silvypass_east_auv_tm.trx" dlsize="2790214" size="12407137" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="37424CCE68CD239B3AFAA6D0AB5FED14F09EBDDF" downloadHash="5B7B02B811C25F81FFD4CFEFA51B5E90C82DCB6D" name="5g_ext_silvypass_east_auv_tm.trx" dlsize="2790225" size="12400826" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1600,7 +1600,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1001F7F53DA4DEF89C2509BFC422EBDB72E3DAC3" downloadHash="CCEA6F15CBBD7C3D56250256D5D8D705F1AE39D7" name="5c_int_wintedge_skinned_hare2.trx" dlsize="72235" size="72316" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="05D3A6C7EE69F55EF72E37597B4869C9D9606AE6" downloadHash="2B458045CE37EA7945582BA7BF37EA5F99541045" name="5c_int_wintedge_skinned_hare2.trx" dlsize="130115" size="130712" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1861,6 +1861,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="779B354524BC65C9FD5EB26400472D3E1561EEFE" downloadHash="D7FFF43337E8C7CFA721E40BB8ECAA1C536FBD37" name="8e_int_highforest_olostins_hold.trx" dlsize="1065468" size="3992797" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="D44479D39FDB159280EBAF0EE2747A4785E83ECF" downloadHash="1A27A6A2AEEF3809CA7BC4D36FCBE6F317F01EBA" name="6d_int_silvy_ne_m_courier_s.trx" dlsize="11188" size="11195" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

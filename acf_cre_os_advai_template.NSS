@@ -267,5 +267,5 @@ if (GENERATE_AMMO==1){switch (iAMMO){
 
 SetLocalInt(OBJECT_SELF,"X2_L_BEH_MAGIC",USE_SPECIAL_ABILITY);	
 				
-	ACR_CreatureOnSpawnIn();
+	//ACR_CreatureOnSpawnIn();  
 }
