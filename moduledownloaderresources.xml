@@ -615,7 +615,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DC28842C340082E5194A53DD0A3875D05B2C4189" downloadHash="7E476E186D144E07BD629C55278B3FB43F0C9202" name="6c_ext_river_road.trx" dlsize="1632692" size="7912121" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3BDE34048EB9A26C183B8E50645D5BA6D36322C0" downloadHash="199E2E189ACA5267A36D9D819D6B4305A95A9486" name="6c_ext_river_road.trx" dlsize="1623420" size="7857880" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
