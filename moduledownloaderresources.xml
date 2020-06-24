@@ -165,7 +165,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="80194F1B51034B9D6CE1BFF21F406F2D827AD125" downloadHash="DB56B8F9C07BB1D5FF676703BA22D31B70DACF04" name="5g_int_felbarr_1_south.trx" dlsize="1073313" size="1115390" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="110D4780A26ACE4D5A5BD626DBDBA73FC2E4DA73" downloadHash="679A3772C0376DDCCE5F240FD0299EBEB55F1BB8" name="5g_int_felbarr_1_south.trx" dlsize="1061711" size="1103800" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
