@@ -165,7 +165,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F6532B69F58491DA0D28840A641AD56CE540DCF6" downloadHash="C6BC7039E9CD609C87EB7F56895E999DB70ED3A6" name="5g_int_felbarr_1_south.trx" dlsize="1110162" size="1137236" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="80194F1B51034B9D6CE1BFF21F406F2D827AD125" downloadHash="DB56B8F9C07BB1D5FF676703BA22D31B70DACF04" name="5g_int_felbarr_1_south.trx" dlsize="1073313" size="1115390" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -200,7 +200,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F406C5F09B5D688E6981D9BB93302E48DF619D3B" downloadHash="DDC19A9A611BAE983A4A1DF06112EC548858F9F1" name="6d_ext_silverymoon_northeast.trx" dlsize="3970355" size="18569150" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6605032F2FF9326BD6E0E163DEB98D00F041B0C1" downloadHash="999B8935ECF3967596DD3A311D87F3E771661C74" name="6d_ext_silverymoon_northeast.trx" dlsize="3959509" size="18567722" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
