@@ -115,7 +115,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4A3DAE6FC66A6DD899BDD8F84496E6B2857723C4" downloadHash="C0EE5C058D32AF85F30A0E9ABB7228A449EB403F" name="5b_int_settlestone_inn.trx" dlsize="200650" size="201519" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A7386037C01B299F16217BD3586BC79E95E56D9F" downloadHash="F81A268243282FD5F7990E5353C4F8DDDB305ED8" name="5b_int_settlestone_inn.trx" dlsize="200433" size="201499" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -245,7 +245,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9709AE91B573F8FABCEECE5645E5031A5CC45A3F" downloadHash="3B19DBA55F2CF65846B7C986C8EF72A04C234A55" name="5c_ext_moonwood.trx" dlsize="2919355" size="14832335" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2C7401B22E6381128B2C6AE8403C96916F50C485" downloadHash="E0EA241B0AC6EB824AD424ADEF4ECDC89BC41EAC" name="5c_ext_moonwood.trx" dlsize="2849976" size="14761851" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
