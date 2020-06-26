@@ -1045,7 +1045,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1A6248F700F3797657099174D6ECD68B2E7CF5F7" downloadHash="3AE2CA16345EBBE3083133042853A7C2C0458AFE" name="6b_ext_highway1_wands_farm.trx" dlsize="6529565" size="33980119" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6055DCA6D0B00A92CAF7A2213E4DAF34D55C0AC4" downloadHash="447FBE79C8E674A36895EFC82B7B4A048867DAD8" name="6b_ext_highway1_wands_farm.trx" dlsize="6567908" size="34037130" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DE6161634CEAE5714329765A04DBA8BF5AA3152D" downloadHash="F73D320FB8EB4F7B19E3100594109EA942CC048E" name="8e_ext_highforest_northwest.trx" dlsize="4325164" size="22489972" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9F86DDC95A4B9BED351023E7A01315877C850BC5" downloadHash="9A6D6292E702578A9AE304EC9F42F332BE69C1F2" name="8e_ext_highforest_northwest.trx" dlsize="4330228" size="22494224" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1860,7 +1860,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B53795577958061253F05B0A9B48EA5A05BF6606" downloadHash="E49BD8A46F65DC6D066CF2F1F1FFC5F87A0CEFC4" name="8e_int_highforest_olostins_hold.trx" dlsize="1257263" size="4316131" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="34D849B0400C48F59D60D7C14DA582AB12F2CFA9" downloadHash="DF5804EF04876E5441F62B57FB62496810BDB727" name="8e_int_highforest_olostins_hold.trx" dlsize="1278133" size="4336167" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
