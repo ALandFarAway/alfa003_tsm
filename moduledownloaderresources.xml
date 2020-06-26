@@ -175,7 +175,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="34D1B88F5F1F2F460CFE36EE4D4A0D9833ED7CB3" downloadHash="D1FA58783CA687FB38D1FB77437704FDA46BA47B" name="6d_ext_north_road.trx" dlsize="748209" size="7516858" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8660860360B65D102F8F65A2351B8EE053A39870" downloadHash="95DED7614DB46FFA1EDD697D0470861BC30C9224" name="6d_ext_north_road.trx" dlsize="728964" size="7499680" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -410,7 +410,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="07A0E7A279F72F59998B2A5058FC6049E4DBB089" downloadHash="401A4875BE83813EC01EC07E74799A143340FB72" name="6e_ext_nether_junction.trx" dlsize="1332072" size="9669765" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5CF3AD9A5B62967880C3760C8148ADD2F6EC5D36" downloadHash="E9C5F878AA7B0F6882D8F6E4892764A4A54345E6" name="6e_ext_nether_junction.trx" dlsize="1303907" size="9644264" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1140,7 +1140,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A532FF45739031D26BD8CBA6CEA69914AA062C34" downloadHash="2C9C95316B22046658FD5E5D18A453744D95DEFC" name="6d_ext_highway2_meteor_tm.trx" dlsize="3233503" size="14592421" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="957FA0171A963DF90FEDF5A3BB46DB87C7046BB8" downloadHash="115F512FBDFF767BBF9D09E5B054DDF0A6862CB2" name="6d_ext_highway2_meteor_tm.trx" dlsize="3241441" size="14589974" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1495,7 +1495,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5357329537156604AD1945832889D3FD841EDCE7" downloadHash="5AAAD2C8C62255C2D2F059148AACBB02E437B8C7" name="6d_ext_north_road_2.trx" dlsize="2035033" size="14069655" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5F4A3270118D8A731A8507FF80368B8322C84480" downloadHash="001D493070D825B490603C02BAF72C24191E2719" name="6d_ext_north_road_2.trx" dlsize="1983863" size="14011454" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
