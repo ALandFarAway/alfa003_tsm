@@ -570,7 +570,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="82A6678479D1401762906AB6555799FF3E1D2CE5" downloadHash="608102B2673D12C2631BF9C7C6D02C4679224EA1" name="7d_ext_silverwood4_1.trx" dlsize="6229150" size="27751968" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="CC09E4151FED74B42713BC54E172F490A133C54A" downloadHash="4616510B756AFED200F5FC1FC7D1E8AF536B8EB2" name="7d_ext_silverwood4_1.trx" dlsize="6356774" size="28080840" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -600,7 +600,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B58F9FEE568E0C9168B5DD86E23B671C8715E6B8" downloadHash="793963E865D6B688360CD033B0A6EB079EB496C9" name="7d_ext_silverwood3_2.trx" dlsize="4953038" size="24361598" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="079A0DFF6D13342588BCB35FA924411E16088BD5" downloadHash="2412CF3E2C13E15FEE3907E99D6DA2B48B673899" name="7d_ext_silverwood3_2.trx" dlsize="4958318" size="24351567" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1782,7 +1782,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9B1EE8CD5D3DB3A6756424655823651435AABC71" downloadHash="FDE8DAD18D1CC8F32A6CE9A5D77EA4875222B21F" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5518590" size="25989543" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4334012978428BF9B2C3C6D1AD353E9C03A9890E" downloadHash="C8E4758FCB9763B0F6B52F3785492C5311524C5F" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5568997" size="26018556" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1825,7 +1825,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4C8811DBF59E97850C9BCEDFCA72018FED6CBFAC" downloadHash="A3BCABB5A8E27778644EE1C88D9809FD0D21BB27" name="7e_ext_rauvin_evld_rd.trx" dlsize="3566045" size="19838508" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7AC31ADC1093EB1F5F165667C70397B962CEE643" downloadHash="636DAD952F76C17625ECF77E816F45693821B100" name="7e_ext_rauvin_evld_rd.trx" dlsize="3576771" size="19793880" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9F86DDC95A4B9BED351023E7A01315877C850BC5" downloadHash="9A6D6292E702578A9AE304EC9F42F332BE69C1F2" name="8e_ext_highforest_northwest.trx" dlsize="4330228" size="22494224" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2CA981A91A9B0DADA671190CA5E49E2677936389" downloadHash="34DB615496BB2D5F76E174097B4DA1760BA9953C" name="8e_ext_highforest_northwest.trx" dlsize="4342387" size="22502310" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1860,7 +1860,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="34D849B0400C48F59D60D7C14DA582AB12F2CFA9" downloadHash="DF5804EF04876E5441F62B57FB62496810BDB727" name="8e_int_highforest_olostins_hold.trx" dlsize="1278133" size="4336167" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2C52A1AB4AF769DF63B4F3763F4E234E6C238696" downloadHash="7160679FA87E9213F90575D2354A198F90E8C52F" name="8e_int_highforest_olostins_hold.trx" dlsize="1266682" size="4325445" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1870,12 +1870,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C04F47088677E950EA0F122DA62933A080C528D0" downloadHash="182C4A4EED6EBCB80749DD525DFFD5FDFE307B7D" name="8e_int_highforest_oh_troll.trx" dlsize="49218" size="50597" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1D22AB96180CD585095F942FA78A13F0CFE24A6D" downloadHash="3CBCF62AA40828FCDC6D0B74D339E80F55BD7DE2" name="8e_int_highforest_oh_troll.trx" dlsize="112010" size="112855" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="52F4545E0A8777A6308C46C780558D7DC062486B" downloadHash="84006726FFA86EC30D4A73A29F5B7F5DB4A82C5F" name="8e_int_highforest_oh_flagon.trx" dlsize="48891" size="50229" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="40BAD51B1B682A25A8A81359CD16D6A381D2B3E2" downloadHash="2D8BAB7DF73DB0795EF72D9AB8A9EC43598DF3BB" name="8e_int_highforest_oh_flagon.trx" dlsize="136195" size="137298" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
