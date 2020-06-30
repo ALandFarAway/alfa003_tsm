@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="07BF5050130B99587AB7DAA2C047C497525524B2" downloadHash="921677F282CEC770732A04576BF2C2E5C6919DE0" name="5h_ext_sundabar.trx" dlsize="5193771" size="20621686" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6ABE24BD60A4E2662CAAB8FC04BC335667247735" downloadHash="B5560C454135F9DF0B1A96E9C433ED119D66D1D7" name="5h_ext_sundabar.trx" dlsize="6271028" size="25617688" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1850,7 +1850,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1D8150CA0F998C5D9EA50DA83235068A96A2543F" downloadHash="34B67B7BC5CF2FCF79D01FF4C3BEB57AC32BC0E7" name="5h_int_sundabar_woodworkers.trx" dlsize="41556" size="41980" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B8654ABC0BBB73DCA60FC4CCCD913133073BB1D4" downloadHash="D8F309C1A6F99123B4AF8EB0811445739DDF2DB6" name="5h_int_sundabar_woodworkers.trx" dlsize="123951" size="126119" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
