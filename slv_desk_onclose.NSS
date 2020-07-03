@@ -185,7 +185,7 @@ void main()
          sProc1Type = "Master Snooty Elf";
          sProc2Type = "Tiny";
          sProc3Type = "Mistress Snooty Elf";
-         sTeach = "Master Silverblade";
+         sTeach = "Master Elestari";
 		 sPrefix = "enc";        
 		}
 		
