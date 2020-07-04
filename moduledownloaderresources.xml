@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="2CA981A91A9B0DADA671190CA5E49E2677936389" downloadHash="34DB615496BB2D5F76E174097B4DA1760BA9953C" name="8e_ext_highforest_northwest.trx" dlsize="4342387" size="22502310" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4139A93902BC4E1BD746FC73E9815D26BF0B603E" downloadHash="A075972612F8A258C692DA8DD53B77C693F58FDE" name="8e_ext_highforest_northwest.trx" dlsize="4312524" size="22485930" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1875,7 +1875,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="40BAD51B1B682A25A8A81359CD16D6A381D2B3E2" downloadHash="2D8BAB7DF73DB0795EF72D9AB8A9EC43598DF3BB" name="8e_int_highforest_oh_flagon.trx" dlsize="136195" size="137298" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3C01A2796482636AA3F85DE2FF5AE1EBCC7BB9E2" downloadHash="F7D6A26C36B1BE03BF0D2618B8F409BCDF8FE183" name="8e_int_highforest_oh_flagon.trx" dlsize="125391" size="126285" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
