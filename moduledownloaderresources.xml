@@ -1825,7 +1825,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7AC31ADC1093EB1F5F165667C70397B962CEE643" downloadHash="636DAD952F76C17625ECF77E816F45693821B100" name="7e_ext_rauvin_evld_rd.trx" dlsize="3576771" size="19793880" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A758B95408F4E19131AF659FD22BAE307B8BCA78" downloadHash="64685838D137D780765C3068F884EB0DBE101078" name="7e_ext_rauvin_evld_rd.trx" dlsize="3563676" size="19790287" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1881,6 +1881,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="F30744058515D2E7D95B727CD6D229189C7AEA42" downloadHash="BF9DAD33624E33A0A5B877CD1A4D01F1730607D2" name="8e_int_highforest_oh_lathander.trx" dlsize="48084" size="48461" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="8E5F849D17AA50192E7B0EF0F80020FCC3E8A492" downloadHash="5CC6075EEA87C096267A7E071BA075509AFDC95C" name="7e_int_rauvin_ruins.trx" dlsize="61206" size="62284" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
