@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6ABE24BD60A4E2662CAAB8FC04BC335667247735" downloadHash="B5560C454135F9DF0B1A96E9C433ED119D66D1D7" name="5h_ext_sundabar.trx" dlsize="6271028" size="25617688" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D6DD92161A282E8F5BA86B6BA32E5359E105AE3B" downloadHash="D0C3BA7B1E086C123F5A514B6268DD43A46AD72D" name="5h_ext_sundabar.trx" dlsize="6187151" size="25519576" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1035,7 +1035,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="AB6EF452CC091F8D226702FF7C7F8E3E8F9D1440" downloadHash="62DDB83B0D264904810DB41402392538718FAFD4" name="5g_ext_silvypass_east_sundabar.trx" dlsize="6139494" size="25925963" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="069A5111074E11839BAE76C63EDE2A80F60AFAA6" downloadHash="6455ECCBC27E346C01DC24D431711CD33C15C44B" name="5g_ext_silvypass_east_sundabar.trx" dlsize="6130848" size="25926926" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
