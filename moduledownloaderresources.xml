@@ -105,7 +105,7 @@
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="02AAA72A36D8E95485544FC0621EDEEF67CFBA1E" downloadHash="103DD49BDCC57F60046D9656AA4ECA27A59F1D33" name="5h_sundabar_everfire_rift_c.trx" dlsize="2275489" size="14957391" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FC969A319410DCF73C96A540204332CFD64D1701" downloadHash="34B022972A8B4C9597D10F12F9D7D92B606CFADA" name="5h_sundabar_everfire_rift_c.trx" dlsize="2289493" size="14972269" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="D6DD92161A282E8F5BA86B6BA32E5359E105AE3B" downloadHash="D0C3BA7B1E086C123F5A514B6268DD43A46AD72D" name="5h_ext_sundabar.trx" dlsize="6187151" size="25519576" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4EEFF2BAC216821F443E13E01E0591D3E19E28FD" downloadHash="61F8056171C6AB77537414A0BE7F4A6FF86A0744" name="5h_ext_sundabar.trx" dlsize="6194981" size="25530627" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1365,7 +1365,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="27B35190FD7D91914564C5BDE1AC28206A382564" downloadHash="24DD17FF3412BA7CD2B27823947D5E2E9941888D" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5024873" size="24920022" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7A0B3FDEF89BB2FBE21086EB41DF13AC660861D0" downloadHash="D4A4AB1AAF921665FA81A4941622D15804733685" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5026792" size="24921623" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1830,7 +1830,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7A687F511404E4E957DECC1A03DB476C7C6DCC48" downloadHash="0A6E5CC09AE6857A55A4E27FB950B28B670B09FF" name="8e_ext_highforest_north.trx" dlsize="1130035" size="17954820" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EB304ED00079D0EDA9964510BDE6FAA7765BF66D" downloadHash="2FFD7310B101C5FA17DE9341A500065FE1EEA684" name="8e_ext_highforest_north.trx" dlsize="1143882" size="17966929" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
