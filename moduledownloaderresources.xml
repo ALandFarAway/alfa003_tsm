@@ -105,7 +105,7 @@
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="68DB94268DB260123D4FA5816EE90D39FC044265" downloadHash="DD7EA6706EF9C12F581C8F7F87F960995FAAC44F" name="5h_sundabar_everfire_rift_c.trx" dlsize="2271633" size="14957370" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="02AAA72A36D8E95485544FC0621EDEEF67CFBA1E" downloadHash="103DD49BDCC57F60046D9656AA4ECA27A59F1D33" name="5h_sundabar_everfire_rift_c.trx" dlsize="2275489" size="14957391" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1830,7 +1830,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F83F8D3C0F20B98E3CF85012C25F7AE3E1EA3B04" downloadHash="FEB418938007EEEBF10089CEA97ED55763ACCEC1" name="8e_ext_highforest_north.trx" dlsize="1125767" size="17954820" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7A687F511404E4E957DECC1A03DB476C7C6DCC48" downloadHash="0A6E5CC09AE6857A55A4E27FB950B28B670B09FF" name="8e_ext_highforest_north.trx" dlsize="1130035" size="17954820" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1886,6 +1886,11 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="A29CE73D9601DC1AE8044C9728F34C0CA65DF2DF" downloadHash="7194C9F8F68F44F1AA2E72BFF4AA961A9C5A3EB9" name="7e_int_rauvin_ruins.trx" dlsize="298059" size="303812" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="31392C33A195DC820E8922E6D9B5B0937AA1E1AD" downloadHash="D616BFAC66AF3DD8C783076F8CA8BFE278FB32CB" name="5h_int_sundabar_malshym_inn.trx" dlsize="49848" size="50231" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
