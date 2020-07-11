@@ -300,7 +300,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B1E775547101B6661F61C6B9BD60B5BF01170ABE" downloadHash="1B718CE9DB1293EFA3EC4FC69D7B29E7B83EDF04" name="5h_int_sundabar_master.trx" dlsize="492499" size="497503" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C0232B904EB016D55832F18C415EF3AC9A725A73" downloadHash="283AF9BFB14CF0D0F016B7C74D333FEF3F6D4BCB" name="5h_int_sundabar_master.trx" dlsize="493311" size="498375" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1890,7 +1890,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E925C8816A6921CECADA2FA852025B2E6B2ABB86" downloadHash="F1849F39B00FAF297ACF2BA1A7D8ACB965ABCC1A" name="5h_int_sundabar_malshym_inn.trx" dlsize="74464" size="74958" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B45F9B5B88694D79BC1DF8C3370D9FBBBBE9341E" downloadHash="DFABE0668FD298F02D47EE9970EBE4E1216E4573" name="5h_int_sundabar_malshym_inn.trx" dlsize="75980" size="76477" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
