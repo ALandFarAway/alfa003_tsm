@@ -52,7 +52,10 @@ void main()
 		{ActionRandomWalk();}
 		
 	 if(GetTag(OBJECT_SELF) == "003_cr_slv_studgen1")
-		{ActionRandomWalk();}	
+		{if(GetObjectByTag(GetTag(OBJECT_SELF), 1) != OBJECT_INVALID)
+	 		{DestroyObject(OBJECT_SELF);}
+		 ActionRandomWalk();
+		}	
 	
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_phoenix_statue")
