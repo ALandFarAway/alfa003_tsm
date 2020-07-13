@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-#include "acr_trigger_i"
+#include "acr_placeable_i"
 #include "acr_quest_i"
 #include "acr_spawn_i"
 
@@ -63,15 +63,15 @@ void ACR_ApplyNLDDamageToCreature(object oTarget, int nSubdualDamage)
 
 void main()
 {
-    ACR_TriggerOnEnter();
+    ACR_PlaceableOnUsed();
 
     // Custom code goes here.
-	object oPC = GetEnteringObject();
-    int nSkillName = GetLocalInt(OBJECT_SELF, "SKILL_NAME_INT");
+	object oPC = GetLastUsedBy();
+    string sSkillName = GetLocalString(OBJECT_SELF, "SKILL_NAME_STRING");
+	int nSkillName = StringToInt("SKILL_" + sSkillName);
 	int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
-	string sSkillName = GetLocalString(OBJECT_SELF, "SKILL_NAME_STRING");
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
@@ -97,22 +97,15 @@ void main()
 	}
 	
 	
- if(GetTag(OBJECT_SELF) == "003_tr_skillcheck")
-		{ if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
-		 	{SendMessageToPC(oPC, sMessageSuccess);
-			 
-		 	}
-		}
- if(GetTag(OBJECT_SELF) == "003_trg_skillmove")
-		{nSkillName = StringToInt("SKILL_" + sSkillName);
-		 if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
+ 
+		if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 		 	{SendMessageToPC(oPC, sMessageSuccess);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
 		 	 }
 	 	 else {SendMessageToPC(oPC, sMessageFail);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail)));
 		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
-			 	{SendMessageToPC(oPC, "Your ability to tumble keeps your on your feet and saves you from hurting yourself badly.");
+			 	{SendMessageToPC(oPC, "You fall. Your ability to tumble keeps your on your feet and saves you from hurting yourself badly.");
 			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
 			     ACR_ApplyNLDDamageToCreature(oPC, d6());
 				 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
@@ -121,11 +114,8 @@ void main()
 			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
 			     if(nKnockdown == 1) { 
 					 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime);
-					 SendMessageToPC(oPC, "You are knocked flat by the fall!");
+					 SendMessageToPC(oPC, "You fall and are knocked flat!");
 			 	     }
 				}
-			 }
-		}
-	  
-			   
+			 }   
 }

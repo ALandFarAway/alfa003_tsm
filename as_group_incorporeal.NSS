@@ -54,17 +54,16 @@ void main() {
             ACR_SpawnObject("abr_cr_un_wight", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-            ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("abr_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
             break;
         case 3:
-            ACR_SpawnObject("abr_cr_un_ghost_cleric", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
             break;
 		case 4:
-            ACR_SpawnObject("abr_cr_un_wight", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_un_wight", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_un_wraith", OBJECT_TYPE_CREATURE);
             break;
         case 5:
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
@@ -72,21 +71,21 @@ void main() {
             break;
         case 6:
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_un_ghost_cleric", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
             break;
         case 7:
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
             break;
 		case 8:
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
             break;
 		case 9:
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_un_ghost_cleric", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
             break;	}			
 	
 
