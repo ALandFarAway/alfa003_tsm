@@ -64,7 +64,7 @@ void main() {
         case 3:
             ACR_SpawnObject("abr_cr_an_wild_deer_stag", OBJECT_TYPE_CREATURE);
 			ACR_SpawnObject("abr_cr_an_wild_deer_doe", OBJECT_TYPE_CREATURE);
-			ACR_SpawnObject("abr_cr_an_wild_deer_doe", OBJECT_TYPE_CREATURE);
+			ACR_SpawnObject("abr_cr_an_wild_deer_fawn", OBJECT_TYPE_CREATURE);
 			
 			
             break;			

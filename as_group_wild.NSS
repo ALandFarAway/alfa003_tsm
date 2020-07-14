@@ -48,7 +48,7 @@ void main();
 ////////////////////////////////////////////////////////////////////////////////
 
 void main() {
-	switch(Random(20)) {
+	switch(Random(21)) {
         case 0:
             ACR_SpawnObject("abr_cr_an_wild_boar", OBJECT_TYPE_CREATURE);
             break;
@@ -125,6 +125,8 @@ void main() {
             break;			
 		case 19:	
 			ACR_SpawnObject("abr_cr_an_wild_dogwolf", OBJECT_TYPE_CREATURE);
+		case 20:	
+			ACR_SpawnObject("abr_cr_an_wild__wolverine", OBJECT_TYPE_CREATURE);
            				
 		break;}
 }	

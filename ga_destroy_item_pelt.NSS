@@ -57,10 +57,10 @@ void main(string sItemTag)
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_boar" ));
     DestroyItems( oPC,"it_plot_hide_boar",nTotalItem,5,3 );
 			
-	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_berry" ));
+	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_berry" )); //not on TSM
     DestroyItems( oPC,"it_plot_hide_berry",nTotalItem,1,1 );
 	
-    nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_cat" ));
+    nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_cat" )); // covers Lions & Mtn Lions
     DestroyItems( oPC,"it_plot_hide_cat",nTotalItem,2,1 );	
 	
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_deer" ));
