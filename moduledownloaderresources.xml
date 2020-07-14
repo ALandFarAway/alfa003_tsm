@@ -1885,7 +1885,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="148C4DE7A6FCD61A5DACE1732479D011A83EE2C2" downloadHash="61D1A26D57BA632D9B6384A333AE4A8E53D68641" name="7e_int_rauvin_ruins.trx" dlsize="417758" size="422304" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A0BA374C637D4A0AD26C4EB8E920BB25D233E7C5" downloadHash="A3922620FA5B6545E6A2F65D718C4C069F1425B6" name="7e_int_rauvin_ruins.trx" dlsize="417533" size="422124" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
