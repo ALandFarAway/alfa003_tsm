@@ -29,22 +29,21 @@ void main()
 	
 	string sMessage = GetLocalString(OBJECT_SELF, "CREATE_MESSAGE_STRING");
 	string sBroadcast = GetLocalString(OBJECT_SELF, "CREATE_BROADCAST_STRING");
-	float fDelay = GetLocalFloat(OBJECT_SELF, "CREATE_DELAY_FLOAT");
-	int nPlayOnce = 0;
-	
+	int nDelay = GetLocalInt(OBJECT_SELF, "CREATE_DELAY_INT");
+	float fDelay = IntToFloat(nDelay);
+	int nPlayOnce = GetLocalInt(OBJECT_SELF, "PLAY_ONCE");
+		
+	if(nPlayOnce == 1) {
+			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
+			SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 2);
+		}
+		
 	if(nPlayOnce == 0) {
 		SendMessageToPC(oPC, sMessage);
+		SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 1);
 		ActionSpeakString(sBroadcast, TALKVOLUME_TALK);
-		nPlayOnce = 1;	
-		if (fDelay > 0.0) {
-			DelayCommand(fDelay, ExecuteScript("tsm_plc_onopen_create", OBJECT_SELF));
-			}
-		
-	    else {object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);}
-	}
+		DelayCommand(fDelay, ExecuteScript("tsm_plc_onopen_create", OBJECT_SELF));
+		}
 	
-		if(nPlayOnce == 1) {
-			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
-			nPlayOnce = 2;
-		}		
+			
 }
