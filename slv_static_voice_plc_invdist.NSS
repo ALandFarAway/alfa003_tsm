@@ -37,6 +37,8 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 		{object oItemOne = GetFirstItemInInventory(OBJECT_SELF);
 		 string sItemOneName = GetName(oItemOne);
 		 string sItemOne = GetTag(oItemOne);
+		 if(FindSubString(sItemOne, "_g_item",0) != -1)
+		 	{ActionSpeakString("This item has no connection to any living creature.");}
 		 //ActionSpeakString("sItemOneName = "  + sItemOneName, TALKVOLUME_TALK);
 		 while (oItemOne != OBJECT_INVALID)
 		 	{object oItemNext = GetFirstItemInInventory(OBJECT_SELF);
@@ -250,7 +252,8 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 			 oItemOne = GetNextItemInInventory(OBJECT_SELF);
 			 }
 		}
-	 else {ActionSpeakString("This item is not part of any oracular divination.", TALKVOLUME_TALK);}
+	 else {ActionSpeakString("This item is not part of any oracular divination.", TALKVOLUME_TALK);
+	 	 }
 	}		
 
 }

@@ -57,7 +57,7 @@ void main() {
             ACR_SpawnObject("003_cr_un_ghost_fgt", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_wiz0", OBJECT_TYPE_CREATURE);
             break;
         case 3:
             ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
@@ -76,12 +76,12 @@ void main() {
             break;
         case 7:
             ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_wiz0", OBJECT_TYPE_CREATURE);
             break;
 		case 8:
             ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_wiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_wiz0", OBJECT_TYPE_CREATURE);
             break;
 		case 9:
             ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
