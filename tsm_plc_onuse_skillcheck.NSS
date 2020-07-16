@@ -84,13 +84,12 @@ void main()
 	int nTumbleDmg = nFallDamage - Random(6) - Random(6);
 	effect eDamage = EffectDamage(nFallDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	effect eTumbleDmg = EffectDamage(nTumbleDmg, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-	int nRope = 0;
 	object oRope = GetFirstItemInInventory(oPC); 
 	string sRope = GetTag(oRope);
 	while (oRope != OBJECT_INVALID) {
-	if(FindSubString(sRope, "Rope", 0)) {
-		nRope = 1;
+	if(FindSubString(sRope, "Rope", 0)!=-1) {
 		nSkillDC = nSkillDC - 10;
+		SendMessageToPC(oPC, "The rope you carry surely comes in handy in situations like this.");
 		break;
 		}
 	 oRope = GetNextItemInInventory(oPC);
@@ -105,7 +104,8 @@ void main()
 	 	 else {SendMessageToPC(oPC, sMessageFail);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail)));
 		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
-			 	{SendMessageToPC(oPC, "You fall. Your ability to tumble keeps your on your feet and saves you from hurting yourself badly.");
+			 	{SendMessageToPC(oPC, sMessageFail);
+			     SendMessageToPC(oPC, "Your ability to tumble keeps your on your feet and saves you from hurting yourself badly.");
 			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
 			     ACR_ApplyNLDDamageToCreature(oPC, d6());
 				 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
@@ -114,7 +114,8 @@ void main()
 			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
 			     if(nKnockdown == 1) { 
 					 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime);
-					 SendMessageToPC(oPC, "You fall and are knocked flat!");
+					 SendMessageToPC(oPC, sMessageFail);
+			      	 SendMessageToPC(oPC, "You are knocked flat!");
 			 	     }
 				}
 			 }   
