@@ -68,7 +68,11 @@ void main()
     // Custom code goes here.
 	object oPC = GetLastUsedBy();
     string sSkillName = GetLocalString(OBJECT_SELF, "SKILL_NAME_STRING");
-	int nSkillName = StringToInt("SKILL_" + sSkillName);
+	int nSkillName = SKILL_BALANCE;
+	if(sSkillName == "CLIMB")
+		{nSkillName = SKILL_CLIMB;}
+	if(sSkillName == "JUMP")
+		{nSkillName = SKILL_JUMP;}
 	int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
