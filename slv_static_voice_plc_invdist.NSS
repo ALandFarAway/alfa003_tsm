@@ -37,7 +37,7 @@ if((GetTag(OBJECT_SELF) == "vala_sphinx")  && (GetInventoryDisturbType() == INVE
 		{object oItemOne = GetFirstItemInInventory(OBJECT_SELF);
 		 string sItemOneName = GetName(oItemOne);
 		 string sItemOne = GetTag(oItemOne);
-		 if(FindSubString(sItemOne, "_g_item",0) != -1)
+		 if(FindSubString(sItemOne, "_g_item2",0) != -1)
 		 	{ActionSpeakString("This item has no connection to any living creature.");}
 		 //ActionSpeakString("sItemOneName = "  + sItemOneName, TALKVOLUME_TALK);
 		 while (oItemOne != OBJECT_INVALID)
