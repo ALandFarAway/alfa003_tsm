@@ -1905,4 +1905,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="8B4B4647D0A8FFAE5215B1DD184AADD336A26245" downloadHash="7E63348A4A73396329559505EC6B50C0A101A1C7" name="8e_ext_highforest_olostins_hold.trx" dlsize="1070593" size="17960687" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
