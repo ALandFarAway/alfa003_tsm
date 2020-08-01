@@ -1495,7 +1495,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="54DF6CBC6B6B242FE55F793C9214E58B4AD21B73" downloadHash="A40D9BB4E85A894B5730688E600D7338E1172851" name="6d_ext_north_road_2.trx" dlsize="1958825" size="13993546" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A24B3506E9C191D724B419CB77F578E1EC86C6B8" downloadHash="F115F08B5D322F45777FF3E3E82F86B881E92F57" name="6d_ext_north_road_2.trx" dlsize="1927833" size="13954936" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

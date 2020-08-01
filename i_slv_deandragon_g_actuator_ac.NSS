@@ -91,8 +91,8 @@ void main()
 		DelayCommand(99.0, AssignCommand(oTarget, ActionSpeakString("Return to creator.", TALKVOLUME_TALK)));
 		DestroyObject(oTarget, 100.0);
 		}
-	else if((GetTag(oTarget) == "003_cr_slv_deandragon_golem") && (GetDistanceBetween(oUser, oTarget) > 5.0))
-	   {AssignCommand(oTarget, ActionSpeakString("Actuator detected. Minimum usage distance exceeded. Command invalid.", TALKVOLUME_TALK));
+	else if(((GetTag(oTarget) == "003_cr_slv_deandragon_golem")|| (GetTag(oTarget) == "003_slv_dq_g_creature")) && (GetDistanceBetween(oUser, oTarget) > 5.0))
+	    {AssignCommand(oTarget, ActionSpeakString("Actuator detected. Minimum usage distance exceeded. Command invalid.", TALKVOLUME_TALK));
 		}
 
 }
