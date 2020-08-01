@@ -228,7 +228,7 @@ void main()
 	         SetListenPattern(OBJECT_SELF, "**Dragon**", 5011);
 	         SetListenPattern(OBJECT_SELF, "**Elemental**", 5012);
 	         SetListenPattern(OBJECT_SELF, "**Fire Mephit**", 5013);
-	         SetListenPattern(OBJECT_SELF, "**Giant**", 5014);
+	         SetListenPattern(OBJECT_SELF, "**Golem**", 5014);
 	         SetListenPattern(OBJECT_SELF, "**Harpy**", 5015);
 	         SetListenPattern(OBJECT_SELF, "**Imp**", 5016);
 	         SetListenPattern(OBJECT_SELF, "**Jann**", 5017);
