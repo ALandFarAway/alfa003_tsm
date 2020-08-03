@@ -250,7 +250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4786C733CF9F2A1BDD9BF4D10F669002871F03B2" downloadHash="606C60BAFCE9B4D79DA0E589ADFFA571864A70C3" name="5h_ext_sundabar.trx" dlsize="6219021" size="25541099" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4453C041C69AA2A6EFCD6B9791CCE465E0DE2861" downloadHash="8863CC443C95B1282FB6ADBCE254E2973D910FAB" name="5h_ext_sundabar.trx" dlsize="6303062" size="25728431" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
