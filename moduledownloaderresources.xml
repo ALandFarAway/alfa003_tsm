@@ -995,7 +995,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="549EFCFA218372939EC12676779A9BF75F4BFD15" downloadHash="3260CDBB65D5930FBCE287144B9F1975FFC8743B" name="6d_int_silvy_fochlucan.trx" dlsize="510663" size="917698" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3AD88D637901D574EA86A683758FC26D8E4DA899" downloadHash="73E2C55328065D974DE48B6B5713CDD168614E99" name="6d_int_silvy_fochlucan.trx" dlsize="496721" size="903409" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="64FE3E806ABF79F319FFBE590B214BC564D56D2D" downloadHash="6D408EF0B6DDEE92FFC910872BE6E869617B6128" name="8e_ext_highforest_northwest.trx" dlsize="3241602" size="20503758" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0EAB356C22876D2458EDF20A3EABD8D5EC6FE2C4" downloadHash="7DB81B3ACE7496D0AF3B4D3B02BEE8B0A3A73956" name="8e_ext_highforest_northwest.trx" dlsize="4606632" size="21583986" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
