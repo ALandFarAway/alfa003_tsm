@@ -67,11 +67,13 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
-    int nSkillName = GetLocalInt(OBJECT_SELF, "SKILL_NAME_INT");
-	int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
+    int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
 	string sSkillName = GetLocalString(OBJECT_SELF, "SKILL_NAME_STRING");
+	int	nSkillName = StringToInt("SKILL_" + sSkillName);
+	if(sSkillName == "CLIMB")
+		{nSkillName = SKILL_CLIMB;}
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
@@ -103,8 +105,7 @@ void main()
 		 	}
 		}
  if(GetTag(OBJECT_SELF) == "003_trg_skillmove")
-		{nSkillName = StringToInt("SKILL_" + sSkillName);
-		 if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
+		{if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 		 	{SendMessageToPC(oPC, sMessageSuccess);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
 		 	 }
