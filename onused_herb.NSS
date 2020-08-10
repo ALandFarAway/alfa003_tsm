@@ -93,6 +93,16 @@ void main()
 		sMsg = "This herb has leaves of a peculiar sheen, but none look good enough for harvesting.";
 		sRef = "it_skullcap";
 	}
+	
+	//TSM Additions
+	
+	else if (sTag == "hrv_plc_tree_fallen_moss") {
+		nSpell = 3;
+		nSurv = 4;
+		sMsg = "You scrape at some of the delicate moss on the fallen log but it crumbles in your hand.";
+		sRef = "003_it_harvest_moss_blue";
+	}
+	
 
 	bHealCheck = GetSkillRank(SKILL_HEAL, oPC, TRUE) >= nHeal;
 	bSurvCheck = GetSkillRank(SKILL_SURVIVAL, oPC, TRUE) >= nSurv;

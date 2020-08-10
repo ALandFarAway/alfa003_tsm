@@ -39,6 +39,15 @@ void main( string sItemTag ) {
 	// Total GP rewarded.
 	int nGP = 0;
 
+	//TSM additions
+	// Blue Moss: 5gp, 2.5xp, CR 5
+	nGP += ConsumeReward( oPC, "pmoss", 5, 2.5f, 2.0f );
+
+	// Mephit Claw: 5gp, 2.5xp, CR 2
+	nGP += ConsumeReward( oPC, "003_it_harvest_mephit_claw", 5, 2.5f, 2.0f );
+
+	//End TSM additions
+	
 	// Fire Rat Tail: 5gp, 2.5xp, CR 2
 	nGP += ConsumeReward( oPC, "firerattail", 5, 2.5f, 2.0f );
 
