@@ -80,26 +80,31 @@ void main()
 	int nPaladin = GetLevelByClass(CLASS_TYPE_PALADIN, OBJECT_SELF);
 	int nRanger = GetLevelByClass(CLASS_TYPE_RANGER, OBJECT_SELF);
 	int nDomainLevel;
-	string sDomainLevel = IntToString(nDomainLevel);
+	string sDomainLevel;
 	string sDomainClass;
 	if((nCleric > 0) && (nCleric >= nPaladin) && (nCleric >= nDruid) && (nCleric >= nRanger) && (nCleric >= nBard))
 		{nDomainLevel = nCleric;
+		sDomainLevel = IntToString(nDomainLevel);
 		sDomainClass = "Cleric " + sDomainLevel;
 		}
 	else if((nPaladin  > 0) && (nPaladin >= nCleric) && (nPaladin >= nDruid) && (nPaladin >= nRanger) && (nPaladin >= nBard))
 		{nDomainLevel = nPaladin;
+		sDomainLevel = IntToString(nDomainLevel);
 		sDomainClass = "Paladin " + sDomainLevel;
 		}
 	else if((nDruid  > 0) && (nDruid >= nCleric) && (nDruid >= nPaladin) && (nDruid >= nRanger) && (nDruid >= nBard))
 		{nDomainLevel = nDruid;
+		sDomainLevel = IntToString(nDomainLevel);
 		sDomainClass = "Druid " + sDomainLevel;
 		}
 	else if((nBard  > 0) && (nBard >= nCleric) && (nBard >= nPaladin) && (nBard >= nRanger) && (nBard >= nDruid))
 		{nDomainLevel = nBard;
+		sDomainLevel = IntToString(nDomainLevel);
 		sDomainClass = "Bard " + sDomainLevel;
 		}
 	else if((nRanger  > 0) && (nRanger >= nCleric) && (nRanger >= nPaladin) && (nRanger >= nBard) && (nRanger >= nDruid))
 		{nDomainLevel = nRanger;
+		sDomainLevel = IntToString(nDomainLevel);
 		sDomainClass = "Ranger " + sDomainLevel;
 		}
 	
