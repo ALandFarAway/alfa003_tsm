@@ -132,6 +132,7 @@ void main()
 	if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
 		{ if(nCLWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oCLW != OBJECT_INVALID)
 		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
@@ -150,39 +151,16 @@ void main()
 		  else if(nMCLWMem > 0)
 				{ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 if(GetTag(oArea) == "003_quests_lab") {
-					for(nLoop;nLoop<nTargets;nLoop++) {
-						if(oPatientCircle != OBJECT_INVALID) {
-							if(GetFactionEqual(oPatientCircle, OBJECT_SELF)) {
-								AssignCommand(OBJECT_SELF, ActionSpeakString("MCLW Mem " + GetName(oPatientCircle) + " -- Healed by " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
-								AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks, " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
-								}
-							oPatientCircle = GetNextObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
-							}
-						else {break;}
-						}
-					}
-				}
+				 }
 		  else if(oMCLWS != OBJECT_INVALID)
 		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
 				 ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 2.0)));
 				 DestroyObject(oMCLWS, 0.0, TRUE);
-				 if(GetTag(oArea) == "003_quests_lab") {
-					for(nLoop;nLoop<nTargets;nLoop++) {
-						if(oPatientCircle != OBJECT_INVALID) {
-							if(GetFactionEqual(oPatientCircle, OBJECT_SELF)) {
-								AssignCommand(OBJECT_SELF, ActionSpeakString("MCLW Scroll " + GetName(oPatientCircle) + " -- Healed by " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
-								AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks, " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
-								}
-							oPatientCircle = GetNextObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
-							}
-						else {break;}
-						}
-					}
-				}
+				 }
 		 else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oCMW != OBJECT_INVALID)
 		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
@@ -200,6 +178,7 @@ void main()
 				 }
 		  else if(nMCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_MASS_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oMCMWS != OBJECT_INVALID)
 		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
@@ -210,6 +189,7 @@ void main()
 		 
 		  else if(nCSWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_SERIOUS_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oCSW != OBJECT_INVALID)
 		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
@@ -227,6 +207,7 @@ void main()
 				 }
 		  else if(nMCSWMem > 0)
 				{ActionCastSpellAtObject(SPELL_MASS_CURE_SERIOUS_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oMCSWS != OBJECT_INVALID)
 		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
@@ -237,6 +218,7 @@ void main()
 		 
 		  else if(nCCWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_CRITICAL_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oCCW != OBJECT_INVALID)
 		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
@@ -254,6 +236,7 @@ void main()
 				 }
 		  else if(nMCCWMem > 0)
 				{ActionCastSpellAtObject(SPELL_MASS_CURE_CRITICAL_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oMCCWS != OBJECT_INVALID)
 		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
