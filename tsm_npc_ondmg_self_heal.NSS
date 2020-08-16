@@ -148,7 +148,8 @@ void main()
 				 DestroyObject(oCLWS, 0.0, TRUE);
 				 }
 		  else if(nMCLWMem > 0)
-				{ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				{ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				 ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 if(GetTag(oArea) == "003_quests_lab") {
 					for(nLoop;nLoop<nTargets;nLoop++) {
 						if(oPatientCircle != OBJECT_INVALID) {
