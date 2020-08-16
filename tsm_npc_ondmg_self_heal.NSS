@@ -45,7 +45,8 @@ void main()
 {
     ACR_CreatureOnDamaged();
 
-    object oAttacker = GetLastDamager(OBJECT_SELF);
+    object oArea = GetArea(OBJECT_SELF);
+	object oAttacker = GetLastDamager(OBJECT_SELF);
 	int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nCLWMem = GetHasSpell(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF);
@@ -107,10 +108,15 @@ void main()
 	object oNearestPatient = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1); 
 	object oPatientCircle = GetFirstObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
 	int nLoop = 1;
-	for(nLoop;nLoop<nTargets;nLoop++) {
-	AssignCommand(OBJECT_SELF, ActionSpeakString(GetName(oPatientCircle) + " -- Healed.", TALKVOLUME_TALK));
-	AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks!", TALKVOLUME_TALK));
-	
+	if(GetTag(oArea) == "003_quests_lab") {
+		for(nLoop;nLoop<nTargets;nLoop++) {
+			if(oPatientCircle != OBJECT_INVALID) {
+				AssignCommand(OBJECT_SELF, ActionSpeakString(GetName(oPatientCircle) + " -- Healed.", TALKVOLUME_TALK));
+				AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks!", TALKVOLUME_TALK));
+				oPatientCircle = GetNextObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
+				}
+			else {break;}
+		}
 	}
 	
 	
