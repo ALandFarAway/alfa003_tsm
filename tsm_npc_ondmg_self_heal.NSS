@@ -80,16 +80,28 @@ void main()
 	int nPaladin = GetLevelByClass(CLASS_TYPE_PALADIN, OBJECT_SELF);
 	int nRanger = GetLevelByClass(CLASS_TYPE_RANGER, OBJECT_SELF);
 	int nDomainLevel;
+	string sDomainLevel = IntToString(nDomainLevel);
+	string sDomainClass;
 	if((nCleric > 0) && (nCleric >= nPaladin) && (nCleric >= nDruid) && (nCleric >= nRanger) && (nCleric >= nBard))
-		{nDomainLevel = nCleric;}
+		{nDomainLevel = nCleric;
+		sDomainClass = "Cleric " + sDomainLevel;
+		}
 	else if((nPaladin  > 0) && (nPaladin >= nCleric) && (nPaladin >= nDruid) && (nPaladin >= nRanger) && (nPaladin >= nBard))
-		{nDomainLevel = nPaladin;}
+		{nDomainLevel = nPaladin;
+		sDomainClass = "Paladin " + sDomainLevel;
+		}
 	else if((nDruid  > 0) && (nDruid >= nCleric) && (nDruid >= nPaladin) && (nDruid >= nRanger) && (nDruid >= nBard))
-		{nDomainLevel = nDruid;}
+		{nDomainLevel = nDruid;
+		sDomainClass = "Druid " + sDomainLevel;
+		}
 	else if((nBard  > 0) && (nBard >= nCleric) && (nBard >= nPaladin) && (nBard >= nRanger) && (nBard >= nDruid))
-		{nDomainLevel = nBard;}
+		{nDomainLevel = nBard;
+		sDomainClass = "Bard " + sDomainLevel;
+		}
 	else if((nRanger  > 0) && (nRanger >= nCleric) && (nRanger >= nPaladin) && (nRanger >= nBard) && (nRanger >= nDruid))
-		{nDomainLevel = nRanger;}
+		{nDomainLevel = nRanger;
+		sDomainClass = "Ranger " + sDomainLevel;
+		}
 	
 	int nCLWHeal = Random(8) + nDomainLevel;
 	effect eCLW = EffectHeal(nCLWHeal);
@@ -109,16 +121,8 @@ void main()
 	object oPatientCircle = GetFirstObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
 	int nLoop = 1;
 	if(GetTag(oArea) == "003_quests_lab") {
-		for(nLoop;nLoop<nTargets;nLoop++) {
-			if(oPatientCircle != OBJECT_INVALID) {
-				AssignCommand(OBJECT_SELF, ActionSpeakString(GetName(oPatientCircle) + " -- Healed.", TALKVOLUME_TALK));
-				AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks!", TALKVOLUME_TALK));
-				oPatientCircle = GetNextObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
-				}
-			else {break;}
-		}
+	 ActionSpeakString("sDomain = " + sDomainClass, TALKVOLUME_TALK);
 	}
-	
 	
 	if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
 		{ if(nCLWMem > 0)
@@ -140,13 +144,37 @@ void main()
 				 }
 		  else if(nMCLWMem > 0)
 				{ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 }
+				 if(GetTag(oArea) == "003_quests_lab") {
+					for(nLoop;nLoop<nTargets;nLoop++) {
+						if(oPatientCircle != OBJECT_INVALID) {
+							if(GetFactionEqual(oPatientCircle, OBJECT_SELF)) {
+								AssignCommand(OBJECT_SELF, ActionSpeakString("MCLW Mem " + GetName(oPatientCircle) + " -- Healed by " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
+								AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks, " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
+								}
+							oPatientCircle = GetNextObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
+							}
+						else {break;}
+						}
+					}
+				}
 		  else if(oMCLWS != OBJECT_INVALID)
 		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
 				 ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 2.0)));
 				 DestroyObject(oMCLWS, 0.0, TRUE);
-				 }
+				 if(GetTag(oArea) == "003_quests_lab") {
+					for(nLoop;nLoop<nTargets;nLoop++) {
+						if(oPatientCircle != OBJECT_INVALID) {
+							if(GetFactionEqual(oPatientCircle, OBJECT_SELF)) {
+								AssignCommand(OBJECT_SELF, ActionSpeakString("MCLW Scroll " + GetName(oPatientCircle) + " -- Healed by " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
+								AssignCommand(oPatientCircle, ActionSpeakString(GetName(oPatientCircle) + " -- Thanks, " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
+								}
+							oPatientCircle = GetNextObjectInShape(SHAPE_SPHERE, fRange,GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);	
+							}
+						else {break;}
+						}
+					}
+				}
 		 else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 }
