@@ -28,15 +28,30 @@ void main()
 	string sQVSupply = IntToString(nQVSupply);
 	string sWESupply = IntToString(nWESupply);
 	
-//University Rod Change TSM Supply Quest States
+	int nRMSupplyActive = ACR_GetPersistentInt(oPC, "rmsupply");
+	int nHHSupplyActive = ACR_GetPersistentInt(oPC, "hhsupply");
+	int nQVSupplyActive = ACR_GetPersistentInt(oPC, "qvsupply");
+	int nWESupplyActive = ACR_GetPersistentInt(oPC, "wesupply");
+	string sRMSupplyActive = IntToString(nRMSupplyActive);
+	string sHHSupplyActive = IntToString(nHHSupplyActive);
+	string sQVSupplyActive = IntToString(nQVSupplyActive);
+	string sWESupplyActive = IntToString(nWESupplyActive);
+	
+	
+//University Rod Change TSM Mail States
 	
  if((nSupplyInc == 0) && (nSupplyDec == 0)) {
 	SendMessageToPC(oDM, GetName(oPC) + " alsupply = " + sALSupply + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " rm_supply = " + sRMSupply + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " hh_supply = " + sHHSupply + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " qv_supply = " + sQVSupply + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " we_supply = " + sWESupply + "." );
-}
+	SendMessageToPC(oDM, GetName(oPC) + " rm_supply reps = " + sRMSupply + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " hh_supply reps = " + sHHSupply + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " qv_supply reps = " + sQVSupply + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " we_supply reps = " + sWESupply + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " rm_supply active now? = " + sRMSupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " hh_supply active now? = " + sHHSupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " qv_supply active now? = " + sQVSupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " we_supply active now? = " + sWESupplyActive + "." );
+
+	}
 
 
 
