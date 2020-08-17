@@ -55,10 +55,10 @@ void main( string sItemTag ) {
 	nGP += ConsumeReward( oPC, "it_cassil", 30, 15.0f, 8.0f );
 
 	// Garclive: 4gp, 2xp, CR 2
-	nGP += ConsumeReward( oPC, "it_garclive", 30, 15.0f, 2.0f );
+	nGP += ConsumeReward( oPC, "it_garclive", 4, 2.0f, 2.0f );
 
 	// Elderberry: 4gp, 2xp, CR 2
-	nGP += ConsumeReward( oPC, "it_elderberry", 30, 15.0f, 2.0f );
+	nGP += ConsumeReward( oPC, "it_elderberry", 4, 2.0f, 2.0f );
 
 	// Hensbane: 35gp, 17.5xp, CR 8
 	nGP += ConsumeReward( oPC, "it_henbane", 35, 17.5f, 8.0f );
