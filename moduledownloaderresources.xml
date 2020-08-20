@@ -200,7 +200,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0813FB0D9FF05B6843315C81D83A97CE29BABB15" downloadHash="7E9403BC813291EF68EA19483E15BE3A85F832F9" name="6d_ext_silverymoon_northeast.trx" dlsize="3972107" size="18577393" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A523B2F48BA1A7AAF74DA4E3382C556A546B051B" downloadHash="40C542E1DB3914E00688F6E8D282C520E2BBCA63" name="6d_ext_silverymoon_northeast.trx" dlsize="3951757" size="18558393" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -215,7 +215,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="33CFC0EEB190C6A56619D528DE55C65D01BC8035" downloadHash="0D429C3535846BD4C5F68FA1F8AB2D3BAAE042D0" name="6d_int_silvy_hatemporium.trx" dlsize="67572" size="67941" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="AF202D68ABEF099E4DF339AB61576674413AFCC9" downloadHash="869BF7004F7B4052C2F8F8435F708EF639425A38" name="6d_int_silvy_hatemporium.trx" dlsize="67029" size="67411" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
