@@ -930,7 +930,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="BD2ED7C63AB836CDD09A97E197597415C1C9EFEA" downloadHash="86F25A5FAD022A029952FEE1ACAF518B57F66CF2" name="6e_int_silvypass_hall_dugmaren.trx" dlsize="542988" size="554272" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B21D2367D1447F7C1DBAC6293E041ADACA168991" downloadHash="A35D7585444D6671E9C872AF9303975384C138BF" name="6e_int_silvypass_hall_dugmaren.trx" dlsize="536240" size="547356" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
