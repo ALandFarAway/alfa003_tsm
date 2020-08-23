@@ -1825,7 +1825,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="150F1D313B8393C67DFC72C4F7045FDC4CEE010E" downloadHash="28AAB2806E0A73EBDCAF0EDE5D5416BBF9A4513A" name="7e_ext_rauvin_evld_rd.trx" dlsize="3688393" size="20165050" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4A2F2EB4D6CE2FB0FCF54AE56253C8E662E5C959" downloadHash="3EFE4013495228CA9E2FEEF5E887186851390D09" name="7e_ext_rauvin_evld_rd.trx" dlsize="3684674" size="20165049" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
