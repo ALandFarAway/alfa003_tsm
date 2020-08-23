@@ -51,18 +51,18 @@ void main()
 	
  if((nSupplyInc == 0) && (nSupplyDec == 0)) {
 	SendMessageToPC(oDM, GetName(oPC) + " i_qst_alsupply active now = " + sALSupplyActive + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " rm_supply active now = " + sRMSupplyActive + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " rm_supply reset days = " + sRMSupplyReset + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " hh_supply active now = " + sHHSupplyActive + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " hh_supply reset days = " + sHHSupplyReset + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " qv_supply active now = " + sQVSupplyActive + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " qv_supply reset days = " + sQVSupplyReset + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " we_supply active now = " + sWESupplyActive + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " we_supply reset days = " + sWESupplyReset + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " rm_supply reps = " + sRMSupplyReps + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " hh_supply reps = " + sHHSupplyReps + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " qv_supply reps = " + sQVSupplyReps + "." );
-	SendMessageToPC(oDM, GetName(oPC) + " we_supply reps = " + sWESupplyReps + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_qst_rmsupply_d active now = " + sRMSupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_rst_rmsupply reset days = " + sRMSupplyReset + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_qst_hhsupply_d active now = " + sHHSupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_rst_hhsupply reset days = " + sHHSupplyReset + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_qst_qvsupply_d active now = " + sQVSupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_rst_qvsupply reset days = " + sQVSupplyReset + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_qst_wesupply_d active now = " + sWESupplyActive + "." );
+	SendMessageToPC(oDM, GetName(oPC) + " i_rst_wesupply reset days = " + sWESupplyReset + "." );
+	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_rm_supply reps = " + sRMSupplyReps + "." );
+	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_hh_supply reps = " + sHHSupplyReps + "." );
+	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_qv_supply reps = " + sQVSupplyReps + "." );
+	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_we_supply reps = " + sWESupplyReps + "." );
 	
 	}
 
