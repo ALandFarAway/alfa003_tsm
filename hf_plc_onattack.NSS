@@ -12,10 +12,10 @@ void main()
 	ACR_PlaceableOnPhysicalAttacked();
 
 	object oAttacker = GetLastAttacker();
-	object oStoneTree = GetObjectByTag("rauvin_ruin_treestone_one", 1);
-	object oStoneTreeWP = GetObjectByTag("undead_treant_one_wp", 1);
-	object oStoneTreeTwo = GetObjectByTag("rauvin_ruin_treestone_two", 1);
-	object oStoneTreeTwoWP = GetObjectByTag("undead_treant_two_wp", 1);
+	object oStoneTree = GetObjectByTag("rauvin_ruin_treestone_one", 0);
+	object oStoneTreeWP = GetObjectByTag("undead_treant_one_wp", 0);
+	object oStoneTreeTwo = GetObjectByTag("rauvin_ruin_treestone_two", 0);
+	object oStoneTreeTwoWP = GetObjectByTag("undead_treant_two_wp", 0);
 	string sCreateCr = "abr_cr_pla_treant_undead";
 	
 	//High Forest Destroying Corrupted Portal
