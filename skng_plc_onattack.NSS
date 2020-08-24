@@ -1,5 +1,5 @@
-//OnUse for all Dean's Exam (deandragon) placeables 
-//Wynna February 2009
+//Onattack for Dean's Quest 2020 placeable
+//Wynna August 2020
 
 
 #include "acr_placeable_i"
