@@ -35,15 +35,7 @@ void main()
 	string sQVSupplyReset = IntToString(nQVSupplyReset);
 	string sWESupplyReset = IntToString(nWESupplyReset);
 	
-	int nRMSupplyReps = ACR_GetPersistentInt(oPC, "rm_supply");
-	int nHHSupplyReps = ACR_GetPersistentInt(oPC, "hh_supply");
-	int nQVSupplyReps = ACR_GetPersistentInt(oPC, "qv_supply");
-	int nWESupplyReps = ACR_GetPersistentInt(oPC, "we_supply");
 	string sALSupplyActive = IntToString(nALSupplyActive);
-	string sRMSupplyReps = IntToString(nRMSupplyReps);
-	string sHHSupplyReps = IntToString(nHHSupplyReps);
-	string sQVSupplyReps = IntToString(nQVSupplyReps);
-	string sWESupplyReps = IntToString(nWESupplyReps);
 	
 	
 	
@@ -59,11 +51,6 @@ void main()
 	SendMessageToPC(oDM, GetName(oPC) + " i_rst_qvsupply reset days = " + sQVSupplyReset + "." );
 	SendMessageToPC(oDM, GetName(oPC) + " i_qst_wesupply_d active now = " + sWESupplyActive + "." );
 	SendMessageToPC(oDM, GetName(oPC) + " i_rst_wesupply reset days = " + sWESupplyReset + "." );
-	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_rm_supply reps = " + sRMSupplyReps + "." );
-	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_hh_supply reps = " + sHHSupplyReps + "." );
-	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_qv_supply reps = " + sQVSupplyReps + "." );
-	//SendMessageToPC(oDM, GetName(oPC) + " i_qst_we_supply reps = " + sWESupplyReps + "." );
-	
 	}
 
 
