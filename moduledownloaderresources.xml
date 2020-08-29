@@ -1915,4 +1915,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="E24D4582DDDD5DDFF073A046B2187DB30E33D578" downloadHash="2B53ED3E3E540A155F1729E873DC11901BD6FCB5" name="8e_ext_highforest_centralwest.trx" dlsize="1069824" size="17962510" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
