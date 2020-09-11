@@ -406,13 +406,16 @@ int TEMP_ModuleOnChat(object oSpeaker, object oTarget, int nMode, string sText)
 		}
 		else if(sNewPick == "@koz")
 		{
+            /*
 			if(_IsLanguageKnown(oSpeaker, LNG_KOZAKURAN) || GetIsDM(oSpeaker) || GetIsDMPossessed(oSpeaker))
 				sLangPick = LNG_KOZAKURAN;
 			else
+            
 			{
+            */
 				SendMessageToPC(oSpeaker, "You don't know how to speak Kozakuran.");
 				return FALSE;
-			}
+			//}
 		}
 		else if(sNewPick == "@lan")
 		{
