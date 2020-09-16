@@ -1845,7 +1845,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="50758A415164DA517D92C6238C38AA057FE82F83" downloadHash="6808D1C245FBB7D1D9AACE72DFAB6ED8E7623B44" name="8e_ext_highforest_northwest.trx" dlsize="4631797" size="21849912" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B75CF55C99821200DADBDD647AEBFA83DC1FF782" downloadHash="350D6589E0BC9B7EE58FFDECE0C1556F22E59DAD" name="8e_ext_highforest_northwest.trx" dlsize="4607788" size="21814534" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1905,7 +1905,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="24B39616D0E5D50D84AB1471F65DCB6ACFEF5EC1" downloadHash="C5535A6641D22C3BF1BC82FE648F2551A63DFBB3" name="8e_ext_highforest_olostins_hold.trx" dlsize="4503431" size="22634388" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A4F8667A6CD88822C790C47596E0D9AE71026FFD" downloadHash="7F8534B2AD12F057C9EFFC540D9AEEEDBBC9F52E" name="8e_ext_highforest_olostins_hold.trx" dlsize="4508232" size="22636768" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
