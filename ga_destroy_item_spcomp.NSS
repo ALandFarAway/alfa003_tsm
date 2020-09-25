@@ -46,6 +46,12 @@ void main( string sItemTag ) {
 	// Mephit Claw: 5gp, 2.5xp, CR 2
 	nGP += ConsumeReward( oPC, "003_it_harvest_mephit_claw", 5, 2.5f, 2.0f );
 
+	// Wasp Stinger: 5gp, 2.5xp, CR 2
+	nGP += ConsumeReward( oPC, "it_misc_wasp_stinger", 5, 2.5f, 2.0f );
+
+	 // Spider Venom Sac: 5gp, 2.5xp, CR 2
+	nGP += ConsumeReward( oPC, "003_it_harvest_spider_poison", 5, 2.5f, 2.0f );
+
 	//End TSM additions
 	
 	// Fire Rat Tail: 5gp, 2.5xp, CR 2

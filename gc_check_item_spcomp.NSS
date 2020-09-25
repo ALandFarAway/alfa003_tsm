@@ -31,6 +31,8 @@ int StartingConditional()
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"abr_it_misc_redcap_tooth"))) return TRUE;
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_misc_ankheg_acid_gland"))) return TRUE;
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_misc_wyvern_stinger"))) return TRUE;
+    if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_misc_wasp_stinger"))) return TRUE;
+    if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"003_it_harvest_spider_poison"))) return TRUE;
   
    // return GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),sItem));
     
