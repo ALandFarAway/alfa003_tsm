@@ -1920,7 +1920,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="804E77C11CEF2F740415967C1C6CD5CF5ADE2AD2" downloadHash="FF2A075DB69701585CE417F3B0A33330AD7CD56F" name="8e_int_highforest_cw_rillifane.trx" dlsize="442549" size="2842556" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="394FD0CDBDFBECEE7894E5261FDD5D962C59EF81" downloadHash="32AE70BB28E9EB4C35C868B1E11BCE2E3B7A8CDD" name="8e_int_highforest_cw_rillifane.trx" dlsize="441962" size="2846363" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
