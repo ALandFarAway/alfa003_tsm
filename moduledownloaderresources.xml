@@ -850,7 +850,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F22E24E1118E49C83DDAE2402BFB7003D19444BC" downloadHash="69945DE6E2D5BB795AD3F787DA3E9F0ADD8D8982" name="6e_int_khelb_derochelle_manor.trx" dlsize="372886" size="733471" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="CB1CAE5E6F8F8AF93922F9D91D57A9848A52EAA7" downloadHash="3D78779C39DB713929BC6771136B79537F26007C" name="6e_int_khelb_derochelle_manor.trx" dlsize="372250" size="733469" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
