@@ -49,14 +49,25 @@ void main();
 
 void main() {
 
-	switch(Random(3)) {
+	switch(Random(4)) {
         case 0:
+            ACR_SpawnObject("003_orc_captain_02", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_orcbattlepriest", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_hu_orcbattlepriest", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("abr_cr_hu_orcberserker", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_orc_captain_03", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_orcbattlepriest", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("abr_cr_hu_orctracker", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_orcbattlepriest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_orc_captain_01", OBJECT_TYPE_CREATURE);
+            break;
+		case 3:
+            ACR_SpawnObject("abr_cr_hu_orctracker", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_orcbattlepriest", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_orcchieftain", OBJECT_TYPE_CREATURE);
             break;
 }}
