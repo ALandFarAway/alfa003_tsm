@@ -75,6 +75,9 @@ void main(string sItemTag)
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"003_it_harvest_jaguarpelt" ));
     DestroyItems( oPC,"003_it_harvest_jaguarpelt",nTotalItem,20,20 );	
 	
+	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_bear_dire" ));
+    DestroyItems( oPC,"it_plot_hide_bear_dire",nTotalItem,50,50 );	
+	
 //	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_wolverine" ));
    // DestroyItems( oPC,"it_plot_hide_wolverine",nTotalItem,3,2 );	
 	

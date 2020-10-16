@@ -21,7 +21,7 @@ int StartingConditional()
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_gorgon"))) return TRUE;
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_timberwolf"))) return TRUE;
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"003_it_harvest_jaguarpelt"))) return TRUE;
-//	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_wolverine"))) return TRUE;
+	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_bear_dire"))) return TRUE;
   
    // return GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),sItem));
     
