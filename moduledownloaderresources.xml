@@ -725,7 +725,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="392A2611F800A163455435C5F4FF94122E33AB9D" downloadHash="C3EF6F568672C28F1660485F9344DB9D03E5B0C9" name="6e_int_silvypass_path_elevation.trx" dlsize="1100323" size="1120618" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="45D56AA526C4FFC05CF6BE1CDE3E0781F8EBC38E" downloadHash="89CB53B4C462B67FFA0988213885A6BCE1CF7D48" name="6e_int_silvypass_path_elevation.trx" dlsize="1102068" size="1123240" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
