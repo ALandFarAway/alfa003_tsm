@@ -260,7 +260,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="120FEAF25F68362CC6AB57010B63F1172DFF4343" downloadHash="BC072BBAA952859A2CCFBB65BD25A27FA11F84D9" name="5g_ext_silvypass_east_auvwild_tm.trx" dlsize="898779" size="6230621" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4B1619226886FC948C94AABB0923B6E26ADC613C" downloadHash="551D2C61E193C2F91BCDC34FFC50829A6EF03E6A" name="5g_ext_silvypass_east_auvwild_tm.trx" dlsize="1762814" size="10233719" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1585,7 +1585,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="ED78CF53CD82D7A927614F51B97FF6A6A0B0B2D3" downloadHash="87DC04933D42A64C757CAAA6F2FD204E4900585D" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3145942" size="17835746" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="37327E7E6E668D9424F57EFFD425A44000BF3678" downloadHash="A680FE3638892BD0544741A2CE09CFBC30900D78" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3132591" size="17833068" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
