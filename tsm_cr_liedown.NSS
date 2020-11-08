@@ -6,13 +6,26 @@
  
 void main()
 {
+
+	effect eKnockdown = EffectKnockdown();
+	
 	object oTarget = GetItemActivatedTarget();
 	int iLieDown = GetLocalInt(oTarget, "iWandLieDown");
 	if(iLieDown == 0)
 		{SetLocalInt(oTarget, "iWandLieDown", 1);
-		 AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_LOOPING_DEAD_BACK, 1.0, 3600.0));}
-	if(iLieDown == 1)
+		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oTarget, 360000.0);}
+	else if(iLieDown == 1)
 		{SetLocalInt(oTarget, "iWandLieDown", 0);
-		 AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_FIREFORGET_STANDUP, 1.0, 3600.0));}
+		 RemoveEffect(oTarget, eKnockdown);
+			 if(GetIsPC(oTarget) != TRUE)
+			 	{int iHealth = GetCurrentHitPoints(oTarget);
+				 int iHP = GetMaxHitPoints(oTarget);
+				 int iDmg = iHP - iHealth;
+				 effect eDamage = EffectDamage(iDmg, DAMAGE_TYPE_DIVINE, DAMAGE_POWER_NORMAL, TRUE);
+				 object oNew = CreateObject(OBJECT_TYPE_CREATURE, GetResRef(oTarget), GetLocation(oTarget));
+			 	 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oNew));
+				 DestroyObject(oTarget);
+				 }
+		}
 					      
    }

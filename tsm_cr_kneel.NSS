@@ -11,7 +11,7 @@ void main()
 	if(iKneelDown == 0)
 		{SetLocalInt(oTarget, "iWandKneelDown", 1);
 		 AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE, 1.0, 3600.0));}
-	if(iKneelDown == 1)
+	else if(iKneelDown == 1)
 		{SetLocalInt(oTarget, "iWandKneelDown", 0);
 		 AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_FIREFORGET_STANDUP, 1.0, 3600.0));}
 					      

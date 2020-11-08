@@ -11,7 +11,7 @@ void main()
 	if(iSitDown == 0)
 		{SetLocalInt(oTarget, "iWandSitDown", 1);
 		 AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CROSS, 1.0, 3600.0));}
-	if(iSitDown == 1)
+	else if(iSitDown == 1)
 		{SetLocalInt(oTarget, "iWandSitDown", 0);
 		 AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_FIREFORGET_STANDUP, 1.0, 3600.0));}
 						      
