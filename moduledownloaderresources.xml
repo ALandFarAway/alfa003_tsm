@@ -260,7 +260,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1EB62DF099856FAC9D4312F4FCC231B859AB4550" downloadHash="6871773A5EF21FBB47C7AEADB8FBD9C11DEE4759" name="5g_ext_silvypass_east_auvwild_tm.trx" dlsize="1793065" size="10265431" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1316C5D665E550E5073C4B0BD0627702ABD65A75" downloadHash="79B972A52380063E8658B49DF9508546080AEBBE" name="5g_ext_silvypass_east_auvwild_tm.trx" dlsize="1705337" size="10179076" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
