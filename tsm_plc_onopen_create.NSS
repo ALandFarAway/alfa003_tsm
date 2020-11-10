@@ -32,9 +32,16 @@ void main()
 	int nDelay = GetLocalInt(OBJECT_SELF, "CREATE_DELAY_INT");
 	float fDelay = IntToFloat(nDelay);
 	int nPlayOnce = GetLocalInt(OBJECT_SELF, "PLAY_ONCE");
-		
+	int nNumberCreate = GetLocalInt(OBJECT_SELF, "CREATE_NUMBER");
+	if (nNumberCreate == 0) {
+		nNumberCreate = 1;
+	}
 	if(nPlayOnce == 1) {
+			int a = 0;
+			while(a < nNumberCreate) {
 			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
+			a++;
+			}
 			SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 2);
 		}
 		
