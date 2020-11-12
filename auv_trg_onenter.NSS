@@ -35,7 +35,7 @@ void main()
 				SendMessageToPC(oEnterer, "You are jerked off your feet and fall into the thorny creeper, entangled.");
 		 		float fEntangle = 6.0;
 				int nRep = 0;
-				while((GetAbilityModifier(ABILITY_STRENGTH, oEnterer) + d20(1) < 23) && (!GetIsSkillSuccessful(oEnterer, SKILL_ESCAPE_ARTIST, 23, TRUE)) && (nRep < Random(10)))
+				while((GetAbilityModifier(ABILITY_STRENGTH, oEnterer) + d20(1) < 23) && (!GetIsSkillSuccessful(oEnterer, SKILL_ESCAPE_ARTIST, 23, FALSE)) && (nRep < Random(10)))
 					{fEntangle = fEntangle + 6.0;
 					 //SendMessageToPC(oEnterer, IntToString(nRep) + " fEntangle = " + FloatToString(fEntangle));
 					 nRep++;
