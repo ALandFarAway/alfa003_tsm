@@ -17,9 +17,10 @@ void main()
 	
 	
 		 SendMessageToPC(oAcquirer, "As your fingers close around this mask, a ripple of conflicting emotions goes through you, half a desire to burst into laughter and half a need to weep.");
-		  
+		 if(GetLocalInt(OBJECT_SELF, "Charmed") == 0) {
 		 if(WillSave(oAcquirer, 18, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF) > 0)
-		 {DelayCommand(5.0, SendMessageToPC(oAcquirer, "The emotions fade."));
+		 	{DelayCommand(5.0, SendMessageToPC(oAcquirer, "The emotions fade."));
+			 SendMessageToAllDMs(GetName(oAcquirer) + " made the will save and was not charmed by the mask.");
 			 }
 		 else	 	
 		 	{DelayCommand(4.0, AssignCommand(oAcquirer, ActionEquipItem(oItem, INVENTORY_SLOT_HEAD)));
@@ -28,8 +29,11 @@ void main()
 			 DelayCommand(20.0, AssignCommand(oAcquirer, ActionCastSpellAtObject(VFX_DUR_SPELL_CHARM_PERSON, oTaker, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE))); 
 			 DelayCommand(25.0, SendMessageToPC(oAcquirer, "Life's but a walking shadow; a poor player, that struts and frets his hour upon the stage, and then is heard no more: it is a tale told by an idiot, full of sound and fury, signifying nothing."));
 			 DelayCommand(35.0, SendMessageToPC(oAcquirer, "The voice continues, in a soft, friendly tone: 'You will forget you heard from me, but remember our friendship later.' Your memory of anything unusual since you acquired the mask blurs, then fades."));
-			 }
-		 
+			 SendMessageToAllDMs(GetName(oAcquirer) + " failed the will save and was charmed by the mask.");
+			 SetLocalInt(OBJECT_SELF, "Charmed", 1);
+			 
+		 	}
+		 }
 		 	
 		 
 		 
