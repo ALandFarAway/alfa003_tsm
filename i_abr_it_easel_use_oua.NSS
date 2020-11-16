@@ -16,7 +16,7 @@ void main()
 	
 	location lReceiver = GetLocation(oReceiver);
 	vector vReceiver = GetPositionFromLocation(lReceiver);
-	vector vObject = Vector(vReceiver.x, vReceiver.y, vReceiver.z + 3.0);
+	vector vObject = Vector(vReceiver.x, vReceiver.y, vReceiver.z);
 	location lObject = Location(GetArea(oReceiver), vObject, 0.0); 
 	object oObjectPLC = CreateObject(OBJECT_TYPE_PLACEABLE, "abr_plc_easel_use", lObject);
     DestroyObject(oItem);

@@ -41,7 +41,7 @@ void main()
 					 nRep++;
 					 }
 				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oEnterer, fEntangle);  
-				SendMessageToPC(oEnterer, "You think you will be able to work your way free in " + FloatToString(fEntangle) +  " seconds.");
+				SendMessageToPC(oEnterer, "You think you will be able to work your way free in " + IntToString(FloatToInt(fEntangle)) +  " seconds.");
 				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eEntangle, oEnterer, fEntangle);  
 				DelayCommand(fEntangle, RemoveEffect(oEnterer, eEntangle));
 				}
