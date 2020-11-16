@@ -17,7 +17,7 @@ void main()
 	effect eKnockdown = EffectKnockdown();
 	effect eEntangle = EffectEntangle();
 	
-	if((GetTag(OBJECT_SELF) == "tsm_trap_snare") && (GetLocalInt(OBJECT_SELF, "Sprung") == 0)) {
+	if((GetTag(OBJECT_SELF) == "003_trap_custom_snare") && (GetLocalInt(OBJECT_SELF, "Sprung") == 0)) {
 		if(GetIsSkillSuccessful(oEnterer, SKILL_SEARCH, 23, TRUE)) {
 			SendMessageToPC(oEnterer, "You avoid a loop of creeping vine that seems positioned exactly to catch you around your ankle.");
 		 	}
