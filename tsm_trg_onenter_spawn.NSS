@@ -88,27 +88,36 @@ void main()
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	
 		 if(nRunOnce == 1) {
+			SendMessageToAllDMs("RunOnce = 1.");
 			
 			if((nSpawnNumber > 0) && (sSpawn != "")) {
-				object oSpawnOne = CreateObject(nSpawnType, sSpawn, lSpawnWP); 
+				SendMessageToAllDMs("oSpawnOne = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
+			    object oSpawnOne = CreateObject(nSpawnType, sSpawn, lSpawnWP); 
 			    if(fDelayVFXOne > fDelaySpawnOne) {
+				    SendMessageToAllDMs("Delayed " + FloatToString(fDelayVFXOne) + " " + IntToString(nDurationType) + " " + IntToString(nVFX) + " on " + sSpawnWP + " for " + FloatToString(fDurationLength) + " seconds.");
 					DelayCommand(fDelayVFXOne - fDelaySpawnOne, ApplyEffectToObject(nDurationType, eOne, oSpawnOne, fDurationLength));
 		    		}
+				SendMessageToAllDMs("nSpawnNumber = " + IntToString(nSpawnNumber));
 			    int a = 0;
 				while((a < nSpawnNumber - 1)&& (a < 10)) {
-				CreateObject(nSpawnType, sSpawn, lSpawnWP); 
+				SendMessageToAllDMs("a = " + IntToString(a) + ". " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
+			    CreateObject(nSpawnType, sSpawn, lSpawnWP); 
 			    a++;
 				}
 			}
 			
 			if((nSpawnNumberTwo > 0) && (sSpawnTwo != "")) {
-				object oSpawnTwo = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo); 
+				SendMessageToAllDMs("oSpawnTwo = " + IntToString(nSpawnTypeTwo) + " " + sSpawnTwo + " at location of " +sSpawnWPTwo );
+			    object oSpawnTwo = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo); 
 			    if(fDelayVFXTwo > fDelaySpawnTwo) {
+				SendMessageToAllDMs("Delayed " + FloatToString(fDelayVFXTwo) + " " + IntToString(nDurationTypeTwo) + " " + IntToString(nVFXTwo) + " on " + sSpawnWPTwo + " for " + FloatToString(fDurationLengthTwo) + " seconds.");
 				DelayCommand(fDelayVFXTwo - fDelaySpawnTwo, ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnTwo, fDurationLengthTwo));
 		        }
-		        int b = 0;
+				SendMessageToAllDMs("nSpawnNumberTwo = " + IntToString(nSpawnNumberTwo));
+			    int b = 0;
 				while((b < nSpawnNumberTwo - 1) && (b < 10)) {
-				CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo); 
+				SendMessageToAllDMs("b = " + IntToString(b) + ". " + IntToString(nSpawnTypeTwo) + " " + sSpawnTwo + " at location of " +sSpawnWPTwo );
+			    CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo); 
 			    b++;
 				}
 			}
@@ -118,14 +127,18 @@ void main()
 			
 		if(nRunOnce == 0) {
 			SendMessageToPC(oPC, sMessage);
+			SendMessageToAllDMs("RunOnce = 0. sMessage = " + sMessage);
 			SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 			if(fDelaySpawnOne >= fDelayVFXOne) {
 				DelayCommand(fDelayVFXOne, ApplyEffectToObject(nDurationType, eOne, oSpawnWP, fDurationLength));
-		    	}
+		    	SendMessageToAllDMs("Delayed " + FloatToString(fDelayVFXOne) + " " + IntToString(nDurationType) + " " + IntToString(nVFX) + " on " + sSpawnWP + " for " + FloatToString(fDurationLength) + " seconds.");
+				}
 			
 			if(fDelaySpawnTwo >= fDelayVFXTwo) {
 				DelayCommand(fDelayVFXTwo, ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnWPTwo, fDurationLengthTwo));
-		    }
+		        SendMessageToAllDMs("Delayed " + FloatToString(fDelayVFXTwo) + " " + IntToString(nDurationTypeTwo) + " " + IntToString(nVFXTwo) + " on " + sSpawnWPTwo + " for " + FloatToString(fDurationLengthTwo) + " seconds.");
+				
+				}
 			
 			DelayCommand(fDelaySpawnOne, ExecuteScript("tsm_trg_onenter_spawn", OBJECT_SELF));
 			}	
