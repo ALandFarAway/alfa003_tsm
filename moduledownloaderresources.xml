@@ -565,7 +565,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F3A1E65027F81F453C18F65CF1B576FF7C4BCAAA" downloadHash="6D93BB86FFA5F560F7C51E9EDA3813C40AC004A5" name="6d_int_silvy_silverguardfort.trx" dlsize="480765" size="485741" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D9CD1398E1D34FE07CEE4D745301E6030F3D0251" downloadHash="17A9070E87FC031FEAEC92B004F03A61B1DA83CC" name="6d_int_silvy_silverguardfort.trx" dlsize="493456" size="498394" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1275,7 +1275,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0CDBB562771D73DA2CC1F9B838980C66520F4F99" downloadHash="EDD78BAE69EFBC18E6EBEB812B76B49E25F1D0C7" name="6d_int_silvy_everdusk2.trx" dlsize="230370" size="319538" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4D3A2C16434FB37114F0BDD8C0475394B976D69D" downloadHash="160299FF948949FB8423574B90C12C6B9940B224" name="6d_int_silvy_everdusk2.trx" dlsize="230306" size="319562" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
