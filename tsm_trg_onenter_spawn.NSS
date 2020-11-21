@@ -139,7 +139,7 @@ void main()
 		        SendMessageToAllDMs("Delayed " + FloatToString(fDelayVFXTwo) + " " + IntToString(nDurationTypeTwo) + " " + IntToString(nVFXTwo) + " on " + sSpawnWPTwo + " for " + FloatToString(fDurationLengthTwo) + " seconds.");
 				
 				}
-			
+			SendMessageToAllDMs(FloatToString(fDelaySpawnOne) + " execute tsm_trg_onenter_spawn");
 			DelayCommand(fDelaySpawnOne, ExecuteScript("tsm_trg_onenter_spawn", OBJECT_SELF));
 			}	
 		 
