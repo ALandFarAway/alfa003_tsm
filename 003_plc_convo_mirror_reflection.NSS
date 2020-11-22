@@ -1,5 +1,5 @@
-//Conversation driven for all Silvy Uni critters  
-//Wynna February 2008
+//Conversation driven Mirror of Reflection 
+//Wynna November 2020
 
 
 #include "acr_creature_i"
