@@ -13,10 +13,12 @@ void main()
 	location lCopyWP = GetLocation(oCopyWP);
 	
 	if((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))) {
+		SendMessageToAllDMs(GetName(oPC) + " has been copied by a Mirror of Reflection.");
+		SendMessageToAllDMs("sCopy WP = " + sCopyWP);
+		SendMessageToPC(oPC, "Your reflection steps out of the mirror!");
+		SendMessageToPC(oPC, "sCopy WP = " + sCopyWP);
 		object oEvilMe = CopyObject(oPC, lCopyWP, OBJECT_INVALID);
 		ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
-		SendMessageToAllDMs(GetName(oPC) + " has been copied by a Mirror of Reflection.");
-		SendMessageToPC(oPC, "Your reflection steps out of the mirror!");
 		}
 	else {SendMessageToAllDMs(GetName(oPC) + " is a DM avatar and can't be copied.");
 		}
