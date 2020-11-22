@@ -8,13 +8,18 @@
 void main()
 {
 	object oPC = GetPCSpeaker();
-	string sCopyWP = GetLocalString(OBJECT_SELF, "COPY_WP");
+	string sCopyWP = GetLocalString(OBJECT_SELF, "MIRROR_REF_TARGET");
 	object oCopyWP = GetWaypointByTag(sCopyWP);
 	location lCopyWP = GetLocation(oCopyWP);
 	
-	object oEvilMe = CopyObject(oPC, lCopyWP, OBJECT_INVALID);
-	ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
-	
+	if((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))) {
+		object oEvilMe = CopyObject(oPC, lCopyWP, OBJECT_INVALID);
+		ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
+		SendMessageToAllDMs(GetName(oPC) + " has been copied by a Mirror of Reflection.");
+		SendMessageToPC(oPC, "Your reflection steps out of the mirror!");
+		}
+	else {SendMessageToAllDMs(GetName(oPC) + " is a DM avatar and can't be copied.");
+		}
 	
 	
     
