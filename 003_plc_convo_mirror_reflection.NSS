@@ -19,6 +19,7 @@ void main()
 		SendMessageToPC(oPC, "sCopy WP = " + sCopyWP);
 		object oEvilMe = CopyObject(oPC, lCopyWP, OBJECT_INVALID);
 		ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
+		SetLootable(oEvilMe, FALSE);
 		}
 	else {SendMessageToAllDMs(GetName(oPC) + " is a DM avatar and can't be copied.");
 		}
