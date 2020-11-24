@@ -14,12 +14,18 @@ void main()
 	
 	if((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))) {
 		SendMessageToAllDMs(GetName(oPC) + " has been copied by a Mirror of Reflection.");
-		SendMessageToAllDMs("sCopy WP = " + sCopyWP);
+		//SendMessageToAllDMs("sCopy WP = " + sCopyWP);
 		SendMessageToPC(oPC, "Your reflection steps out of the mirror!");
-		SendMessageToPC(oPC, "sCopy WP = " + sCopyWP);
+		//SendMessageToPC(oPC, "sCopy WP = " + sCopyWP);
 		object oEvilMe = CopyObject(oPC, lCopyWP, OBJECT_INVALID);
 		ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
-		SetLootable(oEvilMe, FALSE);
+		
+		object oInventory = GetFirstItemInInventory(oEvilMe);
+		while (oInventory != OBJECT_INVALID) {
+			SetDroppableFlag(oInventory, FALSE);
+			oInventory = GetNextItemInInventory(oEvilMe);
+			}
+		
 		}
 	else {SendMessageToAllDMs(GetName(oPC) + " is a DM avatar and can't be copied.");
 		}
