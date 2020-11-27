@@ -13,33 +13,22 @@ void main()
 	location lCopyWP = GetLocation(oCopyWP);
 	
 	if((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))) {
-		//SendMessageToAllDMs("sCopy WP = " + sCopyWP);
 		SendMessageToPC(oPC, "Your reflection steps out of the mirror!");
-		//SendMessageToPC(oPC, "sCopy WP = " + sCopyWP);
 		object oEvilMe = CopyObject(oPC, lCopyWP, OBJECT_INVALID);
 		int nGold = GetGold(oEvilMe);
 		ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
 		TakeGoldFromCreature(nGold, oEvilMe, TRUE, FALSE);
-		SendMessageToPC(oPC, "nGold = " +IntToString(nGold));
-		SendMessageToAllDMs(GetName(oPC) + " has been copied by a Mirror of Reflection.  " + IntToString(nGold) + " gold was removed.");
+		SendMessageToAllDMs(GetName(oPC) + " has been copied by a Mirror of Reflection in " + GetName(GetArea(oPC)));
 		object oInventory = GetFirstItemInInventory(oEvilMe);
 		while (oInventory != OBJECT_INVALID) {
 			SetDroppableFlag(oInventory, FALSE);
-			SendMessageToPC(oPC, "oInventory = " +GetName(oInventory));
-		    oInventory = GetNextItemInInventory(oEvilMe);
+			oInventory = GetNextItemInInventory(oEvilMe);
 			}
 		int nEquipped = 0;
 		while (nEquipped <18) {
 			object oEquipped = GetItemInSlot(nEquipped, oEvilMe);
-		    SendMessageToPC(oPC, "oEquipped = " +GetName(oEquipped));
 		    SetDroppableFlag(oEquipped, FALSE);
 			nEquipped++;
-			 }
-		
+			 }	
 		}
-	else {SendMessageToAllDMs(GetName(oPC) + " is a DM avatar and can't be copied.");
-		}
-	
-	
-    
 }			 			 
