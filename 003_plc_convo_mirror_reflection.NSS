@@ -9,7 +9,7 @@ void main()
 {
 	object oPC = GetPCSpeaker();
 	string sCopyWP = GetLocalString(OBJECT_SELF, "MIRROR_REF_TARGET");
-	object oCopyWP = GetWaypointByTag(sCopyWP);
+	object oCopyWP = GetNearestObjectByTag(sCopyWP, oPC, 1);
 	location lCopyWP = GetLocation(oCopyWP);
 	
 	if((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))) {
