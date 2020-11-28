@@ -10,8 +10,8 @@
 
 void main()
 {	
-	object oItem = GetModuleItemLost();
- 	object oPC = GetModuleItemLostBy();
+	object oItem = GetPCItemLastUnequipped();
+ 	object oPC = GetPCItemLastUnequippedBy();
 			 
 	object oTool=DMFI_GetTool(oPC);
 	string sLang = "LNG_ORC";

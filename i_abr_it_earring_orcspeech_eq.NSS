@@ -10,14 +10,15 @@
 
 void main()
 {	
-	object oItem = GetModuleItemAcquired();
- 	object oPC = GetModuleItemAcquiredBy();
+	object oItem = GetPCItemLastEquipped();
+ 	object oPC = GetPCItemLastEquippedBy();
 			 
 	object oTool=DMFI_GetTool(oPC);
 	string sLang = "LNG_ORC";
 	
 		 if (DMFI_IsLanguageKnown(oPC, sLang) == FALSE)
 				{DMFI_GrantLanguage(oPC, sLang);
+				 SetLocalInt(oPC, "DMFI_TemporaryOrc", 1);
 				}
 			
 					 
