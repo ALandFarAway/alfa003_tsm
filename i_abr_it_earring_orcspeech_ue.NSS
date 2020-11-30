@@ -6,7 +6,7 @@
 #include "acr_db_persist_i"
 #include "acr_quest_i"
 #include "dmfi_inc_langexe" 
-
+#include "x2_inc_itemprop"
 
 void main()
 {	
@@ -15,7 +15,8 @@ void main()
 			 
 	object oTool=DMFI_GetTool(oPC);
 	string sLang = "LNG_ORC";
-		
+		SendMessageToPC(oPC, "Unequipped " + GetName(oItem));
+		 
 
 		 if ((DMFI_IsLanguageKnown(oPC, sLang) == TRUE) && (GetLocalInt(oPC, "DMFI_TemporaryOrc") == 1));
 						

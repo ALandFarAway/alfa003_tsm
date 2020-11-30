@@ -473,8 +473,8 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_x") && (ACR_RetrieveQuestState("slv_d
 	 
 	 // Xan's speech for Deandragon_x
 	 if((GetTag(OBJECT_SELF) == "slv_deandragon_x_xan")  && (GetLocalInt(OBJECT_SELF, "Triggered") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))))
- 	 	{if(ACR_RetrieveQuestState("slv_deandragon_x", GetEnteringObject()) == 3)
-			{ACR_AddPersistentJournalQuestEntry("slv_deandragon_x", 4, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);}
+ 	 	{//if(ACR_RetrieveQuestState("slv_deandragon_x", GetEnteringObject()) == 3)
+		//	{ACR_AddPersistentJournalQuestEntry("slv_deandragon_x", 4, GetEnteringObject(), FALSE, FALSE, FALSE, FALSE);}
 		 SetLocalInt(OBJECT_SELF, "Triggered", 1);
 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "Triggered", 0));
 		 object oXanWP = GetWaypointByTag("slv_deandragon_x_dream");
@@ -486,16 +486,16 @@ if((GetTag(OBJECT_SELF) == "slv_deandragon_x") && (ACR_RetrieveQuestState("slv_d
 		 DelayCommand(48.0, AssignCommand(oXan, ActionSpeakString("So, since we dream this cave, I presume you seek information I may have gathered on my trip through here on my way to ignominy, incarceration and ultimately unpleasant decapitation. It's useless, of course, but I will tell what I know.", TALKVOLUME_TALK)));
 		 DelayCommand(60.0, AssignCommand(oXan, ActionSpeakString("What can I tell you, though? You already have passed the test of friendly knowledge by selecting the correct dragonkin to enter; you must have earned the Sage's trust..difficult enough with his constant distraction with carving the history and feeding his pet baby giant.", TALKVOLUME_TALK)));
 		 DelayCommand(72.0, AssignCommand(oXan, ActionSpeakString("What? Wait? I see it in your own knowledge.... There is no Sage? Not anymore? Not even my kiira anymore? What wizardry is this? What am I? But a reflection? A captured memory? It is worse than even I thought.", TALKVOLUME_TALK)));
-		 DelayCommand(84.0, AssignCommand(oXan, ActionSpeakString("Very well, then, since you know absolutely nothing.... *Looks around*  Here was the xorn tunnel, created by the Sage -- the /previous/ Sage -- (You truly are doomed, you know?) to reach the buried knowledge of Occidian. Clever chap. I suppose the xorn aren't behaving very well if he has gone to Labelas' side?", TALKVOLUME_TALK)));
-		 DelayCommand(96.0, AssignCommand(oXan, ActionSpeakString("I don't dream any sign of activity here, at least, and though the xorn leave no trace, others would.  *Shakes head sadly.* They do not know enough to honor their predecessor's bargain with the xorn.", TALKVOLUME_TALK)));
+		 DelayCommand(84.0, AssignCommand(oXan, ActionSpeakString("Very well, then, since you know absolutely nothing.... *Looks around*  Here was the xorn tunnel, created by the Sage -- the /previous/ Sage -- (You truly are doomed, you know?) to reach buried knowledge. Clever chap. I suppose the xorn aren't behaving very well if he has gone to Labelas' side?", TALKVOLUME_TALK)));
+		 DelayCommand(96.0, AssignCommand(oXan, ActionSpeakString("I don't dream any sign of activity in that direction, though, and though the xorn leave no trace, others would.  *Shakes head sadly.* They do not know enough to honor their predecessor's bargain with the xorn.", TALKVOLUME_TALK)));
 		 DelayCommand(108.0, AssignCommand(oXan, ActionSpeakString("Well, that's it, then. All is lost from my lifetime and yours, all buried. Only a xorn can pass through the miles of accreted history -- and by that I mean dirt -- that separate any destination from any embarkation.", TALKVOLUME_TALK)));
 		 DelayCommand(120.0, AssignCommand(oXan, ActionSpeakString("There's no sense in trying and you have wasted my entire dream learning that. Goodbye. I will now wake up.", TALKVOLUME_TALK)));
-		 object oParty = GetFirstFactionMember(GetEnteringObject(), TRUE);
-		 while(oParty != OBJECT_INVALID)
-			{DelayCommand(125.0, FadeToBlack(GetEnteringObject(), FADE_SPEED_MEDIUM, 10.0));
-			 DelayCommand(135.0, FadeFromBlack(GetEnteringObject(), FADE_SPEED_MEDIUM));
-			 oParty = GetNextFactionMember(GetEnteringObject(), TRUE);
-			}
+		 //object oParty = GetFirstFactionMember(GetEnteringObject(), TRUE);
+		// while(oParty != OBJECT_INVALID)
+		//	{DelayCommand(125.0, FadeToBlack(GetEnteringObject(), FADE_SPEED_MEDIUM, 10.0));
+		//	 DelayCommand(135.0, FadeFromBlack(GetEnteringObject(), FADE_SPEED_MEDIUM));
+		//	 oParty = GetNextFactionMember(GetEnteringObject(), TRUE);
+		//	}
 		}
 	 
 	 // Xorn appearance for Deandragon_x

@@ -81,8 +81,10 @@ void main()
 			  lGoTo = GetLocation(oGoTo);
 			  SetLocalLocation(OBJECT_SELF, "lGoTo", lGoTo);
 			 }
-		 object oToken=CreateItemOnObject("003_it_slv_teleport", oUser, 1);
-		 DelayCommand(2.0, SetIdentified(oToken, TRUE));
+		 if(FindSubString(GetTag(OBJECT_SELF), "Vord") == -1) {
+			 object oToken=CreateItemOnObject("003_it_slv_teleport", oUser, 1);
+			 DelayCommand(2.0, SetIdentified(oToken, TRUE));
+			}
 		 DelayCommand(2.5, AssignCommand(oUser, ActionJumpToLocation(lGoTo)));
  
 		 if(GetTag(OBJECT_SELF) == "slv_el_earth")
