@@ -6,8 +6,7 @@
 #include "acr_db_persist_i"
 #include "acr_quest_i"
 #include "dmfi_inc_langexe" 
-#include "x2_inc_itemprop"
-
+#include "x2_inc_itemprop"	
 
 void main()
 {	
@@ -19,7 +18,7 @@ void main()
 		 SendMessageToPC(oPC, "Equipped " + GetName(oItem));
 		 if (DMFI_IsLanguageKnown(oPC, sLang) == FALSE)
 				{DMFI_GrantLanguage(oPC, sLang);
-				 SetLocalInt(oPC, "DMFI_TemporaryOrc", 1);
+				 SetLocalInt(oItem, "DMFI_TemporaryOrc", 1);
 				}
 			
 					 

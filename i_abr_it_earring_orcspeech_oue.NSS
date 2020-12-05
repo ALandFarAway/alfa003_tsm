@@ -15,13 +15,14 @@ void main()
 			 
 	object oTool=DMFI_GetTool(oPC);
 	string sLang = "LNG_ORC";
-		SendMessageToPC(oPC, "Unequipped " + GetName(oItem));
+		
+	SendMessageToPC(oPC, "Unequipped " + GetName(oItem));
 		 
-
-		 if ((DMFI_IsLanguageKnown(oPC, sLang) == TRUE) && (GetLocalInt(oPC, "DMFI_TemporaryOrc") == 1));
+	 if ((DMFI_IsLanguageKnown(oPC, sLang) == TRUE) && (GetLocalInt(oItem, "DMFI_TemporaryOrc") == 1));
 						
 				{SendMessageToPC(oPC, "You have lost the ability to speak " + sLang);
-				 DMFI_RemoveLanguage(oPC, sLang);	
+				 DMFI_RemoveLanguage(oPC, sLang);
+				 SetLocalInt(oItem, "DMFI_TemporaryOrc",0);	
 				}
 						
 					
