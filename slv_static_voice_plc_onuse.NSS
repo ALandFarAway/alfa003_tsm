@@ -82,8 +82,8 @@ void main()
 			  SetLocalLocation(OBJECT_SELF, "lGoTo", lGoTo);
 			 }
 		 if(FindSubString(GetTag(OBJECT_SELF), "Vord") == -1) {
-			 object oToken=CreateItemOnObject("003_it_slv_teleport", oUser, 1);
-			 DelayCommand(2.0, SetIdentified(oToken, TRUE));
+			 //object oToken=CreateItemOnObject("003_it_slv_teleport", oUser, 1);
+			 //DelayCommand(2.0, SetIdentified(oToken, TRUE));
 			}
 		 DelayCommand(2.5, AssignCommand(oUser, ActionJumpToLocation(lGoTo)));
  
