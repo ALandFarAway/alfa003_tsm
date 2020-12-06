@@ -14,7 +14,7 @@ void main()
  	object oPC = GetPCItemLastUnequippedBy();
 			 
 	object oTool=DMFI_GetTool(oPC);
-	string sLang = "LNG_ORC";
+	string sLang = "lng_orc";
 		
 	SendMessageToPC(oPC, "Unequipped " + GetName(oItem));
 		 
