@@ -13,28 +13,13 @@ void main()
 	object oItem = GetPCItemLastEquipped();
  	object oPC = GetPCItemLastEquippedBy();
 			
-	SendMessageToPC(oPC, "Languages Known = " + IntToString(ACR_GetLangagesKnown( oPC )));
-	
-	SendMessageToPC(oPC, "Language Index 0 = " + ACR_GetLanguageAtIndex( oPC, 0));
-	SendMessageToPC(oPC, "Language Index 1 = " + ACR_GetLanguageAtIndex( oPC, 1));
-	SendMessageToPC(oPC, "Language Index 2 = " + ACR_GetLanguageAtIndex( oPC, 2));
-	SendMessageToPC(oPC, "Language Index 3 = " + ACR_GetLanguageAtIndex( oPC, 3));
-	SendMessageToPC(oPC, "Language Index 4 = " + ACR_GetLanguageAtIndex( oPC, 4));
-	
 	object oTool=DMFI_GetTool(oPC);
 	string sLang = "orc";
 		 SendMessageToPC(oPC, "Equipped " + GetName(oItem));
 		 if (DMFI_IsLanguageKnown(oPC, sLang) == FALSE)
 				{DMFI_GrantLanguage(oPC, sLang);
 				 SetLocalInt(oItem, "DMFI_TemporaryOrc", 1);
-				 SendMessageToPC(oPC, "Languages Known = " + IntToString(ACR_GetLangagesKnown( oPC )));
-	
-				SendMessageToPC(oPC, "Language Index 0 = " + ACR_GetLanguageAtIndex( oPC, 0));
-				SendMessageToPC(oPC, "Language Index 1 = " + ACR_GetLanguageAtIndex( oPC, 1));
-				SendMessageToPC(oPC, "Language Index 2 = " + ACR_GetLanguageAtIndex( oPC, 2));
-				SendMessageToPC(oPC, "Language Index 3 = " + ACR_GetLanguageAtIndex( oPC, 3));
-				SendMessageToPC(oPC, "Language Index 4 = " + ACR_GetLanguageAtIndex( oPC, 4));
-			}
+				 }
 			
 					 
 }			  
