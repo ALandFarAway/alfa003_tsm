@@ -22,8 +22,6 @@ void main()
 						
 				{SendMessageToPC(oPC, "You have lost the ability to speak " + sLang);
 				 DMFI_RemoveLanguage(oPC, sLang);
-				 DMFI_RemoveLanguage(oPC, "lng_orc");
-				 DMFI_RemoveLanguage(oPC, "lng_orc");
 				 SetLocalInt(oItem, "DMFI_TemporaryOrc",0);	
 				}
 						
