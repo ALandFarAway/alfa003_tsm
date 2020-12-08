@@ -45,7 +45,7 @@ void main()
 			{SendMessageToPC(GetEnteringObject(), "A strange sensation passes through you, as if you feel a momentary impulse to turn around...but it passes." );
 			}
 			
-		else {SetLocalInt(OBJECT_SELF, "Fired", 1);
+		else {//SetLocalInt(OBJECT_SELF, "Fired", 1);
 			  AssignCommand(GetEnteringObject(), ActionMoveToObject(oGeasWP, TRUE, 1.0));
 	          SendMessageToPC(GetEnteringObject(), "You find yourself turning around, suddenly convinced that you must go find out what lies to the south, around the corner of the tunnel and to the east. You can think and speak as normal, but the compulsion to move south and east is irresistable." );
 			  CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_vm_spider_huge", GetLocation(oGeasWP));
