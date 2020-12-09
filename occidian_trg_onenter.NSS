@@ -50,9 +50,9 @@ void main()
 	          SendMessageToPC(GetEnteringObject(), "You find yourself turning around, suddenly convinced that you must go find out what lies to the south, around the corner of the tunnel and to the east. You can think and speak as normal, but the compulsion to move south and east is irresistable." );
 			  CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_vm_spider_huge", GetLocation(oGeasWP));
 			  object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
-			  ApplyEffectToObject(DURATION_TYPE_INSTANT, eMysticExp, oGlyph);
+			  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMysticExp, oGlyph, 2.0);
 			  DelayCommand(1.0, SendMessageToPC(GetEnteringObject(), "Mystic Explosion done. Sound burst coming."));
-			  DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eSoundBurstSilent, oGlyph));
+			  DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, oGlyph, 2.0));
 			  //ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMysticExp, oGlyph, 6.0);
 			  DestroyObject(oGlyph, 6.0);
 			  }
