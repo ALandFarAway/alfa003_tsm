@@ -40,7 +40,7 @@ void main()
 	
 	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers") {
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding_floor", GetLocation(oGlyphWP));
 			 DestroyObject(oGlyph, 6000.0);
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
 			 SetLocalInt(OBJECT_SELF, "Ticking", 1);

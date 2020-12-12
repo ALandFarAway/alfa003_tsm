@@ -63,7 +63,7 @@ void main() {
 	          SendMessageToPC(oPC, "You find yourself suddenly convinced that it is imperative that you relock the door and leave the vicinity. The compulsion is irresistable." );
 			  }
 		SetLocalInt(OBJECT_SELF, "Fired", 1);	  
-		object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding_floor", GetLocation(oGlyphWP));
+		object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
 		DestroyObject(oGlyph, 6000.0);
 			  
 		 	}
