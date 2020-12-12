@@ -38,18 +38,25 @@ void main()
 	int eLevel = GetTotalLevels(GetEnteringObject(), FALSE);
 	object oPC = GetEnteringObject();
 	
-	 if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "occ_trg_symbol_pers"))
-        {if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-			{SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. A moment later that joy fades, as if you'd turned and against that certainty, found no familiar face." );
-			}
-			
-		else if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers") 
-			{SetLocalInt(OBJECT_SELF, "Fired", 1);
-			  SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. You *feel* an upwelling of warmth for this friend, a connection based on trust and unshakable loyalty. You can't bring the face of this person to mind immediately, but it doesn't matter. You know him or her on the inside, and will know him or her when you meet again." );
-			  object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
-			  DestroyObject(oGlyph, 6.0);
-			  }
-		 	}
+	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers") {
+		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
+			 DestroyObject(oGlyph, 6000.0);
+			 SetLocalInt(OBJECT_SELF, "Fired", 1);
+			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
+			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
+			 }
+				   	  	   
+		 if(GetLocalInt(OBJECT_SELF, "Ticking") == 1){
+		 	if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
+				{SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. A moment later that joy fades, as if you'd turned and against that certainty, found no familiar face." );
+				}
+			else 
+				{SendMessageToAllDMs(GetName(oPC) + " is charmed by " + GetName(OBJECT_SELF));
+				  SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. You *feel* an upwelling of warmth for this friend, a connection based on trust and unshakable loyalty. You can't bring the face of this person to mind immediately, but it doesn't matter. You know him or her on the inside, and will know him or her when you meet again." );
+				 }
+			}	 	
+	}
 	 
 	 // Xorn appearance inside Occidian cave
 	 if(GetTag(OBJECT_SELF) == "slv_deandragon_x_xorn")  

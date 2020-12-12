@@ -54,17 +54,18 @@ void main() {
 	
 	 if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (eLevel < 8) && (GetTag(OBJECT_SELF) == "plc_dc_gtdra03"))
         {if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-			{SendMessageToPC(oPC, "A strange sensation passes through you, as if you feel a momentary impulse to turn around...but it passes." );
+			{SendMessageToPC(oPC, "A strange sensation passes through you, as if you feel a momentary impulse to relock the door and leave the vicinity...but it passes." );
 			}
 			
 		else if (GetTag(OBJECT_SELF) == "plc_dc_gtdra03")
-			 {SetLocalInt(OBJECT_SELF, "Fired", 1);
-			  AssignCommand(oPC, ActionMoveToObject(oGeasWP, TRUE, 1.0));
-	          SendMessageToPC(oPC, "You find yourself turning around, suddenly convinced that you must go find out what lies to the south, around the corner of the tunnel and to the east. You can think and speak as normal, but the compulsion to move south and east is irresistable." );
-			  CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_vm_spider_huge", GetLocation(oGeasWP));
-			  object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
-			  DestroyObject(oGlyph, 6.0);
+			 {AssignCommand(oPC, ActionLockObject(OBJECT_SELF));
+			  DelayCommand(3.0, AssignCommand(oPC, ActionMoveToObject(oGeasWP, TRUE, 1.0)));
+	          SendMessageToPC(oPC, "You find yourself suddenly convinced that it is imperative that you relock the door and leave the vicinity. The compulsion is irresistable." );
 			  }
+		SetLocalInt(OBJECT_SELF, "Fired", 1);	  
+		object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
+		DestroyObject(oGlyph, 6.0);
+			  
 		 	}
 
 }
