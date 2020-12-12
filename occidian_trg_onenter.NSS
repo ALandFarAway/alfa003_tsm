@@ -47,8 +47,9 @@ void main()
 			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
 			 }
 				   	  	   
-		 if(GetLocalInt(OBJECT_SELF, "Ticking") == 1){
-		 	if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
+		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
+		 	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));
+			if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
 				{SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. A moment later that joy fades, as if you'd turned and against that certainty, found no familiar face." );
 				}
 			else 

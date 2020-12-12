@@ -52,19 +52,19 @@ void main() {
 	object oPC = GetLastUnlocked();
 	int eLevel = GetTotalLevels(oPC, FALSE);
 	
-	 if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (eLevel < 8) && (GetTag(OBJECT_SELF) == "plc_dc_gtdra03"))
+	 if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "plc_dc_gtdra03"))
         {if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
 			{SendMessageToPC(oPC, "A strange sensation passes through you, as if you feel a momentary impulse to relock the door and leave the vicinity...but it passes." );
 			}
 			
 		else if (GetTag(OBJECT_SELF) == "plc_dc_gtdra03")
 			 {AssignCommand(oPC, ActionLockObject(OBJECT_SELF));
-			  DelayCommand(3.0, AssignCommand(oPC, ActionMoveToObject(oGeasWP, TRUE, 1.0)));
+			  DelayCommand(7.0, AssignCommand(oPC, ActionMoveToObject(oGeasWP, TRUE, 1.0)));
 	          SendMessageToPC(oPC, "You find yourself suddenly convinced that it is imperative that you relock the door and leave the vicinity. The compulsion is irresistable." );
 			  }
 		SetLocalInt(OBJECT_SELF, "Fired", 1);	  
-		object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
-		DestroyObject(oGlyph, 6.0);
+		object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding_floor", GetLocation(oGlyphWP));
+		DestroyObject(oGlyph, 6000.0);
 			  
 		 	}
 
