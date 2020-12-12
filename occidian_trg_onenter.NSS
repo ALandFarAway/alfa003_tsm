@@ -34,26 +34,19 @@ void main()
 
     // Custom code goes here.
 	
-    object oGeasWP = GetObjectByTag("Occ_Geas_WP", 0);
-	object oGlyphWP = GetObjectByTag("occ_plc_glyph_warding_wp", 0);
-	effect eMysticExp = EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION, FALSE);
-    effect eSoundBurstSilent = EffectVisualEffect(VFX_FNF_SOUND_BURST_SILENT, FALSE);
-    int eLevel = GetTotalLevels(GetEnteringObject(), FALSE);
+    object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp", 0);
+	int eLevel = GetTotalLevels(GetEnteringObject(), FALSE);
+	object oPC = GetEnteringObject();
 	
-	 if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (eLevel < 8) && (GetTag(OBJECT_SELF) == "occ_trg_glyph_memory"))
-        {if(WillSave(GetEnteringObject(),17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-			{SendMessageToPC(GetEnteringObject(), "A strange sensation passes through you, as if you feel a momentary impulse to turn around...but it passes." );
+	 if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "occ_trg_symbol_pers"))
+        {if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
+			{SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. A moment later that joy fades, as if you'd turned and against that certainty, found no familiar face." );
 			}
 			
-		else {//SetLocalInt(OBJECT_SELF, "Fired", 1);
-			  AssignCommand(GetEnteringObject(), ActionMoveToObject(oGeasWP, TRUE, 1.0));
-	          SendMessageToPC(GetEnteringObject(), "You find yourself turning around, suddenly convinced that you must go find out what lies to the south, around the corner of the tunnel and to the east. You can think and speak as normal, but the compulsion to move south and east is irresistable." );
-			  CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_vm_spider_huge", GetLocation(oGeasWP));
+		else if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers") 
+			{SetLocalInt(OBJECT_SELF, "Fired", 1);
+			  SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. You *feel* an upwelling of warmth for this friend, a connection based on trust and unshakable loyalty. You can't bring the face of this person to mind immediately, but it doesn't matter. You know him or her on the inside, and will know him or her when you meet again." );
 			  object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding", GetLocation(oGlyphWP));
-			  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMysticExp, oGlyph, 2.0);
-			  DelayCommand(1.0, SendMessageToPC(GetEnteringObject(), "Mystic Explosion done. Sound burst coming."));
-			  DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, oGlyph, 2.0));
-			  //ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMysticExp, oGlyph, 6.0);
 			  DestroyObject(oGlyph, 6.0);
 			  }
 		 	}
