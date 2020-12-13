@@ -59,7 +59,7 @@ void main() {
 			
 		else if (GetTag(OBJECT_SELF) == "plc_dc_gtdra03")
 			 {AssignCommand(oPC, ActionLockObject(OBJECT_SELF));
-			  DelayCommand(7.0, AssignCommand(oPC, ActionMoveToObject(oGeasWP, TRUE, 1.0)));
+			  DelayCommand(8.0, AssignCommand(oPC, ActionMoveToObject(oGeasWP, TRUE, 1.0)));
 	          SendMessageToPC(oPC, "You find yourself suddenly convinced that it is imperative that you relock the door and leave the vicinity. The compulsion is irresistable." );
 			  }
 		SetLocalInt(OBJECT_SELF, "Fired", 1);	  

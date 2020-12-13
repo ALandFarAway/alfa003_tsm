@@ -330,7 +330,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="BC668B8C706DF4F8B557F2A1652BA1A522B75297" downloadHash="73B4A30237A45FDDBA49BB8F7EB778ECCA9AAD5D" name="5g_int_felbarr_lowroad_04.trx" dlsize="963448" size="993618" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="E03D3C2E3FDD442C51B2540E3293189A389E43D5" downloadHash="0A751B44C1FC4C2858065B6B489E8CB9A2A34D69" name="5g_int_felbarr_lowroad_04.trx" dlsize="1048139" size="1077127" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
