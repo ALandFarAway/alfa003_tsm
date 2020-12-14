@@ -60,8 +60,8 @@ void main()
 	}
 	
 	
-	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers2") {
-	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp2", 0);
+	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers_bridge") {
+	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp_bridge", 0);
 	object oPC = GetEnteringObject();
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
@@ -81,6 +81,31 @@ void main()
 				{SendMessageToAllDMs(GetName(oPC) + " is charmed by " + GetName(OBJECT_SELF));
 				  SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. You *feel* an upwelling of warmth for this friend, a connection based on trust and unshakable loyalty. You can't bring the face of this person to mind immediately, but it doesn't matter. You know him or her on the inside, and will know him or her when you meet again." );
 				 }
+			}	 	
+	}
+	
+	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers_entry") {
+	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp_entry", 0);
+	object oPC = GetEnteringObject();
+	
+		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding_floor", GetLocation(oGlyphWP));
+			 DestroyObject(oGlyph, 6000.0);
+			 SetLocalInt(OBJECT_SELF, "Fired", 1);
+			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
+			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
+			 }
+				   	  	   
+		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
+		 	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));
+			if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
+				{SendMessageToPC(oPC, "A strange desire passes through you. You see a gong hanging over the archway beyond the bridge. You are momentarily siezed by the need to run across the bridge and pull the cord hanging from it...but the desire passes." );
+				}
+			else 
+				{SendMessageToAllDMs(GetName(oPC) + " is charmed by " + GetName(OBJECT_SELF));
+				  SendMessageToPC(oPC, "A strange desire passes through you. You see a gong hanging over the archway beyond the bridge. You are siezed by the need to run across the bridge and pull the cord hanging from it. It is an irresistable desire." );
+				 ActionForceMoveToObject(GetObjectByTag("occ_gong", 1), TRUE, 1.0);
+				  }
 			}	 	
 	}
 	 
