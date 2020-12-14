@@ -1250,7 +1250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B64B0214B50AA001A499FF8401B77E6BB0ECD16A" downloadHash="F1554A7646F30CCF612CCA46943E075E46777160" name="5g_int_felbarr_tr_cave.trx" dlsize="1017898" size="1039581" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C72F6F686F425BE297D5A051018E85B7F97E8E60" downloadHash="50F8483AC727C48FE01995ACF1D2D455F5C21AE2" name="5g_int_felbarr_tr_cave.trx" dlsize="951806" size="974688" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
