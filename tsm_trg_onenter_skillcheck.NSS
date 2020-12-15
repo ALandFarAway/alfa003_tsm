@@ -71,9 +71,11 @@ void main()
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
 	string sSkillName = GetLocalString(OBJECT_SELF, "SKILL_NAME_STRING");
-	int	nSkillName = StringToInt("SKILL_" + sSkillName);
+	int	nSkillName;
 	if(sSkillName == "CLIMB")
 		{nSkillName = SKILL_CLIMB;}
+	if(sSkillName == "BALANCE")
+		{nSkillName = SKILL_BALANCE;}
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
@@ -82,10 +84,10 @@ void main()
 	effect eKnockdown = EffectKnockdown();
 	float fKDTime = GetLocalFloat(OBJECT_SELF, "KDTIME");
 	int nFallDistance = GetLocalInt(OBJECT_SELF, "FAIL_DISTANCE");	
-	int nFallDamage = Random(6*nFallDistance/10) + (nFallDistance/10);
-	int nTumbleDmg = nFallDamage - Random(6) - Random(6);
+	int nTumbleDamage = Random(6*nFallDistance/10) + (nFallDistance/10);
+	int nFallDamage = nTumbleDamage*2;
 	effect eDamage = EffectDamage(nFallDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-	effect eTumbleDmg = EffectDamage(nTumbleDmg, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+	effect eTumbleDmg = EffectDamage(nTumbleDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	object oRope = GetFirstItemInInventory(oPC); 
 	string sRope = GetTag(oRope);
 	while (oRope != OBJECT_INVALID) {
@@ -108,12 +110,14 @@ void main()
 		{if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 		 	{SendMessageToPC(oPC, sMessageSuccess);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
-		 	 }
+		 	 AssignCommand(oPC, ActionSpeakString("*Puts a foot wrong, onto thin air.*", TALKVOLUME_TALK));
+			 }
 	 	 else {SendMessageToPC(oPC, sMessageFail);
-			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail)));
+			 AssignCommand(oPC, ActionSpeakString("*Falls off the invisible edge!*", TALKVOLUME_TALK));
+			 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));
 		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
 			 	{SendMessageToPC(oPC, sMessageFail);
-			     SendMessageToPC(oPC, "Your ability to tumble keeps your on your feet and saves you from hurting yourself badly.");
+			     SendMessageToPC(oPC, "You land heavily on rocks below, but your ability to tumble saves you from hurting yourself worse than you did.");
 			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
 			     ACR_ApplyNLDDamageToCreature(oPC, d6());
 				 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
@@ -123,7 +127,7 @@ void main()
 			     if(nKnockdown == 1) { 
 					 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime);
 					 SendMessageToPC(oPC, sMessageFail);
-			         SendMessageToPC(oPC, "You are knocked flat by the fall!");
+			         SendMessageToPC(oPC, "You fail to tumble to a safe landing and hurt yourself badly!");
 			 	     }
 				}
 			 }
