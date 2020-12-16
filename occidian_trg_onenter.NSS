@@ -108,6 +108,25 @@ void main()
 				  }
 			}	 	
 	}
+	
+	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_dd") {
+	object oGlyphWP = GetObjectByTag("occ_plc_symbol_dd_wp", 0);
+	object oPC = GetEnteringObject();
+	object oOccPeak = GetWaypointByTag("occ_peak_wp");
+	
+		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_small", GetLocation(oGlyphWP));
+			 DestroyObject(oGlyph, 6000.0);
+			 SetLocalInt(OBJECT_SELF, "Fired", 1);
+			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
+			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
+			 }
+				   	  	   
+		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
+		 	AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccPeak)));
+		 	 
+			}	 	
+	}
 	 
 	 // Xorn appearance inside Occidian cave
 	 if(GetTag(OBJECT_SELF) == "slv_deandragon_x_xorn")  
