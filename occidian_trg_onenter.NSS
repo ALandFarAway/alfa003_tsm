@@ -35,7 +35,7 @@ void main()
     // Custom code goes here.
 	
     
-	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers") {
+	if((GetTag(OBJECT_SELF) == "occ_trg_symbol_pers") && (GetIsPC(GetEnteringObject()))) {
 	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp", 0);
 	object oPC = GetEnteringObject();
 	
@@ -60,7 +60,7 @@ void main()
 	}
 	
 	
-	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers_bridge") {
+	if((GetTag(OBJECT_SELF) == "occ_trg_symbol_pers_bridge")&& (GetIsPC(GetEnteringObject()))) {
 	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp_bridge", 0);
 	object oPC = GetEnteringObject();
 	
@@ -84,29 +84,25 @@ void main()
 			}	 	
 	}
 	
-	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_pers_entry") {
+	if((GetTag(OBJECT_SELF) == "occ_trg_symbol_pers_entry")&& (GetIsPC(GetEnteringObject()))) {
 	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp_entry", 0);
 	object oPC = GetEnteringObject();
+	object oGong = GetObjectByTag("occ_gong", 1);
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
 	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding_floor", GetLocation(oGlyphWP));
 			 DestroyObject(oGlyph, 6000.0);
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
-			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
-			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
-			 }
-				   	  	   
-		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
-		 	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));
-			if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-				{SendMessageToPC(oPC, "A strange desire passes through you. You see a gong hanging over the archway beyond the bridge. You are momentarily siezed by the need to run across the bridge and pull the cord hanging from it...but the desire passes." );
+			 AssignCommand(oGong, ActionSpeakString("*A deep, resonant note peals out from this gong.", TALKVOLUME_TALK));
+			 int nDelay = 0;
+			
+			 while (nDelay < 10) {
+			 	nDelay = nDelay + 1;
+			 	if(oGong != OBJECT_INVALID) {
+					DelayCommand(IntToFloat(nDelay * 10), AssignCommand(oGong, ActionSpeakString("*GONG", TALKVOLUME_TALK)));
+					 }
 				}
-			else 
-				{SendMessageToAllDMs(GetName(oPC) + " is charmed by " + GetName(OBJECT_SELF));
-				  SendMessageToPC(oPC, "A strange desire passes through you. You see a gong hanging over the archway beyond the bridge. You are siezed by the need to run across the bridge and pull the cord hanging from it. It is an irresistable desire." );
-				 ActionForceMoveToObject(GetObjectByTag("occ_gong", 1), TRUE, 1.0);
-				  }
-			}	 	
+			 }	 	
 	}
 	
 	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_dd") {
@@ -124,10 +120,48 @@ void main()
 				   	  	   
 		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
 		 	AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccPeak)));
-		 	 
+		 	SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
 			}	 	
 	}
-	 
+	
+	
+	if((GetTag(OBJECT_SELF) == "occ_trg_glyph_explode") && (GetIsPC(GetEnteringObject()))) {
+	object oGlyphWP = GetNearestObjectByTag("occ_plc_symbol_explode_wp", OBJECT_SELF, 1);
+	object oPC = GetEnteringObject();
+	effect eExplode = EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION, FALSE);
+	
+	
+	if(GetLocalInt(OBJECT_SELF, "Fired") == 0) 
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_small", GetLocation(oGlyphWP));
+			 ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eExplode, GetLocation(oGlyphWP)); 
+			 DestroyObject(oGlyph, 6000.0);
+			 SetLocalInt(OBJECT_SELF, "Fired", 1);
+			 int nDamage = d8(5);
+			 if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF)) {
+			 	nDamage = nDamage/2;
+			 	}
+			 effect eDamage = EffectDamage(nDamage, DAMAGE_TYPE_SONIC, DAMAGE_POWER_NORMAL, FALSE);
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
+			 
+			 int nParty = 0;
+			 while (nParty < 6) {
+				 nParty = nParty + 1;
+				 object oParty = GetNearestObject(OBJECT_TYPE_CREATURE, oPC, nParty);
+				 int nPartyDmg = d8(5);
+				 if(GetDistanceBetween(oPC, oParty) < 5.0)
+				 	{if(ReflexSave(oParty, 15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF)) {
+					    nPartyDmg = nPartyDmg/2;
+					 	}
+				     effect eDamageParty = EffectDamage(nPartyDmg, DAMAGE_TYPE_SONIC, DAMAGE_POWER_NORMAL, FALSE);
+				 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamageParty, oParty);
+				 	}
+				 }
+			 
+			 }
+	}
+ 
+	
+	
 	 // Xorn appearance inside Occidian cave
 	 if(GetTag(OBJECT_SELF) == "slv_deandragon_x_xorn")  
 		  	{if(GetLocalInt(OBJECT_SELF, "Xorn") != 1)
