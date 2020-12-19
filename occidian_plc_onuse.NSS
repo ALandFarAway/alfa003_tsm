@@ -88,4 +88,15 @@ void main()
 		 SendMessageToPC(oUser, "oMyWP = " + GetTag(oMyWP));
 		 AssignCommand(GetLastUsedBy(), ActionJumpToLocation(GetLocation(oMyWP)));
 		}
+		
+	if(GetTag(OBJECT_SELF) == 	"occ_plc_glyph_ward_flr_splode") {
+	object oPC = GetLastUsedBy();
+	if(GetIsSkillSuccessful(oPC, SKILL_DISABLE_TRAP, 28)) {
+			object oGlyphTrig = GetNearestObjectByTag("occ_trg_glyph_explode", OBJECT_SELF, 1);
+			SetLocalInt(oGlyphTrig, "Fired", 1);
+			SetUseableFlag(OBJECT_SELF, FALSE);
+			 	
+		}
+
+	}
 }

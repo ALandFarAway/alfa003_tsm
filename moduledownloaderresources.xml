@@ -1250,7 +1250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="35C855E6627E66035EBC573135344FB86862BF43" downloadHash="492F9BE9D48791A10E816F7BE42C108BA3AE3E37" name="5g_int_felbarr_tr_cave.trx" dlsize="1028179" size="1049627" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9B9C74E92E09BFB4A3845654E120C49D08E03880" downloadHash="D85FCD7FC3E6C876F1D6C62348E64D3AF7E34555" name="5g_int_felbarr_tr_cave.trx" dlsize="1004217" size="1025830" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1585,7 +1585,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="37327E7E6E668D9424F57EFFD425A44000BF3678" downloadHash="A680FE3638892BD0544741A2CE09CFBC30900D78" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3132591" size="17833068" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="878FAB0A1342D7F3115CBB2F2BA0E6C6CBBD9843" downloadHash="21F3FFC79B23BDAD660E4F68C908BC737768553E" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3212217" size="17905219" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
