@@ -92,6 +92,7 @@ void main()
 	if(GetTag(OBJECT_SELF) == 	"occ_plc_glyph_ward_flr_splode") {
 	object oPC = GetLastUsedBy();
 	effect eSonicImplode = EffectVisualEffect(1009, FALSE);
+	effect eImplode = EffectVisualEffect(736, FALSE);
 	if(GetIsSkillSuccessful(oPC, SKILL_DISABLE_TRAP, 28)) {
 			object oGlyphTrig = GetNearestObjectByTag("occ_trg_glyph_explode", OBJECT_SELF, 1);
 			SetLocalInt(oGlyphTrig, "Fired", 1);
@@ -99,6 +100,7 @@ void main()
 			 	
 		}
 	else {DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eSonicImplode, GetLocation(OBJECT_SELF), 3.0));
+		  DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(OBJECT_SELF), 3.0));
 			 DestroyObject(OBJECT_SELF, 10.0);
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
 			 int nDamage = d8(5);
