@@ -141,7 +141,7 @@ void main()
 	if((GetTag(OBJECT_SELF) == "occ_trg_glyph_explode_det") && (GetIsPC(GetEnteringObject()))) {
 	object oGlyphWP = GetNearestObjectByTag("occ_plc_symbol_explode_wp", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
-	SendMessageToPC(oPC, "Entered Detect");
+	//SendMessageToPC(oPC, "Entered Detect");
 	
 	
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
