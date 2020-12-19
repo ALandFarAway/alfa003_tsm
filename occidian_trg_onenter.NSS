@@ -88,12 +88,14 @@ void main()
 	object oGlyphWP = GetObjectByTag("occ_plc_symbol_pers_wp_entry", 0);
 	object oPC = GetEnteringObject();
 	object oGong = GetObjectByTag("occ_gong", 0);
+	effect eSoundBurst = EffectVisualEffect(VFX_FNF_SOUND_BURST, FALSE);
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
 	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_warding_floor", GetLocation(oGlyphWP));
 			 DestroyObject(oGlyph, 6000.0);
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
 			 AssignCommand(oGong, ActionSpeakString("*A deep, resonant note peals out from this gong.", TALKVOLUME_TALK));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurst, oGong, 5.0);
 			 int nDelay = 0;
 			
 			 while (nDelay < 10) {
@@ -129,7 +131,7 @@ void main()
 	object oGlyphWP = GetNearestObjectByTag("occ_plc_symbol_explode_wp", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
-		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design on the ground!");
+		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design carved onto the ground!");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_splode", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, SetUseableFlag(oGlyph, TRUE));
 		}
@@ -147,21 +149,26 @@ void main()
 	effect eImplode = EffectVisualEffect(736, FALSE);
 	effect eCircle = EffectVisualEffect(700, FALSE);
 	effect eSonicImplode = EffectVisualEffect(1009, FALSE);
+	effect eSoundBurst = EffectVisualEffect(VFX_FNF_SOUND_BURST, FALSE);
 							 						 
 	object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_splode", GetLocation(oGlyphWP));
 	
 	DelayCommand(1.0, SendMessageToPC(oPC, "eFire"));		 
-	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFireExplosion, oGlyph, 5.0));
+	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFireExplosion, oPC, 5.0));
 	DelayCommand(10.0, SendMessageToPC(oPC, "eElectric"));		 						 					 
-	DelayCommand(11.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eElectric, oGlyph, 3.0));
+	DelayCommand(11.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eElectric, oPC, 3.0));
 	DelayCommand(20.0, SendMessageToPC(oPC, "eCircle"));		 						 					 
 	DelayCommand(21.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 3.0));
 	DelayCommand(30.0, SendMessageToPC(oPC, "eSteamExplosion"));		 						 					 
-	DelayCommand(31.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSteamExplosion, oGlyph, 3.0));
+	DelayCommand(31.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSteamExplosion, oPC, 3.0));
 	DelayCommand(40.0, SendMessageToPC(oPC, "eImplode"));		 						 					 
-	DelayCommand(41.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eImplode, oGlyph, 3.0));
+	DelayCommand(41.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eImplode, oPC, 3.0));
 	DelayCommand(50.0, SendMessageToPC(oPC, "eSonicImplode"));		 						 					 
-	DelayCommand(51.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonicImplode, oGlyph, 3.0));
+	DelayCommand(51.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonicImplode, oPC, 3.0));
+	DelayCommand(60.0, SendMessageToPC(oPC, "eExplode"));		 						 					 
+	DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode, oPC, 3.0));
+	DelayCommand(70.0, SendMessageToPC(oPC, "eExplode2"));		 						 					 
+	DelayCommand(71.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode2, oPC, 3.0));
 							 						 
 	
 							 
