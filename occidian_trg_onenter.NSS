@@ -130,6 +130,7 @@ void main()
 	if((GetTag(OBJECT_SELF) == "occ_trg_glyph_explode_det") && (GetIsPC(GetEnteringObject()))) {
 	object oGlyphWP = GetNearestObjectByTag("occ_plc_symbol_explode_wp", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
+	SendMessageToPC(oPC, "Entered Detect");
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
 		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design carved onto the ground!");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_splode", GetLocation(oGlyphWP));
@@ -150,27 +151,32 @@ void main()
 	effect eCircle = EffectVisualEffect(700, FALSE);
 	effect eSonicImplode = EffectVisualEffect(1009, FALSE);
 	effect eSoundBurst = EffectVisualEffect(VFX_FNF_SOUND_BURST, FALSE);
-							 						 
+	effect eDust = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION, FALSE);
+	effect eStone = EffectVisualEffect(VFX_COM_CHUNK_STONE_MEDIUM, FALSE);
+			 						 						 
 	object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_splode", GetLocation(oGlyphWP));
 	
 	DelayCommand(1.0, SendMessageToPC(oPC, "eFire"));		 
-	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFireExplosion, oPC, 5.0));
+	DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eFireExplosion, GetLocation(oGlyph), 5.0));
 	DelayCommand(10.0, SendMessageToPC(oPC, "eElectric"));		 						 					 
-	DelayCommand(11.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eElectric, oPC, 3.0));
+	DelayCommand(11.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eElectric, GetLocation(oGlyph), 3.0));
 	DelayCommand(20.0, SendMessageToPC(oPC, "eCircle"));		 						 					 
-	DelayCommand(21.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 3.0));
+	DelayCommand(21.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	DelayCommand(30.0, SendMessageToPC(oPC, "eSteamExplosion"));		 						 					 
-	DelayCommand(31.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSteamExplosion, oPC, 3.0));
+	DelayCommand(31.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eSteamExplosion, GetLocation(oGlyph), 3.0));
 	DelayCommand(40.0, SendMessageToPC(oPC, "eImplode"));		 						 					 
-	DelayCommand(41.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eImplode, oPC, 3.0));
+	DelayCommand(41.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(oGlyph), 3.0));
 	DelayCommand(50.0, SendMessageToPC(oPC, "eSonicImplode"));		 						 					 
-	DelayCommand(51.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonicImplode, oPC, 3.0));
+	DelayCommand(51.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eSonicImplode, GetLocation(oGlyph), 3.0));
 	DelayCommand(60.0, SendMessageToPC(oPC, "eExplode"));		 						 					 
-	DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode, oPC, 3.0));
+	DelayCommand(61.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eExplode, GetLocation(oGlyph), 3.0));
 	DelayCommand(70.0, SendMessageToPC(oPC, "eExplode2"));		 						 					 
-	DelayCommand(71.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode2, oPC, 3.0));
-							 						 
-	
+	DelayCommand(71.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eExplode2, GetLocation(oGlyph), 3.0));
+	DelayCommand(80.0, SendMessageToPC(oPC, "eDust"));		 						 					 
+	DelayCommand(81.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eDust, GetLocation(oGlyph)));
+	DelayCommand(90.0, SendMessageToPC(oPC, "eStone"));		 						 					 
+	DelayCommand(91.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eStone, GetLocation(oGlyph)));
+			 
 							 
 	if(GetLocalInt(OBJECT_SELF, "Fired") == 0) 
 	        {ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplode, oGlyphWP); 
