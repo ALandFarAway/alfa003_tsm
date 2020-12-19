@@ -91,12 +91,39 @@ void main()
 		
 	if(GetTag(OBJECT_SELF) == 	"occ_plc_glyph_ward_flr_splode") {
 	object oPC = GetLastUsedBy();
+	effect eSonicImplode = EffectVisualEffect(1009, FALSE);
 	if(GetIsSkillSuccessful(oPC, SKILL_DISABLE_TRAP, 28)) {
 			object oGlyphTrig = GetNearestObjectByTag("occ_trg_glyph_explode", OBJECT_SELF, 1);
 			SetLocalInt(oGlyphTrig, "Fired", 1);
 			SetUseableFlag(OBJECT_SELF, FALSE);
 			 	
 		}
+	else {DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eSonicImplode, GetLocation(OBJECT_SELF), 3.0));
+			 DestroyObject(OBJECT_SELF, 10.0);
+			 SetLocalInt(OBJECT_SELF, "Fired", 1);
+			 int nDamage = d8(5);
+			 if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF)) {
+			 	nDamage = nDamage/2;
+			 	}
+			 effect eDamage = EffectDamage(nDamage, DAMAGE_TYPE_SONIC, DAMAGE_POWER_NORMAL, FALSE);
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
+			 
+			 int nParty = 0;
+			 while (nParty < 6) {
+				 nParty = nParty + 1;
+				 object oParty = GetNearestObject(OBJECT_TYPE_CREATURE, oPC, nParty);
+				 int nPartyDmg = d8(5);
+				 if(GetDistanceBetween(oPC, oParty) < 5.0)
+				 	{if(ReflexSave(oParty, 15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF)) {
+					    nPartyDmg = nPartyDmg/2;
+					 	}
+				     effect eDamageParty = EffectDamage(nPartyDmg, DAMAGE_TYPE_SONIC, DAMAGE_POWER_NORMAL, FALSE);
+				 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamageParty, oParty);
+				 	}
+				 }
+			 
+			 }
+		
 
 	}
 }
