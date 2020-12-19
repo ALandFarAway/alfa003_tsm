@@ -47,7 +47,7 @@ if((GetTag(OBJECT_SELF) == "slv_plc_xorn_hole") && (GetInventoryDisturbType() ==
 			   || (FindSubString(GetName(oItem), "Pot,") != -1)   || (FindSubString(GetName(oItem), "Ram,") != -1)  || (FindSubString(GetName(oItem), "Needle") != -1)  || (FindSubString(GetName(oItem), "Shovel") != -1) || (FindSubString(GetName(oItem), "Whistle") != -1)  
 				 || (FindSubString(GetName(oItem), "Metal") != -1)  || (FindSubString(GetName(oItem), "Stone") != -1)  || (FindSubString(GetName(oItem), "Whetstone") != -1) 
 				  || (FindSubString(GetName(oItem), "Gold") != -1) || (FindSubString(GetName(oItem), "Copper") != -1)|| (FindSubString(GetName(oItem), "Silver") != -1)|| (FindSubString(GetName(oItem), "Iron") != -1) || (FindSubString(GetName(oItem), "Steel") != -1)
-				  || (FindSubString(GetName(oItem), "Bronze") != -1)  || (FindSubString(GetName(oItem), "Ingot") != -1))  
+				  || (FindSubString(GetName(oItem), "Bronze") != -1)  || (FindSubString(GetName(oItem), "Ingot") != -1) || (FindSubString(GetName(oItem), "Anvil") != -1))  
 			{iWeight = GetWeight(oItem);
 			 sEat = sEdible;
 			 }
