@@ -138,7 +138,7 @@ void main()
 	}
 	
 	
-	if((GetTag(OBJECT_SELF) == "occ_trg_glyph_explode_det") && (GetIsPC(GetEnteringObject()))) {
+	if((GetTag(OBJECT_SELF) == "occ_trg_glyph_explode_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) {
 	object oGlyphWP = GetNearestObjectByTag("occ_plc_symbol_explode_wp", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	//SendMessageToPC(oPC, "Entered Detect");
@@ -149,12 +149,14 @@ void main()
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_splode", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 SetLocalInt(OBJECT_SELF, "Fired", 1);
 		}
 	else if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
 		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design carved onto the ground!");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_splode", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 SetLocalInt(OBJECT_SELF, "Fired", 1);
 		}
 	
 	}
