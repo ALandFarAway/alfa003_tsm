@@ -119,43 +119,23 @@ void main()
 	}
 	
 	if(GetTag(OBJECT_SELF) == "occ_trg_symbol_dd") {
-	object oGlyphWP = GetObjectByTag("occ_plc_symbol_dd_wp", 0);
-	object oPC = GetEnteringObject();
-	object oOccPeak = GetWaypointByTag("occ_peak_wp");
-	
-		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_small", GetLocation(oGlyphWP));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
-	         DestroyObject(oGlyph, 6000.0);
-			 SetLocalInt(OBJECT_SELF, "Fired", 1);
-			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
-			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
-			 }
-				   	  	   
-		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
-		 	AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccPeak)));
-		 	SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
-			}	 	
+		object oPC = GetEnteringObject();
+		object oOccPeak = GetWaypointByTag("occ_peak_wp");
+		object oGlyph = GetObjectByTag("occ_plc_symbol_dd",0);
+		SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
+		DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
+		DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccPeak))));
+				 	
 	}
 	
-	if(GetTag(OBJECT_SELF) == "occ_peak_trg_symbol_dd") {
-	object oGlyphWP = GetObjectByTag("occ_peak_plc_symbol_dd_wp", 0);
-	object oPC = GetEnteringObject();
-	object oOccEntry = GetWaypointByTag("slv_maze_occ");
-	
-		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "occ_plc_glyph_ward_flr_small", GetLocation(oGlyphWP));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
-	         DestroyObject(oGlyph, 6000.0);
-			 SetLocalInt(OBJECT_SELF, "Fired", 1);
-			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
-			 DelayCommand(6000.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
-			 }
-				   	  	   
-		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
-		 	AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccEntry)));
-		 	SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
-			}	 	
+	if((GetTag(OBJECT_SELF) == "occ_peak_trg_symbol_dd") && (GetIsPC(GetEnteringObject()))) {
+		object oPC = GetEnteringObject();
+		object oOccEntry = GetWaypointByTag("slv_maze_occ");
+		object oGlyph = GetObjectByTag("occ_peak_plc_symbol_dd",0);
+		SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
+		DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
+	    DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccEntry))));
+				 	
 	}
 	
 	if((GetTag(OBJECT_SELF) == "occ_trg_glyph_explode_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) {
