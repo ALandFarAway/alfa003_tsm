@@ -1585,7 +1585,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5A4D3A6F8BD192D5044A9B9BA5C242F0396C74D3" downloadHash="A14E89B2D84E9CEF2FD4EA317B00C90EAB01A15A" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3227838" size="17957274" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7F2BCE570B5E4275A29F65D4B333951D6E5EAE6F" downloadHash="C6745E233D54FD733FE143C370FEED4F381E12FC" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3238246" size="17967288" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

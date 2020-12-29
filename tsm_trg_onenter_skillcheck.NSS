@@ -113,11 +113,11 @@ void main()
 		 	 AssignCommand(oPC, ActionSpeakString("*Puts a foot wrong, onto thin air.*", TALKVOLUME_TALK));
 			 }
 	 	 else {SendMessageToPC(oPC, sMessageFail);
-			 AssignCommand(oPC, ActionSpeakString("*Falls off the invisible edge!*", TALKVOLUME_TALK));
+			 AssignCommand(oPC, ActionSpeakString("*Falls!*", TALKVOLUME_TALK));
 			 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));
 		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
 			 	{SendMessageToPC(oPC, sMessageFail);
-			     SendMessageToPC(oPC, "You land heavily on rocks below, but your ability to tumble saves you from hurting yourself worse than you did.");
+			     SendMessageToPC(oPC, "You land heavily, but your ability to tumble saves you from hurting yourself worse than you did.");
 			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
 			     ACR_ApplyNLDDamageToCreature(oPC, d6());
 				 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
