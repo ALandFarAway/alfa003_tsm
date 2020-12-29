@@ -141,9 +141,10 @@ void main()
 			 else   
 			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
 			     if(nKnockdown == 1) { 
-					 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime);
+					 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
+			         DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime));
 					 SendMessageToPC(oPC, sMessageFail);
-			         SendMessageToPC(oPC, "You fail to tumble to a safe landing and hurt yourself badly!");
+			         SendMessageToPC(oPC, "You fail to tumble to a safe landing and hurt yourself!");
 			 	     }
 				}
 			 }
