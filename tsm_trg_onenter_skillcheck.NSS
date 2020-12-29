@@ -74,8 +74,9 @@ void main()
 	int	nSkillName;
 	if(sSkillName == "CLIMB")
 		{nSkillName = SKILL_CLIMB;}
-	if(sSkillName == "BALANCE")
+	else if(sSkillName == "BALANCE")
 		{nSkillName = SKILL_BALANCE;}
+		
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess, OBJECT_SELF, 1);
