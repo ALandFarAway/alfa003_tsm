@@ -66,8 +66,10 @@ void main()
 	if((GetLocalInt(oPC, "IceWalking") == 1) && (nLoop < 10) && (oPC != OBJECT_INVALID))
 		{if(!GetHasSpellEffect(SPELL_FREEDOM_OF_MOVEMENT, oPC)) {
 				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ExtraordinaryEffect(EffectMovementSpeedDecrease(50)), oPC, 6.0);
-				SendMessageToPC(oPC, IntToString(nLoop) + ". The slippery ice cuts your movement to half!");	 
-		 	}
+				if(nLoop == 0) {
+					SendMessageToPC(oPC, "The slippery ice cuts your movement to half!");	 
+		 		}
+			}
 	     	nLoop++;
 		 	SetLocalInt(oPC, "nLoopIce", nLoop);
 			DelayCommand(6.0, ExecuteScript("tsm_trg_onloop_ice", oPC));
