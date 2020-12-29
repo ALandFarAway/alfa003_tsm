@@ -61,9 +61,56 @@ void main()
     ACR_TriggerOnEnter();
 
     // Custom code goes here.
-	object oPC = GetExitingObject();
-	SetLocalInt(oPC, "IceWalking", 0);
-	SetLocalInt(oPC, "nLoopIce", 0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ExtraordinaryEffect(EffectMovementSpeedIncrease(99)), oPC, 6.0);
-	     
+	object oPC = GetEnteringObject();
+	int nRepCold = GetLocalInt(oPC, "nRepCold");
+	float fTimeLoop = 91.0;
+			
+if((GetLocalInt(oPC, "ColdLoop") == 1) && (nRepCold < 10)  && (oPC != OBJECT_INVALID)) {
+
+	if(GetIsPC(oPC))
+		{
+		if(FindSubString(GetName(GetItemInSlot(INVENTORY_SLOT_CLOAK, oPC)), "Greatcloak") != -1)
+			{if(nRepCold == 1) {SendMessageToPC(oPC, "Your warm cloak will insulate you from some of the cold.");
+			 }
+			fTimeLoop = 300.0;
+			}
+		if(GetHasSkill(SKILL_SURVIVAL, oPC))
+			{SetLocalInt(oPC, "Survival", 4);
+			 if(nRepCold == 1) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the cold.");
+				}
+			}
+		if((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
+			{int nSurvival = GetLocalInt(oPC, "Survival");
+			 int nDC = 15 + nRepCold - nSurvival;
+			 if(nRepCold > 0) {
+			 if(!FortitudeSave(oPC, nDC, SAVING_THROW_TYPE_COLD, oPC))
+				{ACR_ApplyNLDDamageToCreature(oPC, d6());
+				 ACR_NLD_ReportTotal(oPC, oPC, 0);
+				 SendMessageToPC(oPC, "The bitter cold takes its toll!");
+				 }
+				}
+			}
+			else if((GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) || (GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))|| (GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
+				{SendMessageToPC(oPC, "You feel your elemental protection spell keeping the worst of the cold at bay.");
+				}
+					
+			SetLocalInt(oPC, "Survival", 0);
+			nRepCold++;
+			SetLocalInt(oPC, "nRepCold", nRepCold);
+			if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
+				{SetLocalInt(oPC, "nRepCold", 0);
+				 SendMessageToPC(oPC, "The last of the bitter cold shakes itself from your bones.");
+				}
+			
+		
+		
+			if(GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail") {
+				DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onenter_cold", oPC));
+				}
+			else {
+				SetLocalInt(oPC, "nRepCold", 0);
+			  	SetLocalInt(oPC, "nRepCold", 0);
+				}		 
+		}
+	}
 }

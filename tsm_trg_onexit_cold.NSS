@@ -62,11 +62,7 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetExitingObject();
-
- if(GetLocalInt(oPC, "nRepCold") != 0)
-		{SetLocalInt(oPC, "nRepCold", 0);
-		 }
-if(GetLocalString(OBJECT_SELF, GetName(oPC)) == GetName(oPC)){
-   SetLocalString(OBJECT_SELF, GetName(oPC), "");				
-	}   
+	SetLocalInt(oPC, "ColdLoop", 0);
+	SetLocalInt(oPC, "nRepCold", 0);
+	
 }

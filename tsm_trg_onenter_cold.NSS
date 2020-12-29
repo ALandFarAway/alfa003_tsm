@@ -62,52 +62,10 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
+	if(GetIsPC(oPC)) {
+		SetLocalInt(oPC, "ColdLoop", 1);
+		ExecuteScript("tsm_trg_onloop_cold", oPC);
+	}
 
- if(GetLocalInt(oPC, "ColdRep") == 0)
-		{//SetLocalInt(oPC, "ColdRep", 1);
-		 //DelayCommand(61.0, ExecuteScript("slv_static_voice_cr_pc", oPC));
-		}
 
-if((GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC)) || (GetLocalInt(oPC, "nRepCold") > 0)) {
-	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));				
-	if(GetLocalInt(oPC, "nRepCold") <25)
-		{
-		float fTimeLoop = 91.0;
-		int nRepCold = GetLocalInt(oPC, "nRepCold");
-		if(FindSubString(GetName(GetItemInSlot(INVENTORY_SLOT_CLOAK, oPC)), "Greatcloak") != -1)
-			{SendMessageToPC(oPC, "Your warm cloak will insulate you from some of the cold.");
-			 fTimeLoop = 300.0;
-			}
-		if(GetHasSkill(SKILL_SURVIVAL, oPC))
-			{SetLocalInt(oPC, "Survival", 4);
-			 if(nRepCold == 0) { SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the cold.");
-				}
-			}
-		if ((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
-			{int nSurvival = GetLocalInt(oPC, "Survival");
-			 int nDC = 15 + nRepCold - nSurvival;
-			 if(!FortitudeSave(oPC, nDC, SAVING_THROW_TYPE_COLD, oPC))
-				{ACR_ApplyNLDDamageToCreature(oPC, d6());
-				 SendMessageToPC(oPC, "The bitter cold takes its toll!");
-				 ACR_NLD_ReportTotal(oPC, oPC, 0);
-				}
-			}
-			else {SendMessageToPC(oPC, "You feel your elemental protection spell keeping the worst of the cold at bay.");
-				}
-					
-			SetLocalInt(oPC, "Survival", 0);
-			nRepCold++;
-			SetLocalInt(oPC, "nRepCold", nRepCold);
-			if((GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail")&& (nRepCold < 25))
-				{DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onenter_cold", oPC));}
-			if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
-				{SetLocalInt(oPC, "nRepCold", 0);
-				 SendMessageToPC(oPC, "The last of the bitter cold shakes itself from your bones.");
-				}
-			}
-			else {SetLocalInt(oPC, "nRepCold", 0);
-				 SetLocalInt(oPC, "nRepCold", 0);
-				}	
-				 
-	  } 
 }
