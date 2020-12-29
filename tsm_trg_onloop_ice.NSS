@@ -70,6 +70,7 @@ void main()
 		 	}
 	     	nLoop++;
 		 	SetLocalInt(oPC, "nLoopIce", nLoop);
+			DelayCommand(6.0, ExecuteScript("tsm_trg_onloop_ice", oPC));
+				
 		}
 }
-

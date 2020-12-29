@@ -105,7 +105,7 @@ if((GetLocalInt(oPC, "ColdLoop") == 1) && (nRepCold < 10)  && (oPC != OBJECT_INV
 		
 		
 			if(GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail") {
-				DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onenter_cold", oPC));
+				DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onloop_cold", oPC));
 				}
 			else {
 				SetLocalInt(oPC, "nRepCold", 0);

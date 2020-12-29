@@ -78,8 +78,8 @@ void main()
 		{nSkillName = SKILL_BALANCE;}
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
-	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
-	object oWPFail = GetNearestObjectByTag(sWPFail);
+	object oWPSuccess = GetNearestObjectByTag(sWPSuccess, OBJECT_SELF, 1);
+	object oWPFail = GetNearestObjectByTag(sWPFail, OBJECT_SELF, 1);
 	int nKnockdown = GetLocalInt(OBJECT_SELF, "KNOCKDOWN");
 	effect eKnockdown = EffectKnockdown();
 	float fKDTime = GetLocalFloat(OBJECT_SELF, "KDTIME");
@@ -110,8 +110,14 @@ void main()
 		{if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 		 	{SendMessageToPC(oPC, sMessageSuccess);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
-		 	 AssignCommand(oPC, ActionSpeakString("*Puts a foot wrong, onto thin air.*", TALKVOLUME_TALK));
+		 	 AssignCommand(oPC, ActionSpeakString("*Climbs safely*", TALKVOLUME_TALK));
 			 }
+		 else if(GetHasSpellEffect(SPELL_FEATHER_FALL, oPC)) {
+		 	 SendMessageToPC(oPC, "Falls...but a Feather Fall spell makes you float safely down.");
+			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
+		 	 AssignCommand(oPC, ActionSpeakString("*Falls...and floats down safely.*", TALKVOLUME_TALK));
+			 
+		 	}
 	 	 else {SendMessageToPC(oPC, sMessageFail);
 			 AssignCommand(oPC, ActionSpeakString("*Falls!*", TALKVOLUME_TALK));
 			 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));

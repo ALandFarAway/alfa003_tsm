@@ -97,10 +97,10 @@ void main()
 				ApplyEffectToObject(nDurationType, eTwo, oSpawnWP, fDurationLength);
 		        //SendMessageToAllDMs(IntToString(nDurationTypeTwo) + " " + IntToString(nVFXTwo) + " on " + sSpawnWPTwo + " for " + FloatToString(fDurationLengthTwo) + " seconds.");
 				ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnWPTwo, fDurationLengthTwo);
-		        if((nSpawnNumber > 1) && (Random(2) == 1))
+		        if(nSpawnNumber > 1) 
 					{//SendMessageToAllDMs("oSpawnOneB = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
 			         object oSpawnOneB = CreateObject(nSpawnType, sSpawn, lSpawnWP);}
-				if((nSpawnNumber > 2) && (Random(2) == 1))
+				if(nSpawnNumber > 2) 
 					{//SendMessageToAllDMs("oSpawnOneC = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
 			         object oSpawnOneC = CreateObject(nSpawnType, sSpawn, lSpawnWP);}
 				if((nSpawnNumber > 3) && (Random(2) == 1))
@@ -121,27 +121,27 @@ void main()
 			if((nSpawnNumberTwo > 0) && (sSpawnTwo != "")) {
 				//SendMessageToAllDMs("oSpawnTwo = " + IntToString(nSpawnTypeTwo) + " " + sSpawnTwo + " at location of " +sSpawnWPTwo );
 			    object oSpawnTwo = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo); 
-			    DelayCommand(1.0, AssignCommand(oSpawnTwo,ActionSpeakString("*Climbs out of the xorn's mouth.", TALKVOLUME_TALK)));
+			    DelayCommand(1.0, AssignCommand(oSpawnTwo,ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
 				//SendMessageToAllDMs("nSpawnNumberTwo = " + IntToString(nSpawnNumberTwo));
-			     if((nSpawnNumberTwo > 1) && (Random(2) == 1))
+			     if(nSpawnNumberTwo > 1) 
 					{//SendMessageToAllDMs("oSpawnTwoB = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
 			         object oSpawnTwoB = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-					 DelayCommand(1.0, AssignCommand(oSpawnTwoB, ActionSpeakString("*Climbs out of the xorn's mouth.", TALKVOLUME_TALK)));
+					 DelayCommand(1.0, AssignCommand(oSpawnTwoB, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
 					}
-				if((nSpawnNumberTwo > 2) && (Random(2) == 1))
+				if(nSpawnNumberTwo > 2)
 					{//SendMessageToAllDMs("oSpawnTwoC = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
 			         object oSpawnTwoC = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-					 DelayCommand(1.0, AssignCommand(oSpawnTwoC, ActionSpeakString("*Climbs out of the xorn's mouth.", TALKVOLUME_TALK)));
+					 DelayCommand(1.0, AssignCommand(oSpawnTwoC, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
 					}
 				if((nSpawnNumberTwo > 3) && (Random(2) == 1))
 					{//SendMessageToAllDMs("oSpawnTwoD = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
 			         object oSpawnTwoD = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-					 DelayCommand(1.0, AssignCommand(oSpawnTwoD, ActionSpeakString("*Climbs out of the xorn's mouth.", TALKVOLUME_TALK)));
+					 DelayCommand(1.0, AssignCommand(oSpawnTwoD, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
 					}
 				if((nSpawnNumberTwo > 4) && (Random(2) == 1))
 					{//SendMessageToAllDMs("oSpawnTwoE = " + IntToString(nSpawnType) + " " + sSpawn + " at location of " +sSpawnWP );
 			         object oSpawnTwoE = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-					 DelayCommand(1.0, AssignCommand(oSpawnTwoE, ActionSpeakString("*Climbs out of the xorn's mouth.", TALKVOLUME_TALK)));
+					 DelayCommand(1.0, AssignCommand(oSpawnTwoE, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
 					}
 				if(fDelayVFXTwo > fDelaySpawnTwo) {
 				//SendMessageToAllDMs("Delayed " + FloatToString(fDelayVFXTwo) + " " + IntToString(nDurationTypeTwo) + " " + IntToString(nVFXTwo) + " on " + sSpawnWPTwo + " for " + FloatToString(fDurationLengthTwo) + " seconds.");
