@@ -88,6 +88,16 @@ void main()
 	int nFallDamage = nTumbleDamage*2;
 	effect eDamage = EffectDamage(nFallDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	effect eTumbleDmg = EffectDamage(nTumbleDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+	effect eFeatherFall = GetFirstEffect(oPC);
+	
+	while(GetIsEffectValid(eFeatherFall)) {
+		int nFeatherFall = FALSE;
+		int nEffectType = GetEffectType(eFeatherFall);
+		int nEffectSubType = GetEffectSubType(eFeatherFall);
+		SendMessageToPC(oPC, IntToString(nEffectType) + " = Type. " + IntToString(nEffectSubType) + " = SubType.");
+		eFeatherFall = GetNextEffect(oPC);
+	}
+	
 	object oRope = GetFirstItemInInventory(oPC); 
 	string sRope = GetTag(oRope);
 	while (oRope != OBJECT_INVALID) {
