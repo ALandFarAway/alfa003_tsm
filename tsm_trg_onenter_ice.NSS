@@ -62,9 +62,8 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
-	
- 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ExtraordinaryEffect(EffectMovementSpeedDecrease(50)), oPC, 100.0);
-	SendMessageToPC(oPC, "Decrease applied for 100 seconds.");	 
-
+	SetLocalInt(oPC, "IceWalking", 1);
+	ExecuteScript("tsm_trg_onloop_ice", oPC);
+		 
 
 }

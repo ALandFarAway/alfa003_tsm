@@ -62,7 +62,7 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetExitingObject();
-
-	 RemoveEffect(oPC, ExtraordinaryEffect(EffectMovementSpeedDecrease(50)));
-	 SendMessageToPC(oPC, "Decrease removed.");
+	SetLocalInt(oPC, "IceWalking", 0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ExtraordinaryEffect(EffectMovementSpeedIncrease(99)), oPC, 6.0);
+	     
 }
