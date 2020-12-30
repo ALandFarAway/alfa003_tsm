@@ -63,7 +63,7 @@ void main()
     // Custom code goes here.
 	object oPC = OBJECT_SELF;
 	int nLoop = GetLocalInt(oPC, "nLoopIce");
-	if((GetLocalInt(oPC, "IceWalking") == 1) && (nLoop < 10) && (oPC != OBJECT_INVALID))
+	if((GetLocalInt(oPC, "IceWalking") == 1) && (nLoop < 100) && (oPC != OBJECT_INVALID))
 		{if(!GetHasSpellEffect(SPELL_FREEDOM_OF_MOVEMENT, oPC)) {
 				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ExtraordinaryEffect(EffectMovementSpeedDecrease(50)), oPC, 6.0);
 				if(nLoop == 0) {
