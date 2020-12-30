@@ -122,7 +122,7 @@ void main()
 		object oPC = GetEnteringObject();
 		object oOccPeak = GetWaypointByTag("occ_peak_wp");
 		object oGlyph = GetObjectByTag("occ_plc_symbol_dd",0);
-		SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
+		SendMessageToPC(oPC, "You hear mocking laughter in your head, and then a wrenching sense of dislocation.");
 		DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 		DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccPeak))));
 				 	
@@ -132,7 +132,7 @@ void main()
 		object oPC = GetEnteringObject();
 		object oOccEntry = GetWaypointByTag("slv_maze_occ");
 		object oGlyph = GetObjectByTag("occ_peak_plc_symbol_dd",0);
-		SendMessageToPC(oPC, "You feel a strange sensation, like a cold wind blowing through you, and then a wrenching sense of dislocation.");
+		SendMessageToPC(oPC, "You hear mocking laughter in your head, and then a wrenching sense of dislocation.");
 		DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	    DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oOccEntry))));
 				 	
