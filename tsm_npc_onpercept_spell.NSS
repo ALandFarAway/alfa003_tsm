@@ -52,14 +52,18 @@ void main()
 	
 	if((GetIsPC(oPerceived)) && (GetLocalInt(OBJECT_SELF, "PerceiveFired") != 1))
 		{SetLocalInt(OBJECT_SELF, "PerceiveFired", 1);
+		 ClearAllActions(TRUE);
 		 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 DelayCommand(5.0, ClearAllActions(TRUE));
 		 DelayCommand(6.0, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 		
 		}
 		
-	if((GetName(oPerceived)== "Kythorn") && (GetLocalInt(OBJECT_SELF, "PerceiveKy") != 1))
+	if((GetName(oPerceived)== "WynnaKyTest") && (GetLocalInt(OBJECT_SELF, "PerceiveKy") != 1))
 		{SetLocalInt(OBJECT_SELF, "PerceiveKy", 1);
+		 ClearAllActions(TRUE);
 		 ActionCastSpellAtObject(SPELL_CHARM_PERSON, oAmnestria, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 DelayCommand(5.0, ClearAllActions(TRUE));
 		 DelayCommand(6.0, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oAmnestria, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 		
 		}		 
