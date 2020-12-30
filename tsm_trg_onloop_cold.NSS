@@ -61,7 +61,7 @@ void main()
     ACR_TriggerOnEnter();
 
     // Custom code goes here.
-	object oPC = GetEnteringObject();
+	object oPC = OBJECT_SELF;
 	int nRepCold = GetLocalInt(oPC, "nRepCold");
 	float fTimeLoop = 91.0;
 			

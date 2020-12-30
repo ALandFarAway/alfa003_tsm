@@ -129,7 +129,7 @@ void main()
 		 	 AssignCommand(oPC, ActionSpeakString("*Falls...and floats down safely.*", TALKVOLUME_TALK));
 			 
 		 	}
-	 	 else {SendMessageToPC(oPC, sMessageFail);
+	 	 else {
 			 AssignCommand(oPC, ActionSpeakString("*Falls!*", TALKVOLUME_TALK));
 			 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));
 		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
@@ -142,8 +142,7 @@ void main()
 			 else   
 			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
 			     if(nKnockdown == 1) { 
-					 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
-			         DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime));
+					 DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime));
 					 SendMessageToPC(oPC, sMessageFail);
 			         SendMessageToPC(oPC, "You fail to tumble to a safe landing and hurt yourself!");
 			 	     }
