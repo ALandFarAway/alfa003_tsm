@@ -67,6 +67,13 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
+	int nRace = GetRacialType(oPC);
+	int nSubRace = GetSubRace(oPC);
+	 
+	SendMessageToPC(oPC, "Race = " + IntToString(nRace));
+	SendMessageToPC(oPC, "Subrace = " + IntToString(nSubRace));
+	if((nRace != RACIAL_TYPE_DRAGON) && (nRace != RACIAL_TYPE_FEY)) {
+	
     int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
@@ -150,5 +157,5 @@ void main()
 			 }
 		}
 	  
-			   
+	}		   
 }
