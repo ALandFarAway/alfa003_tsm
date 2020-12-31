@@ -51,7 +51,8 @@ void main()
 	object oAmnestria = GetObjectByTag("003_cr_elf_sun_amnestria", 0);
 	
 	if((GetIsPC(oPerceived)) && (GetLocalInt(OBJECT_SELF, "PerceiveFired") != 1))
-		{SetLocalInt(OBJECT_SELF, "PerceiveFired", 1);
+		{ActionSpeakString(GetName(oPerceived));
+		 SetLocalInt(OBJECT_SELF, "PerceiveFired", 1);
 		 ClearAllActions(TRUE);
 		 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 DelayCommand(5.0, ClearAllActions(TRUE));
@@ -59,13 +60,6 @@ void main()
 		
 		}
 		
-	if((GetName(oPerceived)== "WynnaKyTest") && (GetLocalInt(OBJECT_SELF, "PerceiveKy") != 1))
-		{SetLocalInt(OBJECT_SELF, "PerceiveKy", 1);
-		 ClearAllActions(TRUE);
-		 ActionCastSpellAtObject(SPELL_CHARM_PERSON, oAmnestria, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-		 DelayCommand(5.0, ClearAllActions(TRUE));
-		 DelayCommand(6.0, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oAmnestria, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-		
-		}		 
+		 
 	
 }
