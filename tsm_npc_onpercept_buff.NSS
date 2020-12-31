@@ -49,8 +49,14 @@ void main()
 	object oMarp = GetObjectByTag("abr_cr_hu_marpenoth", 0);
 	object oMinotaur = GetObjectByTag("flbtr_plc_minotaur_statue", 0);
 	object oAmnestria = GetObjectByTag("003_cr_elf_sun_amnestria", 0);
+	int nEndure = GetHasSpell(SPELL_ENDURE_ELEMENTS, OBJECT_SELF);
+	int nArrows = GetHasSpell(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF);
+	int nGlobeLess = GetHasSpell(SPELL_LESSER_GLOBE_OF_INVULNERABILITY, OBJECT_SELF);
+	int nMirror = GetHasSpell(SPELL_MIRROR_IMAGE, OBJECT_SELF);
+	int nMageArmor = GetHasSpell(SPELL_MAGE_ARMOR, OBJECT_SELF);
+	int nStoneskin = GetHasSpell(SPELL_STONESKIN, OBJECT_SELF);
 	
-	if((GetIsPC(oPerceived)) && (GetLocalInt(OBJECT_SELF, "PerceiveFired") != 1))
+	if(((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived))) && (GetLocalInt(OBJECT_SELF, "PerceiveFired") != 1))
 		{ActionSpeakString(GetName(oPerceived));
 		 SetLocalInt(OBJECT_SELF, "PerceiveFired", 1);
 		 ClearAllActions(TRUE);
