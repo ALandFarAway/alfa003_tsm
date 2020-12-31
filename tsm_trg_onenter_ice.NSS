@@ -62,8 +62,9 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
+	if(nRace != RACIAL_TYPE_FEY) {
 	SetLocalInt(oPC, "IceWalking", 1);
 	ExecuteScript("tsm_trg_onloop_ice", oPC);
-		 
+	}
 
 }

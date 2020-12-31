@@ -70,8 +70,8 @@ void main()
 	int nRace = GetRacialType(oPC);
 	int nSubRace = GetSubRace(oPC);
 	 
-	SendMessageToPC(oPC, "Race = " + IntToString(nRace));
-	SendMessageToPC(oPC, "Subrace = " + IntToString(nSubRace));
+	//SendMessageToPC(oPC, "Race = " + IntToString(nRace));
+	//SendMessageToPC(oPC, "Subrace = " + IntToString(nSubRace));
 	if((nRace != RACIAL_TYPE_DRAGON) && (nRace != RACIAL_TYPE_FEY)) {
 	
     int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
