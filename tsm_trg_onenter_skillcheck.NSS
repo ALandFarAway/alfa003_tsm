@@ -128,7 +128,7 @@ void main()
 		{if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 		 	{SendMessageToPC(oPC, sMessageSuccess);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
-		 	 AssignCommand(oPC, ActionSpeakString("*Climbs safely*", TALKVOLUME_TALK));
+		 	 //AssignCommand(oPC, ActionSpeakString("*Climbs safely*", TALKVOLUME_TALK));
 			 }
 		 else if(GetHasSpellEffect(SPELL_FEATHER_FALL, oPC)) {
 		 	 SendMessageToPC(oPC, "Falls...but a Feather Fall spell makes you float safely down.");
