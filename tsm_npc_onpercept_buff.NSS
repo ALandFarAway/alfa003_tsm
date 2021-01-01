@@ -44,8 +44,7 @@
 
 void main()
 {
-    ACR_CreatureOnPerception();
-	object oPerceived = GetLastPerceived();
+    object oPerceived = GetLastPerceived();
 	object oMarp = GetObjectByTag("abr_cr_hu_marpenoth", 0);
 	object oMinotaur = GetObjectByTag("flbtr_plc_minotaur_statue", 0);
 	object oAmnestria = GetObjectByTag("003_cr_elf_sun_amnestria", 0);
@@ -132,6 +131,6 @@ void main()
 		
 		}
 		
-		 
+	DelayCommand(10.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));	 
 	
 }

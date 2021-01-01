@@ -7,13 +7,6 @@
 #include "acr_quest_i"
 
 
-
-
-
-
-
-
-
 void main()
 { object oWyvern = GetObjectByTag("abr_cr_dragon_wyvern_twisted_lg", 0);
   object oMarp = GetObjectByTag("abr_cr_hu_marpenoth", 0);
@@ -37,22 +30,22 @@ void main()
   DelayCommand(20.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_10"), TRUE)));
   DelayCommand(22.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_11"), TRUE)));
   DelayCommand(24.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_12"), TRUE)));
-  DelayCommand(25.0, AssignCommand(oWyvern, ActionSpeakString("*Wings buffet the air.", TALKVOLUME_TALK)));
+  DelayCommand(25.0, AssignCommand(oWyvern, ActionSpeakString("*Wings buffet the air.", TALKVOLUME_SHOUT)));
   DelayCommand(26.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_13"), TRUE)));
   DelayCommand(28.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_14"), TRUE)));
   DelayCommand(30.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_15"), TRUE)));
   DelayCommand(32.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_16"), TRUE)));
   DelayCommand(34.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_17"), TRUE)));
   DelayCommand(36.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_18"), TRUE)));
-  DelayCommand(37.0, AssignCommand(oWyvern, ActionSpeakString("*Plummets, spiraling out of sight beneath the rim of the plateau.", TALKVOLUME_TALK)));
+  DelayCommand(37.0, AssignCommand(oWyvern, ActionSpeakString("*Plummets, spiraling out of sight beneath the rim of the plateau.", TALKVOLUME_SHOUT)));
   DelayCommand(44.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_19"), TRUE)));
   DelayCommand(44.0, AssignCommand(oMarp, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_19"), TRUE)));
-  DelayCommand(45.0, AssignCommand(oWyvern, ActionSpeakString("*Wings beating, lunges into view on the other side of the plateau, climbing higher.", TALKVOLUME_TALK)));
+  DelayCommand(45.0, AssignCommand(oWyvern, ActionSpeakString("*Wings beating, lunges into view on the other side of the plateau, climbing higher.", TALKVOLUME_SHOUT)));
   DelayCommand(46.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_20"), TRUE)));
   DelayCommand(48.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_21"), TRUE)));
   DelayCommand(50.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_22"), TRUE)));
   DelayCommand(52.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_23"), TRUE)));
-  DelayCommand(53.0, AssignCommand(oMarp, ActionSpeakString("*Bellowing in orcish: *orc* Descend, beast! Take me down! */orc*", TALKVOLUME_TALK)));
+  DelayCommand(53.0, AssignCommand(oMarp, ActionSpeakString("*Bellowing in orcish: *orc* Descend, beast! Take me down! */orc*", TALKVOLUME_SHOUT)));
   DelayCommand(54.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_24"), TRUE)));
   DelayCommand(56.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_25"), TRUE)));
   DelayCommand(58.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_26"), TRUE)));
@@ -61,8 +54,8 @@ void main()
   DelayCommand(64.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_29"), TRUE)));
   DelayCommand(66.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_30"), TRUE)));
   DelayCommand(68.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_31"), TRUE)));
-  DelayCommand(69.0, AssignCommand(oWyvern, ActionSpeakString("*Dwindles rapidly in the distance, arrowing off to the northwest.", TALKVOLUME_TALK)));
-  DelayCommand(70.0, AssignCommand(oMarp, ActionSpeakString("*Bellowing in orcish: *orc* Take...me...baaaaackkkk! */orc*", TALKVOLUME_TALK)));
+  DelayCommand(69.0, AssignCommand(oWyvern, ActionSpeakString("*Dwindles rapidly in the distance, arrowing off to the northwest.", TALKVOLUME_SHOUT)));
+  DelayCommand(70.0, AssignCommand(oMarp, ActionSpeakString("*Bellowing in orcish: *orc* Take...me...baaaaackkkk! */orc*", TALKVOLUME_SHOUT)));
   DelayCommand(72.0, DestroyObject(oWyvern));
   DelayCommand(72.0, DestroyObject(oMarp));
 
