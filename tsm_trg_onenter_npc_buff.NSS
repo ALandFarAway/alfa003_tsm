@@ -75,22 +75,22 @@ void main()
 	object oBuffer = oRobed;
 	int nRep = 0;
 	
-	while (nRep < 7) {
+	while (nRep < 9) {
 	nRep = nRep +1;
 	SendMessageToPC(oEnterer, IntToString(nRep) + " " + GetName(oBuffer));
-	if(nRep = 2)
+	if(nRep == 2)
 		{oBuffer = oHalfOrcCleric;}
-	if(nRep = 2)
+	if(nRep == 3)
 		{oBuffer = oCleric;}
-	if(nRep = 2)
+	if(nRep == 4)
 		{oBuffer = oClericTwo;}
-	if(nRep = 2)
+	if(nRep == 5)
 		{oBuffer = oBattlePriest;}
-	if(nRep = 2)
+	if(nRep = 6)
 		{oBuffer = oBattlePriestTwo;}
-	if(nRep = 2)
+	if(nRep == 7)
 		{oBuffer = oMarp;}
-	if(nRep = 2)
+	if(nRep == 8)
 		{oBuffer = oAmnestria;}
 	
 	
