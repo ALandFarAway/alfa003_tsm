@@ -70,12 +70,14 @@ void main()
 	object oCaptain = GetObjectByTag("003_orc_captainOne", 0);
 	object oCaptainTwo = GetObjectByTag("003_orc_captainTwo", 0);
 	
+	SendMessageToPC(oEnterer, "Entered");
 	
 	object oBuffer = oRobed;
 	int nRep = 0;
 	
 	while (nRep < 7) {
 	nRep = nRep +1;
+	SendMessageToPC(oEnterer, IntToString(nRep) + " " + GetName(oBuffer));
 	if(nRep = 2)
 		{oBuffer = oHalfOrcCleric;}
 	if(nRep = 2)

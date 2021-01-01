@@ -17,11 +17,11 @@ void main()
   //DelayCommand(2.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_01"), TRUE)));
   //DelayCommand(4.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_02"), TRUE)));
   DelayCommand(2.0, AssignCommand(oMarp, ActionSpeakString("*orc* I ascend, as Gruumsh said that I would! */orc*", TALKVOLUME_TALK)));
-  DelayCommand(6.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_03"), TRUE)));
+  DelayCommand(6.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_03"), TRUE)));
   DelayCommand(6.0, AssignCommand(oMarp, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_03"), TRUE)));
   //DelayCommand(8.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_04"), TRUE)));
   //DelayCommand(10.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_05"), TRUE)));
-  DelayCommand(12.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_06"), TRUE)));
+  DelayCommand(12.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_06"), TRUE)));
   DelayCommand(12.0, AssignCommand(oMarp, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_06"), TRUE)));
   //DelayCommand(14.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_07"), TRUE)));
   //DelayCommand(16.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_08"), TRUE)));

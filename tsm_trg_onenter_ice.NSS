@@ -59,10 +59,11 @@ void ACR_ApplyNLDDamageToCreature(object oTarget, int nSubdualDamage)
 void main()
 {
     ACR_TriggerOnEnter();
-
+ 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
-	if(nRace != RACIAL_TYPE_FEY) {
+	int nRace = GetRacialType(oPC);
+	if((GetTag(oPC) != "abr_cr_hu_marpenoth") && (nRace != RACIAL_TYPE_FEY) && (nRace != RACIAL_TYPE_DRAGON)) {
 	SetLocalInt(oPC, "IceWalking", 1);
 	ExecuteScript("tsm_trg_onloop_ice", oPC);
 	}
