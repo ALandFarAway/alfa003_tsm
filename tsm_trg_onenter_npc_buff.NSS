@@ -86,7 +86,7 @@ void main()
 		{oBuffer = oClericTwo;}
 	if(nRep == 5)
 		{oBuffer = oBattlePriest;}
-	if(nRep = 6)
+	if(nRep == 6)
 		{oBuffer = oBattlePriestTwo;}
 	if(nRep == 7)
 		{oBuffer = oMarp;}
