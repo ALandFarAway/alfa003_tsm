@@ -131,6 +131,6 @@ void main()
 		
 		}
 		
-	DelayCommand(10.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));	 
+	//DelayCommand(10.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));	 
 	
 }
