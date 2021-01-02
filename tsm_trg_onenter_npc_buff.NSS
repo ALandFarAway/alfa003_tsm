@@ -71,28 +71,28 @@ void main()
 	object oCaptainTwo = GetObjectByTag("003_orc_captainTwo", 0);
 	
 	SendMessageToPC(oEnterer, "Entered");
-	
+		  
 	object oBuffer = oRobed;
 	int nRep = 0;
 	
 	while (nRep < 9) {
-	nRep = nRep +1;
-	SendMessageToPC(oEnterer, IntToString(nRep) + " " + GetName(oBuffer));
 	if(nRep == 2)
 		{oBuffer = oHalfOrcCleric;}
-	if(nRep == 3)
+	else if(nRep == 3)
 		{oBuffer = oCleric;}
-	if(nRep == 4)
+	else if(nRep == 4)
 		{oBuffer = oClericTwo;}
-	if(nRep == 5)
+	else if(nRep == 5)
 		{oBuffer = oBattlePriest;}
-	if(nRep == 6)
+	else if(nRep == 6)
 		{oBuffer = oBattlePriestTwo;}
-	if(nRep == 7)
+	else if(nRep == 7)
 		{oBuffer = oMarp;}
-	if(nRep == 8)
+	else if(nRep == 8)
 		{oBuffer = oAmnestria;}
+	else {return;}
 	
+	SendMessageToPC(oEnterer, IntToString(nRep) + " " + GetName(oBuffer));
 	
 	
 	
@@ -140,15 +140,14 @@ void main()
 		sDomainClass = "Ranger " + sDomainLevel;
 		}
 	
-	if(((GetIsPC(oEnterer)) || (GetIsDMPossessed(oEnterer))) && (GetLocalInt(OBJECT_SELF, "PerceiveFired") != 1))
-		{AssignCommand(oBuffer, ClearAllActions(TRUE));
-		 AssignCommand(oBuffer, ActionSpeakString(GetName(oEnterer)));
-		 SetLocalInt(OBJECT_SELF, "PerceiveFired", 1);
-		 AssignCommand(oBuffer, ClearAllActions(TRUE));
+	if(GetIsPC(oEnterer))
+		{//AssignCommand(oBuffer, ClearAllActions(TRUE));
+		 SendMessageToPC(oEnterer, "");
+	     //AssignCommand(oBuffer, ClearAllActions(TRUE));
 		 if(GetTag(oBuffer) == "003_cr_circus_magician")
 			 {
 			 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-			 DelayCommand(5.0, ClearAllActions(TRUE));
+			 //DelayCommand(5.0, ClearAllActions(TRUE));
 			 DelayCommand(6.0, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			}
 			
@@ -182,5 +181,6 @@ void main()
 		}
 		
 	//DelayCommand(10.0, ChangeToStandardFaction(oBuffer, STANDARD_FACTION_HOSTILE));	 
+	nRep = nRep +1;
 	}
 }
