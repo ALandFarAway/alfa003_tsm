@@ -90,7 +90,7 @@ void main()
 		{oBuffer = oMarp;}
 	else if(nRep == 8)
 		{oBuffer = oAmnestria;}
-	else {return;}
+	//else {return;}
 	
 	SendMessageToPC(oEnterer, IntToString(nRep) + " " + GetName(oBuffer));
 	
