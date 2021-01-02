@@ -25,25 +25,29 @@ void main()
 	object oBerserkerThree = GetObjectByTag("abr_cr_hu_orcberserkerThree", 0);
 	object oCaptain = GetObjectByTag("003_orc_captainOne", 0);
 	object oCaptainTwo = GetObjectByTag("003_orc_captainTwo", 0);
-	 
-  AssignCommand(oRobed, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oCleric, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oClericTwo, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oBattlePriest, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oBattlePriestTwo, ActionMoveAwayFromObject(oStart, TRUE, 2.0));
-  AssignCommand(oChieftain, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oBerserker, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oBerserkerTwo, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oBerserkerThree, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oCaptain, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
-  AssignCommand(oCaptainTwo, ActionMoveAwayFromObject(oStart, TRUE, 5.0));
+	object oPortalWP= GetWaypointByTag("occ_peak_portal_exit_wp");
+ 
+  AssignCommand(oCleric, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oClericTwo, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oBattlePriest, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oBattlePriestTwo, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oChieftain, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oBerserker, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oBerserkerTwo, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oBerserkerThree, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oCaptain, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
+  AssignCommand(oCaptainTwo, ActionMoveAwayFromObject(oStart, TRUE, 10.0));
   
+  AssignCommand(oRobed, ActionForceMoveToObject(oPortalWP, TRUE, 0.5));
+  DestroyObject(oRobed, 5.0); 
+  ChangeToStandardFaction(oWyvern, STANDARD_FACTION_COMMONER);
+  ChangeToStandardFaction(oMarp, STANDARD_FACTION_COMMONER);
   AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_01"), TRUE));
   DelayCommand(1.0, AssignCommand(oMarp, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_01"), TRUE)));
   AssignCommand(oMarp, ActionSpeakString("*Grabs a spine on the wyvern's back and hauls himself up onto its back.", TALKVOLUME_TALK));
-  DelayCommand(2.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_01"), TRUE)));
-  //DelayCommand(4.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_02"), TRUE)));
-  DelayCommand(2.0, AssignCommand(oMarp, ActionSpeakString("*orc* I ascend, as Gruumsh said that I would! */orc*", TALKVOLUME_TALK)));
+  DelayCommand(2.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_01"), TRUE)));
+  DelayCommand(4.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_02"), TRUE)));
+  DelayCommand(3.0, AssignCommand(oMarp, ActionSpeakString("*orc* I ascend, as Gruumsh promised I would! Stupid rest of you to the hells!*/orc*", TALKVOLUME_TALK)));
   DelayCommand(6.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_03"), TRUE)));
   DelayCommand(6.5, AssignCommand(oMarp, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_03"), TRUE)));
   DelayCommand(8.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_04"), TRUE)));
@@ -51,10 +55,10 @@ void main()
   DelayCommand(12.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_06"), TRUE)));
   DelayCommand(12.5, AssignCommand(oMarp, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_06"), TRUE)));
   DelayCommand(14.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_07"), TRUE)));
-  //DelayCommand(16.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_08"), TRUE)));
+  DelayCommand(16.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_08"), TRUE)));
   DelayCommand(17.0, AssignCommand(oWyvern, ActionSpeakString("*Launches into the sky.", TALKVOLUME_TALK)));
-  DelayCommand(18.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_09"), TRUE)));
-  DelayCommand(18.5, AssignCommand(oMarp, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_09"), TRUE)));;
+  DelayCommand(18.0, AssignCommand(oWyvern, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_09"), TRUE)));
+  DelayCommand(18.5, AssignCommand(oMarp, ActionJumpToObject(GetWaypointByTag("WP_wyvern_lg_09"), TRUE)));;
   DelayCommand(19.0, AssignCommand(oMarp, ActionSpeakString("*Lurches, fighting to hang on.", TALKVOLUME_TALK)));
   DelayCommand(18.0, AssignCommand(oWyvern, ActionForceMoveToObject(GetWaypointByTag("WP_wyvern_lg_10"), TRUE)));
   DelayCommand(20.5, AssignCommand(oMarp, ActionJumpToObject(oWyvern, TRUE)));
