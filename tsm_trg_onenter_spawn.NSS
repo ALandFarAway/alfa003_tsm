@@ -87,6 +87,33 @@ void main()
 	
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	
+		 object oXorn = GetNearestObjectByTag("xorn_trigger_spawn_wp", OBJECT_SELF, 1);
+		  object oAmnestria = GetObjectByTag("003_cr_elf_sun_amnestria", 0);
+	object oRobed = GetObjectByTag("003_cr_circus_magician", 0);
+	object oHalfOrcCleric = GetObjectByTag("003_cr_halforc_male", 0);
+	object oCleric = GetObjectByTag("abr_cr_hu_orcclericheal", 0);
+	object oClericTwo = GetObjectByTag("abr_cr_hu_orcclerichealTwo", 0);
+	object oBattlePriest = GetObjectByTag("abr_cr_hu_orcbattlepriestOne", 0);
+	object oBattlePriestTwo = GetObjectByTag("abr_cr_hu_orcbattlepriestTwo", 0);
+	object oChieftain = GetObjectByTag("abr_cr_hu_orcchieftainOne", 0);
+	object oBerserker = GetObjectByTag("abr_cr_hu_orcberserkerOne", 0);
+	object oBerserkerTwo = GetObjectByTag("abr_cr_hu_orcberserkerTwo", 0);
+	object oBerserkerThree = GetObjectByTag("abr_cr_hu_orcberserkerThree", 0);
+	object oCaptain = GetObjectByTag("003_orc_captainOne", 0);
+	object oCaptainTwo = GetObjectByTag("003_orc_captainTwo", 0);
+	
+  AssignCommand(oRobed, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oCleric, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oClericTwo, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oBattlePriest, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oBattlePriestTwo, ActionMoveAwayFromObject(oXorn, TRUE, 2.0));
+  AssignCommand(oChieftain, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oBerserker, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oBerserkerTwo, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oBerserkerThree, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oCaptain, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  AssignCommand(oCaptainTwo, ActionMoveAwayFromObject(oXorn, TRUE, 5.0));
+  
 		 if(nRunOnce == 1) {
 			//SendMessageToAllDMs("RunOnce = 1.");
 			

@@ -147,9 +147,9 @@ void main()
 		 if(GetTag(oBuffer) == "003_cr_circus_magician")
 			 {
 			 SendMessageToPC(oEnterer, "oRobed");
-	         AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	         DelayCommand(1.0, AssignCommand(oRobed, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oRobed, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			 //DelayCommand(5.0, ClearAllActions(TRUE));
-			 DelayCommand(6.0, AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			 DelayCommand(10.0, AssignCommand(oRobed, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			}
 			
 		 else if(nCleric > 0){
