@@ -63,7 +63,7 @@ void main()
 		 
 			 	 
 	if((!GetIsPC(oTraveller)) && (!GetIsDM(oTraveller))&& (!GetIsOwnedByPlayer(oTraveller))) 
-	   {DestroyObject(oTraveller);
+	   {//DestroyObject(oTraveller);
 	    return;
 	   }
 		

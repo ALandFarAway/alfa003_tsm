@@ -142,40 +142,43 @@ void main()
 	
 	if(GetIsPC(oEnterer))
 		{//AssignCommand(oBuffer, ClearAllActions(TRUE));
-		 SendMessageToPC(oEnterer, "");
+		 SendMessageToPC(oEnterer, "isPC");
 	     //AssignCommand(oBuffer, ClearAllActions(TRUE));
 		 if(GetTag(oBuffer) == "003_cr_circus_magician")
 			 {
-			 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+			 SendMessageToPC(oEnterer, "oRobed");
+	         AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 //DelayCommand(5.0, ClearAllActions(TRUE));
-			 DelayCommand(6.0, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			 DelayCommand(6.0, AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			}
 			
-		 if(nCleric > 0){
+		 else if(nCleric > 0){
+		 SendMessageToPC(oEnterer, "oCleric = " + GetName(oBuffer));
+	         
 		 	if(Random(3) == 1)
-		 		{ActionCastSpellAtObject(SPELL_MAGIC_CIRCLE_AGAINST_GOOD, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_MAGIC_CIRCLE_AGAINST_GOOD, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	}
 			}
 		
 		if((nPrayer > 0) && (Random(3) == 1))
-		 		{ActionCastSpellAtObject(SPELL_PRAYER, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_PRAYER, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	}
 		else if((nBless > 0) && (Random(3) == 1))
-		 		{ActionCastSpellAtObject(SPELL_BLESS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_BLESS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	}
 			
 	
 		if((Random(3) == 1) && (nStoneskin > 0))
-		 	{ActionCastSpellAtObject(SPELL_STONESKIN, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 	{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_STONESKIN, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 		else if((Random(3) == 1) && (nGlobeLess > 0))
-		 	{ActionCastSpellAtObject(SPELL_LESSER_GLOBE_OF_INVULNERABILITY, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 	{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_LESSER_GLOBE_OF_INVULNERABILITY, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 		else if((Random(3) == 1) && (nMageArmor > 0))
-		 	{ActionCastSpellAtObject(SPELL_MAGE_ARMOR, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 	{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_MAGE_ARMOR, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 		else if((Random(3) == 1) && (nMirror > 0))
-		 	{ActionCastSpellAtObject(SPELL_MIRROR_IMAGE, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 	{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_MIRROR_IMAGE, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 		
 		}
