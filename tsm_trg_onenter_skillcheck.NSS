@@ -147,7 +147,7 @@ void main()
 				 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
 				}
 			 else   
-			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC);
+			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
 			     if(nKnockdown == 1) { 
 					 DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime));
 					 SendMessageToPC(oPC, sMessageFail);

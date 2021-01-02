@@ -72,8 +72,8 @@ void main()
 	
 	SendMessageToPC(oEnterer, "Entered");
 		  
-	object oBuffer = oRobed;
-	int nRep = 0;
+	//object oBuffer = oRobed;
+	/*int nRep = 0;
 	
 	while (nRep < 9) {
 	if(nRep == 2)
@@ -140,34 +140,36 @@ void main()
 		sDomainClass = "Ranger " + sDomainLevel;
 		}
 	
-	if(GetIsPC(oEnterer))
-		{//AssignCommand(oBuffer, ClearAllActions(TRUE));
+	if(GetIsPC(oEnterer))*/
+	//	{AssignCommand(oBuffer, ClearAllActions(TRUE));
 		 SendMessageToPC(oEnterer, "isPC");
 	     //AssignCommand(oBuffer, ClearAllActions(TRUE));
-		 if(GetTag(oBuffer) == "003_cr_circus_magician")
-			 {
+		 //if(GetTag(oBuffer) == "003_cr_circus_magician")
+		//	 {
 			 SendMessageToPC(oEnterer, "oRobed");
 	         DelayCommand(1.0, AssignCommand(oRobed, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oRobed, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			 //DelayCommand(5.0, ClearAllActions(TRUE));
-			 DelayCommand(10.0, AssignCommand(oRobed, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-			}
+			 //DelayCommand(10.0, AssignCommand(oRobed, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+		//	}
 			
-		 else if(nCleric > 0){
-		 SendMessageToPC(oEnterer, "oCleric = " + GetName(oBuffer));
+		// else if(nCleric > 0){
+		 SendMessageToPC(oEnterer, "oCleric");
 	         
-		 	if(Random(3) == 1)
-		 		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_MAGIC_CIRCLE_AGAINST_GOOD, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			 	}
-			}
+		 //	if(Random(3) == 1)
+		 	//	{
+				DelayCommand(5.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_MAGIC_CIRCLE_AGAINST_GOOD, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			 	//}
+		//	}
 		
-		if((nPrayer > 0) && (Random(3) == 1))
-		 		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_PRAYER, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			 	}
-		else if((nBless > 0) && (Random(3) == 1))
-		 		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_BLESS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			 	}
+		//if((nPrayer > 0) && (Random(3) == 1))
+		 		//{
+				DelayCommand(10.0, AssignCommand(oClericTwo, ActionCastSpellAtObject(SPELL_PRAYER, oMarp, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			 //	}
+		//else if((nBless > 0) && (Random(3) == 1))
+		 //		{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_BLESS, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			// 	}
 			
-	
+	/*
 		if((Random(3) == 1) && (nStoneskin > 0))
 		 	{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_STONESKIN, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
@@ -181,9 +183,9 @@ void main()
 		 	{AssignCommand(oBuffer, ActionCastSpellAtObject(SPELL_MIRROR_IMAGE, oBuffer, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 		
-		}
+		}*/
 		
 	//DelayCommand(10.0, ChangeToStandardFaction(oBuffer, STANDARD_FACTION_HOSTILE));	 
-	nRep = nRep +1;
-	}
+	//nRep = nRep +1;
+//	}
 }
