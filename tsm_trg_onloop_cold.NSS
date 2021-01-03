@@ -88,9 +88,7 @@ SendMessageToPC(oPC, "ColdLoop");
 				{ACR_ApplyNLDDamageToCreature(oPC, d6());
 				 ACR_NLD_ReportTotal(oPC, oPC, 0);
 				 SendMessageToPC(oPC, "The bitter cold takes its toll!");
-				 nRepCold++;
-				 SetLocalInt(oPC, "nRepCold", nRepCold);
-				}
+				 }
 				}
 			}
 			else if((GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) || (GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))|| (GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
@@ -98,6 +96,8 @@ SendMessageToPC(oPC, "ColdLoop");
 				}
 					
 			SetLocalInt(oPC, "Survival", 0);
+			nRepCold++;
+			SetLocalInt(oPC, "nRepCold", nRepCold);
 			if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
 				{SetLocalInt(oPC, "nRepCold", 0);
 				 SendMessageToPC(oPC, "The last of the bitter cold shakes itself from your bones.");
