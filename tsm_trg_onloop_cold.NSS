@@ -66,7 +66,7 @@ void main()
 	float fTimeLoop = 91.0;
 			
 if((GetLocalInt(oPC, "ColdLoop") == 1) && (nRepCold < 100)  && (oPC != OBJECT_INVALID)) {
-SendMessageToPC(oPC, "ColdLoop");
+//SendMessageToPC(oPC, "ColdLoop");
 	
 	if(GetIsPC(oPC))
 		{
