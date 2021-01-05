@@ -705,7 +705,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="27CE48C739602B82BFA33C0519E994BC7C23C5FB" downloadHash="885BAE0C3F70E907B516CACC75D2BA4C263DE462" name="7d_int_silverwood1_ancient_maze.trx" dlsize="1251232" size="1366044" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A9F6D4E53B11A564D757368FCE5EB469C60955ED" downloadHash="8E6BE2A4B9253D8155CFEE6D804F6C53E0736A46" name="7d_int_silverwood1_ancient_maze.trx" dlsize="1399933" size="1519521" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
