@@ -21,10 +21,27 @@ void main()
 		 string sIllusionMsg = GetLocalString(OBJECT_SELF, "circus_illusion_message");
 		 string sIllusionMsg2 = GetLocalString(OBJECT_SELF, "circus_illusion_message2");
 		 string sIllusionMsg3 = GetLocalString(OBJECT_SELF, "circus_illusion_message3");
+		 string sDestroy = GetLocalString(OBJECT_SELF, "circus_illusion_destroy");
+		 object oDestroy = GetNearestObjectByTag(sDestroy, OBJECT_SELF, 1);
+		 if(sDestroy == "")
+		 	{oDestroy = OBJECT_SELF;}
+		 int nCreateType = OBJECT_TYPE_PLACEABLE;
+		 string sCreateType = GetLocalString(OBJECT_SELF, "circus_illusion_create_type");
+		 if(GetStringLowerCase(sCreateType) == "creature") {
+			 nCreateType = OBJECT_TYPE_CREATURE;}
+		 else if(GetStringLowerCase(sCreateType) == "item") {
+			 nCreateType = OBJECT_TYPE_ITEM;}
+		 else if(GetStringLowerCase(sCreateType) == "light") {
+			 nCreateType = OBJECT_TYPE_LIGHT;}
+		 string sCreate = GetLocalString(OBJECT_SELF, "circus_illusion_create");
+		 
+		 
 		 int nIllusionDC = GetLocalInt(OBJECT_SELF, "circus_illusion_dc");
 		 SendMessageToPC(oPC, sDisplayMsg);
 		 if(WillSave(oPC, nIllusionDC, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-		 	{DelayCommand(6.0, SendMessageToPC(oPC, sIllusionMsg));
+		 	{if(sCreate != "") {
+				CreateObject(nCreateType, sCreate, GetLocation(oDestroy), FALSE); }
+			 DelayCommand(6.0, SendMessageToPC(oPC, sIllusionMsg));
 			 DelayCommand(8.0, SendMessageToPC(oPC, sIllusionMsg2));
 			 DelayCommand(10.0, SendMessageToPC(oPC, sIllusionMsg3));
 			}

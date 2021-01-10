@@ -52,12 +52,12 @@ void main() {
 	string sKeyTagFour = GetLocalString(OBJECT_SELF, "PORTAL_KEY_4");
 	string sKeyTagFive = GetLocalString(OBJECT_SELF, "PORTAL_KEY_5");
 	string sKeyTagSix = GetLocalString(OBJECT_SELF, "PORTAL_KEY_6");
-	string sMyTarget = GetLocalString(OBJECT_SELF, "PORTAL_TARGET");
-	string sMyTargetTwo = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_2");
-	string sMyTargetThree = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_3");
-	string sMyTargetFour = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_4");
-	string sMyTargetFive = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_5");
-	string sMyTargetSix = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_6");
+	string sMyTarget = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP");
+	string sMyTargetTwo = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP2");
+	string sMyTargetThree = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP3");
+	string sMyTargetFour = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP4");
+	string sMyTargetFive = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP5");
+	string sMyTargetSix = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP6");
 	object oMyWaypoint = GetWaypointByTag(sMyTarget);
 	
 	
@@ -79,7 +79,7 @@ void main() {
 		
 		 SetLocalObject(OBJECT_SELF, "sCurrent_WP", oMyWaypoint);
 		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
-		 DelayCommand(6.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
+		 DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
 		
 		}
 	}
