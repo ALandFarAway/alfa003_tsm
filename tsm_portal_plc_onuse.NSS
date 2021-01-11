@@ -44,9 +44,11 @@ void main() {
 
 
 	if(FindSubString(GetTag(OBJECT_SELF), "_portal") != -1)
-	{
-	object oTraveller = GetLastUsedBy();
-    string sKeyTag = GetLocalString(OBJECT_SELF, "PORTAL_KEY");
+	{object oTraveller = GetLastUsedBy();
+    
+	SendMessageToPC(oTraveller, "Portal Used");
+		 
+	string sKeyTag = GetLocalString(OBJECT_SELF, "PORTAL_KEY");
 	string sKeyTagTwo = GetLocalString(OBJECT_SELF, "PORTAL_KEY_2");
 	string sKeyTagThree = GetLocalString(OBJECT_SELF, "PORTAL_KEY_3");
 	string sKeyTagFour = GetLocalString(OBJECT_SELF, "PORTAL_KEY_4");
@@ -63,20 +65,28 @@ void main() {
 	
 	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated") == 0)) {
 		if((((((GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)))))) {
+		 SendMessageToPC(oTraveller, "Activated");
 		 SetLocalInt(OBJECT_SELF, "Activated", 1);
 		 if(GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTarget);}
+		 	{SendMessageToPC(oTraveller, "1 " + sKeyTag);
+		     oMyWaypoint = GetWaypointByTag(sMyTarget);}
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
+		 	{SendMessageToPC(oTraveller, "2 " + sKeyTagTwo);
+		     oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
+		 	{SendMessageToPC(oTraveller, "3 " + sKeyTagThree);
+		     oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
+		 	{SendMessageToPC(oTraveller, "4 " + sKeyTagFour);
+		     oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
+		 	{SendMessageToPC(oTraveller, "5 " + sKeyTagFive);
+		     oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
+		 	{SendMessageToPC(oTraveller, "6 " + sKeyTagSix);
+		     oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
 		
+		 SendMessageToPC(oTraveller, GetName(oMyWaypoint));
 		 SetLocalObject(OBJECT_SELF, "sCurrent_WP", oMyWaypoint);
 		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
 		 DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
