@@ -61,7 +61,9 @@ void main() {
 	string sMyTargetFive = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP5");
 	string sMyTargetSix = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP6");
 	object oMyWaypoint = GetWaypointByTag(sMyTarget);
-	
+	SendMessageToPC(oTraveller, "1. oMyWaypoint = " + GetName(oMyWaypoint));
+	oMyWaypoint = GetObjectByTag(sMyTarget, 0);	 
+	SendMessageToPC(oTraveller, "2. oMyWaypoint = " + GetName(oMyWaypoint));
 	
 	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated") == 0)) {
 		if((((((GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)))))) {
