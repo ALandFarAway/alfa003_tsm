@@ -86,21 +86,20 @@ void main() {
 		 	{SendMessageToPC(oTraveller, "6 " + sKeyTagSix);
 		     oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
 		
-		 SendMessageToPC(oTraveller, GetName(oMyWaypoint));
+		 SendMessageToPC(oTraveller, "Waypoint = " + GetName(oMyWaypoint));
 		 SetLocalObject(OBJECT_SELF, "sCurrent_WP", oMyWaypoint);
 		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
 		 DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
 		
 		}
 	}
-	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated")==1))
+	
+	if(GetLocalInt(OBJECT_SELF, "Activated")==1)
 		{oMyWaypoint = GetLocalObject(OBJECT_SELF, "sCurrent_WP");
 		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
 		 }
 	
-	if(sKeyTag == "")
-		{AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
-		 }
+
 	}	
 	
 		
