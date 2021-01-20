@@ -16,7 +16,7 @@ void main()
 		  
 	//Will Save to see through illusions on displays in circus. 
 	if((GetTag(OBJECT_SELF) == "circus_illusion_trg") && (GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) && ((GetIsPC(oPC))|| (GetIsDMPossessed(oPC))))
-		{//SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
+		{SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
 		 string sDisplayMsg = GetLocalString(OBJECT_SELF, "circus_display_message");
 		 string sIllusionMsg = GetLocalString(OBJECT_SELF, "circus_illusion_message");
 		 string sIllusionMsg2 = GetLocalString(OBJECT_SELF, "circus_illusion_message2");
