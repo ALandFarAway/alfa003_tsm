@@ -52,24 +52,28 @@ void main() {
 	switch(Random(8)) {
         case 0:
             ACR_SpawnObject("abr_cr_hu_lizfolk_defender01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("abr_cr_hu_lizfolk_defender02", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("abr_cr_hu_lizfolk_defender03", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 3:
             ACR_SpawnObject("abr_cr_hu_lizfolk_defender05", OBJECT_TYPE_CREATURE);
             break;
 		case 4:
             ACR_SpawnObject("abr_cr_hu_lizfolk_fighter01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 5:
             ACR_SpawnObject("abr_cr_hu_lizfolk_fighter02", OBJECT_TYPE_CREATURE);
             break;
         case 6:
             ACR_SpawnObject("abr_cr_hu_lizfolk_fighter03", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 7:
             ACR_SpawnObject("abr_cr_hu_lizfolk_fighter04", OBJECT_TYPE_CREATURE);
@@ -78,24 +82,28 @@ void main() {
 	switch(Random(8)) {
         case 0:
             ACR_SpawnObject("abr_cr_hu_lizfolk_fighter05", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("abr_cr_hu_lizfolk_fighter06", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("abr_cr_hu_lizfolk_warrior01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 3:
             ACR_SpawnObject("abr_cr_hu_lizfolk_warrior02", OBJECT_TYPE_CREATURE);
             break;
 		case 4:
             ACR_SpawnObject("abr_cr_hu_lizfolk_warrior03", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 5:
             ACR_SpawnObject("abr_cr_hu_lizfolk_warrior04", OBJECT_TYPE_CREATURE);
             break;
         case 6:
             ACR_SpawnObject("abr_cr_hu_lizfolk_brawler", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 7:
             ACR_SpawnObject("abr_cr_hu_lizfolk_brawler", OBJECT_TYPE_CREATURE);

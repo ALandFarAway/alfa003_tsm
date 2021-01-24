@@ -52,20 +52,26 @@ void main() {
 	switch(Random(6)) {
         case 0:
             ACR_SpawnObject("abr_cr_hu_lizfolk_captain", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 1:
             ACR_SpawnObject("abr_cr_hu_lizfolk_champion", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("abr_cr_hu_lizfolk_druid", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
 		case 3:
             ACR_SpawnObject("abr_cr_hu_lizfolk_general", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
         case 4:
             ACR_SpawnObject("abr_cr_hu_lizfolk_ranger", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
 		case 5:
             ACR_SpawnObject("abr_cr_hu_lizfolk_sorcerer", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_hu_lizfolk_twisted", OBJECT_TYPE_CREATURE);
             break;
 }}
