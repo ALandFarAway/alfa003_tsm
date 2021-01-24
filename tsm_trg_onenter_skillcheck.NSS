@@ -102,7 +102,7 @@ void main()
 		int nFeatherFall = FALSE;
 		int nEffectType = GetEffectType(eFeatherFall);
 		int nEffectSubType = GetEffectSubType(eFeatherFall);
-		SendMessageToPC(oPC, IntToString(nEffectType) + " = Type. " + IntToString(nEffectSubType) + " = SubType.");
+		//SendMessageToPC(oPC, IntToString(nEffectType) + " = Type. " + IntToString(nEffectSubType) + " = SubType.");
 		eFeatherFall = GetNextEffect(oPC);
 	}
 	

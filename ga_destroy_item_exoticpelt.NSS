@@ -78,8 +78,8 @@ void main(string sItemTag)
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_bear_dire" ));
     DestroyItems( oPC,"it_plot_hide_bear_dire",nTotalItem,50,50 );	
 	
-//	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_wolverine" ));
-   // DestroyItems( oPC,"it_plot_hide_wolverine",nTotalItem,3,2 );	
+	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_misc_wasp_stinger" ));
+    DestroyItems( oPC,"it_misc_wasp_stinger",nTotalItem,3,2 );	
 	
 	GiveGoldToCreature(oPC,Ggold);
 }
