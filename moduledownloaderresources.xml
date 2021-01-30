@@ -705,7 +705,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6E3CAD075E605AAA215F82D625F3A2C3251BD464" downloadHash="F6139E83B63E56AAD837038D4A3FE2B4C3652254" name="7d_int_silverwood1_ancient_maze.trx" dlsize="1516533" size="1724041" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="BE0BDDC662A3167E54145D94DFC050DAE7294A2B" downloadHash="11AC0AC373CB7CE44821479093B37F3D22029716" name="7d_int_silverwood1_ancient_maze.trx" dlsize="1541888" size="1748171" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1885,7 +1885,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="FDB7F258BEF2B7E5F4DCC44AE03BAC57987EF9A7" downloadHash="9DE23C07713F61D971739FB7D919A161B3C3B0C4" name="7e_int_rauvin_ruins.trx" dlsize="410141" size="414463" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="57A6BF4E0F9E2FD222196C9376B159D5B37E31EA" downloadHash="2F383F9B8B15CEE4872F0C64DBF1E2352449925B" name="7e_int_rauvin_ruins.trx" dlsize="410301" size="414598" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
