@@ -68,7 +68,7 @@ void main() {
 	
 	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated") == 0)) {
 		if((((((GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)))))) {
-		 SendMessageToPC(oTraveller, "Activated");
+		 //SendMessageToPC(oTraveller, "Activated");
 		 SetLocalInt(OBJECT_SELF, "Activated", 1);
 		 
 		 if(GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID)
@@ -77,7 +77,7 @@ void main() {
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID)
 		 	{//SendMessageToPC(oTraveller, "2 " + sKeyTagTwo + "..." + sMyTargetTwo);
 		      oMyWaypoint = GetWaypointByTag(sMyTargetTwo);
-			  SendMessageToPC(oTraveller, "2b. oMyWaypoint = " + GetName(oMyWaypoint)); 
+			  //SendMessageToPC(oTraveller, "2b. oMyWaypoint = " + GetName(oMyWaypoint)); 
 			  }
 		 else if(GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID)
 		 	{//SendMessageToPC(oTraveller, "3 " + sKeyTagThree + "..." + sMyTargetThree);
