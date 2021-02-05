@@ -631,10 +631,16 @@ int GetSilvyUniversityMageLevel(object oStudent)
 {
     int nMageLevel = GetLevelByClass(CLASS_TYPE_WIZARD, oStudent);
     int nSorcLevel = GetLevelByClass(CLASS_TYPE_SORCERER, oStudent);
+	int nBardLevel = GetLevelByClass(CLASS_TYPE_BARD, oStudent);
 
     if (nSorcLevel > nMageLevel)
     {
         nMageLevel = nSorcLevel;
+    }
+	
+	if (nBardLevel > nMageLevel)
+    {
+        nMageLevel = nBardLevel;
     }
 
     return nMageLevel;
