@@ -1435,7 +1435,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B1E025A7AF3EB5AC847E667F1F30D7E660A89420" downloadHash="CA58F1E72B89C3A6F8CC39B693D4484A87777D9E" name="5b_int_settlestone_chapel.trx" dlsize="72214" size="72265" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="055CB6E4AB27C2D3340E43410C2B87B5750DA808" downloadHash="D57A1E7761E687D2288B8D5764E2B1985E26E261" name="5b_int_settlestone_chapel.trx" dlsize="57968" size="57899" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
