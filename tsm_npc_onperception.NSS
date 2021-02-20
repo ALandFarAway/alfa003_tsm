@@ -51,7 +51,7 @@ void main()
 		SendMessageToAllDMs("Debug: Duergar Sapper = " + GetTag(OBJECT_SELF));
 		object oBomb = GetItemPossessedBy(OBJECT_SELF, "abr_it_msc_firebomb");
 		object oAlchFire = GetItemPossessedBy(OBJECT_SELF, "abr_it_msc_alchfire");
-	    if(((GetIsPC(oPerceived) || (GetIsDMPossessed(oPerceived)))) && (GetIsReactionTypeHostile(oPerceived, OBJECT_SELF))  && (GetLocalString(OBJECT_SELF, GetName(oPerceived)) != "Bombed")) {
+	    //if(((GetIsPC(oPerceived) || (GetIsDMPossessed(oPerceived)))) && (GetIsReactionTypeHostile(oPerceived, OBJECT_SELF))  && (GetLocalString(OBJECT_SELF, GetName(oPerceived)) != "Bombed")) {
 			SetLocalString(OBJECT_SELF, GetName(oPerceived), "Bombed");
 			SendMessageToAllDMs("Debug: " + GetTag(OBJECT_SELF) + " perceives " + GetName(oPerceived));
 		    if(oBomb != OBJECT_INVALID) {
@@ -66,7 +66,7 @@ void main()
 	            ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectAreaOfEffect(AOE_PER_FOGFIRE), GetLocation(oPerceived), RoundsToSeconds(5));
 	    		DestroyObject(oAlchFire, 1.0);
 				}
-			}
+			//}
 		}
 	
 	
