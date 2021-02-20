@@ -56,13 +56,15 @@ void main()
 			SendMessageToAllDMs("Debug: " + GetTag(OBJECT_SELF) + " perceives " + GetName(oPerceived));
 		    if(oBomb != OBJECT_INVALID) {
 			    SendMessageToAllDMs("Debug: " + GetTag(OBJECT_SELF) + " has bomb ");
-				DoGrenade(d6(10),1, VFX_IMP_FLAME_M, VFX_FNF_FIREBALL,DAMAGE_TYPE_FIRE,RADIUS_SIZE_HUGE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR | OBJECT_TYPE_PLACEABLE);
+				SpawnSpellProjectile(OBJECT_SELF, oPerceived, GetLocation(OBJECT_SELF), GetLocation(oPerceived), 744, PROJECTILE_PATH_TYPE_DEFAULT);
+				DelayCommand(1.0, DoGrenade(d6(10),1, VFX_IMP_FLAME_M, VFX_FNF_FIREBALL,DAMAGE_TYPE_FIRE,RADIUS_SIZE_HUGE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR | OBJECT_TYPE_PLACEABLE));
 	            ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectAreaOfEffect(AOE_PER_FOGFIRE), GetLocation(oPerceived), RoundsToSeconds(5));
 	    		DestroyObject(oBomb);
 				}
 			else if(oAlchFire != OBJECT_INVALID) {
 				SendMessageToAllDMs("Debug: " + GetTag(OBJECT_SELF) + " has alchemist's fire ");
-				DoGrenade(d6(2),1, VFX_IMP_FLAME_M, VFX_FNF_FIREBALL,DAMAGE_TYPE_FIRE,RADIUS_SIZE_HUGE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR | OBJECT_TYPE_PLACEABLE);
+				SpawnSpellProjectile(OBJECT_SELF, oPerceived, GetLocation(OBJECT_SELF), GetLocation(oPerceived), 744, PROJECTILE_PATH_TYPE_DEFAULT);
+				DelayCommand(1.0, DoGrenade(d6(2),1, VFX_IMP_FLAME_M, VFX_FNF_FIREBALL,DAMAGE_TYPE_FIRE,RADIUS_SIZE_HUGE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR | OBJECT_TYPE_PLACEABLE));
 	            ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectAreaOfEffect(AOE_PER_FOGFIRE), GetLocation(oPerceived), RoundsToSeconds(5));
 	    		DestroyObject(oAlchFire);
 				}
