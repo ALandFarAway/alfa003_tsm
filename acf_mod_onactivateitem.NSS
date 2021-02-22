@@ -71,7 +71,7 @@ void main() {
 
 		  SendMessageToAllDMs("zSpawn called");
 		
-			object oData = GetSpellCastItem();
+			object oData = oItem;
 			string sTag = GetTag(oData);
 			SendMessageToAllDMs("zSpawn Tag = " + sTag);
 				    
