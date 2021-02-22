@@ -65,6 +65,7 @@ void main() {
 	
 
 	object oItem = GetItemActivated();
+	object oActivator = GetItemActivator();
 	if(GetTag(oItem) == "521100000000000000000005ZZZZZZ999999")
 		{
 		//Local file to test zspawn issues. 2/21/21 Wynna
@@ -494,7 +495,7 @@ void main() {
 			}
 			else
 			{*/
-				oSpawn = CreateCreatureOfClass(nClass, nGender, GetLocation(OBJECT_SELF));
+				oSpawn = CreateCreatureOfClass(nClass, nGender, GetLocation(oActivator));
 				float fCR = IntToFloat(nLevel);
 				SetLocalFloat(oSpawn, "CR", fCR);
 			//}		
