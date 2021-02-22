@@ -506,6 +506,11 @@ void main() {
 			{
 				while(nLevel > 0)
 				{   SendMessageToAllDMs("Loop Before Lvl " + IntToString(nLevel));
+				    SendMessageToAllDMs("nClass = " + IntToString(nClass));
+				    int nLevelUpH = LevelUpHenchman(oSpawn, nClass, TRUE, GetPackageForClass(nClass));
+					SendMessageToAllDMs("LevelUpHenchman = " + IntToString(nLevelUpH));
+				    int nGetPackage = GetPackageForClass(nClass);
+					SendMessageToAllDMs("GetPackageForClass = " + IntToString(nGetPackage));
 				    ACR_LogOnLevelUp(oSpawn);
 					LevelUpHenchman(oSpawn, nClass, TRUE, GetPackageForClass(nClass));
 					ACR_LogOnLevelUp(oSpawn);
