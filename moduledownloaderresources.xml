@@ -1925,4 +1925,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="DB271659B85DF0DCAAD1F29B417FA247AFD7A6C3" downloadHash="73A1266344FDE95618F7DB63F345442F709E76DB" name="5b_ext_frosthills_settlestone.trx" dlsize="3230783" size="22873743" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
