@@ -1100,7 +1100,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0C9B5233097153622EA2F47E96B9A5F6AE46B5BA" downloadHash="49A6491233DED86393744B159808319A38F4EFFE" name="5b_ext_frosthills_keepersdale.trx" dlsize="5532941" size="23809915" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6B3859CC48DD04548F0DF6163B1A71F7F8D87FDF" downloadHash="75BDDA95C908B67CD68B020AC15F9F71732FD072" name="5b_ext_frosthills_keepersdale.trx" dlsize="5527582" size="23817313" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1365,7 +1365,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7A0B3FDEF89BB2FBE21086EB41DF13AC660861D0" downloadHash="D4A4AB1AAF921665FA81A4941622D15804733685" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5026792" size="24921623" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="15FC6C3F040C0635D184015087F92AD9464383F9" downloadHash="46788EC8D0D1A6BB3000062D7F28DB40C06961BB" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5012614" size="24911284" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1565,7 +1565,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F2BF289FA056B11591979DB5D48B39874B0C0567" downloadHash="AD384206953270DE6E1D557EF972F7365CB4D6B8" name="5b_ext_frosthills_glacier.trx" dlsize="5472552" size="27048659" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5A1F1CF2B32F93006AE65B6BB36E54C508C1006F" downloadHash="9ABFA48EBD7C80B721054F8DD58AAC38BF290AA2" name="5b_ext_frosthills_glacier.trx" dlsize="5464045" size="27043953" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1925,7 +1925,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DB271659B85DF0DCAAD1F29B417FA247AFD7A6C3" downloadHash="73A1266344FDE95618F7DB63F345442F709E76DB" name="5b_ext_frosthills_settlestone.trx" dlsize="3230783" size="22873743" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="CE58DD0AB2A4C1243D3E4746DE8F5F5511E6F966" downloadHash="A92B1A80DB339C410AC87F2FBB69F6CFC049F788" name="5b_ext_frosthills_settlestone.trx" dlsize="5080402" size="26010085" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
