@@ -1925,7 +1925,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CE58DD0AB2A4C1243D3E4746DE8F5F5511E6F966" downloadHash="A92B1A80DB339C410AC87F2FBB69F6CFC049F788" name="5b_ext_frosthills_settlestone.trx" dlsize="5080402" size="26010085" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4AC3B371C3A053F784606592B8EAA5D07DCA19B7" downloadHash="A4E14879CC5CA27EF2F436D0AD0198C340827A54" name="5b_ext_frosthills_settlestone.trx" dlsize="5039001" size="25964109" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
