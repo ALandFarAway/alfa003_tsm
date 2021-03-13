@@ -83,6 +83,8 @@ void main()
 		{nSkillName = SKILL_CLIMB;}
 	else if(sSkillName == "BALANCE")
 		{nSkillName = SKILL_BALANCE;}
+	else if(sSkillName == "JUMP")
+		{nSkillName = SKILL_JUMP;}
 		
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
