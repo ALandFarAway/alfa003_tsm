@@ -1925,12 +1925,17 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="2C3A99D34AA8C1B1C2A65C3A1BC92B965F2A3CE3" downloadHash="D2823343B7B38252BF4B70F2E9E234DD9A11C28E" name="5b_ext_frosthills_settlestone.trx" dlsize="5566292" size="26591578" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B56255D92C729E5BAB69CE0D428CABEC7A4F77CF" downloadHash="AACFDF0B7E45A99D52498F7C4D9334D7201DD85A" name="5b_ext_frosthills_settlestone.trx" dlsize="5572221" size="26582383" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="4C5DEE9A81E06DE1B1D364AF9E2CCFDA9AC26E17" downloadHash="2FA61284420C582ED1F5A882757E2B7F6E94AED5" name="6c_int_highlands_caverns.trx" dlsize="936883" size="1953493" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="C01325C1A1DB33294DE5B8087163C380EC846166" downloadHash="3D919AE6F7A455C8D93EBD65F794AB9877D94646" name="5b_int_frosthills_settlestone.trx" dlsize="36553" size="38947" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
