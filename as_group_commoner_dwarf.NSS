@@ -65,13 +65,13 @@ void main() {
 	
 
       case 4:
-            ACR_SpawnObject("03_silvy_commoner_v", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_v0", OBJECT_TYPE_CREATURE);
             break;
         case 5:
             ACR_SpawnObject("03_silvy_commoner_e", OBJECT_TYPE_CREATURE);
             break;
         case 6:
-            ACR_SpawnObject("03_silvy_commoner_dd", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_dd0", OBJECT_TYPE_CREATURE);
             break;
         case 7:
             ACR_SpawnObject("c_st01_pirates_dwarf_f01", OBJECT_TYPE_CREATURE);
@@ -80,36 +80,36 @@ void main() {
 	
 
         case 8:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_app_02", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_ii0", OBJECT_TYPE_CREATURE);
             break;
         case 9:
-           ACR_SpawnObject("003_cr_felbarr_dkstn_rog_04", OBJECT_TYPE_CREATURE);
+           ACR_SpawnObject("03_silvy_commoner_dwf_m", OBJECT_TYPE_CREATURE);
             break;
 		case 10:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_rog_03", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_l0", OBJECT_TYPE_CREATURE);
             break;
         case 11:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_rog_02", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_l1", OBJECT_TYPE_CREATURE);
             break;
         case 12:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_rog_01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_v1", OBJECT_TYPE_CREATURE);
             break;
         case 13:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_rog_04", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_dwf_clf", OBJECT_TYPE_CREATURE);
             break;			
 	
 
       case 14:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_msn_04", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_dwf_clf", OBJECT_TYPE_CREATURE);
             break;
         case 15:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_msn_03", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_dwf_m", OBJECT_TYPE_CREATURE);
             break;
         case 16:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_msn_02", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_dwf_clf", OBJECT_TYPE_CREATURE);
             break;
         case 17:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_msn_01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("03_silvy_commoner_dwf_m", OBJECT_TYPE_CREATURE);
             break;
 			
 			
@@ -154,13 +154,13 @@ void main() {
             ACR_SpawnObject("003_cr_felbarr_dkstn_app_03", OBJECT_TYPE_CREATURE);
             break;
         case 29:
-            ACR_SpawnObject("003_cr_felbarr_dkstn_app_04", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_mithall_xbow", OBJECT_TYPE_CREATURE);
             break;
         case 30:
-            ACR_SpawnObject("003_cr_felbarr_darkstone", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_mithall_dwarf_gutbuster", OBJECT_TYPE_CREATURE);
             break;
         case 31:
-            ACR_SpawnObject("003_cr_felbarr_gategd_06", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_mithall_hinf", OBJECT_TYPE_CREATURE);
             break;			
 	
 
