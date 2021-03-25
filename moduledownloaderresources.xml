@@ -1925,7 +1925,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6558CF3533204B5BF2CE96C918F65F9300F0CDBF" downloadHash="6D19B698B352DCE7BFCEB7120DAF1BFF6A1B1077" name="5b_ext_frosthills_settlestone.trx" dlsize="5566455" size="26593050" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EA96728A33AB709EE8FADD14E5B6E49191DD70A9" downloadHash="2D25DE1DC9E7E1616AAF5F2F78369855FB120BA0" name="5b_ext_frosthills_settlestone.trx" dlsize="5561489" size="26589871" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1935,7 +1935,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A04B618EF54F9D265E22B9C53AC349495B8E48EA" downloadHash="A065B6DD8D829268A10EA7323994AA3C8B2499AA" name="5b_int_frosthills_settlestone.trx" dlsize="853136" size="1017418" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="450767770F16D26F020284E7A019FFFD64BB796A" downloadHash="1C5E95D19BE7A8DA854ABA406E5E4A0282FD2A2D" name="5b_int_frosthills_settlestone.trx" dlsize="839690" size="1001747" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
