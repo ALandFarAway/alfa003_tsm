@@ -610,7 +610,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="2AB085F3CF9E4948C9DCD949B816152782D75F76" downloadHash="B1530E73CE412D103DCA07A55385E1D32ED1E0E6" name="6b_int_evermoors_caves.trx" dlsize="991767" size="3667418" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="407002379CC4508C02D59947D3616DEF56DB8049" downloadHash="DF6C6BD154BA44F5FEF9257C0DBB40979BE57ECA" name="6b_int_evermoors_caves.trx" dlsize="983363" size="3667329" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
