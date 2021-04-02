@@ -1910,7 +1910,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A77B1808B176CC0E18C44637051326A104AFD381" downloadHash="D1380D6137A3FECC3B7799527180FB2CE9BFC718" name="8e_int_highforest_nw_cave_aq.trx" dlsize="185998" size="2042981" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="E5619F6B13A9DE99DF088488CBCD6C118BF11EC6" downloadHash="42EAA3A931F49225440F2014798B2028226DA8B8" name="8e_int_highforest_nw_cave_aq.trx" dlsize="203281" size="2103154" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

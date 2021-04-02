@@ -73,6 +73,10 @@ void main()
 		{nSkillName = SKILL_CLIMB;}
 	if(sSkillName == "JUMP")
 		{nSkillName = SKILL_JUMP;}
+	if(sSkillName == "SWIM")
+		{nSkillName = SKILL_SWIM;}
+	if(sSkillName == "SURVIVAL")
+		{nSkillName = SKILL_SURVIVAL;}
 	int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
