@@ -95,18 +95,6 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	       }
 	}
 	
-if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_enter")
-	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-	 object oSwimExit = GetObjectByTag("hf_aq_plc_well_enter_WP");
-	 int nSwim = ACR_SkillCheck(SKILL_SWIM, oUser);
-	 if(nSwim >= 5) {
-	 	 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
-	     SendMessageToPC(oUser, "You swim down into the inky blackness of the well.");		 
-	     }
-	else {
-	 	   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-	       SendMessageToPC(oUser, "You lose your way, blundering along the stone inside the well and surface back where you began.");		 
-	       }
-	}
+
 												
 }
