@@ -20,6 +20,7 @@
 
 #include "acr_spellhook_i"
 #include "x0_i0_position"
+#include "acr_skills_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -140,139 +141,153 @@ void main()
 	effect eFailure = EffectSpellFailure(100);
 	string sArea = GetTag(GetArea(oCaster));
 	
+//Campaign consequences for DeanSphinx 2021
 
-/*if(nSpellId == 3073) {
+object oOlivusCast;
+if(FindSubString(GetName(oCaster), "Olivu") != -1)
+	{oOlivusCast = oCaster;}
+object oJhessiCast;
+if(FindSubString(GetName(oCaster), "Jhess") != -1)
+	{oJhessiCast = oCaster;}
 
-    SendMessageToAllDMs(GetName(oCaster) + " is casting Analyze Portal");
-	int nCasterLevel = GetCasterLevel(oCaster);
-	int nPortalNumber = 0;
-	float fResultsDelay = 0.0;			
-	SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", 0.0);
-	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_TRIGGER);
-	while(oPortal != OBJECT_INVALID) {
-		if((GetTag(oPortal) == "003_portal_plc") || (GetTag(oPortal) == "003_portal_trg")) {
-			if(GetObjectType(oPortal) == OBJECT_TYPE_PLACEABLE) {
-				SetUseableFlag(oPortal, TRUE);
-				}
-			string sPortalLocation = GetLocalString(oPortal, "PORTAL_LOCATION");
-			string sPortalCommand = GetLocalString(oPortal, "PORTAL_COMMAND");
-			string sPortalCirc = GetLocalString(oPortal, "PORTAL_CIRCUMSTANCE");
-			string sPortalDirection = GetLocalString(oPortal, "PORTAL_DIRECTION");
-			string sPortalProps = GetLocalString(oPortal, "PORTAL_PROPERTIES");
-			string sPortalDest = GetLocalString(oPortal, "PORTAL_DESTINATION");
-			string sPortalFunc = GetLocalString(oPortal, "PORTAL_FUNCTIONALITY");
-            string sPortalCompassDirection = GetCompassDirectionOfAngle(
-                GetAngleBetweenObjects(oCaster, oPortal)
-            );
-			if(nPortalNumber == 0) {
-				SendMessageToPC(
-                    oCaster,
-                    "You have discovered a portal within 60 feet! " +
-                    "It is " + sPortalCompassDirection + " of your position. " + 
-                    sPortalLocation
-                );
-				}
-			else {
-				fResultsDelay = GetLocalFloat(oCaster, "AnalyzePortalFloatDelay") + 12.0;
-				SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
-				DelayCommand(
-                    fResultsDelay,
-                    SendMessageToPC(
-                        oCaster,
-                        "You have discovered another portal within 60 feet! " + 
-                        "It is " + sPortalCompassDirection + " of your position. " + 
-                        sPortalLocation
-                    )
-                );
-				}
-			SendMessageToAllDMs(
-				GetName(oCaster) + 
-				" has discovered a portal. " + 
-				" It is " + sPortalCompassDirection + " of the PC. " +
-				sPortalLocation + 
-				" The PC will also learn the following information in increments of 6 seconds:"
-				);
-			int nCLCheck;
-			string sPortalVariable;
-			for(nCLCheck = 0; nCLCheck < 6; nCLCheck++) {
-				
-					switch(nCLCheck) {
-			        case 0:
-			            sPortalVariable = sPortalCommand;
-						break;
-			        case 1:
-			            sPortalVariable = sPortalCirc;
-						break;
-			        case 2:
-			            sPortalVariable = sPortalDirection;
-						break;
-			        case 3:
-			            sPortalVariable = sPortalProps;
-						break;
-					case 4:
-			            sPortalVariable = sPortalDest;
-						break;
-			        case 5:
-			            sPortalVariable = sPortalFunc;
-						break;
-			       	}		
-			
-				if(d20(1) + nCasterLevel >= 17) {   
-				    SendMessageToAllDMs(GetName(oCaster) + " learned: " + sPortalVariable);
-					SetLocalFloat(oCaster, "AnalyzePortalFloatDelay", fResultsDelay + 6.0);
-					fResultsDelay = fResultsDelay + 6.0;
-					DelayCommand(fResultsDelay, SendMessageToPC(oCaster, sPortalVariable));
-					}
-				else {SendMessageToAllDMs(GetName(oCaster) + " failed a caster level check on Analyze Portal and will learn no more about this portal.");
-					  DelayCommand(fResultsDelay + 6.0, SendMessageToPC(oCaster, "You have failed a caster level check and will learn no more about this portal.")); 
-					  break;
-					 }
-			}
-							
-		nPortalNumber++;	
+object oOlivusTarget;
+if(FindSubString(GetName(oTarget), "Olivu") != -1)
+	{oOlivusTarget = oTarget;}
+object oJhessiTarget;
+if(FindSubString(GetName(oTarget), "Jhess") != -1)
+	{oJhessiTarget = oTarget;}
+
+if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTarget) || (oTarget == oJhessiTarget)) {	
+	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
+	int nFail = Random(5);
+	int nSpellLevel = GetSpellLevel(nSpellId);
+	int nDC = d20(1) + nSpellcraft;
+	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
+	if((nRunningTab < 5) && ((oCaster == oOlivusCast) || (oCaster == oJhessiCast))) {
+		if(nFail == 1) {
+		SetModuleOverrideSpellScriptFinished();
+		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
+		nRunningTab = nRunningTab + nSpellLevel;
+		SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
+		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
+		SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
+		SendMessageToAllDMs(GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
 		}
-			
-		oPortal = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_TRIGGER);	
-	}
-}
-	
-			
-if(nSpellId == 283) {
-	SendMessageToAllDMs("oCaster = " + GetName(oCaster));
-	SendMessageToAllDMs("nSpell = " + IntToString(nSpellId));
-	SendMessageToAllDMs("oTarget = " + GetName(oTarget));
-	effect eKnockdown = EffectKnockdown();
-	int nSlamDmg = d6(1) + 1;
-	effect eSlam = EffectDamage(nSlamDmg, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
-	effect eImpact = EffectVisualEffect(VFX_IMP_PULSE_WIND);
-    object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
-	while(oPC != OBJECT_INVALID) {
-		SendMessageToAllDMs("oPC = " + GetName(oPC));
-		if(oPC != oCaster) {
-		if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_NONE, OBJECT_SELF) > 0)
-				{SendMessageToPC(oPC, "You avoid flying debris.");
-				SendMessageToAllDMs(GetName(oPC) + " avoids flying debris.");
-				}
-		else{SendMessageToPC(oPC, "You are cut by flying debris!");
-		     SendMessageToAllDMs(GetName(oPC) + " is cut by flying debris for " + IntToString(nSlamDmg) + "hp." );
-				
-				ApplyEffectToObject(DURATION_TYPE_INSTANT, eSlam, oPC);
-				if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_NONE, OBJECT_SELF) > 0)
-					{SendMessageToPC(oPC, "You stay on your feet against forceful winds.");
-					 SendMessageToAllDMs(GetName(oPC) + " stays on their feet against forceful winds.");
-					}
-				else{SendMessageToPC(oPC, "Strong winds knock you down!");
-					SendMessageToAllDMs(GetName(oPC) + " is knocked down by forceful winds.");
-					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 3.0);
-					ApplyEffectToObject(DURATION_TYPE_INSTANT, eImpact, oPC);
-	    			SendMessageToAllDMs(GetName(oPC) + " stays on their feet against forceful winds.");
-					}
-				}
+	if(nRunningTab >= 5) {
+		SetModuleOverrideSpellScriptFinished();
+		SendMessageToPC(oCaster, "The power of the Weave recoils within you, then lashes out in an unintended spell!");
+		if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, nDC, TRUE)) {
+			SendMessageToPC(oCaster, "Your facility with Spellcraft allows you to clamp down on your own casting and avoid loosing the unintended spell...this time.");
 			}
-		oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
-	}
+		else {SendMessageToPC(oCaster, "You are unable to stop your own casting of the unintended spell!");
+			
+			int nSpellOne;
+			int nSpellTwo;
+			int nSpellThree;
+			int nSpellFour;
+			int nSpellFive;
+			int nSpellSix;
+			int nSpellSeven;
+			int nSpellEight;	
+			int nSpellNine;
+			int nSpellTen;
+			int nSpell;
+			
+		if (nSpellLevel == 1) {
+					nSpellOne = SPELL_LESSER_ORB_OF_ACID;
+					nSpellTwo = SPELL_LESSER_ORB_OF_COLD;
+					nSpellThree = SPELL_LESSER_ORB_OF_ELECTRICITY;
+					nSpellFour = SPELL_LESSER_ORB_OF_FIRE;
+					nSpellFive = SPELL_LESSER_ORB_OF_SOUND;
+					nSpellSix = SPELL_MAGE_ARMOR;
+					nSpellSeven = SPELL_BLADES_OF_FIRE;
+					nSpellEight = SPELL_GREASE;
+					nSpellNine = SPELL_SUMMON_CREATURE_I;
+					nSpellTen = SPELL_SUMMON_CREATURE_I;
+				}
+				else if(nSpellLevel==2) {
+					nSpellOne = SPELL_SUMMON_CREATURE_II;
+					nSpellTwo = SPELL_MELFS_ACID_ARROW;
+					nSpellThree = 3168;
+					nSpellFour = SPELL_WEB;
+					nSpellFive = 3182;
+					nSpellSix = SPELL_SUMMON_CREATURE_II;
+					nSpellSeven = SPELL_MELFS_ACID_ARROW;
+					nSpellEight = 3168;
+					nSpellNine = SPELL_WEB;
+					nSpellTen = 3182;
+					}	
+				else if(nSpellLevel==3) {
+					nSpellOne = SPELL_FLAME_ARROW;
+					nSpellTwo = SPELL_STINKING_CLOUD;
+					nSpellThree = SPELL_IMPROVED_MAGE_ARMOR;
+					nSpellFour = SPELL_MESTILS_ACID_BREATH;
+					nSpellFive = SPELL_SUMMON_CREATURE_III;
+					nSpellSeven = SPELL_STINKING_CLOUD;
+					nSpellEight = SPELL_IMPROVED_MAGE_ARMOR;
+					nSpellNine = SPELL_MESTILS_ACID_BREATH;
+					nSpellTen = SPELL_SUMMON_CREATURE_III;
+					}
+				else {
+					nSpellOne = SPELL_EVARDS_BLACK_TENTACLES;
+					nSpellTwo = 3026;
+					nSpellThree = SPELL_ORB_OF_SOUND;
+					nSpellFour = SPELL_SUMMON_CREATURE_IV;
+					nSpellFive = SPELL_ORB_OF_COLD;
+					nSpellSix = SPELL_ORB_OF_ELECTRICITY;
+					nSpellSeven = SPELL_ORB_OF_FIRE;
+					nSpellEight = SPELL_ORB_OF_ACID;
+					nSpellNine = SPELL_SUMMON_CREATURE_IV;
+					nSpellTen = SPELL_SUMMON_CREATURE_IV;
+					
+				}
+				
+				switch(Random(10)) {
+		        case 0:
+		            nSpell = nSpellTen;
+					break;
+				case 1:
+		            nSpell = nSpellOne;
+					break;
+				case 2:
+		            nSpell = nSpellTwo;
+					break;
+				case 3:
+		            nSpell = nSpellThree;
+					break;
+				case 4:
+		            nSpell = nSpellFour;
+					break;
+				case 5:
+		            nSpell = nSpellFive;
+					break;
+				case 6:
+		            nSpell = nSpellSix;
+					break;
+				case 7:
+		            nSpell = nSpellSeven;
+					break;
+				case 8:
+		            nSpell = nSpellEight;
+					break;
+				case 9:
+		            nSpell = nSpellNine;
+					break;
+				}
+		
+			AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			nRunningTab = 0;
+			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
+			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
+			SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
+			SendMessageToAllDMs(GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
+			
+			}
+		}
+	
+	} 
 }
-*/	
+
 
 if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetTag(GetArea(oCaster)), "5h_") != -1)|| (FindSubString(GetTag(GetArea(oCaster)), "6f_") != -1) || ((FindSubString(GetTag(GetArea(oCaster)), "5g_") != -1) && (FindSubString(GetTag(GetArea(oCaster)), "felbarr") == -1))  )
 	{if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
