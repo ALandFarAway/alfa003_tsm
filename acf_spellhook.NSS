@@ -170,8 +170,8 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 	SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
 	SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
-	if((nRunningTab < 5) && ((oCaster == oOlivusCast) || (oCaster == oJhessiCast))) {
-		if(nFail == 1) {
+	if((oCaster == oOlivusCast) || (oCaster == oJhessiCast)) {
+	if(nFail == 1) {
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
 		nRunningTab = nRunningTab + nSpellLevel;
@@ -182,6 +182,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	    SendMessageToAllDMs(GetName(oCaster) + " CrystalCon charges to " + IntToString(nRunningTab));
 	    SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
 	   }
+	   
 	if(nRunningTab >= 5) {
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "The power of the Weave recoils within you, then lashes out in an unintended spell!");
