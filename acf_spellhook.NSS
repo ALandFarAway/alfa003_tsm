@@ -158,17 +158,17 @@ if(FindSubString(GetName(oTarget), "Jhessic") != -1)
 	{oJhessiTarget = oTarget;}
 
 if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTarget) || (oTarget == oJhessiTarget)) {	
-	SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
+	//SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
 	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
-	SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
+	//SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
 	int nFail = Random(5);
-	SendMessageToPC(oCaster, "nFail is " + IntToString(nFail));
+	//SendMessageToPC(oCaster, "nFail is " + IntToString(nFail));
 	int nSpellLevel = GetSpellLevel(nSpellId);
-	SendMessageToPC(oCaster, "nSpellLevel is " + IntToString(nSpellLevel));
+	//SendMessageToPC(oCaster, "nSpellLevel is " + IntToString(nSpellLevel));
 	int nDC = d20(1) + nSpellcraft;
-	SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
+	//SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
 	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-	SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
+	//SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
 	SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
 	if((oCaster == oOlivusCast) || (oCaster == oJhessiCast)) {
 	if(nFail <= 1) {
@@ -177,10 +177,10 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 		nRunningTab = nRunningTab + nSpellLevel;
 		SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
 		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-		SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
+		//SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
 		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of level " + IntToString(nSpellLevel) + " " + IntToString(nSpellId));
 	    SendMessageToAllDMs(GetName(oCaster) + " CrystalCon charges to " + IntToString(nRunningTab));
-	    SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
+	   //SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
 	   }
 	   
 	if(nRunningTab >= 5) {
@@ -304,7 +304,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 					{object oRandomCreature = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
 					 int nCount = 0;
 					 while ((oRandomCreature != OBJECT_INVALID) && (nCount < 10)) {
-					 	 SendMessageToPC(oCaster, "oRandomCreature = " + IntToString(nCount) + " is " + GetName(oRandomCreature));
+					 	 //SendMessageToPC(oCaster, "oRandomCreature = " + IntToString(nCount) + " is " + GetName(oRandomCreature));
 						 oRandomCreature = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
 						 nCount = nCount +1;
 						 }
@@ -313,17 +313,16 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 				
 				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 				if((nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
-				object oSummons = GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster,1); 
-				AssignCommand(oSummons, ActionSpeakString("*Shakes its head in confusion*", TALKVOLUME_TALK));
-				SetIsTemporaryEnemy(oCaster, oSummons);
+				DelayCommand(5.0, AssignCommand(GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster, 1), ActionSpeakString("*Shakes its head in confusion*", TALKVOLUME_TALK)));
+				DelayCommand(5.0, ChangeToStandardFaction(GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster, 1), STANDARD_FACTION_HOSTILE));
 				}
 			}
 			
 			nRunningTab = 0;
 			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
 			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-			SendMessageToPC(oCaster, "nRunningTab discharges to zero: " + IntToString(nRunningTab));
-			SendMessageToPC(oCaster, "You discharge CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
+			//SendMessageToPC(oCaster, "nRunningTab discharges to zero: " + IntToString(nRunningTab));
+			//SendMessageToPC(oCaster, "You discharge CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
 			SendMessageToAllDMs(GetName(oCaster) + " discharges CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
 			SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
 			
