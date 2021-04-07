@@ -144,17 +144,17 @@ void main()
 //Campaign consequences for DeanSphinx 2021
 
 object oOlivusCast;
-if(FindSubString(GetName(oCaster), "Olivuria") != -1)
+if(FindSubString(GetName(oCaster), "Olivu") != -1)
 	{oOlivusCast = oCaster;}
 object oJhessiCast;
-if(FindSubString(GetName(oCaster), "Jhessic") != -1)
+if(FindSubString(GetName(oCaster), "Jhess") != -1)
 	{oJhessiCast = oCaster;}
 
 object oOlivusTarget;
-if(FindSubString(GetName(oTarget), "Olivuria") != -1)
+if(FindSubString(GetName(oTarget), "Olivu") != -1)
 	{oOlivusTarget = oTarget;}
 object oJhessiTarget;
-if(FindSubString(GetName(oTarget), "Jhessic") != -1)
+if(FindSubString(GetName(oTarget), "Jhess") != -1)
 	{oJhessiTarget = oTarget;}
 
 if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTarget) || (oTarget == oJhessiTarget)) {	
@@ -172,7 +172,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
 	if((oCaster == oOlivusCast) || (oCaster == oJhessiCast)) {
 	int nCrystalCast = GetCampaignInt("DeanSphinx", "CrystalCast", oCaster);
-	if((nFail <= 1)&& (nCrystalCast == 0)) {
+	if((nFail == 1)&& (nCrystalCast == 0)) {
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
 		nRunningTab = nRunningTab + nSpellLevel;
@@ -180,12 +180,13 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 		//SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
 		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of level " + IntToString(nSpellLevel) + " " + IntToString(nSpellId));
-	    SendMessageToAllDMs(GetName(oCaster) + " CrystalCon charges to " + IntToString(nRunningTab));
+	    SendMessageToAllDMs(GetName(oCaster) + " CrysCon charges to " + IntToString(nRunningTab));
 	   //SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
 	   }
 	SetCampaignInt("DeanSphinx", "CrystalCast", 0, oCaster);			
 		   
 	if(nRunningTab >= 5) {
+		int nSpell;
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "The power of the Weave recoils within you, then lashes out in an unintended spell!");
 		if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, nDC, TRUE)) {
@@ -203,7 +204,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 			int nSpellEight;	
 			int nSpellNine;
 			int nSpellTen;
-			int nSpell;
+			
 			
 		if (nSpellLevel == 1) {
 					nSpellOne = SPELL_LESSER_ORB_OF_ACID;
@@ -320,16 +321,17 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 				}
 			}
 			
+			SetCampaignInt("DeanSphinx", "CrystalCast", 1, oCaster);			
+			SendMessageToAllDMs(GetName(oCaster) + " discharges a crystal based conjuration spell with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
+			}
+			
 			nRunningTab = 0;
 			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
-			SetCampaignInt("DeanSphinx", "CrystalCast", 1, oCaster);			
 			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 			//SendMessageToPC(oCaster, "nRunningTab discharges to zero: " + IntToString(nRunningTab));
 			//SendMessageToPC(oCaster, "You discharge CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
-			SendMessageToAllDMs(GetName(oCaster) + " discharges CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
-			SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
+			SendMessageToAllDMs(GetName(oCaster) + " CrysCon is at " + IntToString(nRunningTab));
 			
-			}
 		}
 	
 	} 
