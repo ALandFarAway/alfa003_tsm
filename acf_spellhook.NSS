@@ -171,7 +171,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
 	SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
 	if((oCaster == oOlivusCast) || (oCaster == oJhessiCast)) {
-	if(nFail == 1) {
+	if(nFail <= 1) {
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
 		nRunningTab = nRunningTab + nSpellLevel;
@@ -233,6 +233,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 					nSpellThree = SPELL_IMPROVED_MAGE_ARMOR;
 					nSpellFour = SPELL_MESTILS_ACID_BREATH;
 					nSpellFive = SPELL_SUMMON_CREATURE_III;
+					nSpellSix = SPELL_FLAME_ARROW;
 					nSpellSeven = SPELL_STINKING_CLOUD;
 					nSpellEight = SPELL_IMPROVED_MAGE_ARMOR;
 					nSpellNine = SPELL_MESTILS_ACID_BREATH;
