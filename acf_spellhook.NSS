@@ -218,14 +218,14 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 				else if(nSpellLevel==2) {
 					nSpellOne = SPELL_SUMMON_CREATURE_II;
 					nSpellTwo = SPELL_MELFS_ACID_ARROW;
-					nSpellThree = 3168;
+					nSpellThree = SPELL_SUMMON_CREATURE_II;
 					nSpellFour = SPELL_WEB;
-					nSpellFive = 3182;
+					nSpellFive = SPELL_SUMMON_CREATURE_II;
 					nSpellSix = SPELL_SUMMON_CREATURE_II;
 					nSpellSeven = SPELL_MELFS_ACID_ARROW;
-					nSpellEight = 3168;
+					nSpellEight = SPELL_SUMMON_CREATURE_II;
 					nSpellNine = SPELL_WEB;
-					nSpellTen = 3182;
+					nSpellTen = SPELL_SUMMON_CREATURE_II;
 					}	
 				else if(nSpellLevel==3) {
 					nSpellOne = SPELL_FLAME_ARROW;
@@ -285,11 +285,39 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 					break;
 				}
 		
-			AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			if((nSpell == SPELL_MAGE_ARMOR) || (nSpell == SPELL_IMPROVED_MAGE_ARMOR) || (nSpell == 3026)) {
+				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oCaster, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			}
+			else if((nSpell == SPELL_GREASE)|| (nSpell == SPELL_WEB) || (nSpell == SPELL_STINKING_CLOUD)|| (nSpell == SPELL_EVARDS_BLACK_TENTACLES)|| (nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
+				AssignCommand(oCaster, ActionCastSpellAtLocation(nSpell, GetLocation(oCaster), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			}
+			else {
+				int nRandomTarget = Random(3);
+				if(nRandomTarget == 0) 
+					{oTarget = oCaster;}
+				if((nRandomTarget == 1) && (oTarget != OBJECT_INVALID)) 
+					{oTarget = oTarget;}
+				if((nRandomTarget == 1) && (oTarget == OBJECT_INVALID)) 
+					{oTarget = oCaster;}
+				if(nRandomTarget == 2) 
+					{object oRandomCreature = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+					 int nCount = 0;
+					 while ((oRandomCreature != OBJECT_INVALID) && (nCount < 10)) {
+					 	 SendMessageToPC(oCaster, "oRandomCreature = " + IntToString(nCount) + " is " + GetName(oRandomCreature));
+						 oRandomCreature = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+						 nCount = nCount +1;
+						 }
+					 oTarget = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, Random(nCount));
+					}
+				
+				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			}
+			
 			nRunningTab = 0;
 			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
 			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 			SendMessageToPC(oCaster, "nRunningTab discharges to zero: " + IntToString(nRunningTab));
+			SendMessageToPC(oCaster, "You discharge CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
 			SendMessageToAllDMs(GetName(oCaster) + " discharges CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
 			SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
 			
