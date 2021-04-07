@@ -312,6 +312,11 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 					}
 				
 				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+				if((nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
+				object oSummons = GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster,1); 
+				AssignCommand(oSummons, ActionSpeakString("*Shakes its head in confusion*", TALKVOLUME_TALK));
+				SetIsTemporaryEnemy(oCaster, oSummons);
+				}
 			}
 			
 			nRunningTab = 0;
