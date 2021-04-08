@@ -72,8 +72,11 @@ void main()
 	if(FindSubString(GetName(oRester), "ithran") != -1)
 	{oBaeithra = oRester;}
 	
+	if((oRester == oAshera) || (oRester == oSaerela)|| (oRester == oBaeithra)) {
+	SendMessageToPC(oRester, "nLocal = " + IntToString(GetLocalInt(oRester, "DreamCooldown")));
+	SendMessageToPC(oRester, "nCampaign = " + IntToString(GetCampaignInt("DeanSphinx", "DreamStage", oRester)));
+			
 	if(GetLocalInt(oRester, "DreamCooldown") != 1) {
-		if((oRester == oAshera) || (oRester == oSaerela)|| (oRester == oBaeithra)) {
 		int nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oRester);
 		string sDreamMessage;
 		if((oRester == oAshera) || (oRester == oSaerela)) {
