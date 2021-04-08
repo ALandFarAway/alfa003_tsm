@@ -120,7 +120,7 @@ void main()
 		nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oRester);
 		SendMessageToAllDMs(GetName(oRester) + " had a dream " + sDreamMessage);
 		SendMessageToAllDMs(GetName(oRester) + "'s DreamStage is now at " + IntToString(nDreamStage));
-		//SetLocalInt(oRester, "DreamCooldown", 1);
+		SetLocalInt(oRester, "DreamCooldown", 1);
 		}
 	}
 }
