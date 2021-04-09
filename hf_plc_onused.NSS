@@ -53,7 +53,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_enter")
 	 else if(nSurvival >= 10) {
 	 	   AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
 	       ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-	       SendMessageToPC(oUser, "You squeeze with difficulty into the crack, feeling skin scrape and blundering painfully into a wall of stone. It is too narrow to turn around. You are wedged!");		 
+	       SendMessageToPC(oUser, "You squeeze with difficulty into the crack, feeling skin scrape and blundering painfully into a wall of stone. You are blocked!");		 
 	       if(Random(2)==1) {
 		   	 if(GetLocalObject(OBJECT_SELF, "oWell") == OBJECT_INVALID) {
 		 		object oWellExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_well_exit", GetLocation(oWellSpawnWP));
@@ -92,13 +92,14 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	 object oSwimThree = GetObjectByTag("hf_aq_plc_crack_swim3_WP");
 	 object oSwimEnter = GetObjectByTag("hf_aq_plc_well_enter_WP");
 	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 10, TRUE)) {
-	 	 SendMessageToPC(oUser, "You swim along the rock walls, seeking the widest crack, and push yourself through into a wider column of water with a light shining down from thirty feet above.");		 
+	 	 SendMessageToPC(oUser, "You swim along the rock walls, seeking the widest crack.");		 
 	     if(Random(2) == 1) 
 		 	{AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
 	     if(Random(2) == 1) 
 		 	{DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));}
-	     DelayCommand(11.0, AssignCommand(oUser, ActionSpeakString("*Vanishes into a crack in the wall", TALKVOLUME_TALK)));
-		 DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
+	     DelayCommand(11.0, AssignCommand(oUser, ActionSpeakString("*Slides into a crack in the wall and out of sight.", TALKVOLUME_TALK)));
+		 DelayCommand(10.0, SendMessageToPC(oUser, "You slide yourself through a crack in the wall into a wider column of water with a light shining down from thirty feet above."));		 
+	     DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
 	     DelayCommand(17.0, SendMessageToPC(oUser, "You surface with a gasp, in a dimly lit room, and haul yourself onto a dirty marble floor."));		 
 	     //DelayCommand(18.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 	     }
