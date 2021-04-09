@@ -96,11 +96,11 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	     if(Random(2) == 1) 
 		 	{AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
 	     if(Random(2) == 1) 
-		 	{DelayCommand(3.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));}
-	     DelayCommand(5.0, AssignCommand(oUser, ActionSpeakString("*Vanishes into a crack in the wall", TALKVOLUME_TALK)));
-		 DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
-	     DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
-	     DelayCommand(13.0, SendMessageToPC(oUser, "You surface with a gasp, in a dimly lit room, and haul yourself onto a dirty marble floor."));		 
+		 	{DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));}
+	     DelayCommand(11.0, AssignCommand(oUser, ActionSpeakString("*Vanishes into a crack in the wall", TALKVOLUME_TALK)));
+		 DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
+	     DelayCommand(17.0, SendMessageToPC(oUser, "You surface with a gasp, in a dimly lit room, and haul yourself onto a dirty marble floor."));		 
+	     //DelayCommand(18.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 	     }
 	else {
 	 	   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
