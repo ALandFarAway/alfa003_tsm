@@ -43,12 +43,12 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_enter")
 	 int nSurvival = ACR_SkillCheck(SKILL_SURVIVAL, oUser);
 	 if(nSurvival >= 15) {
 	 	 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
-	     SendMessageToPC(oUser, "You find your way easily through the crack and immediately encounter a wall of stone before you. It is too narrow to turn around. You are wedged!");		 
+	     SendMessageToPC(oUser, "You find your way easily through the crack and immediately encounter a wall of stone before you. You are blocked!");		 
 	     if(GetLocalObject(OBJECT_SELF, "oWell") == OBJECT_INVALID) {
 		 	object oWellExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_well_exit", GetLocation(oWellSpawnWP));
 		 	SetLocalObject(OBJECT_SELF, "oWell", oWellExit);
 			}
-		 DelayCommand(5.0, SendMessageToPC(oUser, "A glimmering light triggers your survival skills. You are wedged into a rock-walled column of water but there is light thirty feet above you. The light comes through a crack in the ceiling that you could fit through."));
+		 DelayCommand(5.0, SendMessageToPC(oUser, "The faintest of light triggers your survival skills. You are in a rock-walled column of water but there are a few faintly lit cracks in the rocks around you. Maybe you could fit through a crack to go deeper into the rock...if you choose?"));
 		 }
 	 else if(nSurvival >= 10) {
 	 	   AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
@@ -59,7 +59,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_enter")
 		 		object oWellExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_well_exit", GetLocation(oWellSpawnWP));
 		 		SetLocalObject(OBJECT_SELF, "oWell", oWellExit);
 				}
-			DelayCommand(5.0, SendMessageToPC(oUser, "A glimmering light triggers your survival skills. You are wedged into a rock-walled column of water but there is light thirty feet above you. The light comes through a crack in the ceiling that you could fit through."));
+			DelayCommand(5.0, SendMessageToPC(oUser, "The faintest of light triggers your survival skills. You are in a rock-walled column of water but there are a few faintly lit cracks in the rocks around you. Maybe you could fit through a crack to go deeper into the rock...if you choose?"));
 		 	}
 		   }
  	else {
@@ -87,10 +87,20 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_enter")
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	 object oSwimExit = GetObjectByTag("hf_aq_plc_well_exit_WP");
+	 object oSwimOne = GetObjectByTag("hf_aq_plc_crack_swim1_WP");
+	 object oSwimTwo = GetObjectByTag("hf_aq_plc_crack_swim2_WP");
+	 object oSwimThree = GetObjectByTag("hf_aq_plc_crack_swim3_WP");
 	 object oSwimEnter = GetObjectByTag("hf_aq_plc_well_enter_WP");
 	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 10, TRUE)) {
-	 	 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
-	     SendMessageToPC(oUser, "You swim up towards the glimmering light and haul yourself out onto a dirty marble floor.");		 
+	 	 SendMessageToPC(oUser, "You swim along the rock walls, seeking the widest crack, and push yourself through into a wider column of water with a light shining down from thirty feet above.");		 
+	     if(Random(2) == 1) 
+		 	{AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
+	     if(Random(2) == 1) 
+		 	{DelayCommand(3.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));}
+	     DelayCommand(5.0, AssignCommand(oUser, ActionSpeakString("*Vanishes into a crack in the wall", TALKVOLUME_TALK)));
+		 DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
+	     DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+	     DelayCommand(13.0, SendMessageToPC(oUser, "You surface with a gasp, in a dimly lit room, and haul yourself onto a dirty marble floor."));		 
 	     }
 	else {
 	 	   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
