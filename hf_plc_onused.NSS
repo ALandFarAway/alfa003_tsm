@@ -94,19 +94,29 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 10, TRUE)) {
 	 	 SendMessageToPC(oUser, "You swim along the rock walls, seeking the widest crack.");		 
 	     if(Random(2) == 1) 
-		 	{AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
+		 	{AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));
+			DelayCommand(1.0, SendMessageToPC(oUser, "You swim along the edge of the wall, seeking a way in."));		 
+	     }
 	     if(Random(2) == 1) 
-		 	{DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));}
-	     DelayCommand(11.0, AssignCommand(oUser, ActionSpeakString("*Slides into a crack in the wall and out of sight.", TALKVOLUME_TALK)));
-		 DelayCommand(10.0, SendMessageToPC(oUser, "You slide yourself through a crack in the wall into a wider column of water with a light shining down from thirty feet above."));		 
+		 	{DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));
+			DelayCommand(7.0, SendMessageToPC(oUser, "You swim higher, reaching for a high crack in the wall."));		 
+	     }
+	     DelayCommand(11.0, AssignCommand(oUser, ActionSpeakString("*Hauls self up into a crack in the corner of the ceiling and out of sight.", TALKVOLUME_TALK)));
+		 DelayCommand(11.0, SendMessageToPC(oUser, "You haul yourself up through a crack in the corner of the ceiling into a wider column of water with a light shining down from thirty feet above. You swim for the light."));		 
 	     DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
 	     DelayCommand(17.0, SendMessageToPC(oUser, "You surface with a gasp, in a dimly lit room, and haul yourself onto a dirty marble floor."));		 
-	     //DelayCommand(18.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+	     DelayCommand(18.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 	     }
 	else {
 	 	   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-	       SendMessageToPC(oUser, "You lose your sense of up and down, blundering along the stone walls of the crack, losing air, until you find yourself back where you began.");		 
-	       }
+	       if(Random(2) == 1) 
+		 	{AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
+			DelayCommand(1.0, SendMessageToPC(oUser, "*You swim along the edge of the wall, seeking a way in."));		 
+	     	DelayCommand(5.0, SendMessageToPC(oUser, "You lose your sense of up and down, blundering along the stone walls, and end up back where you began."));		 
+	        DelayCommand(5.0, AssignCommand(oUser, ActionSpeakString("*Seems unable to find a way onward.", TALKVOLUME_TALK)));
+		    DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimEnter))));
+	        
+			}
 	}
 	
 

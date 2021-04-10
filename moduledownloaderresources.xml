@@ -1400,7 +1400,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1A5E15DC5D3B610E96E18662B4BCC95257749DC2" downloadHash="DDC636E05649A5AD87689A138C7FC2FF7FF24611" name="6d_int_silvy_ladycol_class_lvl.trx" dlsize="893626" size="945490" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A0A7C5910FBA989F21662B8F9642743396DB4BF9" downloadHash="08D06C2553521294A47CAC4CAD75719AF8BF9D53" name="6d_int_silvy_ladycol_class_lvl.trx" dlsize="893475" size="945490" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1910,7 +1910,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F78E4F4797407EFA1B7EB4A2DCE518EDCF18712D" downloadHash="4820740EA34EDEEBA9333A142FCB5086B741F85D" name="8e_int_highforest_nw_cave_aq.trx" dlsize="693754" size="7130207" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0221226FC7D04FD8ADF978BF8FC87743DE4C0070" downloadHash="853C4760E758698179FA1C1F9D394164DBA5CB23" name="8e_int_highforest_nw_cave_aq.trx" dlsize="681409" size="7158491" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
