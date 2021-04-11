@@ -81,6 +81,8 @@ void main()
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
+	string sSpeakFail=GetLocalString(OBJECT_SELF, "SPEAKSTRING_FAIL");
+	string sSpeakSuccess=GetLocalString(OBJECT_SELF, "SPEAKSTRING_SUCCESS");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
 	object oWPFail = GetNearestObjectByTag(sWPFail);
@@ -108,8 +110,10 @@ void main()
 		if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
 		 	{SendMessageToPC(oPC, sMessageSuccess);
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
-		 	 }
+		 	 AssignCommand(oPC, ActionSpeakString(sSpeakSuccess));
+			 }
 	 	 else {SendMessageToPC(oPC, sMessageFail);
+			 AssignCommand(oPC, ActionSpeakString(sSpeakFail));
 			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail)));
 		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
 			 	{SendMessageToPC(oPC, sMessageFail);
