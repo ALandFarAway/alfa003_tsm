@@ -83,7 +83,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_enter")
 	 object oSwimEnter = GetObjectByTag("hf_aq_plc_well_exit_WP");
 	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 5, TRUE)) {
 	 	 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
-	     SendMessageToPC(oUser, "You swim down into the inky blackness of the well.");		 
+	     SendMessageToPC(oUser, "You swim down into the blue glow of the well.");		 
 	     }
 	else {
 	 	   AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
@@ -103,21 +103,19 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 10, TRUE)) {
 	 	 SendMessageToPC(oUser, "You swim along the rock walls, seeking the widest crack.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));
-		 DelayCommand(1.0, SendMessageToPC(oUser, "You swim along the edge of the wall, seeking a way in."));		 
+		 //DelayCommand(1.0, SendMessageToPC(oUser, "You swim along the edge of the wall, seeking a way in."));		 
 	     
 	     DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimTwo))));
-		 DelayCommand(7.0, SendMessageToPC(oUser, "You swim higher, reaching for a high crack in the wall."));		 
+		 //DelayCommand(7.0, SendMessageToPC(oUser, "You swim higher, reaching for a high crack in the wall."));		 
 	     
 	     DelayCommand(11.0, AssignCommand(oUser, ActionSpeakString("*Hauls self up into a crack in the corner of the ceiling and out of sight.", TALKVOLUME_TALK)));
 		 DelayCommand(11.0, SendMessageToPC(oUser, "You haul yourself up through a crack in the corner of the ceiling into a wider column of water with a light shining down from thirty feet above."));		 
 	     DelayCommand(12.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimThree))));
-	     //DelayCommand(17.0, SendMessageToPC(oUser, "You surface with a gasp, in a dimly lit room, and haul yourself onto a dirty marble floor."));		 
-	     //DelayCommand(18.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
 	     }
 	else {
 	 	   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 	        AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
-			DelayCommand(1.0, SendMessageToPC(oUser, "*You swim along the edge of the wall, seeking a way in."));		 
+			//DelayCommand(1.0, SendMessageToPC(oUser, "*You swim along the edge of the wall, seeking a way in."));		 
 	     	DelayCommand(5.0, SendMessageToPC(oUser, "You lose your sense of up and down, blundering along the stone walls, and end up back where you began."));		 
 	        DelayCommand(5.0, AssignCommand(oUser, ActionSpeakString("*Seems unable to find a way onward.", TALKVOLUME_TALK)));
 		    DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimEnter))));
@@ -133,7 +131,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_up")
 	 int nSwimCheck = ACR_SkillCheck(SKILL_SWIM, oUser);
 	 
 	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 15, TRUE)) {
-	 	 SendMessageToPC(oUser, "You swim up strongly and break the surface into a room faintly lit with an eery glow.");		 
+	 	 SendMessageToPC(oUser, "You swim up strongly and break the surface into a room faintly lit with the glow of phosphorescent moss.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
 		}
 		
@@ -152,14 +150,14 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_up")
 		}
 	
 	else{ApplyEffectToObject(DURATION_TYPE_INSTANT,eColdDmg, oUser);
-	     SendMessageToPC(oUser, "The cold water saps your strength and you make no progress upwards.");		 
+	     SendMessageToPC(oUser, "The cold water saps your strength.");		 
 	     }
 	}
   	
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_down")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	 effect eColdDmg = EffectDamage(Random(6), DAMAGE_TYPE_COLD, DAMAGE_POWER_NORMAL, FALSE);
-	 object oSwimExit = GetObjectByTag("hf_aq_plc_crack_swim2_WP");
+	 object oSwimExit = GetObjectByTag("hf_aq_plc_crack_exit_WP");
 	 object oSwimEnter = GetObjectByTag("hf_aq_plc_crack_swim3_WP");
 	 
 	 
@@ -185,7 +183,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_down")
 		}
 	
 	else{ApplyEffectToObject(DURATION_TYPE_INSTANT,eColdDmg, oUser);
-	     SendMessageToPC(oUser, "The cold water saps your strength and you make no progress upwards.");		 
+	     SendMessageToPC(oUser, "The cold water saps your strength.");		 
 	     }
 	}										
 }
