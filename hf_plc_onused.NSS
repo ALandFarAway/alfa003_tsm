@@ -114,14 +114,13 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	     }
 	else {
 	 	   ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-	        AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));}
+	        AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));
 			//DelayCommand(1.0, SendMessageToPC(oUser, "*You swim along the edge of the wall, seeking a way in."));		 
 	     	DelayCommand(5.0, SendMessageToPC(oUser, "You lose your sense of up and down, blundering along the stone walls, and end up back where you began."));		 
 	        DelayCommand(5.0, AssignCommand(oUser, ActionSpeakString("*Seems unable to find a way onward.", TALKVOLUME_TALK)));
 		    DelayCommand(6.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimEnter))));
-	        
-			
-	}
+		}
+		}
 	
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_up")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
