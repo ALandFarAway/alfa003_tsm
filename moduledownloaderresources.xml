@@ -1300,7 +1300,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F83ADA802A77C0200686AB167AF7AC7176C4C18D" downloadHash="E959CF0105125C438DC4A9C6B2D1575E57E1F981" name="003_startarea.trx" dlsize="75450" size="76079" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C7D536D43A152571752CFFC4E947B64AFDBCDDEF" downloadHash="D425B9540BC98AA4876248CC4DB7EACE458519E7" name="003_startarea.trx" dlsize="81894" size="82524" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
