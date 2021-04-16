@@ -80,7 +80,7 @@ void main()
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeThreeWP), TRUE);
 			
 			
-		if(oStoneTreeFour != OBJECT_INVALID) {
+			if(oStoneTreeFour != OBJECT_INVALID) {
 			
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTreeFour);
