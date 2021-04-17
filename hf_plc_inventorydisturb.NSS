@@ -64,14 +64,35 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oCrystalDiscordF = GetObjectByTag("crystal_discord_f", 0);
 	 object oCrystalDiscordG = GetObjectByTag("crystal_discord_g", 0);
 	 object oCrystalDiscordH = GetObjectByTag("crystal_discord_h", 0);
+	 object oCrystalDiscordI = GetObjectByTag("crystal_discord_a", 0);
+	 object oCrystalDiscordJ = GetObjectByTag("crystal_discord_b", 0);
+	 object oCrystalDiscordK = GetObjectByTag("crystal_discord_c", 0);
+	 object oCrystalDiscordL = GetObjectByTag("crystal_discord_d", 0);
+	 object oCrystalDiscordM = GetObjectByTag("crystal_discord_e", 0);
+	 object oCrystalDiscordN = GetObjectByTag("crystal_discord_f", 0);
+	 object oCrystalDiscordO = GetObjectByTag("crystal_discord_g", 0);
+	 object oCrystalDiscordP = GetObjectByTag("crystal_discord_h", 0);
+	 object oDoorwayBlue = GetObjectByTag("hf_aq_door_blue_forcefield", 0);
+	 object oDoorwayGreen = GetObjectByTag("hf_aq_door_green_forcefield", 0);
+	 object oDoorwayRed = GetObjectByTag("hf_aq_door_red_forcefield", 0);
+	 object oDoorwayGold = GetObjectByTag("hf_aq_door_fold_forcefield", 0);
 	 
 	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueB = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueC = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueD = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueC, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreen = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGold = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGoldB = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, oRelayGoldA, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGoldC = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, oRelayGoldB, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGoldD = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, oRelayGoldC, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRed = EffectBeam(VFX_BEAM_FIRE, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamRedB = EffectBeam(VFX_BEAM_FIRE, oRelayRedA, BODY_NODE_CHEST, FALSE);
+	 effect eBeamRedC = EffectBeam(VFX_BEAM_FIRE, oRelayRedB, BODY_NODE_CHEST, FALSE);
+	 effect eBeamRedD = EffectBeam(VFX_BEAM_FIRE, oRelayRedC, BODY_NODE_CHEST, FALSE);
 	 effect eBeamOpal = EffectBeam(VFX_BEAM_WEB_OF_PURITY, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 
 	 effect eSoundBurst = EffectVisualEffect(VFX_FNF_SOUND_BURST, FALSE);
@@ -117,19 +138,143 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DestroyObject(oCrystalDiscordB, 57.0);
 			 DestroyObject(oCrystalDiscordC, 59.0);
 			 DestroyObject(oCrystalDiscordD, 61.0);
+			 DestroyObject(oDoorwayBlue, 65.0);
 			 }
-		 else{ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSmoke, OBJECT_SELF, 25.0); 
-		      SpawnItemProjectile(OBJECT_SELF, oDisturber, GetLocation(OBJECT_SELF), GetLocation(oDisturber), BASE_ITEM_SLING, PROJECTILE_PATH_TYPE_HIGH_BALLISTIC, OVERRIDE_ATTACK_RESULT_HIT_SUCCESSFUL, DAMAGE_TYPE_COLD);
-		 	  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
+		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_blue") {
+		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSmoke, OBJECT_SELF, 25.0); 
 		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
 			  DelayCommand(12.0, ActionCreateWynCreature("abr_cr_el_airweird", GetLocation(oWPCreateBlue)));
-			  DelayCommand(15.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have chosen...poorly. *Reaches into crystal globe for the last item placed there and drops it at its feet.", TALKVOLUME_TALK)));
-			  DelayCommand(15.0, SendMessageToPC(oDisturber, "You have chosen...poorly. *Reaches into crystal globe for the last item placed there and drops it at its feet."));
-			  DelayCommand(16.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionTakeItem(oItem, oGlobeBlue)));
-			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionPutDownItem(oItem)));
-			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have five seconds to depart my sight.", TALKVOLUME_TALK)));
-			  DelayCommand(25.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_airweird", 0),STANDARD_FACTION_HOSTILE));
+			  DelayCommand(15.0, ActionSpeakString("*A bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
+			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
+			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_airweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have ten seconds to depart this guardian's sight.", TALKVOLUME_TALK)));
+			  DelayCommand(40.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_airweird", 0),STANDARD_FACTION_HOSTILE));
+			  }
+			  
+		if(GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID) {
+		     object oPlatformGreenOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGreen));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oRelayGreenA, 310.0);
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGreenA, 5.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenB, 305.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGreenB, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenC, 300.0));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, OBJECT_SELF, 5.0));
+			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oRelayGreenA, 5.0));
+			 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oRelayGreenB, 5.0));
+			 DelayCommand(30.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oRelayGreenC, 5.0));
+			 DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordE, 5.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordF, 5.0));
+			 DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordG, 5.0));
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordH, 5.0));
+			 DelayCommand(52.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oCrystalDiscordE, 5.0));
+			 DelayCommand(54.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oCrystalDiscordF, 5.0));
+			 DelayCommand(56.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oCrystalDiscordG, 5.0));
+			 DelayCommand(58.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oCrystalDiscordH, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordE, 5.0));
+			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordF, 5.0));
+			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordG, 5.0));
+			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordH, 5.0));
+			 DestroyObject(oCrystalDiscordE, 55.0);
+			 DestroyObject(oCrystalDiscordF, 57.0);
+			 DestroyObject(oCrystalDiscordG, 59.0);
+			 DestroyObject(oCrystalDiscordH, 61.0);
+			 DestroyObject(oDoorwayGreen, 65.0);
+			 }
+		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_green") {
+		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
+		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
+		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, OBJECT_SELF, 5.0));
+			  DelayCommand(12.0, ActionCreateWynCreature("abr_cr_el_earthweird", GetLocation(oWPCreateGreen)));
+			  DelayCommand(15.0, ActionSpeakString("*A bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
+			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_earthweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
+			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_earthweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_earthweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_earthweird", 0), ActionSpeakString("You have ten of your heartbeats to depart this guardian's sight.", TALKVOLUME_TALK)));
+			  DelayCommand(40.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_earthweird", 0),STANDARD_FACTION_HOSTILE));
+			  }
+			  
+		 if(GetItemPossessedBy(oGlobeGold, "003_it_phalorm_topaz")!= OBJECT_INVALID) {
+		     object oPlatformGoldOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGold));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldA, 5.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGoldB, oRelayGoldB, 305.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldB, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGoldC, oRelayGoldC, 300.0));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, OBJECT_SELF, 5.0));
+			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oRelayGoldA, 5.0));
+			 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oRelayGoldB, 5.0));
+			 DelayCommand(30.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oRelayGoldC, 5.0));
+			 DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordI, 5.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordJ, 5.0));
+			 DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordK, 5.0));
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordL, 5.0));
+			 DelayCommand(52.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordI, 5.0));
+			 DelayCommand(54.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordJ, 5.0));
+			 DelayCommand(56.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordK, 5.0));
+			 DelayCommand(58.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordL, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordI, 5.0));
+			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordJ, 5.0));
+			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordK, 5.0));
+			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordL, 5.0));
+			 DestroyObject(oCrystalDiscordI, 55.0);
+			 DestroyObject(oCrystalDiscordJ, 57.0);
+			 DestroyObject(oCrystalDiscordK, 59.0);
+			 DestroyObject(oCrystalDiscordL, 61.0);
+			 DestroyObject(oDoorwayGold, 65.0);
+			 }
+		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_gold") {
+		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
+		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
+		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, OBJECT_SELF, 5.0));
+			  DelayCommand(12.0, ActionCreateWynCreature("abr_cr_el_waterweird", GetLocation(oWPCreateGold)));
+			  DelayCommand(15.0, AssignCommand(GetObjectByTag("abr_cr_el_waterweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
+			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_waterweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_waterweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_waterweird", 0), ActionSpeakString("You have ten of your heartbeats to depart my sight.", TALKVOLUME_TALK)));
+			  DelayCommand(35.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_waterweird", 0),STANDARD_FACTION_HOSTILE));
+			  }
+			  
+		if(GetItemPossessedBy(oGlobeRed, "003_it_phalorm_beryl")!= OBJECT_INVALID) {
+		     object oPlatformRedOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformRed));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRed, oRelayRedA, 310.0);
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayRedA, 5.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRedB, oRelayRedB, 305.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayRedB, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRedC, oRelayRedC, 300.0));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, OBJECT_SELF, 5.0));
+			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oRelayRedA, 5.0));
+			 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oRelayRedB, 5.0));
+			 DelayCommand(30.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oRelayRedC, 5.0));
+			 DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordM, 5.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordN, 5.0));
+			 DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordO, 5.0));
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordP, 5.0));
+			 DelayCommand(52.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordM, 5.0));
+			 DelayCommand(54.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordN, 5.0));
+			 DelayCommand(56.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordO, 5.0));
+			 DelayCommand(58.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordP, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordM, 5.0));
+			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordN, 5.0));
+			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordO, 5.0));
+			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordP, 5.0));
+			 DestroyObject(oCrystalDiscordM, 55.0);
+			 DestroyObject(oCrystalDiscordN, 57.0);
+			 DestroyObject(oCrystalDiscordO, 59.0);
+			 DestroyObject(oCrystalDiscordP, 61.0);
+			 DestroyObject(oDoorwayRed, 65.0);
+			 }
+		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_red") {
+		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
+		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
+		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, OBJECT_SELF, 5.0));
+			  DelayCommand(12.0, ActionCreateWynCreature("", GetLocation(oWPCreateRed)));
+			  DelayCommand(15.0, ActionSpeakString("*A bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
+			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
+			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_fireweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionSpeakString("You have ten of your heartbeats to depart this guardian's sight.", TALKVOLUME_TALK)));
+			  DelayCommand(40.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_fireweird", 0),STANDARD_FACTION_HOSTILE));
 			  }
 		}
 }
