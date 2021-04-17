@@ -26,6 +26,12 @@ void main()
 	object oStoneTreeFour;
 	object oStoneTreeFourWP;
 		
+	if((GetTag(OBJECT_SELF) == "phalorm_crystal_necromancy") && (nSpellId == 3174 )){
+		object oForceDown = GetObjectByTag("hf_aq_door_down_forcefield", 0);
+		DestroyObject(oForceDown, 2.0);
+		
+		}
+	
 	
 	//High Forest Destroying Corrupted Portals
 	if((GetTag(OBJECT_SELF)=="phalorm_orb_green")  && (oCaster != OBJECT_SELF)) {

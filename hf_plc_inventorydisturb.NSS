@@ -2,6 +2,21 @@
 //Wynna April 2021
 
 
+void ActionCreateWynPlace(string sPlace, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
+}
+
+void ActionCreateWynCreature(string sCreature, location lLocCreature)
+{
+    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
+}
+
+void ActionCreateWynPlacedEffect(string sPlacedEffect, location lLocPlaceEffect)
+{
+    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sPlacedEffect, lLocPlaceEffect);
+}
+
 #include "acr_placeable_i"
 
 void main()
@@ -14,7 +29,12 @@ void main()
 	
 		 
 if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))
-	{object oRelayBlueA = GetObjectByTag("phalorm_crystal_relay_blue_a", 0);
+	{object oGlobeBlue = GetObjectByTag("phalorm_globe_blue", 0);
+	 object oGlobeGreen = GetObjectByTag("phalorm_globe_green", 0);
+	 object oGlobeGold = GetObjectByTag("phalorm_globe_gold", 0);
+	 object oGlobeRed = GetObjectByTag("phalorm_globe_red", 0);
+	 
+	 object oRelayBlueA = GetObjectByTag("phalorm_crystal_relay_blue_a", 0);
 	 object oRelayBlueB = GetObjectByTag("phalorm_crystal_relay_blue_b", 0);
 	 object oRelayBlueC = GetObjectByTag("phalorm_crystal_relay_blue_c", 0);
 	 object oRelayGreenA = GetObjectByTag("phalorm_crystal_relay_green_a", 0);
@@ -31,6 +51,10 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oWPPlatformGreen = GetWaypointByTag("WP_phalorm_globe_platform_green");
 	 object oWPPlatformGold = GetWaypointByTag("WP_phalorm_globe_platform_gold");
 	 object oWPPlatformRed = GetWaypointByTag("WP_phalorm_globe_platform_red");
+	 object oWPCreateBlue = GetWaypointByTag("WP_phalorm_create_blue");
+	 object oWPCreateGreen = GetWaypointByTag("WP_phalorm_create_green");
+	 object oWPCreateGold = GetWaypointByTag("WP_phalorm_create_gold");
+	 object oWPCreateRed = GetWaypointByTag("WP_phalorm_create_red");
 	 
 	 object oCrystalDiscordA = GetObjectByTag("crystal_discord_a", 0);
 	 object oCrystalDiscordB = GetObjectByTag("crystal_discord_b", 0);
@@ -57,81 +81,55 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eImplosion = EffectVisualEffect(VFX_FNF_IMPLOSION, FALSE);
 	 effect eHowl = EffectVisualEffect(VFX_FNF_HOWL_MIND, FALSE);
 	 effect eSoundSpike = EffectVisualEffect(VFX_SOUND_SPIKE, FALSE);
-	 
-	 
-	 effect eExplosionGreen;
-	 effect eExplosionGold;
-	 effect eExplosionRed;
-	 effect eExplosionBlue = EffectVisualEffect(VFX_FNF_ELECTRIC_EXPLOSION,FALSE);
-	 effect eExplosionTestB = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_ACID,FALSE);
-	 effect eExplosionTestC = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL,FALSE);
-	 effect eExplosionTestD = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_FIRE,FALSE);
-	 effect eExplosionTestE = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_GREASE,FALSE);
-	 effect eExplosionTestF = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_MIND,FALSE);
-	 effect eExplosionTestG = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_NATURE,FALSE);
-	 effect eExplosionTestH = EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION,FALSE);
-	 effect eExplosionTestI = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION,FALSE);
+	 effect eChunk = EffectVisualEffect(VFX_COM_CHUNK_STONE_MEDIUM, FALSE);
+	 effect eExplosion = EffectVisualEffect(VFX_FNF_ELECTRIC_EXPLOSION,FALSE);
 	 
 	 effect eSummonBlue = EffectVisualEffect(VFX_FNF_SUMMON_CELESTIAL, FALSE);
 	 effect eSummonGreen = EffectVisualEffect(VFX_FNF_NATURES_BALANCE, FALSE);
 	 effect eSummonRed = EffectVisualEffect(VFX_FNF_SUMMON_GATE, FALSE);
 	 effect eSummonGold = EffectVisualEffect(VFX_FNF_SUMMONDRAGON, FALSE);
 	 
-	 if(FindSubString(GetTag(oItem), "003_it_phalorm") != -1)
-	 	{//ActionSpeakString(GetTag(oItem), TALKVOLUME_TALK);
-		 //SendMessageToPC(oDisturber, GetTag(oItem));
-		 object oPlatformBlueOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBlue));
-		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, OBJECT_SELF, 5.0);
-		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueA, 310.0);
-		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oRelayBlueA, 5.0));
-		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueB, oRelayBlueB, 305.0));
-		 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oRelayBlueB, 5.0));
-		 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueC, oRelayBlueC, 300.0));
-		 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
-		 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueA, 5.0));
-		 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueB, 5.0));
-		 DelayCommand(30.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueC, 5.0));
-		 DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordA, 5.0));
-		 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordB, 5.0));
-		 DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordC, 5.0));
-		 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordD, 5.0));
-		 DelayCommand(52.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordA, 5.0));
-		 DelayCommand(54.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordB, 5.0));
-		 DelayCommand(56.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordC, 5.0));
-		 DelayCommand(58.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordD, 5.0));
-		 DestroyObject(oCrystalDiscordA, 60.0);
-		 DestroyObject(oCrystalDiscordB, 61.0);
-		 DestroyObject(oCrystalDiscordC, 62.0);
-		 DestroyObject(oCrystalDiscordD, 63.0);
-		 }
-	 else{ActionPutDownItem(oItem);
-	 	  //DelayCommand(5.0, ActionSpeakString("*Spins, hurling the item back out.", TALKVOLUME_TALK));
-	 	  SpawnItemProjectile(OBJECT_SELF, oDisturber, GetLocation(OBJECT_SELF), GetLocation(oDisturber), BASE_ITEM_SLING, PROJECTILE_PATH_TYPE_HIGH_BALLISTIC, OVERRIDE_ATTACK_RESULT_HIT_SUCCESSFUL, DAMAGE_TYPE_COLD);
-	 	  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
-	      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
-	     }
-	 
-	  
-	 /*DelayCommand(2.5, ActionSpeakString("ExplodeA", TALKVOLUME_TALK));
-	 DelayCommand(2.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestA, oRelayBlueA, 5.0));
-	 DelayCommand(7.5, ActionSpeakString("ExplodeB", TALKVOLUME_TALK));
-	 DelayCommand(7.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestB, oRelayBlueA, 5.0));
-	 DelayCommand(12.5, ActionSpeakString("ExplodeC", TALKVOLUME_TALK));
-	 DelayCommand(12.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestC, oRelayBlueA, 5.0));
-	 DelayCommand(17.5, ActionSpeakString("ExplodeD", TALKVOLUME_TALK));
-	 DelayCommand(17.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestD, oRelayBlueA, 5.0));
-	 DelayCommand(22.5, ActionSpeakString("ExplodeF", TALKVOLUME_TALK));
-	 DelayCommand(22.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestF, oRelayBlueA, 5.0));
-	 DelayCommand(27.5, ActionSpeakString("ExplodeG", TALKVOLUME_TALK));
-	 DelayCommand(27.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestG, oRelayBlueA, 5.0));
-	 DelayCommand(32.5, ActionSpeakString("ExplodeH", TALKVOLUME_TALK));
-	 DelayCommand(32.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestH, oRelayBlueA, 5.0));
-	 DelayCommand(37.5, ActionSpeakString("ExplodeI", TALKVOLUME_TALK));
-	 DelayCommand(37.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestI, oRelayBlueA, 5.0));
-	 DelayCommand(42.5, ActionSpeakString("ExplodeE", TALKVOLUME_TALK));
-	 DelayCommand(42.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestE, oRelayBlueA, 5.0));
-	 */
-	 
-	 
-	 }
+	 if(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) {
+		     object oPlatformBlueOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBlue));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueA, 310.0);
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayBlueA, 5.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueB, oRelayBlueB, 305.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayBlueB, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueC, oRelayBlueC, 300.0));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
+			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueA, 5.0));
+			 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueB, 5.0));
+			 DelayCommand(30.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueC, 5.0));
+			 DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordA, 5.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordB, 5.0));
+			 DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordC, 5.0));
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oCrystalDiscordD, 5.0));
+			 DelayCommand(52.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordA, 5.0));
+			 DelayCommand(54.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordB, 5.0));
+			 DelayCommand(56.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordC, 5.0));
+			 DelayCommand(58.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordD, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordA, 5.0));
+			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordB, 5.0));
+			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordC, 5.0));
+			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordD, 5.0));
+			 DestroyObject(oCrystalDiscordA, 55.0);
+			 DestroyObject(oCrystalDiscordB, 57.0);
+			 DestroyObject(oCrystalDiscordC, 59.0);
+			 DestroyObject(oCrystalDiscordD, 61.0);
+			 }
+		 else{ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSmoke, OBJECT_SELF, 25.0); 
+		      SpawnItemProjectile(OBJECT_SELF, oDisturber, GetLocation(OBJECT_SELF), GetLocation(oDisturber), BASE_ITEM_SLING, PROJECTILE_PATH_TYPE_HIGH_BALLISTIC, OVERRIDE_ATTACK_RESULT_HIT_SUCCESSFUL, DAMAGE_TYPE_COLD);
+		 	  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
+		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
+		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
+			  DelayCommand(12.0, ActionCreateWynCreature("abr_cr_el_airweird", GetLocation(oWPCreateBlue)));
+			  DelayCommand(15.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have chosen...poorly. *Reaches into crystal globe for the last item placed there and drops it at its feet.", TALKVOLUME_TALK)));
+			  DelayCommand(15.0, SendMessageToPC(oDisturber, "You have chosen...poorly. *Reaches into crystal globe for the last item placed there and drops it at its feet."));
+			  DelayCommand(16.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionTakeItem(oItem, oGlobeBlue)));
+			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionPutDownItem(oItem)));
+			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have five seconds to depart my sight.", TALKVOLUME_TALK)));
+			  DelayCommand(25.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_airweird", 0),STANDARD_FACTION_HOSTILE));
+			  }
+		}
 }
