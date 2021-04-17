@@ -59,11 +59,10 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eSoundSpike = EffectVisualEffect(VFX_SOUND_SPIKE, FALSE);
 	 
 	 
-	 effect eExplosionBlue;
 	 effect eExplosionGreen;
 	 effect eExplosionGold;
 	 effect eExplosionRed;
-	 effect eExplosionTestA = EffectVisualEffect(VFX_FNF_ELECTRIC_EXPLOSION,FALSE);
+	 effect eExplosionBlue = EffectVisualEffect(VFX_FNF_ELECTRIC_EXPLOSION,FALSE);
 	 effect eExplosionTestB = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_ACID,FALSE);
 	 effect eExplosionTestC = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL,FALSE);
 	 effect eExplosionTestD = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_FIRE,FALSE);
@@ -82,23 +81,38 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 	{//ActionSpeakString(GetTag(oItem), TALKVOLUME_TALK);
 		 //SendMessageToPC(oDisturber, GetTag(oItem));
 		 object oPlatformBlueOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBlue));
-		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestA, OBJECT_SELF, 5.0);
-		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueA, 5.0);
-		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestA, oRelayBlueA, 5.0));
-		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueB, 5.0));
-		 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestA, oRelayBlueB, 5.0));
-		 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueC, 5.0));
-		 
+		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, OBJECT_SELF, 5.0);
+		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueA, 310.0);
+		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oRelayBlueA, 5.0));
+		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueB, oRelayBlueB, 305.0));
+		 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oRelayBlueB, 5.0));
+		 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueC, oRelayBlueC, 300.0));
+		 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
+		 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueA, 5.0));
+		 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueB, 5.0));
+		 DelayCommand(30.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oRelayBlueC, 5.0));
+		 DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordA, 5.0));
+		 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordB, 5.0));
+		 DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordC, 5.0));
+		 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionBlue, oCrystalDiscordD, 5.0));
+		 DelayCommand(52.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordA, 5.0));
+		 DelayCommand(54.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordB, 5.0));
+		 DelayCommand(56.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordC, 5.0));
+		 DelayCommand(58.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oCrystalDiscordD, 5.0));
+		 DestroyObject(oCrystalDiscordA, 60.0);
+		 DestroyObject(oCrystalDiscordB, 61.0);
+		 DestroyObject(oCrystalDiscordC, 62.0);
+		 DestroyObject(oCrystalDiscordD, 63.0);
 		 }
 	 else{ActionPutDownItem(oItem);
 	 	  //DelayCommand(5.0, ActionSpeakString("*Spins, hurling the item back out.", TALKVOLUME_TALK));
 	 	  SpawnItemProjectile(OBJECT_SELF, oDisturber, GetLocation(OBJECT_SELF), GetLocation(oDisturber), BASE_ITEM_SLING, PROJECTILE_PATH_TYPE_HIGH_BALLISTIC, OVERRIDE_ATTACK_RESULT_HIT_SUCCESSFUL, DAMAGE_TYPE_COLD);
 	 	  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
-	      //DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
+	      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 	     }
 	 
 	  
-	 DelayCommand(2.5, ActionSpeakString("ExplodeA", TALKVOLUME_TALK));
+	 /*DelayCommand(2.5, ActionSpeakString("ExplodeA", TALKVOLUME_TALK));
 	 DelayCommand(2.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestA, oRelayBlueA, 5.0));
 	 DelayCommand(7.5, ActionSpeakString("ExplodeB", TALKVOLUME_TALK));
 	 DelayCommand(7.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestB, oRelayBlueA, 5.0));
@@ -116,7 +130,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 DelayCommand(37.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosionTestI, oRelayBlueA, 5.0));
 	 DelayCommand(42.5, ActionSpeakString("ExplodeE", TALKVOLUME_TALK));
 	 DelayCommand(42.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eExplosionTestE, oRelayBlueA, 5.0));
-	 
+	 */
 	 
 	 
 	 }
