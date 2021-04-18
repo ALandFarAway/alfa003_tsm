@@ -141,12 +141,13 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DestroyObject(oCrystalDiscordD, 61.0);
 			 DestroyObject(oDoorwayBlue, 65.0);
 			 }
-		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_blue") {
+			 
+		 if ((GetTag(OBJECT_SELF) == "phalorm_globe_blue") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_sapphire")== OBJECT_INVALID))  {
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSmoke, OBJECT_SELF, 25.0); 
 		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
 			  DelayCommand(12.0, ActionCreateWynCreature("abr_cr_el_airweird", GetLocation(oWPCreateBlue)));
-			  DelayCommand(15.0, ActionSpeakString("*A bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
+			  DelayCommand(15.0, ActionSpeakString("*A hazy bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
 			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
 			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_airweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have ten seconds to depart this guardian's sight.", TALKVOLUME_TALK)));
@@ -155,7 +156,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  
 		if(GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID) {
 		     object oPlatformGreenOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGreen));
-			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_green", GetLocation(oWPPlatformBlue)));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_green", GetLocation(oWPPlatformGreen)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oRelayGreenA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGreenA, 5.0));
@@ -184,12 +185,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DestroyObject(oCrystalDiscordH, 61.0);
 			 DestroyObject(oDoorwayGreen, 65.0);
 			 }
-		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_green") {
+		 if ((GetTag(OBJECT_SELF) == "phalorm_globe_green") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")== OBJECT_INVALID)) {
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
 		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, OBJECT_SELF, 5.0));
 			  DelayCommand(12.0, ActionCreateWynCreature("abr_cr_el_earthweird", GetLocation(oWPCreateGreen)));
-			  DelayCommand(15.0, ActionSpeakString("*A bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
+			  DelayCommand(15.0, ActionSpeakString("*A muddy bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
 			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_earthweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
 			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_earthweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_earthweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_earthweird", 0), ActionSpeakString("You have ten of your heartbeats to depart this guardian's sight.", TALKVOLUME_TALK)));
@@ -227,7 +228,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DestroyObject(oCrystalDiscordL, 61.0);
 			 DestroyObject(oDoorwayGold, 65.0);
 			 }
-		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_gold") {
+		 if ((GetTag(OBJECT_SELF) == "phalorm_globe_gold") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_topaz")== OBJECT_INVALID)) {
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
 		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, OBJECT_SELF, 5.0));
@@ -269,12 +270,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DestroyObject(oCrystalDiscordP, 61.0);
 			 DestroyObject(oDoorwayRed, 65.0);
 			 }
-		 else if (GetTag(OBJECT_SELF) == "phalorm_globe_red") {
+		if ((GetTag(OBJECT_SELF) == "phalorm_globe_red") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_beryl")== OBJECT_INVALID)){
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
 		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, OBJECT_SELF, 5.0));
 			  DelayCommand(12.0, ActionCreateWynCreature("", GetLocation(oWPCreateRed)));
-			  DelayCommand(15.0, ActionSpeakString("*A bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
+			  DelayCommand(15.0, ActionSpeakString("*A smoky bubble the height of the door forms around the platform, pushing water outward in a sphere.", TALKVOLUME_TALK));
 			  DelayCommand(20.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionSpeakString("You have chosen...poorly.", TALKVOLUME_TALK)));
 			  DelayCommand(25.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetObjectByTag("abr_cr_el_fireweird", 0), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionSpeakString("You have ten of your heartbeats to depart this guardian's sight.", TALKVOLUME_TALK)));
