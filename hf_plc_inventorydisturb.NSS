@@ -64,14 +64,14 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oCrystalDiscordF = GetObjectByTag("crystal_discord_f", 0);
 	 object oCrystalDiscordG = GetObjectByTag("crystal_discord_g", 0);
 	 object oCrystalDiscordH = GetObjectByTag("crystal_discord_h", 0);
-	 object oCrystalDiscordI = GetObjectByTag("crystal_discord_a", 0);
-	 object oCrystalDiscordJ = GetObjectByTag("crystal_discord_b", 0);
-	 object oCrystalDiscordK = GetObjectByTag("crystal_discord_c", 0);
-	 object oCrystalDiscordL = GetObjectByTag("crystal_discord_d", 0);
-	 object oCrystalDiscordM = GetObjectByTag("crystal_discord_e", 0);
-	 object oCrystalDiscordN = GetObjectByTag("crystal_discord_f", 0);
-	 object oCrystalDiscordO = GetObjectByTag("crystal_discord_g", 0);
-	 object oCrystalDiscordP = GetObjectByTag("crystal_discord_h", 0);
+	 object oCrystalDiscordI = GetObjectByTag("crystal_discord_i", 0);
+	 object oCrystalDiscordJ = GetObjectByTag("crystal_discord_j", 0);
+	 object oCrystalDiscordK = GetObjectByTag("crystal_discord_k", 0);
+	 object oCrystalDiscordL = GetObjectByTag("crystal_discord_l", 0);
+	 object oCrystalDiscordM = GetObjectByTag("crystal_discord_m", 0);
+	 object oCrystalDiscordN = GetObjectByTag("crystal_discord_n", 0);
+	 object oCrystalDiscordO = GetObjectByTag("crystal_discord_o", 0);
+	 object oCrystalDiscordP = GetObjectByTag("crystal_discord_p", 0);
 	 object oDoorwayBlue = GetObjectByTag("hf_aq_door_blue_forcefield", 0);
 	 object oDoorwayGreen = GetObjectByTag("hf_aq_door_green_forcefield", 0);
 	 object oDoorwayRed = GetObjectByTag("hf_aq_door_red_forcefield", 0);
@@ -199,7 +199,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  
 		 if(GetItemPossessedBy(oGlobeGold, "003_it_phalorm_topaz")!= OBJECT_INVALID) {
 		     object oPlatformGoldOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGold));
-			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_yellow", GetLocation(oWPPlatformBlue)));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_yellow", GetLocation(oWPPlatformGold)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldA, 5.0));
@@ -241,7 +241,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  
 		if(GetItemPossessedBy(oGlobeRed, "003_it_phalorm_beryl")!= OBJECT_INVALID) {
 		     object oPlatformRedOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformRed));
-			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_orange", GetLocation(oWPPlatformBlue)));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_orange", GetLocation(oWPPlatformRed)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRed, oRelayRedA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayRedA, 5.0));
