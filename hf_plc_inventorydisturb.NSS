@@ -112,6 +112,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 
 	 if(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) {
 		     object oPlatformBlueOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBlue));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_blue", GetLocation(oWPPlatformBlue)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlue, oRelayBlueA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayBlueA, 5.0));
@@ -154,6 +155,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  
 		if(GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID) {
 		     object oPlatformGreenOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGreen));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_green", GetLocation(oWPPlatformBlue)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oRelayGreenA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGreenA, 5.0));
@@ -196,6 +198,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  
 		 if(GetItemPossessedBy(oGlobeGold, "003_it_phalorm_topaz")!= OBJECT_INVALID) {
 		     object oPlatformGoldOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGold));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_yellow", GetLocation(oWPPlatformBlue)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldA, 5.0));
@@ -237,6 +240,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  
 		if(GetItemPossessedBy(oGlobeRed, "003_it_phalorm_beryl")!= OBJECT_INVALID) {
 		     object oPlatformRedOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformRed));
+			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_orange", GetLocation(oWPPlatformBlue)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRed, oRelayRedA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayRedA, 5.0));
