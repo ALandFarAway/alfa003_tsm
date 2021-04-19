@@ -86,9 +86,9 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGold = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
-	 effect eBeamGoldB = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, oRelayGoldA, BODY_NODE_CHEST, FALSE);
-	 effect eBeamGoldC = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, oRelayGoldB, BODY_NODE_CHEST, FALSE);
-	 effect eBeamGoldD = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, oRelayGoldC, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGoldB = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldA, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGoldC = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldB, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGoldD = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldC, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRed = EffectBeam(VFX_BEAM_FIRE, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRedB = EffectBeam(VFX_BEAM_FIRE, oRelayRedA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRedC = EffectBeam(VFX_BEAM_FIRE, oRelayRedB, BODY_NODE_CHEST, FALSE);
@@ -106,7 +106,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eExplosion = EffectVisualEffect(VFX_FNF_ELECTRIC_EXPLOSION,FALSE);
 	 
 	 effect eSummonBlue = EffectVisualEffect(VFX_FNF_SUMMON_CELESTIAL, FALSE);
-	 effect eSummonGreen = EffectVisualEffect(VFX_FNF_NATURES_BALANCE, FALSE);
+	 effect eSummonGreen = EffectVisualEffect(VFX_DUR_ENTANGLE, FALSE);
 	 effect eSummonRed = EffectVisualEffect(VFX_FNF_SUMMON_GATE, FALSE);
 	 effect eSummonGold = EffectVisualEffect(VFX_FNF_SUMMONDRAGON, FALSE);
 	 
@@ -153,7 +153,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_airweird", 0), ActionSpeakString("You have ten seconds to depart this guardian's sight.", TALKVOLUME_TALK)));
 			  DelayCommand(40.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_airweird", 0),STANDARD_FACTION_HOSTILE));
 			  }
-			  
+		
 		if(GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID) {
 		     object oPlatformGreenOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGreen));
 			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_green", GetLocation(oWPPlatformGreen)));
@@ -270,7 +270,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DestroyObject(oCrystalDiscordP, 61.0);
 			 DestroyObject(oDoorwayRed, 65.0);
 			 }
-		if ((GetTag(OBJECT_SELF) == "phalorm_globe_red") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_beryl")== OBJECT_INVALID)){
+		if((GetTag(OBJECT_SELF) == "phalorm_globe_red") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_beryl")== OBJECT_INVALID)){
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
 		      DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundSpike, OBJECT_SELF, 5.0)); 
 		      DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, OBJECT_SELF, 5.0));
@@ -281,5 +281,16 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  DelayCommand(30.0, AssignCommand(GetObjectByTag("abr_cr_el_fireweird", 0), ActionSpeakString("You have ten of your heartbeats to depart this guardian's sight.", TALKVOLUME_TALK)));
 			  DelayCommand(40.0, ChangeToStandardFaction(GetObjectByTag("abr_cr_el_fireweird", 0),STANDARD_FACTION_HOSTILE));
 			  }
+			  
+		if((GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) && (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)) {
+		 	 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordP, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordP, 5.0));
+			 DestroyObject(oCrystalDiscordP, 58.0);
+			 }
+		if((GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) && (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)  && (GetItemPossessedBy(oGlobeRed, "003_it_phalorm_beryl")!= OBJECT_INVALID)) {
+		 	 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordL, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordL, 5.0));
+			 DestroyObject(oCrystalDiscordL, 58.0);
+			 }
 		}
 }
