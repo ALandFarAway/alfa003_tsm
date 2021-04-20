@@ -75,7 +75,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oDoorwayBlue = GetObjectByTag("hf_aq_door_blue_forcefield", 0);
 	 object oDoorwayGreen = GetObjectByTag("hf_aq_door_green_forcefield", 0);
 	 object oDoorwayRed = GetObjectByTag("hf_aq_door_red_forcefield", 0);
-	 object oDoorwayGold = GetObjectByTag("hf_aq_door_fold_forcefield", 0);
+	 object oDoorwayGold = GetObjectByTag("hf_aq_door_gold_forcefield", 0);
 	 
 	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueB = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueA, BODY_NODE_CHEST, FALSE);
@@ -85,7 +85,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
-	 effect eBeamGold = EffectBeam(VFX_SPELL_BEAM_MOON_BOLT, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGold = EffectBeam(VFX_BEAM_RESCUEE, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGoldB = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGoldC = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGoldD = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldC, BODY_NODE_CHEST, FALSE);
