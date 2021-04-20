@@ -34,7 +34,7 @@ void main()
 	
 	
 	//High Forest Destroying Corrupted Portals
-	if((GetTag(OBJECT_SELF) == "phalorm_orb_green") && (nSpellId == SPELL_GLOBE_OF_INVULNERABILITY )){
+	if((GetTag(OBJECT_SELF) == "phalorm_orb_green") && (nSpellId == SPELL_ORB_OF_SOUND )){
 		object oGreenGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
 		SendMessageToAllDMs("A phalorm Emerald Sphere was just created.");
 		DestroyObject(OBJECT_SELF, 20.0);
@@ -61,7 +61,7 @@ void main()
 			}
 	}
 	
-	if((GetTag(OBJECT_SELF) == "phalorm_orb_purple") && (nSpellId == SPELL_GLOBE_OF_INVULNERABILITY )){
+	if((GetTag(OBJECT_SELF) == "phalorm_orb_purple") && (nSpellId == SPELL_ORB_OF_SOUND )){
 		object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
 		object oPurpleGemBackup = CreateItemOnObject("003_it_phalorm_diamond", oCaster, 1);
 		SendMessageToAllDMs("A phalorm Diamond Key was just created.");
