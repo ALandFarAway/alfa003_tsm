@@ -34,7 +34,14 @@ void main()
 	
 	
 	//High Forest Destroying Corrupted Portals
-	if((GetTag(OBJECT_SELF)=="phalorm_orb_green")  && (oCaster != OBJECT_SELF)) {
+	if((GetTag(OBJECT_SELF) == "phalorm_orb_green") && (nSpellId == SPELL_GLOBE_OF_INVULNERABILITY )){
+		object oGreenGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
+		SendMessageToAllDMs("A phalorm Emerald Sphere was just created.");
+		DestroyObject(OBJECT_SELF, 20.0);
+		}
+		
+	
+	else if((GetTag(OBJECT_SELF)=="phalorm_orb_green")  && (oCaster != OBJECT_SELF)) {
 	     oStoneTree = GetObjectByTag("rauvin_ruin_treestone_one", 0);
 		 oStoneTreeWP = GetObjectByTag("undead_treant_one_wp", 0);
 		 oStoneTreeTwo = GetObjectByTag("rauvin_ruin_treestone_two", 0);
@@ -54,7 +61,14 @@ void main()
 			}
 	}
 	
-	if((GetTag(OBJECT_SELF)=="phalorm_orb_purple")  && (oCaster != OBJECT_SELF)) {
+	if((GetTag(OBJECT_SELF) == "phalorm_orb_purple") && (nSpellId == SPELL_GLOBE_OF_INVULNERABILITY )){
+		object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
+		object oPurpleGemBackup = CreateItemOnObject("003_it_phalorm_diamond", oCaster, 1);
+		SendMessageToAllDMs("A phalorm Diamond Key was just created.");
+		DestroyObject(OBJECT_SELF, 20.0);
+		}
+		
+	else if((GetTag(OBJECT_SELF)=="phalorm_orb_purple")  && (oCaster != OBJECT_SELF)) {
 	     oStoneTree = GetObjectByTag("aq_cave_treestone_one", 0);
 		 oStoneTreeWP = GetObjectByTag("aq_cave_undead_treant_one_wp", 0);
 		 oStoneTreeTwo = GetObjectByTag("aq_cave_treestone_two", 0);
@@ -63,8 +77,10 @@ void main()
 		 oStoneTreeThreeWP = GetObjectByTag("aq_cave_undead_treant_three_wp", 0);
 		 oStoneTreeFour = GetObjectByTag("aq_cave_treestone_four", 0);
 		 oStoneTreeFourWP = GetObjectByTag("aq_cave_undead_treant_four_wp", 0);
-		
-	
+		 if(GetLocalInt(OBJECT_SELF, "Treant") != 1) {
+		 	ActionSpeakString("*Crackling and the rumbling of stone sounds from around the room, drawing all eyes to the eastern curve of the room. A pattern of cracks appears across the surface of a petrified tree, then explodes outward. As the dust settles, it reveals a moving creature. A treant -- or what had been a treant -- stands there, bark scarred, trunk splintered and dry. What had been wood shimmers with crystalline petrifications over mottled black and gray, as if centuries of rot had been crystallized. It thrashes. A clattering like a storm through bones sounds over a wail of anger and animosity.", TALKVOLUME_TALK);
+			SetLocalInt(OBJECT_SELF, "Treant", 1);
+			}
 	 	if(oStoneTree != OBJECT_INVALID) {
 			
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 

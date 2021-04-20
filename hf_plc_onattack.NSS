@@ -48,7 +48,10 @@ void main()
 		 oStoneTreeThreeWP = GetObjectByTag("aq_cave_undead_treant_three_wp", 0);
 		 oStoneTreeFour = GetObjectByTag("aq_cave_treestone_four", 0);
 		 oStoneTreeFourWP = GetObjectByTag("aq_cave_undead_treant_four_wp", 0);
-		
+		 if(GetLocalInt(OBJECT_SELF, "Treant") != 1) {
+		 	ActionSpeakString("*Crackling and the rumbling of stone sounds from around the room, drawing all eyes to the eastern curve of the room. A pattern of cracks appears across the surface of a petrified tree, then explodes outward. As the dust settles, it reveals a moving creature. A treant -- or what had been a treant -- stands there, bark scarred, trunk splintered and dry. What had been wood shimmers with crystalline petrifications over mottled black and gray, as if centuries of rot had been crystallized. It thrashes. A clattering like a storm through bones sounds over a wail of anger and animosity.", TALKVOLUME_TALK);
+			SetLocalInt(OBJECT_SELF, "Treant", 1);
+			}
 	
 	 	if(oStoneTree != OBJECT_INVALID) {
 			
