@@ -76,6 +76,10 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oDoorwayGreen = GetObjectByTag("hf_aq_door_green_forcefield", 0);
 	 object oDoorwayRed = GetObjectByTag("hf_aq_door_red_forcefield", 0);
 	 object oDoorwayGold = GetObjectByTag("hf_aq_door_gold_forcefield", 0);
+	 object oGateBlue = GetObjectByTag("phalorm_door_blue", 0);
+	 object oGateGreen = GetObjectByTag("phalorm_door_green", 0);
+	 object oGateRed = GetObjectByTag("phalorm_door_red", 0);
+	 object oGateGold = GetObjectByTag("phalorm_door_gold", 0);
 	 
 	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueB = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueA, BODY_NODE_CHEST, FALSE);
@@ -283,14 +287,27 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  }
 			  
 		if((GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) && (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)) {
-		 	 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordP, 5.0));
-			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordP, 5.0));
-			 DestroyObject(oCrystalDiscordP, 58.0);
+		 	 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCrystalDiscordM, 10.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueD, oCrystalDiscordN, 10.0));
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordM, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordM, 5.0));
+			 DestroyObject(oCrystalDiscordM, 58.0);
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordN, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordN, 5.0));
+			 DestroyObject(oCrystalDiscordN, 58.0);
+			 DelayCommand(60.0, ActionUnlockObject(oGateRed));
 			 }
 		if((GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) && (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)  && (GetItemPossessedBy(oGlobeRed, "003_it_phalorm_beryl")!= OBJECT_INVALID)) {
-		 	 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordL, 5.0));
-			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordL, 5.0));
-			 DestroyObject(oCrystalDiscordL, 58.0);
+		 	 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCrystalDiscordI, 10.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueD, oCrystalDiscordJ, 10.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRedD, oCrystalDiscordJ, 10.0));
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordI, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordI, 5.0));
+			 DestroyObject(oCrystalDiscordI, 58.0);
+			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordJ, 5.0));
+			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordJ, 5.0));
+			 DestroyObject(oCrystalDiscordJ, 58.0);
+			 DelayCommand(60.0, ActionUnlockObject(oGateGold));
 			 }
 		}
 }
