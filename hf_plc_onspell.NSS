@@ -70,7 +70,7 @@ void main()
 		DestroyObject(OBJECT_SELF, 20.0);
 		}
 		
-	else if((GetTag(OBJECT_SELF)=="phalorm_orb_purple")  && (oCaster != OBJECT_SELF)) {
+	else if((GetTag(OBJECT_SELF)=="phalorm_orb_purple") && (nSpellId != 547 ) && (oCaster != OBJECT_SELF)) {
 	     oStoneTree = GetObjectByTag("aq_cave_treestone_one", 0);
 		 oStoneTreeWP = GetObjectByTag("aq_cave_undead_treant_one_wp", 0);
 		 oStoneTreeTwo = GetObjectByTag("aq_cave_treestone_two", 0);
