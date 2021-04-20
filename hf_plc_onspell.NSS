@@ -15,7 +15,7 @@ void main()
 {
 	ACR_PlaceableOnSpellCastAt();
     object oCaster = GetLastSpellCaster();
-	int nSpellId = GetSpellId();
+	int nSpellId = GetLastSpell();
 	string sCreateCr = "abr_cr_pla_treant_undead";
 	object oStoneTree;
 	object oStoneTreeWP;
