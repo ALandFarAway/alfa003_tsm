@@ -64,11 +64,11 @@ void main()
 	//ActionSpeakString("SpellID = " + IntToString(nSpellId), TALKVOLUME_TALK);
     if((GetTag(OBJECT_SELF) == "phalorm_orb_white") && (nSpellId == 1209 )){
 		//object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
-		object oWhiteGem = CreateItemOnObject("003_it_phalorm_diamond", GetObjectByTag("phalorm_globe_purple", 1));
-		ActionSpeakString("The glowing orb descends slowly. It drifts through a gap in the meshwork of the crystal globe beneath it and comes to a rest.", TALKVOLUME_TALK);
-        SendMessageToAllDMs("A phalorm Diamond Key was just created.");
-		DestroyObject(OBJECT_SELF, 1.0);
-		DestroyObject(GetObjectByTag("phalorm_orb_white_fx", 1), 5.0);
+		object oWhiteGem = CreateItemOnObject("003_it_phalorm_diamond", GetObjectByTag("phalorm_globe_white", 1));
+		ActionSpeakString("A sparkling gem descends from out of the glowing orb. The gem drifts through a gap in the meshwork of the crystal globe beneath it and comes to a rest inside.", TALKVOLUME_TALK);
+        //SendMessageToAllDMs("A phalorm Diamond Key was just created.");
+		DestroyObject(GetObjectByTag("phalorm_orb_white_fx", 1), 1.0);
+		DestroyObject(OBJECT_SELF, 2.0);
 		}
 		
 	else if((GetTag(OBJECT_SELF)=="phalorm_orb_white") && (nSpellId != 547 ) && (oCaster != OBJECT_SELF)) {
