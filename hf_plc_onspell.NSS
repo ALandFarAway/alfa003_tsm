@@ -62,15 +62,16 @@ void main()
 	}
 	
 	//ActionSpeakString("SpellID = " + IntToString(nSpellId), TALKVOLUME_TALK);
-	//ActionSpeakString("Tag = " + GetTag(OBJECT_SELF), TALKVOLUME_TALK);
-	if((GetTag(OBJECT_SELF) == "phalorm_orb_purple") && (nSpellId == 1209 )){
-		object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
-		//object oPurpleGemBackup = CreateItemOnObject("003_it_phalorm_diamond", oCaster, 1);
-		SendMessageToAllDMs("A phalorm Diamond Key was just created.");
-		DestroyObject(OBJECT_SELF, 20.0);
+    if((GetTag(OBJECT_SELF) == "phalorm_orb_white") && (nSpellId == 1209 )){
+		//object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
+		object oWhiteGem = CreateItemOnObject("003_it_phalorm_diamond", GetObjectByTag("phalorm_globe_purple", 1));
+		ActionSpeakString("The glowing orb descends slowly. It drifts through a gap in the meshwork of the crystal globe beneath it and comes to a rest.", TALKVOLUME_TALK);
+        SendMessageToAllDMs("A phalorm Diamond Key was just created.");
+		DestroyObject(OBJECT_SELF, 1.0);
+		DestroyObject(GetObjectByTag("phalorm_orb_white_fx", 1), 5.0);
 		}
 		
-	else if((GetTag(OBJECT_SELF)=="phalorm_orb_purple") && (nSpellId != 547 ) && (oCaster != OBJECT_SELF)) {
+	else if((GetTag(OBJECT_SELF)=="phalorm_orb_white") && (nSpellId != 547 ) && (oCaster != OBJECT_SELF)) {
 	     oStoneTree = GetObjectByTag("aq_cave_treestone_one", 0);
 		 oStoneTreeWP = GetObjectByTag("aq_cave_undead_treant_one_wp", 0);
 		 oStoneTreeTwo = GetObjectByTag("aq_cave_treestone_two", 0);
