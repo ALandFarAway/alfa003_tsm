@@ -61,11 +61,11 @@ void main()
 			}
 	}
 	
-	ActionSpeakString("SpellID = " + IntToString(nSpellId), TALKVOLUME_TALK);
-	ActionSpeakString("Tag = " + GetTag(OBJECT_SELF), TALKVOLUME_TALK);
+	//ActionSpeakString("SpellID = " + IntToString(nSpellId), TALKVOLUME_TALK);
+	//ActionSpeakString("Tag = " + GetTag(OBJECT_SELF), TALKVOLUME_TALK);
 	if((GetTag(OBJECT_SELF) == "phalorm_orb_purple") && (nSpellId == 1209 )){
 		object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
-		object oPurpleGemBackup = CreateItemOnObject("003_it_phalorm_diamond", oCaster, 1);
+		//object oPurpleGemBackup = CreateItemOnObject("003_it_phalorm_diamond", oCaster, 1);
 		SendMessageToAllDMs("A phalorm Diamond Key was just created.");
 		DestroyObject(OBJECT_SELF, 20.0);
 		}
