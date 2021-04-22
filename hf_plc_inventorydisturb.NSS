@@ -72,14 +72,20 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oCrystalDiscordN = GetObjectByTag("crystal_discord_n", 0);
 	 object oCrystalDiscordO = GetObjectByTag("crystal_discord_o", 0);
 	 object oCrystalDiscordP = GetObjectByTag("crystal_discord_p", 0);
-	 object oDoorwayBlue = GetObjectByTag("hf_aq_door_blue_forcefield", 0);
-	 object oDoorwayGreen = GetObjectByTag("hf_aq_door_green_forcefield", 0);
-	 object oDoorwayRed = GetObjectByTag("hf_aq_door_red_forcefield", 0);
-	 object oDoorwayGold = GetObjectByTag("hf_aq_door_gold_forcefield", 0);
+	 object oFFieldBlue = GetObjectByTag("hf_aq_door_blue_forcefield", 0);
+	 object oFFieldGreen = GetObjectByTag("hf_aq_door_green_forcefield", 0);
+	 object oFFieldRed = GetObjectByTag("hf_aq_door_red_forcefield", 0);
+	 object oFFieldGold = GetObjectByTag("hf_aq_door_gold_forcefield", 0);
 	 object oGateBlue = GetObjectByTag("phalorm_door_blue", 0);
 	 object oGateGreen = GetObjectByTag("phalorm_door_green", 0);
 	 object oGateRed = GetObjectByTag("phalorm_door_red", 0);
 	 object oGateGold = GetObjectByTag("phalorm_door_gold", 0);
+	 object oDoorBlue = GetObjectByTag("phalorm_blue_chamber", 0);
+	 object oDoorGreen = GetObjectByTag("phalorm_green_chamber", 0);
+	 object oDoorRed = GetObjectByTag("phalorm_red_chamber", 0);
+	 object oDoorGold = GetObjectByTag("phalorm_gold_chamber", 0);
+	 
+	 
 	 
 	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueB = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueA, BODY_NODE_CHEST, FALSE);
@@ -139,11 +145,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordB, 5.0));
 			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordC, 5.0));
 			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordD, 5.0));
+			 DestroyObject(oDoorBlue, 50.0);
 			 DestroyObject(oCrystalDiscordA, 55.0);
 			 DestroyObject(oCrystalDiscordB, 57.0);
 			 DestroyObject(oCrystalDiscordC, 59.0);
 			 DestroyObject(oCrystalDiscordD, 61.0);
-			 DestroyObject(oDoorwayBlue, 65.0);
+			 DestroyObject(oFFieldBlue, 65.0);
 			 }
 			 
 		 if ((GetTag(OBJECT_SELF) == "phalorm_globe_blue") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_sapphire")== OBJECT_INVALID))  {
@@ -183,11 +190,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordF, 5.0));
 			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordG, 5.0));
 			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordH, 5.0));
+			 DestroyObject(oDoorGreen, 50.0);
 			 DestroyObject(oCrystalDiscordE, 55.0);
 			 DestroyObject(oCrystalDiscordF, 57.0);
 			 DestroyObject(oCrystalDiscordG, 59.0);
 			 DestroyObject(oCrystalDiscordH, 61.0);
-			 DestroyObject(oDoorwayGreen, 65.0);
+			 DestroyObject(oFFieldGreen, 65.0);
 			 }
 		 if ((GetTag(OBJECT_SELF) == "phalorm_globe_green") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")== OBJECT_INVALID)) {
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
@@ -226,11 +234,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordJ, 5.0));
 			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordK, 5.0));
 			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordL, 5.0));
+			 DestroyObject(oDoorGold, 50.0);
 			 DestroyObject(oCrystalDiscordI, 55.0);
 			 DestroyObject(oCrystalDiscordJ, 57.0);
 			 DestroyObject(oCrystalDiscordK, 59.0);
 			 DestroyObject(oCrystalDiscordL, 61.0);
-			 DestroyObject(oDoorwayGold, 65.0);
+			 DestroyObject(oFFieldGold, 65.0);
 			 }
 		 if ((GetTag(OBJECT_SELF) == "phalorm_globe_gold") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_topaz")== OBJECT_INVALID)) {
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
@@ -268,11 +277,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordN, 5.0));
 			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordO, 5.0));
 			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordP, 5.0));
+			 DestroyObject(oDoorRed, 50.0);
 			 DestroyObject(oCrystalDiscordM, 55.0);
 			 DestroyObject(oCrystalDiscordN, 57.0);
 			 DestroyObject(oCrystalDiscordO, 59.0);
 			 DestroyObject(oCrystalDiscordP, 61.0);
-			 DestroyObject(oDoorwayRed, 65.0);
+			 DestroyObject(oFFieldRed, 65.0);
 			 }
 		if((GetTag(OBJECT_SELF) == "phalorm_globe_red") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_beryl")== OBJECT_INVALID)){
 		      ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSoundBurstSilent, OBJECT_SELF, 5.0); 
@@ -304,9 +314,6 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordI, 5.0));
 			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordI, 5.0));
 			 DestroyObject(oCrystalDiscordI, 58.0);
-			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordJ, 5.0));
-			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordJ, 5.0));
-			 DestroyObject(oCrystalDiscordJ, 58.0);
 			 DelayCommand(60.0, ActionUnlockObject(oGateGold));
 			 }
 		}
