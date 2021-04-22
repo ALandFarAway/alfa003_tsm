@@ -146,6 +146,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			 DelayCommand(59.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordC, 5.0));
 			 DelayCommand(61.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordD, 5.0));
 			 DestroyObject(oDoorBlue, 50.0);
+			 DelayCommand(51.0, ActionUnlockObject(oGateBlue));
 			 DestroyObject(oCrystalDiscordA, 55.0);
 			 DestroyObject(oCrystalDiscordB, 57.0);
 			 DestroyObject(oCrystalDiscordC, 59.0);
@@ -213,7 +214,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 		     object oPlatformGoldOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGold));
 			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_yellow", GetLocation(oWPPlatformGold)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
-			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
+			 //ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldA, 5.0));
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGoldB, oRelayGoldB, 305.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldB, 5.0));
