@@ -87,19 +87,19 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 
 	 
 	 
-	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, oGlobeBlue, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueB = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueC = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueD = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueC, BODY_NODE_CHEST, FALSE);
-	 effect eBeamGreen = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGreen = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oGlobeGreen, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
-	 effect eBeamGold = EffectBeam(VFX_BEAM_RESCUEE, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGold = EffectBeam(VFX_BEAM_RESCUEE, oGlobeGold, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGoldB = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGoldC = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamGoldD = EffectBeam(VFX_BEAM_RESCUEE, oRelayGoldC, BODY_NODE_CHEST, FALSE);
-	 effect eBeamRed = EffectBeam(VFX_BEAM_FIRE, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	 effect eBeamRed = EffectBeam(VFX_BEAM_FIRE, oGlobeRed, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRedB = EffectBeam(VFX_BEAM_FIRE, oRelayRedA, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRedC = EffectBeam(VFX_BEAM_FIRE, oRelayRedB, BODY_NODE_CHEST, FALSE);
 	 effect eBeamRedD = EffectBeam(VFX_BEAM_FIRE, oRelayRedC, BODY_NODE_CHEST, FALSE);
@@ -214,7 +214,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 		     object oPlatformGoldOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformGold));
 			 DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_gem_energy_yellow", GetLocation(oWPPlatformGold)));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
-			 //ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGold, oRelayGoldA, 310.0);
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldA, 5.0));
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGoldB, oRelayGoldB, 305.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oRelayGoldB, 5.0));
