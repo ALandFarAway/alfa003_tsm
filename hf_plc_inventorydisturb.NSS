@@ -126,13 +126,14 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eSummonGold = EffectVisualEffect(VFX_FNF_SUMMONDRAGON, FALSE);
 	 
 	 if(GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
-	 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueGlobe, oGlobeBook, 10.0);
-		DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
-		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
-		DelayCommand(4.0, ActionCreateWynPlacedEffect("fx_gem_energy_blue", GetLocation(oDisturber)));
-		AssignCommand(oDisturber, ActionJumpToObject(oWPCreateBlue, FALSE));
+	 	object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
+		object oLightOn = CreateObject(OBJECT_TYPE_PLACED_EFFECT,"fx_gem_energy_blue", GetLocation(oDisturber));
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueGlobe, oGlobeBook, 10.0);
+		DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oDisturber, 5.0));
+		//ActionCreateWynPlacedEffect("fx_gem_energy_blue", GetLocation(oDisturber));
+		DelayCommand(5.0, AssignCommand(oDisturber, ActionJumpToObject(oWPCreateBlue, FALSE)));
 		DestroyObject(oPlatformBookOn, 10.0);
-		DestroyObject(GetObjectByTag("fx_gem_energy_blue",0), 10.0);	 	 	 	 	 	 
+		DestroyObject(oLightOn, 10.0);	 	 	 	 	 	 
 	 }
 	 
 	 if(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
