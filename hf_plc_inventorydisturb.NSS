@@ -51,6 +51,7 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oWPPlatformGreen = GetWaypointByTag("WP_phalorm_globe_platform_green");
 	 object oWPPlatformGold = GetWaypointByTag("WP_phalorm_globe_platform_gold");
 	 object oWPPlatformRed = GetWaypointByTag("WP_phalorm_globe_platform_red");
+	 object oWPPlatformBook = GetWaypointByTag("WP_phalorm_globe_platform_book");
 	 object oWPCreateBlue = GetWaypointByTag("WP_phalorm_create_blue");
 	 object oWPCreateGreen = GetWaypointByTag("WP_phalorm_create_green");
 	 object oWPCreateGold = GetWaypointByTag("WP_phalorm_create_gold");
@@ -84,8 +85,12 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 object oDoorGreen = GetObjectByTag("phalorm_green_chamber", 0);
 	 object oDoorRed = GetObjectByTag("phalorm_red_chamber", 0);
 	 object oDoorGold = GetObjectByTag("phalorm_gold_chamber", 0);
+	 object oGlobeTeleBlue = GetObjectByTag("phalorm_globe_tele_blue", 0);
+	 object oGlobeTeleGreen = GetObjectByTag("phalorm_globe_tele_green", 0);
+	 object oGlobeBook = GetObjectByTag("phalorm_globe_book", 0);
 	 
-	 
+	 effect eBeamBlueGlobe = EffectBeam(VFX_BEAM_LIGHTNING, oGlobeTeleBlue, BODY_NODE_CHEST, FALSE);
+	 effect eBeamGreenGlobe = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oGlobeTeleGreen, BODY_NODE_CHEST, FALSE);
 	 
 	 effect eBeamBlue = EffectBeam(VFX_BEAM_LIGHTNING, oGlobeBlue, BODY_NODE_CHEST, FALSE);
 	 effect eBeamBlueB = EffectBeam(VFX_BEAM_LIGHTNING, oRelayBlueA, BODY_NODE_CHEST, FALSE);
@@ -119,6 +124,26 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eSummonGreen = EffectVisualEffect(VFX_DUR_ENTANGLE, FALSE);
 	 effect eSummonRed = EffectVisualEffect(VFX_FNF_SUMMON_GATE, FALSE);
 	 effect eSummonGold = EffectVisualEffect(VFX_FNF_SUMMONDRAGON, FALSE);
+	 
+	 if(GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
+	 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueGlobe, oGlobeBook, 10.0);
+		DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, OBJECT_SELF, 5.0));
+		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
+		DelayCommand(4.0, ActionCreateWynPlacedEffect("fx_gem_energy_blue", GetLocation(oDisturber)));
+		AssignCommand(oDisturber, ActionJumpToObject(oWPCreateBlue, FALSE));
+		DestroyObject(oPlatformBookOn, 10.0);
+		DestroyObject(GetObjectByTag("fx_gem_energy_blue",0), 10.0);	 	 	 	 	 	 
+	 }
+	 
+	 if(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
+	 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenGlobe, oGlobeBook, 10.0);
+		DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, OBJECT_SELF, 5.0));
+		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
+		DelayCommand(4.0, ActionCreateWynPlacedEffect("fx_gem_energy_green", GetLocation(oDisturber)));
+		AssignCommand(oDisturber, ActionJumpToObject(oWPCreateGreen, FALSE));
+		DestroyObject(oPlatformBookOn, 10.0);
+		DestroyObject(GetObjectByTag("fx_gem_energy_green",0), 10.0);	 	 	 	 	 	 
+	 }
 	 
 	 if(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) {
 		     object oPlatformBlueOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBlue));
