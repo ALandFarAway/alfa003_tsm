@@ -52,8 +52,7 @@ void main()
 {
     ACR_TriggerOnEnter();
 
-    // ATing out of or into Travel Map areas
-	object oTraveller = GetEnteringObject();
+    object oTraveller = GetEnteringObject();
     object oDestination = GetLocalObject(OBJECT_SELF, "oDestination");
 	if(oDestination == OBJECT_INVALID)
 		{string sDestination = GetLocalString(OBJECT_SELF, "sDestination");
@@ -62,11 +61,6 @@ void main()
 		 }
 		 
 			 	 
-	if((!GetIsPC(oTraveller)) && (!GetIsDM(oTraveller))&& (!GetIsOwnedByPlayer(oTraveller))) 
-	   {//DestroyObject(oTraveller);
-	    return;
-	   }
-		
 	//ATing into secret areas
 	
 			

@@ -725,7 +725,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="45D56AA526C4FFC05CF6BE1CDE3E0781F8EBC38E" downloadHash="89CB53B4C462B67FFA0988213885A6BCE1CF7D48" name="6e_int_silvypass_path_elevation.trx" dlsize="1102068" size="1123240" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8E4E3219363F9A338048328B66247DF0FC265BAD" downloadHash="EF4DBF06014EBE1B7BC9C5D08E6CC1A5FBA0B339" name="6e_int_silvypass_path_elevation.trx" dlsize="1279156" size="1300627" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1910,7 +1910,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7DDE30975CBD6BBB87B5B899AF41FF21CBEEA3C8" downloadHash="5F927811EE7B1A6C63D20CB29B4499AEE4C4CA83" name="8e_int_highforest_nw_cave_aq.trx" dlsize="755776" size="7961923" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="751EFA881C0E8B3AF350CA63866310469AA9166B" downloadHash="AB98F52A7D39613FC4932957417CB6CCE01BCE6A" name="8e_int_highforest_nw_cave_aq.trx" dlsize="712716" size="7651263" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

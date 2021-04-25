@@ -161,7 +161,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	//SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
 	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
 	//SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
-	int nFail = Random(5);
+	int nFail = Random(6);
 	//SendMessageToPC(oCaster, "nFail is " + IntToString(nFail));
 	int nSpellLevel = GetSpellLevel(nSpellId);
 	//SendMessageToPC(oCaster, "nSpellLevel is " + IntToString(nSpellLevel));
