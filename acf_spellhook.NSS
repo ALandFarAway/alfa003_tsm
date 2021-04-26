@@ -169,18 +169,17 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	//SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
 	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 	//SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
-	SendMessageToAllDMs(GetName(oCaster) + " CrystalCon is at " + IntToString(nRunningTab));
 	if((oCaster == oOlivusCast) || (oCaster == oJhessiCast)) {
 	int nCrystalCast = GetCampaignInt("DeanSphinx", "CrystalCast", oCaster);
-	if((nFail == 1)&& (nCrystalCast == 0)) {
+	if((nFail == 1)&& (nCrystalCast == 0) && (nSpellId != 32)&& (nSpellId != 33)&& (nSpellId != 31)&& (nSpellId != 34)&& (nSpellId != 35)&& (nSpellId != 1020)&& (nSpellId != 1021)&& (nSpellId != 1)&& (nSpellId != 6)&& (nSpellId != 189)&& (nSpellId != 431)&& (nSpellId != 154)&& (nSpellId != 146)&& (nSpellId != 414)&& (nSpellId != 148)&& (nSpellId != 3159)&& (nSpellId != 3160)&& (nSpellId != 449)&& (nSpellId != 450)&& (nSpellId != 432)&& (nSpellId != 418)) {
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
 		nRunningTab = nRunningTab + nSpellLevel;
 		SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
 		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 		//SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
-		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of level " + IntToString(nSpellLevel) + " " + IntToString(nSpellId));
-	    SendMessageToAllDMs(GetName(oCaster) + " CrysCon charges to " + IntToString(nRunningTab));
+		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of SpellID " + IntToString(nSpellId) + " a level " + IntToString(nSpellLevel) + " spell. CrysCon charges to " + IntToString(nRunningTab));
+	    //SendMessageToAllDMs(GetName(oCaster) + " CrysCon charges to " + );
 	   //SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
 	   }
 	SetCampaignInt("DeanSphinx", "CrystalCast", 0, oCaster);			
