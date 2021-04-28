@@ -184,7 +184,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	   }
 	SetCampaignInt("DeanSphinx", "CrystalCast", 0, oCaster);			
 		   
-	if(nRunningTab >= 5) {
+	if(nRunningTab >= 6) {
 		int nSpell;
 		SetModuleOverrideSpellScriptFinished();
 		SendMessageToPC(oCaster, "The power of the Weave recoils within you, then lashes out in an unintended spell!");
