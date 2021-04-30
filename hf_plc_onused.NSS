@@ -22,6 +22,7 @@ void main()
      object oUser = GetLastUsedBy();
 	 
 	 
+	 
 	
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_exit")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);

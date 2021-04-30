@@ -27,10 +27,21 @@ void main()
 	if(oCreateLocation == OBJECT_INVALID)
 		{lCreateLocation = GetLocation(OBJECT_SELF);}
 	
+	string sCreateTwo = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE_TWO");
+	string sCreateLocationTwo = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING_TWO");
+	object oCreateLocationTwo = GetNearestObjectByTag(sCreateLocationTwo);
+	location lCreateLocationTwo = GetLocation(oCreateLocationTwo);
+	if(oCreateLocationTwo == OBJECT_INVALID)
+		{lCreateLocationTwo = GetLocation(OBJECT_SELF);}
+	
+		
 	string sMessage = GetLocalString(OBJECT_SELF, "CREATE_MESSAGE_STRING");
 	string sBroadcast = GetLocalString(OBJECT_SELF, "CREATE_BROADCAST_STRING");
 	int nDelay = GetLocalInt(OBJECT_SELF, "CREATE_DELAY_INT");
 	float fDelay = IntToFloat(nDelay);
+	int nDestroy = GetLocalInt(OBJECT_SELF, "DESTROY_SELF");
+	int nDestroyDelay = GetLocalInt(OBJECT_SELF, "DESTROY_DELAY");
+	float fDestroyDelay = IntToFloat(nDestroyDelay);
 	int nPlayOnce = GetLocalInt(OBJECT_SELF, "PLAY_ONCE");
 	int nNumberCreate = GetLocalInt(OBJECT_SELF, "CREATE_NUMBER");
 	if (nNumberCreate == 0) {
@@ -52,5 +63,7 @@ void main()
 		DelayCommand(fDelay, ExecuteScript("tsm_plc_onopen_create", OBJECT_SELF));
 		}
 	
+	if(nDestroy == 1)
+		{DestroyObject(OBJECT_SELF, fDestroyDelay);}
 			
 }
