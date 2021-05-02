@@ -12,7 +12,7 @@
 void main()
 {
 	ACR_PlaceableOnOpen();
-
+	SendMessageToAllDMs("onopen create fired");
 	object oPC = GetLastOpenedBy();
 	string sCreateType = GetLocalString(OBJECT_SELF, "OBJECT_TYPE_STRING");
 	int nCreateType = OBJECT_TYPE_CREATURE;
@@ -24,8 +24,12 @@ void main()
 	string sCreateLocation = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING");
 	object oCreateLocation = GetNearestObjectByTag(sCreateLocation);
 	location lCreateLocation = GetLocation(oCreateLocation);
+	SendMessageToAllDMs("sCreate = " + sCreate);
+	SendMessageToAllDMs("sCreateLocation = " + sCreateLocation);
 	if(oCreateLocation == OBJECT_INVALID)
-		{lCreateLocation = GetLocation(OBJECT_SELF);}
+		{lCreateLocation = GetLocation(OBJECT_SELF);
+		SendMessageToAllDMs("lCreateLocation invalid");
+	}
 	
 	string sCreateTypeTwo = GetLocalString(OBJECT_SELF, "OBJECT_TYPE_STRING_TWO");
 	int nCreateTypeTwo = OBJECT_TYPE_CREATURE;
@@ -36,6 +40,8 @@ void main()
 	string sCreateTwo = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE_TWO");
 	string sCreateLocationTwo = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING_TWO");
 	object oCreateLocationTwo = GetNearestObjectByTag(sCreateLocationTwo);
+	SendMessageToAllDMs("sCreateTwo = " + sCreateTwo);
+	SendMessageToAllDMs("sCreateLocationTwo = " + sCreateLocationTwo);
 	location lCreateLocationTwo = GetLocation(oCreateLocationTwo);
 	if(oCreateLocationTwo == OBJECT_INVALID)
 		{lCreateLocationTwo = GetLocation(OBJECT_SELF);}
@@ -43,6 +49,8 @@ void main()
 		
 	string sMessage = GetLocalString(OBJECT_SELF, "CREATE_MESSAGE_STRING");
 	string sBroadcast = GetLocalString(OBJECT_SELF, "CREATE_BROADCAST_STRING");
+	SendMessageToAllDMs("sMessage = " + sMessage);
+	SendMessageToAllDMs("sBroadcast = " + sBroadcast);
 	int nDelay = GetLocalInt(OBJECT_SELF, "CREATE_DELAY_INT");
 	float fDelay = IntToFloat(nDelay);
 	int nDestroy = GetLocalInt(OBJECT_SELF, "DESTROY_SELF");
@@ -54,16 +62,20 @@ void main()
 		nNumberCreate = 1;
 	}
 	if(nPlayOnce == 1) {
+			SendMessageToAllDMs("nPlayOnce = 1");
+			
 			int a = 0;
 			while(a < nNumberCreate) {
 			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
 			object oCreateTwo = CreateObject(nCreateTypeTwo, sCreateTwo, lCreateLocationTwo, FALSE);
+			SendMessageToAllDMs("a = " + IntToString(a));
 			a++;
 			}
 			SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 2);
 		}
 		
 	if(nPlayOnce == 0) {
+		SendMessageToAllDMs("nPlayOnce = 0");
 		SendMessageToPC(oPC, sMessage);
 		SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 1);
 		ActionSpeakString(sBroadcast, TALKVOLUME_TALK);
