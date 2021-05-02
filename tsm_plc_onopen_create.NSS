@@ -44,7 +44,9 @@ void main()
 	SendMessageToAllDMs("sCreateLocationTwo = " + sCreateLocationTwo);
 	location lCreateLocationTwo = GetLocation(oCreateLocationTwo);
 	if(oCreateLocationTwo == OBJECT_INVALID)
-		{lCreateLocationTwo = GetLocation(OBJECT_SELF);}
+		{lCreateLocationTwo = GetLocation(OBJECT_SELF);
+		SendMessageToAllDMs("lCreateLocationTwo invalid");
+		}
 	
 		
 	string sMessage = GetLocalString(OBJECT_SELF, "CREATE_MESSAGE_STRING");
