@@ -26,16 +26,11 @@ void main()
 	object oStoneTreeFour;
 	object oStoneTreeFourWP;
 		
-	if((GetTag(OBJECT_SELF) == "phalorm_crystal_necromancy") && (nSpellId == 3174 )){
-		object oForceDown = GetObjectByTag("hf_aq_door_down_forcefield", 0);
-		DestroyObject(oForceDown, 2.0);
 		
-		}
 	
-	
-	//High Forest Destroying Corrupted Portals
-	if((GetTag(OBJECT_SELF) == "phalorm_orb_green") && (nSpellId == SPELL_ORB_OF_SOUND )){
-		object oGreenGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
+	//High Forest Phalorm Spheres
+	if((GetTag(OBJECT_SELF) == "phalorm_orb_green") && ((nSpellId == SPELL_ORB_OF_ACID ) || (nSpellId == SPELL_ORB_OF_COLD )|| (nSpellId == SPELL_ORB_OF_ELECTRICITY ) || (nSpellId == SPELL_ORB_OF_FIRE ))){
+		object oGreenGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_emerald", GetLocation(OBJECT_SELF));
 		SendMessageToAllDMs("A phalorm Emerald Sphere was just created.");
 		DestroyObject(OBJECT_SELF, 20.0);
 		}

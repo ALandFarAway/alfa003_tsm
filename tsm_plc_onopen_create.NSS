@@ -27,6 +27,12 @@ void main()
 	if(oCreateLocation == OBJECT_INVALID)
 		{lCreateLocation = GetLocation(OBJECT_SELF);}
 	
+	string sCreateTypeTwo = GetLocalString(OBJECT_SELF, "OBJECT_TYPE_STRING_TWO");
+	int nCreateTypeTwo = OBJECT_TYPE_CREATURE;
+	if(sCreateTypeTwo == "Placeable")
+		{nCreateTypeTwo = OBJECT_TYPE_PLACEABLE;}
+	if(sCreateTypeTwo == "Item")
+		{nCreateTypeTwo = OBJECT_TYPE_ITEM;}
 	string sCreateTwo = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE_TWO");
 	string sCreateLocationTwo = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING_TWO");
 	object oCreateLocationTwo = GetNearestObjectByTag(sCreateLocationTwo);
@@ -51,6 +57,7 @@ void main()
 			int a = 0;
 			while(a < nNumberCreate) {
 			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
+			object oCreateTwo = CreateObject(nCreateTypeTwo, sCreateTwo, lCreateLocationTwo, FALSE);
 			a++;
 			}
 			SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 2);
