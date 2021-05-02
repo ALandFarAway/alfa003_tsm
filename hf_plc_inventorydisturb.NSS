@@ -27,6 +27,7 @@ void main()
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);	
 		
 	
+
 		 
 if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))
 	{object oGlobeBlue = GetObjectByTag("phalorm_globe_blue", 0);
