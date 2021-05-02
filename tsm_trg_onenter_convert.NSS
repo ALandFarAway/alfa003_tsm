@@ -71,11 +71,13 @@ void main()
 		 
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
-		 
+		 if(nRunOnce == 0) {
+		 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 		 SendMessageToPC(oPC, sMessage);
 		 object oSpawn = CreateObject(nSpawnType, sSpawn, lSpawnReplace); 
 		 ApplyEffectToObject(nDurationType, eOne, oSpawnReplace, fDurationLength);
-		 DestroyObject(oSpawnReplace, 2.0);  
+		 DestroyObject(oSpawnReplace, 2.0);
+		 }  
 		  
 		 
 		 
