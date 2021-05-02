@@ -54,6 +54,8 @@ void main()
     // Custom code goes here.
 	object oPC = GetEnteringObject();
 
+	
+	
  if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_spawn") && (GetIsPC(oPC)))
 		{string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
 		 

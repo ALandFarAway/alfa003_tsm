@@ -56,6 +56,9 @@ void main()
 
  if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_convert") && (GetIsPC(oPC)))
 		{string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
+		 string sSpeak=GetLocalString(OBJECT_SELF, "ACR_SPAWN_SPEAK");
+		 
+		
 		 int nSpawnType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_TYPE");
 		 string sSpawn = GetLocalString(OBJECT_SELF, "ACR_SPAWN_RESREF");
 		 string sSpawnReplace = GetLocalString(OBJECT_SELF, "ACR_REPLACE_PLC");
@@ -72,6 +75,7 @@ void main()
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
 		 if(nRunOnce == 0) {
+		 AssignCommand(oSpawnReplace, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 		 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 		 SendMessageToPC(oPC, sMessage);
 		 object oSpawn = CreateObject(nSpawnType, sSpawn, lSpawnReplace); 

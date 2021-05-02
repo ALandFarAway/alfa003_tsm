@@ -19,7 +19,17 @@ void main()
 	ACR_TriggerOnEnter();
 	object oPC = GetEnteringObject();
     
-		  
+if((GetTag(OBJECT_SELF) == "phalorm_light_green_up_trg") && (GetIsPC(oPC)) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE") == 0))
+		{SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
+		 object oOrb = GetObjectByTag("phalorm_orb_green_up", 1); 
+		 object oLight = GetObjectByTag("fx_phalorm_light_green_up", 1); 
+		 AssignCommand(oOrb, ActionSpeakString("Drops suddenly into the pit and descends, its light quickly fading.", TALKVOLUME_TALK));	
+		 DestroyObject(oOrb, 2.0);
+		 DestroyObject(oLight, 3.0);
+		}
+	
+	
+
 if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
 		object oHereWP = GetWaypointByTag("WP_phalorm_archive_platform_enter");
