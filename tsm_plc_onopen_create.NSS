@@ -6,10 +6,6 @@
 #include "acr_quest_i"
 #include "acr_spawn_i"
 
-void ActionCreateWynPlace(string sPlace, location lLocPlace)
-{
-    CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
-}
 
 
 void main()
