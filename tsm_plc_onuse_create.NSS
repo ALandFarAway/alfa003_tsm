@@ -77,8 +77,8 @@ void main()
 			a++;
 			}
 			SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 2);
-			//if(nDestroy == 1)
-			//	{DestroyObject(OBJECT_SELF, fDestroyDelay);}
+			if(nDestroy == 1)
+				{DestroyObject(OBJECT_SELF, fDestroyDelay);}
 			}
 		
 	if(nPlayOnce == 0) {
