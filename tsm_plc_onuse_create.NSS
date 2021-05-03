@@ -80,7 +80,7 @@ void main()
 		SendMessageToPC(oPC, sMessage);
 		SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 1);
 		ActionSpeakString(sBroadcast, TALKVOLUME_TALK);
-		DelayCommand(fDelay, ExecuteScript("tsm_plc_onopen_create", OBJECT_SELF));
+		DelayCommand(fDelay, ExecuteScript("tsm_plc_onuse_create", OBJECT_SELF));
 		}
 	
 	if(nDestroy == 1)
