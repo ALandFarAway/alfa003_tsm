@@ -6,7 +6,10 @@
 #include "acr_quest_i"
 #include "acr_spawn_i"
 
-
+void ActionCreateWynPlace(string sPlace, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
+}
 
 
 void main()
@@ -22,7 +25,7 @@ void main()
 		{nCreateType = OBJECT_TYPE_ITEM;}
 	string sCreate = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE");
 	string sCreateLocation = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING");
-	object oCreateLocation = GetNearestObjectByTag(sCreateLocation);
+	object oCreateLocation = GetWaypointByTag(sCreateLocation);
 	location lCreateLocation = GetLocation(oCreateLocation);
 	//SendMessageToAllDMs("sCreate = " + sCreate);
 	//SendMessageToAllDMs("sCreateLocation = " + sCreateLocation);
@@ -39,7 +42,7 @@ void main()
 		{nCreateTypeTwo = OBJECT_TYPE_ITEM;}
 	string sCreateTwo = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE_TWO");
 	string sCreateLocationTwo = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING_TWO");
-	object oCreateLocationTwo = GetNearestObjectByTag(sCreateLocationTwo);
+	object oCreateLocationTwo = GetWaypointByTag(sCreateLocationTwo);
 	location lCreateLocationTwo = GetLocation(oCreateLocationTwo);
 	if(oCreateLocationTwo == OBJECT_INVALID)
 		{lCreateLocationTwo = GetLocation(OBJECT_SELF);
