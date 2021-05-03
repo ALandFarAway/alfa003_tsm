@@ -7,6 +7,10 @@
 #include "acr_spawn_i"
 
 
+void ActionCreateWynPlace(string sPlace, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
+}
 
 void main()
 {
@@ -69,11 +73,13 @@ void main()
 			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
 			SendMessageToAllDMs("sCreateTwo = " + sCreateTwo);
 			SendMessageToAllDMs("sCreateLocationTwo = " + sCreateLocationTwo);
-	 		object oCreateTwo = CreateObject(nCreateTypeTwo, sCreateTwo, lCreateLocationTwo, FALSE);
+	 		DelayCommand(2.0, ActionCreateWynPlace(sCreateTwo, lCreateLocation));
 			a++;
 			}
 			SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 2);
-		}
+			//if(nDestroy == 1)
+			//	{DestroyObject(OBJECT_SELF, fDestroyDelay);}
+			}
 		
 	if(nPlayOnce == 0) {
 		SendMessageToAllDMs("nPlayOnce = 0");
@@ -83,7 +89,6 @@ void main()
 		DelayCommand(fDelay, ExecuteScript("tsm_plc_onuse_create", OBJECT_SELF));
 		}
 	
-	if(nDestroy == 1)
-		{DestroyObject(OBJECT_SELF, fDestroyDelay);}
+
 			
 }
