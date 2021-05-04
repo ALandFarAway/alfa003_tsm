@@ -12,6 +12,11 @@ void ActionCreateWynPlace(string sPlace, location lLocPlace)
     CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
 }
 
+void ActionCreateWynDoor(string sPlace, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_DOOR, sPlace, lLocPlace);
+}
+
 void main()
 {
 	ACR_PlaceableOnUsed();

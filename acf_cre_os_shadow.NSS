@@ -20,6 +20,6 @@ void main()
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectImmunity(IMMUNITY_TYPE_KNOCKDOWN)), oCreature);
 	FeatAdd(oCreature, FEAT_WEAPON_FINESSE, FALSE, FALSE, FALSE);
 	
-	SendMessageToAllDMs("spawned\n");
+	//SendMessageToAllDMs("spawned\n");
 
 }

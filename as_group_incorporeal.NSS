@@ -87,7 +87,8 @@ void main() {
             ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
-            break;	}			
+            break;	
+			}			
 	
 
 
