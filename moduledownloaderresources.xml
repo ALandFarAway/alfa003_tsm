@@ -77,7 +77,7 @@
       <string>2</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="25FE1755C08C029BCA7077E057ACC56F9FAD9C59" downloadHash="05C148587CAEE1D05C1ECCC6D8B618BC7E70CC78" name="alfa_creatures2.hak" dlsize="321855438" size="1511428294" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="25FE1755C08C029BCA7077E057ACC56F9FAD9C59" downloadHash="05C148587CAEE1D05C1ECCC6D8B618BC7E70CC78" name="alfa_creatures2.hak" dlsize="415182161" size="1511428294" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
       <string>3</string>
