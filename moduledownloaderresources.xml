@@ -532,7 +532,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="05AAD3906FD3A366BB13A7EDCBF613502CE9E1F2" downloadHash="CDD081FEA4E3F482C9C7EA8EEA1EEA3F8C730727" name="6d_ext_silverymoon_south.trx" dlsize="3609451" size="19227885" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="77883E4CE7C140C83E412412EB2487D4EADBC552" downloadHash="179F229F912FE3FDBA8528C68F1856900C93015B" name="6d_ext_silverymoon_south.trx" dlsize="3657315" size="19275027" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -592,7 +592,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="628AE8E7BD690A6236CAF3B2054533990C397761" downloadHash="B15D3FBEA13150AE5215C985BE52FB1C54A3F9D2" name="6d_int_silvy_sewer_south.trx" dlsize="296108" size="303167" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8EF43C95A083EB12AEADCA9A19CD8F169522F197" downloadHash="F3CD602C81CD6BB6C050FDD4C46115F07C5F1714" name="6d_int_silvy_sewer_south.trx" dlsize="2203432" size="13749779" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
