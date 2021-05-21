@@ -55,7 +55,11 @@ void main()
 		}
 
 	
-	
+	//Hydra's extra attacks
+	if(GetTag(OBJECT_SELF) == "abr_cr_mb_hydra5") {
+	SetBaseAttackBonus(5, OBJECT_SELF);
+	}
+		
 	
 
     // Custom code goes here.
