@@ -36,7 +36,7 @@ void main()
 		nCurrentHeads = GetLocalInt(OBJECT_SELF, "CurrentHeads") - nHeadsLost;
 		SetLocalInt(OBJECT_SELF, "CurrentHeads", nCurrentHeads);
 	    ActionSpeakString("*Loses " + IntToString(nHeadsLost) + " head" + sSLost + "! It now has " + IntToString(nCurrentHeads) + " heads.", TALKVOLUME_TALK);
-		
+		SendMessageToAllDMs("*Hydra loses " + IntToString(nHeadsLost) + " head" + sSLost + "! It now has " + IntToString(nCurrentHeads) + " heads.");
 		if((nFire+nAcid)==0){
 			int nRegrow = 2;
 			int nLoop=0;

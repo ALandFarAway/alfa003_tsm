@@ -26,12 +26,14 @@ void main()
 	
 	if((GetLocalInt(OBJECT_SELF, "Cauterized") == 1)&& (GetLocalInt(OBJECT_SELF, "Regrowing") == 1)) {
 		ActionSpeakString("Damaged heads do not regrow!", TALKVOLUME_TALK);
+		SendMessageToAllDMs("Damaged heads are cauterized and don't regrow!");
 		SetLocalInt(OBJECT_SELF, "Cauterized",0);
 		SetLocalInt(OBJECT_SELF,"Regrowing",0);
 		}
 	else if (GetLocalInt(OBJECT_SELF, "Regrowing") == 1) {
 		SetLocalInt(OBJECT_SELF,"Regrowing",0);
 		ActionSpeakString("Regrows " + IntToString(nRegrow) + " head" + sSRegrown + " from the stump of a damaged one!", TALKVOLUME_TALK);
+		SendMessageToAllDMs("Regrows " + IntToString(nRegrow) + " head" + sSRegrown + " from the stump of a damaged one!");
 		nCurrentHeads = GetLocalInt(OBJECT_SELF, "CurrentHeads") + nRegrow;
 		SetLocalInt(OBJECT_SELF, "CurrentHeads", nCurrentHeads);
 		if(nCurrentHeads > 5) {
