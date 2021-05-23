@@ -54,11 +54,15 @@ void main() {
 	object oPC = GetLastUsedBy();
 	int nQuestState = GetLocalInt(OBJECT_SELF, "QuestStateToFire");
 	string sQuest = GetLocalString(OBJECT_SELF, "Quest");
+	string sSuccess = GetLocalString(OBJECT_SELF, "QuestMessageSuccess");
+	string sFail = GetLocalString(OBJECT_SELF, "QuestMessageFail");
 	
 	if(ACR_GetPersistentInt(oPC, sQuest) == nQuestState) {
 		ACR_SetPersistentInt(oPC, sQuest, nQuestState+1);
-	
+		SendMessageToPC(oPC, sSuccess);
 	}
+	
+	else {SendMessageToPC(oPC, sFail);}
 	
  
 	
