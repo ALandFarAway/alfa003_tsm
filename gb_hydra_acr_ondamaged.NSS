@@ -8,18 +8,22 @@
 void main()
 {
 	ACR_CreatureOnDamaged();
-	
+	SendMessageToAllDMs("Hydra damaged");
 	int nHeads = GetHitDice(OBJECT_SELF);
 	int nCurrentHeads = GetLocalInt(OBJECT_SELF, "CurrentHeads");
 	if(nCurrentHeads = 0)
 		{nCurrentHeads = nHeads;}
+	SendMessageToAllDMs("nCurrentHeads = " +IntToString(nCurrentHeads));
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nAllDmg = GetDamageDealtByType(DAMAGE_TYPE_ALL);
 	int nAcid = GetDamageDealtByType(DAMAGE_TYPE_ACID)+1; //returns -1 if none is dealt, 0 if acid damage was dealt, but a very meager amount
 	int nFire = GetDamageDealtByType(DAMAGE_TYPE_FIRE)+1;
+	SendMessageToAllDMs("nAllDmg = " + IntToString(nAllDmg) + ". " + IntToString(nAcid) + " was acid and " + IntToString(nFire) + " was Fire.");
 	int nHeadLossHP = nMaxHP/nHeads;
 	int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
 	int nHeadsLost = StringToInt(GetStringLeft(IntToString(nAllDmg/nHeadLossHP), 1));
+	SendMessageToAllDMs("nHeadsLossHP = " + IntToString(nHeadLossHP));
+	
 	string sSLost = "";
 	string sSRegrown = "s";
 	
