@@ -50,6 +50,7 @@ void main()
 	object oPC = GetEnteringObject();
 	int nQuestState = GetLocalInt(OBJECT_SELF, "QuestStateToFire");
 	string sQuest = GetLocalString(OBJECT_SELF, "Quest");
+	SendMessageToPC(oPC, sQuest + " = " + IntToString(ACR_GetPersistentInt(oPC, sQuest)));
 	string sObjectType;
 	int nObjectType = OBJECT_TYPE_CREATURE;
 	string sObjectResRef;

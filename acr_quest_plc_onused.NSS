@@ -54,6 +54,9 @@ void main() {
 	object oPC = GetLastUsedBy();
 	int nQuestState = GetLocalInt(OBJECT_SELF, "QuestStateToFire");
 	string sQuest = GetLocalString(OBJECT_SELF, "Quest");
+	SendMessageToPC(oPC, sQuest + " = " + IntToString(ACR_GetPersistentInt(oPC, sQuest)));
+	
+	
 	string sSuccess = GetLocalString(OBJECT_SELF, "QuestMessageSuccess");
 	string sFail = GetLocalString(OBJECT_SELF, "QuestMessageFail");
 	

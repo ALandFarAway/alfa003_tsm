@@ -14,7 +14,6 @@
 //  more complex example of spawn groups, see the script "as_group_complex".
 //
 //  Revision History
-// Rick, made several types of beetles, for this one, I need to make tougher beetles for later.
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,10 +51,10 @@ void main() {
 
  switch(Random(15)) {
         case 0:
-            ACR_SpawnObject("abr_cr_an_wild_snake_lrgconst_01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_an_wild_snake_smgconst_01", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-            ACR_SpawnObject("abr_cr_an_wild_snake_lrgviper_01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
             break;
         case 2:
             ACR_SpawnObject("abr_cr_an_wild_snake_medconst_01", OBJECT_TYPE_CREATURE);
