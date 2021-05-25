@@ -106,9 +106,9 @@ void main()
 		
 	int nRep = 0;
 		
-	while (nRep < nQuestNumberCreate) {
+	//while (nRep < nQuestNumberCreate) {
 		object oQuestCreature = CreateObject(nObjectType, sObjectResRef, GetLocation(oWaypoint));
 		ResetCreatureLevelForXP(oQuestCreature, nXP, TRUE);
-		}
+	//	}
 	}
 }
