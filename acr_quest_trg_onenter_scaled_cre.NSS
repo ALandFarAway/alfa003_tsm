@@ -109,6 +109,9 @@ void main()
 	//while (nRep < nQuestNumberCreate) {
 		object oQuestCreature = CreateObject(nObjectType, sObjectResRef, GetLocation(oWaypoint));
 		ResetCreatureLevelForXP(oQuestCreature, nXP, TRUE);
+		int nCreatureHD = GetHitDice(oQuestCreature);
+		SendMessageToPC(oPC, sObjectResRef + " created with " + IntToString(nCreatureHD) + " hit dice.");
+	
 	//	}
 	}
 }
