@@ -2,6 +2,7 @@
 // return persistent int shell
 
 #include "acr_db_persist_i"
+#include "acr_quest_i"
 
 int StartingConditional(string plot, int value)
 {

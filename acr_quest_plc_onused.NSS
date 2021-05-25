@@ -42,7 +42,7 @@
 
 // The main event handler.
 #include "acr_db_persist_i"
-
+#include "acr_quest_i"
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,7 @@ void main() {
 	
 	if(ACR_GetPersistentInt(oPC, sQuest) == nQuestState) {
 		ACR_SetPersistentInt(oPC, sQuest, nQuestState+1);
+		ACR_AddPersistentJournalQuestEntry(sQuest, nQuestState+1, oPC, 0, 0, 0, 0);
 		SendMessageToPC(oPC, sSuccess);
 	}
 	

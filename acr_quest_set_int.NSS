@@ -1,7 +1,7 @@
 // THIS SCRIPT IS NOT A PART OF ACR
 // set persistent int shell
 #include "acr_db_persist_i"
-
+#include "acr_quest_i"
 
 void main(string plot, int val)
 {
