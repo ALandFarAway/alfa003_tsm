@@ -59,52 +59,48 @@ void main()
 
 	if(ACR_GetPersistentInt(oPC, sQuest) == nQuestState) {
 		int nHD = GetHitDice(oPC);
-		if(nHD = 2) {
-			nXP = 1001;
-		}
-		else if(nHD = 3) {
-			nXP = 3001;
-		}
-		else if(nHD = 4) {
-			nXP = 6001;
-		}
-		else if(nHD = 5) {
-			nXP = 10001;
-		}
-		else if(nHD = 6) {
-			nXP = 15001;
-		}
-		else if(nHD = 7) {
-			nXP = 21001;
-		}
-		else if(nHD = 8) {
-			nXP = 28001;
-		}
-		else if(nHD = 9) {
-			nXP = 36001;
-		}
-		else if(nHD >= 10) {
-			nXP = 45001;
-		}
+		SendMessageToPC(oPC, "oPC has " + IntToString(nHD) + " HD");
 	
-		
-		if(nHD < 3) {
+		if(nHD == 1) {
+			nXP = 500;
 			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRTwo");
-			}
-		
-		else if(nHD < 6) {
+		}
+		else if(nHD == 2) {
+			nXP = 1001;
+			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRTwo");
+		}
+		else if(nHD == 3) {
+			nXP = 3001;
+			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRTwo");
+		}
+		else if(nHD == 4) {
 			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRFive");
 		}
-		
-		else if(nHD < 9) {
+		else if(nHD == 5) {
+			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRFive");
+		}
+		else if(nHD == 6) {
+			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRFive");
+		}
+		else if(nHD == 7) {
+			nXP = 21001;
+			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCREight");
+		}
+		else if(nHD == 8) {
+			nXP = 28001;
+			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCREight");
+		}
+		else if(nHD >= 9) {
+			nXP = 36001;
 			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCREight");
 		}
 		
+			
 	string sWaypoint = GetLocalString(OBJECT_SELF, "QuestWP");
 	object oWaypoint = GetWaypointByTag(sWaypoint);
 	int nQuestNumberCreate = GetLocalInt(OBJECT_SELF, "QuestNumberCreate");
 		
-	int nRep = 0;
+	//int nRep = 0;
 		
 	//while (nRep < nQuestNumberCreate) {
 		object oQuestCreature = CreateObject(nObjectType, sObjectResRef, GetLocation(oWaypoint));
