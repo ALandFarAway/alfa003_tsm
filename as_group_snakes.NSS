@@ -75,10 +75,8 @@ void main() {
 		case 7:
             ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
             break;
 		case 8:
-            ACR_SpawnObject("abr_cr_an_wild_snake_medviper_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_medviper_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
             break;
@@ -90,31 +88,25 @@ void main() {
             ACR_SpawnObject("abr_cr_an_wild_snake_medviper_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_an_wild_snake_smviper_01", OBJECT_TYPE_CREATURE);
             break;
 		case 11:
-            ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             break;
 		case 12:
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             break;
 		case 13:
-            ACR_SpawnObject("abr_cr_an_wild_snake_medconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_medconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             break;
 		case 14:
-            ACR_SpawnObject("abr_cr_an_wild_snake_medconst_01", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_an_wild_snake_medconst_01", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             break;
 		case 15:
             ACR_SpawnObject("abr_cr_an_wild_snake_medconst_01", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("abr_cr_an_wild_snake_smconst_01", OBJECT_TYPE_CREATURE);
             break;

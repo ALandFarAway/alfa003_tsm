@@ -51,63 +51,30 @@ void main()
 	int nQuestState = GetLocalInt(OBJECT_SELF, "QuestStateToFire");
 	string sQuest = GetLocalString(OBJECT_SELF, "Quest");
 	SendMessageToPC(oPC, sQuest + " = " + IntToString(ACR_GetPersistentInt(oPC, sQuest)));
-	string sObjectType;
-	int nObjectType = OBJECT_TYPE_CREATURE;
 	string sObjectResRef;
-	int nXP;
 	
 
 	if(ACR_GetPersistentInt(oPC, sQuest) == nQuestState) {
 		int nHD = GetHitDice(oPC);
-		SendMessageToPC(oPC, "oPC has " + IntToString(nHD) + " HD");
-	
-		if(nHD == 1) {
-			nXP = 500;
+		if(nHD <= 3) {
 			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRTwo");
 		}
-		else if(nHD == 2) {
-			nXP = 1001;
-			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRTwo");
-		}
-		else if(nHD == 3) {
-			nXP = 3001;
-			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRTwo");
-		}
-		else if(nHD == 4) {
+		else if(nHD <= 6) {
 			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRFive");
 		}
-		else if(nHD == 5) {
-			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRFive");
-		}
-		else if(nHD == 6) {
-			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCRFive");
-		}
-		else if(nHD == 7) {
-			nXP = 21001;
-			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCREight");
-		}
-		else if(nHD == 8) {
-			nXP = 28001;
-			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCREight");
-		}
-		else if(nHD >= 9) {
-			nXP = 36001;
+		else if(nHD > 6) {
 			sObjectResRef = GetLocalString(OBJECT_SELF, "QuestResRefCREight");
 		}
 		
 			
 	string sWaypoint = GetLocalString(OBJECT_SELF, "QuestWP");
-	object oWaypoint = GetWaypointByTag(sWaypoint);
-	int nQuestNumberCreate = GetLocalInt(OBJECT_SELF, "QuestNumberCreate");
+	object oWaypoint = GetNearestObjectByTag(sWaypoint, OBJECT_SELF, 1);
 		
 	//int nRep = 0;
 		
 	//while (nRep < nQuestNumberCreate) {
-		object oQuestCreature = CreateObject(nObjectType, sObjectResRef, GetLocation(oWaypoint));
-		ResetCreatureLevelForXP(oQuestCreature, nXP, TRUE);
-		int nCreatureHD = GetHitDice(oQuestCreature);
-		SendMessageToPC(oPC, sObjectResRef + " created with " + IntToString(nCreatureHD) + " hit dice.");
-	
+		object oQuestCreature = CreateObject(OBJECT_TYPE_CREATURE, sObjectResRef, GetLocation(oWaypoint));
+		
 	//	}
 	}
 }
