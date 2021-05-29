@@ -592,7 +592,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="FDF574106D4A976682B82F2DDDE01ACE304B6497" downloadHash="67A3B8E9FF2F61D519A098BD91D508D43B7409CD" name="6d_int_silvy_sewer_south.trx" dlsize="2298690" size="21524749" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DD0C89EAEF57F329AF7C8F7AB3510D5475AEE5CE" downloadHash="0A289385921D331D29AF09AEA74807D5509E11D6" name="6d_int_silvy_sewer_south.trx" dlsize="2325933" size="21445136" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
