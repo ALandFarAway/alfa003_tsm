@@ -67,28 +67,30 @@ void main() {
 	//SendMessageToPC(oTraveller, "2. oMyWaypoint = " + GetName(oMyWaypoint));
 	
 	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated") == 0)) {
-		if((((((GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)))))) {
+		object oMask = GetItemInSlot(INVENTORY_SLOT_HEAD, oTraveller);
+		
+		if((GetTag(oMask) == sKeyTag) || (GetTag(oMask) == sKeyTagTwo)  || (GetTag(oMask) == sKeyTagThree) || (GetTag(oMask) == sKeyTagFour) || (GetTag(oMask) == sKeyTagFive) || (GetTag(oMask) == sKeyTagSix)){
 		 //SendMessageToPC(oTraveller, "Activated");
 		 SetLocalInt(OBJECT_SELF, "Activated", 1);
 		 
-		 if(GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID)
+		 if(GetTag(oMask) == sKeyTag)
 		 	{//SendMessageToPC(oTraveller, "1 " + sKeyTag + "..." + sMyTarget);
 		      oMyWaypoint = GetWaypointByTag(sMyTarget);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID)
+		 else if(GetTag(oMask) == sKeyTagTwo)
 		 	{//SendMessageToPC(oTraveller, "2 " + sKeyTagTwo + "..." + sMyTargetTwo);
 		      oMyWaypoint = GetWaypointByTag(sMyTargetTwo);
 			  //SendMessageToPC(oTraveller, "2b. oMyWaypoint = " + GetName(oMyWaypoint)); 
 			  }
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID)
+		 else if(GetTag(oMask) == sKeyTagThree)
 		 	{//SendMessageToPC(oTraveller, "3 " + sKeyTagThree + "..." + sMyTargetThree);
 		      oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID)
+		 else if(GetTag(oMask) == sKeyTagFour)
 		 	{//SendMessageToPC(oTraveller, "4 " + sKeyTagFour + "..." + sMyTargetFour);
 		      oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID)
+		 else if(GetTag(oMask) == sKeyTagFive)
 		 	{//SendMessageToPC(oTraveller, "5 " + sKeyTagFive + "..." + sMyTargetFive);
 		      oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)
+		 else if(GetTag(oMask) == sKeyTagSix)
 		 	{//SendMessageToPC(oTraveller, "6 " + sKeyTagSix + "..." + sMyTargetSix);
 		      oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
 		

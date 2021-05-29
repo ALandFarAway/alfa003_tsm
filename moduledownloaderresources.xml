@@ -762,7 +762,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="003B3B3A62F8149D1940E463F63FA5499FAA5631" downloadHash="22AC6780FA7F8B7026DF5BE2CA4E3886F1385345" name="6d_int_silvy_abandoned.trx" dlsize="140290" size="142292" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C0007B212DF22542D4AEB177C1AE63CF667E2896" downloadHash="51F10BFF5605E8E4FB686DB43C5E2FD3FFBF286B" name="6d_int_silvy_abandoned.trx" dlsize="155680" size="157557" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
