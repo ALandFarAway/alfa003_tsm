@@ -108,6 +108,11 @@ void main( string sItemTag ) {
 	// Adamantine Gear: 350gp, 175xp, CR 15
 	nGP += ConsumeReward( oPC, "it_plot_gear_adamantine", 350, 175.0f, 15.0f );			
 	
+	// Spider Poison Gland: 3gp, 1.5xp, CR 2
+	nGP += ConsumeReward( oPC, "003_it_harvest_spider_poison", 3, 1.5f, 2.0f );
+	
+	
+	
 	// Reward GP.
 	GiveGoldToCreature( oPC, nGP );
 }
