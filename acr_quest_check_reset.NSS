@@ -7,8 +7,8 @@ int StartingConditional(string plot)
 	object oPC = GetPCSpeaker();
 	string name = "i_rst_"+plot;
 	int days = ACR_GetPersistentInt(oPC, name);
-	SendMessageToPC(oPC, "acr_quest_check_reset");
-	SendMessageToAllDMs("acr_quest_check_reset");
+	SendMessageToPC(oPC, "acr_quest_check_reset " + name);
+	SendMessageToAllDMs("acr_quest_check_reset"  + name);
 	SendMessageToPC(oPC, "days = " + IntToString(days));
 	SendMessageToAllDMs("days = " + IntToString(days));
 	SendMessageToPC(oPC, "Gamedays since start = " + IntToString(ACR_GetGameDaysSinceStart()));
