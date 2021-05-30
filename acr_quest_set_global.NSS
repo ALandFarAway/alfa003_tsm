@@ -9,4 +9,7 @@ void main(string plot, int val)
 	string name = "i_qst_"+plot;
 
 	ACR_SetPersistentInt(oPC, name, val);
+	
+	SendMessageToPC(oPC, name + " = " + IntToString(ACR_GetPersistentInt(oPC, name)));
+	
 }
