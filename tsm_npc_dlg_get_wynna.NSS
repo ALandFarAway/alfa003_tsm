@@ -6,10 +6,11 @@
 int StartingConditional(string sName)
 {
 	object oPC = GetPCSpeaker();
-	SendMessageToPC(oPC, "Wynna PC identified.");
 	
-	if (FindSubString(GetName(oPC),"Wynna",0) != -1)
+	
+	if (FindSubString(GetName(oPC),"Wynna",0) != -1) {
+		SendMessageToPC(oPC, "Wynna PC identified.");	
 		return TRUE;
-		
+		}
 	return FALSE;
 }
