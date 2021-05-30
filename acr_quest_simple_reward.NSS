@@ -14,6 +14,8 @@ void main(string plot, int gp, int xp, float reset_days, float cr)
 	int val = ACR_GetGameDaysSinceStart();
 	//SendMessageToPC(oPC, "fabs(cr) = " + FloatToString(fabs(cr)));
 	//SendMessageToPC(oPC, "EPSILON = " + FloatToString(EPSILON));
+	SendMessageToPC(oPC, "acr_quest_simple_reward");
+	SendMessageToAllDMs("acr_quest_simple_reward");
 	SendMessageToPC(oPC, sQuest + " = " + IntToString(nState));
 	SendMessageToAllDMs(sQuest + " = " + IntToString(nState));
 	
