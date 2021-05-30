@@ -8,6 +8,7 @@ void main(string plot, int val)
     object oPC = GetPCSpeaker();
 	string name = "i_qst_"+plot;
 	SendMessageToPC(oPC, name + " = " + IntToString(ACR_GetPersistentInt(oPC, name)));
+	SendMessageToAllDMs(name + " = " + IntToString(ACR_GetPersistentInt(oPC, name)));
 	
 	ACR_SetPersistentInt(oPC, name, val);
 	
