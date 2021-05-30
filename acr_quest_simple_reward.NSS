@@ -12,8 +12,8 @@ void main(string plot, int gp, int xp, float reset_days, float cr)
 	string sQuest = "i_qst_"+plot;
 	int nState = ACR_GetPersistentInt(oPC, sQuest);
 	int val = ACR_GetGameDaysSinceStart();
-	SendMessageToPC(oPC, "fabs(cr) = " + FloatToString(fabs(cr)));
-	SendMessageToPC(oPC, "EPSILON = " + FloatToString(EPSILON));
+	//SendMessageToPC(oPC, "fabs(cr) = " + FloatToString(fabs(cr)));
+	//SendMessageToPC(oPC, "EPSILON = " + FloatToString(EPSILON));
 	SendMessageToPC(oPC, sQuest + " = " + IntToString(nState));
 	
 	if (fabs(cr) < EPSILON) {

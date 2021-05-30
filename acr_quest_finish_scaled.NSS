@@ -53,7 +53,7 @@ void main(string sQuest, int nGold)
 	GiveGoldToCreature(oPC, nGold);
 
 	// remove the quest item if one exists
-	if (GetIsObjectValid(oItem)) { DestroyObject(oItem); }
+	//if (GetIsObjectValid(oItem)) { DestroyObject(oItem); }
 
 	
 	// update the quest to its final (completed) state
