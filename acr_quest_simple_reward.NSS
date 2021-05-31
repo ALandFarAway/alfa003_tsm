@@ -32,7 +32,7 @@ void main(string plot, int gp, int xp, float reset_days, float cr)
 	ACR_AwardStaticQuestXP(oPC,plot,xp,cr); 
    
 	// Prevent re-doing until n days
-	ACR_SetPersistentInt(oPC, name, val);
+	ACR_SetPersistentInt(oPC, name, val, 100);
 	int nRestState = ACR_GetPersistentInt(oPC, name);
 	SendMessageToPC(oPC, name + " = " + IntToString(nRestState));
 	SendMessageToAllDMs(name + " = " + IntToString(nRestState));
