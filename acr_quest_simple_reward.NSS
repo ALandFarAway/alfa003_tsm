@@ -12,10 +12,10 @@ void main(string plot, int gp, int xp, float reset_days, float cr)
 	string sQuest = "i_qst_"+plot;
 	int val = ACR_GetGameDaysSinceStart();
 	int nState = ACR_GetPersistentInt(oPC, sQuest);
-	//SendMessageToPC(oPC, sQuest + " = " + IntToString(nState));
-	//SendMessageToAllDMs(sQuest + " = " + IntToString(nState));
-	//SendMessageToPC(oPC, "fabs(cr) = " + FloatToString(fabs(cr)));
-	//SendMessageToPC(oPC, "EPSILON = " + FloatToString(EPSILON));
+	SendMessageToPC(oPC, sQuest + " = " + IntToString(nState));
+	SendMessageToAllDMs(sQuest + " = " + IntToString(nState));
+	SendMessageToPC(oPC, "fabs(cr) = " + FloatToString(fabs(cr)));
+	SendMessageToPC(oPC, "EPSILON = " + FloatToString(EPSILON));
 	SendMessageToPC(oPC, "acr_quest_simple_reward");
 	SendMessageToAllDMs("acr_quest_simple_reward");
 	
@@ -32,7 +32,7 @@ void main(string plot, int gp, int xp, float reset_days, float cr)
 	ACR_AwardStaticQuestXP(oPC,plot,xp,cr); 
    
 	// Prevent re-doing until n days
-	ACR_SetPersistentInt(oPC, name, val, 100);
+	ACR_SetPersistentInt(oPC, name, val);
 	int nRestState = ACR_GetPersistentInt(oPC, name);
 	SendMessageToPC(oPC, name + " = " + IntToString(nRestState));
 	SendMessageToAllDMs(name + " = " + IntToString(nRestState));
