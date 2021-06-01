@@ -1127,7 +1127,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DBAD36E7BF0437DCBB9C9E0E9071B94C5C31E444" downloadHash="B7A7575969A866101395090CD37DFB9ADF674DBA" name="6d_int_rwkeep_interior.trx" dlsize="239885" size="1051493" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="588E1497D47534FB3C7B7FEA23548B1DE0114722" downloadHash="8D568BBA5B3A42577D5493B2BDA768F99E7F4A51" name="6d_int_rwkeep_interior.trx" dlsize="228308" size="1039776" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1602,7 +1602,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E5270FCE6AD6D73A1ECD0048A75ADE3CD7405033" downloadHash="299125C9A2BD6379F24EFC4EBE4A6B6198E5D3B8" name="6d_int_rwkeep_interior_2.trx" dlsize="299018" size="1064946" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A9145D3BBC9F70E3E01413DF6F9A0A1ED7271C04" downloadHash="EE9D50684D110A3C76926A0C91F37F4F8EE9FE0A" name="6d_int_rwkeep_interior_2.trx" dlsize="299533" size="1064449" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
