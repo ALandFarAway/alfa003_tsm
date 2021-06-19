@@ -1932,7 +1932,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="EA96728A33AB709EE8FADD14E5B6E49191DD70A9" downloadHash="2D25DE1DC9E7E1616AAF5F2F78369855FB120BA0" name="5b_ext_frosthills_settlestone.trx" dlsize="5561489" size="26589871" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A3487AA540BB83D002C7E3F5DEE53BBA616A4002" downloadHash="DC344B5BD854EEADABE3D804D162371A1084C1B4" name="5b_ext_frosthills_settlestone.trx" dlsize="5576216" size="26589872" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1943,6 +1943,16 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="450767770F16D26F020284E7A019FFFD64BB796A" downloadHash="1C5E95D19BE7A8DA854ABA406E5E4A0282FD2A2D" name="5b_int_frosthills_settlestone.trx" dlsize="839690" size="1001747" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="056290D4431185DAF104040ECC31463B5ADDA194" downloadHash="25B33CE171D102D3542446C94D493D25F9A6ED01" name="5b_ext_frosthills_glacier_lake.trx" dlsize="3553141" size="17657696" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="2783D3FD54A63168094CA2B9563496C1D1178B61" downloadHash="D96CE9A032DFA462E07E20F2AFBA811C827FED3C" name="5b_ext_frosthills_glacier_trail.trx" dlsize="3292686" size="16775462" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
