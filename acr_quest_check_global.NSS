@@ -7,10 +7,6 @@ int StartingConditional(string plot)
 {
 	object oPC = GetPCSpeaker();
 	string name = "i_qst_"+plot;
-	SendMessageToPC(oPC, "acr_quest_check_global");
-	SendMessageToAllDMs("acr_quest_check_global");
-	SendMessageToPC(oPC, name + " = " + IntToString(ACR_GetPersistentInt(oPC, name)));
-	SendMessageToAllDMs(name + " = " + IntToString(ACR_GetPersistentInt(oPC, name)));
 	
 	if (ACR_GetPersistentInt(oPC, name) != 0)
 		return TRUE;

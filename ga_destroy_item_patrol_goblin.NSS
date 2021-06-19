@@ -25,7 +25,7 @@ int ConsumeReward( object oTarget, string sItem, int nGold, float fXP, float fCR
 	}
 
 	// Award XP.
-	ACR_AwardStaticQuestXP( oTarget, "Collected: Kobold Bounty" + sItem, FloatToInt( fXP * nCount ), fCR ); 
+	ACR_AwardStaticQuestXP( oTarget, "Collected: Goblin Bounty" + sItem, FloatToInt( fXP * nCount ), fCR ); 
 
 	// Pass back GP to be awarded at the end.
 	return nGold * nCount;
@@ -39,8 +39,8 @@ void main( string sItemTag ) {
 	// Total GP rewarded.
 	int nGP = 0;
 
-	//Kobold Tongue: 0gp, 5xp, CR 1
-	nGP += ConsumeReward( oPC, "003_it_harvest_kobold_tongue", 0, 5.0f, 1.0f );
+	//Goblin Ear: 1gp, .5xp, CR 1
+	nGP += ConsumeReward( oPC, "003_it_harvest_goblin_ear", 1, 0.5f, 1.0f );
 
 
 	// Reward GP.

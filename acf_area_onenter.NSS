@@ -56,7 +56,13 @@ void main() {
 	string sTag = GetTag(OBJECT_SELF);
 	if(FindSubString(sTag, "ext", 0) != -1) {
 	int nXP = 25;
-	if(((FindSubString(sTag, "6b_", 0) != -1) && (FindSubString(sTag, "evermoor_", 0) == -1)) || (FindSubString(sTag, "6c_", 0) != -1) || (FindSubString(sTag, "6d_", 0) != -1)) {
+	if((FindSubString(sTag, "6c_", 0) != -1) || (FindSubString(sTag, "6d_", 0) != -1)) {
+		nXP = 10;
+		}
+	if((FindSubString(sTag, "6b_", 0) != -1) && (FindSubString(sTag, "evermoor", 0) == -1)) {
+		nXP = 10;
+		}
+	if((FindSubString(sTag, "7d_", 0) != -1) && (FindSubString(sTag, "silverwood1", 0) != -1)) {
 		nXP = 10;
 		}
 	if(ACR_GetPersistentInt(GetEnteringObject(), GetTag(OBJECT_SELF) + " XP") == 0) {

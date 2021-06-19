@@ -39,8 +39,8 @@ void main( string sItemTag ) {
 	// Total GP rewarded.
 	int nGP = 0;
 
-	//Kobold Tongue: 0gp, 5xp, CR 1
-	nGP += ConsumeReward( oPC, "003_it_harvest_kobold_tongue", 0, 5.0f, 1.0f );
+	//Kobold Tongue: 1gp, .5xp, CR 1
+	nGP += ConsumeReward( oPC, "003_it_harvest_kobold_tongue", 1, 0.5f, 1.0f );
 
 
 	// Reward GP.
