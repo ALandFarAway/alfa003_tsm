@@ -1947,12 +1947,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="056290D4431185DAF104040ECC31463B5ADDA194" downloadHash="25B33CE171D102D3542446C94D493D25F9A6ED01" name="5b_ext_frosthills_glacier_lake.trx" dlsize="3553141" size="17657696" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DD71B2876BA93C2A06CCB8E91D4C54518DBDDE82" downloadHash="C9DA50E3095ED597BB57AAFFE3CA384912B54151" name="5b_ext_frosthills_glacier_lake.trx" dlsize="3537872" size="17867418" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="2783D3FD54A63168094CA2B9563496C1D1178B61" downloadHash="D96CE9A032DFA462E07E20F2AFBA811C827FED3C" name="5b_ext_frosthills_glacier_trail.trx" dlsize="3292686" size="16775462" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="31E57BA1A029E0EA4DA0B2D15EEC8891EA09FC28" downloadHash="42AAA7CF3D25822BF7C6354DA94B485AEF5DDF17" name="5b_ext_frosthills_glacier_trail.trx" dlsize="3282491" size="16764489" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
