@@ -1947,7 +1947,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DD71B2876BA93C2A06CCB8E91D4C54518DBDDE82" downloadHash="C9DA50E3095ED597BB57AAFFE3CA384912B54151" name="5b_ext_frosthills_glacier_lake.trx" dlsize="3537872" size="17867418" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FE11B9937F343A42E51C3AC38484291CF4B4D2D3" downloadHash="8B3AFFE4885547BFBBACD84146837197176D9DD3" name="5b_ext_frosthills_glacier_lake.trx" dlsize="3659008" size="17987070" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
