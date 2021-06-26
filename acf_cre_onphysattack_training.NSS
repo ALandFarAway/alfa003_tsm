@@ -61,7 +61,7 @@ void main()
 	object oAttacker = GetLastAttacker(OBJECT_SELF);
 	int nNLDTotal = _GetNLDTotal(oAttacker);
     int nHPMax = GetMaxHitPoints(oAttacker);
-    SpeakString("Onphysattack oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
+    ActionSpeakString("Onphysattack oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
 		
 	if(_GetNLDMode(OBJECT_SELF) == FALSE)
 			 	{ACR_ToggleNLDMode(OBJECT_SELF);}

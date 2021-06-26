@@ -199,7 +199,7 @@ void main()
     {
       AssignCommand(oPC,ClearAllActions(TRUE));
       ACR_AwardStaticQuestXP(oPC,"puk",nXP);
-      SendMessageToPC(oPC, WHITE + "Nice work!! You have gained " + YELLOW +IntToString(nXP)+ WHITE + " Experience in this session.");
+      SendMessageToPC(oPC, WHITE + "Nice work! You have gained " + YELLOW +IntToString(nXP-1)+ WHITE + " Experience in this session.");
       DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
       DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
 	  SetLocalInt(oPC, "RangedTrainingDone", iTodayIs);
