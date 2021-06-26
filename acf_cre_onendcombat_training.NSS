@@ -49,9 +49,31 @@ void main()
 	
 	int nNLDTotal = _GetNLDTotal(OBJECT_SELF);
     int nHPMax = GetMaxHitPoints(OBJECT_SELF);
-	object oAttacker = GetLastAttacker();
-	SpeakString("endcombatround oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
-	ActionAttack(oAttacker, FALSE);	
+	//object oAttacker = GetLastAttacker();
+	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
+	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
+	float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
+	float fDistanceSword = GetDistanceBetween(OBJECT_SELF, oTargetSword);
+	object oTargetChoice;
+	if((oTargetSpear != OBJECT_INVALID) && (oTargetSword != OBJECT_INVALID)) {
+		if(fDistanceSpear <= fDistanceSword) {
+			oTargetChoice = oTargetSpear;
+		}
+		else {oTargetChoice = oTargetSword;}
+	}
+	
+	else if(oTargetSpear != OBJECT_INVALID) {
+		oTargetChoice = oTargetSpear;
+		}
+		
+	else if(oTargetSword != OBJECT_INVALID) {
+		oTargetChoice = oTargetSword;
+		}
+	SpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
+	ActionAttack(oTargetChoice, FALSE);	
+	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
+	SoundObjectPlay(oBattleSound);
+	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
 	
 	if(nHPMax - nNLDTotal < 5) {
 		ActionSpeakString("Yield!", TALKVOLUME_TALK);
@@ -59,9 +81,9 @@ void main()
 		ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE,1.0,5.0);
 		object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");
 		DelayCommand(6.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
-		DelayCommand(6.0, AssignCommand(oAttacker, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
+		DelayCommand(6.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
 		DelayCommand(7.0, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
-		DelayCommand(7.0, AssignCommand(oAttacker, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
+		DelayCommand(7.0, AssignCommand(oTargetChoice, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
 		
 		}
 		

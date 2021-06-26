@@ -66,11 +66,11 @@ void main()
 	if(_GetNLDMode(OBJECT_SELF) == FALSE)
 			 	{ACR_ToggleNLDMode(OBJECT_SELF);}
 		
-	ActionAttack(oAttacker, FALSE);	
+	/*ActionAttack(oAttacker, FALSE);	
 	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
 	SoundObjectPlay(oBattleSound);
 	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
-		
+	*/	
 		
 	if(nHPMax - _GetNLDTotal(oAttacker) <= 5) {
 		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
