@@ -69,11 +69,19 @@ void main()
 	else if(oTargetSword != OBJECT_INVALID) {
 		oTargetChoice = oTargetSword;
 		}
-	SpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
+	AssignCommand(OBJECT_SELF, ClearAllActions(TRUE));
 	ActionAttack(oTargetChoice, FALSE);	
-	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
-	SoundObjectPlay(oBattleSound);
-	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
+	ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
+	//object oBattleSound = GetObjectByTag("githbattle_rwk_object");
+	//SoundObjectPlay(oBattleSound);
+	//DelayCommand(1.0, SoundObjectStop(oBattleSound));	
+	PlaySound("cb_ht_bladeplat1", FALSE);
+	DelayCommand(2.0, PlaySound("cb_ht_bladeplat2", FALSE));
+	DelayCommand(4.0, PlaySound("cb_ht_bladewood1", FALSE));
+	DelayCommand(6.0, PlaySound("cb_ht_bladewood2", FALSE));
+	DelayCommand(8.0, PlaySound("cb_ht_metblplat1", FALSE));
+	DelayCommand(10.0, PlaySound("cb_ht_metblplat2", FALSE));
+	
 	
 	if(nHPMax - nNLDTotal < 5) {
 		ActionSpeakString("Yield!", TALKVOLUME_TALK);
