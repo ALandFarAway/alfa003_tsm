@@ -51,6 +51,7 @@ void main()
     int nHPMax = GetMaxHitPoints(OBJECT_SELF);
 	object oAttacker = GetLastAttacker();
 	SpeakString("endcombatround oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
+	ActionAttack(oAttacker, FALSE);	
 	
 	if(nHPMax - nNLDTotal < 5) {
 		ActionSpeakString("Yield!", TALKVOLUME_TALK);
