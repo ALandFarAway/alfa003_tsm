@@ -106,7 +106,7 @@ void main()
     //: SET ONLY HERE WHAT YOU WANT TO GIVE OR ALLOW AT ALL !!!
     int nTrainerLEV = 0;//Set to 1 this if you don't want to give XP and/or Level-up
 	int nTrainerENM = 1;//Set to 1 this if you want to allow Enhanced Weapons
-    int nTrainerXPS = 11;//Set this to the XP Per Each Session
+    int nTrainerXPS = 10;//Set this to the XP Per Each Session
     int nTrainerDPS = 100;//Set this to Amount of Damage Required Per Session
     int nTrainerXPL = 10000;//Set this to the Max XP for Combat Trainers (Level 10 Default)
 
@@ -146,7 +146,7 @@ void main()
     int nMessage = 0;
 
     //These are the Messages given during the Session
-    string sMessage1 = WHITE + "I felt the breeze on that one =) !";
+    string sMessage1 = WHITE + "I felt the breeze on that one!";
     string sMessage2 = WHITE + "That was soft....hit like that and you'll be here forever!";
     string sMessage3 = WHITE + "That was better....keep it up!";
     string sMessage4 = WHITE + "Looks like you are improving.....Keep it up!";
