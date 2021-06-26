@@ -138,7 +138,7 @@ void main()
       return;
     }
 	
-    int nXP     = nTrainerXPS;
+    int nXP     = nTrainerXPS +1;
     int nReq    = nTrainerDPS;
     int nGive   = 0;
     int nDamage = GetTotalDamageDealt();
@@ -147,10 +147,10 @@ void main()
 
     //These are the Messages given during the Session
     string sMessage1 = WHITE + "I felt the breeze on that one!";
-    string sMessage2 = WHITE + "That was soft....hit like that and you'll be here forever!";
-    string sMessage3 = WHITE + "That was better....keep it up!";
-    string sMessage4 = WHITE + "Looks like you are improving.....Keep it up!";
-    string sMessage5 = WHITE + "Nice swing...this is becoming too easy!";
+    string sMessage2 = WHITE + "Hit like that and you'll be here forever!";
+    string sMessage3 = WHITE + "That was better!";
+    string sMessage4 = WHITE + "Looks like you are improving!";
+    string sMessage5 = WHITE + "Nice swing. This is becoming too easy!";
     string sMessage6 = WHITE + "Looks like you are becoming a real professional at this!";
 
     //NO CHEATING =) ...the Weapon you start the session with is what you must finish with
@@ -197,7 +197,7 @@ void main()
     {
       AssignCommand(oPC,ClearAllActions(TRUE));
       ACR_AwardStaticQuestXP(oPC,"puk",nXP);
-      SendMessageToPC(oPC, WHITE + "Nice work!! You have gained " + YELLOW +IntToString(nXP)+ WHITE + " Experience in this session.");
+      SendMessageToPC(oPC, WHITE + "Nice work! You have gained " + YELLOW +IntToString(nXP)+ WHITE + " Experience in this session.");
       DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
       DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
 	  SetLocalInt(oPC, "MeleeTrainingDone", iTodayIs);
@@ -205,7 +205,7 @@ void main()
 	else if(nGive == 1 && nTrainerLEV == 1)
 	{
       AssignCommand(oPC,ClearAllActions(TRUE));
-      SendMessageToPC(oPC, WHITE + "Nice work!! You have finished this session.");
+      SendMessageToPC(oPC, WHITE + "Nice work! You have finished this session.");
       DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
       DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
     }

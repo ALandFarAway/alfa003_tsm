@@ -106,7 +106,7 @@ void main()
     //: SET ONLY HERE WHAT YOU WANT TO GIVE OR ALLOW AT ALL !!!
     int nTrainerLEV = 0;//Set to 1 this if you don't want to give XP and/or Level-up
 	int nTrainerENR = 1;//Set to 1 this if you want to allow Enhanced Weapons
-    int nTrainerXPS = 10;//Set this to the XP Per Each Session
+    int nTrainerXPS = 11;//Set this to the XP Per Each Session
     int nTrainerDPS = 100;//Set this to Amount of Damage Required Per Session
     int nTrainerXPL = 10000;//Set this to the Max XP for Combat Trainers (Level 10 Default)
 
@@ -138,7 +138,7 @@ void main()
       return;
     }
 	
-    int nXP     = nTrainerXPS;
+    int nXP     = nTrainerXPS +1;
     int nReq    = nTrainerDPS;
     int nGive   = 0;
     int nDamage = GetTotalDamageDealt();
@@ -148,10 +148,10 @@ void main()
     //These are the Messages given during the Session
     string sMessage1 = WHITE + "That one might have missed the barn!";
     string sMessage2 = WHITE + "Barely hit the target!";
-    string sMessage3 = WHITE + "Blue....could be better!";
-    string sMessage4 = WHITE + "White.....not bad at all!";
-    string sMessage5 = WHITE + "Red.....nice shot!";
-    string sMessage6 = WHITE + "Very Nice shot....dead center of the Red!";
+    string sMessage3 = WHITE + "Blue. Could be better!";
+    string sMessage4 = WHITE + "White. Not bad at all!";
+    string sMessage5 = WHITE + "Red. Nice shot!";
+    string sMessage6 = WHITE + "Very nice shot! Dead center of the Red!";
 
     //NO CHEATING =) ...the Wepaon you start the session with is what you must finish with
     if(nTally == 0)
@@ -207,7 +207,7 @@ void main()
 	else if(nGive == 1 && nTrainerLEV == 1)
 	{
       AssignCommand(oPC,ClearAllActions(TRUE));
-      SendMessageToPC(oPC, WHITE + "Nice work!! You have finished this session.");
+      SendMessageToPC(oPC, WHITE + "Nice work! You have finished this session.");
       DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
       DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
     }
