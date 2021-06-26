@@ -61,17 +61,16 @@ void main()
 	object oAttacker = GetLastAttacker(OBJECT_SELF);
 	int nNLDTotal = _GetNLDTotal(oAttacker);
     int nHPMax = GetMaxHitPoints(oAttacker);
-    SpeakString("oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
+    SpeakString("Onphysattack oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
 		
-	if(!GetIsPC(oAttacker)) {
 	if(_GetNLDMode(OBJECT_SELF) == FALSE)
 			 	{ACR_ToggleNLDMode(OBJECT_SELF);}
 		
 	ActionAttack(oAttacker, FALSE);	
 	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
-	//SoundObjectPlay(oBattleSound);
-	//DelayCommand(1.0, SoundObjectStop(oBattleSound));	
-		}
+	SoundObjectPlay(oBattleSound);
+	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
+		
 		
 	if(nHPMax - _GetNLDTotal(oAttacker) <= 5) {
 		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);

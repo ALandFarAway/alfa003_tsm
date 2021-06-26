@@ -50,6 +50,8 @@ void main()
 	int nNLDTotal = _GetNLDTotal(OBJECT_SELF);
     int nHPMax = GetMaxHitPoints(OBJECT_SELF);
 	object oAttacker = GetLastAttacker();
+	SpeakString("endcombatround oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
+	
 	if(nHPMax - nNLDTotal < 5) {
 		ActionSpeakString("Yield!", TALKVOLUME_TALK);
 		ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELDAMAGE,1.0,0.0);
