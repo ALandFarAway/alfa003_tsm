@@ -71,8 +71,9 @@ void main()
 		}
 	ClearAllActions(TRUE);
 	AssignCommand(oTargetChoice, ClearAllActions(TRUE));
-	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, FALSE));	
+	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
 	ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
+	ActionAttack(oTargetChoice, TRUE);
 	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
 	//SoundObjectPlay(oBattleSound);
 	//DelayCommand(1.0, SoundObjectStop(oBattleSound));	
