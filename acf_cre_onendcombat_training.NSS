@@ -85,19 +85,24 @@ void main()
 	
 	int nNLDTotal = _GetNLDTotal(oTargetChoice);
     int nHPMax = GetMaxHitPoints(oTargetChoice);
+	object oCleric = GetObjectByTag("003_cr_ilmater_traveller", 0);
 	
-	
-	if(nHPMax - nNLDTotal < 10) {
+	if(nHPMax - nNLDTotal < 20) {
 		ActionSpeakString("nNLDTotal = " + IntToString(nNLDTotal) + " nMaxHP = " + IntToString(nHPMax), TALKVOLUME_TALK);
+		AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 		//ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELDAMAGE,1.0,0.0);
 		//ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE,1.0,5.0);
 		object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");
 		//DelayCommand(6.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
 		//DelayCommand(6.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
 		//DelayCommand(7.0, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
+		DelayCommand(6.0, AssignCommand(oTargetChoice, ActionSpeakString("I Yield!", TALKVOLUME_TALK)));
 		//DelayCommand(7.0, AssignCommand(oTargetChoice, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
 		
 		}
-		
+	
+	if(nHPMax - nNLDTotal < 10) {	
+		AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	}
     
 }
