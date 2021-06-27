@@ -93,8 +93,8 @@ void main()
 				 	{ACR_ToggleNLDMode(OBJECT_SELF);}
 			ActionMoveToObject(oTargetChoice, FALSE, 1.0);
 			DelayCommand(2.0, ActionAttack(oTargetChoice, FALSE));
-			DelayCommand(12.0, ActionAttack(oTargetChoice, FALSE));
-			DelayCommand(22.0, ActionAttack(oTargetChoice, FALSE));
+			//DelayCommand(12.0, ActionAttack(oTargetChoice, FALSE));
+			//DelayCommand(22.0, ActionAttack(oTargetChoice, FALSE));
 						
 		}
 	}

@@ -47,10 +47,8 @@ void main()
 
     // Custom code goes here.
 	
-	int nNLDTotal = _GetNLDTotal(OBJECT_SELF);
-    int nHPMax = GetMaxHitPoints(OBJECT_SELF);
 	//object oAttacker = GetLastAttacker();
-	/*object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
+	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
 	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
 	float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
 	float fDistanceSword = GetDistanceBetween(OBJECT_SELF, oTargetSword);
@@ -69,7 +67,7 @@ void main()
 	else if(oTargetSword != OBJECT_INVALID) {
 		oTargetChoice = oTargetSword;
 		}
-	ClearAllActions(TRUE);
+	/*ClearAllActions(TRUE);
 	AssignCommand(oTargetChoice, ClearAllActions(TRUE));
 	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
 	ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
@@ -85,15 +83,19 @@ void main()
 	AssignCommand(oBattleSound, DelayCommand(10.0, PlaySound("cb_ht_metblplat2", FALSE)));
 	*/
 	
-	if(nHPMax - nNLDTotal < 5) {
-		ActionSpeakString("Yield!", TALKVOLUME_TALK);
-		ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELDAMAGE,1.0,0.0);
-		ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE,1.0,5.0);
+	int nNLDTotal = _GetNLDTotal(oTargetChoice);
+    int nHPMax = GetMaxHitPoints(oTargetChoice);
+	
+	
+	if(nHPMax - nNLDTotal < 10) {
+		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
+		//ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELDAMAGE,1.0,0.0);
+		//ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE,1.0,5.0);
 		object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");
-		DelayCommand(6.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
-		DelayCommand(6.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
-		DelayCommand(7.0, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
-		DelayCommand(7.0, AssignCommand(oTargetChoice, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
+		//DelayCommand(6.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
+		//DelayCommand(6.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
+		//DelayCommand(7.0, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
+		//DelayCommand(7.0, AssignCommand(oTargetChoice, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
 		
 		}
 		
