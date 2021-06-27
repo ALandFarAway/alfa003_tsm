@@ -70,7 +70,7 @@ void main()
 	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
 	SoundObjectPlay(oBattleSound);
 	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
-	*/	
+	
 	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
 	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
 	float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
@@ -92,7 +92,7 @@ void main()
 		}	
 		
 	ActionAttack(oTargetChoice, TRUE);
-	
+	*/	
 	if(nHPMax - _GetNLDTotal(oAttacker) <= 5) {
 		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
 		}

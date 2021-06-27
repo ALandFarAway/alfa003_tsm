@@ -50,7 +50,7 @@ void main()
 	int nNLDTotal = _GetNLDTotal(OBJECT_SELF);
     int nHPMax = GetMaxHitPoints(OBJECT_SELF);
 	//object oAttacker = GetLastAttacker();
-	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
+	/*object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
 	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
 	float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
 	float fDistanceSword = GetDistanceBetween(OBJECT_SELF, oTargetSword);
@@ -69,13 +69,13 @@ void main()
 	else if(oTargetSword != OBJECT_INVALID) {
 		oTargetChoice = oTargetSword;
 		}
-	//ClearAllActions(TRUE);
-	//AssignCommand(oTargetChoice, ClearAllActions(TRUE));
-	//AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
-	//ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
-	//ActionAttack(oTargetChoice, TRUE);
-	//object oBattleSound = GetObjectByTag("githbattle_rwk_object");
-	/*SoundObjectPlay(oBattleSound);
+	ClearAllActions(TRUE);
+	AssignCommand(oTargetChoice, ClearAllActions(TRUE));
+	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
+	ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
+	ActionAttack(oTargetChoice, TRUE);
+	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
+	SoundObjectPlay(oBattleSound);
 	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
 	AssignCommand(oBattleSound, PlaySound("cb_ht_bladeplat1", FALSE));
 	AssignCommand(oBattleSound, DelayCommand(2.0, PlaySound("cb_ht_bladeplat2", FALSE)));

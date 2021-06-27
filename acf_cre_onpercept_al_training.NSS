@@ -91,8 +91,11 @@ void main()
 			SetLocalInt(OBJECT_SELF, "Trained", 1);
 			if(_GetNLDMode(OBJECT_SELF) == FALSE)
 				 	{ACR_ToggleNLDMode(OBJECT_SELF);}
-			
-			ActionAttack(oTargetChoice, FALSE);			
+			ActionMoveToObject(oTargetChoice, FALSE, 1.0);
+			DelayCommand(2.0, ActionAttack(oTargetChoice, FALSE));
+			DelayCommand(12.0, ActionAttack(oTargetChoice, FALSE));
+			DelayCommand(22.0, ActionAttack(oTargetChoice, FALSE));
+						
 		}
 	}
 }
