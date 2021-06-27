@@ -69,21 +69,21 @@ void main()
 	else if(oTargetSword != OBJECT_INVALID) {
 		oTargetChoice = oTargetSword;
 		}
-	ClearAllActions(TRUE);
-	AssignCommand(oTargetChoice, ClearAllActions(TRUE));
-	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
-	ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
-	ActionAttack(oTargetChoice, TRUE);
-	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
-	//SoundObjectPlay(oBattleSound);
-	//DelayCommand(1.0, SoundObjectStop(oBattleSound));	
+	//ClearAllActions(TRUE);
+	//AssignCommand(oTargetChoice, ClearAllActions(TRUE));
+	//AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
+	//ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
+	//ActionAttack(oTargetChoice, TRUE);
+	//object oBattleSound = GetObjectByTag("githbattle_rwk_object");
+	/*SoundObjectPlay(oBattleSound);
+	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
 	AssignCommand(oBattleSound, PlaySound("cb_ht_bladeplat1", FALSE));
 	AssignCommand(oBattleSound, DelayCommand(2.0, PlaySound("cb_ht_bladeplat2", FALSE)));
 	AssignCommand(oBattleSound, DelayCommand(4.0, PlaySound("cb_ht_bladewood1", FALSE)));
 	AssignCommand(oBattleSound, DelayCommand(6.0, PlaySound("cb_ht_bladewood2", FALSE)));
 	AssignCommand(oBattleSound, DelayCommand(8.0, PlaySound("cb_ht_metblplat1", FALSE)));
 	AssignCommand(oBattleSound, DelayCommand(10.0, PlaySound("cb_ht_metblplat2", FALSE)));
-	
+	*/
 	
 	if(nHPMax - nNLDTotal < 5) {
 		ActionSpeakString("Yield!", TALKVOLUME_TALK);
