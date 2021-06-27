@@ -103,17 +103,18 @@ void main()
 	
 	if((oTargetChoice != oTargetDummy) && (nHPMax - nNLDTotal < 20)) {
 		ClearAllActions(TRUE);
+		AssignCommand(oTargetChoice, ClearAllActions(TRUE));
 		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
 		AssignCommand(oCleric, ActionMoveToObject(oTargetChoice, FALSE, 1.0));
 		DelayCommand(1.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE)));
 		DelayCommand(2.0, ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE,1.0,5.0));
 		DelayCommand(6.0, AssignCommand(oTargetChoice, ActionSpeakString("I yield!", TALKVOLUME_TALK)));
-		DelayCommand(7.0, SetFacingObject(oTargetChoice));
-		DelayCommand(7.0, AssignCommand(oTargetChoice, SetFacingObject(OBJECT_SELF)));
-		DelayCommand(8.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
-		DelayCommand(8.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
-		DelayCommand(9.0, ActionForceMoveToObject(oCombatEndWP, FALSE, 1.0));
-		DelayCommand(9.0, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 1.0)));
+		DelayCommand(8.0, SetFacingObject(oTargetChoice));
+		DelayCommand(8.0, AssignCommand(oTargetChoice, SetFacingObject(OBJECT_SELF)));
+		DelayCommand(9.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
+		DelayCommand(9.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
+		DelayCommand(10.0, ActionForceMoveToObject(oCombatEndWP, FALSE, 1.0));
+		DelayCommand(10.0, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 1.0)));
 		
 		}
 	
