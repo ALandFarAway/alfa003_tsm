@@ -108,12 +108,12 @@ void main()
 	int nTrainerENM = 1;//Set to 1 this if you want to allow Enhanced Weapons
     int nTrainerXPS = 10;//Set this to the XP Per Each Session
     int nTrainerDPS = 100;//Set this to Amount of Damage Required Per Session
-    int nTrainerXPL = 10000;//Set this to the Max XP for Combat Trainers (Level 10 Default)
+    int nTrainerXPL = 1000;//Set this to the Max XP for Combat Trainers (Level 10 Default)
 
    //:****************************************************************************/
 
     //The Player is restricted by the Max XP Level Setting
-    if(nTrainerXPL == 0) nTrainerXPL = 10000;//Level 5 Default
+    if(nTrainerXPL == 0) nTrainerXPL = 1000;//Level 5 Default
     int nPCXP = GetXP(oPC);
     if(nPCXP > nTrainerXPL)
     {
