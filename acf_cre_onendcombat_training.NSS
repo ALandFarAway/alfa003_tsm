@@ -50,6 +50,7 @@ void main()
 	//object oAttacker = GetLastAttacker();
 	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
 	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
+	object oTargetDummy = GetNearestObjectByTag("abr_pl_mp_pracdummuse", OBJECT_SELF,1);
 	float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
 	float fDistanceSword = GetDistanceBetween(OBJECT_SELF, oTargetSword);
 	object oTargetChoice;
@@ -67,6 +68,11 @@ void main()
 	else if(oTargetSword != OBJECT_INVALID) {
 		oTargetChoice = oTargetSword;
 		}
+		
+	else if((oTargetSword == OBJECT_INVALID) && (oTargetSpear == OBJECT_INVALID)) {
+		oTargetChoice  = oTargetDummy;
+		}
+
 	/*ClearAllActions(TRUE);
 	AssignCommand(oTargetChoice, ClearAllActions(TRUE));
 	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
@@ -88,7 +94,7 @@ void main()
 	object oCleric = GetObjectByTag("003_cr_ilmater_traveller", 0);
 	object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");
 		
-	if(nHPMax - nNLDTotal < 20) {
+	if((oTargetChoice != oTargetDummy) && (nHPMax - nNLDTotal < 20)) {
 		ActionSpeakString("nNLDTotal = " + IntToString(nNLDTotal) + " nMaxHP = " + IntToString(nHPMax), TALKVOLUME_TALK);
 		AssignCommand(oCleric, ActionMoveToObject(oTargetChoice, FALSE, 1.0));
 		DelayCommand(1.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE)));
@@ -102,9 +108,6 @@ void main()
 		
 		}
 	
-	if(nHPMax - nNLDTotal < 10) {	
-		AssignCommand(oCleric, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
-		DelayCommand(3.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE)));
-	}
+	
     
 }

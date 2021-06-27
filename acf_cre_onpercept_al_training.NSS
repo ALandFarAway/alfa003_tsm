@@ -93,11 +93,12 @@ void main()
 				 	{ACR_ToggleNLDMode(OBJECT_SELF);}
 			ActionMoveToObject(oTargetChoice, FALSE, 1.0);
 			DelayCommand(2.0, ActionAttack(oTargetChoice, FALSE));
-			DelayCommand(8.0, ActionAttack(oTargetChoice, FALSE));
-			DelayCommand(14.0, ActionAttack(oTargetChoice, FALSE));
-			DelayCommand(20.0, ActionAttack(oTargetChoice, FALSE));
-			DelayCommand(26.0, ActionAttack(oTargetChoice, FALSE));
-						
+			if(oTargetChoice != oTargetDummy) {
+				DelayCommand(8.0, ActionAttack(oTargetChoice, FALSE));
+				DelayCommand(14.0, ActionAttack(oTargetChoice, FALSE));
+				DelayCommand(20.0, ActionAttack(oTargetChoice, FALSE));
+				DelayCommand(26.0, ActionAttack(oTargetChoice, FALSE));
+			}			
 		}
 	}
 }
