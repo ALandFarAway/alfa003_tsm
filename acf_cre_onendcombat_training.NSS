@@ -95,7 +95,7 @@ void main()
 	object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");
 		
 	if((oTargetChoice != oTargetDummy) && (nHPMax - nNLDTotal < 20)) {
-		ActionSpeakString("nNLDTotal = " + IntToString(nNLDTotal) + " nMaxHP = " + IntToString(nHPMax), TALKVOLUME_TALK);
+		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
 		AssignCommand(oCleric, ActionMoveToObject(oTargetChoice, FALSE, 1.0));
 		DelayCommand(1.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE)));
 		//ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELDAMAGE,1.0,0.0);
@@ -103,8 +103,8 @@ void main()
 		DelayCommand(6.0, AssignCommand(oTargetChoice, ActionSpeakString("I yield!", TALKVOLUME_TALK)));
 		DelayCommand(7.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
 		DelayCommand(7.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
-		//DelayCommand(7.0, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
-		//DelayCommand(7.0, AssignCommand(oTargetChoice, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
+		DelayCommand(8.0, ActionMoveToObject(oCombatEndWP, FALSE, 1.0));
+		DelayCommand(8.0, AssignCommand(oTargetChoice, ActionMoveToObject(oCombatEndWP, FALSE, 1.0)));
 		
 		}
 	
