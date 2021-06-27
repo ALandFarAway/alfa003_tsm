@@ -88,7 +88,7 @@ void main()
 	
 	
 	if(nHPMax - nNLDTotal < 10) {
-		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
+		ActionSpeakString("nNLDTotal = " + IntToString(nNLDTotal) + " nMaxHP = " + IntToString(nHPMax), TALKVOLUME_TALK);
 		//ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELDAMAGE,1.0,0.0);
 		//ActionPlayAnimation(ANIMATION_LOOPING_KNEELIDLE,1.0,5.0);
 		object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");

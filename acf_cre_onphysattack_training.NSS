@@ -59,9 +59,7 @@ void main()
     // Custom code goes here.
 	
 	object oAttacker = GetLastAttacker(OBJECT_SELF);
-	int nNLDTotal = _GetNLDTotal(oAttacker);
-    int nHPMax = GetMaxHitPoints(oAttacker);
-    //ActionSpeakString("Onphysattack oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
+	//ActionSpeakString("Onphysattack oAttacker = " + GetTag(oAttacker), TALKVOLUME_TALK);
 		
 	if(_GetNLDMode(OBJECT_SELF) == FALSE)
 			 	{ACR_ToggleNLDMode(OBJECT_SELF);}
@@ -91,9 +89,11 @@ void main()
 		oTargetChoice = oTargetSword;
 		}	
 		
-	ActionAttack(oTargetChoice, TRUE);
-	*/	
-	if(nHPMax - _GetNLDTotal(oAttacker) <= 5) {
+	//ActionAttack(oTargetChoice, TRUE);
+ 	int nNLDTotal = _GetNLDTotal(oTargetChoice);
+    int nHPMax = GetMaxHitPoints(oTargetChoice);
+    
+	if(nHPMax - _GetNLDTotal(oTargetChoice) <= 5) {
 		ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
-		}
+		}*/
 }
