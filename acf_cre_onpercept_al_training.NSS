@@ -86,7 +86,6 @@ void main()
 		}
 	
 	if((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived))) {
-		//ActionSpeakString("oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
 		if(GetLocalInt(OBJECT_SELF, "Trained") == 0) {
 			SetLocalInt(OBJECT_SELF, "Trained", 1);
 			if(_GetNLDMode(OBJECT_SELF) == FALSE)

@@ -151,7 +151,7 @@ void main()
     string sMessage3 = WHITE + "Blue. Could be better!";
     string sMessage4 = WHITE + "White. Not bad at all!";
     string sMessage5 = WHITE + "Red. Nice shot!";
-    string sMessage6 = WHITE + "Very nice shot! Dead center of the Red!";
+    string sMessage6 = WHITE + "Bulls eye!";
 
     //NO CHEATING =) ...the Wepaon you start the session with is what you must finish with
     if(nTally == 0)

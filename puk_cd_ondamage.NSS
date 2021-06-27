@@ -149,9 +149,9 @@ void main()
     string sMessage1 = WHITE + "I felt the breeze on that one!";
     string sMessage2 = WHITE + "Hit like that and you'll be here forever!";
     string sMessage3 = WHITE + "That was better!";
-    string sMessage4 = WHITE + "Looks like you are improving!";
-    string sMessage5 = WHITE + "Nice swing. This is becoming too easy!";
-    string sMessage6 = WHITE + "Looks like you are becoming a real professional at this!";
+    string sMessage4 = WHITE + "Showing improvement!";
+    string sMessage5 = WHITE + "Nice swing.";
+    string sMessage6 = WHITE + "Actually not bad at all.";
 
     //NO CHEATING =) ...the Weapon you start the session with is what you must finish with
     if(nTally == 0)

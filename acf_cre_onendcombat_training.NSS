@@ -53,7 +53,6 @@ void main()
 
     // Custom code goes here.
 	
-	//object oAttacker = GetLastAttacker();
 	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
 	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
 	object oTargetDummy = GetNearestObjectByTag("abr_pl_mp_pracdummuse", OBJECT_SELF,1);
@@ -79,22 +78,8 @@ void main()
 		oTargetChoice  = oTargetDummy;
 		}
 
-	/*ClearAllActions(TRUE);
-	AssignCommand(oTargetChoice, ClearAllActions(TRUE));
-	AssignCommand(oTargetChoice, ActionAttack(OBJECT_SELF, TRUE));	
-	ActionSpeakString("endcombatround oTargetChoice = " + GetTag(oTargetChoice), TALKVOLUME_TALK);
-	ActionAttack(oTargetChoice, TRUE);
-	object oBattleSound = GetObjectByTag("githbattle_rwk_object");
-	SoundObjectPlay(oBattleSound);
-	DelayCommand(1.0, SoundObjectStop(oBattleSound));	
-	AssignCommand(oBattleSound, PlaySound("cb_ht_bladeplat1", FALSE));
-	AssignCommand(oBattleSound, DelayCommand(2.0, PlaySound("cb_ht_bladeplat2", FALSE)));
-	AssignCommand(oBattleSound, DelayCommand(4.0, PlaySound("cb_ht_bladewood1", FALSE)));
-	AssignCommand(oBattleSound, DelayCommand(6.0, PlaySound("cb_ht_bladewood2", FALSE)));
-	AssignCommand(oBattleSound, DelayCommand(8.0, PlaySound("cb_ht_metblplat1", FALSE)));
-	AssignCommand(oBattleSound, DelayCommand(10.0, PlaySound("cb_ht_metblplat2", FALSE)));
-	*/
-	
+
+	object oTrainingWP = GetWaypointByTag("rwk_training_wp");
 	int nNLDTotal = _GetNLDTotal(oTargetChoice);
     int nHPMax = GetMaxHitPoints(oTargetChoice);
 	object oCleric = GetObjectByTag("003_cr_ilmater_traveller", 0);
@@ -112,8 +97,8 @@ void main()
 	string sMessage10 = "Ouch!";
 	 
 	
-	int nSpeak = d4(1);
-	if(nSpeak ==1) {
+	int nSpeak = d6(1);
+	if(nSpeak == 1) {
 	int nMessage = d10(1);
 	 
 	if(nMessage == 1) ActionSpeakString(sMessage1, TALKVOLUME_TALK);
@@ -144,6 +129,12 @@ void main()
 		DelayCommand(15.5, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5)));
 		DelayCommand(25.0, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5));
 		DelayCommand(25.5, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5)));
+		float fCoolDown = IntToFloat(Random(120) + 120);
+		DelayCommand(fCoolDown, ActionForceMoveToObject(oTrainingWP, FALSE, 0.5 ));
+		DelayCommand(fCoolDown + 0.5, AssignCommand(oTargetChoice, ActionForceMoveToObject(oTrainingWP, FALSE, 0.5 )));
+		DelayCommand(fCoolDown + 10.0, SetLocalInt(OBJECT_SELF, "Trained", 0));
+		DelayCommand(fCoolDown + 10.5, SetLocalInt(oTargetChoice, "Trained", 0));
+			
 		
 		}
 	
