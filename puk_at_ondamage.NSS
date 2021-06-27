@@ -106,7 +106,7 @@ void main()
     //: SET ONLY HERE WHAT YOU WANT TO GIVE OR ALLOW AT ALL !!!
     int nTrainerLEV = 0;//Set to 1 this if you don't want to give XP and/or Level-up
 	int nTrainerENR = 1;//Set to 1 this if you want to allow Enhanced Weapons
-    int nTrainerXPS = 11;//Set this to the XP Per Each Session
+    int nTrainerXPS = 10;//Set this to the XP Per Each Session
     int nTrainerDPS = 100;//Set this to Amount of Damage Required Per Session
     int nTrainerXPL = 10000;//Set this to the Max XP for Combat Trainers (Level 10 Default)
 
@@ -200,29 +200,31 @@ void main()
       AssignCommand(oPC,ClearAllActions(TRUE));
       ACR_AwardStaticQuestXP(oPC,"puk",nXP);
       SendMessageToPC(oPC, WHITE + "Nice work! You have gained " + YELLOW +IntToString(nXP-1)+ WHITE + " Experience in this session.");
-      DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
-      DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
+      //DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
+      //DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
 	  SetLocalInt(oPC, "RangedTrainingDone", iTodayIs);
     }
 	else if(nGive == 1 && nTrainerLEV == 1)
 	{
       AssignCommand(oPC,ClearAllActions(TRUE));
       SendMessageToPC(oPC, WHITE + "Nice work! You have finished this session.");
-      DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
-      DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
+      //DelayCommand(1.0, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_LOOPING_PAUSE_TIRED,1.0,3.0)));
+      //DelayCommand(4.5, AssignCommand(oPC,ActionPlayAnimation(ANIMATION_FIREFORGET_VICTORY1,1.0)));
     }
     //Give a Message to Player
     else 
     {
-      if(d2() == 1)
+      if(d3() == 1)
       {
         //Decide which message to give to the Player
-        if(nMessage == 0) SendMessageToPC(oPC, sMessage1);
-        if(nMessage >= 1 && nMessage < 3) SendMessageToPC(oPC, sMessage2);
-        if(nMessage >= 3 && nMessage < 6) SendMessageToPC(oPC, sMessage3);
-        if(nMessage >= 6 && nMessage < 10) SendMessageToPC(oPC, sMessage4);
-        if(nMessage >= 10 && nMessage < 15) SendMessageToPC(oPC, sMessage5);
-        if(nMessage >= 15) SendMessageToPC(oPC, sMessage6);
+		object oSpeaker = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oPC,1);
+        
+		if(nMessage == 0) AssignCommand(oSpeaker, ActionSpeakString(sMessage1, TALKVOLUME_TALK));
+        if(nMessage >= 1 && nMessage < 3) AssignCommand(oSpeaker, ActionSpeakString(sMessage2, TALKVOLUME_TALK));
+        if(nMessage >= 3 && nMessage < 6) AssignCommand(oSpeaker, ActionSpeakString(sMessage3, TALKVOLUME_TALK));
+        if(nMessage >= 6 && nMessage < 10) AssignCommand(oSpeaker, ActionSpeakString(sMessage4, TALKVOLUME_TALK));
+        if(nMessage >= 10 && nMessage < 15) AssignCommand(oSpeaker, ActionSpeakString(sMessage5, TALKVOLUME_TALK));
+        if(nMessage >= 15) AssignCommand(oSpeaker, ActionSpeakString(sMessage6, TALKVOLUME_TALK));
       }
     }
 }

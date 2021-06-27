@@ -99,23 +99,51 @@ void main()
     int nHPMax = GetMaxHitPoints(oTargetChoice);
 	object oCleric = GetObjectByTag("003_cr_ilmater_traveller", 0);
 	object oCombatEndWP = GetWaypointByTag("al_training_combat_end_wp");
+	
+	string sMessage1 = "Nice!";
+	string sMessage2 = "A hit!";
+	string sMessage3 = "Oh ho!";
+	string sMessage4 = "Missed!";
+	string sMessage5 = "Feck!";
+	string sMessage6 = "Hells!";
+	string sMessage7 = "Yield?";
+	string sMessage8 = "Shite!";
+	string sMessage9 = "Close!";
+	string sMessage10 = "Ouch!";
 	 
 	
-	if((oTargetChoice != oTargetDummy) && (nHPMax - nNLDTotal < 20)) {
-		ClearAllActions(TRUE);
-		AssignCommand(oTargetChoice, ClearAllActions(TRUE));
-		//ActionSpeakString("Do you yield?", TALKVOLUME_TALK);
+	int nSpeak = d4(1);
+	if(nSpeak ==1) {
+	int nMessage = d10(1);
+	 
+	if(nMessage == 1) ActionSpeakString(sMessage1, TALKVOLUME_TALK);
+    if(nMessage == 2) ActionSpeakString(sMessage2, TALKVOLUME_TALK);
+    if(nMessage == 3) ActionSpeakString(sMessage3, TALKVOLUME_TALK);
+    if(nMessage == 4) ActionSpeakString(sMessage4, TALKVOLUME_TALK);
+    if(nMessage == 5) ActionSpeakString(sMessage5, TALKVOLUME_TALK);
+    if(nMessage == 6) ActionSpeakString(sMessage6, TALKVOLUME_TALK);
+    if(nMessage == 7) ActionSpeakString(sMessage7, TALKVOLUME_TALK);
+    if(nMessage == 8) ActionSpeakString(sMessage8, TALKVOLUME_TALK);
+    if(nMessage == 9) ActionSpeakString(sMessage9, TALKVOLUME_TALK);
+    if(nMessage == 10) ActionSpeakString(sMessage10, TALKVOLUME_TALK);
+    }    
+	
+	
+	if((oTargetChoice != oTargetDummy) && (nHPMax - nNLDTotal < 5)) {
 		AssignCommand(oCleric, ActionMoveToObject(oTargetChoice, FALSE, 1.0));
-		DelayCommand(1.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE)));
-		DelayCommand(5.0, AssignCommand(oTargetChoice, ActionSpeakString("I yield!", TALKVOLUME_TALK)));
+		AssignCommand(oTargetChoice, ClearAllActions(TRUE));
+		ClearAllActions(TRUE);
+		DelayCommand(1.0, AssignCommand(oCleric, ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, oTargetChoice, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE)));
+		DelayCommand(2.0, ClearAllActions(TRUE));
+		DelayCommand(2.0, AssignCommand(oTargetChoice, ClearAllActions(TRUE)));
 		DelayCommand(7.0, SetFacingObject(oTargetChoice));
 		DelayCommand(7.5, AssignCommand(oTargetChoice, SetFacingObject(OBJECT_SELF)));
 		DelayCommand(9.0, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0));
 		DelayCommand(9.0, AssignCommand(oTargetChoice, ActionPlayAnimation(ANIMATION_FIREFORGET_SALUTE,1.0,0.0)));
-		DelayCommand(10.0, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5));
-		DelayCommand(10.5, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5)));
 		DelayCommand(15.0, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5));
 		DelayCommand(15.5, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5)));
+		DelayCommand(25.0, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5));
+		DelayCommand(25.5, AssignCommand(oTargetChoice, ActionForceMoveToObject(oCombatEndWP, FALSE, 0.5)));
 		
 		}
 	
