@@ -3,6 +3,6 @@
 
 void main()
 {
-   CreateItemOnObject("militarysupplieswe", GetPCSpeaker(), 1);
+   CreateItemOnObject("militarysuppliesrm", GetPCSpeaker(), 1);
    ACR_SetPersistentInt(GetPCSpeaker(), "alsupply", 1);
 }

@@ -39,8 +39,8 @@ void main( string sItemTag ) {
 	// Total GP rewarded.
 	int nGP = 0;
 
-	//Troll Skin: 20gp, 10xp, CR 1
-	nGP += ConsumeReward( oPC, "003_it_harvest_trollskin", 20, 10.0f, 1.0f );
+	//Troll Skin: 20gp, 20xp, CR 1
+	nGP += ConsumeReward( oPC, "003_it_harvest_trollskin", 20, 20.0f, 1.0f );
 
 
 	// Reward GP.

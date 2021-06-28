@@ -39,8 +39,8 @@ void main( string sItemTag ) {
 	// Total GP rewarded.
 	int nGP = 0;
 
-	//Goblin Ear: 1gp, .5xp, CR 1
-	nGP += ConsumeReward( oPC, "003_it_harvest_goblin_ear", 1, 0.5f, 1.0f );
+	//Goblin Ear: 2gp, 5xp, CR 1
+	nGP += ConsumeReward( oPC, "003_it_harvest_goblin_ear", 2, 5.0f, 1.0f );
 
 
 	// Reward GP.
