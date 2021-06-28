@@ -76,7 +76,7 @@ void main()
 		}
 	}
 		
-	object oSparringPartner = CreateObject(OBJECT_TYPE_CREATURE, sSparringPartner, GetLocation(oSparringWP));
+	object oSparringPartner = CreateObject(OBJECT_TYPE_CREATURE, sSparringPartner, GetLocation(oSparringWP), FALSE, "003_cr_argent_rwk_sparring");
 	
 	if(nHitDice == 1) {
 		ResetCreatureLevelForXP(oSparringPartner, 900, FALSE);	

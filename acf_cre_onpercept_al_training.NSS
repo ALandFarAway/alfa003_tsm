@@ -56,52 +56,55 @@ void main()
     ACR_CreatureOnPerception();
 
     // Custom code goes here.
-	object oPerceived = GetLastPerceived();
-	object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
-	object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
-	int nRandomDummy = Random(6) +3;
-	object oTargetDummy = GetNearestObjectByTag("abr_pl_mp_pracdummuse", OBJECT_SELF,nRandomDummy);
+	if(GetTag(GetArea(OBJECT_SELF)) == "6d_int_rwkeep_interior_2") {
 	
-	float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
-	float fDistanceSword = GetDistanceBetween(OBJECT_SELF, oTargetSword);
-	
-	object oTargetChoice;
-	if((oTargetSpear != OBJECT_INVALID) && (oTargetSword != OBJECT_INVALID)) {
-		if(fDistanceSpear <= fDistanceSword) {
-			oTargetChoice = oTargetSpear;
-		}
-		else {oTargetChoice = oTargetSword;}
-	}
-	
-	else if(oTargetSpear != OBJECT_INVALID) {
-		oTargetChoice = oTargetSpear;
-		}
+		object oPerceived = GetLastPerceived();
+		object oTargetSpear = GetNearestObjectByTag("003_cr_argent_spearman_train", OBJECT_SELF,1);
+		object oTargetSword = GetNearestObjectByTag("003_cr_argent_swordsman_train", OBJECT_SELF,1);
+		int nRandomDummy = Random(6) +3;
+		object oTargetDummy = GetNearestObjectByTag("abr_pl_mp_pracdummuse", OBJECT_SELF,nRandomDummy);
 		
-	else if(oTargetSword != OBJECT_INVALID) {
-		oTargetChoice = oTargetSword;
-		}
+		float fDistanceSpear = GetDistanceBetween(OBJECT_SELF, oTargetSpear);
+		float fDistanceSword = GetDistanceBetween(OBJECT_SELF, oTargetSword);
 		
-	else if((oTargetSword == OBJECT_INVALID) && (oTargetSpear == OBJECT_INVALID)) {
-		oTargetChoice  = oTargetDummy;
-		}
-	
-	if((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived))) {
-		if(GetLocalInt(OBJECT_SELF, "Trained") == 0) {
-			SetLocalInt(OBJECT_SELF, "Trained", 1);
-			if(_GetNLDMode(OBJECT_SELF) == FALSE)
-				 	{ACR_ToggleNLDMode(OBJECT_SELF);}
-			ActionMoveToObject(oTargetChoice, FALSE, 0.5);
-			DelayCommand(4.0, ActionAttack(oTargetChoice, FALSE));
-			if(oTargetChoice != oTargetDummy) {
-				DelayCommand(8.0, ActionAttack(oTargetChoice, FALSE));
-				DelayCommand(14.0, ActionAttack(oTargetChoice, FALSE));
-				DelayCommand(20.0, ActionAttack(oTargetChoice, FALSE));
-				DelayCommand(26.0, ActionAttack(oTargetChoice, FALSE));
-				DelayCommand(32.0, ActionAttack(oTargetChoice, FALSE));
-				DelayCommand(38.0, ActionAttack(oTargetChoice, FALSE));
-				DelayCommand(44.0, ActionAttack(oTargetChoice, FALSE));
+		object oTargetChoice;
+		if((oTargetSpear != OBJECT_INVALID) && (oTargetSword != OBJECT_INVALID)) {
+			if(fDistanceSpear <= fDistanceSword) {
+				oTargetChoice = oTargetSpear;
 			}
-			else {DelayCommand(8.0, ActionAttack(oTargetChoice, FALSE));}			
+			else {oTargetChoice = oTargetSword;}
+		}
+		
+		else if(oTargetSpear != OBJECT_INVALID) {
+			oTargetChoice = oTargetSpear;
+			}
+			
+		else if(oTargetSword != OBJECT_INVALID) {
+			oTargetChoice = oTargetSword;
+			}
+			
+		else if((oTargetSword == OBJECT_INVALID) && (oTargetSpear == OBJECT_INVALID)) {
+			oTargetChoice  = oTargetDummy;
+			}
+		
+		if((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived))) {
+			if(GetLocalInt(OBJECT_SELF, "Trained") == 0) {
+				SetLocalInt(OBJECT_SELF, "Trained", 1);
+				if(_GetNLDMode(OBJECT_SELF) == FALSE)
+					 	{ACR_ToggleNLDMode(OBJECT_SELF);}
+				ActionMoveToObject(oTargetChoice, FALSE, 0.5);
+				DelayCommand(4.0, ActionAttack(oTargetChoice, FALSE));
+				if(oTargetChoice != oTargetDummy) {
+					DelayCommand(8.0, ActionAttack(oTargetChoice, FALSE));
+					DelayCommand(14.0, ActionAttack(oTargetChoice, FALSE));
+					DelayCommand(20.0, ActionAttack(oTargetChoice, FALSE));
+					DelayCommand(26.0, ActionAttack(oTargetChoice, FALSE));
+					DelayCommand(32.0, ActionAttack(oTargetChoice, FALSE));
+					DelayCommand(38.0, ActionAttack(oTargetChoice, FALSE));
+					DelayCommand(44.0, ActionAttack(oTargetChoice, FALSE));
+				}
+				else {DelayCommand(8.0, ActionAttack(oTargetChoice, FALSE));}			
+			}
 		}
 	}
 }

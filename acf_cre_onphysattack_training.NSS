@@ -57,9 +57,11 @@ void main()
     ACR_CreatureOnPhysicallyAttacked();
 
     // Custom code goes here.
-		
-	if(_GetNLDMode(OBJECT_SELF) == FALSE)
+	object oAttacker = GetLastAttacker(OBJECT_SELF);
+	if(GetTag(GetArea(OBJECT_SELF)) == "6d_int_rwkeep_interior_2") {
+	
+		if(_GetNLDMode(OBJECT_SELF) == FALSE)
 			 	{ACR_ToggleNLDMode(OBJECT_SELF);}
-		
-
+		ActionAttack(oAttacker, FALSE);
+	}
 }
