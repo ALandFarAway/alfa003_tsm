@@ -103,5 +103,8 @@ void main()
 		}
 		SetLocalObject(oSparringPartner, "oTargetChoice", oPC); 
 		ActionSpeakString("sparring_partner is " + GetName(GetLocalObject(OBJECT_SELF, "oTargetChoice")), TALKVOLUME_TALK);
-}
+		DelayCommand(2.0, ActionSpeakString("2. sparring_partner is " + GetName(GetLocalObject(OBJECT_SELF, "oTargetChoice")), TALKVOLUME_TALK));
+		
+		
+		}
 	
