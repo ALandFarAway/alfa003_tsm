@@ -1602,7 +1602,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="62772BABBC6C8B732EB2162087444922E4BF317A" downloadHash="9CC1F2C057534CC67A603A3B94A056072D9381E5" name="6d_int_rwkeep_interior_2.trx" dlsize="302239" size="1068549" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="71A26B627ABDAB4D519E1EE770B78ABB9D9D464A" downloadHash="5B186BF030789F9B49627242FF2B9F6D641463A3" name="6d_int_rwkeep_interior_2.trx" dlsize="305662" size="1072111" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

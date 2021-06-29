@@ -58,7 +58,9 @@ void main()
 
     // Custom code goes here.
 	object oAttacker = GetLastAttacker(OBJECT_SELF);
-	if(GetTag(GetArea(OBJECT_SELF)) == "6d_int_rwkeep_interior_2") {
+	ActionSpeakString("oAttacker = " + GetName(oAttacker), TALKVOLUME_TALK);
+	ActionSpeakString("onphysattack is " + GetName(GetLocalObject(OBJECT_SELF, "oTargetChoice")), TALKVOLUME_TALK);
+   if(GetTag(GetArea(OBJECT_SELF)) == "6d_int_rwkeep_interior_2") {
 	
 		if(_GetNLDMode(OBJECT_SELF) == FALSE)
 			 	{ACR_ToggleNLDMode(OBJECT_SELF);}

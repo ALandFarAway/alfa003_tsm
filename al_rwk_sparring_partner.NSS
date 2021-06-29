@@ -98,8 +98,10 @@ void main()
 		}
 	}	
 	
-	DelayCommand(5.0, ACR_ToggleNLDMode(oSparringPartner));
-	DelayCommand(10.0, SetPCDislike(oPC, oSparringPartner));
-	
+		if(_GetNLDMode(OBJECT_SELF) == FALSE) {
+			ACR_ToggleNLDMode(oSparringPartner);
+		}
+		SetLocalObject(oSparringPartner, "oTargetChoice", oPC); 
+		ActionSpeakString("sparring_partner is " + GetName(GetLocalObject(OBJECT_SELF, "oTargetChoice")), TALKVOLUME_TALK);
 }
 	

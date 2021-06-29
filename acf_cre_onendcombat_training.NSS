@@ -82,7 +82,7 @@ void main()
 		object oTrainingWP = GetWaypointByTag("rwk_training_wp");
 		
 		if(GetTag(OBJECT_SELF) == "003_cr_argent_rwk_sparring") {
-		 	oTargetChoice = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1); 
+		 	oTargetChoice = GetLocalObject(OBJECT_SELF, "oTargetChoice"); 
 			oTrainingWP = GetWaypointByTag("rwk_bout_wp");
 			}
 		int nNLDTotal = _GetNLDTotal(oTargetChoice);
