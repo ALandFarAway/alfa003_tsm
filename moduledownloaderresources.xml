@@ -1957,4 +1957,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="A2B42F195BBD5EE09A2A33EDBD53C6888CCF11BB" downloadHash="381B67465398493D36411263D27886F99AE70814" name="5b_ext_frosthills_glacier_tr_n.trx" dlsize="2060086" size="10797526" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
