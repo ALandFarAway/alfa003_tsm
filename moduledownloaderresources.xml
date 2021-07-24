@@ -1962,7 +1962,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="88445E1FC5ED6A2961EEAABD1BDF26BD2ABFA7D5" downloadHash="5B8108E8E93C6A23E9ECF6F94CCE7E937F0AA18B" name="5b_ext_frosthills_glacier_tr_s.trx" dlsize="1961873" size="11457587" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4FCD4A375EF930162154065E538C4F694C952E28" downloadHash="EEC5C1CEE8E215AB447B2FFAAC9824419465D1D2" name="5b_ext_frosthills_glacier_tr_s.trx" dlsize="1946092" size="11446062" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1972,7 +1972,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="17CF4B6EB2A201C7CE46514EE6BC7F1FB30BB9F9" downloadHash="9314A058E9195DB5FC9C1D142CBC6A7C21D9586E" name="5b_ext_frosthills_glacier_tr_n1.trx" dlsize="2094016" size="10780216" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5CB9F3CADC45C684B3C334F56485549FA6470C59" downloadHash="2E13F8B19714422159AC47A2C20BE531246BC487" name="5b_ext_frosthills_glacier_tr_n1.trx" dlsize="2076787" size="10762942" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
