@@ -1962,7 +1962,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="AE922B64D03D16B9D29152DCEB367847EBC781DB" downloadHash="2B44013742FCA24618B54F012A4C5CE98D1253B4" name="5b_ext_frosthills_glacier_tr_s.trx" dlsize="1970080" size="11463649" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D0EDE1F3782422CDD3330E2F8BAAEDADBD3184E6" downloadHash="02748D1214E6CF76CD97D0C5F0BBD46C4663F8F8" name="5b_ext_frosthills_glacier_tr_s.trx" dlsize="1954649" size="11450930" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1978,6 +1978,21 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="CAF3A1CB55BAB224BBDA230A8AAA6B9483B4A377" downloadHash="937FDC94DF1FBC1E78E68E724B8E2828C9C7C311" name="5b_ext_frosthills_glacier_lk_n.trx" dlsize="1679534" size="9569817" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="CC86E2645EDBE5C370E537EDB8B6C807502AFBAF" downloadHash="8BF05A55AA5C86DBD60130BBBB432BC4E3FB6C55" name="5b_int_frosthills_glacier_tr_s.trx" dlsize="7724" size="7680" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="CC86E2645EDBE5C370E537EDB8B6C807502AFBAF" downloadHash="8BF05A55AA5C86DBD60130BBBB432BC4E3FB6C55" name="5b_int_frosthills_glacier_tr.trx" dlsize="7724" size="7680" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="8D8AAF692D7268FA191CD7EBB8257C7545344853" downloadHash="2A269FF25AB6784AFEB63DCB80C21B9BF7784199" name="5b_int_frosthills_glacier_plat.trx" dlsize="3135" size="3121" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
