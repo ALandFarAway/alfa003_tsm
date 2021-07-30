@@ -1992,7 +1992,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DA16DDCB27FADC7399732E3B25C24F6B823535EC" downloadHash="44958C9F265812B114AB055D9E677B2C6559891E" name="5b_int_frosthills_glacier_plat.trx" dlsize="413668" size="421444" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="930CB9F4B9FB7B1BFFD01E45981664530DC2ADDD" downloadHash="5782102413980F7A61D6FF8FF1F21452CB889526" name="5b_int_frosthills_glacier_plat.trx" dlsize="435160" size="442496" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
