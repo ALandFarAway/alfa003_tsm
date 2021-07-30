@@ -16,14 +16,15 @@ void main()
 	ACR_PlaceableOnSpellCastAt();
     object oCaster = GetLastSpellCaster();
 	int nSpellId = GetSpellId();
-	effect eFireball = EffectVisualEffect(VFX_DUR_FIREBALL, FALSE);
+	effect eFireball = EffectVisualEffect(VFX_DUR_SPELL_INCENDIARY_CLOUD, FALSE);
     object oCorpse = GetNearestObjectByTag("skng_plc_corpse_mh", OBJECT_SELF, 1);
-	string sCreateAirCr = "003_cr_el_air";
-	int nRandCreate = Random(5);
+	string sCreateAirCr = "010_cr_elementalairelder";
+	/*int nRandCreate = Random(5);
 	if((nRandCreate == 3) || (nRandCreate == 4))
 		{sCreateAirCr = "abr_cr_mephit_ice";}
 	if(nRandCreate == 5)
 		{sCreateAirCr = "003_slv_dq_a_creature";}
+	*/
 	effect eSteamDmg = EffectDamage(d6(1),DAMAGE_TYPE_FIRE, DAMAGE_POWER_NORMAL, FALSE);
 	
 		
@@ -50,8 +51,15 @@ void main()
 				 SpeakString("*Melts a little", TALKVOLUME_TALK);
 				}
 		}
+		
+	if(GetTag(OBJECT_SELF) == "abr_plc_snow_melt_pillar") {
+		CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_un_zombie_frostmourngiant", GetLocation(OBJECT_SELF), TRUE);
+		SpeakString("*Ice shatters and a withered creature with ice-blackened skin claws its way out!", TALKVOLUME_TALK);
+		} 
+		
+			
 	
-	if(GetTag(OBJECT_SELF) == "plc_snow_melt")
+	if(FindSubString(GetTag(OBJECT_SELF), "plc_snow_melt", 0)!= -1)
 		{	if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
 			|| nSpellId == SPELL_BURNING_HANDS || nSpellId == SPELL_FLAME_STRIKE || nSpellId == SPELL_GREATER_FIREBURST  || nSpellId == SPELL_INCENDIARY_CLOUD ||nSpellId == SPELL_INFERNO || nSpellId == SPELL_INFINITE_RANGE_FIREBALL 
 			|| nSpellId == 1056 || nSpellId == 1057 || nSpellId == SPELL_METEOR_SWARM || nSpellId == SPELL_METEOR_SWARM_TARGET_CREATURE || nSpellId == SPELL_METEOR_SWARM_TARGET_LOCATION || nSpellId == SPELL_METEOR_SWARM_TARGET_SELF
