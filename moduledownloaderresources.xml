@@ -1997,7 +1997,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1A7C61B22F6D378A0C409C1E3356079FFAD646B5" downloadHash="6E6486CB2126C7541A60F68CFAA42338A127DB28" name="5b_ext_frosthills_gl_lake_n.trx" dlsize="1750240" size="9338500" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DAA8166D33AC1ED8B5CC567A5530FA76CBAFE832" downloadHash="73261FA1AB34F544B1EAEFFD4C5BD42C4706C02D" name="5b_ext_frosthills_gl_lake_n.trx" dlsize="2050319" size="9940100" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
