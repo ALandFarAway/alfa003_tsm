@@ -1997,4 +1997,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="695AB822AC685AE2A6F3DEAF99AE3CBB3B1887BA" downloadHash="9C34F6BF72A695F1C26A833BD4FCBCC3B1FFEDBC" name="5b_ext_frosthills_gl_lake_n.trx" dlsize="342662" size="8533085" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
