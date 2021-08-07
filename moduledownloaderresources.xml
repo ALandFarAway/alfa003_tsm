@@ -1982,7 +1982,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CC86E2645EDBE5C370E537EDB8B6C807502AFBAF" downloadHash="8BF05A55AA5C86DBD60130BBBB432BC4E3FB6C55" name="5b_int_frosthills_glacier_tr_s.trx" dlsize="7724" size="7680" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="867F9FE263974EF159AEE7E2AF9DF98D69D611C0" downloadHash="BCD539877C357C91C5B1E2BF7D47F28F202F6A0C" name="5b_int_frosthills_glacier_tr_s.trx" dlsize="402941" size="2539457" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
