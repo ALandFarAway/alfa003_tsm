@@ -1942,7 +1942,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="450767770F16D26F020284E7A019FFFD64BB796A" downloadHash="1C5E95D19BE7A8DA854ABA406E5E4A0282FD2A2D" name="5b_int_frosthills_settlestone.trx" dlsize="839690" size="1001747" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EEDBD72678B6E1ADFD16EAE8A7B53669ABCE2AE3" downloadHash="DB5970153ECB9E47FF5F754FEA47EDE309A3F971" name="5b_int_frosthills_settlestone.trx" dlsize="844763" size="1006691" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
