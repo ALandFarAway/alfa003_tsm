@@ -61,8 +61,53 @@ void main()
     ACR_TriggerOnEnter();
 
     // Custom code goes here.
-	object oPC = GetExitingObject();
-	SetLocalInt(oPC, "HeatLoop", 0);
-	SetLocalInt(oPC, "nRepHeat", 0);
+	object oPC = OBJECT_SELF;
+	int nRepHeat = GetLocalInt(oPC, "nRepHeat");
+	float fTimeLoop = 91.0;
+			
+if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_INVALID)) {
+//SendMessageToPC(oPC, "HeatLoop");
 	
+	if(GetIsPC(oPC))
+		{
+	
+		if(GetHasSkill(SKILL_SURVIVAL, oPC))
+			{SetLocalInt(oPC, "Survival", 4);
+			 if(nRepHeat == 1) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the heat.");
+				}
+			}
+		if((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
+			{int nSurvival = GetLocalInt(oPC, "Survival");
+			 int nDC = 15 + nRepHeat - nSurvival;
+			 if(nRepHeat > 0) {
+			 if(!FortitudeSave(oPC, nDC, SAVING_THROW_TYPE_FIRE, oPC))
+				{ACR_ApplyNLDDamageToCreature(oPC, d6());
+				 ACR_NLD_ReportTotal(oPC, oPC, 0);
+				 SendMessageToPC(oPC, "The burning heat takes its toll!");
+				 }
+				}
+			}
+			else if((GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) || (GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))|| (GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
+				{SendMessageToPC(oPC, "You feel your elemental protection spell keeping the worst of the Heat at bay.");
+				}
+					
+			SetLocalInt(oPC, "Survival", 0);
+			nRepHeat++;
+			SetLocalInt(oPC, "nRepHeat", nRepHeat);
+			if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
+				{SetLocalInt(oPC, "nRepHeat", 0);
+				 SendMessageToPC(oPC, "The last of the burning heat fades.");
+				}
+			
+		
+		
+			if(GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail") {
+				DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onloop_heat", oPC));
+				}
+			else {
+				SetLocalInt(oPC, "nRepHeat", 0);
+			  	SetLocalInt(oPC, "nRepHeat", 0);
+				}		 
+		}
+	}
 }
