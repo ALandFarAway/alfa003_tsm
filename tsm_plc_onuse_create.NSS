@@ -20,7 +20,7 @@ void ActionCreateWynDoor(string sPlace, location lLocPlace)
 void main()
 {
 	ACR_PlaceableOnUsed();
-	SendMessageToAllDMs("onuse create fired");
+	//SendMessageToAllDMs("onuse create fired");
 	object oPC = GetLastUsedBy();
 	string sCreateType = GetLocalString(OBJECT_SELF, "OBJECT_TYPE_STRING");
 	int nCreateType = OBJECT_TYPE_CREATURE;
@@ -74,10 +74,10 @@ void main()
 			
 			int a = 0;
 			while(a < nNumberCreate) {
-			SendMessageToAllDMs("a = " + IntToString(a));
+			//SendMessageToAllDMs("a = " + IntToString(a));
 			object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
-			SendMessageToAllDMs("sCreateTwo = " + sCreateTwo);
-			SendMessageToAllDMs("sCreateLocationTwo = " + sCreateLocationTwo);
+			//SendMessageToAllDMs("sCreateTwo = " + sCreateTwo);
+			//SendMessageToAllDMs("sCreateLocationTwo = " + sCreateLocationTwo);
 	 		DelayCommand(2.0, ActionCreateWynPlace(sCreateTwo, lCreateLocation));
 			a++;
 			}
@@ -87,8 +87,8 @@ void main()
 			}
 		
 	if(nPlayOnce == 0) {
-		SendMessageToAllDMs("nPlayOnce = 0");
-		SendMessageToPC(oPC, sMessage);
+		//SendMessageToAllDMs("nPlayOnce = 0");
+		//SendMessageToPC(oPC, sMessage);
 		SetLocalInt(OBJECT_SELF, "PLAY_ONCE", 1);
 		ActionSpeakString(sBroadcast, TALKVOLUME_TALK);
 		DelayCommand(fDelay, ExecuteScript("tsm_plc_onuse_create", OBJECT_SELF));
