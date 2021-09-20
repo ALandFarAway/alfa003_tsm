@@ -1007,8 +1007,7 @@ void main()
 		 ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 2.0);
 		 DelayCommand(1.0, PlaySound("as_cv_lute1", FALSE));
 		 if(sVerseA != "") {DelayCommand(2.0, ActionSpeakString(sVerseA, TALKVOLUME_TALK));}
-         DelayCommand(2.5, ActionPlayAnimation(ANIMATION_LOOPING_GUITARPLAY, 1.0, 250.0));
-		 if(sVerseB != "") {DelayCommand(10.0, ActionSpeakString(sVerseB, TALKVOLUME_TALK));}
+         if(sVerseB != "") {DelayCommand(10.0, ActionSpeakString(sVerseB, TALKVOLUME_TALK));}
          if(sVerseC != "") {DelayCommand(15.0, ActionSpeakString(sVerseC, TALKVOLUME_TALK));}
          if(sVerseD != "") {DelayCommand(20.0, ActionSpeakString(sVerseD, TALKVOLUME_TALK));}
          if(sVerseE != "") {DelayCommand(25.0, ActionSpeakString(sVerseE, TALKVOLUME_TALK));}
