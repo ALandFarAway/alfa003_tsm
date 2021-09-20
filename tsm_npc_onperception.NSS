@@ -971,134 +971,93 @@ void main()
 			break;
 			
 			case 14:
-			sVerseA = "Thank you. Gonna take a little break now. Tip your waitress!";
 			sVerseJ = "*Strums a lute, without singing.";
-			sVerseZ = "*Idly plucks chords.";
 			sVerseAD = "*Watches the audience, smiling.";
-			sVerseAY = "*Sits up and swings lute to the front, tuning it as if break over.";
 			break;
 			
 			case 15:
 			sVerseE = "*Toe taps to the rhythm of the music.";
-			sVerseH = "*Plays a sea shanty.";
 			sVerseW = "*Swings into a jaunty road song.";
-			sVerseAB= "*Plays a comedic love song.";
 			sVerseAY = "Thank you! I'm here all tenday!";
 			break;
 			
 			case 16:
-			sVerseE = "*Toe taps to the rhythm of the music.";
-			sVerseH = "*Plays a sea shanty.";
-			sVerseW = "*Swings into a jaunty song.";
-			sVerseAB= "*Plays a comedic love song.";
-			sVerseAY = "Thank you! That's the set for now!";
+			sVerseS = "*Performs a sweet ballad.";
+			sVerseAB= "*Runs fingers along strings in a set of scales.";
 			break;
 			
+			case 17:
+			sVerseA = "Thank you. Gonna take a little break now. Tip your waitress!";
+			sVerseZ = "*Idly plucks chords.";
+			sVerseAY = "*Sits up and swings lute to the front, tuning it as if break over.";
+			break;
+			
+			case 18:
+			sVerseH = "*Plays a sea shanty.";
+			sVerseAB= "*Sings a comedic love song.";
+			break;
+			
+			case 19:
+			sVerseE = "*Sings a haunting love song.";
+			sVerseW = "*Plucks soft notes as background music.";
+			sVerseAY = "*Hums a tune, sometimes adding a bit of verse.";
+			break;
 			}	
 		 
 		 ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 2.0);
-		 DelayCommand(5.0, ActionSpeakString(sVerseA, TALKVOLUME_TALK));
-         DelayCommand(6.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+		 DelayCommand(1.0, PlaySound("as_cv_lute1", FALSE));
+		 DelayCommand(2.0, ActionSpeakString(sVerseA, TALKVOLUME_TALK));
+         DelayCommand(2.5, ActionPlayAnimation(ANIMATION_LOOPING_GUITARPLAY, 1.0, 250.0));
 		 DelayCommand(10.0, ActionSpeakString(sVerseB, TALKVOLUME_TALK));
-         DelayCommand(11.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(15.0, ActionSpeakString(sVerseC, TALKVOLUME_TALK));
-         DelayCommand(16.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(20.0, ActionSpeakString(sVerseD, TALKVOLUME_TALK));
-         DelayCommand(21.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(20.0, ActionSpeakString(sVerseD, TALKVOLUME_TALK));
          DelayCommand(25.0, ActionSpeakString(sVerseE, TALKVOLUME_TALK));
-         DelayCommand(26.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(30.0, ActionSpeakString(sVerseF, TALKVOLUME_TALK));
-         DelayCommand(31.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(35.0, ActionSpeakString(sVerseG, TALKVOLUME_TALK));
-         DelayCommand(36.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(40.0, ActionSpeakString(sVerseH, TALKVOLUME_TALK));
-         DelayCommand(41.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(40.0, ActionSpeakString(sVerseH, TALKVOLUME_TALK));
          DelayCommand(45.0, ActionSpeakString(sVerseI, TALKVOLUME_TALK));
-         DelayCommand(46.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(50.0, ActionSpeakString(sVerseJ, TALKVOLUME_TALK));
-         DelayCommand(51.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(50.0, ActionSpeakString(sVerseJ, TALKVOLUME_TALK));
          DelayCommand(55.0, ActionSpeakString(sVerseK, TALKVOLUME_TALK));
-         DelayCommand(56.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(60.0, ActionSpeakString(sVerseL, TALKVOLUME_TALK));
-         DelayCommand(61.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(60.0, ActionSpeakString(sVerseL, TALKVOLUME_TALK));
          DelayCommand(65.0, ActionSpeakString(sVerseM, TALKVOLUME_TALK));
-         DelayCommand(66.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(70.0, ActionSpeakString(sVerseN, TALKVOLUME_TALK));
-         DelayCommand(71.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(70.0, ActionSpeakString(sVerseN, TALKVOLUME_TALK));
          DelayCommand(75.0, ActionSpeakString(sVerseO, TALKVOLUME_TALK));
-         DelayCommand(76.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(80.0, ActionSpeakString(sVerseP, TALKVOLUME_TALK));
-         DelayCommand(81.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(80.0, ActionSpeakString(sVerseP, TALKVOLUME_TALK));
          DelayCommand(85.0, ActionSpeakString(sVerseQ, TALKVOLUME_TALK));
-         DelayCommand(86.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(90.0, ActionSpeakString(sVerseR, TALKVOLUME_TALK));
-         DelayCommand(91.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(90.0, ActionSpeakString(sVerseR, TALKVOLUME_TALK));
          DelayCommand(95.0, ActionSpeakString(sVerseS, TALKVOLUME_TALK));
-         DelayCommand(96.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(100.0, ActionSpeakString(sVerseT, TALKVOLUME_TALK));
-         DelayCommand(101.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(105.0, ActionSpeakString(sVerseU, TALKVOLUME_TALK));
-         DelayCommand(106.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(110.0, ActionSpeakString(sVerseV, TALKVOLUME_TALK));
-         DelayCommand(111.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(105.0, ActionSpeakString(sVerseU, TALKVOLUME_TALK));
+         DelayCommand(110.0, ActionSpeakString(sVerseV, TALKVOLUME_TALK));
          DelayCommand(115.0, ActionSpeakString(sVerseW, TALKVOLUME_TALK));
-         DelayCommand(116.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(120.0, ActionSpeakString(sVerseX, TALKVOLUME_TALK));
-         DelayCommand(121.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(120.0, ActionSpeakString(sVerseX, TALKVOLUME_TALK));
          DelayCommand(125.0, ActionSpeakString(sVerseY, TALKVOLUME_TALK));
-         DelayCommand(126.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(130.0, ActionSpeakString(sVerseZ, TALKVOLUME_TALK));
-         DelayCommand(131.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(130.0, ActionSpeakString(sVerseZ, TALKVOLUME_TALK));
          DelayCommand(135.0, ActionSpeakString(sVerseAA, TALKVOLUME_TALK));
-         DelayCommand(136.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(140.0, ActionSpeakString(sVerseAB, TALKVOLUME_TALK));
-         DelayCommand(141.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(140.0, ActionSpeakString(sVerseAB, TALKVOLUME_TALK));
          DelayCommand(145.0, ActionSpeakString(sVerseAC, TALKVOLUME_TALK));
-         DelayCommand(146.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(150.0, ActionSpeakString(sVerseAD, TALKVOLUME_TALK));
-         DelayCommand(151.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(155.0, ActionSpeakString(sVerseAE, TALKVOLUME_TALK));
-         DelayCommand(156.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(160.0, ActionSpeakString(sVerseAF, TALKVOLUME_TALK));
-         DelayCommand(161.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(160.0, ActionSpeakString(sVerseAF, TALKVOLUME_TALK));
          DelayCommand(165.0, ActionSpeakString(sVerseAG, TALKVOLUME_TALK));
-         DelayCommand(166.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(170.0, ActionSpeakString(sVerseAH, TALKVOLUME_TALK));
-         DelayCommand(171.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(175.0, ActionSpeakString(sVerseAI, TALKVOLUME_TALK));
-         DelayCommand(176.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(180.0, ActionSpeakString(sVerseAJ, TALKVOLUME_TALK));
-         DelayCommand(181.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(185.0, ActionSpeakString(sVerseAK, TALKVOLUME_TALK));
-         DelayCommand(186.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
-		 DelayCommand(190.0, ActionSpeakString(sVerseAL, TALKVOLUME_TALK));
-         DelayCommand(191.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
+         DelayCommand(190.0, ActionSpeakString(sVerseAL, TALKVOLUME_TALK));
          DelayCommand(195.0, ActionSpeakString(sVerseAM, TALKVOLUME_TALK));
-         DelayCommand(196.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(200.0, ActionSpeakString(sVerseAN, TALKVOLUME_TALK));
-         DelayCommand(201.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(205.0, ActionSpeakString(sVerseAO, TALKVOLUME_TALK));
-         DelayCommand(206.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(210.0, ActionSpeakString(sVerseAP, TALKVOLUME_TALK));
-         DelayCommand(211.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(215.0, ActionSpeakString(sVerseAQ, TALKVOLUME_TALK));
-         DelayCommand(216.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(220.0, ActionSpeakString(sVerseAR, TALKVOLUME_TALK));
-         DelayCommand(221.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(225.0, ActionSpeakString(sVerseAS, TALKVOLUME_TALK));
-         DelayCommand(226.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(230.0, ActionSpeakString(sVerseAT, TALKVOLUME_TALK));
-         DelayCommand(231.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(235.0, ActionSpeakString(sVerseAU, TALKVOLUME_TALK));
-         DelayCommand(236.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(240.0, ActionSpeakString(sVerseAV, TALKVOLUME_TALK));
-         DelayCommand(241.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(245.0, ActionSpeakString(sVerseAW, TALKVOLUME_TALK));
-         DelayCommand(246.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(250.0, ActionSpeakString(sVerseAX, TALKVOLUME_TALK));
-         DelayCommand(251.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          DelayCommand(255.0, ActionSpeakString(sVerseAY, TALKVOLUME_TALK));
-         DelayCommand(256.0, ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 2.0));
          
 		 }
 		
