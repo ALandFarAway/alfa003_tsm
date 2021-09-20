@@ -1006,58 +1006,58 @@ void main()
 		 
 		 ActionPlayAnimation(ANIMATION_FIREFORGET_BOW, 1.0, 2.0);
 		 DelayCommand(1.0, PlaySound("as_cv_lute1", FALSE));
-		 DelayCommand(2.0, ActionSpeakString(sVerseA, TALKVOLUME_TALK));
+		 if(sVerseA != "") {DelayCommand(2.0, ActionSpeakString(sVerseA, TALKVOLUME_TALK));}
          DelayCommand(2.5, ActionPlayAnimation(ANIMATION_LOOPING_GUITARPLAY, 1.0, 250.0));
-		 DelayCommand(10.0, ActionSpeakString(sVerseB, TALKVOLUME_TALK));
-         DelayCommand(15.0, ActionSpeakString(sVerseC, TALKVOLUME_TALK));
-         DelayCommand(20.0, ActionSpeakString(sVerseD, TALKVOLUME_TALK));
-         DelayCommand(25.0, ActionSpeakString(sVerseE, TALKVOLUME_TALK));
-         DelayCommand(30.0, ActionSpeakString(sVerseF, TALKVOLUME_TALK));
-         DelayCommand(35.0, ActionSpeakString(sVerseG, TALKVOLUME_TALK));
-         DelayCommand(40.0, ActionSpeakString(sVerseH, TALKVOLUME_TALK));
-         DelayCommand(45.0, ActionSpeakString(sVerseI, TALKVOLUME_TALK));
-         DelayCommand(50.0, ActionSpeakString(sVerseJ, TALKVOLUME_TALK));
-         DelayCommand(55.0, ActionSpeakString(sVerseK, TALKVOLUME_TALK));
-         DelayCommand(60.0, ActionSpeakString(sVerseL, TALKVOLUME_TALK));
-         DelayCommand(65.0, ActionSpeakString(sVerseM, TALKVOLUME_TALK));
-         DelayCommand(70.0, ActionSpeakString(sVerseN, TALKVOLUME_TALK));
-         DelayCommand(75.0, ActionSpeakString(sVerseO, TALKVOLUME_TALK));
-         DelayCommand(80.0, ActionSpeakString(sVerseP, TALKVOLUME_TALK));
-         DelayCommand(85.0, ActionSpeakString(sVerseQ, TALKVOLUME_TALK));
-         DelayCommand(90.0, ActionSpeakString(sVerseR, TALKVOLUME_TALK));
-         DelayCommand(95.0, ActionSpeakString(sVerseS, TALKVOLUME_TALK));
-         DelayCommand(100.0, ActionSpeakString(sVerseT, TALKVOLUME_TALK));
-         DelayCommand(105.0, ActionSpeakString(sVerseU, TALKVOLUME_TALK));
-         DelayCommand(110.0, ActionSpeakString(sVerseV, TALKVOLUME_TALK));
-         DelayCommand(115.0, ActionSpeakString(sVerseW, TALKVOLUME_TALK));
-         DelayCommand(120.0, ActionSpeakString(sVerseX, TALKVOLUME_TALK));
-         DelayCommand(125.0, ActionSpeakString(sVerseY, TALKVOLUME_TALK));
-         DelayCommand(130.0, ActionSpeakString(sVerseZ, TALKVOLUME_TALK));
-         DelayCommand(135.0, ActionSpeakString(sVerseAA, TALKVOLUME_TALK));
-         DelayCommand(140.0, ActionSpeakString(sVerseAB, TALKVOLUME_TALK));
-         DelayCommand(145.0, ActionSpeakString(sVerseAC, TALKVOLUME_TALK));
-         DelayCommand(150.0, ActionSpeakString(sVerseAD, TALKVOLUME_TALK));
-         DelayCommand(155.0, ActionSpeakString(sVerseAE, TALKVOLUME_TALK));
-         DelayCommand(160.0, ActionSpeakString(sVerseAF, TALKVOLUME_TALK));
-         DelayCommand(165.0, ActionSpeakString(sVerseAG, TALKVOLUME_TALK));
-         DelayCommand(170.0, ActionSpeakString(sVerseAH, TALKVOLUME_TALK));
-         DelayCommand(175.0, ActionSpeakString(sVerseAI, TALKVOLUME_TALK));
-         DelayCommand(180.0, ActionSpeakString(sVerseAJ, TALKVOLUME_TALK));
-         DelayCommand(185.0, ActionSpeakString(sVerseAK, TALKVOLUME_TALK));
-         DelayCommand(190.0, ActionSpeakString(sVerseAL, TALKVOLUME_TALK));
-         DelayCommand(195.0, ActionSpeakString(sVerseAM, TALKVOLUME_TALK));
-         DelayCommand(200.0, ActionSpeakString(sVerseAN, TALKVOLUME_TALK));
-         DelayCommand(205.0, ActionSpeakString(sVerseAO, TALKVOLUME_TALK));
-         DelayCommand(210.0, ActionSpeakString(sVerseAP, TALKVOLUME_TALK));
-         DelayCommand(215.0, ActionSpeakString(sVerseAQ, TALKVOLUME_TALK));
-         DelayCommand(220.0, ActionSpeakString(sVerseAR, TALKVOLUME_TALK));
-         DelayCommand(225.0, ActionSpeakString(sVerseAS, TALKVOLUME_TALK));
-         DelayCommand(230.0, ActionSpeakString(sVerseAT, TALKVOLUME_TALK));
-         DelayCommand(235.0, ActionSpeakString(sVerseAU, TALKVOLUME_TALK));
-         DelayCommand(240.0, ActionSpeakString(sVerseAV, TALKVOLUME_TALK));
-         DelayCommand(245.0, ActionSpeakString(sVerseAW, TALKVOLUME_TALK));
-         DelayCommand(250.0, ActionSpeakString(sVerseAX, TALKVOLUME_TALK));
-         DelayCommand(255.0, ActionSpeakString(sVerseAY, TALKVOLUME_TALK));
+		 if(sVerseB != "") {DelayCommand(10.0, ActionSpeakString(sVerseB, TALKVOLUME_TALK));}
+         if(sVerseC != "") {DelayCommand(15.0, ActionSpeakString(sVerseC, TALKVOLUME_TALK));}
+         if(sVerseD != "") {DelayCommand(20.0, ActionSpeakString(sVerseD, TALKVOLUME_TALK));}
+         if(sVerseE != "") {DelayCommand(25.0, ActionSpeakString(sVerseE, TALKVOLUME_TALK));}
+         if(sVerseF != "") {DelayCommand(30.0, ActionSpeakString(sVerseF, TALKVOLUME_TALK));}
+         if(sVerseG != "") {DelayCommand(35.0, ActionSpeakString(sVerseG, TALKVOLUME_TALK));}
+         if(sVerseH != "") {DelayCommand(40.0, ActionSpeakString(sVerseH, TALKVOLUME_TALK));}
+         if(sVerseI != "") {DelayCommand(45.0, ActionSpeakString(sVerseI, TALKVOLUME_TALK));}
+         if(sVerseJ != "") {DelayCommand(50.0, ActionSpeakString(sVerseJ, TALKVOLUME_TALK));}
+         if(sVerseK != "") {DelayCommand(55.0, ActionSpeakString(sVerseK, TALKVOLUME_TALK));}
+         if(sVerseL != "") {DelayCommand(60.0, ActionSpeakString(sVerseL, TALKVOLUME_TALK));}
+         if(sVerseM != "") {DelayCommand(65.0, ActionSpeakString(sVerseM, TALKVOLUME_TALK));}
+         if(sVerseN != "") {DelayCommand(70.0, ActionSpeakString(sVerseN, TALKVOLUME_TALK));}
+         if(sVerseO != "") {DelayCommand(75.0, ActionSpeakString(sVerseO, TALKVOLUME_TALK));}
+         if(sVerseP != "") {DelayCommand(80.0, ActionSpeakString(sVerseP, TALKVOLUME_TALK));}
+         if(sVerseQ != "") {DelayCommand(85.0, ActionSpeakString(sVerseQ, TALKVOLUME_TALK));}
+         if(sVerseR != "") {DelayCommand(90.0, ActionSpeakString(sVerseR, TALKVOLUME_TALK));}
+         if(sVerseS != "") {DelayCommand(95.0, ActionSpeakString(sVerseS, TALKVOLUME_TALK));}
+         if(sVerseT != "") {DelayCommand(100.0, ActionSpeakString(sVerseT, TALKVOLUME_TALK));}
+         if(sVerseU != "") {DelayCommand(105.0, ActionSpeakString(sVerseU, TALKVOLUME_TALK));}
+         if(sVerseV != "") {DelayCommand(110.0, ActionSpeakString(sVerseV, TALKVOLUME_TALK));}
+         if(sVerseW != "") {DelayCommand(115.0, ActionSpeakString(sVerseW, TALKVOLUME_TALK));}
+         if(sVerseX != "") {DelayCommand(120.0, ActionSpeakString(sVerseX, TALKVOLUME_TALK));}
+         if(sVerseY != "") {DelayCommand(125.0, ActionSpeakString(sVerseY, TALKVOLUME_TALK));}
+         if(sVerseZ != "") {DelayCommand(130.0, ActionSpeakString(sVerseZ, TALKVOLUME_TALK));}
+         if(sVerseAA != "") {DelayCommand(135.0, ActionSpeakString(sVerseAA, TALKVOLUME_TALK));}
+         if(sVerseAB != "") {DelayCommand(140.0, ActionSpeakString(sVerseAB, TALKVOLUME_TALK));}
+         if(sVerseAC != "") {DelayCommand(145.0, ActionSpeakString(sVerseAC, TALKVOLUME_TALK));}
+         if(sVerseAD != "") {DelayCommand(150.0, ActionSpeakString(sVerseAD, TALKVOLUME_TALK));}
+         if(sVerseAE != "") {DelayCommand(155.0, ActionSpeakString(sVerseAE, TALKVOLUME_TALK));}
+         if(sVerseAF != "") {DelayCommand(160.0, ActionSpeakString(sVerseAF, TALKVOLUME_TALK));}
+         if(sVerseAG != "") {DelayCommand(165.0, ActionSpeakString(sVerseAG, TALKVOLUME_TALK));}
+         if(sVerseAH != "") {DelayCommand(170.0, ActionSpeakString(sVerseAH, TALKVOLUME_TALK));}
+         if(sVerseAI != "") {DelayCommand(175.0, ActionSpeakString(sVerseAI, TALKVOLUME_TALK));}
+         if(sVerseAJ != "") {DelayCommand(180.0, ActionSpeakString(sVerseAJ, TALKVOLUME_TALK));}
+         if(sVerseAK != "") {DelayCommand(185.0, ActionSpeakString(sVerseAK, TALKVOLUME_TALK));}
+         if(sVerseAL != "") {DelayCommand(190.0, ActionSpeakString(sVerseAL, TALKVOLUME_TALK));}
+         if(sVerseAM != "") {DelayCommand(195.0, ActionSpeakString(sVerseAM, TALKVOLUME_TALK));}
+         if(sVerseAN != "") {DelayCommand(200.0, ActionSpeakString(sVerseAN, TALKVOLUME_TALK));}
+         if(sVerseAO != "") {DelayCommand(205.0, ActionSpeakString(sVerseAO, TALKVOLUME_TALK));}
+         if(sVerseAP != "") {DelayCommand(210.0, ActionSpeakString(sVerseAP, TALKVOLUME_TALK));}
+         if(sVerseAQ != "") {DelayCommand(215.0, ActionSpeakString(sVerseAQ, TALKVOLUME_TALK));}
+         if(sVerseAR != "") {DelayCommand(220.0, ActionSpeakString(sVerseAR, TALKVOLUME_TALK));}
+         if(sVerseAS != "") {DelayCommand(225.0, ActionSpeakString(sVerseAS, TALKVOLUME_TALK));}
+         if(sVerseAT != "") {DelayCommand(230.0, ActionSpeakString(sVerseAT, TALKVOLUME_TALK));}
+         if(sVerseAU != "") {DelayCommand(235.0, ActionSpeakString(sVerseAU, TALKVOLUME_TALK));}
+         if(sVerseAV != "") {DelayCommand(240.0, ActionSpeakString(sVerseAV, TALKVOLUME_TALK));}
+         if(sVerseAW != "") {DelayCommand(245.0, ActionSpeakString(sVerseAW, TALKVOLUME_TALK));}
+         if(sVerseAX != "") {DelayCommand(250.0, ActionSpeakString(sVerseAX, TALKVOLUME_TALK));}
+         if(sVerseAY != "") {DelayCommand(255.0, ActionSpeakString(sVerseAY, TALKVOLUME_TALK));}
          
 		 }
 		
