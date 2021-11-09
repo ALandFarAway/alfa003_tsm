@@ -57,7 +57,8 @@ void main()
 	}
 	
 	//ActionSpeakString("SpellID = " + IntToString(nSpellId), TALKVOLUME_TALK);
-    if((GetTag(OBJECT_SELF) == "phalorm_orb_white") && (nSpellId == 1209 )){
+    if((GetTag(OBJECT_SELF) == "phalorm_orb_white") && (nSpellId => 1197 ) && (nSpellId =< 1209) && (nSpellId != 1200) && (nSpellId != 1201) && (nSpellId != 1202)){
+		sCreateCr = "abr_cr_pla_treant_crystal";
 		//object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
 		object oWhiteGem = CreateItemOnObject("003_it_phalorm_diamond", GetObjectByTag("phalorm_globe_white", 0));
 		ActionSpeakString("A sparkling gem descends from out of the glowing orb. The gem drifts through a gap in the meshwork of the crystal globe beneath it and comes to a rest inside.", TALKVOLUME_TALK);
@@ -76,7 +77,7 @@ void main()
 		 oStoneTreeFour = GetObjectByTag("aq_cave_treestone_four", 0);
 		 oStoneTreeFourWP = GetObjectByTag("aq_cave_undead_treant_four_wp", 0);
 		 if(GetLocalInt(OBJECT_SELF, "Treant") != 1) {
-		 	ActionSpeakString("*Crackling and the rumbling of stone sounds from around the room, drawing all eyes to the eastern curve of the room. A pattern of cracks appears across the surface of a petrified tree, then explodes outward. As the dust settles, it reveals a moving creature. A treant -- or what had been a treant -- stands there, bark scarred, trunk splintered and dry. What had been wood shimmers with crystalline petrifications over mottled black and gray, as if centuries of rot had been crystallized. It thrashes. A clattering like a storm through bones sounds over a wail of anger and animosity.", TALKVOLUME_TALK);
+		 	ActionSpeakString("*Crackling and the rumbling of stone sounds from around the room, drawing all eyes to the eastern curve of the room. A pattern of cracks appears across the surface of a petrified tree, then explodes outward. As the dust settles, it reveals a moving being. A treant -- or what had been a treant -- stands there, bark glittering, leaves made of crystal planes. What had been wood shimmers with facets, as if a living treant had been turned to diamond. It is both beautiful and terrible.", TALKVOLUME_TALK);
 			SetLocalInt(OBJECT_SELF, "Treant", 1);
 			}
 	 	if(oStoneTree != OBJECT_INVALID) {
