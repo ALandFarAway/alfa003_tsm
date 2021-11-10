@@ -58,7 +58,6 @@ void main()
 	
 	//ActionSpeakString("SpellID = " + IntToString(nSpellId), TALKVOLUME_TALK);
     if((GetTag(OBJECT_SELF) == "phalorm_orb_white") && (nSpellId >= 1197 ) && (nSpellId <= 1209) && (nSpellId != 1200) && (nSpellId != 1201) && (nSpellId != 1202)){
-		sCreateCr = "abr_cr_pla_treant_crystal";
 		//object oPurpleGem = CreateObject(OBJECT_TYPE_ITEM, "003_it_phalorm_diamond", GetLocation(OBJECT_SELF));
 		object oWhiteGem = CreateItemOnObject("003_it_phalorm_diamond", GetObjectByTag("phalorm_globe_white", 0));
 		ActionSpeakString("A sparkling gem descends from out of the glowing orb. The gem drifts through a gap in the meshwork of the crystal globe beneath it and comes to a rest inside.", TALKVOLUME_TALK);
@@ -68,7 +67,8 @@ void main()
 		}
 		
 	else if((GetTag(OBJECT_SELF)=="phalorm_orb_white") && (nSpellId != 547 ) && (oCaster != OBJECT_SELF)) {
-	     oStoneTree = GetObjectByTag("aq_cave_treestone_one", 0);
+	     sCreateCr = "abr_cr_pla_treant_crystal";
+		 oStoneTree = GetObjectByTag("aq_cave_treestone_one", 0);
 		 oStoneTreeWP = GetObjectByTag("aq_cave_undead_treant_one_wp", 0);
 		 oStoneTreeTwo = GetObjectByTag("aq_cave_treestone_two", 0);
 		 oStoneTreeTwoWP = GetObjectByTag("aq_cave_undead_treant_two_wp", 0);
@@ -76,9 +76,17 @@ void main()
 		 oStoneTreeThreeWP = GetObjectByTag("aq_cave_undead_treant_three_wp", 0);
 		 oStoneTreeFour = GetObjectByTag("aq_cave_treestone_four", 0);
 		 oStoneTreeFourWP = GetObjectByTag("aq_cave_undead_treant_four_wp", 0);
-		 if(GetLocalInt(OBJECT_SELF, "Treant") != 1) {
-		 	ActionSpeakString("*Crackling and rumbling of stone sounds from around the room, drawing all eyes to the eastern curve of the room. A pattern of cracks appears across the surface of a petrified tree, then explodes outward. As the dust settles, it reveals a moving being. A treant -- or what had been a treant -- stands there, bark glittering, leaves made of crystal planes. What had been wood shimmers with facets, as if a living treant had been turned to diamond. It is both beautiful and terrible.", TALKVOLUME_TALK);
+		 if(GetLocalInt(OBJECT_SELF, "Treant") == 0) {
+		 	ActionSpeakString("*Crackling and rumbling of stone sounds. A pattern of cracks appears across the surface of a stone tree, then explodes outward. As the dust settles, it reveals a moving being, a treant larger than most, bark glittering, leaves made of crystal planes. What had been wood shimmers with facets, as if a living treant had been turned to diamond. It is both beautiful and terrible.", TALKVOLUME_TALK);
 			SetLocalInt(OBJECT_SELF, "Treant", 1);
+			}
+	 	if(GetLocalInt(OBJECT_SELF, "Treant") == 1) {
+		 	ActionSpeakString("*A second crystal treant bursts out of the dusty, cob-webbed stone that had hidden it.", TALKVOLUME_TALK);
+			SetLocalInt(OBJECT_SELF, "Treant", 2);
+			}
+	 	if(GetLocalInt(OBJECT_SELF, "Treant") == 2) {
+		 	ActionSpeakString("*First one, then two crystal treants explode into movement amid the schrapnel of the stone that had encased them.", TALKVOLUME_TALK);
+			SetLocalInt(OBJECT_SELF, "Treant", 2);
 			}
 	 	if(oStoneTree != OBJECT_INVALID) {
 			
@@ -103,7 +111,6 @@ void main()
 			
 			if(oStoneTreeFour != OBJECT_INVALID) {
 			
-			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTreeFour);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeFourWP), TRUE);
 			}
