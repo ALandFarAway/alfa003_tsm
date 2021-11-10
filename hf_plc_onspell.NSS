@@ -76,41 +76,30 @@ void main()
 		 oStoneTreeThreeWP = GetObjectByTag("aq_cave_undead_treant_three_wp", 0);
 		 oStoneTreeFour = GetObjectByTag("aq_cave_treestone_four", 0);
 		 oStoneTreeFourWP = GetObjectByTag("aq_cave_undead_treant_four_wp", 0);
-		 if(GetLocalInt(OBJECT_SELF, "Treant") == 0) {
-		 	ActionSpeakString("*Crackling and rumbling of stone sounds. A pattern of cracks appears across the surface of a stone tree, then explodes outward. As the dust settles, it reveals a moving being, a treant larger than most, bark glittering, leaves made of crystal planes. What had been wood shimmers with facets, as if a living treant had been turned to diamond. It is both beautiful and terrible.", TALKVOLUME_TALK);
-			SetLocalInt(OBJECT_SELF, "Treant", 1);
-			}
-	 	if(GetLocalInt(OBJECT_SELF, "Treant") == 1) {
-		 	ActionSpeakString("*A second crystal treant bursts out of the dusty, cob-webbed stone that had hidden it.", TALKVOLUME_TALK);
-			SetLocalInt(OBJECT_SELF, "Treant", 2);
-			}
-	 	if(GetLocalInt(OBJECT_SELF, "Treant") == 2) {
-		 	ActionSpeakString("*First one, then two crystal treants explode into movement amid the schrapnel of the stone that had encased them.", TALKVOLUME_TALK);
-			SetLocalInt(OBJECT_SELF, "Treant", 2);
-			}
+		 	
 	 	if(oStoneTree != OBJECT_INVALID) {
-			
+			ActionSpeakString("*Crackling and rumbling of stone sounds. A pattern of cracks appears across the surface of a stone tree, then explodes outward. As the dust settles, it reveals a moving being, a treant larger than most, bark glittering, leaves made of crystal planes. What had been wood shimmers with facets, as if a living treant had been turned to diamond. It is both beautiful and terrible.", TALKVOLUME_TALK);
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTree);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeWP), TRUE);
 			}
 			
 		 else if(oStoneTreeTwo != OBJECT_INVALID) {
-			
+			ActionSpeakString("*A second crystal treant bursts out of the dusty, cob-webbed stone that had hidden it.", TALKVOLUME_TALK);
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTreeTwo);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeTwoWP), TRUE);
 			}
 			
 		else if(oStoneTreeThree != OBJECT_INVALID) {
-			
+			ActionSpeakString("*A third crystal treant explodes into movement amid the schrapnel of the stone that had encased it.", TALKVOLUME_TALK);
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTreeThree);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeThreeWP), TRUE);
 			
 			
 			if(oStoneTreeFour != OBJECT_INVALID) {
-			
+			ActionSpeakString("*Athe last of the stone trees on the stone parapet becomes a walking crystalline threat.", TALKVOLUME_TALK);
 			DestroyObject(oStoneTreeFour);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeFourWP), TRUE);
 			}
