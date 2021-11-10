@@ -85,7 +85,7 @@ void main()
 			}
 			
 		 else if(oStoneTreeTwo != OBJECT_INVALID) {
-			ActionSpeakString("*A second crystal treant bursts out of the dusty, cob-webbed stone that had hidden it.", TALKVOLUME_TALK);
+			ActionSpeakString("*A second crystal treant bursts out of the dusty, cob-webbed stone that had hidden it. A sound like a thousand fingernails on a thousand chalkboards shrills in the air.", TALKVOLUME_TALK);
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTreeTwo);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeTwoWP), TRUE);
@@ -99,7 +99,7 @@ void main()
 			
 			
 			if(oStoneTreeFour != OBJECT_INVALID) {
-			ActionSpeakString("*Athe last of the stone trees on the stone parapet becomes a walking crystalline threat.", TALKVOLUME_TALK);
+			ActionSpeakString("*The last of the stone trees on the stone parapet bursts its shackles. The air is nearly split by a hum that resonates in your teeth and bones.", TALKVOLUME_TALK);
 			DestroyObject(oStoneTreeFour);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeFourWP), TRUE);
 			}
