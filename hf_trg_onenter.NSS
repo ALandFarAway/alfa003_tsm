@@ -72,20 +72,20 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
 			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
-			DelayCommand(1.0, SendMessageToPC(oPC, "A light blinks on beneath your feet. A clear white light rises around you. You feel your heart rise as if dropping suddenly and find yourself in another place."));
+			DelayCommand(1.0, SendMessageToPC(oPC, "A cascade of rainbow lights blink on beneath your feet. You feel your heart rise as if your body is falling, and you find yourself in another place."));
 			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
 			}
 		
 		if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
-			DelayCommand(1.0, SendMessageToPC(oPC, "You feel your heart drop as if rising suddenly and find yourself in another place."));
-			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			DelayCommand(1.0, SendMessageToPC(oPC, "You find yourself in another place."));
+			DelayCommand(5.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			}
 		}
 		
 	if(GetTag(OBJECT_SELF) == "phalorm_vault_exit") {
 		object oGoThere = GetWaypointByTag("WP_phalorm_vault_exit");
 		location lGoThere = GetLocation(oGoThere);
-		DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+		DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 		}
 			
 		//Dex Checks for PCs on beam	 
