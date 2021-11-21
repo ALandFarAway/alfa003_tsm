@@ -41,6 +41,7 @@ void main()
 		 oStoneTreeWP = GetObjectByTag("undead_treant_one_wp", 0);
 		 oStoneTreeTwo = GetObjectByTag("rauvin_ruin_treestone_two", 0);
 		 oStoneTreeTwoWP = GetObjectByTag("undead_treant_two_wp", 0);
+		 sCreateCr = "abr_cr_pla_treant_uncryst";
 		 if(oStoneTree != OBJECT_INVALID) {
 			
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 

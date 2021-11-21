@@ -45,6 +45,20 @@ void main()
 {
     ACR_CreatureOnDamaged();
 
+		if(GetTag(OBJECT_SELF) == "abr_cr_pla_treant_uncryst")
+		{object oMothOne = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));
+		 if(Random(2)==1) {object oMothTwo = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
+		 if(Random(2)==1) {object oMothThree = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
+		 if(Random(2)==1) {object oMothFour = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
+		 if(Random(2)==1) {object oMothFive = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
+		 if(Random(2)==1) {object oMothSix = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
+		 DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Death moths flutter out of the petrifying hive.", TALKVOLUME_TALK)));
+		 effect eImplode = EffectVisualEffect(VFX_FNF_IMPLOSION, FALSE);
+		 DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(OBJECT_SELF)));
+		 DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(oMothOne)));
+		 }	
+	
+	
     //KiS Static combat_03
 		 
 		if(GetTag(OBJECT_SELF) == "003_cr_kis_atarms_parade") 
