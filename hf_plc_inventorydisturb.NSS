@@ -326,24 +326,30 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 			  }
 			  
 		if((GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) && (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)) {
-		 	 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCrystalDiscordM, 10.0));
-			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueD, oCrystalDiscordN, 10.0));
+		 	 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCrystalDiscordM, 20.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueD, oCrystalDiscordN, 20.0));
 			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordM, 5.0));
 			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordM, 5.0));
 			 DestroyObject(oCrystalDiscordM, 58.0);
 			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonRed, oCrystalDiscordN, 5.0));
 			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordN, 5.0));
+			 DelayCommand(57.0, PlaySound("as_cv_glasbreak3"));
+			 DelayCommand(59.0, PlaySound("as_cv_glasbreak3"));
+			 DelayCommand(60.0, PlaySound("as_cv_glasbreak3"));
 			 DestroyObject(oCrystalDiscordN, 58.0);
-			 DelayCommand(60.0, ActionUnlockObject(oGateRed));
+			 DestroyObject(oGateRed, 60.0);
 			 }
 		if((GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) && (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)  && (GetItemPossessedBy(oGlobeRed, "003_it_phalorm_beryl")!= OBJECT_INVALID)) {
-		 	 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCrystalDiscordI, 10.0));
-			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueD, oCrystalDiscordJ, 10.0));
-			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRedD, oCrystalDiscordJ, 10.0));
+		 	 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCrystalDiscordI, 20.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueD, oCrystalDiscordJ, 20.0));
+			 DelayCommand(40.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamRedD, oCrystalDiscordJ, 20.0));
 			 DelayCommand(50.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGold, oCrystalDiscordI, 5.0));
 			 DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, oCrystalDiscordI, 5.0));
+			 DelayCommand(57.0, PlaySound("as_cv_glasbreak3"));
+			 DelayCommand(59.0, PlaySound("as_cv_glasbreak3"));
+			 DelayCommand(60.0, PlaySound("as_cv_glasbreak3"));
 			 DestroyObject(oCrystalDiscordI, 58.0);
-			 DelayCommand(60.0, ActionUnlockObject(oGateGold));
+			 DestroyObject(oGateGold, 60.0);
 			 }
 		}
 }
