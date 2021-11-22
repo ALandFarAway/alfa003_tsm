@@ -44,7 +44,9 @@
 void main()
 {
     ACR_CreatureOnDamaged();
-
+	
+	//Fossilizing treants spill parasitic moths
+	
 		if(GetTag(OBJECT_SELF) == "abr_cr_pla_treant_uncryst")
 		{object oMothOne = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));
 		 if(Random(2)==1) {object oMothTwo = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
@@ -57,6 +59,14 @@ void main()
 		 DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(OBJECT_SELF)));
 		 DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(oMothOne)));
 		 }	
+	
+	//Drowned monsters regenerate speakstring
+	
+		if((GetTag(OBJECT_SELF) == "abr_cr_un_drowned_dwarf") || (GetTag(OBJECT_SELF) == "abr_cr_un_drowned_elf") || (GetTag(OBJECT_SELF) == "abr_cr_un_drowned_human") ) {
+			if(Random(3)==1)
+				{ActionSpeakString("Sucks in water, healing itself a small amount", TALKVOLUME_TALK);}
+		
+		}
 	
 	
     //KiS Static combat_03
