@@ -336,6 +336,37 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	} 
 }
 
+if(GetSpellId() == 3056)
+	{object oScryer = OBJECT_SELF;
+	 object oScry = GetNearestObject(OBJECT_TYPE_PLACEABLE, oScryer, 1);
+	  if(FindSubString(GetTag(oScry), "_scry") == -1) {
+	     oScry = GetNearestObject(OBJECT_TYPE_PLACEABLE, oScryer, 2);
+		  if(FindSubString(GetTag(oScry), "_scry") == -1) {
+		     oScry = GetNearestObject(OBJECT_TYPE_PLACEABLE, oScryer, 3);
+			  if(FindSubString(GetTag(oScry), "_scry") == -1) {
+			     oScry = GetNearestObject(OBJECT_TYPE_PLACEABLE, oScryer, 4);
+			  }
+		  }
+	  }
+	if(oScry == OBJECT_INVALID) {
+		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
+		}
+	else {
+	
+	 string sScryName = GetName(oScry);
+	 location lHere = GetLocation(oScry);
+	 int nScryerLevel = GetCasterLevel(oScryer);
+	 float fScryTimer;
+	 effect eDivination = EffectVisualEffect(VFX_BEAM_DIVINATION, FALSE);
+	 if(GetLocalInt(oScryer, "SCRY_ACTIVE") == 0){
+			SendMessageToPC(oScryer, "The " + sScryName + "responds!");
+			SetLocalInt(oScryer, "SCRY_ACTIVE", 1);
+			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivination, lHere, 60.0 * nScryerLevel);
+			DelayCommand(60.0 * nScryerLevel, SetLocalInt(oScryer, "SCRY_ACTIVE", 0));		
+	
+			}
+		}
+	}
 
 if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetTag(GetArea(oCaster)), "5h_") != -1)|| (FindSubString(GetTag(GetArea(oCaster)), "6f_") != -1) || ((FindSubString(GetTag(GetArea(oCaster)), "5g_") != -1) && (FindSubString(GetTag(GetArea(oCaster)), "felbarr") == -1))  )
 	{if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 

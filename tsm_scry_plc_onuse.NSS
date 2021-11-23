@@ -46,10 +46,10 @@ void main() {
 	if(FindSubString(GetTag(OBJECT_SELF), "_scry") != -1)
 	{object oScryer = GetLastUsedBy();
 	 string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
-	 	   if(GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 0) {
-			SendMessageToPC(oScryer, "The scrying object requires a spell");
+	 	   if(GetLocalInt(oScryer, "SCRY_ACTIVE") == 0) {
+			SendMessageToPC(oScryer, "The scrying object requires the casting of the Scry spell.");
 		}
-		if(GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) {
+		if(GetLocalInt(oScryer, "SCRY_ACTIVE") == 1) {
 			SendMessageToPC(oScryer, sSpeak);
 		}	
 	}
