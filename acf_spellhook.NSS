@@ -359,7 +359,7 @@ if(GetSpellId() == 3056)
 	 float fScryTimer;
 	 effect eDivination = EffectVisualEffect(VFX_BEAM_DIVINATION, FALSE);
 	 if(GetLocalInt(oScryer, "SCRY_ACTIVE") == 0){
-			SendMessageToPC(oScryer, "The " + sScryName + "responds!");
+			SendMessageToPC(oScryer, "The " + sScryName + " responds!");
 			SetLocalInt(oScryer, "SCRY_ACTIVE", 1);
 			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivination, lHere, 60.0 * nScryerLevel);
 			DelayCommand(60.0 * nScryerLevel, SetLocalInt(oScryer, "SCRY_ACTIVE", 0));		
