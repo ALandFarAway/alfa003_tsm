@@ -47,5 +47,17 @@ void main()
 
     // Custom code goes here.
 	
+	object oWielder = GetLastDamager(OBJECT_SELF);
+	object oSword = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oWielder);
+	
+	if(GetTag(oSword) == "abr_it_wpn_lsw1_cryscon") {
+	   
+	   SendMessageToPC(oWielder, "Hit");
+	   int nCastSummon = Random(20);
+	   SendMessageToPC(oWielder, IntToString(nCastSummon));
+	   if(nCastSummon==1)	{
+	   	ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	  	}
+	}
 
 }

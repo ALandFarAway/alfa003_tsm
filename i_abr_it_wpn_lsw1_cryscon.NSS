@@ -18,7 +18,7 @@ void main()
 	   int nCastSummon = Random(20);
 	   SendMessageToPC(oWielder, IntToString(nCastSummon));
 	   if(nCastSummon==1)	{
-	  ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	   ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	  }		
 
 }			  

@@ -136,10 +136,25 @@ void main()
     object oStudent = OBJECT_SELF;
     object oItem = GetSpellCastItem();
     object oTarget = GetSpellTargetObject();
+	string sTarget = GetName(oTarget);
     location lTarget = GetSpellTargetLocation();
 	int nItemType = GetBaseItemType(oItem);
 	effect eFailure = EffectSpellFailure(100);
 	string sArea = GetTag(GetArea(oCaster));
+	
+	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
+	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
+	if(GetTag(oArmor) == "003_it_arm_breastplt_petr") {
+	   SendMessageToPC(oTarget, "Hit");
+	   int nCastSize = Random(20);
+	   SendMessageToPC(oTarget, IntToString(nCastSize));
+	   if(nCastSize==1)	{
+		  AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_REDUCE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		  }		
+		else if(nCastSize==2)	{
+		AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_ENLARGE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		  }
+	}
 	
 //Campaign consequences for DeanSphinx 2021
 
@@ -367,6 +382,9 @@ if(GetSpellId() == 3056)
 			}
 		}
 	}
+	
+	
+	
 
 if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetTag(GetArea(oCaster)), "5h_") != -1)|| (FindSubString(GetTag(GetArea(oCaster)), "6f_") != -1) || ((FindSubString(GetTag(GetArea(oCaster)), "5g_") != -1) && (FindSubString(GetTag(GetArea(oCaster)), "felbarr") == -1))  )
 	{if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
