@@ -389,9 +389,10 @@ if(GetSpellId() == 3056)
 			}
 		}
 	}
+	SendMessageToAllDMs(GetName(oCaster) + " casting.");
 	
 	if(FindSubString(GetTag(GetArea(oCaster)), "nw_cave_aq") != -1) 
-	{SendMessageToAllDMs(GetName(oCaster) + " casting in Aquatic Cave");
+	{SendMessageToAllDMs(GetName(oCaster) + " is in Aquatic Cave");
 	object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
 	 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {
