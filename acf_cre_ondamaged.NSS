@@ -52,11 +52,10 @@ void main()
 	
 	if(GetTag(oSword) == "abr_it_wpn_lsw1_cryscon") {
 	   
-	   SendMessageToPC(oWielder, "Hit");
 	   int nCastSummon = Random(20);
-	   SendMessageToPC(oWielder, IntToString(nCastSummon));
 	   if(nCastSummon==1)	{
-	   	ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	   	SendMessageToPC(oWielder, "The sword vibrates, and sends out a high-pitched burst of noise.");
+	    ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	  	}
 	}
 

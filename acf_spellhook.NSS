@@ -145,15 +145,22 @@ void main()
 	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
 	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
 	if(GetTag(oArmor) == "003_it_arm_breastplt_petr") {
-	   SendMessageToPC(oTarget, "Hit");
 	   int nCastSize = Random(20);
-	   SendMessageToPC(oTarget, IntToString(nCastSize));
 	   if(nCastSize==1)	{
-		  AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_REDUCE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		  SendMessageToPC(oTarget, "The concentric growth rings of your armor suddenly shrink. For a moment it is horribly tight...and then fits again.");
+	      AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_REDUCE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 		  }		
 		else if(nCastSize==2)	{
-		AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_ENLARGE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		  SendMessageToPC(oTarget, "The concentric growth rings of your armor suddenly dilate. For a moment you feel yourself falling out through the bottom of it...and then it fits again.");
+	      AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_ENLARGE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 		  }
+		  
+		if(GetLocalInt(oTarget, "Piezo")!= 1) {
+		 SetLocalInt(oTarget, "Piezo", 1);
+		 SendMessageToPC(oTarget, "You suddenly have more understanding blossom in your awareness:");
+		 SendMessageToPC(oTarget, "Like all magic armor, it shrinks or expands as necessary to fit the size of its wearer. This was a prototype, and has a small design flaw when the wearer is targeted by magics...either offensive or defensive.");
+		 SendMessageToPC(oTarget, "Although the armor is made of crystal tuned to absorb magical attacks, it unfortunately sometimes discharges that power in a piezoarcane reaction. There is a small, random chance that the growth rings on the armor will either suddenly dilate or shrink down, followed a moment later by its wearer performing the same enlargement or reduction.");
+		}
 	}
 	
 //Campaign consequences for DeanSphinx 2021
