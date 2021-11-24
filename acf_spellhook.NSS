@@ -390,10 +390,12 @@ if(GetSpellId() == 3056)
 		}
 	}
 	
-	if(FindSubString(GetTag(GetArea(oCaster)), "int_highforest_nw_cave_aq") != -1) 
-	{object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
+	if(FindSubString(GetTag(GetArea(oCaster)), "nw_cave_aq") != -1) 
+	{SendMessageToAllDMs(GetName(oCaster) + " casting in Aquatic Cave");
+	object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
 	 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {
+	 SendMessageToAllDMs(sTrgTag + " is the nearest trigger. Spell ID is " + IntToString(nSpellId));
 	
 	   if(nSpellId == SPELL_COMBUST ||nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
 		|| nSpellId == SPELL_BURNING_HANDS || nSpellId == SPELL_FLAME_STRIKE || nSpellId == SPELL_GREATER_FIREBURST  || nSpellId == SPELL_INCENDIARY_CLOUD ||nSpellId == SPELL_INFERNO || nSpellId == SPELL_INFINITE_RANGE_FIREBALL 
