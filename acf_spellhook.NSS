@@ -393,11 +393,11 @@ if(GetSpellId() == 3056)
 	SendMessageToAllDMs(GetName(oCaster) + " casting.");
 	
 	if(FindSubString(GetTag(GetArea(oCaster)), "nw_cave_aq") != -1) 
-	{SendMessageToAllDMs(GetName(oCaster) + " is in Aquatic Cave");
-	object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
+	{//SendMessageToAllDMs(GetName(oCaster) + " is in Aquatic Cave");
+	 object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
 	 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {
-	 SendMessageToAllDMs(sTrgTag + " is the nearest trigger. Spell ID is " + IntToString(nSpellId));
+	 //SendMessageToAllDMs(sTrgTag + " is the nearest trigger. Spell ID is " + IntToString(nSpellId));
 	
 	   if(nSpellId == 1199 ||nSpellId == 1208 || nSpellId == SPELL_COMBUST || nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
 		|| nSpellId == SPELL_BURNING_HANDS || nSpellId == SPELL_FLAME_STRIKE || nSpellId == SPELL_GREATER_FIREBURST  || nSpellId == SPELL_INCENDIARY_CLOUD ||nSpellId == SPELL_INFERNO || nSpellId == SPELL_INFINITE_RANGE_FIREBALL 
@@ -406,9 +406,51 @@ if(GetSpellId() == 3056)
 			{ SetModuleOverrideSpellScriptFinished();
 			  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
 			  SendMessageToPC(oCaster, "Your fire spell fizzles.");
-			  AssignCommand(oCaster, ActionCastSpellAtObject(SPELL_FLARE, oCaster, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			  SendMessageToAllDMs(GetName(oCaster) + "'s Fire based spell fizzled in " + sArea + ".");
 			}
+		}
+		
+		if(nSpellId == SPELL_SHOCKING_GRASP || nSpellId == SPELL_ELECTRIC_JOLT || nSpellId == SPELL_GEDLEES_ELECTRIC_LOOP || nSpellId == SPELL_LESSER_ORB_OF_ELECTRICITY || nSpellId == SPELL_ORB_OF_ELECTRICITY ||nSpellId == SPELL_BALL_LIGHTNING ||nSpellId == SPELL_CALL_LIGHTNING |nSpellId == SPELL_CALL_LIGHTNING_STORM || nSpellId == SPELL_CHAIN_LIGHTNING || nSpellId == SPELL_LIGHTNING_BOLT)
+			{ SetModuleOverrideSpellScriptFinished();
+			  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
+			  SendMessageToPC(oCaster, "Your lightning spell sends an electric shock through you...and conducts it throughout the water!");
+			  SendMessageToAllDMs(GetName(oCaster) + "'s Lightning based spell ran wild in " + sArea + ".");
+			  AssignCommand(oCaster, ActionCastFakeSpellAtObject(SPELL_CALL_LIGHTNING_STORM, oCaster, PROJECTILE_PATH_TYPE_DEFAULT));
+			  effect eElecDmg = EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE);
+			  object oCreatureA = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 1);
+			  object oCreatureB = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 2);
+			  object oCreatureC = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 3);
+			  object oCreatureD = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 4);
+			  object oCreatureE = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 5);
+			  object oCreatureF = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 6);
+			  object oCreatureG = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 7);
+			  object oCreatureH = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 8);
+			  ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCaster);
+			  if(GetDistanceBetween(oCaster, oCreatureA) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureA);
+			 	}
+			  if(GetDistanceBetween(oCaster, oCreatureB) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureB);
+			 	}
+		      if(GetDistanceBetween(oCaster, oCreatureC) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureC);
+			 	}
+			  if(GetDistanceBetween(oCaster, oCreatureD) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureD);
+			 	}
+			  if(GetDistanceBetween(oCaster, oCreatureE) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureE);
+			 	}
+			  if(GetDistanceBetween(oCaster, oCreatureF) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureF);
+			 	}
+		      if(GetDistanceBetween(oCaster, oCreatureG) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureG);
+			 	}
+			  if(GetDistanceBetween(oCaster, oCreatureH) < 40.0) {
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureH);
+			 	}
+		
 		}
 	}
 	
