@@ -59,11 +59,11 @@ void main()
 	object oProjectile;
 	string sProjectile;
 	
-	SendMessageToAllDMs(GetName(oAttacker) + " is attacking " + GetName(OBJECT_SELF) + " with " + sWeapon);
+	SendMessageToAllDMs(GetName(oAttacker) + " is attacking " + GetName(OBJECT_SELF) + " with " + sWeapon + " in " + GetName(GetArea(oAttacker)));
 	if(FindSubString(GetTag(GetArea(oAttacker)), "nw_cave_aq") != -1) 
 		{object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oAttacker, 1);
 		 string sTrgTag = GetTag(oSwimTrg);
-		 SendMessageToAllDMs("Nearest trigger is " + sTrgTag);
+		 //SendMessageToAllDMs("Nearest trigger is " + sTrgTag);
 		 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {
 		 	 AddItemProperty(DURATION_TYPE_TEMPORARY, ItemPropertyAttackPenalty(2), oWeapon, 7.0);
 			 AddItemProperty(DURATION_TYPE_TEMPORARY, ItemPropertyDamagePenalty(2), oWeapon, 7.0);
@@ -72,24 +72,28 @@ void main()
 				 AddItemProperty(DURATION_TYPE_TEMPORARY, ItemPropertyAttackPenalty(2), oWeapon, 7.0);
 				 AddItemProperty(DURATION_TYPE_TEMPORARY, ItemPropertyDamagePenalty(2), oWeapon, 7.0);
 				 SendMessageToPC(oAttacker, "Water density makes ranged weapons even more challenging than melee weapons and reduces their projectile impact.");
-				 if(FindSubString(sAttacker, "Nionie") == -1) {
+				 if(FindSubString(sAttacker, "Nionie") != -1) {
+				 	SendMessageToPC(oAttacker, "Your specially designed arrows carry better through the water than standard arrows.");
+					oProjectile = oArrows;
+					}
+				 else {
 				 	 if(FindSubString(sWeapon, "crossbow") != -1) {
-							SendMessageToAllDMs("Attacking weapon is a crossbow.");
+							//SendMessageToAllDMs("Attacking weapon is a crossbow.");
 					    	SendMessageToPC(oAttacker, "Your bolts tumble in the water.");
 							oProjectile = oBolts;
 							}
 						else if(FindSubString(sWeapon, "bow") != -1) {
-							SendMessageToAllDMs("Attacking weapon is a bow.");
+							//SendMessageToAllDMs("Attacking weapon is a bow.");
 					    	SendMessageToPC(oAttacker, "Your arrows tumble in the water.");
 							oProjectile = oArrows;
 							}
 						else if(FindSubString(sWeapon, "sling") != -1) {
-							SendMessageToAllDMs("Attacking weapon is a sling.");
+							//SendMessageToAllDMs("Attacking weapon is a sling.");
 					    	SendMessageToPC(oAttacker, "Your bullets tumble in the water.");
 							oProjectile = oBullets;
 							}
 						else if(FindSubString(sWeapon, "Throwing") != -1) {
-							SendMessageToAllDMs("Attacking weapon is a throwing axe.");
+							//SendMessageToAllDMs("Attacking weapon is a throwing axe.");
 					    	SendMessageToPC(oAttacker, "Your axes tumble in the water.");
 							}
 					}		
@@ -97,7 +101,7 @@ void main()
 				int nFireDmg = GetDamageDealtByType(DAMAGE_TYPE_FIRE);
 				SendMessageToAllDMs(GetName(OBJECT_SELF) + " has taken " + IntToString(nFireDmg) + " points of damage from fire.");
 			    effect eHeal = EffectHeal(nFireDmg);
-				if((FindSubString(sProjectile, "fire") != -1) || (FindSubString(sWeapon, "fire") != -1) || (FindSubString(sProjectile, "flame") != -1) || (FindSubString(sWeapon, "flame") != -1)) {
+				if((FindSubString(sProjectile, "Fire") != -1) || (FindSubString(sWeapon, "Fire") != -1) || (FindSubString(sProjectile, "Flame") != -1) || (FindSubString(sWeapon, "Flame") != -1)) {
 				  	SendMessageToPC(oAttacker, "Your fiery projectile is doused.");
 				 	ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF); 
 					} 

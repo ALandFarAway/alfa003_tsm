@@ -143,6 +143,9 @@ void main()
 	string sArea = GetTag(GetArea(oCaster));
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
+	SendMessageToAllDMs(GetName(oCaster) + " casting " + IntToString(nSpellId) + " in " + sArea);
+	
+	
 	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
 	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
 	if(GetTag(oArmor) == "003_it_arm_breastplt_petr") {
@@ -390,7 +393,6 @@ if(GetSpellId() == 3056)
 			}
 		}
 	}
-	SendMessageToAllDMs(GetName(oCaster) + " casting.");
 	
 	if(FindSubString(GetTag(GetArea(oCaster)), "nw_cave_aq") != -1) 
 	{//SendMessageToAllDMs(GetName(oCaster) + " is in Aquatic Cave");
@@ -416,7 +418,6 @@ if(GetSpellId() == 3056)
 			  SendMessageToPC(oCaster, "Your lightning spell sends an electric shock through you...and conducts it throughout the water!");
 			  SendMessageToAllDMs(GetName(oCaster) + "'s Lightning based spell ran wild in " + sArea + ".");
 			  AssignCommand(oCaster, ActionCastFakeSpellAtObject(SPELL_CALL_LIGHTNING_STORM, oCaster, PROJECTILE_PATH_TYPE_DEFAULT));
-			  effect eElecDmg = EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE);
 			  object oCreatureA = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 1);
 			  object oCreatureB = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 2);
 			  object oCreatureC = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 3);
@@ -425,30 +426,30 @@ if(GetSpellId() == 3056)
 			  object oCreatureF = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 6);
 			  object oCreatureG = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 7);
 			  object oCreatureH = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, 8);
-			  ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCaster);
+			  ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCaster);
 			  if(GetDistanceBetween(oCaster, oCreatureA) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureA);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureA);
 			 	}
 			  if(GetDistanceBetween(oCaster, oCreatureB) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureB);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureB);
 			 	}
 		      if(GetDistanceBetween(oCaster, oCreatureC) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureC);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureC);
 			 	}
 			  if(GetDistanceBetween(oCaster, oCreatureD) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureD);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureD);
 			 	}
 			  if(GetDistanceBetween(oCaster, oCreatureE) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureE);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureE);
 			 	}
 			  if(GetDistanceBetween(oCaster, oCreatureF) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureF);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureF);
 			 	}
 		      if(GetDistanceBetween(oCaster, oCreatureG) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureG);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureG);
 			 	}
 			  if(GetDistanceBetween(oCaster, oCreatureH) < 40.0) {
-			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, eElecDmg, oCreatureH);
+			  	ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(d20(), DAMAGE_TYPE_ELECTRICAL, DAMAGE_POWER_NORMAL, FALSE), oCreatureH);
 			 	}
 		
 		}
