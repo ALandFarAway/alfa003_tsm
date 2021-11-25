@@ -143,7 +143,7 @@ void main()
 	string sArea = GetTag(GetArea(oCaster));
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
-	SendMessageToAllDMs(GetName(oCaster) + " casting " + IntToString(nSpellId) + " in " + sArea);
+	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
 	
 	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
@@ -394,7 +394,7 @@ if(GetSpellId() == 3056)
 		}
 	}
 	
-	if(FindSubString(GetTag(GetArea(oCaster)), "nw_cave_aq") != -1) 
+	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 
 	{//SendMessageToAllDMs(GetName(oCaster) + " is in Aquatic Cave");
 	 object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
