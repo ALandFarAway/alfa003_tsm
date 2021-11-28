@@ -395,7 +395,7 @@ if(GetSpellId() == 3056)
 	}
 	
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 
-	{//SendMessageToAllDMs(GetName(oCaster) + " is in Aquatic Cave");
+	{SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " is in Aquatic Cave");
 	 object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
 	 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {

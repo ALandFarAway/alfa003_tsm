@@ -107,9 +107,11 @@ void main()
 					} 
 					
 				}
-			 else if((FindSubString(sWeapon, "fire") != -1) || (FindSubString(sWeapon, "flame") != -1)) {
+			 else {SendMessageToPC(oAttacker, "Water density makes fighting challenging and reduces a weapon's impact.");
+			 	if((FindSubString(sWeapon, "fire") != -1) || (FindSubString(sWeapon, "flame") != -1)) {
 				  	SendMessageToPC(oAttacker, "Your fiery weapon is doused.");
 				 	} 
+				}
 			}
 		}
 		

@@ -55,8 +55,9 @@ void main() {
     // Custom code goes below this line.
 	string sTag = GetTag(OBJECT_SELF);
 	
-	SendMessageToAllDMs(GetName(GetEnteringObject()) + " has entered " + sTag);
 	
+	
+	//Exploration xp
 	if(FindSubString(sTag, "ext", 0) != -1) {
 	int nXP = 25;
 	if((FindSubString(sTag, "6c_", 0) != -1) || (FindSubString(sTag, "6d_", 0) != -1)) {
