@@ -19,7 +19,9 @@ void main()
     effect eFireball = EffectVisualEffect ( VFX_FNF_FIREBALL, FALSE);
     effect eExplosion = EffectVisualEffect ( VFX_FNF_GAS_EXPLOSION_FIRE, FALSE);
     effect eShake = EffectVisualEffect(VFX_FNF_SCREEN_SHAKE, FALSE);
-
+    object oNPCOne = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
+    object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
+    
 	
     if(GetTag(OBJECT_SELF) == "giant_crystal_source")
 		{ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oDamager, 3.0); 
@@ -28,32 +30,42 @@ void main()
 	     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eExplosion, OBJECT_SELF, 3.0); 
 	     ActionSpeakString("The light within the giant crystal pulses. Cracks spread, and shards fly!", TALKVOLUME_TALK);
 		 if(GetDistanceBetween(oPCOne, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCOne, 3.0); 
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCOne); 
 	    	 ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCOne, 3.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCOne, 3.0); 
 	     }
 		if(GetDistanceBetween(oPCTwo, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCTwo, 3.0); 
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCTwo); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCTwo, 3.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCTwo, 3.0); 
 	     }
 		if(GetDistanceBetween(oPCThree, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCThree, 3.0); 
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCThree); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCThree, 3.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCThree, 3.0); 
 	     }
 		
 		if(GetDistanceBetween(oPCFour, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCFour, 3.0); 
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCFour); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCFour, 3.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCFour, 3.0); 
 	     }
 		if(GetDistanceBetween(oPCFive, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCFive, 3.0); 
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCFive); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCFive, 3.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCFive, 3.0); 
 	     }
-		 
+		if(GetDistanceBetween(oNPCOne, OBJECT_SELF) <= 30.0) {
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oNPCOne); 
+	    	 ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oNPCOne, 3.0); 
+		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oNPCOne, 3.0); 
+	     }
+		if(GetDistanceBetween(oNPCTwo, OBJECT_SELF) <= 30.0) {
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oNPCTwo); 
+	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oNPCTwo, 3.0); 
+		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oNPCTwo, 3.0); 
+	     }
+		
 		
 		}
 }			 			 
