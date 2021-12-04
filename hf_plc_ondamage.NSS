@@ -14,7 +14,7 @@ void main()
     object oPCFour = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 4);
     object oPCFive = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 5);
     effect eKnockdown = EffectKnockdown();
-	effect eStruck = EffectDamage(1, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);			
+	effect eStruck = EffectDamage(d4(1), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);			
 	effect eSpark = EffectVisualEffect( VFX_IMP_FLAME_M, FALSE);
     effect eFireball = EffectVisualEffect ( VFX_FNF_FIREBALL, FALSE);
     effect eExplosion = EffectVisualEffect ( VFX_FNF_GAS_EXPLOSION_FIRE, FALSE);

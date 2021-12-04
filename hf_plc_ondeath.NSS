@@ -114,7 +114,12 @@ if(GetTag(OBJECT_SELF) == "giant_crystal_source")
 	     }
 		 
 		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0));
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eImplosion, oForceDown, 5.0));
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oPCOne, 5.0));
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oPCTwo, 5.0));
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oNPCOne, 5.0));
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oPCThree, 5.0));
+		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0));
+		DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0));
 		DestroyObject(oForceDown, 20.0);
 		
 		}
