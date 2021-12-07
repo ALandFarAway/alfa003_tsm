@@ -6,7 +6,7 @@ const string EVENT_TOOL_GUIFILE = "eventtool.xml";
 const string EVENT_TOOL_SCREEN = "EVENT_TOOL_SCREEN";
 const string EVENT_TOOL_MARK_INT = "EVENT_TOOL_SAVE"; // local int on objects marked to be saved
 const string EVENT_TOOL_OBJECT_COUNT = "ObjCt"; // int in DB that specifies number of saved objects
-const string EVENT_TOOL_OBJECT_VAR = "EvtObj"; // objects stored as EventObject#, for placeables it will be the Resref
+const string EVENT_TOOL_OBJECT_VAR = "EvtObj"; // objects stored as EventObject#, for placeables tags are stored and resrefs used to recreate, so tag and resref must match
 const string EVENT_TOOL_OBJECT_LOCATION = "EvtObjLoc";
 const string EVENT_TOOL_LOCATION_TAG = "EvtLocTag"; // when saving a location save area tag too
 const string EVENT_TOOL_OBJECT_TYPE = "EvtObjTyp"; // database int of object type
@@ -18,8 +18,11 @@ const string EVENT_TOOL_VARIABLE_TYPE_SUFFIX = "v"; // local variables are saved
 const string EVENT_TOOL_VARIABLE_DATA_SUFFIX = "d";
 const string EVENT_TOOL_VARIABLE_NAME_SUFFIX = "s";
 const string EVENT_TOOL_OBJECT_SCALE_PREFIX = "Scale";
+const string EVENT_TOOL_OBJECT_USABLE_PREFIX = "Usable";
 const int EVENT_TOOL_SCALE_SAVE_TYPES = 72; // OBJECT_TYPE_DOOR | OBJECT_TYPE_PLACEABLE
-/*
+const int EVENT_TOOL_USABLE_SAVE_TYPES = OBJECT_TYPE_PLACEABLE;
+
+/* 
 const string EVENT_TOOL_EFFECT_COUNT_VAR = "nEff";
 const string EVENT_TOOL_EFFECT_TYPE_SUFFIX = "t"; // effects are saved as OBJECT_PREFIX_object#_EFFECT_SUFFIX+var#
 const string EVENT_TOOL_EFFECT_SUBTYPE_SUFFIX = "u";
@@ -32,12 +35,156 @@ const string EVENT_TOOL_EFFECT_DURATION_SUFFIX = "d";
 const int EVENT_TOOL_OBJECT_MASK = 0x3; // OBJECT_TYPE_CREATURE | OBJECT_TYPE_ITEM
 
 // object types to save as resref
-const int EVENT_TOOL_RESREF_MASK = 0x2FC; // everything else
+const int EVENT_TOOL_RESREF_MASK = 0x7FC; // everything else
 
 const int EVENT_TOOL_OBJECTS_PER_LOOP = 16; // will process this many objects then initiate a new action
 
 const float EVENT_TOOL_DESTROY_DELAY = 1.0f; // destroyig of objects will be delayed by this amount to avoid problems with recursive actions for the event loop
 
+
+const string RESREF_REDIRECT_2DA = "eventtoolredirect"; // the 2DA is assumed to be alphabetical for faster searching
+const string RESREF_REDIRECT_ORIGINAL_COL = "Tag";
+const string RESREF_REDIRECT_REPLACEMENT_COL = "ResRef";
+
+int SearchAlphabetical2DA(string s2DA, string sColumn, string sMatchElement, int bExactMatch = TRUE)
+{
+	int nGreater = GetNum2DARows(s2DA);
+	int nLess = -1;
+	int nRow = (nGreater+nLess)/2;
+	string sEntry = Get2DAString(s2DA, sColumn, nRow);
+	int nCompare = StringCompare(sEntry,sMatchElement);
+
+	while ((nCompare != 0) && (nGreater > (nLess+1)))
+	{
+		if (nCompare<0)
+			nLess = nRow;
+		else
+			nGreater = nRow;
+		nRow = (nGreater+nLess)/2;
+		sEntry = Get2DAString(s2DA, sColumn, nRow);
+		nCompare = StringCompare(sEntry,sMatchElement);
+	}
+	if (nCompare == 0 || !bExactMatch)	
+		return nRow;
+	else
+		return -1;
+}
+
+string LocationToString(location lLocation, string sSep = ":")
+{
+	vector vLoc = GetPositionFromLocation(lLocation);
+	float fFacing = GetFacingFromLocation(lLocation);
+	string sLocation = FloatToString(vLoc.x);
+	sLocation += sSep+FloatToString(vLoc.y);
+	sLocation += sSep+FloatToString(vLoc.z);
+	sLocation += sSep+FloatToString(fFacing);
+	return sLocation;
+}
+
+// since placeables can't be targeted we need a workaround targeting system
+
+const int EVENT_TOOL_TARGET_MASK = 0x640; // OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_LIGHT
+
+const string EVENT_TOOL_CURRENT_TARGET = "oEventToolTarget"; // local object on oPC for targeting placeables
+
+const string EVENT_TOOL_TARGET = "EVENT_TOOL_TARGET"; // UIObject for current target
+
+void TargetNearestObject(object oPC)
+{
+	object oObject = GetNearestObject(EVENT_TOOL_TARGET_MASK,oPC);
+	SetLocalObject(oPC,EVENT_TOOL_CURRENT_TARGET,oObject);
+}
+
+void TargetNextObject(object oPC, int bReverse = FALSE)
+{
+	object oCurrent = GetLocalObject(oPC,EVENT_TOOL_CURRENT_TARGET);
+//	SendMessageToPC(oPC,"Current target 0x"+ObjectToString(oCurrent)+" "+GetName(oCurrent));
+	object oTarget = OBJECT_INVALID;
+	object oLast;
+	int nNth = 0; // will increment to 1 during search
+	do // find current target and one before
+	{
+			oLast = oTarget;
+			oTarget = GetNearestObject(EVENT_TOOL_TARGET_MASK,oPC,++nNth); // prefix increment since started at 0 and first object is 1
+//			SendMessageToPC(oPC,IntToString(nNth)+" object found 0x"+ObjectToString(oTarget)+" "+GetName(oTarget));
+			// when reversing if the current object is the first object then go until invlid so oLast is last in area
+	} while ((oTarget != oCurrent || (nNth == 1 && bReverse)) && GetIsObjectValid(oTarget));
+	if (bReverse)
+	{
+//		SendMessageToPC(oPC,"Last was 0x"+ObjectToString(oLast)+" "+GetName(oLast));
+		oTarget = oLast;
+	}
+	else 
+	{
+		oTarget = GetNearestObject(EVENT_TOOL_TARGET_MASK,oPC,++nNth); // get the next target
+//		SendMessageToPC(oPC,"Next is 0x"+ObjectToString(oTarget)+" "+GetName(oTarget));
+		if (!GetIsObjectValid(oTarget)) // if there is no next object then go back to first object
+			oTarget = GetNearestObject(EVENT_TOOL_TARGET_MASK,oPC);	
+	}
+	if (!GetIsObjectValid(oTarget)) // if there was a problem, just use nearest
+		oTarget = GetNearestObject(EVENT_TOOL_TARGET_MASK,oPC);
+	SetLocalObject(oPC,EVENT_TOOL_CURRENT_TARGET,oTarget);
+}
+
+void ShowCurrentTarget(object oPC)
+{
+	object oTarget = GetLocalObject(oPC,EVENT_TOOL_CURRENT_TARGET);
+	if (GetIsObjectValid(oTarget))
+	{
+		string sString = GetTag(oTarget);
+		AssignCommand(oTarget,SpeakString(sString));
+		SetGUIObjectText(oPC,EVENT_TOOL_SCREEN,EVENT_TOOL_TARGET,-1,GetStringLeft(sString,32));
+		sString += "@"+LocationToString(GetLocation(oTarget));
+		SendMessageToPC(oPC,sString);
+	} 
+	else
+	{
+		SendMessageToPC(oPC,"No placeable targeted.");
+		SetGUIObjectText(oPC,EVENT_TOOL_SCREEN,EVENT_TOOL_TARGET,-1,"No target");
+	}	
+}
+
+// set if placeable is marked for saving
+void SetTargetMarked(object oPC, int bMark)
+{
+	object oTarget = GetLocalObject(oPC,EVENT_TOOL_CURRENT_TARGET);
+	if (GetIsObjectValid(oTarget))
+	{
+		string sMessage;
+		if (!bMark)
+		{
+			DeleteLocalInt(oTarget,EVENT_TOOL_MARK_INT);
+			sMessage="un";
+		}
+		else
+			SetLocalInt(oTarget,EVENT_TOOL_MARK_INT,TRUE);
+		sMessage+="marked";
+		AssignCommand(oTarget,SpeakString(sMessage));		
+		SendMessageToPC(oPC,GetTag(oTarget)+"@"+LocationToString(GetLocation(oTarget))+" "+sMessage+".");
+	}
+	else
+		SendMessageToPC(oPC,"No placeable targeted.");
+}
+
+
+// objects in area will speak if marked and oPC will be informed in chat log
+void FindMarkedInArea(object oArea, object oPC)
+{
+	SendMessageToPC(oPC,"Finding marked objects in "+GetTag(oArea));
+	object oObject = GetFirstObjectInArea(oArea);
+	while (GetIsObjectValid(oObject)) 
+	{
+		if (GetLocalInt(oObject,EVENT_TOOL_MARK_INT))
+		{
+			string sString = GetTag(oObject);
+			AssignCommand(oObject,SpeakString(sString));
+			sString += "@"+LocationToString(GetLocation(oObject));
+			SendMessageToPC(oPC,sString);
+		}
+		oObject = GetNextObjectInArea(oArea);
+	}
+	SendMessageToPC(oPC,"Finding marked objects complete.");
+}
 
 // save local int, float, and string type variables on oTarget to sDatabase 
 void SaveVariables(object oTarget, string sDatabase, string sPrefix)
@@ -174,24 +321,37 @@ void SaveScale(object oTarget, string sDatabase, string sScaleRef)
 
 object RecreateObject(string sDatabase, string sObjectNum, int nObjectType, location lObjectLoc)
 {
+	// tag was saved by object must be created by resref
 	string sResref = GetCampaignString(sDatabase,EVENT_TOOL_OBJECT_VAR+sObjectNum);
+	// Some objects have a tag that isn't the same as the resref, if it's listed in the 2DA use that
+	int nRow = SearchAlphabetical2DA(RESREF_REDIRECT_2DA,RESREF_REDIRECT_ORIGINAL_COL,sResref);
+	// IF found use new resref otherwise keep the current resref
+	if (nRow>=0) sResref = Get2DAString(RESREF_REDIRECT_2DA,RESREF_REDIRECT_REPLACEMENT_COL,nRow);
+	
 	object oLoaded = CreateObject(nObjectType,sResref,lObjectLoc);
+
+//	if (!GetIsObjectValid(oLoaded)) oLoaded = CreateObject(nObjectType,GetStringLowerCase(sResref),lObjectLoc);
 	// placeables have to have their inventory saved separately
 	if (GetHasInventory(oLoaded))
 		AssignCommand(oLoaded,LoadInventory(oLoaded,sDatabase,EVENT_TOOL_INVENTORY_PREFIX+sObjectNum));
 	if (nObjectType & EVENT_TOOL_SCALE_SAVE_TYPES)
 		LoadScale(oLoaded,sDatabase,EVENT_TOOL_OBJECT_SCALE_PREFIX+sObjectNum);	
+	if (nObjectType & EVENT_TOOL_USABLE_SAVE_TYPES)
+		SetUseableFlag(oLoaded,GetCampaignInt(sDatabase,EVENT_TOOL_OBJECT_USABLE_PREFIX+sObjectNum));
 	return oLoaded;
 }
 
 void SaveObjectInfo(object oTarget, string sDatabase, string sObjectNum, int nType)
 {
-		SetCampaignString(sDatabase,EVENT_TOOL_OBJECT_VAR+sObjectNum,GetResRef(oTarget));
-		// if a placeable has an inventory it must be saved separately
-		if (GetHasInventory(oTarget))
-			AssignCommand(oTarget,SaveInventory(oTarget,sDatabase,EVENT_TOOL_INVENTORY_PREFIX+sObjectNum));
-		if (nType & EVENT_TOOL_SCALE_SAVE_TYPES)
-			SaveScale(oTarget,sDatabase,sObjectNum);			
+	// since placed objects have no resref they must be saved by tag
+	SetCampaignString(sDatabase,EVENT_TOOL_OBJECT_VAR+sObjectNum,GetTag(oTarget));
+	// if a placeable has an inventory it must be saved separately
+	if (GetHasInventory(oTarget))
+		AssignCommand(oTarget,SaveInventory(oTarget,sDatabase,EVENT_TOOL_INVENTORY_PREFIX+sObjectNum));
+	if (nType & EVENT_TOOL_SCALE_SAVE_TYPES)
+		SaveScale(oTarget,sDatabase,EVENT_TOOL_OBJECT_SCALE_PREFIX+sObjectNum);			
+	if (nType & EVENT_TOOL_USABLE_SAVE_TYPES)
+		SetCampaignInt(sDatabase,EVENT_TOOL_OBJECT_USABLE_PREFIX+sObjectNum,GetUseableFlag(oTarget));
 }				
 
 // command to assign to oPC to load saved objects from sDatabase
@@ -295,7 +455,7 @@ void SaveArea(object oPC, string sDatabase, int ctObject, object oArea, object o
 	{
 		if (GetLocalInt(oTarget,EVENT_TOOL_MARK_INT)) // marked for saving
 		{
-			// if it was a commandable creature, then freeze it. it will be restored after it has does it's save
+			// if it was a commandable creature, then freeze it. it will be restored after it does it's save
 /*			int bTargetCommandable = GetCommandable(oTarget); 
 			if (bTargetCommandable) 
 			{
@@ -367,22 +527,8 @@ void main (string sCommand, string sDatabase, string sAppend)
 		return;
 	}
 	
-	// display help
-	if (sCommand == "help")
-	{
-		SendMessageToPC(oPC,"Usage:");
-		SendMessageToPC(oPC,"Set up an event.");
-		SendMessageToPC(oPC,"Mark objects to be saved for event.");
-		SendMessageToPC(oPC,"Save event to database, overwrite mode is recommended to start a clear database.");
-		SendMessageToPC(oPC,"Clear area to remove marked objects.");
-		SendMessageToPC(oPC,"To run event, load event from database to restore saved objects.");
-		SendMessageToPC(oPC,"Run event.");
-		SendMessageToPC(oPC,"After event, clear area to aid in cleanup by removing marked objects.");
-		SendMessageToPC(oPC,"Tip:");
-		SendMessageToPC(oPC,"Saving the event saves marked object, then clearing the area will remove objects that were marked.");
-		SendMessageToPC(oPC,"Any objects that were desired to be saved but weren't marked will remain, and can then be marked and the saved in append mode to add the missed objects to the databse.");
-	}
-	
+	if (sCommand == "list")
+		FindMarkedInArea(GetArea(oPC), oPC);
 	// mark target for saving
 	else if (sCommand == "mark") 
 	{ 
@@ -451,4 +597,30 @@ void main (string sCommand, string sDatabase, string sAppend)
 	// closes the gui window
 	else if (sCommand == "closegui")
 		CloseGUIScreen(oPC,EVENT_TOOL_SCREEN);
+		
+	// target nearest placeable
+	else if (sCommand == "nearest")
+	{
+		TargetNearestObject(oPC);
+		ShowCurrentTarget(oPC);
+	}			
+	else if (sCommand == "next")
+	{
+		TargetNextObject(oPC);
+		ShowCurrentTarget(oPC);
+	}			
+	else if (sCommand == "previous")
+	{
+		TargetNextObject(oPC,TRUE);
+		ShowCurrentTarget(oPC);
+	}			
+	else if (sCommand == "markplaceable")
+		SetTargetMarked(oPC,TRUE);
+	else if (sCommand == "unmarkplaceable")
+		SetTargetMarked(oPC,FALSE);
+	else if (sCommand == "usable")
+	{
+		object oTarget = GetLocalObject(oPC,EVENT_TOOL_CURRENT_TARGET);
+		SetUseableFlag(oTarget,!GetUseableFlag(oTarget));
+	}	
 } 
