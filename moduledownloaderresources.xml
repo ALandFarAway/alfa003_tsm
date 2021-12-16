@@ -1690,7 +1690,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="77A624FE8CFBA6E124A94B4421D25D7AFF62F551" downloadHash="7A091106BA76040C40BDCF871DC88A03D8DDB7EB" name="8e_ext_highforest_north.trx" dlsize="3450882" size="19893185" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="638F3A728D7023F3C807F46BC574D6889F798D9C" downloadHash="3110170CEF4B7C7A5676C92E977F1580E9B555FE" name="8e_ext_highforest_north.trx" dlsize="3673062" size="20078797" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1996,6 +1996,11 @@
     <server-ref>
       <string>0</string>
       <string>2</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="2EB31BB76B05505FBBF56E5BE03D95A03753A09D" downloadHash="08FA72198077C9AE7524F47241905896A6F48BDE" name="7e_ext_rauvin_vale_west.trx" dlsize="3781176" size="20221510" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
     </server-ref>
   </resource>
 </content>
