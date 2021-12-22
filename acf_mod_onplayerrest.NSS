@@ -60,7 +60,7 @@ void main()
 	
 	object oRester = GetLastPCRested();
 	
-	object oAshera;
+	/*object oAshera;
 	if(FindSubString(GetName(oRester), "Ash") != -1)
 	{oAshera = oRester;}
 
@@ -81,37 +81,42 @@ void main()
 		string sDreamMessage;
 		if((oRester == oAshera) || (oRester == oSaerela)) {
 			if(nDreamStage == 0) {
-				sDreamMessage = "Rest proves difficult, your thoughts unsettled. You are filled with a formless sensation that there is something wrong.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 2) {
-				sDreamMessage = "Unsure of whether you rested at all, you are unable to shake fragments of memories of recent blood and violence, and the sound of long, deep-voiced laughter.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 4) {
-				sDreamMessage = "You open your eyes sluggishly in a cold room. The Marches are always cold, but you feel this chill in your bones. The taste of blood lingers on your tongue, no matter how often you flick it against your teeth, clenched in what seems for a moment a too-short jaw.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 6) {
-				sDreamMessage = "For a moment, you are unsure of where you are. Rest proves more elusive every time you have tried. Your eyes blink open slowly, feeling dry. You should be able to draw an inner eyelid across them, shouldn't you? To protect them from extended dry air? Speaking of dry, your skin itches, between your shoulder blades. You scratch, with fingernails that seem to need more trimming than you last recalled.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 8) {
-				sDreamMessage = "'Feedstock.' The word chases you out of visions that set in as soon as you had closed your eyes to seek communion, visions of your broodkin cut down by monsters crossbred from members of your own tribe and alien stock, of crystals shattering and flying, striking your too-soft hide, blood flowing. You hear a laughing voice, and the softer tones of the human torturer, Flat Face, holding a conversation with his master in the mirror. You squirm with the itching of skin. You are dry, so dry that your hide cracks in scales around the wound you received from flying shards of shattered crystal in the dessicated cave.";
+				sDreamMessage = "";
 			}
 		}
 		
 		if(oRester == oBaeithra)  {
 			if(nDreamStage == 0) {
-				sDreamMessage = "Rest proves difficult, your thoughts unsettled. You are filled with a formless sensation that there is something wrong.";
+				//sDreamMessage = "Rest proves difficult, your thoughts unsettled. You are filled with a formless sensation that there is something wrong.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 2) {
-				sDreamMessage = "Unsure of whether you rested at all, you are unable to shake fragments of memories of recent blood and violence, and a sense of pride and righteous anger.";
+				//sDreamMessage = "Unsure of whether you rested at all, you are unable to shake fragments of memories of recent blood and violence, and a sense of pride and righteous anger.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 4) {
-				sDreamMessage = "You open your eyes suddenly into a cold room, with a heat in your chest burning away the chill of the Marches. Your blood thunders in your veins, throbbing like the beating of massive wings. Rest has proved more difficult every day.";
+				//sDreamMessage = "You open your eyes suddenly into a cold room, with a heat in your chest burning away the chill of the Marches. Your blood thunders in your veins, throbbing like the beating of massive wings. Rest has proved more difficult every day.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 6) {
-				sDreamMessage = "For a moment, you are unsure of where you are. Your eyes blink open slowly, feeling dry. You should be able to draw an inner eyelid across them, shouldn't you? To protect them from extended dry air? Speaking of dry, your skin itches, between your shoulder blades. You scratch, with fingernails that seem to need more trimming than you last recalled.";
+				//sDreamMessage = "For a moment, you are unsure of where you are. Your eyes blink open slowly, feeling dry. You should be able to draw an inner eyelid across them, shouldn't you? To protect them from extended dry air? Speaking of dry, your skin itches, between your shoulder blades. You scratch, with fingernails that seem to need more trimming than you last recalled.";
+				sDreamMessage = "";
 			}
 			else if(nDreamStage == 8) {
-				sDreamMessage = "'Awake.' The booming voice in your mind shakes you to your core. Unsure whether you are resting or in reverie, you feel it echo in your mind, in your very blood. 'Bring me what is mine, and my Queen's. Seek us in the Floating Mountain, to bring us what you owe, for loss and death and lesser blood twisted. There are those of your own kin that suffer as mine. Awake, and accept consequence!'";
+				//sDreamMessage = "'Awake.' The booming voice in your mind shakes you to your core. Unsure whether you are resting or in reverie, you feel it echo in your mind, in your very blood. 'Bring me what is mine, and my Queen's. Seek us in the Floating Mountain, to bring us what you owe, for loss and death and lesser blood twisted. There are those of your own kin that suffer as mine. Awake, and accept consequence!'";
+				sDreamMessage = "";
 			}	
 		}
 		SendMessageToPC(oRester, sDreamMessage);
@@ -122,5 +127,5 @@ void main()
 		SendMessageToAllDMs(GetName(oRester) + "'s DreamStage is now at " + IntToString(nDreamStage));
 		SetLocalInt(oRester, "DreamCooldown", 1);
 		}
-	}
+	}*/
 }
