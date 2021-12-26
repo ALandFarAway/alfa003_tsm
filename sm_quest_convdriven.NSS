@@ -14,7 +14,7 @@ void main()
 	effect eStruck = EffectDamage(1, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);			
 
 	
-	if((GetTag(OBJECT_SELF) == "003_cr_silvy_hornhard") || (GetTag(OBJECT_SELF) == "003_cr_qvr_smith_halfling") || (GetTag(OBJECT_SELF) == "003_cr_travel_kaspar") || (GetTag(OBJECT_SELF) == "003_cr_felbarr_letha"))
+	if((GetTag(OBJECT_SELF) == "003_cr_silvy_hornhard") || (GetTag(OBJECT_SELF) == "003_cr_sm_uldon_merchant") || (GetTag(OBJECT_SELF) == "003_cr_sm_uldon_butcher") || (GetTag(OBJECT_SELF) == "003_cr_qvr_smith_halfling") || (GetTag(OBJECT_SELF) == "003_cr_travel_kaspar") || (GetTag(OBJECT_SELF) == "003_cr_felbarr_letha"))
 		{float fHuntPay=GetLocalFloat(OBJECT_SELF, "hunt_pay");
 		 string sHuntPelt=GetLocalString(OBJECT_SELF, "hunt_pelt");
 		 int iPelt=0;
