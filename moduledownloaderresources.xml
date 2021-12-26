@@ -1480,7 +1480,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="DF691F71F30ACEDCEBCEE1A18E9C4575D847EB5D" downloadHash="09873469D47389B8C890307A3BC1624361B73CC8" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3265810" size="17993875" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3C3C32BEA05F4C7E5ACB7A1BC9311A6EF5D98D7A" downloadHash="09873469D47389B8C890307A3BC1624361B73CC8" name="5g_ext_silvypass_felbarr_trail.trx" dlsize="3265810" size="17973756" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1770,7 +1770,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="545820AB44393D630044906F584CDC5923BA1AC6" downloadHash="4EF54BAC8576A230B6D1E1036394E6C5D553E354" name="8e_int_highforest_nw_cave_aq.trx" dlsize="722784" size="6409048" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C2D97F4E3090DF8A8876241AD3F028506CEE16C4" downloadHash="4EF54BAC8576A230B6D1E1036394E6C5D553E354" name="8e_int_highforest_nw_cave_aq.trx" dlsize="722784" size="6410655" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
