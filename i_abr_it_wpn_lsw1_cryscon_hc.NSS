@@ -10,15 +10,15 @@
 
 
 void main()
-	{  object oItem;        // The item casting triggering this spellscript
-	   object oSpellTarget; // On a weapon: The one being hit. On an armor: The one hitting the armor
+	{  object oItem;        // The item triggering this spellscript
+	   object oTarget; // On a weapon: The one being hit. On an armor: The one hitting the armor
 	   object oWielder; // On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
-	  
-	   SendMessageToPC(oWielder, "Hit");
 	   int nCastSummon = Random(20);
+	   
+	   SendMessageToPC(oWielder, "Hit");
 	   SendMessageToPC(oWielder, IntToString(nCastSummon));
 	   if(nCastSummon==1)	{
-	   ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	  }		
+	   	ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	  	}		
 
 }			  
