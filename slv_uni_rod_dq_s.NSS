@@ -51,10 +51,10 @@ if(sDQInc != "")
 		{int nGiveGold = GetLocalInt(oDM, "TestPCGold");
 		 int nGiveXP = GetLocalInt(oDM, "TestPCXP");
 		 if(nGiveGold == 1)
-		 	{GiveGoldToCreature(oStudent, 500, TRUE);
+		 	{GiveGoldToCreature(oStudent, 1000, TRUE);
 			 SetLocalInt(oDM, "TestPCGold", 0);}
 		 if(nGiveXP == 1)
-		 	{GiveXPToCreature(oStudent, 1000);
+		 	{GiveXPToCreature(oStudent, 5000);
 			 SetLocalInt(oDM, "TestPCXP", 0);
 			 }
 		 }
