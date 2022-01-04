@@ -1720,7 +1720,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5DF9883C6E010AA411F5ABC272843654DB64F4E1" downloadHash="ADEFB51EA53A666C8E3A7A8072069797DB0F6F09" name="8e_int_highforest_olostins_hold.trx" dlsize="1517338" size="4578267" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9AE82E9065CE9C79580C0C2EEB83909F6B08011A" downloadHash="741590A0D12DC8AFCDFF973ADF1D2AABF9448882" name="8e_int_highforest_olostins_hold.trx" dlsize="1411519" size="4473385" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
