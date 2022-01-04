@@ -10,7 +10,7 @@
 
 
 void main()
-	{  object oItem;        // The item triggering this spellscript
+	{  object oItem;        // The item triggering this spellscript 
 	   object oTarget; // On a weapon: The one being hit. On an armor: The one hitting the armor
 	   object oWielder; // On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
 	   int nCastSummon = Random(20);
