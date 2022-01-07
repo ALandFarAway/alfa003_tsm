@@ -95,25 +95,30 @@ void main()
 			 }  
 		}	 
 
-if(GetTag(OBJECT_SELF) == "wands_cave_pool_rocks")
-	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-	 object oSwimExit = GetObjectByTag("wands_cave_underground_river_wp");
-	 SendMessageToPC(oUser, "You wade into the pool and dive into a deceptively strong current that pours into a hole! This pool is a backwater of a much larger underground reservoir and you are swept down into it!");		 
-	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
-	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to a pocket of air, treading water.");
-		}
-	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
-		   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Tumbling in a lightless cavern filled with water, you finally bob to the surface, bruised and battered.");
-		}
-	DelayCommand(3.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
-		
+if(GetTag(OBJECT_SELF) == "wands_cave_pool_rocks") {
+	if((GetLocalInt(oUser, "wands_cave_pool") == 1))
+		{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+		 object oSwimExit = GetObjectByTag("wands_cave_underground_river_wp");
+		 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
+		 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to a pocket of air, treading water.");
+			}
+		 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
+			   SendMessageToPC(oUser, "The swim is is much harder than your swimming skills are up to. Tumbling in a lightless cavern filled with water, you finally bob to the surface, bruised and battered.");
+			}
+		DelayCommand(3.0, AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit))));
+		SetLocalInt(oUser, "wands_cave_pool", 0);	
 		}
 
+   else {
+		ActionStartConversation(oUser, "rm_wands_cave_pool_rocks", TRUE, TRUE, FALSE, FALSE);
+	   }
+	}
+	
 if(GetTag(OBJECT_SELF) == "wands_cave_reservoir_enter") 
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	 object oSwimExit = GetObjectByTag("6b_int_wands_cave_river_exit_wp");
 	 SendMessageToPC(oUser, "You swim up against a strong current that pushes against you!");		 
-	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 15))
+	 if(GetIsSkillSuccessful(GetEnteringObject(), SKILL_SWIM, 10))
 	 	{SendMessageToPC(oUser, "Your superior swimming skills allow you to find your way to the surface, dragging yourself out of a lapping pool.");
 		}
 	 else {ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
