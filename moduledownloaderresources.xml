@@ -1735,7 +1735,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="3C01A2796482636AA3F85DE2FF5AE1EBCC7BB9E2" downloadHash="F7D6A26C36B1BE03BF0D2618B8F409BCDF8FE183" name="8e_int_highforest_oh_flagon.trx" dlsize="125391" size="126285" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9B13266DC25317E88714722C53534110F779A376" downloadHash="CFC954720238ACAFC4745262128F2A332522899C" name="8e_int_highforest_oh_flagon.trx" dlsize="73504" size="73614" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
