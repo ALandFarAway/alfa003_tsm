@@ -47,16 +47,6 @@ void main()
 
     // Custom code goes here.
 	
-	object oWielder = GetLastDamager(OBJECT_SELF);
-	object oSword = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oWielder);
-	
-	if(GetTag(oSword) == "abr_it_wpn_lsw1_cryscon") {
-	   
-	  /* int nCastSummon = Random(20);
-	   if(nCastSummon==1)	{
-	   	SendMessageToPC(oWielder, "The sword vibrates, and sends out a high-pitched burst of noise.");
-	    ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oWielder), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	  	}*/
-	}
+
 
 }

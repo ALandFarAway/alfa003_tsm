@@ -18,8 +18,7 @@ void main()
 		
 	SendMessageToPC(oPC, "Unequipped " + GetName(oItem));
 		 
-	 if ((DMFI_IsLanguageKnown(oPC, sLang) == TRUE) && (GetLocalInt(oItem, "DMFI_TemporaryOrc") == 1));
-						
+	 if ((DMFI_IsLanguageKnown(oPC, sLang) == TRUE) && (GetLocalInt(oItem, "DMFI_TemporaryOrc") == 1))
 				{SendMessageToPC(oPC, "You have lost the ability to speak " + sLang);
 				 DMFI_RemoveLanguage(oPC, sLang);
 				 SetLocalInt(oItem, "DMFI_TemporaryOrc",0);	
