@@ -17,9 +17,10 @@ void main()
 	   SendMessageToPC(oPossessor, "Hit"); //Debug
 	   SendMessageToPC(oPossessor, IntToString(nCastSummon));//Debug
 	   
-	   if (GetIsObjectValid(oItem))
-	   if(nCastSummon<=10)	
-	   {
-	   	ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oTarget), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	  	}		
+	   //if (GetIsObjectValid(oItem))
+	   if(nCastSummon<=10){	
+	    SendMessageToPC(oPossessor, "Inside If Statement."); //Debug
+	    ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oTarget), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	  	SendMessageToPC(oPossessor, "After spell cast."); //Debug
+	    }		
 }			  		  
