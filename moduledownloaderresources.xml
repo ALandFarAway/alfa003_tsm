@@ -420,7 +420,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="77883E4CE7C140C83E412412EB2487D4EADBC552" downloadHash="179F229F912FE3FDBA8528C68F1856900C93015B" name="6d_ext_silverymoon_south.trx" dlsize="3657315" size="19275027" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="ABC6760F6EF78CFC346A38855CBC2A7338D97E38" downloadHash="D296AB20CE568955BB103E64FE2BBDBF3FD6F5CA" name="6d_ext_silverymoon_south.trx" dlsize="3635801" size="19250873" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -745,7 +745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CB1CAE5E6F8F8AF93922F9D91D57A9848A52EAA7" downloadHash="3D78779C39DB713929BC6771136B79537F26007C" name="6e_int_khelb_derochelle_manor.trx" dlsize="372250" size="733469" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FB540AE0A342BBABEA99AB4E0E2DFC855D137FB1" downloadHash="8D1D6922B169FC6A9F2B1D3FE6146B4061AB89B2" name="6e_int_khelb_derochelle_manor.trx" dlsize="368015" size="729432" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1785,7 +1785,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A3487AA540BB83D002C7E3F5DEE53BBA616A4002" downloadHash="DC344B5BD854EEADABE3D804D162371A1084C1B4" name="5b_ext_frosthills_settlestone.trx" dlsize="5576216" size="26589872" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EA96728A33AB709EE8FADD14E5B6E49191DD70A9" downloadHash="2D25DE1DC9E7E1616AAF5F2F78369855FB120BA0" name="5b_ext_frosthills_settlestone.trx" dlsize="5561489" size="26589871" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
