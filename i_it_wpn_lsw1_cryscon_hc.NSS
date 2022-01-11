@@ -18,7 +18,7 @@ void main()
 	   SendMessageToPC(oPossessor, IntToString(nCastSummon));//Debug
 	   
 	   if (GetIsObjectValid(oItem))
-	   if(nCastSummon==1)	
+	   if(nCastSummon<=10)	
 	   {
 	   	ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oTarget), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	  	}		
