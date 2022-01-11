@@ -20,7 +20,8 @@ void main()
 	   //if (GetIsObjectValid(oItem))
 	   if(nCastSummon<=10){	
 	    SendMessageToPC(oPossessor, "Inside If Statement."); //Debug
-	    DelayCommand(6.0, ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oPossessor), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	    AssignCommand(oPossessor, ClearAllActions(TRUE));
+		DelayCommand(3.0, ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oPossessor), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	  	SendMessageToPC(oPossessor, "After spells cast."); //Debug
 	    }		
 }			  		  
