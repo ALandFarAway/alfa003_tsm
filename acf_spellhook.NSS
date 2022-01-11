@@ -172,18 +172,19 @@ void main()
 object oOlivusCast;
 if(FindSubString(GetName(oCaster), "Olivu") != -1)
 	{oOlivusCast = oCaster;}
-object oJhessiCast;
-if(FindSubString(GetName(oCaster), "Jhess") != -1)
-	{oJhessiCast = oCaster;}
+	
+//object oJhessiCast;
+//if(FindSubString(GetName(oCaster), "Jhess") != -1)
+//	{oJhessiCast = oCaster;}
 
 object oOlivusTarget;
 if(FindSubString(GetName(oTarget), "Olivu") != -1)
 	{oOlivusTarget = oTarget;}
-object oJhessiTarget;
-if(FindSubString(GetName(oTarget), "Jhess") != -1)
-	{oJhessiTarget = oTarget;}
+//object oJhessiTarget;
+//if(FindSubString(GetName(oTarget), "Jhess") != -1)
+//	{oJhessiTarget = oTarget;}
 
-if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTarget) || (oTarget == oJhessiTarget)) {	
+if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {	
 	//SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
 	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
 	//SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
@@ -195,7 +196,7 @@ if((oCaster == oOlivusCast) || (oCaster == oJhessiCast) || (oTarget == oOlivusTa
 	//SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
 	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
 	//SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
-	if((oCaster == oOlivusCast) || (oCaster == oJhessiCast)) {
+	if(oCaster == oOlivusCast) {
 	int nCrystalCast = GetCampaignInt("DeanSphinx", "CrystalCast", oCaster);
 	if((nFail == 1)&& (nCrystalCast == 0) && (nSpellId != 32)&& (nSpellId != 33)&& (nSpellId != 31)&& (nSpellId != 34)&& (nSpellId != 35)&& (nSpellId != 1020)&& (nSpellId != 1021)&& (nSpellId != 1)&& (nSpellId != 6)&& (nSpellId != 189)&& (nSpellId != 431)&& (nSpellId != 154)&& (nSpellId != 146)&& (nSpellId != 414)&& (nSpellId != 148)&& (nSpellId != 3159)&& (nSpellId != 3160)&& (nSpellId != 449)&& (nSpellId != 450)&& (nSpellId != 432)&& (nSpellId != 418)) {
 		SetModuleOverrideSpellScriptFinished();
