@@ -20,9 +20,10 @@ void main()
 	   //if (GetIsObjectValid(oItem))
 	   if(nCastSummon<=10){	
 	    SendMessageToPC(oPossessor, "Inside If Statement."); //Debug
-	    AssignCommand(oPossessor, ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oPossessor), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-	  	DelayCommand(6.0, ActionCastSpellAtLocation(SPELL_GREASE, GetLocation(oPossessor), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-	  	DelayCommand(12.0, ActionCastSpellAtLocation(SPELL_DARKNESS, GetLocation(oPossessor), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	    ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oSpellTarget), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	  	DelayCommand(6.0, ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oPossessor), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	  	DelayCommand(12.0, ActionCastSpellAtLocation(SPELL_SUMMON_CREATURE_I, GetLocation(oTarget), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	  	DelayCommand(18.0, ActionCastSpellAtLocation(SPELL_DARKNESS, GetLocation(oSpellTarget), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	  	SendMessageToPC(oPossessor, "After spells cast."); //Debug
 	    }		
 }			  		  
