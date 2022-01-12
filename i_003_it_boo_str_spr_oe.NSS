@@ -10,9 +10,7 @@ void main()
  	object oPC = GetPCItemLastEquippedBy();
 	effect eSpeedChange = EffectMovementSpeedIncrease(33);
 	
-	SendMessageToPC(oPC, "Equipped");
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSpeedChange, oPC);
-	SendMessageToPC(oPC, "Increased");
 	
 	}
 

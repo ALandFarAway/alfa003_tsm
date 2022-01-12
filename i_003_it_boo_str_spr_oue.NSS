@@ -11,8 +11,6 @@ void main()
  	object oPC = GetPCItemLastUnequippedBy();
 	effect eSpeedChange = EffectMovementSpeedDecrease(33);
 			 
-		SendMessageToPC(oPC, "Unequipped");	
 		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSpeedChange, oPC);
-	    SendMessageToPC(oPC, "Decreased");
-			 
+	    	 
 }			  

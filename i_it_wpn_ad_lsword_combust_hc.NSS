@@ -16,11 +16,12 @@ void main()
 	   
 	   SendMessageToPC(oPossessor, IntToString(nCastCombust));
 	
-	   if(nCastCombust>=10){	
+	   if(nCastCombust>=0){	
 	    SendMessageToPC(oPossessor, "Combust");
 	    AssignCommand(oPossessor, ClearAllActions(TRUE));
-		DelayCommand(1.0, ActionCastSpellAtObject(SPELL_COMBUST, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-	  	DelayCommand(3.0, AssignCommand(oPossessor, ActionAttack(oTarget)));
+		DelayCommand(1.0, ActionCastSpellAtObject(SPELL_COMBUST, oSpellTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	  	DelayCommand(7.0, ActionCastSpellAtObject(SPELL_COMBUST, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	  	//DelayCommand(3.0, AssignCommand(oPossessor, ActionAttack(oSpellTarget)));
 		SendMessageToPC(oPossessor, "After Combust");
 	    }		
 }			  		  
