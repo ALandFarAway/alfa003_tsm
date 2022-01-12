@@ -75,21 +75,21 @@ void main(string sItemTag)
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"003_it_harvest_jaguarpelt" ));
     DestroyItems( oPC,"003_it_harvest_jaguarpelt",nTotalItem,20,20 );	
 	
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_bear_dire" ));
     DestroyItems( oPC,"it_plot_hide_bear_dire",nTotalItem,50,50 );	
 	
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_misc_wasp_stinger" ));
     DestroyItems( oPC,"it_misc_wasp_stinger",nTotalItem,3,2 );	
-=======
-//	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_wolverine" ));
-   // DestroyItems( oPC,"it_plot_hide_wolverine",nTotalItem,3,2 );	
-=======
+//=======
+	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"it_plot_hide_wolverine" ));
+    DestroyItems( oPC,"it_plot_hide_wolverine",nTotalItem,3,2 );	
+//=======
 	nTotalItem = GetNumStackedItems(GetItemPossessedBy( oPC,"003_it_harvest_trollskin" ));
     DestroyItems( oPC,"003_it_harvest_trollskin",nTotalItem,25,50 );	
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 	
 	GiveGoldToCreature(oPC,Ggold);
 }

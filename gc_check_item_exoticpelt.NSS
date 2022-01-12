@@ -21,20 +21,20 @@ int StartingConditional()
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_gorgon"))) return TRUE;
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_timberwolf"))) return TRUE;
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"003_it_harvest_jaguarpelt"))) return TRUE;
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_plot_hide_bear_dire"))) return TRUE;
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
     if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"it_misc_wasp_stinger"))) return TRUE;
     
 	
 	
-=======
-=======
+//=======
+//=======
 	if(GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),"003_it_harvest_trollskin"))) return TRUE;
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
   
->>>>>>> Stashed changes
-   // return GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),sItem));
+//>>>>>>> Stashed changes
+   //return GetIsObjectValid(GetItemPossessedBy(GetPCSpeaker(),sItem));
     
     return FALSE;
 
