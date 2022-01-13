@@ -1855,7 +1855,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="24673369B2993E354772CF931A09EFE67770546E" downloadHash="8743FAE3805227E9F2660BAE156420AD4FB846D0" name="5b_ext_frosthills_gl_lake_s.trx" dlsize="2282794" size="13115747" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="511617376C9B4EE1668D97B39B94997CBBFF219C" downloadHash="6B52977B8EAE168B5DDE29C1B9F3BC5E1F118CD8" name="5b_ext_frosthills_gl_lake_s.trx" dlsize="2278642" size="13112025" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1997,6 +1997,16 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="BB5DF8B21B21DA70AC0FD18912E696AC929C3D0C" downloadHash="A338C0EC292FDC4BF145973D64385315C362F4D0" name="7e_ext_rauvin_vale_west.trx" dlsize="4163694" size="22388742" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="E301AB22C70FF3D83E53DAEBEE8B932B38B1E743" downloadHash="E99794D644AE9CF73E366A2169BBDF4A77E9695E" name="5b_ext_frosthills_glacier_settle.trx" dlsize="1532076" size="9226999" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="0DE6EF6FA0074DEFEAE51AE5EC81AB6870A32F0A" downloadHash="55D0D19BD362876D20117858B62A7B6F25B1374A" name="5b_ext_overwrite.trx" dlsize="1711860" size="9596778" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
