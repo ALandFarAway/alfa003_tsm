@@ -27,7 +27,7 @@ void main()
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_exit")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	 object oSwimExit = GetObjectByTag("hf_aq_plc_crack_enter_WP");
-	 if(ACR_SkillCheck(SKILL_SURVIVAL, oUser, 10, TRUE)) {
+	 if(ACR_SkillCheck(SKILL_SURVIVAL, oUser, 5, TRUE)) {
 	 	 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
 	     SendMessageToPC(oUser, "You squeeze out into the glimmering blue-lit cave of the aquatic fey.");		 
 	     }
@@ -43,7 +43,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_enter")
 	 object oWellSpawnWP = GetWaypointByTag("hf_aq_plc_well_exit_spawn");
 	 object oCrackSpawnWP = GetWaypointByTag("hf_aq_plc_crack_exit_spawn");
 	 int nSurvival = ACR_SkillCheck(SKILL_SURVIVAL, oUser);
-	 if(nSurvival >= 15) {
+	 if(nSurvival >= 5) {
 	     if(GetLocalObject(OBJECT_SELF, "oCrackExit") == OBJECT_INVALID) {
 		 	object oCrackExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_crack_exit", GetLocation(oCrackSpawnWP));
 		 	SetLocalObject(OBJECT_SELF, "oCrackExit", oCrackExit);
@@ -56,7 +56,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_enter")
 			}
 		 DelayCommand(5.0, SendMessageToPC(oUser, "The faintest of light triggers your survival skills. You are in a rock-walled column of glacially cold water but there are a few faintly lit cracks in the rocks around you. Maybe you could fit through a crack to go deeper into the rock...if you choose?"));
 		 }
-	 else if(nSurvival >= 10) {
+	 else if(nSurvival >= 1) {
 	 	   AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
 	       ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
 	       SendMessageToPC(oUser, "You squeeze with difficulty into the crack, feeling skin scrape. The water is colder, cold enough to numb the bruising impact of bumbling into a wall of stone. You are blocked!");		 
@@ -101,7 +101,7 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_exit")
 	 object oSwimTwo = GetObjectByTag("hf_aq_plc_crack_swim2_WP");
 	 object oSwimThree = GetObjectByTag("hf_aq_plc_crack_swim3_WP");
 	 object oSwimEnter = GetObjectByTag("hf_aq_plc_well_enter_WP");
-	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 10, TRUE)) {
+	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 5, TRUE)) {
 	 	 SendMessageToPC(oUser, "You swim along the rock walls, seeking the widest crack.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimOne)));
 		 //DelayCommand(1.0, SendMessageToPC(oUser, "You swim along the edge of the wall, seeking a way in."));		 
@@ -130,12 +130,12 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_up")
 	 object oSwimEnter = GetObjectByTag("hf_aq_plc_well_enter_WP");
 	 int nSwimCheck = ACR_SkillCheck(SKILL_SWIM, oUser);
 	 
-	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 12, TRUE)) {
+	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 5, TRUE)) {
 	 	 SendMessageToPC(oUser, "You swim up strongly and break the surface into a room faintly lit with the glow of phosphorescent moss.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
 		}
 		
-	 else if(nSwimCheck <= 5) {
+	 else if(nSwimCheck <= 2) {
 	     SendMessageToPC(oUser, "You lose your sense of up and down, blundering along the mossy walls, and end up back where you began.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimEnter)));
 	}
@@ -163,12 +163,12 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_down")
 	 
 	 int nSwimCheck = ACR_SkillCheck(SKILL_SWIM, oUser);
 	 
-	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 12, TRUE)) {
+	 if(ACR_SkillCheck(SKILL_SWIM, oUser, 5, TRUE)) {
 	 	 SendMessageToPC(oUser, "You swim down strongly and wiggle through the cracks into the area adjacent to the nixie cave.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
 		}
 		
-	 else if(nSwimCheck <= 5) {
+	 else if(nSwimCheck <= 2) {
 	     SendMessageToPC(oUser, "You lose your sense of up and down, blundering along the mossy walls, and end up back where you began.");		 
 	     AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimEnter)));
 	}
