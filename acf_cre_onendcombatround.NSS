@@ -47,5 +47,14 @@ void main()
     
 	// Custom code goes here.
 	
+	if(GetTag(OBJECT_SELF) == "sm_raid_04") {
+		object oFoe = GetAttackTarget(OBJECT_SELF);
+		effect eKill = EffectDamage(30,DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+		if(GetLastDamager(oFoe) == OBJECT_SELF) {
+			ActionSpeakString("*Rips away from stinger and falls to ground.", TALKVOLUME_TALK);
+			ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, OBJECT_SELF);
+			}
+		}
+	
 
 }
