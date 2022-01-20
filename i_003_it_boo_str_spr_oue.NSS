@@ -9,8 +9,7 @@ void main()
 {	
 	object oItem = GetPCItemLastUnequipped();
  	object oPC = GetPCItemLastUnequippedBy();
-	effect eSpeedChange = EffectMovementSpeedDecrease(33);
-			 
-		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSpeedChange, oPC);
+	
+	//FeatRemove(oPC, 194);
 	    	 
 }			  

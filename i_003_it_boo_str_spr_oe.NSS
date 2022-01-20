@@ -8,10 +8,7 @@ void main()
 {	
 	object oItem = GetPCItemLastEquipped();
  	object oPC = GetPCItemLastEquippedBy();
-	effect eSpeedChange = EffectMovementSpeedIncrease(33);
 	
-	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSpeedChange, oPC);
-	
+	//FeatAdd(oPC, 194, FALSE, TRUE, FALSE);
 	}
-
 
