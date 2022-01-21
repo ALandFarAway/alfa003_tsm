@@ -1355,7 +1355,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9E0B58F0C975271F388496A43E5FC96C9544E432" downloadHash="94C53C7092814B062B3565B0F7F705529AF5DD29" name="6b_ext_rivmoot.trx" dlsize="4413310" size="21657411" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C141BE6E917527BDD56BFA7D0FC01F02647553C5" downloadHash="0ACE7A383F058543F85E68850ECACA267D9BD719" name="6b_ext_rivmoot.trx" dlsize="4381301" size="21623216" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
