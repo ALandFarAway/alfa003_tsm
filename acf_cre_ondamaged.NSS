@@ -50,13 +50,15 @@ void main()
 	if(GetTag(oDamager) == "sm_raid_04") {
 		object oFoe = OBJECT_SELF;
 		object oStinger = GetLastWeaponUsed(oDamager);
-		effect eKill = EffectDamage(30,DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-		SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + GetTag(oStinger)); 
+		effect ePoison = EffectPoison(IP_CONST_ONMONSTERHIT_POISON);
+		effect eKill = EffectDeath(FALSE, TRUE, FALSE, TRUE);
+		SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with " + GetTag(oStinger)); 
 		
 		if(GetTag(oStinger) == "abr_it_cr_st_giant_bee") {
-			//ActionSpeakString("*Rips away from stinger and falls to ground.", TALKVOLUME_TALK);
-			//ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, OBJECT_SELF);
-		    SendMessageToAllDMs("Inside if statement");
+			ClearAllActions(TRUE);
+			ActionSpeakString("*Leaves stinger in victim.", TALKVOLUME_TALK);
+			ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, oDamager);
+		    //SendMessageToAllDMs("Inside if statement");
 			}
 		}
 

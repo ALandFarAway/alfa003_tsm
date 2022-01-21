@@ -244,6 +244,6 @@ void main()
 		 
 			}
 	
-		 
+		 ExecuteScript("acf_cre_ondamaged", OBJECT_SELF);
 	
 }

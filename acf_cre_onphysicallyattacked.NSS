@@ -69,7 +69,7 @@ void main()
 	object oProjectile;
 	string sProjectile;
 	
-	SendMessageToAllDMs(GetName(oAttacker) + " is attacking " + GetName(OBJECT_SELF) + " with " + sWeapon + " in " + GetName(GetArea(oAttacker)));
+	//SendMessageToAllDMs(GetName(oAttacker) + " is attacking " + GetName(OBJECT_SELF) + " with " + sWeapon + " in " + GetName(GetArea(oAttacker)));
 	if(FindSubString(GetTag(GetArea(oAttacker)), "nw_cave_aq") != -1) 
 		{object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oAttacker, 1);
 		 string sTrgTag = GetTag(oSwimTrg);
