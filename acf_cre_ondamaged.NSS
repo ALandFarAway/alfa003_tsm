@@ -46,7 +46,18 @@ void main()
     ACR_CreatureOnDamaged();
 
     // Custom code goes here.
-	
-
+	object oDamager = GetLastDamager();
+	if(GetTag(oDamager) == "sm_raid_04") {
+		object oFoe = OBJECT_SELF;
+		object oStinger = GetLastWeaponUsed(oDamager);
+		effect eKill = EffectDamage(30,DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+		SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + GetTag(oStinger)); 
+		
+		if(GetTag(oStinger) == "abr_it_cr_st_giant_bee") {
+			//ActionSpeakString("*Rips away from stinger and falls to ground.", TALKVOLUME_TALK);
+			//ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, OBJECT_SELF);
+		    SendMessageToAllDMs("Inside if statement");
+			}
+		}
 
 }

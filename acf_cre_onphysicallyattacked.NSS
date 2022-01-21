@@ -50,6 +50,16 @@ void main()
 	string sAttacker = GetName(oAttacker);
 	object oWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oAttacker);
 	string sWeapon = GetName(oWeapon);
+	if(oWeapon == OBJECT_INVALID) {
+		oWeapon = GetItemInSlot(INVENTORY_SLOT_CWEAPON_L);
+		}
+	if(oWeapon == OBJECT_INVALID) {
+		oWeapon = GetItemInSlot(INVENTORY_SLOT_CWEAPON_R);
+		}
+	if(oWeapon == OBJECT_INVALID) {
+		oWeapon = GetItemInSlot(INVENTORY_SLOT_CWEAPON_B);
+		}
+	
 	object oArrows = GetItemInSlot(INVENTORY_SLOT_ARROWS, oAttacker);
 	string sArrows = GetName(oArrows);
 	object oBolts = GetItemInSlot(INVENTORY_SLOT_BOLTS, oAttacker);
