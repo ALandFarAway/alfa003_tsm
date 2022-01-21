@@ -23,6 +23,6 @@ void main()
 
     effect eSuper = SupernaturalEffect(eSpell);
 
-//    SendMessageToPC(oPC,"Applying supernatural speed effect.");
+    SendMessageToPC(oPC,"Applying supernatural speed effect.");
     ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSuper, oPC);
 }

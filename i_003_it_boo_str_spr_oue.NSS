@@ -17,13 +17,13 @@ void main()
     while (GetIsEffectValid(eTest)) {
         if (GetEffectSpellId(eTest) == SPELLID_STRIDING_SPRINGING)
         {
-//            SendMessageToPC(oPC,"Removing speed effect.");
+            SendMessageToPC(oPC,"Removing speed effect.");
              RemoveEffect(oPC, eTest);
             return;
         }
         eTest = GetNextEffect(oPC);
     }
-//    SendMessageToPC(oPC,"Speed effect not found.");
+    SendMessageToPC(oPC,"Speed effect not found.");
 
 
 }  

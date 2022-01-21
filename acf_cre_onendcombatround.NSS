@@ -49,10 +49,12 @@ void main()
 	
 	if(GetTag(OBJECT_SELF) == "sm_raid_04") {
 		object oFoe = GetAttackTarget(OBJECT_SELF);
+		object oStinger = GetLastWeaponUsed(OBJECT_SELF);
 		effect eKill = EffectDamage(30,DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+		SendMessageToAllDMs(GetName(OBJECT_SELF) + " end combat round vs " + GetName(oFoe) + " with " + GetName(oStinger));
 		//if(GetLastDamager(oFoe) == OBJECT_SELF) {
-			ActionSpeakString("*Rips away from stinger and falls to ground.", TALKVOLUME_TALK);
-			ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, OBJECT_SELF);
+			//ActionSpeakString("*Rips away from stinger and falls to ground.", TALKVOLUME_TALK);
+			//ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, OBJECT_SELF);
 		//	}
 		}
 	
