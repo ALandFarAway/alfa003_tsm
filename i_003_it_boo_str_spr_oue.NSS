@@ -11,8 +11,10 @@ void main()
 {
     // * This code runs when the item is unequipped
     object oPC      = GetPCItemLastUnequippedBy();
-//    object oItem    = GetPCItemLastUnequipped();
+    object oItem    = GetPCItemLastUnequipped();
 
+	SendMessageToAllDMs(GetName(oPC) + " took off " + GetName(oItem));
+    
     effect eTest = GetFirstEffect(oPC);
     while (GetIsEffectValid(eTest)) {
         if (GetEffectSpellId(eTest) == SPELLID_STRIDING_SPRINGING)

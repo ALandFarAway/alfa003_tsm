@@ -8,10 +8,11 @@
 const int SPELLID_STRIDING_SPRINGING = 1777;
 
 void main()
-{
+{   
     object oPC      = GetPCItemLastEquippedBy();
-//    object oItem    = GetPCItemLastEquipped();
-
+    object oItem    = GetPCItemLastEquipped();
+	SendMessageToAllDMs(GetName(oPC) + " put on " + GetName(oItem));
+    
 
     effect eFast = EffectMovementSpeedIncrease(30);
 

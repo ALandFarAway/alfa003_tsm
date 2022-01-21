@@ -52,10 +52,12 @@ void main()
 		object oStinger = GetLastWeaponUsed(OBJECT_SELF);
 		effect eKill = EffectDamage(30,DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 		SendMessageToAllDMs(GetName(OBJECT_SELF) + " end combat round vs " + GetName(oFoe) + " with " + GetName(oStinger));
-		//if(GetLastDamager(oFoe) == OBJECT_SELF) {
+		
+		if((GetLastDamager(oFoe) == OBJECT_SELF) && (GetName(oStinger) == "Wasp Stinger")) {
 			//ActionSpeakString("*Rips away from stinger and falls to ground.", TALKVOLUME_TALK);
 			//ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, OBJECT_SELF);
-		//	}
+		    SendMessageToAllDMs("Inside if statement");
+			}
 		}
 	
 
