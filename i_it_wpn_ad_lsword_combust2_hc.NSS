@@ -8,8 +8,13 @@
 
 #include "x2_I0_SPELLS"
 #include "x2_inc_toollib"
+ #include "acr_spawn_i"
+ #include "x2_inc_spellhook"
+
 
 void main() {
+  SendMessageToPC(OBJECT_SELF,GetTag(OBJECT_SELF) + " onhit cast fired.");
+        
     if (!Random(3)) {// random 3 returned 0, 1 in 3 chance
         object oTarget = GetSpellTargetObject();
         int nDamage = d8(2);
