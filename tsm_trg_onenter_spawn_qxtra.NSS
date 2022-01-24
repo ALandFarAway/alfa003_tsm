@@ -40,13 +40,18 @@ void main()
     // Custom code goes here.
 	object oPC = GetEnteringObject();
 
- if((GetTag(OBJECT_SELF) == "tsm_trg_onenter_spawn_qxtra") && (GetIsPC(oPC)))
+ if((GetTag(OBJECT_SELF) == "tsm_trg_onenter_spawn_qxtra") && (GetIsPC(oPC)) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 2))
 	{string sQuest = GetLocalString(OBJECT_SELF, "ACR_SPAWN_QUEST");
 	 int nLowerState = GetLocalInt(OBJECT_SELF, "ACR_QST_LOWER_STATE");
 	 int nUpperState = GetLocalInt(OBJECT_SELF, "ACR_QST_UPPER_STATE");
+	 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	 if((ACR_RetrieveQuestState(sQuest, oPC) >= nLowerState)&& (ACR_RetrieveQuestState(sQuest, oPC) < nUpperState)) {
 		 int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
-		 if(Random(100)+1 <= nPercentChance) {
+		 if(Random(100)+1 > nPercentChance) {
+			 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
+			 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "RUN_ONCE", 0));
+			}
+		 else {
 			 string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
 			 
 			 int nSpawnType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_TYPE");
@@ -77,8 +82,7 @@ void main()
 		     float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
 			 float fDurationLengthTwo = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH_TWO");
 		
-			 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
-		
+			 
 			 
 			 if(nRunOnce == 1) {
 				if((nSpawnNumber > 0) && (sSpawn != "")) {

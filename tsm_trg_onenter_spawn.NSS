@@ -55,7 +55,14 @@ void main()
 	object oPC = GetEnteringObject();
 
  if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_spawn") && (GetIsPC(oPC)))
-		{string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
+		{int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
+		 if((nPercentChance != 0) && (Random(100)+1 > nPercentChance)) {
+			 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
+			 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "RUN_ONCE", 0));
+			}
+		 else {
+		
+		 string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
 		 
 		 int nSpawnType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_TYPE");
 		 string sSpawn = GetLocalString(OBJECT_SELF, "ACR_SPAWN_RESREF");
@@ -170,11 +177,6 @@ void main()
 			//SendMessageToAllDMs(FloatToString(fDelaySpawnOne) + " execute tsm_trg_onenter_spawn");
 			DelayCommand(fDelaySpawnOne, ExecuteScript("tsm_trg_onenter_spawn", OBJECT_SELF));
 			}	
-		 
-		 
-		 
-		 
-		 
 		 }
-	   
+	}
 }

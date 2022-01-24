@@ -1,8 +1,13 @@
 //TSM individual item onHit cast.
-// Wynna /  Arri  / Saaz  2022
+// Saaz  2022
 
+/* i_03_it_wpn_ad_lsword_hc
+
+    On hit to mimic combut at caster level two in one out of three hits.
+*/
+
+#include "x2_I0_SPELLS"
 #include "x2_inc_toollib"
-#include "acr_spells_i"
 
 void main() {
     if (!Random(3)) {// random 3 returned 0, 1 in 3 chance
@@ -14,8 +19,9 @@ void main() {
         effect eHit = EffectLinkEffects(eDam, eVis);
 
         AddItemProperty(DURATION_TYPE_TEMPORARY,ItemPropertyVisualEffect(ITEM_VISUAL_FIRE),OBJECT_SELF,6.0);
-        if(!MyResistSpell(OBJECT_SELF, oTarget))
-        {
+        int nSRResult = MyResistSpell(OBJECT_SELF, oTarget);
+        SendMessageToPC(OBJECT_SELF,"SR result is "+IntToString(nSRResult));
+        if(nSRResult<1) {
             ApplyEffectToObject(DURATION_TYPE_INSTANT, eHit, oTarget);
             TLVFXPillar(VFX_HIT_SPELL_EVOCATION, GetLocation(oTarget), 5, 0.1f,0.0f, 2.0f);
         }

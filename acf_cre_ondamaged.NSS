@@ -47,14 +47,14 @@ void main()
 
     // Custom code goes here.
 	object oDamager = GetLastDamager();
-	if(GetTag(oDamager) == "sm_raid_04") {
-		object oFoe = OBJECT_SELF;
-		object oStinger = GetLastWeaponUsed(oDamager);
-		effect ePoison = EffectPoison(IP_CONST_ONMONSTERHIT_POISON);
-		effect eKill = EffectDeath(FALSE, TRUE, FALSE, TRUE);
-		SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with " + GetTag(oStinger)); 
+	object oWeapon = GetLastWeaponUsed(oDamager);
+	SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with " + GetTag(oWeapon)); 
 		
-		if(GetTag(oStinger) == "abr_it_cr_st_giant_bee") {
+	if(GetTag(oDamager) == "sm_raid_04") {
+	effect ePoison = EffectPoison(IP_CONST_ONMONSTERHIT_POISON);
+	effect eKill = EffectDeath(FALSE, TRUE, FALSE, TRUE);
+		
+		if(GetTag(oWeapon) == "abr_it_cr_st_giant_bee") {
 			ClearAllActions(TRUE);
 			ActionSpeakString("*Leaves stinger in victim.", TALKVOLUME_TALK);
 			ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, oDamager);
