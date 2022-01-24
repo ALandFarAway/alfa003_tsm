@@ -143,14 +143,14 @@ void main()
 				SendMessageToPC(oPC, sMessage);
 				SendMessageToPC(oPC, "nRunOnce = 0");
 				SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
-				if(fDelaySpawnOne >= fDelayVFXOne) {
+			/*	if(fDelaySpawnOne >= fDelayVFXOne) {
 					DelayCommand(fDelayVFXOne, ApplyEffectAtLocation(nDurationType, eOne, lSpawnWP, fDurationLength));
 			    		}
 				
 				if(fDelaySpawnTwo >= fDelayVFXTwo) {
 					DelayCommand(fDelayVFXTwo, ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnWPTwo, fDurationLengthTwo));
-			       }
-				DelayCommand(fDelaySpawnOne, ExecuteScript("tsm_trg_onenter_spawn", OBJECT_SELF));
+			       }*/
+				DelayCommand(fDelaySpawnOne, ExecuteScript("tsm_trg_onenter_spawn_qxtra", OBJECT_SELF));
 				}			 
 			 } 
 		}

@@ -8,12 +8,12 @@
 
 #include "x2_I0_SPELLS"
 #include "x2_inc_toollib"
- #include "acr_spawn_i"
- #include "x2_inc_spellhook"
+#include "acr_spawn_i"
+#include "x2_inc_spellhook"
 
 
 void main() {
-  SendMessageToPC(OBJECT_SELF,GetTag(OBJECT_SELF) + " onhit cast fired.");
+  //SendMessageToPC(OBJECT_SELF,GetTag(OBJECT_SELF) + " onhit cast fired.");
         
     if (!Random(3)) {// random 3 returned 0, 1 in 3 chance
         object oTarget = GetSpellTargetObject();
@@ -25,7 +25,7 @@ void main() {
 
         AddItemProperty(DURATION_TYPE_TEMPORARY,ItemPropertyVisualEffect(ITEM_VISUAL_FIRE),OBJECT_SELF,6.0);
         int nSRResult = MyResistSpell(OBJECT_SELF, oTarget);
-        SendMessageToPC(OBJECT_SELF,"SR result is "+IntToString(nSRResult));
+        //SendMessageToPC(OBJECT_SELF,"SR result is "+IntToString(nSRResult));
         if(nSRResult<1) {
             ApplyEffectToObject(DURATION_TYPE_INSTANT, eHit, oTarget);
             TLVFXPillar(VFX_HIT_SPELL_EVOCATION, GetLocation(oTarget), 5, 0.1f,0.0f, 2.0f);
