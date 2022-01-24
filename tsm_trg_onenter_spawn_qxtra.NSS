@@ -50,7 +50,7 @@ void main()
 	 int nRandom = Random(100) +1;
 	 //SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
 	 if((ACR_RetrieveQuestState(sQuest, oPC) >= nLowerState)&& (ACR_RetrieveQuestState(sQuest, oPC) < nUpperState)) {
-		 SendMessageToPC(oPC, "Quest State = " + IntToString(ACR_RetrieveQuestState(sQuest, oPC)));
+		 //SendMessageToPC(oPC, "Quest State = " + IntToString(ACR_RetrieveQuestState(sQuest, oPC)));
 	     int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
 		 if(nRandom > nPercentChance) {
 			 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
