@@ -39,27 +39,27 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
-	SendMessageToPC(oPC, GetTag(OBJECT_SELF) + " triggered");
+	//SendMessageToPC(oPC, GetTag(OBJECT_SELF) + " triggered");
 	 
  if((GetTag(OBJECT_SELF) == "tsm_trg_onenter_spawn_qxtra") && (GetIsPC(oPC)) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 2))
 	{string sQuest = GetLocalString(OBJECT_SELF, "ACR_SPAWN_QUEST");
 	 int nLowerState = GetLocalInt(OBJECT_SELF, "ACR_QST_LOWER_STATE");
 	 int nUpperState = GetLocalInt(OBJECT_SELF, "ACR_QST_UPPER_STATE");
 	 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
-	 SendMessageToPC(oPC, sQuest + " " + IntToString(nRunOnce));
+	 //SendMessageToPC(oPC, sQuest + " " + IntToString(nRunOnce));
 	 int nRandom = Random(100) +1;
-	 SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
+	 //SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
 	 if((ACR_RetrieveQuestState(sQuest, oPC) >= nLowerState)&& (ACR_RetrieveQuestState(sQuest, oPC) < nUpperState)) {
 		 SendMessageToPC(oPC, "Quest State = " + IntToString(ACR_RetrieveQuestState(sQuest, oPC)));
 	     int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
 		 if(nRandom > nPercentChance) {
-			 //SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
-			 SendMessageToPC(oPC, "nRandom greater than nPercent Chance. RUN_ONCE Now 2");
+			 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
+			// SendMessageToPC(oPC, "nRandom greater than nPercent Chance. RUN_ONCE Now 2");
 	 		 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "RUN_ONCE", 0));
 			}
 		 else {
 			 string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
-			 SendMessageToPC(oPC, "nRandom less than nPercent Chance. Firing.");
+			 //SendMessageToPC(oPC, "nRandom less than nPercent Chance. Firing.");
 	 		 
 			 int nSpawnType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_TYPE");
 			 string sSpawn = GetLocalString(OBJECT_SELF, "ACR_SPAWN_RESREF");
@@ -92,7 +92,7 @@ void main()
 			 
 			 
 			 if(nRunOnce == 1) {
-				SendMessageToPC(oPC, "nRunOnce = 1");
+				//SendMessageToPC(oPC, "nRunOnce = 1");
 				if((nSpawnNumber > 0) && (sSpawn != "")) {
 					object oSpawnOne = CreateObject(nSpawnType, sSpawn, lSpawnWP); 
 				    ApplyEffectToObject(nDurationType, eTwo, oSpawnWP, fDurationLength);
@@ -135,13 +135,13 @@ void main()
 				}
 				
 				SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
-				SendMessageToPC(oPC, "RUN_ONCE set to 2");
+				//SendMessageToPC(oPC, "RUN_ONCE set to 2");
 				
 			}
 				
 			if(nRunOnce == 0) {
 				SendMessageToPC(oPC, sMessage);
-				SendMessageToPC(oPC, "nRunOnce = 0");
+				//SendMessageToPC(oPC, "nRunOnce = 0");
 				SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 			/*	if(fDelaySpawnOne >= fDelayVFXOne) {
 					DelayCommand(fDelayVFXOne, ApplyEffectAtLocation(nDurationType, eOne, lSpawnWP, fDurationLength));
