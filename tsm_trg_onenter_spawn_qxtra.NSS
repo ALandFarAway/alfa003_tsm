@@ -77,17 +77,17 @@ void main()
 			 
 			 float fDelaySpawnOne = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
 			 float fDelaySpawnTwo = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY_TWO");
-			 float fDelayVFXOne = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY");
-			 float fDelayVFXTwo = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY_TWO");
+			//float fDelayVFXOne = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY");
+			 //float fDelayVFXTwo = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY_TWO");
 			 
-			 int nVFX = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX");
-			 int nVFXTwo = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_TWO");
-			 effect eOne = EffectVisualEffect(nVFX);
-		     effect eTwo = EffectVisualEffect(nVFXTwo);
-			 int nDurationType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE");
-		     int nDurationTypeTwo = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE_TWO");
-		     float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
-			 float fDurationLengthTwo = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH_TWO");
+			 //int nVFX = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX");
+			// int nVFXTwo = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_TWO");
+			 //effect eOne = EffectVisualEffect(nVFX);
+		    //effect eTwo = EffectVisualEffect(nVFXTwo);
+			 //int nDurationType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE");
+		     //int nDurationTypeTwo = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE_TWO");
+		     //float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
+			// float fDurationLengthTwo = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH_TWO");
 		
 			 
 			 
@@ -95,43 +95,57 @@ void main()
 				//SendMessageToPC(oPC, "nRunOnce = 1");
 				if((nSpawnNumber > 0) && (sSpawn != "")) {
 					object oSpawnOne = CreateObject(nSpawnType, sSpawn, lSpawnWP); 
-				    ApplyEffectToObject(nDurationType, eTwo, oSpawnWP, fDurationLength);
-			        ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnWPTwo, fDurationLengthTwo);
+					SendMessageToPC(oPC, "Created " + sSpawn);
+				    //ApplyEffectToObject(nDurationType, eTwo, oSpawnWP, fDurationLength);
+			        //ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnWPTwo, fDurationLengthTwo);
 			        if(nSpawnNumber > 1) 
-						{object oSpawnOneB = CreateObject(nSpawnType, sSpawn, lSpawnWP);}
+						{object oSpawnOneB = CreateObject(nSpawnType, sSpawn, lSpawnWP);
+						 SendMessageToPC(oPC, "Created " + sSpawn);
+				    	}
 					if(nSpawnNumber > 2) 
-						{object oSpawnOneC = CreateObject(nSpawnType, sSpawn, lSpawnWP);}
+						{object oSpawnOneC = CreateObject(nSpawnType, sSpawn, lSpawnWP);
+						 SendMessageToPC(oPC, "Created " + sSpawn);
+				    }
 					if((nSpawnNumber > 3) && (Random(2) == 1))
-						{object oSpawnOneD = CreateObject(nSpawnType, sSpawn, lSpawnWP);}
+						{object oSpawnOneD = CreateObject(nSpawnType, sSpawn, lSpawnWP);
+						SendMessageToPC(oPC, "Created " + sSpawn);
+				      }
 					if((nSpawnNumber > 4) && (Random(2) == 1))
-						{object oSpawnOneE = CreateObject(nSpawnType, sSpawn, lSpawnWP);}
-					if(fDelayVFXOne > fDelaySpawnOne) {
-					    DelayCommand(fDelayVFXOne - fDelaySpawnOne, ApplyEffectToObject(nDurationType, eOne, oSpawnOne, fDurationLength));
-			    		}
+						{object oSpawnOneE = CreateObject(nSpawnType, sSpawn, lSpawnWP);
+						SendMessageToPC(oPC, "Created " + sSpawn);
+				    }
+					//if(fDelayVFXOne > fDelaySpawnOne) {
+					   // DelayCommand(fDelayVFXOne - fDelaySpawnOne, ApplyEffectToObject(nDurationType, eOne, oSpawnOne, fDurationLength));
+			    	//	}
 				}
 				
 				if((nSpawnNumberTwo > 0) && (sSpawnTwo != "")) {
 					object oSpawnTwo = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo); 
-				    DelayCommand(1.0, AssignCommand(oSpawnTwo,ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
-					 if(nSpawnNumberTwo > 1) 
+				    //DelayCommand(1.0, AssignCommand(oSpawnTwo,ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
+					 SendMessageToPC(oPC, "2. Created " + sSpawn);
+				     if(nSpawnNumberTwo > 1) 
 						{object oSpawnTwoB = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-						 DelayCommand(1.0, AssignCommand(oSpawnTwoB, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
-						}
+						 //DelayCommand(1.0, AssignCommand(oSpawnTwoB, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
+						SendMessageToPC(oPC, "2. Created " + sSpawn);
+				     }
 					if(nSpawnNumberTwo > 2)
 						{object oSpawnTwoC = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-						 DelayCommand(1.0, AssignCommand(oSpawnTwoC, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
+						SendMessageToPC(oPC, "2. Created " + sSpawn);
+				     // DelayCommand(1.0, AssignCommand(oSpawnTwoC, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
 						}
 					if((nSpawnNumberTwo > 3) && (Random(2) == 1))
 						{object oSpawnTwoD = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-						 DelayCommand(1.0, AssignCommand(oSpawnTwoD, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
-						}
+						 //DelayCommand(1.0, AssignCommand(oSpawnTwoD, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
+						SendMessageToPC(oPC, "2. Created " + sSpawn);
+				     }
 					if((nSpawnNumberTwo > 4) && (Random(2) == 1))
 						{object oSpawnTwoE = CreateObject(nSpawnTypeTwo, sSpawnTwo, lSpawnWPTwo);
-						 DelayCommand(1.0, AssignCommand(oSpawnTwoE, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
-						}
-					if(fDelayVFXTwo > fDelaySpawnTwo) {
-					DelayCommand(fDelayVFXTwo - fDelaySpawnTwo, ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnTwo, fDurationLengthTwo));
-			        }
+						// DelayCommand(1.0, AssignCommand(oSpawnTwoE, ActionSpeakString("*Climbs out of a xorn's mouth.", TALKVOLUME_TALK)));
+						SendMessageToPC(oPC, "2. Created " + sSpawn);
+				     }
+				//	if(fDelayVFXTwo > fDelaySpawnTwo) {
+					//DelayCommand(fDelayVFXTwo - fDelaySpawnTwo, ApplyEffectToObject(nDurationTypeTwo, eTwo, oSpawnTwo, fDurationLengthTwo));
+			       // }
 				}
 				
 				SetLocalInt(OBJECT_SELF, "RUN_ONCE", 2);
