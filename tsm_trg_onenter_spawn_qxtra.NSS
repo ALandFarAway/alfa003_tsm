@@ -76,6 +76,7 @@ void main()
 				 location lSpawnWPTwo = GetLocation(oSpawnWPTwo);
 				 if((nSpawnNumber > 0) && (sSpawn != "")) {
 						object oSpawnOne = CreateObject(nSpawnType, sSpawn, lSpawnWP); 
+						SendMessageToPC(oPC, "oSpawnOne");
 						if(nSpawnNumber > 1) 
 							{object oSpawnOneB = CreateObject(nSpawnType, sSpawn, lSpawnWP);
 							 }
