@@ -38,9 +38,12 @@ void main()
     ACR_TriggerOnEnter();
 
  // Custom code goes here.
- object oPC = GetEnteringObject();
+ object oPC;
+ if(GetIsPC(GetEnteringObject())) {
+ 	oPC = GetEnteringObject();
+ }
  if(GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) == 1) {
-	oPC = GetLocalObject(OBJECT_SELF, "oPC");
+   oPC = GetLocalObject(OBJECT_SELF, "oPC");
  }
 SendMessageToPC(oPC, IntToString(GetLocalInt(OBJECT_SELF, "RUN_ONCE")) + " " + GetName(oPC));
 						 
