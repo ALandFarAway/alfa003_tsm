@@ -42,18 +42,20 @@ void main()
  if(GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) == 1) {
 	oPC = GetLocalObject(OBJECT_SELF, "oPC");
  }
-	 
+SendMessageToPC(oPC, IntToString(GetLocalInt(OBJECT_SELF, "RUN_ONCE")) + " " + GetName(oPC));
+						 
  if((GetTag(OBJECT_SELF) == "tsm_trg_onenter_spawn_qxtra") && (GetIsPC(oPC)) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) != 2))
 	{string sQuest = GetLocalString(OBJECT_SELF, "ACR_SPAWN_QUEST");
 	 int nLowerState = GetLocalInt(OBJECT_SELF, "ACR_QST_LOWER_STATE");
 	 int nUpperState = GetLocalInt(OBJECT_SELF, "ACR_QST_UPPER_STATE");
 	 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC));
 	 int nRandom = Random(100) +1;
-	 //SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
+	 SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
 	 if((ACR_RetrieveQuestState(sQuest, oPC) >= nLowerState)&& (ACR_RetrieveQuestState(sQuest, oPC) < nUpperState)) {
 		 int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
 		 if((nRunOnce == 0) && (nRandom > nPercentChance)) {
-			 SetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC), 2);
+			 SendMessageToPC(oPC, "nRunOnce = 2");
+		     SetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC), 2);
 			 DelayCommand(3600.0, SetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC), 0));
 			}
 		 else {
@@ -61,6 +63,7 @@ void main()
 			 float fDelaySpawnOne = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
 			 
 			 if(nRunOnce == 1) {
+				 SendMessageToPC(oPC, "nRunOnce = 1");
 				 int nSpawnType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_TYPE");
 				 string sSpawn = GetLocalString(OBJECT_SELF, "ACR_SPAWN_RESREF");
 				 int nSpawnNumber = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_NUMBER");
@@ -112,6 +115,7 @@ void main()
 					}
 				
 				if(nRunOnce == 0) {
+					SendMessageToPC(oPC, "nRunOnce = 0");
 					SendMessageToPC(oPC, sMessage);
 					SetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC), 1);
 					SetLocalObject(OBJECT_SELF, "oPC", oPC);
