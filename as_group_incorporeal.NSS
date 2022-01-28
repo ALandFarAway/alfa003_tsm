@@ -51,42 +51,42 @@ void main() {
 
 	switch(Random(10)) {
         case 0:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_allip", OBJECT_TYPE_CREATURE);
             break;
         case 1:
-            ACR_SpawnObject("003_cr_un_ghost_fgt", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_humfgt", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_un_ghost_wiz0", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow", OBJECT_TYPE_CREATURE);
             break;
         case 3:
-            ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_wight", OBJECT_TYPE_CREATURE);
             break;
 		case 4:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_dwfgt", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_humfgt", OBJECT_TYPE_CREATURE);
             break;
         case 5:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_fgt", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow", OBJECT_TYPE_CREATURE);
             break;
         case 6:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_wight", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_wight", OBJECT_TYPE_CREATURE);
             break;
         case 7:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_wiz0", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_allip", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_allip", OBJECT_TYPE_CREATURE);
             break;
 		case 8:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_wiz0", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow", OBJECT_TYPE_CREATURE);
             break;
 		case 9:
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost", OBJECT_TYPE_CREATURE);
-            ACR_SpawnObject("003_cr_un_ghost_cl", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_humfgt", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_humfgt", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_humcl", OBJECT_TYPE_CREATURE);
             break;	
 			}			
 	

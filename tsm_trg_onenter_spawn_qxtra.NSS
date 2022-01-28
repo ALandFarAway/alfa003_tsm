@@ -10,24 +10,6 @@
 #include "acr_quest_i"
 #include "acr_spawn_i"
 
-
-
-////////////////////////////////////////////////////////////////////////////////
-// Constants ///////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Structures //////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Global Variables ////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Function Prototypes /////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +34,7 @@ void main()
 	 int nLowerState = GetLocalInt(OBJECT_SELF, "ACR_QST_LOWER_STATE");
 	 int nUpperState = GetLocalInt(OBJECT_SELF, "ACR_QST_UPPER_STATE");
 	 int nRandom = Random(100) +1;
-	 SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
+	 //SendMessageToPC(oPC,"nRandom = " + IntToString(nRandom));
 	 if((ACR_RetrieveQuestState(sQuest, oPC) >= nLowerState)&& (ACR_RetrieveQuestState(sQuest, oPC) < nUpperState)) {
 		 int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
 		 if(nRandom < nPercentChance) {
@@ -78,7 +60,7 @@ void main()
 					
 			 if((nSpawnNumber > 0) && (sSpawn != "")) {
 					DelayCommand(fDelaySpawnOne, ActionCreateCreature(sSpawn, lSpawnWP)); 
-					SendMessageToPC(oPC, "oSpawnOne");
+					//DelayCommand(fDelaySpawnOne, SendMessageToPC(oPC, "oSpawnOne"));
 					if(nSpawnNumber > 1) 
 							{DelayCommand(fDelaySpawnOne, ActionCreateCreature(sSpawn, lSpawnWP));}
 					if((nSpawnNumber > 2) && (Random(2) == 1))
@@ -90,15 +72,16 @@ void main()
 					}
 					
 			 if((nSpawnNumberTwo > 0) && (sSpawnTwo != "")) {
-					DelayCommand(fDelaySpawnOne, ActionCreateCreature(sSpawnTwo, lSpawnWP)); 
+					DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWPTwo)); 
+					//DelayCommand(fDelaySpawnTwo, SendMessageToPC(oPC, "oSpawnTwo"));
 					if(nSpawnNumberTwo > 1) 
-							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWP));}
+							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWPTwo));}
 					if((nSpawnNumberTwo > 2)&& (Random(2) == 1))
-							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWP));}
+							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWPTwo));}
 					if((nSpawnNumberTwo > 3) && (Random(2) == 1))
-							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWP));}
+							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWPTwo));}
 					if((nSpawnNumberTwo > 4) && (Random(2) == 1))
-							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWP));}
+							{DelayCommand(fDelaySpawnTwo, ActionCreateCreature(sSpawnTwo, lSpawnWPTwo));}
 					}
 					
 			 SetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC), 1);
