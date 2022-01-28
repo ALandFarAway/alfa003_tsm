@@ -52,7 +52,8 @@ void main()
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
 		else if(Random(10) == 1)
-		   {ClearAllActions(TRUE);
+		   {SendMessageToAllDMs("Moaning ghost firing.");
+		    ClearAllActions(TRUE);
 		    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
 		    PlaySound("as_hr_x2ghost4", FALSE);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonic, OBJECT_SELF, 3.0);

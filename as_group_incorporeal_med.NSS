@@ -49,7 +49,7 @@ void main();
 
 void main() {
 
-	switch(Random(10)) {
+	switch(Random(11)) {
         case 0:
             ACR_SpawnObject("003_cr_un_allip_7", OBJECT_TYPE_CREATURE);
             break;
@@ -57,7 +57,7 @@ void main() {
             ACR_SpawnObject("003_cr_un_ghost_dwcl", OBJECT_TYPE_CREATURE);
             break;
         case 2:
-            ACR_SpawnObject("003_cr_un_ghost_elfwiz", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_un_ghost_dwwiz", OBJECT_TYPE_CREATURE);
             break;
         case 3:
             ACR_SpawnObject("003_cr_un_ghost_elffgt", OBJECT_TYPE_CREATURE);
@@ -78,7 +78,10 @@ void main() {
             ACR_SpawnObject("003_cr_un_ghost_horrific", OBJECT_TYPE_CREATURE);
             break;
 		case 9:
-            ACR_SpawnObject("003_cr_un_ghost_shadow_greater", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("003_cr_undead_shadow_greater", OBJECT_TYPE_CREATURE);
+            break;	
+		case 10:
+            ACR_SpawnObject("003_cr_un_elfcl", OBJECT_TYPE_CREATURE);
             break;	
 			}			
 	
