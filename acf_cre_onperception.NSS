@@ -51,11 +51,17 @@ void main()
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_moan") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
-		else if(Random(10) == 1)
+		else if(Random(5) <= 5)
 		   {SendMessageToAllDMs("Moaning ghost firing.");
 		    ClearAllActions(TRUE);
 		    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
-		    PlaySound("as_hr_x2ghost4", FALSE);
+		    PlaySound("as_hr_x2ghost1", FALSE);
+			DelayCommand(5.0, PlaySound("as_hr_x2ghost2", FALSE));
+			DelayCommand(10.0, PlaySound("as_hr_x2ghost3", FALSE));
+			DelayCommand(15.0, PlaySound("as_hr_x2ghost4", FALSE));
+			DelayCommand(20.0, PlaySound("as_hr_x2ghost5", FALSE));
+			DelayCommand(25.0, PlaySound("as_hr_x2ghost6", FALSE));
+			DelayCommand(30.0, PlaySound("as_hr_x2ghost9", FALSE));
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonic, OBJECT_SELF, 3.0);
 			int nDC = 10 + (GetHitDice(OBJECT_SELF)/2) + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF); 
 			effect eFear = EffectFrightened();
