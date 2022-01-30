@@ -18,7 +18,7 @@ void main()
 	   object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
 	   //SendMessageToAllDMs("oPossessor = " + GetTag(oPossessor));
 	   
-	   if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
+	   if(GetObjectType(oSpellTarget) == OBJECT_TYPE_CREATURE)
 		{
 			int nTouch = TouchAttackMelee(oSpellTarget);
 			int nDamage = d4();
