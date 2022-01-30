@@ -375,11 +375,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="66E6319ADB1DECE39496E6ECDA3E4E67FFC77215" downloadHash="3510C43D52E6341AECCA68433CE54D08EA80309C" name="5d_ext_moonwood_ruins.trx" dlsize="2052192" size="13822086" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="53FB4DAD00C43FF1DECD558A4CA7F447AD9790F6" downloadHash="C10C2E826B91672186A6F051FE1A6686AF888BE9" name="5g_int_auvandell_silverlode1.trx" dlsize="76002" size="76146" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -436,11 +431,6 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="A93DC0CC91C1B16D9DF1D548D6BAD16A94188900" downloadHash="722D5FAB4E1E768A2CD906DF16F7C28E49565984" name="6e_int_silvypass_fort.trx" dlsize="31524" size="31540" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="8E9C900EDF99CA3EC69900B97A50F96D57DB782E" downloadHash="9F773042A2BB5EB057F2F3EFF2305A1F19E01C3E" name="6e_ext_nether_foothills.trx" dlsize="4488850" size="20362368" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -585,11 +575,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="472BB6994FE76F73B4B91BE093D0D87258A79A79" downloadHash="BF8A357A500A719FB28855562E85449F232DB401" name="003_travel_map_east.trx" dlsize="2524467" size="16056579" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="EDA776C2BEF8494C4A6ACFDBD706EF2122A2719C" downloadHash="E44E23F53ACAF054B5A776764F5A61E3BA5CC189" name="5g_int_auvandell_silverlode2.trx" dlsize="81304" size="81916" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -631,11 +616,6 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="ABC4BC10872F405A6EEDC9D742A6F8106A5F831A" downloadHash="CAF3597C6AD799AAB9FDA064996FAF9E72B01798" name="6d_int_rwkeep_garrison.trx" dlsize="105959" size="106921" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="67492F2F97EDDADBB16F9DF34F2022658D1E449B" downloadHash="C87D378C1D9B068AC93D940496E17BF1EF01FB1C" name="5c_int_wintedge_skinned_hare2_up.trx" dlsize="58660" size="58862" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1095,11 +1075,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="645022DAF49D17B4F30113959DBD7F136556E48E" downloadHash="9EDE2179CA5702D10DA4D7D49BB129A5C6DCF688" name="6e_ext_nether_slopes.trx" dlsize="2793168" size="15753496" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="F2C7248367BDDBB914D29DE93FCFD39CBFF5C203" downloadHash="F3FE9DF417CC8176E89C101B9F94A70C1F081DA8" name="5g_int_felbarr_lowroad_01.trx" dlsize="635998" size="643517" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -1146,11 +1121,6 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="B0411B6DD33351544E595F75BAAAE6836FB151B6" downloadHash="994DE3F0D73F45DDD88F1F640708B0ED548B460C" name="5g_int_felbarr_tr_cave.trx" dlsize="999579" size="1021067" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="938E5F6E67C940C7C53C6740F4B1DC8EB4AABF2D" downloadHash="434C03995725F5D8E2540528E728C70C04FD32D8" name="5h_int_sundabar_malshym_1st.trx" dlsize="52192" size="52440" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1250,7 +1220,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="27A413D4D2A05AE75199968349785517DC28C5F5" downloadHash="FED07703C42BA54A907D96311493B1ADD71801A6" name="003_quests_lab.trx" dlsize="56609" size="61193" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5ABB30F1EE3DD31AB505DD85E0FD079D43D733D9" downloadHash="FED07703C42BA54A907D96311493B1ADD71801A6" name="003_quests_lab.trx" dlsize="56609" size="60833" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1316,11 +1286,6 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="29BD243AFCB2A53973DB68BAAA302D477C80E846" downloadHash="5D9EBD116FD11C667B119B5F1C3A278BD135B09A" name="6d_int_silvy_quest_4.trx" dlsize="65056" size="738839" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="4AB922A293E60F5749DB984A8AADF703E767E12B" downloadHash="27D73BA7E999D4C164B7A882A501E577CA6F1A13" name="5h_int_sundabar_baldivers_1st.trx" dlsize="80692" size="81532" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1410,11 +1375,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B0834D7AB1AE620E583D8E72CA4B361A9FE677ED" downloadHash="E91F1FE6236FA8684BD0DCDF4C14DA399ADFBBC7" name="5h_int_sundabar_baldivers_ground.trx" dlsize="91759" size="92142" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="ED3E679E1F8FA00314390A5D3D1A2C8701F9FE55" downloadHash="F85ADA2B7EB3EA4CB9541B4940416BEACBB37111" name="6d_ext_silverymoon_northwest.trx" dlsize="4258790" size="19654779" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -1451,11 +1411,6 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="48763FE305F7C001396A8BF7CD4BB2A55F777C60" downloadHash="BDE5FA48FC3F47BBE82940E063925052E32F4B0A" name="6e_int_silvypass_old_east_mine.trx" dlsize="733084" size="749686" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="CB29AEC91608D0A8A3B36AAE4ED54E4D210AD7FB" downloadHash="92EFDAE662F32FD8CB2ABBD3EC00F9B023A2046A" name="003_travel_map_west.trx" dlsize="2488699" size="16119502" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1530,11 +1485,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="70A896AE3FB4D392662ACFA34BCAC09BA9540179" downloadHash="8A5AB969406ACF68225AC8159EBF536C485F0489" name="5h_int_sundabar_malshym_ground.trx" dlsize="64453" size="64682" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="E66A23671BD69A83BEE7BA3B76E824ADDD3F9EC7" downloadHash="2D929852EC59C83FD61D6E96A9CACA0DD988C394" name="7d_ext_silverwood2_3.trx" dlsize="5177351" size="23311227" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -1585,16 +1535,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="44DA1EB471200F759ED4B9D483F6FBE32CA6583F" downloadHash="9FE66A108DC81737B2CDF142D333E3B7F374F294" name="6d_int_silvy_hh_vreldas.trx" dlsize="129895" size="130737" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="3EA89A905FBF43F774DFF3CDFAC17E7B199E0144" downloadHash="D5BB394F6904D638F3C1570A847491A556AB85A9" name="6e_ext_khelb_town_int.trx" dlsize="244225" size="248029" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="B589F958AAD3B7D8F649ED5BA2AFF2E07165B852" downloadHash="DC2E5B0F6B2E3F26533534F097D32222946E1F68" name="6d_int_silvy_nw_keys.trx" dlsize="12727" size="12706" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -1635,11 +1575,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="BAEA9AA2A05E5F8E1B0F7511013BB5D6DA0E324A" downloadHash="9079F041FD6D6A9EE579AC8930E86496F04FAA49" name="5h_ext_sundabar_altlook.trx" dlsize="4331351" size="18402395" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="7EFB520F1CBFCCD10BDCC1B96DF1A611EB1F8232" downloadHash="D44E01BA6A53BC180F79064BFD996ED494FAF744" name="5h_int_sundabar_shops.trx" dlsize="540686" size="548656" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
@@ -1660,22 +1595,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="FD4781C4A0DF0AD4CA36842350246E4371BD54CE" downloadHash="2376254CC16DED337B12C64617DBD5BE7133295D" name="7d_ext_river_rauvin.trx" dlsize="550827" size="12316055" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="A1985D721B9D1C05C48722A103447453B8CF0497" downloadHash="D4E054DF1E62A1B2AD409D67D635632FC1EB93D6" name="5h_int_sundabar_taverns.trx" dlsize="332512" size="334956" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="9EBAFF1C14137AE82846DF8926AB4A4D921F9A3E" downloadHash="D8E660618ADBA3E0056EA3F11FBB3A9E01462833" name="7d_ext_rauvin_str_giant_rpd.trx" dlsize="5574201" size="26103036" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="2D5848226EC1F5C07F797C965F37BBE5BA9D534B" downloadHash="F9242F1A013DF673BB708BEB0AFF978057BABC92" name="7f_ext_everlund.trx" dlsize="486634" size="11236934" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1730,7 +1655,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1D22AB96180CD585095F942FA78A13F0CFE24A6D" downloadHash="3CBCF62AA40828FCDC6D0B74D339E80F55BD7DE2" name="8e_int_highforest_oh_troll.trx" dlsize="112010" size="112855" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A39C66507A7233BA34F0E3E40DB08821118EB099" downloadHash="13D6F706E3F0641FA663A247DCC915E74684EC1C" name="8e_int_highforest_oh_troll.trx" dlsize="141565" size="142643" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1745,7 +1670,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="348EC699DDC004FE3BCAF78D94499076511765AB" downloadHash="12AA8FE426EF29C6C42366D17AF70CD10CCD31D5" name="7e_int_rauvin_ruins.trx" dlsize="723790" size="732717" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="86F7BFAEAD1445AC0AB62D6A0E7BA25A2479CF38" downloadHash="12AA8FE426EF29C6C42366D17AF70CD10CCD31D5" name="7e_int_rauvin_ruins.trx" dlsize="723790" size="699753" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1800,37 +1725,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="FE11B9937F343A42E51C3AC38484291CF4B4D2D3" downloadHash="8B3AFFE4885547BFBBACD84146837197176D9DD3" name="5b_ext_frosthills_glacier_lake.trx" dlsize="3659008" size="17987070" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="31E57BA1A029E0EA4DA0B2D15EEC8891EA09FC28" downloadHash="42AAA7CF3D25822BF7C6354DA94B485AEF5DDF17" name="5b_ext_frosthills_glacier_trail.trx" dlsize="3282491" size="16764489" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="A6B9EEEA77C4DF26ECE7469B71870FF7993F3E2C" downloadHash="C7C88F883696258CA92E12F8BDAA32ABD4B0DED8" name="5b_ext_frosthills_glacier_tr_n.trx" dlsize="2095451" size="10780216" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="5D685C698C319CEE0A7BBD115B33A8E0A943B68A" downloadHash="9F4814E2F9AB1EF94E5C16B3A08E6ECAB5FB02E6" name="5b_ext_frosthills_glacier_tr_s.trx" dlsize="1940735" size="11437067" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0FC70DC998BBEF73C0DF8512B7B64A7023ED0D78" downloadHash="A24D1160A176A49E5D94D5AE25B341932B02C0CA" name="5b_ext_frosthills_glacier_lk_s.trx" dlsize="1540465" size="9229954" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="DirectoryEntry" hash="E56E75B8D5046BC627B454899371B6ECC6E6CA66" downloadHash="4F8A63919F1558D893AF1363CBBAB667F72DE038" name="5b_ext_frosthills_glacier_tr_n1.trx" dlsize="2055640" size="10738961" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="0DE6EF6FA0074DEFEAE51AE5EC81AB6870A32F0A" downloadHash="55D0D19BD362876D20117858B62A7B6F25B1374A" name="5b_ext_frosthills_glacier_lk_n.trx" dlsize="1711860" size="9596778" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1860,12 +1760,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="44D2175F947B716BDF8250645FD753653C82B93D" downloadHash="BD4FA815A7DF96FF1E87151D9EEED9F586671389" name="alfa2_acr.hak" dlsize="4199112" size="144850759" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="11398139E7E81AB66046483BFA808142768CAD33" downloadHash="BD4FA815A7DF96FF1E87151D9EEED9F586671389" name="alfa2_acr.hak" dlsize="4199112" size="144263206" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>3</string>
     </server-ref>
   </resource>
-  <resource type="Hak" hash="84F8CA85252B7A2744387C22CDF8696885D91AA4" downloadHash="774B40812CD03708B8DFD6088005431586CCEA29" name="alfa2_2da.hak" dlsize="536410" size="35261346" critical="false" exclude="false" urlOverride="">
+  <resource type="Hak" hash="C11FAFD100AFEE8A9ED7CCB8B6B7761E9ED3AA37" downloadHash="774B40812CD03708B8DFD6088005431586CCEA29" name="alfa2_2da.hak" dlsize="536410" size="35261276" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>3</string>
     </server-ref>
@@ -2002,11 +1902,6 @@
     </server-ref>
   </resource>
   <resource type="DirectoryEntry" hash="E301AB22C70FF3D83E53DAEBEE8B932B38B1E743" downloadHash="E99794D644AE9CF73E366A2169BBDF4A77E9695E" name="5b_ext_frosthills_glacier_settle.trx" dlsize="1532076" size="9226999" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="0DE6EF6FA0074DEFEAE51AE5EC81AB6870A32F0A" downloadHash="55D0D19BD362876D20117858B62A7B6F25B1374A" name="5b_ext_overwrite.trx" dlsize="1711860" size="9596778" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
