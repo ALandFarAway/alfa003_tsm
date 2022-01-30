@@ -48,6 +48,13 @@ void main()
     // Custom code goes here.
 	object oPerceived = GetLastPerceived();
 	
+	if(GetTag(OBJECT_SELF) == "003_cr_slv_profnec") {
+		if(GetTag(oPerceived) == "003_cr_bane_bp_elthonds") {
+			ClearAllActions(TRUE);
+			ActionAttack(oPerceived, FALSE);
+			}
+	}
+	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_moan") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
