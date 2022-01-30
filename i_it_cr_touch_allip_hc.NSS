@@ -8,11 +8,15 @@
 void main()
 	{  object oTarget; // On a weapon: The one being hit. On an armor: The one hitting the armor
 	   SendMessageToAllDMs("allip item firing");
-	   SendMessageToPC(oTarget, "allip item firing");
+	   SendMessageToAllDMs("oTarget = " + GetTag(oTarget));
 	   object oItem        = GetSpellCastItem();    // The item casting that triggered this spellscript
-   	   object oSpellOrigin = OBJECT_SELF ;
+   	   SendMessageToAllDMs("oItem = " + GetTag(oItem));
+	   object oSpellOrigin = OBJECT_SELF ;
+	   SendMessageToAllDMs("oSpellOrigin = " + GetTag(oSpellOrigin));
 	   object oSpellTarget = GetSpellTargetObject();
+	   SendMessageToAllDMs("oSpellTarget = " + GetTag(oSpellTarget));
 	   object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
+	   SendMessageToAllDMs("oPossessor = " + GetTag(oPossessor));
 	   
 	   if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{
