@@ -29,8 +29,8 @@ void main()
 	DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lTarget, 5.0));
 	DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eNecAOE, lTarget, 5.0));
 	DelayCommand(10.0, ActionCreateCreature("003_cr_slv_profnec", lTarget));
-	DelayCommand(15.0, AssignCommand(GetNearestObjectByTag("003_cr_slv_profnec", OBJECT_SELF, 1), ActionCastSpellAtObject(SPELL_SPELL_MANTLE, GetNearestObjectByTag("003_cr_slv_profnec", OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-	DelayCommand(16.0, AddHenchman(oUser, GetNearestObjectByTag("003_cr_slv_profnec", OBJECT_SELF, 1)));	  
-	DelayCommand(20.0, AssignCommand(GetNearestObjectByTag("003_cr_slv_profnec", OBJECT_SELF, 1), ActionForceFollowObject(oUser, 2.0))); 		 
+	DelayCommand(15.0, AssignCommand(GetNearestObjectByTag("003_cr_slv_profnec", oUser, 1), ActionCastSpellAtObject(SPELL_SPELL_MANTLE, GetNearestObjectByTag("003_cr_slv_profnec", oUser, 1), METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+	DelayCommand(16.0, AddHenchman(oUser, GetNearestObjectByTag("003_cr_slv_profnec", oUser, 1)));	  
+	DelayCommand(20.0, AssignCommand(GetNearestObjectByTag("003_cr_slv_profnec", oUser, 1), ActionForceFollowObject(oUser, 2.0))); 		 
 	DestroyObject(OBJECT_SELF, 25.0);
 }
