@@ -7,24 +7,16 @@
 
 void main()
 	{  object oTarget; // On a weapon: The one being hit. On an armor: The one hitting the armor
-	   SendMessageToAllDMs("allip item firing");
-	   //SendMessageToAllDMs("oTarget = " + GetTag(oTarget));
 	   object oItem        = GetSpellCastItem();    // The item casting that triggered this spellscript
-   	   //SendMessageToAllDMs("oItem = " + GetTag(oItem));
-	   object oSpellOrigin = OBJECT_SELF ;
-	   //SendMessageToAllDMs("oSpellOrigin = " + GetTag(oSpellOrigin));
+   	   object oSpellOrigin = OBJECT_SELF ;
 	   object oSpellTarget = GetSpellTargetObject();
-	   //SendMessageToAllDMs("oSpellTarget = " + GetTag(oSpellTarget));
 	   object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
-	   //SendMessageToAllDMs("oPossessor = " + GetTag(oPossessor));
-	   
+	    
 	   if(GetObjectType(oSpellTarget) == OBJECT_TYPE_CREATURE)
 		{
 			int nTouch = TouchAttackMelee(oSpellTarget);
 			int nDamage = d4();
-			SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
-	   		SendMessageToPC(oSpellTarget, "nDamage = " + IntToString(nDamage));
-	        if(nTouch == 2) nDamage += d4();
+			if(nTouch == 2) nDamage += d4();
 			if(nTouch)
 			{
 				if(nDamage >  GetAbilityScore(oSpellTarget, ABILITY_WISDOM) &&

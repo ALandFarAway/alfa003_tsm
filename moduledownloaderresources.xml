@@ -1250,7 +1250,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="27A413D4D2A05AE75199968349785517DC28C5F5" downloadHash="FED07703C42BA54A907D96311493B1ADD71801A6" name="003_quests_lab.trx" dlsize="56609" size="61193" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5ABB30F1EE3DD31AB505DD85E0FD079D43D733D9" downloadHash="9AD2B429F3D8DFB16A22C4BADDBE4D6D0FEA99F9" name="003_quests_lab.trx" dlsize="56227" size="60833" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1690,7 +1690,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="17A30A78FFB184AFE33DA3D11DC2783B356A8BDF" downloadHash="96C423AA7CC0068DC730C0C6163F895473D0312C" name="8e_ext_highforest_north.trx" dlsize="3766929" size="20682012" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="59BD67507FB0198580FC5EBEEBCF8034F58D8657" downloadHash="A56E266FA9F3F9E33A62E7B2B30320C0DBB7B634" name="8e_ext_highforest_north.trx" dlsize="3779254" size="20688442" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1745,7 +1745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="348EC699DDC004FE3BCAF78D94499076511765AB" downloadHash="12AA8FE426EF29C6C42366D17AF70CD10CCD31D5" name="7e_int_rauvin_ruins.trx" dlsize="723790" size="732717" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="86F7BFAEAD1445AC0AB62D6A0E7BA25A2479CF38" downloadHash="A2A065815B2974319F71558B695757111EBCBE82" name="7e_int_rauvin_ruins.trx" dlsize="690550" size="699753" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
