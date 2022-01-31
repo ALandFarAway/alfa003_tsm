@@ -1655,7 +1655,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A39C66507A7233BA34F0E3E40DB08821118EB099" downloadHash="13D6F706E3F0641FA663A247DCC915E74684EC1C" name="8e_int_highforest_oh_troll.trx" dlsize="141565" size="142643" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C50F77ECFF931DA82C2BE7AB67A10784697144AC" downloadHash="0E23EF9C2C51C59E5B587E482EDE331655BB8B63" name="8e_int_highforest_oh_troll.trx" dlsize="141570" size="142643" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1759,7 +1759,7 @@
     <server-ref>
       <string>0</string>
     </server-ref>
-   </resource>
+  </resource>
   <resource type="Hak" hash="44D2175F947B716BDF8250645FD753653C82B93D" downloadHash="BD4FA815A7DF96FF1E87151D9EEED9F586671389" name="alfa2_acr.hak" dlsize="4199112" size="144850759" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>3</string>
