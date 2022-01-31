@@ -11,8 +11,6 @@ void main()
    	   object oSpellOrigin = OBJECT_SELF ;
 	   object oSpellTarget = GetSpellTargetObject();
 	   object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
-	   SendMessageToAllDMs("Ghost touch attack firing");
-	   SendMessageToPC(oSpellTarget, "Ghost touch attack firing");
 	   if(GetObjectType(oSpellTarget) == OBJECT_TYPE_CREATURE)
 		{
 			int nTouch = TouchAttackMelee(oSpellTarget);
