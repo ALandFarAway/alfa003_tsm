@@ -38,9 +38,15 @@ void main()
 						eEffect = GetNextEffect(oSpellTarget);
 					}
 				}
-				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), oPossessor);
+				
+				string sMessage = GetName(OBJECT_SELF) + " touches you! Panic clouds your judgement.";
+				SendMessageToPC(oSpellTarget, sMessage);
+				SendMessageToAllDMs(GetName(oSpellTarget) +  " got: " + sMessage);
+				
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_WISDOM, nDamage)), oSpellTarget);
+				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), oPossessor);
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oSpellTarget );
 			}
 		}		
+	
 }			  		  

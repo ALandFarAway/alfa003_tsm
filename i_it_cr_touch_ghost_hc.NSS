@@ -21,7 +21,7 @@ void main()
 			int nDrain = d6();
 			if(nTouch)
 			{
-				effect eEffect = GetFirstEffect(oSpellTarget);
+				/*effect eEffect = GetFirstEffect(oSpellTarget);
 				while(GetIsEffectValid(eEffect))
 				{
 					if(GetEffectSpellId(eEffect) == GetSpellId() &&
@@ -31,7 +31,8 @@ void main()
 						RemoveEffect(oSpellTarget, eEffect);
 					}
 					eEffect = GetNextEffect(oSpellTarget);
-				}
+				}*/
+				
 				int nAbility = Random(6);
 				
 				if(GetLevelByClass(CLASS_TYPE_SORCERER, oSpellTarget) ||
@@ -51,19 +52,19 @@ void main()
 					if(Random(4) == 1) {nAbility = ABILITY_INTELLIGENCE;}
 				}
 				
-				string sMessage = "You fail to avoid an incorporeal touch!";
+				string sMessage = GetName(OBJECT_SELF) + " touches you!";
 				string sMessageAbility;
 				if(nAbility == 0) {sMessageAbility = "Your muscles go slack.";}
 				else if(nAbility == 1) {sMessageAbility = "Your limbs freeze up.";}
 				else if(nAbility == 2) {sMessageAbility = "Your feel faint.";}
 				else if(nAbility == 3) {sMessageAbility = "Your mind dulls.";}
-				else if(nAbility == 4) {sMessageAbility = "Your panic diminishes your common sense.";}
+				else if(nAbility == 4) {sMessageAbility = "Your panic clouds your judgement.";}
 				else if((nAbility == 5) && GetLevelByClass(CLASS_TYPE_BARD, oSpellTarget)) {sMessageAbility = "Your voice stutters.";}
 				else if(nAbility == 5) {sMessageAbility = "Your confidence fails.";}
 				
 				SendMessageToPC(oSpellTarget, sMessage);
 				SendMessageToPC(oSpellTarget, sMessageAbility);
-				SendMessageToAllDMs(GetName(oSpellTarget) + " received " + sMessage + " " + sMessageAbility);
+				SendMessageToAllDMs(GetName(oSpellTarget) + " touched by " + GetTag(OBJECT_SELF) + " got " + sMessageAbility);
 				if(nDrain >  GetAbilityScore(oSpellTarget, nAbility) &&
 				   !GetIsImmune(oSpellTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 				{
