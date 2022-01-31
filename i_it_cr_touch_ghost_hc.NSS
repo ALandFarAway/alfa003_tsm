@@ -57,10 +57,13 @@ void main()
 				else if(nAbility == 1) {sMessageAbility = "Your limbs freeze up.";}
 				else if(nAbility == 2) {sMessageAbility = "Your feel faint.";}
 				else if(nAbility == 3) {sMessageAbility = "Your mind dulls.";}
-				else if(nAbility == 4) {sMessageAbility = "Your panic assails your common sense.";}
+				else if(nAbility == 4) {sMessageAbility = "Your panic diminishes your common sense.";}
 				else if((nAbility == 5) && GetLevelByClass(CLASS_TYPE_BARD, oSpellTarget)) {sMessageAbility = "Your voice stutters.";}
 				else if(nAbility == 5) {sMessageAbility = "Your confidence fails.";}
 				
+				SendMessageToPC(oSpellTarget, sMessage);
+				SendMessageToPC(oSpellTarget, sMessageAbility);
+				SendMessageToAllDMs(GetName(oSpellTarget) + " received " + sMessage + " " + sMessageAbility);
 				if(nDrain >  GetAbilityScore(oSpellTarget, nAbility) &&
 				   !GetIsImmune(oSpellTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 				{
