@@ -1730,7 +1730,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1D22AB96180CD585095F942FA78A13F0CFE24A6D" downloadHash="3CBCF62AA40828FCDC6D0B74D339E80F55BD7DE2" name="8e_int_highforest_oh_troll.trx" dlsize="112010" size="112855" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DF8237287CB1648CA868AE09C5CB7370CB422525" downloadHash="83192108AF0494BD18136CEAF722F3416A370517" name="8e_int_highforest_oh_troll.trx" dlsize="141029" size="142084" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
