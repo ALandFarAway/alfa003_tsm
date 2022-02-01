@@ -116,7 +116,7 @@ void main()
 			effect eDamage = EffectDamage(d10(2), DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL,FALSE);
 			if(GetLocalInt(OBJECT_SELF, GetName(oPerceived)) != 1)  {
 					effect eBeam = EffectBeam(VFX_BEAM_NECROMANCY, OBJECT_SELF, BODY_NODE_MONSTER_0, FALSE);
-		    		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeam, oPerceived, 5.0);
+		    		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeam, oPerceived, 2.0);
 					SetLocalInt(OBJECT_SELF, GetName(oPerceived), 1);
 					SendMessageToPC(oPerceived, "You see the glowing eyes of a ghost turn your way...");
 					if(WillSave(oPerceived, nDC, SAVING_THROW_TYPE_FEAR, OBJECT_SELF) != 0)

@@ -16,7 +16,7 @@ void main()
 			int nTouch = TouchAttackMelee(oSpellTarget);
 			int nDamage = d6();
 			if(nTouch == 2) nDamage += d6();
-			int nDrain = d6();
+			int nDrain = d4();
 			if(nTouch)
 			{
 				/*effect eEffect = GetFirstEffect(oSpellTarget);
