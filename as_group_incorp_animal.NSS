@@ -62,10 +62,8 @@ void main() {
             ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);
             if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
             if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
-            if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
             break;
         case 3:
-            ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);
             ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);
             if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);}
             if(Random(3) == 1) {ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);}

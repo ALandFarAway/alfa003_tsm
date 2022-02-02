@@ -145,6 +145,7 @@ void main()
 	
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
+	//Turning undead spirits that are currently represented by dead body placeables
 	
 	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
 	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
