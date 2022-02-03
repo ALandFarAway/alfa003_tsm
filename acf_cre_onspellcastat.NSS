@@ -52,4 +52,13 @@ void main()
 		 ActionMoveAwayFromObject(GetLastSpellCaster(), TRUE, 200.0);
 		 
 		}
+	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
+	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
+		effect eEffect = GetFirstEffect(OBJECT_SELF);
+		while(GetIsEffectValid(eEffect)) {
+			SendMessageToAllDMs("Effect " + IntToString(GetEffectInteger(eEffect,1)));
+			RemoveEffect(OBJECT_SELF, eEffect);
+			eEffect = GetNextEffect(OBJECT_SELF);
+			}
+		}
 }
