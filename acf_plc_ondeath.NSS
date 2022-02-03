@@ -58,8 +58,8 @@ if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
     object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");
     SendMessageToAllDMs("onDeath Plc Proxy variable = 1. oMyTrigger = " + GetName(oMyTrigger) + ". oMyCreature = " + GetName(oMyCreature));
 	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
-    effect eDestroyed = EffectVisualEffect(VFX_DUR_CESSATE_NEGATIVE, 1);
-	effect eRise = EffectVisualEffect(VFX_IMP_RAISE_DEAD, 1);
+    effect eDestroyed = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE, 1);
+	effect eRise = EffectVisualEffect(VFX_DUR_GHOST_SMOKE_2, 1);
 	effect eParalyze = EffectParalyze(-1,SAVING_THROW_WILL,FALSE);
 	if(oMyCreature != OBJECT_INVALID) {
 	    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDestroyed, oMyCreature, 2.0);

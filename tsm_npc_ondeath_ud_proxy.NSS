@@ -53,7 +53,7 @@ if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
     object oMyTrigger = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg");
     object oMyCorpse = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc");
     SendMessageToAllDMs("onDeath Proxy variable = 1. oMyTrigger = " + GetName(oMyTrigger) + ". oMyCorpse = " + GetName(oMyCorpse));
-	effect eDestroyed = EffectVisualEffect(VFX_DUR_CESSATE_NEGATIVE, 1);
+	effect eDestroyed = EffectVisualEffect(VFX_DUR_GLOW_RED, 1);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDestroyed, oMyCorpse, 2.0);
 	DestroyObject(oMyTrigger, 1.0);
 	}

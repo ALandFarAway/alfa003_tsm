@@ -33,10 +33,10 @@ void main()
 	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
     object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");	     
     object oMyCorpse = GetNearestObjectByTag("tsm_plc_undead_proxy", OBJECT_SELF, 1);
-    effect eRise = EffectVisualEffect(VFX_IMP_RAISE_DEAD, 1);
-	SendMessageToAllDMs("onEnter for " + GetName(OBJECT_SELF)+ ". oMyCreature = " + GetName(oMyCreature) + ". oMyCorpse = " + GetName(oMyCorpse));
+    effect eRise = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, 1);
+	SendMessageToAllDMs(GetName(oPC ) + " entered " + GetName(OBJECT_SELF)+ ". oMyCreature = " + GetName(oMyCreature) + ". oMyCorpse = " + GetName(oMyCorpse));
 	effect eParalyze = EffectParalyze(-1,SAVING_THROW_WILL,FALSE);
-	effect eSpawning = EffectVisualEffect(VFX_DUR_CESSATE_NEGATIVE, 1);
+	effect eSpawning = EffectVisualEffect(VFX_DUR_GHOST_SMOKE, 1);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpawning, oMyCorpse, 2.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 2.0);
 	DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
