@@ -36,10 +36,12 @@ void main()
     effect eRise = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, 1);
 	SendMessageToAllDMs(GetName(oPC ) + " entered " + GetName(OBJECT_SELF)+ ". oMyCreature = " + GetName(oMyCreature) + ". oMyCorpse = " + GetName(oMyCorpse));
 	effect eParalyze = EffectParalyze(-1,SAVING_THROW_WILL,FALSE);
-	effect eSpawning = EffectVisualEffect(VFX_DUR_GHOST_SMOKE, 1);
+	effect eSanctuary = EffectSanctuary(20);
+    effect eSpawning = EffectVisualEffect(VFX_DUR_GHOST_SMOKE, 1);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpawning, oMyCorpse, 2.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 2.0);
 	DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
    	DelayCommand(2.0, RemoveEffect(oMyCreature, eParalyze));
+	DelayCommand(2.0, RemoveEffect(oMyCreature, eSanctuary));
 	}
 }
