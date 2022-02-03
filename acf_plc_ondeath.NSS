@@ -57,21 +57,21 @@ if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
     object oMyTrigger = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg");
     object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");
     SendMessageToAllDMs("onDeath Plc Proxy variable = 1. oMyTrigger = " + GetName(oMyTrigger) + ". oMyCreature = " + GetName(oMyCreature));
-	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
-    effect eDestroyed = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE, FALSE);
-	effect eRise = EffectVisualEffect(VFX_DUR_GHOST_SMOKE_2, FALSE);
-	//effect eParalyze = EffectParalyze(-1,SAVING_THROW_WILL,FALSE);
-	if(oMyCreature != OBJECT_INVALID) {
-	    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDestroyed, oMyCreature, 5.0);
-		//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCreature, 5.0);
-		DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
-	   	effect eEffect = GetFirstEffect(oMyCreature);
-			while(GetIsEffectValid(eEffect)) {
-				SendMessageToAllDMs(GetName(oMyCreature) + " " + IntToString(GetEffectInteger(eEffect,1)) + ", "  + IntToString(GetEffectInteger(eEffect,2 )) + ", "  + IntToString(GetEffectInteger(eEffect,3 )) + ", "  + IntToString(GetEffectInteger(eEffect,4 )) + ", "  + IntToString(GetEffectInteger(eEffect,5 )));
-				RemoveEffect(oMyCreature, eEffect);
-				eEffect = GetNextEffect(oMyCreature);
-				}
-		   	} 
+	if(GetLocalInt(oMyCreature, "Proxy") != 2) {
+		SendMessageToAllDMs("oMyCreature Proxy != 2");
+		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
+	    effect eRise = EffectVisualEffect(VFX_DUR_GHOST_SMOKE_2, FALSE);
+		//effect eParalyze = EffectParalyze(-1,SAVING_THROW_WILL,FALSE);
+		if(oMyCreature != OBJECT_INVALID) {
+		    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCreature, 5.0);
+			DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
+		   	effect eEffect = GetFirstEffect(oMyCreature);
+				while(GetIsEffectValid(eEffect)) {
+					SendMessageToAllDMs(GetName(oMyCreature) + " " + IntToString(GetEffectInteger(eEffect,1)) + ", "  + IntToString(GetEffectInteger(eEffect,2 )) + ", "  + IntToString(GetEffectInteger(eEffect,3 )) + ", "  + IntToString(GetEffectInteger(eEffect,4 )) + ", "  + IntToString(GetEffectInteger(eEffect,5 )) + ", "  + IntToString(GetEffectInteger(eEffect,6 )) + ", "  + IntToString(GetEffectInteger(eEffect,7 )));
+					RemoveEffect(oMyCreature, eEffect);
+					eEffect = GetNextEffect(oMyCreature);
+					}
+			   	} 
 		}
-	
+	}
 }

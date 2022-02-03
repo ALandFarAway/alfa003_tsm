@@ -46,7 +46,7 @@ void main()
     ACR_CreatureOnDeath();
 
     // Custom code goes here.
-	SendMessageToAllDMs("onDeath firing");
+	SendMessageToAllDMs("!!!ONDEATH FOR " + GetName(OBJECT_SELF) + " FIRING!!!");
 
 if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
     object oMyTrigger = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg");

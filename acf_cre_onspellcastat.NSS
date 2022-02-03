@@ -58,7 +58,9 @@ void main()
 	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
 	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
 		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
-        DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
+        effect eRise = EffectVisualEffect(VFX_DUR_GHOST_SMOKE_2, FALSE);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, OBJECT_SELF, 5.0);
+		DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
 	    effect eEffect = GetFirstEffect(OBJECT_SELF);
 		while(GetIsEffectValid(eEffect)) {
 			SendMessageToAllDMs("Onspellcastat " + IntToString(GetEffectInteger(eEffect,1)));
