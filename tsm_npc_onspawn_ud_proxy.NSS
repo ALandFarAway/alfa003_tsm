@@ -10,9 +10,9 @@ void main()
   object oMyTrigger = GetNearestObjectByTag("tsm_trg_undead_proxy", OBJECT_SELF,1);
   object oMyCorpse = GetNearestObjectByTag("tsm_plc_undead_proxy", OBJECT_SELF, 1);
   int nAppearance = GetAppearanceType(OBJECT_SELF);	
-  effect eParalyze = EffectCutsceneParalyze();
   int nRate = GetMovementRate(OBJECT_SELF);
-  effect eInvisible = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+  effect eParalyze = EffectCutsceneParalyze();
+  effect eInvisible = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
   SendMessageToAllDMs("onSpawn. oMyTrigger = " + GetName(oMyTrigger) + ". oMyCorpse = " + GetName(oMyCorpse) + ". Movement rate = " + IntToString(nRate));
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg", oMyTrigger);	     
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc", oMyCorpse);	     

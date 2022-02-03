@@ -65,8 +65,13 @@ if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
 	    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDestroyed, oMyCreature, 5.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCreature, 5.0);
 		DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
-	   	DelayCommand(2.0, RemoveEffect(oMyCreature, eParalyze));
-	
+	   	effect eEffect = GetFirstEffect(oMyCreature);
+			while(GetIsEffectValid(eEffect)) {
+				SendMessageToAllDMs("Effect " + IntToString(GetEffectInteger(eEffect,1)));
+				RemoveEffect(oMyCreature, eEffect);
+				eEffect = GetNextEffect(oMyCreature);
+				}
+		   	} 
 		}
-	}
+	
 }
