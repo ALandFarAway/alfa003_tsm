@@ -56,7 +56,7 @@ void main()
         DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
 	    effect eEffect = GetFirstEffect(OBJECT_SELF);
 		while(GetIsEffectValid(eEffect)) {
-			SendMessageToAllDMs("Ondamaged " + IntToString(GetEffectInteger(eEffect,1)));
+			SendMessageToAllDMs(GetName(OBJECT_SELF) + " Ondamaged " + IntToString(GetEffectInteger(eEffect,1)));
 			RemoveEffect(OBJECT_SELF, eEffect);
 			eEffect = GetNextEffect(OBJECT_SELF);
 			}
