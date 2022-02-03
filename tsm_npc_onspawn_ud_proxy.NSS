@@ -16,8 +16,10 @@ void main()
   SetLocalObject(oMyTrigger, "Undead_Proxy_Cre", OBJECT_SELF);	     
   SetLocalObject(oMyCorpse, "Undead_Proxy_Cre", OBJECT_SELF);
   SetLocalInt(oMyTrigger, "Appearance", nAppearance);    
+  SetLocalInt(oMyCorpse, "Appearance", nAppearance);    
   SendMessageToAllDMs(IntToString(nAppearance)); 
   SetLocalInt(OBJECT_SELF, "Proxy", 1);
+  SetLocalInt(oMyCorpse, "Proxy", 1);
   SetCreatureAppearanceType(OBJECT_SELF,APPEARANCE_TYPE_INVALID);
   ApplyEffectToObject(DURATION_TYPE_PERMANENT,EffectParalyze(-1,SAVING_THROW_WILL,FALSE),OBJECT_SELF);
 }
