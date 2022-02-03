@@ -35,13 +35,17 @@ void main()
     object oMyCorpse = GetNearestObjectByTag("tsm_plc_undead_proxy", OBJECT_SELF, 1);
     effect eRise = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, FALSE);
 	SendMessageToAllDMs(GetName(oPC ) + " entered " + GetName(OBJECT_SELF)+ ". oMyCreature = " + GetName(oMyCreature) + ". oMyCorpse = " + GetName(oMyCorpse));
-	effect eParalyze = EffectCutsceneParalyze();
 	effect eSanctuary = EffectSanctuary(20);
     effect eSpawning = EffectVisualEffect(VFX_DUR_GHOST_SMOKE, FALSE);
+	effect eParalyze = EffectCutsceneParalyze();
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpawning, oMyCorpse, 5.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
 	DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
-   	DelayCommand(2.0, RemoveEffect(oMyCreature, eParalyze));
-	DelayCommand(2.0, RemoveEffect(oMyCreature, eSanctuary));
-	}
+	effect eEffect = GetFirstEffect(oMyCreature);
+	while(GetIsEffectValid(eEffect)) {
+		SendMessageToAllDMs("Effect " + IntToString(GetEffectInteger(eEffect,1)));
+		RemoveEffect(oMyCreature, eEffect);
+		eEffect = GetNextEffect(oMyCreature);
+		}
+   	}
 }
