@@ -52,7 +52,7 @@ void main()
 		 ActionMoveAwayFromObject(GetLastSpellCaster(), TRUE, 200.0);
 		 
 		}
-	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
+	/*if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
 	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
 		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
         DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
@@ -64,5 +64,5 @@ void main()
 			}
 		}
 	object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
-	ActionAttack(oAttack, FALSE);
+	ActionAttack(oAttack, FALSE);*/
 }
