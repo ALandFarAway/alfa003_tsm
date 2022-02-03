@@ -12,7 +12,7 @@ void main()
   int nAppearance = GetAppearanceType(OBJECT_SELF);	
   effect eParalyze = EffectCutsceneParalyze();
   int nRate = GetMovementRate(OBJECT_SELF);
-  effect eSanctuary = EffectSanctuary(20);
+  effect eInvisible = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
   SendMessageToAllDMs("onSpawn. oMyTrigger = " + GetName(oMyTrigger) + ". oMyCorpse = " + GetName(oMyCorpse) + ". Movement rate = " + IntToString(nRate));
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg", oMyTrigger);	     
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc", oMyCorpse);	     
@@ -23,8 +23,8 @@ void main()
   SetLocalInt(oMyCorpse, "Appearance", nAppearance);    
   SetLocalInt(OBJECT_SELF, "Proxy", 1);
   SetLocalInt(oMyCorpse, "Proxy", 1);
-  ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSanctuary, OBJECT_SELF);
   ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, OBJECT_SELF);
+  ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvisible, OBJECT_SELF);
   SetCreatureAppearanceType(OBJECT_SELF,APPEARANCE_TYPE_INVALID);
   
   }
