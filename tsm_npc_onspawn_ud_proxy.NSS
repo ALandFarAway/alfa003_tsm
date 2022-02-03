@@ -21,10 +21,10 @@ void main()
   SetLocalInt(oMyCorpse, "Appearance", nAppearance);    
   SetLocalInt(OBJECT_SELF, "Proxy", 1);
   SetLocalInt(oMyCorpse, "Proxy", 1);
-  SetCreatureAppearanceType(OBJECT_SELF,APPEARANCE_TYPE_INVALID);
   ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSanctuary, OBJECT_SELF);
-  ApplyEffectToObject(DURATION_TYPE_PERMANENT,eParalyze,OBJECT_SELF);
-  DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_PERMANENT,eParalyze,OBJECT_SELF));
-  DelayCommand(6.0, ApplyEffectToObject(DURATION_TYPE_PERMANENT,eParalyze,OBJECT_SELF));
+  ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, OBJECT_SELF);
+  //SetCreatureAppearanceType(OBJECT_SELF,APPEARANCE_TYPE_INVALID);
+  DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, OBJECT_SELF));
+  DelayCommand(6.0, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, OBJECT_SELF));
 
   }
