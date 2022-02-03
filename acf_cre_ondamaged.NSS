@@ -61,5 +61,6 @@ void main()
 			eEffect = GetNextEffect(OBJECT_SELF);
 			}
 		}
-
+		object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
+		ActionAttack(oAttack, FALSE);
 }
