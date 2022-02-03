@@ -54,9 +54,11 @@ void main()
 		}
 	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
 	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
-		effect eEffect = GetFirstEffect(OBJECT_SELF);
+		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
+        DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
+	    effect eEffect = GetFirstEffect(OBJECT_SELF);
 		while(GetIsEffectValid(eEffect)) {
-			SendMessageToAllDMs("Effect " + IntToString(GetEffectInteger(eEffect,1)));
+			SendMessageToAllDMs("Onspellcastat " + IntToString(GetEffectInteger(eEffect,1)));
 			RemoveEffect(OBJECT_SELF, eEffect);
 			eEffect = GetNextEffect(OBJECT_SELF);
 			}

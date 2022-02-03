@@ -18,6 +18,7 @@ void main()
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc", oMyCorpse);	     
   SetLocalObject(oMyTrigger, "Undead_Proxy_Cre", OBJECT_SELF);	     
   SetLocalObject(oMyCorpse, "Undead_Proxy_Cre", OBJECT_SELF);
+  SetLocalInt(OBJECT_SELF, "Appearance", nAppearance);    
   SetLocalInt(oMyTrigger, "Appearance", nAppearance);    
   SetLocalInt(oMyTrigger, "Rate", nRate);    
   SetLocalInt(oMyCorpse, "Appearance", nAppearance);    

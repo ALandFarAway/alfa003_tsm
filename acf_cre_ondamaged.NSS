@@ -50,15 +50,15 @@ void main()
 	object oWeapon = GetLastWeaponUsed(oDamager);
 	SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with " + GetTag(oWeapon)); 
 		
-	if(GetTag(oDamager) == "sm_raid_04") {
-	effect ePoison = EffectPoison(IP_CONST_ONMONSTERHIT_POISON);
-	effect eKill = EffectDeath(FALSE, TRUE, FALSE, TRUE);
-		
-		if(GetTag(oWeapon) == "abr_it_cr_st_giant_bee") {
-			ClearAllActions(TRUE);
-			ActionSpeakString("*Leaves stinger in victim.", TALKVOLUME_TALK);
-			ApplyEffectToObject(DURATION_TYPE_INSTANT, eKill, oDamager);
-		    //SendMessageToAllDMs("Inside if statement");
+	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1); {
+	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
+		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
+        DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
+	    effect eEffect = GetFirstEffect(OBJECT_SELF);
+		while(GetIsEffectValid(eEffect)) {
+			SendMessageToAllDMs("Ondamaged " + IntToString(GetEffectInteger(eEffect,1)));
+			RemoveEffect(OBJECT_SELF, eEffect);
+			eEffect = GetNextEffect(OBJECT_SELF);
 			}
 		}
 
