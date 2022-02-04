@@ -34,9 +34,9 @@ void main()
     object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");	     
     object oMyCorpse = GetNearestObjectByTag("tsm_plc_undead_proxy", OBJECT_SELF, 1);
     SendMessageToAllDMs(GetName(oPC ) + " entered " + GetName(OBJECT_SELF)+ ". oMyCreature = " + GetName(oMyCreature) + ". oMyCorpse = " + GetName(oMyCorpse));
-	effect eSanctuary = EffectSanctuary(20);
+	//effect eSanctuary = EffectSanctuary(20);
     effect eParalyze = EffectCutsceneParalyze();
-	effect eRise = EffectVisualEffect(VFX_DUR_GHOST_SMOKE_2, FALSE);
+	effect eRise = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE_GOOD, FALSE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
 	DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
 	effect eEffect = GetFirstEffect(oMyCreature);
