@@ -58,7 +58,7 @@ void main()
 	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
 	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
 		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
-        effect eRise = EffectVisualEffect(VFX_SPELL_SHADES_SUMMON_CREATURE, FALSE);
+        effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 		//effect eLocation = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
 		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eLocation, GetLocation(OBJECT_SELF), 5.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, OBJECT_SELF, 5.0);

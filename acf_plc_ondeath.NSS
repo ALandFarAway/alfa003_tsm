@@ -61,7 +61,7 @@ if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
 		SendMessageToAllDMs("oMyCreature Proxy != 2");
 		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
 	    effect eRise = EffectVisualEffect(VFX_DUR_SPELL_AWAKEN, FALSE);
-		effect eEmerge = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE, FALSE);
+		//effect eEmerge = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE, FALSE);
 		//effect eParalyze = EffectParalyze(-1,SAVING_THROW_WILL,FALSE);
 		if(oMyCreature != OBJECT_INVALID) {
 		    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCreature, 5.0);
