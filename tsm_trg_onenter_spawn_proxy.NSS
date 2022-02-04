@@ -36,7 +36,7 @@ void main()
     SendMessageToAllDMs(GetName(oPC ) + " entered " + GetName(OBJECT_SELF)+ ". oMyCreature = " + GetName(oMyCreature) + ". oMyCorpse = " + GetName(oMyCorpse));
 	//effect eSanctuary = EffectSanctuary(20);
     effect eParalyze = EffectCutsceneParalyze();
-	effect eRise = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE_GOOD, FALSE);
+	effect eRise = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE, FALSE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
 	DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
 	effect eEffect = GetFirstEffect(oMyCreature);
