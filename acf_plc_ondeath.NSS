@@ -67,7 +67,7 @@ if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
 			DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
 		   	effect eEffect = GetFirstEffect(oMyCreature);
 				while(GetIsEffectValid(eEffect)) {
-					SendMessageToAllDMs(GetName(oMyCreature) + " " + IntToString(GetEffectInteger(eEffect,1)) + ", "  + IntToString(GetEffectInteger(eEffect,2 )) + ", "  + IntToString(GetEffectInteger(eEffect,3 )) + ", "  + IntToString(GetEffectInteger(eEffect,4 )) + ", "  + IntToString(GetEffectInteger(eEffect,5 )) + ", "  + IntToString(GetEffectInteger(eEffect,6 )) + ", "  + IntToString(GetEffectInteger(eEffect,7 )));
+					//SendMessageToAllDMs(GetName(oMyCreature) + " " + IntToString(GetEffectInteger(eEffect,1)) + ", "  + IntToString(GetEffectInteger(eEffect,2 )) + ", "  + IntToString(GetEffectInteger(eEffect,3 )) + ", "  + IntToString(GetEffectInteger(eEffect,4 )) + ", "  + IntToString(GetEffectInteger(eEffect,5 )) + ", "  + IntToString(GetEffectInteger(eEffect,6 )) + ", "  + IntToString(GetEffectInteger(eEffect,7 )));
 					RemoveEffect(oMyCreature, eEffect);
 					eEffect = GetNextEffect(oMyCreature);
 					}

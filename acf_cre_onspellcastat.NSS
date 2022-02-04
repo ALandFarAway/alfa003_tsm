@@ -63,7 +63,7 @@ void main()
 		DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
 	    effect eEffect = GetFirstEffect(OBJECT_SELF);
 		while(GetIsEffectValid(eEffect)) {
-			SendMessageToAllDMs("Onspellcastat " + IntToString(GetEffectInteger(eEffect,1)));
+			//SendMessageToAllDMs("Onspellcastat " + IntToString(GetEffectInteger(eEffect,1)));
 			RemoveEffect(OBJECT_SELF, eEffect);
 			eEffect = GetNextEffect(OBJECT_SELF);
 			}

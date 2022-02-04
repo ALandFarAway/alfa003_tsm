@@ -41,7 +41,7 @@ void main()
 	DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
 	effect eEffect = GetFirstEffect(oMyCreature);
 	while(GetIsEffectValid(eEffect)) {
-		SendMessageToAllDMs(GetName(oMyCreature) + " " + IntToString(GetEffectInteger(eEffect,1)));
+		//SendMessageToAllDMs(GetName(oMyCreature) + " " + IntToString(GetEffectInteger(eEffect,1)));
 		RemoveEffect(oMyCreature, eEffect);
 		eEffect = GetNextEffect(oMyCreature);
 		}

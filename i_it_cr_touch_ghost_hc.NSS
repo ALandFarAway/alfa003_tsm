@@ -11,8 +11,7 @@ void main()
    	   object oSpellOrigin = OBJECT_SELF ;
 	   object oSpellTarget = GetSpellTargetObject();
 	   object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
-	   SendMessageToAllDMs("Ghost touch attack firing");
-	   SendMessageToPC(oSpellTarget, "Ghost touch attack firing");
+	   //SendMessageToPC(oSpellTarget, "Ghost touch attack firing");
 	   if(GetObjectType(oSpellTarget) == OBJECT_TYPE_CREATURE)
 		{
 			int nTouch = TouchAttackMelee(oSpellTarget);
@@ -34,7 +33,8 @@ void main()
 				}*/
 				
 				int nAbility = Random(6);
-				
+				SendMessageToAllDMs(GetName(oSpellTarget, + " loses " + IntToString(nDamage) + " points of ability " + IntToString(nAbility) );
+	   
 				if(GetLevelByClass(CLASS_TYPE_SORCERER, oSpellTarget) ||
 				   GetLevelByClass(CLASS_TYPE_FAVORED_SOUL, oSpellTarget) ||
 				   GetLevelByClass(CLASS_TYPE_BARD, oSpellTarget))
