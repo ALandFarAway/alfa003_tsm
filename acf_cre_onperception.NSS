@@ -49,32 +49,29 @@ void main()
 	object oPerceived = GetLastPerceived();
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_profnec") {
+		object oMaster = GetLocalObject(OBJECT_SELF, "oMaster");
+		location lSafe = CalcSafeLocation(OBJECT_SELF, GetLocation(oMaster), 1.0, TRUE,FALSE);
+		if((oMaster == oPerceived) && (GetLastPerceptionVanished())) {
+			ActionForceFollowObject(oMaster, 1.0, 0);
+			ActionForceMoveToObject(oMaster, TRUE, 1.0, 30.0);
+			}
 		if(GetTag(oPerceived) == "003_cr_bane_bp_elthonds") {
 			ClearAllActions(TRUE);
 			ActionAttack(oPerceived, FALSE);
+			
 			}
 	}
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_moan") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
-		else if((Random(5) <= 5) && (GetDistanceBetween(OBJECT_SELF, oPerceived) < 30.0))
-		   {SendMessageToAllDMs("Moaning ghost firing.");
+		else if((Random(5) <= 1) && (GetDistanceBetween(OBJECT_SELF, oPerceived) < 30.0))
+		   {int nProxy = GetLocalInt(OBJECT_SELF, "Proxy");
+		    SendMessageToAllDMs("Moaning ghost firing. Proxy = " + IntToString(nProxy));
+		    SendMessageToPC(oPerceived, "Proxy = " + IntToString(nProxy));
 		    ClearAllActions(TRUE);
 		    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
 		    PlaySound("as_hr_x2ghost1", FALSE);
-			DelayCommand(5.0, PlaySound("as_hr_x2ghost2", FALSE));
-			DelayCommand(10.0, PlaySound("as_hr_x2ghost3", FALSE));
-			DelayCommand(15.0, PlaySound("as_hr_x2ghost4", FALSE));
-			DelayCommand(20.0, PlaySound("as_hr_x2ghost5", FALSE));
-			DelayCommand(25.0, PlaySound("as_hr_x2ghost6", FALSE));
-			DelayCommand(30.0, PlaySound("as_hr_x2ghost9", FALSE));
-			object oSound = GetObjectByTag("ghosts01_ql", 0);
-			object oSound2 = GetObjectByTag("ghosts02_ql", 0);
-			DelayCommand(35.0, SoundObjectPlay(oSound));
-			DelayCommand(40.0, SoundObjectPlay(oSound2));
-			DelayCommand(45.0, SoundObjectStop(oSound));
-			DelayCommand(50.0, SoundObjectStop(oSound2));
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonic, OBJECT_SELF, 3.0);
 			int nDC = 10 + (GetHitDice(OBJECT_SELF)/2) + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF); 
 			effect eFear = EffectFrightened();
