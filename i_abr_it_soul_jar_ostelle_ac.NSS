@@ -44,7 +44,9 @@ void main()
 		}
 	
 	else {
-		AssignCommand(oOstelle, ActionJumpToLocation(lTarget));
-		DelayCommand(2.0, AssignCommand(oOstelle, ActionSpeakString("Appears at " + GetName(oMaster) + "'s side.", TALKVOLUME_TALK)));
+		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lTarget, 5.0);
+		DelayCommand(1.0, AssignCommand(oOstelle, ActionJumpToLocation(GetLocation(oUser))));
+		DelayCommand(2.0, AssignCommand(oOstelle, ActionSpeakString("*Appears at " + GetName(oMaster) + "'s side.", TALKVOLUME_TALK)));
+		DelayCommand(3.0, AssignCommand(GetNearestObjectByTag("003_cr_slv_profnec", oUser, 1), ActionForceFollowObject(oUser, 2.0))); 		 
 		}
 }
