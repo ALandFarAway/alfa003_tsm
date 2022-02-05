@@ -13,11 +13,10 @@ void ActionCreateCreature(string sCreature, location lLocPlace)
 
 void main()
 {
-	ACR_PlaceableOnOpen();
-	//SendMessageToAllDMs("onopen create fired");
-		if(GetLocalInt(OBJECT_SELF, "Run_Once") != 1) {
+	ACR_PlaceableOnUnlock();
+	if(GetLocalInt(OBJECT_SELF, "Run_Once") != 1) {
 		SetLocalInt(OBJECT_SELF, "Run_Once", 1);
-		object oPC = GetLastOpenedBy();
+		object oPC = GetLastUnlocked();
 		string sCreateType = GetLocalString(OBJECT_SELF, "OBJECT_TYPE_STRING");
 		int nCreateType = OBJECT_TYPE_CREATURE;
 		if(sCreateType == "Placeable")
@@ -66,7 +65,7 @@ void main()
 			nNumberCreate = 1;
 		}
 	 
-				SendMessageToAllDMs("plc onopen create " + sCreate);
+				SendMessageToAllDMs("plc onunlock create " + sCreate);
 				SendMessageToPC(oPC, sMessage);
 			    ActionSpeakString(sBroadcast, TALKVOLUME_TALK);
 			
@@ -82,5 +81,5 @@ void main()
 		
 		if(nDestroy == 1)
 			{DestroyObject(OBJECT_SELF, fDestroyDelay);}
-		}		
+	}			
 }
