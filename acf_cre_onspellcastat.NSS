@@ -59,17 +59,15 @@ void main()
 	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
 		int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
         effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
-		//effect eLocation = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
-		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eLocation, GetLocation(OBJECT_SELF), 5.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, OBJECT_SELF, 5.0);
 		DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
 	    effect eEffect = GetFirstEffect(OBJECT_SELF);
 		while(GetIsEffectValid(eEffect)) {
-			//SendMessageToAllDMs("Onspellcastat " + IntToString(GetEffectInteger(eEffect,1)));
 			RemoveEffect(OBJECT_SELF, eEffect);
 			eEffect = GetNextEffect(OBJECT_SELF);
 			}
+		object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
+		ActionAttack(oAttack, FALSE);
 		}
-	object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
-	ActionAttack(oAttack, FALSE);
+
 }

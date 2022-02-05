@@ -13,7 +13,6 @@ void main()
   int nRate = GetMovementRate(OBJECT_SELF);
   effect eParalyze = EffectCutsceneParalyze();
   effect eInvisible = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
-  SendMessageToAllDMs("onSpawn. oMyTrigger = " + GetName(oMyTrigger) + ". oMyCorpse = " + GetName(oMyCorpse) + ". Movement rate = " + IntToString(nRate));
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg", oMyTrigger);	     
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc", oMyCorpse);	     
   SetLocalObject(oMyTrigger, "Undead_Proxy_Cre", OBJECT_SELF);	     

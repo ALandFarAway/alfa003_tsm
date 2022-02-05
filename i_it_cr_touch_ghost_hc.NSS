@@ -33,7 +33,7 @@ void main()
 				}*/
 				
 				int nAbility = Random(6);
-				SendMessageToAllDMs(GetName(oSpellTarget, + " loses " + IntToString(nDamage) + " points of ability " + IntToString(nAbility) );
+				SendMessageToAllDMs(GetName(oSpellTarget) + " loses " + IntToString(nDamage) + " points of ability " + IntToString(nAbility));
 	   
 				if(GetLevelByClass(CLASS_TYPE_SORCERER, oSpellTarget) ||
 				   GetLevelByClass(CLASS_TYPE_FAVORED_SOUL, oSpellTarget) ||
