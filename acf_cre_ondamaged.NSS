@@ -56,7 +56,10 @@ void main()
         effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, OBJECT_SELF, 5.0);
 		DelayCommand(1.0, SetCreatureAppearanceType(OBJECT_SELF,nAppearance));
-	    effect eEffect = GetFirstEffect(OBJECT_SELF);
+	    object oMyTrigger = GetLocalObject(OBJECT_SELF,"Undead_Proxy_Trg");
+        string sMessage = GetLocalString(oMyTrigger, "ACR_SPAWN_MESSAGE");
+		DelayCommand(1.5, ActionSpeakString(sMessage, TALKVOLUME_TALK));
+		effect eEffect = GetFirstEffect(OBJECT_SELF);
 		while(GetIsEffectValid(eEffect)) {
 			RemoveEffect(OBJECT_SELF, eEffect);
 			eEffect = GetNextEffect(OBJECT_SELF);

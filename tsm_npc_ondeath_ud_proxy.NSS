@@ -52,7 +52,7 @@ void main()
 if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
     object oMyTrigger = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg");
     object oMyCorpse = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc");
-    effect eDestroyed = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE, FALSE);
+    effect eDestroyed = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 	AssignCommand(oMyCorpse, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDestroyed, oMyCorpse, 5.0));
 	DestroyObject(oMyTrigger, 1.0);
 	}
