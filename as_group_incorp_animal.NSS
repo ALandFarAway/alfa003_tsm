@@ -48,7 +48,7 @@ void main();
 ////////////////////////////////////////////////////////////////////////////////
 
 void main() {
-
+SendMessageToAllDMs("Incorp animal spawning");
 	switch(Random(7)) {
         case 0:
             ACR_SpawnObject("003_cr_un_lion_ghost", OBJECT_TYPE_CREATURE);

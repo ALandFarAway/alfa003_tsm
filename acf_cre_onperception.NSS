@@ -69,22 +69,24 @@ void main()
 		   {int nProxy = GetLocalInt(OBJECT_SELF, "Proxy");
 		    SendMessageToAllDMs("Moaning ghost firing. Proxy = " + IntToString(nProxy));
 		    SendMessageToPC(oPerceived, "Proxy = " + IntToString(nProxy));
-		    ClearAllActions(TRUE);
-		    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
-		    PlaySound("as_hr_x2ghost1", FALSE);
-			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonic, OBJECT_SELF, 3.0);
-			int nDC = 10 + (GetHitDice(OBJECT_SELF)/2) + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF); 
-			effect eFear = EffectFrightened();
-			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
-		    while(oPC != OBJECT_INVALID) {
-				if((GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) && ((GetIsPC(oPC)) || (GetIsDMPossessed(oPC)))) {
-					SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
-					if(WillSave(oPC, nDC, SAVING_THROW_TYPE_FEAR, OBJECT_SELF) != 0)
-						{SendMessageToPC(oPC, "A ghost's moan sends a chill down your spine but you stand your ground.");}
-					else {SendMessageToPC(oPC, "A ghost's moan strikes fear into your heart. You are under a fear effect.");
-						  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFear, oPC, d4(2)*6.0);
+		    if(nProxy == 2) {
+				ClearAllActions(TRUE);
+			    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
+			    PlaySound("as_hr_x2ghost1", FALSE);
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSonic, OBJECT_SELF, 3.0);
+				int nDC = 10 + (GetHitDice(OBJECT_SELF)/2) + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF); 
+				effect eFear = EffectFrightened();
+				object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+			    while(oPC != OBJECT_INVALID) {
+					if((GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) && ((GetIsPC(oPC)) || (GetIsDMPossessed(oPC)))) {
+						SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
+						if(WillSave(oPC, nDC, SAVING_THROW_TYPE_FEAR, OBJECT_SELF) != 0)
+							{SendMessageToPC(oPC, "A ghost's moan sends a chill down your spine but you stand your ground.");}
+						else {SendMessageToPC(oPC, "A ghost's moan strikes fear into your heart. You are under a fear effect.");
+							  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFear, oPC, d4(2)*6.0);
+						}
+					oPC = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 					}
-				oPC = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 				}
 			}
 		}
