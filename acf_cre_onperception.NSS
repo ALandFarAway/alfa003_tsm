@@ -65,11 +65,9 @@ void main()
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_moan") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
-		else if((Random(5) <= 1) && (GetDistanceBetween(OBJECT_SELF, oPerceived) < 30.0))
+		else if((Random(5) <= 1) && GetLastPerceptionSeen() && (GetDistanceBetween(OBJECT_SELF, oPerceived) < 30.0))
 		   {int nProxy = GetLocalInt(OBJECT_SELF, "Proxy");
-		    SendMessageToAllDMs("Moaning ghost firing. Proxy = " + IntToString(nProxy));
-		    SendMessageToPC(oPerceived, "Proxy = " + IntToString(nProxy));
-		    if(nProxy == 2) {
+		      
 				ClearAllActions(TRUE);
 			    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
 			    PlaySound("as_hr_x2ghost1", FALSE);
@@ -78,7 +76,7 @@ void main()
 				effect eFear = EffectFrightened();
 				object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			    while(oPC != OBJECT_INVALID) {
-					if((GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) && ((GetIsPC(oPC)) || (GetIsDMPossessed(oPC)))) {
+					if(GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) {
 						SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
 						if(WillSave(oPC, nDC, SAVING_THROW_TYPE_FEAR, OBJECT_SELF) != 0)
 							{SendMessageToPC(oPC, "A ghost's moan sends a chill down your spine but you stand your ground.");}
@@ -88,7 +86,7 @@ void main()
 					oPC = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 					}
 				}
-			}
+			
 		}
 	}
 	
