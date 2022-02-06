@@ -34,7 +34,7 @@ void main()
 	
 	int nCount = 0;
 	object oInventory = GetFirstItemInInventory(OBJECT_SELF);
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (FindSubString(GetTag(GetInventoryDisturbItem()), "003_it_phalorm_hglyph_1", 0) != -1) && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (FindSubString(GetTag(GetInventoryDisturbItem()), "003_it_phalorm_hglyph_", 0) != -1) && (GetInventoryDisturbType() == 0))
 		{
 		while(oInventory != OBJECT_INVALID) {
 		    nCount = nCount+1;
@@ -124,7 +124,7 @@ void main()
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_4", lWPTwo);
 		 }	 	
 	 	
-	if((nCount > 0) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
+	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
 		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4")) { 
 			 ActionSpeakString("A ghostly figure rises up though the quicksand filling the central shaft.", TALKVOLUME_TALK);	
 			 CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, TRUE); 

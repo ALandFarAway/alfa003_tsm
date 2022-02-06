@@ -48,40 +48,35 @@ void main();
 ////////////////////////////////////////////////////////////////////////////////
 
 void main() {
-SendMessageToAllDMs("Incorp animal spawning");
+
 	switch(Random(7)) {
         case 0:
-            ACR_SpawnObject("003_cr_un_lion_ghost", OBJECT_TYPE_CREATURE);
-            if(Random(3) == 1) {ACR_SpawnObject("003_cr_un_lioness_ghost", OBJECT_TYPE_CREATURE);}
-            break;
+            ACR_SpawnObject("abr_cr_un_lion_ghost", OBJECT_TYPE_CREATURE);
+            if(Random(2) == 1) {ACR_SpawnObject("abr_cr_un_lioness_ghost", OBJECT_TYPE_CREATURE);}
+			break;
         case 1:
-            ACR_SpawnObject("003_cr_un_lioness_ghost", OBJECT_TYPE_CREATURE);
-            if(Random(3) == 1) {ACR_SpawnObject("003_cr_un_lion_ghost", OBJECT_TYPE_CREATURE);}
-            break;
+            ACR_SpawnObject("abr_cr_un_lioness_ghost", OBJECT_TYPE_CREATURE);
+            if(Random(2) == 1) {ACR_SpawnObject("abr_cr_un_lion_ghost", OBJECT_TYPE_CREATURE);}
+			break;
         case 2:
-            ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);
-            if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
-            if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
-            break;
+            ACR_SpawnObject("abr_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);
+            if(Random(2) == 1) {ACR_SpawnObject("abr_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
+			if(Random(3) == 1) {ACR_SpawnObject("abr_cr_un_monkey_ghost", OBJECT_TYPE_CREATURE);}
+			break;
         case 3:
-            ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);
-            if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);}
-            if(Random(3) == 1) {ACR_SpawnObject("003_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);}
-            break;
+            ACR_SpawnObject("abr_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);
+            if(Random(2) == 1) {ACR_SpawnObject("abr_cr_un_scorpion_ghost", OBJECT_TYPE_CREATURE);}
+			break;
 		case 4:
-            ACR_SpawnObject("003_cr_un_panther_ghost", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_un_panther_ghost", OBJECT_TYPE_CREATURE);
             break;
         case 5:
-            ACR_SpawnObject("003_cr_un_harpy_ghost", OBJECT_TYPE_CREATURE);
-            if(Random(2) == 1) {ACR_SpawnObject("003_cr_un_harpy_ghost", OBJECT_TYPE_CREATURE);}
-            break;
+            ACR_SpawnObject("abr_cr_un_harpy_ghost", OBJECT_TYPE_CREATURE);
+            if(Random(2) == 1) {ACR_SpawnObject("abr_cr_un_harpy_ghost", OBJECT_TYPE_CREATURE);}
+			break;
         case 6:
-            ACR_SpawnObject("003_cr_un_minotaur_ghost", OBJECT_TYPE_CREATURE);
+            ACR_SpawnObject("abr_cr_un_minotaur_ghost", OBJECT_TYPE_CREATURE);
             break;
-        	}			
-	
-
-
-			
+        	}					
     
 }
