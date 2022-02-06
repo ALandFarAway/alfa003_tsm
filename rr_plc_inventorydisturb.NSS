@@ -38,7 +38,7 @@ void main()
 		{
 		while(oInventory != OBJECT_INVALID) {
 		    nCount = nCount+1;
-			SendMessageToPC(oPC, IntToString(nCount));
+			//SendMessageToPC(oPC, IntToString(nCount));
 			if(nCount == 1) {lWPGlyph = lWPOne;}
 			else if(nCount == 2) {lWPGlyph = lWPTwo;}
 			else if(nCount == 3) {lWPGlyph = lWPThree;}

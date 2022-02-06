@@ -62,12 +62,29 @@ void main()
 			}
 	}
 	
+	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_corrupt") {
+		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
+			{return;}
+		else if((GetLocalInt(OBJECT_SELF, GetName(oPerceived)) != 1) && GetLastPerceptionSeen() && ((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))) {
+				SetLocalInt(OBJECT_SELF, GetName(oPerceived), 1);
+		   		int nDC = 10 + (GetHitDice(OBJECT_SELF)/2) + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF); 
+				SendMessageToPC(oPerceived, "You feel the corrupting gaze of something undead...");
+		   		if(FortitudeSave(oPerceived, nDC, SAVING_THROW_TYPE_FEAR, OBJECT_SELF) != 0) 
+					{SendMessageToPC(oPerceived, "...and are able to resist the effects of fear.");
+		   		}
+				else {SendMessageToPC(oPerceived, "...and feel your heart stutter and seize painfully, and your confidence falter.");
+					ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CHARISMA, d4(1))), oPerceived);
+					effect eDamage = EffectDamage(d10(2), DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, FALSE);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPerceived);
+					}
+			}
+		}		    
+	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_moan") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
 		else if((Random(5) <= 1) && GetLastPerceptionSeen() && (GetDistanceBetween(OBJECT_SELF, oPerceived) < 30.0))
-		   {int nProxy = GetLocalInt(OBJECT_SELF, "Proxy");
-		      
+		   {  
 				ClearAllActions(TRUE);
 			    effect eSonic = EffectVisualEffect(VFX_DUR_CONE_SONIC, FALSE);
 			    PlaySound("as_hr_x2ghost1", FALSE);
@@ -94,10 +111,10 @@ void main()
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_horrific") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
 			{return;}
-		else if((GetLocalInt(OBJECT_SELF, GetName(oPerceived)) != 1) && ((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))) {
+		else if((GetLocalInt(OBJECT_SELF, GetName(oPerceived)) != 1) && GetLastPerceptionSeen() && ((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))) {
 				SetLocalInt(OBJECT_SELF, GetName(oPerceived), 1);
 		   		int nDC = 10 + (GetHitDice(OBJECT_SELF)/2) + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF); 
-				SendMessageToPC(oPerceived, "You get a good look at a horrific ghost...");
+				SendMessageToPC(oPerceived, "You get a mere glimpse of a horrific ghost...");
 		   		if(FortitudeSave(oPerceived, nDC, SAVING_THROW_TYPE_FEAR, OBJECT_SELF) != 0) 
 					{SendMessageToPC(oPerceived, "...and are able to resist the effects of fear.");
 		   		}
