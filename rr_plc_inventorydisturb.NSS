@@ -31,13 +31,14 @@ void main()
 	int nCount = 0;
 	object oInventory = GetFirstItemInInventory(OBJECT_SELF);
 	while(oInventory != OBJECT_INVALID) {
-	    nCount++;
+	    nCount = nCount+1;
 		SendMessageToPC(oPC, IntToString(nCount));
 		if(nCount == 1) {lWPGlyph = lWPOne;}
 		else if(nCount == 2) {lWPGlyph = lWPTwo;}
 		else if(nCount == 3) {lWPGlyph = lWPThree;}
 		else if(nCount == 4) {lWPGlyph = lWPFour;}
-		object oInventory = GetNextItemInInventory(OBJECT_SELF);
+		if(nCount > 5) {return;}
+		oInventory = GetNextItemInInventory(OBJECT_SELF);
 	}
 	
 	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 0))
