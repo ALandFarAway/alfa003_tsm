@@ -12,9 +12,9 @@ void main()
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);
 	object oCreate = GetNearestObjectByTag("WP_phalorm_globe_platform_green2", OBJECT_SELF, 1);	
 	location lCreate = GetLocation(oCreate);
-	object oCreateWeird = GetNearestObjectByTag("phalorm_earth_down_wp", OBJECT_SELF, 1);
-	location lCreateWeird = GetLocation(oCreate);
 	string sCreate = "003_cr_un_ghost_corrupt";	
+	object oCreateWeird = GetWaypointByTag("phalorm_earth_down_wp");
+	location lCreateWeird = GetLocation(oCreateWeird);
 	int nRandom = Random(3);
 	if(nRandom==1) 
 		{sCreate = "003_cr_un_ghost_moan";}
@@ -113,7 +113,7 @@ void main()
 	if((GetLocalInt(OBJECT_SELF, "Activated") != 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "abr_it_rng_orbacid") && (GetInventoryDisturbType() == 0))
 		{ 
 	     SetLocalInt(OBJECT_SELF, "Activated", 1);
-		 ActionSpeakString("*New hieroglyphs appear, standing up on top of the panel", TALKVOLUME_TALK);
+		 ActionSpeakString("*Hieroglyph inscribed tablets appear, standing up on top of the panel", TALKVOLUME_TALK);
 		 CreateItemOnObject("003_it_phalorm_hglyph_2", OBJECT_SELF, 1);	
 		 CreateItemOnObject("003_it_phalorm_hglyph_4", OBJECT_SELF, 1);	
 		 CreateItemOnObject("003_it_phalorm_hglyph_3", OBJECT_SELF, 1);	
@@ -125,17 +125,17 @@ void main()
 		 }	 	
 	 	
 	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
-		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4")) { 
+		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_4")) { 
 			 ActionSpeakString("A ghostly figure rises up though the quicksand filling the central shaft.", TALKVOLUME_TALK);	
-			 CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, TRUE); 
+			 CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
 			 }
 		 }
 		 
 	if((GetLocalInt(OBJECT_SELF, "H1") == 1) && (GetLocalInt(OBJECT_SELF, "H2") == 1) && (GetLocalInt(OBJECT_SELF, "H3") == 1) && (GetLocalInt(OBJECT_SELF, "H4") == 1))
 		{ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
-		 DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lCreateWeird, 5.0));
-		 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
-		 DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lCreateWeird, 5.0));
+		 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
+		 //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, lCreateWeird, 5.0);
+		 DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lCreateWeird, 5.0));
 		 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1));
 		 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1));
 		 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1));
@@ -144,6 +144,6 @@ void main()
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_p", lWPTwo);
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_e", lWPThree);
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_n", lWPFour);
-		 CreateObject(OBJECT_TYPE_CREATURE, "phalorm_cr_el_earthweird", lCreateWeird);
+		 CreateObject(OBJECT_TYPE_CREATURE, "phalorm_cr_el_earthweird", lCreateWeird, FALSE);
 		}
 }
