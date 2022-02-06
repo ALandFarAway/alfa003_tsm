@@ -260,7 +260,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B2A56360966581C1819A1A7B12E8AD7A1FF73889" downloadHash="F64B7F13E49ED29339C80B6BFE8BBA758E57C51A" name="6f_int_silvypass_delz_crypt.trx" dlsize="243838" size="245789" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B763DB65996FF1C49F953120881BE2F5B63442B0" downloadHash="6FBB8FA28DBF021B3223ED987CCF3F75ED218258" name="6f_int_silvypass_delz_crypt.trx" dlsize="244325" size="246310" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1645,7 +1645,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="825E6FE2B26A416452B450505885DC7C72BFE22F" downloadHash="0AB9A42B35356C1B5F272C6CA8EB6FE9EBEE45CC" name="8e_int_highforest_olostins_hold.trx" dlsize="1409306" size="4471919" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D1F19557B495C43D546537462EFCBBC2F7A6B0DE" downloadHash="F58D9763C58AC6A38403B69AD8405B849A114EE8" name="8e_int_highforest_olostins_hold.trx" dlsize="1701433" size="4769013" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1665,7 +1665,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F30744058515D2E7D95B727CD6D229189C7AEA42" downloadHash="BF9DAD33624E33A0A5B877CD1A4D01F1730607D2" name="8e_int_highforest_oh_lathander.trx" dlsize="48084" size="48461" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="401FC34CA738DAB95A479C89ABC639589E9C9DF2" downloadHash="DCA59E6A5E160ADAA3888ED41906EDF5259480AC" name="8e_int_highforest_oh_lathander.trx" dlsize="54427" size="54835" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
