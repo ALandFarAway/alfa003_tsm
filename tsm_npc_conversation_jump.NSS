@@ -12,7 +12,7 @@ void main()
 	object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 	while (oPC != OBJECT_INVALID) {
 		nCount = nCount +1;
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eTornado, oPC, 5.0);
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTornado, oPC, 5.0);
 		SendMessageToPC(oPC, "You are engulfed by a sand storm from the central shaft! You feel yourself lifted and pulled in, and then you are sinking, plunging through grit and earth.");
 		DelayCommand(1.0, AssignCommand(oPC, ActionJumpToObject(oDest, FALSE)));
 		if(nCount > 10) {return;}
