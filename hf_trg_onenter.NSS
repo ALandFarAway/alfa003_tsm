@@ -27,8 +27,6 @@ if((GetTag(OBJECT_SELF) == "phalorm_light_green_up_trg") && (GetIsPC(oPC)) && (G
 		 DestroyObject(oOrb, 2.0);
 		 DestroyObject(oLight, 3.0);
 		}
-	
-	
 
 if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
@@ -119,7 +117,7 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 			DelayCommand(5.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			}
 		}
-			
+		
 		//Dex Checks for PCs on beam	 
 	if((GetTag(OBJECT_SELF) == "ruin_beam_trg") && ((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))))
 		{location lFallBreak=GetLocation(GetWaypointByTag("ruin_beam_fall_break_wp"));

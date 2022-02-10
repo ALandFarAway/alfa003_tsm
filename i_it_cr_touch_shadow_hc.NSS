@@ -12,7 +12,6 @@ void main()
 	   object oSpellTarget = GetSpellTargetObject();
 	   object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
 	    
-	    
 		if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 			{int nTouch = TouchAttackMelee(oTarget);
 			 int nDrain = d6();
