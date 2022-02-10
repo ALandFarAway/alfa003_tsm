@@ -54,11 +54,27 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		}
 		
 	if(GetTag(OBJECT_SELF) == "phalorm_archive_exit") {
+		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_enter");
+		object oHereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
 		object oGoThere = GetWaypointByTag("WP_phalorm_archive_exit");
+		location lThere = GetLocation(oThereWP);
+		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
-		DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+		
+		if(GetLocalInt(OBJECT_SELF, "Activated") != 1) {
+			SetLocalInt(OBJECT_SELF, "Activated", 1); 
+			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
+			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
+			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
+			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
+			}
+		else if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
+			DelayCommand(1.0, SendMessageToPC(oPC, "You find yourself in another place."));
+			DelayCommand(5.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			}
 		}
-	
+		
 	if(GetTag(OBJECT_SELF) == "phalorm_vault_enter") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_vault_platform_exit");
 		object oHereWP = GetWaypointByTag("WP_phalorm_vault_platform_enter");
@@ -83,9 +99,25 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		}
 		
 	if(GetTag(OBJECT_SELF) == "phalorm_vault_exit") {
+		object oThereWP = GetWaypointByTag("WP_phalorm_vault_platform_enter");
+		object oHereWP = GetWaypointByTag("WP_phalorm_vault_platform_exit");
 		object oGoThere = GetWaypointByTag("WP_phalorm_vault_exit");
+		location lThere = GetLocation(oThereWP);
+		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
-		DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+		
+		if(GetLocalInt(OBJECT_SELF, "Activated") != 1) {
+			SetLocalInt(OBJECT_SELF, "Activated", 1); 
+			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
+			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
+			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
+			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
+			}
+		else if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
+			DelayCommand(1.0, SendMessageToPC(oPC, "You find yourself in another place."));
+			DelayCommand(5.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			}
 		}
 			
 		//Dex Checks for PCs on beam	 
