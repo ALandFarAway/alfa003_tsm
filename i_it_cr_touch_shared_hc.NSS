@@ -18,31 +18,32 @@ if(FindSubString(GetTag(oPossessor), "_cr_un_wraith")!= -1)
 	{SendMessageToAllDMs("Wraith");
 	 if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{int nTouch = TouchAttackMelee(oTarget);
-		 //int nDamage = d4();
+		 int nDamage = d4();
 		 //if(nTouch == 2) nDamage += d4();
 		 int nDrain = d6();
+		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 if(nTouch && !FortitudeSave(oTarget, 14, SAVING_THROW_TYPE_NEGATIVE, oPossessor))
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_CONSTITUTION) &&
 			 !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 				{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
-				/*else
+				else
 				{
 					effect eEffect = GetFirstEffect(oTarget);
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == OBJECT_SELF)
+						   GetEffectCreator(eEffect) == oItem)
 						{
 							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
 						}
 						eEffect = GetNextEffect(oTarget);
 					}
-				}*/
+				}
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), oPossessor);
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! You feel more frail.");
-				//ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 			}
 		}
@@ -101,7 +102,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_ghost")!= -1)
 					if(Random(3) == 1) {nAbility = ABILITY_INTELLIGENCE;}
 				}
 				
-				SendMessageToAllDMs(GetName(oTarget) + " loses " + IntToString(nDamage) + " points of ability " + IntToString(nAbility));
+				SendMessageToAllDMs(GetName(oTarget) + " loses " + IntToString(nDrain) + " points of ability " + IntToString(nAbility));
 	   
 				string sMessage = GetName(oPossessor) + " touches you!";
 				string sMessageAbility;
@@ -115,7 +116,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_ghost")!= -1)
 				
 				SendMessageToPC(oTarget, sMessage);
 				SendMessageToPC(oTarget, sMessageAbility);
-				SendMessageToAllDMs(GetName(oTarget) + " touched by " + GetTag(oPossessor) + " got " + sMessageAbility);
+				//SendMessageToAllDMs(GetName(oTarget) + " touched by " + GetTag(oPossessor) + " got " + sMessageAbility);
 				
 				if(nDrain >  GetAbilityScore(oTarget, nAbility) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
@@ -142,20 +143,20 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_allip")!= -1)
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_WISDOM) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectSleep(), oTarget);}
-				/*else
+				else
 				{
 					effect eEffect = GetFirstEffect(oTarget);
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == OBJECT_SELF)
+						   GetEffectCreator(eEffect) == oItem)
 						{
-							nDamage += GetEffectInteger(eEffect, 1);
+							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
 						}
 						eEffect = GetNextEffect(oTarget);
 					}
-				}*/
+				}
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), oPossessor);
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_WISDOM, nDrain)), oTarget);
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! Panic clouds your judgement.");
@@ -184,34 +185,33 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow_greater")!= -1)
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		   {int nTouch = TouchAttackMelee(oTarget);
 			int nDrain =  d8();
- 			SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
-			 
+			SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
+			  
 		//if(nTouch == 2) nDamage += d8();
 		if(nTouch)
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
-				/*else
+				else
 				{
 					effect eEffect = GetFirstEffect(oTarget);
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == OBJECT_SELF)
+						   GetEffectCreator(eEffect) == oItem)
 						{
-							nDamage += GetEffectInteger(eEffect, 1);
+							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
 						}
 						eEffect = GetNextEffect(oTarget);
 					}
-				}*/
+				}
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_STRENGTH, nDrain)), oTarget);
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! Your muscles go slack, your strength failing.");
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 				}		
 	 		}
 		}
-	
 	
 else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow")!= -1)
 	{SendMessageToAllDMs("Shadow");
@@ -225,20 +225,20 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow")!= -1)
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
-				/*else
+				else
 				{
 					effect eEffect = GetFirstEffect(oTarget);
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == OBJECT_SELF)
+						   GetEffectCreator(eEffect) == oItem)
 						{
-							nDamage += GetEffectInteger(eEffect, 1);
+							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
 						}
 						eEffect = GetNextEffect(oTarget);
 					}
-				}*/
+				}
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_STRENGTH, nDrain)), oTarget);
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! Strength goes out of your limbs.");
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
