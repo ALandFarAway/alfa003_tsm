@@ -7,8 +7,7 @@
 
 
 void main()
-{   SendMessageToAllDMs("On Hit Cast fired");
-	object oTarget = GetSpellTargetObject();
+{   object oTarget = GetSpellTargetObject();
 	object oItem        = GetSpellCastItem();    // The item casting that triggered this spellscript
    	object oPossessor   = GetItemPossessor(oItem);  //On a weapon: The one wielding the weapon. On an armor: The one wearing an armor
 	   
@@ -54,9 +53,10 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_ghost")!= -1)
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 			{int nTouch = TouchAttackMelee(oTarget);
 			 int nDamage = d6();
-			 SendMessageToPC(oTarget, "nDamage = " + IntToString(nDamage));
-			//if(nTouch == 2) nDamage += d6();
+			 //if(nTouch == 2) nDamage += d6();
 			 int nDrain = d4();
+			 SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
+			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 			 if(nTouch)
 				{
 				/*effect eEffect = GetFirstEffect(oTarget);
@@ -136,6 +136,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_allip")!= -1)
 	 if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{int nTouch = TouchAttackMelee(oTarget);
          int nDrain = d4();
+		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 			//if(nTouch == 2) nDamage += d4();
 		 if(nTouch)
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_WISDOM) &&
@@ -183,7 +184,8 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow_greater")!= -1)
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		   {int nTouch = TouchAttackMelee(oTarget);
 			int nDrain =  d8();
- 
+ 			SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
+			 
 		//if(nTouch == 2) nDamage += d8();
 		if(nTouch)
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
