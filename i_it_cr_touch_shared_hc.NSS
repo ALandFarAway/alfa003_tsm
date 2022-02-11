@@ -11,7 +11,7 @@ void main()
 	object oTarget = GetSpellTargetObject();
 	//int SaveDC = GetHitDice(OBJECT_SELF) / 2 + GetAbilityModifier(ABILITY_CHARISMA, OBJECT_SELF) + 10;
 
-if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "WRAITH")
+if(GetTag(OBJECT_SELF) == "_cr_un_wraith")
 	{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{int nTouch = TouchAttackMelee(oTarget);
 		 //int nDamage = d4();
@@ -44,7 +44,7 @@ if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "WRAITH")
 		}
 	}
 
-else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GHOST")
+else if(FindSubString(GetTag(OBJECT_SELF), "_cr_un_ghost")!= -1)
 		{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 			{int nTouch = TouchAttackMelee(oTarget);
 			 int nDamage = d6();
@@ -125,7 +125,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GHOST")
 		}
 	}
 	
-else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "ALLIP")
+else if(FindSubString(GetTag(OBJECT_SELF), "_cr_un_allip")!= -1)
 	{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{int nTouch = TouchAttackMelee(oTarget);
          int nDrain = d4();
@@ -156,7 +156,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "ALLIP")
 		}
 	}
 	 
-else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "WISP")
+else if(FindSubString(GetTag(OBJECT_SELF), "_cr_ab_willowisp")!= -1)
 		{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 			{int nTouch = TouchAttackMelee(oTarget);
 			 int nDamage = d8(2);
@@ -169,7 +169,40 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "WISP")
 		}
    }
     
-else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "SHADOW")
+   
+else if(FindSubString(GetTag(OBJECT_SELF), "_cr_un_shadow_greater")!= -1)
+		{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
+		   {int nTouch = TouchAttackMelee(oTarget);
+			int nDrain =  d8();
+ 
+		//if(nTouch == 2) nDamage += d8();
+		if(nTouch)
+			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
+				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
+					{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
+				/*else
+				{
+					effect eEffect = GetFirstEffect(oTarget);
+					while(GetIsEffectValid(eEffect))
+					{
+						if(GetEffectSpellId(eEffect) == GetSpellId() &&
+						   GetEffectCreator(eEffect) == OBJECT_SELF)
+						{
+							nDamage += GetEffectInteger(eEffect, 1);
+							RemoveEffect(oTarget, eEffect);
+						}
+						eEffect = GetNextEffect(oTarget);
+					}
+				}*/
+				ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_STRENGTH, nDrain)), oTarget);
+				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your muscles go slack, your strength failing.");
+				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
+				}		
+	 		}
+		}
+	
+	
+else if(FindSubString(GetTag(OBJECT_SELF), "_cr_un_shadow")!= -1)
 	{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{int nTouch = TouchAttackMelee(oTarget);
 		 int nDrain = d6();
@@ -201,36 +234,5 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "SHADOW")
 	 	}
    }
  
-else
-	{if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GREATER SHADOW")
-		{if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
-		   {int nTouch = TouchAttackMelee(oTarget);
-			int nDrain =  d8();
- 
-		//if(nTouch == 2) nDamage += d8();
-		if(nTouch)
-			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
-				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
-					{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
-				/*else
-				{
-					effect eEffect = GetFirstEffect(oTarget);
-					while(GetIsEffectValid(eEffect))
-					{
-						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == OBJECT_SELF)
-						{
-							nDamage += GetEffectInteger(eEffect, 1);
-							RemoveEffect(oTarget, eEffect);
-						}
-						eEffect = GetNextEffect(oTarget);
-					}
-				}*/
-				ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_STRENGTH, nDrain)), oTarget);
-				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your muscles go slack, your strength failing.");
-				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
-				}		
-	 		}
-		}
-	}
+
 }
