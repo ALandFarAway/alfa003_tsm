@@ -18,12 +18,12 @@ if(FindSubString(GetTag(oPossessor), "_cr_un_wraith")!= -1)
 	{SendMessageToAllDMs("Wraith");
 	 if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 		{//int nTouch = TouchAttackMelee(oTarget);
-		ActionUseFeat(2179, oTarget);
-		/*int nDamage = d4();
+		//ActionUseFeat(2179, oTarget);
+		int nDamage = d4();
 		 //if(nTouch == 2) nDamage += d4();
 		 int nDrain = d6();
 		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
-		 if(nTouch && !FortitudeSave(oTarget, 14, SAVING_THROW_TYPE_NEGATIVE, oPossessor))
+		 if(!FortitudeSave(oTarget, 14, SAVING_THROW_TYPE_NEGATIVE, oPossessor))
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_CONSTITUTION) &&
 			 !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 				{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
@@ -46,21 +46,21 @@ if(FindSubString(GetTag(oPossessor), "_cr_un_wraith")!= -1)
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! You feel more frail.");
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
-			}*/
+			}
 		}
 	}
 
 else if(FindSubString(GetTag(oPossessor), "_cr_un_ghost")!= -1)
 		{SendMessageToAllDMs("Ghost");
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
-			{int nTouch = TouchAttackMelee(oTarget);
+			{//int nTouch = TouchAttackMelee(oTarget);
 			 int nDamage = d6();
 			 //if(nTouch == 2) nDamage += d6();
 			 int nDrain = d4();
 			 SendMessageToAllDMs("nDamage = " + IntToString(nDamage));
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
-			 if(nTouch)
-				{
+			// if(nTouch)
+			//	{
 				/*effect eEffect = GetFirstEffect(oTarget);
 				//while(GetIsEffectValid(eEffect))
 				{
@@ -129,19 +129,20 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_ghost")!= -1)
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(nAbility, nDrain)), oTarget);
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
-			}
+			//}
 		}
 	}
 	
 else if(FindSubString(GetTag(oPossessor), "_cr_un_allip")!= -1)
 	{SendMessageToAllDMs("Allip");
 	 if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
-		{int nTouch = TouchAttackMelee(oTarget);
+		{//int nTouch = TouchAttackMelee(oTarget);
          int nDrain = d4();
 		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 			//if(nTouch == 2) nDamage += d4();
-		 if(nTouch)
-			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_WISDOM) &&
+		 //if(nTouch)
+			//{
+			if(nDrain >  GetAbilityScore(oTarget, ABILITY_WISDOM) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectSleep(), oTarget);}
 				else
@@ -162,21 +163,22 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_allip")!= -1)
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_WISDOM, nDrain)), oTarget);
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! Panic clouds your judgement.");
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
-			}
+			//}
 		}
 	}
 	 
 else if(FindSubString(GetTag(oPossessor), "_cr_ab_willowisp")!= -1)
 		{SendMessageToAllDMs("Wisp");
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
-			{int nTouch = TouchAttackMelee(oTarget);
+			{//int nTouch = TouchAttackMelee(oTarget);
 			 int nDamage = d8(2);
 			 //if(nTouch == 2) nDamage += d8(2);
-		 	 if(nTouch)
-				{ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectDamage( nDamage, DAMAGE_TYPE_ELECTRICAL ), oTarget );
+		 	// if(nTouch)
+				//{
+				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectDamage( nDamage, DAMAGE_TYPE_ELECTRICAL ), oTarget );
 			     SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! You feel a jolt run through your body");
 				 ApplyEffectToObject( DURATION_TYPE_TEMPORARY, EffectBeam( VFX_BEAM_SHOCKING_GRASP, oPossessor, BODY_NODE_CHEST, FALSE ), oTarget, 1.0f );
-			}
+			//}
 		}
    }
     
@@ -184,13 +186,14 @@ else if(FindSubString(GetTag(oPossessor), "_cr_ab_willowisp")!= -1)
 else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow_greater")!= -1)
 		{SendMessageToAllDMs("Greater Shadow");
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
-		   {int nTouch = TouchAttackMelee(oTarget);
+		   {//int nTouch = TouchAttackMelee(oTarget);
 			int nDrain =  d8();
 			SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 			  
 		//if(nTouch == 2) nDamage += d8();
-		if(nTouch)
-			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
+		//if(nTouch)
+		//	{
+			if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);}
 				else
@@ -210,7 +213,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow_greater")!= -1)
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_STRENGTH, nDrain)), oTarget);
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! Your muscles go slack, your strength failing.");
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
-				}		
+			//	}		
 	 		}
 		}
 	
