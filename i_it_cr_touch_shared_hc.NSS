@@ -220,7 +220,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow")!= -1)
 		 int nDrain = d6();
 		
         //if(nTouch == 2) nDamage += d6();
-		SendMessageToPC(oTarget, "nDrain = " + IntToString(nDrain));
+		SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		if(nTouch)
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
