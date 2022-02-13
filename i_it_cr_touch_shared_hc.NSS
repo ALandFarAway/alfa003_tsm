@@ -32,7 +32,7 @@ if(FindSubString(GetTag(oPossessor), "_cr_un_wraith")!= -1)
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == oItem)
+						   GetEffectCreator(eEffect) == OBJECT_SELF)
 						{
 							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
@@ -149,7 +149,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_allip")!= -1)
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == oItem)
+						   GetEffectCreator(eEffect) == OBJECT_SELF)
 						{
 							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
@@ -198,7 +198,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow_greater")!= -1)
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == oItem)
+						   GetEffectCreator(eEffect) == OBJECT_SELF)
 						{
 							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
@@ -231,7 +231,7 @@ else if(FindSubString(GetTag(oPossessor), "_cr_un_shadow")!= -1)
 					while(GetIsEffectValid(eEffect))
 					{
 						if(GetEffectSpellId(eEffect) == GetSpellId() &&
-						   GetEffectCreator(eEffect) == oItem)
+						   GetEffectCreator(eEffect) == OBJECT_SELF)
 						{
 							nDrain += GetEffectInteger(eEffect, 1);
 							RemoveEffect(oTarget, eEffect);
