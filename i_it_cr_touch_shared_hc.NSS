@@ -17,8 +17,9 @@ void main()
 if(FindSubString(GetTag(oPossessor), "_cr_un_wraith")!= -1)
 	{SendMessageToAllDMs("Wraith");
 	 if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
-		{int nTouch = TouchAttackMelee(oTarget);
-		 int nDamage = d4();
+		{//int nTouch = TouchAttackMelee(oTarget);
+		ActionUseFeat(2179, oTarget);
+		/*int nDamage = d4();
 		 //if(nTouch == 2) nDamage += d4();
 		 int nDrain = d6();
 		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
@@ -45,7 +46,7 @@ if(FindSubString(GetTag(oPossessor), "_cr_un_wraith")!= -1)
 				SendMessageToPC(oTarget, GetName(oPossessor) + " touches you! You feel more frail.");
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
-			}
+			}*/
 		}
 	}
 
