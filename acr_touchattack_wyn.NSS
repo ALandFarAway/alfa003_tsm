@@ -1,4 +1,4 @@
-// Variables need to be put on the creatures claw/slam and the Creature.  Choose the OnHitCast Touch attack on the item.
+// ACR_TOUCH_ATTACK strings need to be put on the Creature.  Choose the OnHitCast Touch attack on the creature claw/bite item.
 
 #include "x2_inc_spellhook"
 #include "x2_inc_switches"

@@ -1916,4 +1916,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="3D70E85DA2F4470336B265F9DA86C02D1A6D988B" downloadHash="15BE23843DCC05AD183386ABEDC7E9636BB9480B" name="5g_int_auvandell_cave.trx" dlsize="12493" size="12597" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
