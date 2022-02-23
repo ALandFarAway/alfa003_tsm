@@ -77,18 +77,15 @@ void main()
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
 		 if(nRunOnce == 0) {
-		 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-		 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
-		 SendMessageToPC(oPC, sMessage);
-		 ApplyEffectToObject(nDurationType, eOne, oPLCDestroy, fDurationLength);
-		 DestroyObject(oPLCDestroy, 2.0);
-		 }  
-		  
-		 
-		 
-		 
-		 
-		 
-		 }
+			 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
+			 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
+			 SendMessageToPC(oPC, sMessage);
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SCREEN_SHAKE), oPC);
+             AssignCommand(oPC, ActionPlayAnimation(ANIMATION_LOOPING_DEAD_BACK, 1.0, 5.0));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_SPELL_HIT_EARTHQUAKE), oPC, 5.0);
+			 DestroyObject(oPLCDestroy, 2.0);
+			 DelayCommand(4.0, AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE)));
+			 }  
+		}
 	   
 }

@@ -1670,7 +1670,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="86F7BFAEAD1445AC0AB62D6A0E7BA25A2479CF38" downloadHash="A2A065815B2974319F71558B695757111EBCBE82" name="7e_int_rauvin_ruins.trx" dlsize="690550" size="699753" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1F47A9378EBB34454AEC6EB10D0BF9475D7A3173" downloadHash="609478F5A167EF94942EE15C44009140B845467B" name="7e_int_rauvin_ruins.trx" dlsize="686114" size="695176" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1745,7 +1745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9A432BF53A1F801D338907036A79CE6CB8EEB14B" downloadHash="5B00774062655207483CD01995408FD8461D8E72" name="5b_int_frosthills_glacier_plat.trx" dlsize="637976" size="649567" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B414FF06E85E989F27D688E5F2E1589A778113C5" downloadHash="A5F039CAA82015D4AC218604867BCC33AAF1828E" name="5b_int_frosthills_glacier_plat.trx" dlsize="652907" size="665331" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
