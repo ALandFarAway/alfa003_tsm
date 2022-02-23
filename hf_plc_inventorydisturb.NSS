@@ -1,4 +1,4 @@
-//OnInventoryDisturb for all High Forest placeables outside the classrooms
+//OnInventoryDisturb for all High Forest placeables
 //Wynna April 2021
 
 
@@ -128,22 +128,33 @@ if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDi
 	 effect eSummonRed = EffectVisualEffect(VFX_FNF_SUMMON_GATE, FALSE);
 	 effect eSummonGold = EffectVisualEffect(VFX_FNF_SUMMONDRAGON, FALSE);
 	 
-	 if(GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
-	 	object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
+	 if((GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_diamond")!= OBJECT_INVALID) || (GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID)) {
+	 	if(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) {
+			DestroyObject(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire"), 1.0);
+			CreateItemOnObject("003_it_phalorm_sapphire", oDisturber, 1);
+			}
+		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
 		object oLightOn = CreateObject(OBJECT_TYPE_PLACED_EFFECT,"fx_gem_energy_blue", GetLocation(oDisturber));
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlueGlobe, oGlobeBook, 10.0);
 		DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonBlue, oDisturber, 5.0));
 		DelayCommand(5.0, AssignCommand(oDisturber, ActionJumpToObject(oWPTeleBlue, FALSE)));
+		DestroyObject(oFFieldBlue, 5.0);
 		DestroyObject(oPlatformBookOn, 10.0);
-		DestroyObject(oLightOn, 10.0);	 	 	 	 	 	 
+		DestroyObject(oLightOn, 10.0);
+			 	 	 	 	 	 
 	 }
 	 
-	 if(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
-	 	object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
+	 if((GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_diamond")!= OBJECT_INVALID) || (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)) {
+	 	if(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID) {
+			DestroyObject(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_emerald"), 1.0);
+			CreateItemOnObject("003_it_phalorm_emerald", oDisturber, 1);
+			}
+		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
 		object oLightOn = CreateObject(OBJECT_TYPE_PLACED_EFFECT,"fx_gem_energy_green", GetLocation(oDisturber));
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenGlobe, oGlobeBook, 10.0);
 		DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSummonGreen, oDisturber, 5.0));
 		DelayCommand(5.0, AssignCommand(oDisturber, ActionJumpToObject(oWPTeleGreen, FALSE)));
+		DestroyObject(oFFieldGreen, 5.0);
 		DestroyObject(oPlatformBookOn, 10.0);
 		DestroyObject(oLightOn, 10.0);	 	 	 	 	 	 
 	 }

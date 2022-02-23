@@ -1695,7 +1695,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B50C02AC94D1ACF3CCD992930697541945879BD9" downloadHash="4FC56E6828F4E983DACE3846B8413AD312DDB24E" name="8e_int_highforest_nw_cave_aq.trx" dlsize="735748" size="6424768" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="96ABC6896097BEEE222A590BD0CE0B96663C432D" downloadHash="B211159A2A82A3706D0002A5234AB3782D66B8D1" name="8e_int_highforest_nw_cave_aq.trx" dlsize="718296" size="6421052" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1745,7 +1745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0960958261CD7C3C1406C693441A6F51C601EBCA" downloadHash="2130EEBFF4D2557B1519515E658406DAE1F6BC35" name="5b_int_frosthills_glacier_plat.trx" dlsize="432934" size="440037" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3D6943E7A9E6D7A4B926DE3607020F250A670B29" downloadHash="070F479ABF255E71045FAD56C847C736B2DA5ECD" name="5b_int_frosthills_glacier_plat.trx" dlsize="634527" size="645380" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

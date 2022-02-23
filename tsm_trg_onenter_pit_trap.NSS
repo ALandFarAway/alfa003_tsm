@@ -1,0 +1,94 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  System Name : ACR Configuration File
+//     Filename : acf_trg_onenter.nss
+//    $Revision:: 236        $ current version of the file
+//        $Date:: 2007-01-21#$ date the file was created or modified
+//       Author : Cipher
+//
+//    Var Prefix:
+//  Dependencies:
+//
+//  Description
+//  This script calls the ACR's OnEnter code for triggers, and any
+//  custom code a server may need. It is not updated in ACR updates.
+//
+//  Revision History
+//  2007/01/20  Cipher  Inception
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+#include "acr_trigger_i"
+#include "acr_quest_i"
+#include "acr_spawn_i"
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Constants ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Structures //////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Global Variables ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Function Prototypes /////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Function Definitions ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void ActionCreateCreature(string sCreature, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocPlace, FALSE);
+}
+
+void main()
+{
+    ACR_TriggerOnEnter();
+
+    // Custom code goes here.
+	object oPC = GetEnteringObject();
+
+ if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_pit_trap") && ((GetIsPC(oPC)) || (GetIsDMPossessed(oPC))))
+		{string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
+		 string sSpeak=GetLocalString(OBJECT_SELF, "ACR_SPAWN_SPEAK");
+		 string sJumpTo = GetLocalString(OBJECT_SELF, "ACR_WP_JUMP_TO");
+		 object oJumpTo = GetWaypointByTag(sJumpTo);
+		
+		 string sPLCDestroy = GetLocalString(OBJECT_SELF, "ACR_DESTROY_PLC");
+		 object oPLCDestroy = GetNearestObjectByTag(sPLCDestroy, OBJECT_SELF, 1);
+		 
+		 float fDelaySpawnOne = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
+		 float fDelayVFXOne = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY");
+		 int nVFX = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX");
+		 effect eOne = EffectVisualEffect(nVFX);
+	     int nDurationType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE");
+	     float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
+		 
+		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
+	     
+		 if(nRunOnce == 0) {
+		 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
+		 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
+		 SendMessageToPC(oPC, sMessage);
+		 ApplyEffectToObject(nDurationType, eOne, oPLCDestroy, fDurationLength);
+		 DestroyObject(oPLCDestroy, 2.0);
+		 }  
+		  
+		 
+		 
+		 
+		 
+		 
+		 }
+	   
+}
