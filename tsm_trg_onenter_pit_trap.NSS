@@ -64,10 +64,13 @@ void main()
 		 string sJumpTo = GetLocalString(OBJECT_SELF, "ACR_WP_JUMP_TO");
 		 object oJumpTo = GetWaypointByTag(sJumpTo);
 		 int nDC = GetLocalInt(OBJECT_SELF, "ACR_REFLEX_DC");
-		 
+		 float fFall = GetLocalFloat(OBJECT_SELF, "ACR_FALL_HEIGHT")/10;
+		 int nFallRounded = FloatToInt(fFall);
+		 effect eFallDmg = EffectDamage(d6(nFallRounded), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);  
 		 string sPLCDestroy = GetLocalString(OBJECT_SELF, "ACR_DESTROY_PLC");
 		 object oPLCDestroy = GetNearestObjectByTag(sPLCDestroy, OBJECT_SELF, 1);
-		 
+		 string sGender = "her";
+		 if(GetGender(oPC) == GENDER_MALE) {sGender = "him";}
 		 float fDelaySpawnOne = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
 		 float fDelayVFXOne = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY");
 		 int nVFX = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX");
@@ -87,11 +90,12 @@ void main()
 			 DestroyObject(oPLCDestroy, 2.0);
 			 if(ReflexSave(oPC, nDC, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) < 1) { 
 		 		DelayCommand(3.0, SendMessageToPC(oPC, "You are falling!"));
-				DelayCommand(3.1, AssignCommand(oPC, ActionSpeakString("*" + GetName(oPC) + " is unable to save themself from falling!", TALKVOLUME_TALK)));
+				DelayCommand(3.1, AssignCommand(oPC, ActionSpeakString("*" + GetName(oPC) + " is unable to save " + sGender + "self from falling!", TALKVOLUME_TALK)));
 			    DelayCommand(4.0, AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE)));
+				DelayCommand(4.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, eFallDmg, oPC)); 
 				}
 			else {DelayCommand(3.0, SendMessageToPC(oPC, "You stop yourself in time from falling."));
-				  DelayCommand(3.1, AssignCommand(oPC, ActionSpeakString("*" + GetName(oPC) + " stops themself from falling.", TALKVOLUME_TALK)));
+				  DelayCommand(3.1, AssignCommand(oPC, ActionSpeakString("*" + GetName(oPC) + " stops " + sGender + "self from falling.", TALKVOLUME_TALK)));
 			     }
 			 }  
 		}
