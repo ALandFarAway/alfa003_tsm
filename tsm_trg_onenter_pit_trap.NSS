@@ -63,7 +63,8 @@ void main()
 		 string sSpeak=GetLocalString(OBJECT_SELF, "ACR_SPAWN_SPEAK");
 		 string sJumpTo = GetLocalString(OBJECT_SELF, "ACR_WP_JUMP_TO");
 		 object oJumpTo = GetWaypointByTag(sJumpTo);
-		
+		 int nDC = GetLocalInt(OBJECT_SELF, "ACR_REFLEX_DC");
+		 
 		 string sPLCDestroy = GetLocalString(OBJECT_SELF, "ACR_DESTROY_PLC");
 		 object oPLCDestroy = GetNearestObjectByTag(sPLCDestroy, OBJECT_SELF, 1);
 		 
@@ -77,14 +78,21 @@ void main()
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
 		 if(nRunOnce == 0) {
+		 	 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 			 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-			 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 			 SendMessageToPC(oPC, sMessage);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SCREEN_SHAKE), oPC);
              AssignCommand(oPC, ActionPlayAnimation(ANIMATION_LOOPING_DEAD_BACK, 1.0, 5.0));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_SPELL_HIT_EARTHQUAKE), oPC, 5.0);
 			 DestroyObject(oPLCDestroy, 2.0);
-			 DelayCommand(4.0, AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE)));
+			 if(ReflexSave(oPC, nDC, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) < 1) { 
+		 		DelayCommand(3.0, SendMessageToPC(oPC, "You are falling!"));
+				DelayCommand(3.1, AssignCommand(oPC, ActionSpeakString("*" + GetName(oPC) + " is unable to save themself from falling!", TALKVOLUME_TALK)));
+			    DelayCommand(4.0, AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE)));
+				}
+			else {DelayCommand(3.0, SendMessageToPC(oPC, "You stop yourself in time from falling."));
+				  DelayCommand(3.1, AssignCommand(oPC, ActionSpeakString("*" + GetName(oPC) + " stops themself from falling.", TALKVOLUME_TALK)));
+			     }
 			 }  
 		}
 	   
