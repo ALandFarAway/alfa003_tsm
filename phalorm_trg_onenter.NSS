@@ -33,8 +33,9 @@ if(GetTag(OBJECT_SELF) == "phalorm_glacier_enter") {
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
 			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
-			DelayCommand(1.0, SendMessageToPC(oPC, "A light blinks on beneath your feet. A clear white light rises around you. You feel yourself shift suddenly and find yourself in another place."));
+			DelayCommand(1.0, SendMessageToPC(oPC, "A rune lights beneath your feet. A pale blue light rises around you. You feel yourself shift suddenly and find yourself in another place."));
 			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
+			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			}
 		
 		else if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
