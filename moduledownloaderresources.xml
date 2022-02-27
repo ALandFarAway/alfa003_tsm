@@ -1360,7 +1360,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4B9291AAE29F6800AB19410BD0EA4CAAE9CD8908" downloadHash="F57E372849A2A5DE0B27DCA1785C2C46266D27B9" name="5g_int_felbarr_lowroad_entrance.trx" dlsize="1274361" size="1299210" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="34432BF2386CB88492F2DFB078E8692E3F7AB213" downloadHash="FFEA0EF3F5B07DA4D51755A922FB86B6BA3A7F42" name="5g_int_felbarr_lowroad_entrance.trx" dlsize="1387190" size="1413202" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
