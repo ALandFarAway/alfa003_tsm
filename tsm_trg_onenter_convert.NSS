@@ -64,6 +64,7 @@ void main()
 		 string sSpawnReplace = GetLocalString(OBJECT_SELF, "ACR_REPLACE_PLC");
 		 object oSpawnReplace = GetNearestObjectByTag(sSpawnReplace, OBJECT_SELF, 1);
 		 location lSpawnReplace = GetLocation(oSpawnReplace);
+		 int nSpawnNumber = 
 		 
 		 float fDelaySpawnOne = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
 		 float fDelayVFXOne = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY");
@@ -71,15 +72,29 @@ void main()
 		 effect eOne = EffectVisualEffect(nVFX);
 	     int nDurationType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE");
 	     float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
+		 int nSpawnQty = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_QTY");
+		 if(nSpawnQty == 0) {
+		 	{nSpawnQty = 1;}
 		 
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
 		 if(nRunOnce == 0) {
-		 AssignCommand(oSpawnReplace, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 		 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
+		 AssignCommand(oSpawnReplace, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 		 SendMessageToPC(oPC, sMessage);
 		 object oSpawn = CreateObject(nSpawnType, sSpawn, lSpawnReplace); 
+		 int nLoop = 0; 
+		 if(nSpawnQty > 1) {
+		 	while (nLoop < nSpawnQty} {
+		 		CreateObject(nSpawnType, sSpawn, lSpawnReplace);
+				nLoop = nLoop + 1;
+				}
+		 	}
+		 
+		 
+		 }
 		 ApplyEffectToObject(nDurationType, eOne, oSpawnReplace, fDurationLength);
+		 ApplyEffectToObject(nDurationType, eOne, oSpawn, fDurationLength);
 		 DestroyObject(oSpawnReplace, 2.0);
 		 }  
 		  
