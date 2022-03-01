@@ -32,22 +32,24 @@ void main()
 	oPC = GetEnteringObject();
 	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
     object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");	     
-    if(GetLocalInt(oMyCreature, "Proxy") == 1) {
+    if((GetIsObjectValid(oMyCreature)) && (GetLocalInt(oMyCreature, "Proxy") == 1)) {
 		SetLocalInt(oMyCreature, "Proxy", 2);	
-		object oMyCorpse = GetNearestObjectByTag("tsm_plc_undead_proxy", OBJECT_SELF, 1);
-	    effect eParalyze = EffectCutsceneParalyze();
-		effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
-		DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
-		string sMessage = GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
-		DelayCommand(1.5, AssignCommand(oMyCreature, ActionSpeakString(sMessage, TALKVOLUME_TALK)));
-		effect eEffect = GetFirstEffect(oMyCreature);
-		while(GetIsEffectValid(eEffect)) {
-			RemoveEffect(oMyCreature, eEffect);
-			eEffect = GetNextEffect(oMyCreature);
+		object oMyCorpse = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc");
+	    if(GetIsObjectValid(oMyCorpse)) {
+			effect eParalyze = EffectCutsceneParalyze();
+			effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
+			DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
+			string sMessage = GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
+			DelayCommand(1.5, AssignCommand(oMyCreature, ActionSpeakString(sMessage, TALKVOLUME_TALK)));
+			effect eEffect = GetFirstEffect(oMyCreature);
+			while(GetIsEffectValid(eEffect)) {
+				RemoveEffect(oMyCreature, eEffect);
+				eEffect = GetNextEffect(oMyCreature);
+				}
+		   	object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
+			ActionAttack(oAttack, FALSE);
 			}
-	   	object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
-		ActionAttack(oAttack, FALSE);
 		}
 	}
 }

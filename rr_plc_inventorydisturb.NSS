@@ -31,6 +31,7 @@ void main()
 	location lWPGlyph;
 	effect eWeb = EffectVisualEffect(VFX_AOE_WEB_OF_PURITY, FALSE);
 	effect ePurge = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
+	object oSoulReaper = GetObjectByTag("003_cr_bane_bp_elthonds", 1)
 	
 	int nCount = 0;
 	object oInventory = GetFirstItemInInventory(OBJECT_SELF);
@@ -141,19 +142,31 @@ void main()
 	     object oRelayGreenB = GetObjectByTag("rauvin_crystal_relay_green_b", 0);
 	     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
 	     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
-	     effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
-		 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
-		 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
-		 effect eBeamGreenE = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
-		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenB, 10.0));
-		 DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenC, 9.0));
-		 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oRelayGreenD, 8.0));
-		 DelayCommand(4.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenE, oRelayGreenA, 6.0));
+	     object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
+	     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
+	     object oHiveC = GetObjectByTag("PLC_hive_si", 0);
+	     object oHiveD = GetObjectByTag("PLC_hive_aloisus", 0);
+	     
 		 
-		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenE, oCenter, 5.0));
+		 effect eBeamGreenA = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
+		 effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
+		 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
+		 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
+		 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
+		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 10.0));
+		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 10.0));
+		 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 7.0));
+		 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 7.0));
+		 
+		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 5.0));
 		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 5.0));
 		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 5.0));
 		 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 5.0));
+		 
+		 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveA, 3.0));
+		 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveB, 3.0));
+		 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveC, 3.0));
+		 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveD, 3.0));
 		 
 		 
 		 DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lCreateWeird, 5.0));
@@ -165,6 +178,7 @@ void main()
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_p", lWPTwo);
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_e", lWPThree);
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_n", lWPFour);
-		 CreateObject(OBJECT_TYPE_CREATURE, "phalorm_cr_el_earthweird", lCreateWeird, FALSE);
-		}
+		 object oWeird = CreateObject(OBJECT_TYPE_CREATURE, "phalorm_cr_el_earthweird", lCreateWeird, FALSE);
+		 
+		 }
 }

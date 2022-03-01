@@ -15,6 +15,7 @@ void main()
   effect eInvisible = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg", oMyTrigger);	     
   SetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc", oMyCorpse);	     
+  SetLocalObject(oMyTrigger, "Undead_Proxy_Plc", oMyCorpse);	     
   SetLocalObject(oMyTrigger, "Undead_Proxy_Cre", OBJECT_SELF);	     
   SetLocalObject(oMyCorpse, "Undead_Proxy_Cre", OBJECT_SELF);
   SetLocalObject(oMyCorpse, "Undead_Proxy_Trg", oMyTrigger);	     
