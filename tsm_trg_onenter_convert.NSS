@@ -54,7 +54,7 @@ void main()
     // Custom code goes here.
 	object oPC = GetEnteringObject();
 
- if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_convert") && (GetIsPC(oPC)))
+ if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_convert") && ((GetIsPC(oPC)) || GetIsDMPossessed(oPC) ))
 		{string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
 		 string sSpeak=GetLocalString(OBJECT_SELF, "ACR_SPAWN_SPEAK");
 		 
@@ -64,7 +64,7 @@ void main()
 		 string sSpawnReplace = GetLocalString(OBJECT_SELF, "ACR_REPLACE_PLC");
 		 object oSpawnReplace = GetNearestObjectByTag(sSpawnReplace, OBJECT_SELF, 1);
 		 location lSpawnReplace = GetLocation(oSpawnReplace);
-		 int nSpawnNumber = 
+		 int nSpawnNumber = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_QTY");
 		 
 		 float fDelaySpawnOne = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
 		 float fDelayVFXOne = GetLocalFloat(OBJECT_SELF, "ACR_VFX_DELAY");
@@ -83,20 +83,18 @@ void main()
 		 AssignCommand(oSpawnReplace, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 		 SendMessageToPC(oPC, sMessage);
 		 object oSpawn = CreateObject(nSpawnType, sSpawn, lSpawnReplace); 
+		 ApplyEffectToObject(nDurationType, eOne, oSpawnReplace, fDurationLength);
+		 ApplyEffectToObject(nDurationType, eOne, oSpawn, fDurationLength);
+		 DestroyObject(oSpawnReplace, 2.0);
 		 int nLoop = 0; 
 		 if(nSpawnQty > 1) {
-		 	while (nLoop < nSpawnQty} {
+		 	while (nLoop < nSpawnQty) {
 		 		CreateObject(nSpawnType, sSpawn, lSpawnReplace);
 				nLoop = nLoop + 1;
 				}
 		 	}
-		 
-		 
 		 }
-		 ApplyEffectToObject(nDurationType, eOne, oSpawnReplace, fDurationLength);
-		 ApplyEffectToObject(nDurationType, eOne, oSpawn, fDurationLength);
-		 DestroyObject(oSpawnReplace, 2.0);
-		 }  
+	}  
 		  
 		 
 		 

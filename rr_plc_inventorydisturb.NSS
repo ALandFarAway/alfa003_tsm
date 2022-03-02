@@ -226,6 +226,9 @@ void main()
 			 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
 			 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
 			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
+			 
+			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_BLACK, oCenter, BODY_NODE_CHEST, FALSE);
+			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1), 1.0, 1);
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1), 1.5, 1);
@@ -241,10 +244,10 @@ void main()
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 5.0));
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 5.0));
 			 
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveA, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveB, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveC, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveD, 3.0));
+			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveA, 3.0));
+			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveB, 3.0));
+			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveC, 3.0));
+			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveD, 3.0));
 			 
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveA, 2.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveB, 2.0));
