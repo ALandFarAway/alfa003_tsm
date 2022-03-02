@@ -23,12 +23,12 @@ void main()
 {
     ACR_TriggerOnEnter();
 
-	SendMessageToAllDMs("onEnter firing for " + GetName(OBJECT_SELF));
-
+	
  // Custom code goes here.
  object oPC;
  if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject())))) {
- 	SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
+ 	SendMessageToAllDMs("onEnter firing for " + GetName(OBJECT_SELF));
+    SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 	oPC = GetEnteringObject();
 	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
     object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");	     

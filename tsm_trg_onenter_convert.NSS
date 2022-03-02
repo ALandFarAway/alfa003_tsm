@@ -79,7 +79,8 @@ void main()
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
 		 if(nRunOnce == 0) {
-		 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
+		 SendMessageToAllDMs("onEnter firing for " + GetName(OBJECT_SELF));
+         SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 		 AssignCommand(oSpawnReplace, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 		 SendMessageToPC(oPC, sMessage);
 		 object oSpawn = CreateObject(nSpawnType, sSpawn, lSpawnReplace); 

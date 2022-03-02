@@ -134,7 +134,8 @@ void main()
 		 }
 	
 	if((GetLocalInt(OBJECT_SELF, "H1") == 1) && (GetLocalInt(OBJECT_SELF, "H2") == 1) && (GetLocalInt(OBJECT_SELF, "H3") == 1) && (GetLocalInt(OBJECT_SELF, "H4") == 1))
-		{if(GetTag(oPC) != "003_cr_bane_bp_elthonds") {	 
+		{SendMessageToAllDMs(GetName(oPC) + " setting off crystals");	 
+		 if(FindSubString(GetName(oPC), "Banite") == -1) {	 
 		
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
@@ -158,6 +159,8 @@ void main()
 			 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
 			 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
 			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
+			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_BLACK, oCenter, BODY_NODE_CHEST, FALSE);
+			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1), 1.0, 1);
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1), 1.5, 1);
@@ -167,43 +170,47 @@ void main()
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_e", lWPThree);
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_n", lWPFour);
 			 
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 10.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 10.0));
-			 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 7.0));
-			 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 7.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 20.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 20.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 16.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 16.0));
 			 
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 5.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 5.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 5.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 5.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 12.0));
+			 DelayCommand(9.25, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 11.75));
+			 DelayCommand(9.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 11.5));
+			 DelayCommand(9.75, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 11.75));
 			 
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveA, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveB, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveC, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenCenter, oHiveD, 3.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveA, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveB, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveC, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveD, 5.0));
 			 
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveA, 2.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveB, 2.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveC, 2.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveD, 2.0));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveA));
+			 DelayCommand(15.25, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveB));
+			 DelayCommand(15.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveC));
+			 DelayCommand(15.75, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveD));
+			 
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oBlackCrystal, 2.0));
+			 DelayCommand(12.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oBlackCrystal, 2.0));
+			 DelayCommand(14.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oBlackCrystal, 2.0));
+			 
+			 DelayCommand(11.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), GetLocation(oSoulReaper)));
+			 DelayCommand(13.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), GetLocation(oSoulReaper), 2.0));
+			 DelayCommand(15.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), GetLocation(oSoulReaper), 2.0));
+			 
+			 DelayCommand(14.5, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_20), GetLocation(oSoulReaper), 5.0));
+			 DelayCommand(14.5, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_30), GetLocation(oCenter), 5.0));
 			 
 			 DestroyObject(oHiveA, 12.0);
 			 DestroyObject(oHiveB, 12.0);
 			 DestroyObject(oHiveC, 12.0);
 			 DestroyObject(oHiveD, 12.0);
 			 
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oBlackCrystal, 2.0));
-			 DelayCommand(12.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oBlackCrystal, 2.0));
-			 DelayCommand(14.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oBlackCrystal, 2.0));
-			 
-			 DelayCommand(15.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(oCenter), 5.0));
-			 
-			 DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, lCreateWeird, 5.0));
 			 object oWeird = CreateObject(OBJECT_TYPE_CREATURE, "phalorm_cr_el_earthweird", lCreateWeird, FALSE);
 			 }
 			 
-			 if(GetTag(oPC) == "003_cr_bane_bp_elthonds") {	 
-		
+			 if(FindSubString(GetName(oPC), "Banite") != -1) {
+			 
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 			 //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, lCreateWeird, 5.0);
@@ -212,7 +219,7 @@ void main()
 		     object oRelayGreenB = GetObjectByTag("rauvin_crystal_relay_green_b", 0);
 		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
 		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
-		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_relay_black", 0);
+		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 		     object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
 		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
 		     object oHiveC = GetObjectByTag("PLC_hive_si", 0);
@@ -234,35 +241,36 @@ void main()
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1), 1.5, 1);
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_4", OBJECT_SELF, 1), 2.0, 1);
 			 
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 10.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 10.0));
-			 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 7.0));
-			 DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 7.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 20.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 20.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 16.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 16.0));
 			 
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 5.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 5.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 5.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 5.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 12.0));
+			 DelayCommand(9.25, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 11.75));
+			 DelayCommand(9.5, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 11.5));
+			 DelayCommand(9.75, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 11.75));
 			 
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveA, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveB, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveC, 3.0));
-			 DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveD, 3.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveA, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveB, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveC, 5.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oHiveD, 5.0));
 			 
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveA, 2.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveB, 2.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveC, 2.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oHiveD, 2.0));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveA));
+			 DelayCommand(15.25, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveB));
+			 DelayCommand(15.5, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveC));
+			 DelayCommand(15.75, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oHiveD));
 			 
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oBlackCrystal, 2.0));
-			 DelayCommand(12.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oBlackCrystal, 2.0));
-			 DelayCommand(14.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_MYSTICAL_EXPLOSION), oBlackCrystal, 2.0));
+			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oBlackCrystal, 2.0));
+			 DelayCommand(12.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oBlackCrystal, 2.0));
+			 DelayCommand(14.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), oBlackCrystal, 2.0));
 			 
-			 DelayCommand(11.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_COM_BLOOD_SPARK_LARGE), oSoulReaper, 2.0));
-			 DelayCommand(13.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_COM_BLOOD_SPARK_LARGE), oSoulReaper, 2.0));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_COM_BLOOD_SPARK_LARGE), oSoulReaper, 2.0));
+			 DelayCommand(11.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), GetLocation(oSoulReaper)));
+			 DelayCommand(13.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), GetLocation(oSoulReaper), 2.0));
+			 DelayCommand(15.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL), GetLocation(oSoulReaper), 2.0));
 			 
-			 DelayCommand(14.5, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(oCenter), 5.0));
+			 DelayCommand(14.5, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_20), GetLocation(oSoulReaper), 5.0));
+			 DelayCommand(14.5, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_30), GetLocation(oCenter), 5.0));
 			 
 			 DestroyObject(oBlackCrystal, 14.5);
 			 DestroyObject(oPC, 15.5);
