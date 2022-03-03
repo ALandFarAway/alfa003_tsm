@@ -298,7 +298,7 @@ void main()
 			 
 			 DelayCommand(30.0, AssignCommand(oBlackCrystal, ActionSpeakString("*Explodes", TALKVOLUME_TALK)));
 			 DelayCommand(31.0, AssignCommand(oSoulReaper, ActionSpeakString("*Throws arms wide in triumph, then stiffens and screams, eyes widening in sudden terror...and vanishes.", TALKVOLUME_TALK)));
-		     DelayCommand(31.0, AssignCommand(oParsifal, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
+		     DelayCommand(30.0, AssignCommand(oParsifal, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
 			 DelayCommand(31.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
 			 DelayCommand(34.0, AssignCommand(oCenter, ActionSpeakString("*Sinks out of sight, into the crystal globe, where its green glow immediately vanishes.", TALKVOLUME_TALK)));
 			 
