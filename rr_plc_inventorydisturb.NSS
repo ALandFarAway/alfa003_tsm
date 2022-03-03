@@ -230,6 +230,8 @@ void main()
 			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
 			 object oWallA = GetObjectByTag("phaedra_wall_a", 0);
 			 object oWallB = GetObjectByTag("phaedra_wall_b", 0);
+			 object oLight = GetObjectByTag("fx_phalorm_light_green_up", 0);
+			 
 			 
 			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
 		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
@@ -304,6 +306,7 @@ void main()
 			 
 			 DelayCommand(32.0, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
 			 
+			 DestroyObject(oLight, 35.0);
 			 DestroyObject(oBlackCrystal, 31.5);
 			 DestroyObject(oSoulReaper, 32.0);
 			 DestroyObject(oWallA, 32.0);
