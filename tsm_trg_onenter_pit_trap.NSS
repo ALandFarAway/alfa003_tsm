@@ -77,10 +77,12 @@ void main()
 		 effect eOne = EffectVisualEffect(nVFX);
 	     int nDurationType = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE");
 	     float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
-		 
+		 int nFlying = GetLocalInt(oPC, "ACR_CREATURE_FLYING");
+		 int nIncorporeal = GetLocalInt(oPC, "X2_L_IS_INCORPOREAL");
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
-		 if(nRunOnce == 0) {
+		 
+		 if((nRunOnce == 0)&& (nFlying == 0) && (nIncorporeal == 0)) {
 		 	 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 			 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			 SendMessageToPC(oPC, sMessage);

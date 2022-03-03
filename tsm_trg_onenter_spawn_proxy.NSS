@@ -36,7 +36,6 @@ void main()
 		SetLocalInt(oMyCreature, "Proxy", 2);	
 		object oMyCorpse = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc");
 	    if(GetIsObjectValid(oMyCorpse)) {
-			effect eParalyze = EffectCutsceneParalyze();
 			effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
 			DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
