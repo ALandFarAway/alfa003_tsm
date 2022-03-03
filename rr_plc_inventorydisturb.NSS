@@ -222,7 +222,11 @@ void main()
 			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
 			 object oWallA = GetObjectByTag("phaedra_wall_a", 0);
 			 object oWallB = GetObjectByTag("phaedra_wall_b", 0);
+			 object oWallC = GetObjectByTag("phaedra_wall_c", 0);
+			 object oWallD = GetObjectByTag("phaedra_wall_d", 0);
 			 object oLight = GetObjectByTag("fx_phalorm_light_green_up", 0);
+			 object oCloud = GetObjectByTag("phalorm_black_cloud", 0);
+			 object oContain = GetObjectByTag("phalorm_containment", 0);
 			 
 			 
 			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
@@ -303,8 +307,12 @@ void main()
 			 DestroyObject(oSoulReaper, 32.0);
 			 DestroyObject(oWallA, 32.0);
 			 DestroyObject(oWallB, 32.0);
+			 DestroyObject(oWallC, 32.0);
+			 DestroyObject(oWallD, 32.0);
 			 DestroyObject(oParsifal, 32.0);
 			 DestroyObject(oCenter, 35.0);
+			 DestroyObject(oContainment, 36.0);
+			 DestroyObject(oCloud, 37.0);
 			 
 			 
 			 }
