@@ -10,6 +10,7 @@ void main()
     object oItem = GetModuleItemAcquired();
 	object oPC = GetLastDisturbed();
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);
+	object oCenter = GetObjectByTag("phalorm_globe_green2", 0);
 	object oCreate = GetNearestObjectByTag("WP_phalorm_globe_platform_green2", OBJECT_SELF, 1);	
 	location lCreate = GetLocation(oCreate);
 	string sCreate = "003_cr_un_ghost_corrupt";	
@@ -85,10 +86,6 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H4", 0);
 		 	}
 		 }	
-	
-	
-		
-		
 		
 	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 1))
 		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1));
@@ -108,9 +105,6 @@ void main()
 		 }	
 			 
 		 
-	
-		 
-		 
 	if((GetLocalInt(OBJECT_SELF, "Activated") != 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "abr_it_rng_orbacid") && (GetInventoryDisturbType() == 0))
 		{ 
 	     SetLocalInt(OBJECT_SELF, "Activated", 1);
@@ -127,9 +121,8 @@ void main()
 	 	
 	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
 		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_4")) { 
-			 ActionSpeakString("A ghostly figure rises up though the quicksand filling the central shaft and drifts into the room.", TALKVOLUME_TALK);	
+			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
 			 object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
-			 DelayCommand(1.0, AssignCommand(oGhost, ActionJumpToLocation(lCreateWeird)));
 			 }
 		 }
 	
@@ -140,8 +133,7 @@ void main()
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 			 //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, lCreateWeird, 5.0);
-			 object oCenter = GetObjectByTag("phalorm_globe_green2", 0);
-		     object oRelayGreenA = GetObjectByTag("rauvin_crystal_relay_green_a", 0);
+			 object oRelayGreenA = GetObjectByTag("rauvin_crystal_relay_green_a", 0);
 		     object oRelayGreenB = GetObjectByTag("rauvin_crystal_relay_green_b", 0);
 		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
 		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
@@ -316,5 +308,11 @@ void main()
 			 
 			 
 			 }
+		 }
+		 else if(nCount == 4) {
+		 	AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
+			object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
+			 
+		 
 		 }
 }
