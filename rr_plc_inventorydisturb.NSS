@@ -223,7 +223,9 @@ void main()
 		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
 		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
 		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
-		     object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
+		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
+			 
+			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
 		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
 		     object oHiveC = GetObjectByTag("PLC_hive_si", 0);
 		     object oHiveD = GetObjectByTag("PLC_hive_aloisus", 0);
@@ -240,7 +242,6 @@ void main()
 			 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
 			 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
 			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
-			 
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
@@ -281,6 +282,7 @@ void main()
 			 
 			 DestroyObject(oBlackCrystal, 31.5);
 			 DestroyObject(oPC, 32.0);
+			 DestroyObject(oParsifal, 32.0);
 			 
 			 
 			 }
