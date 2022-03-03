@@ -311,7 +311,7 @@ void main()
 			 DestroyObject(oWallD, 32.0);
 			 DestroyObject(oParsifal, 32.0);
 			 DestroyObject(oCenter, 35.0);
-			 DestroyObject(oContainment, 36.0);
+			 DestroyObject(oContain, 36.0);
 			 DestroyObject(oCloud, 37.0);
 			 
 			 
@@ -320,7 +320,5 @@ void main()
 		 else if(nCount == 4) {
 		 	AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
 			object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
-			 
-		 
-		 }
+		}
 }
