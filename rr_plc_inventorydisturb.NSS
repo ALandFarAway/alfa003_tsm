@@ -140,7 +140,7 @@ void main()
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 			 //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, lCreateWeird, 5.0);
-			 object oCenter = GetObjectByTag("phalorm_orb_green2", 0);
+			 object oCenter = GetObjectByTag("phalorm_globe_green2", 0);
 		     object oRelayGreenA = GetObjectByTag("rauvin_crystal_relay_green_a", 0);
 		     object oRelayGreenB = GetObjectByTag("rauvin_crystal_relay_green_b", 0);
 		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
