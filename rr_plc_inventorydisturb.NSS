@@ -258,6 +258,11 @@ void main()
 			 object oGlyphItemC = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_3");
 			 object oGlyphItemD = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_4");
 			 
+			 SetLocalInt(OBJECT_SELF, "H1", 0);
+		     SetLocalInt(OBJECT_SELF, "H2", 0);
+			 SetLocalInt(OBJECT_SELF, "H3", 0);
+			 SetLocalInt(OBJECT_SELF, "H4", 0);
+			 
 			 DestroyObject(oGlyphItemA, 1.0);
 			 DestroyObject(oGlyphItemB, 1.5);
 			 DestroyObject(oGlyphItemC, 2.0);
@@ -315,6 +320,7 @@ void main()
 			 DestroyObject(oCloud, 37.0);
 			 
 			 
+		 
 			 }
 		 }
 		 else if(nCount == 4) {
