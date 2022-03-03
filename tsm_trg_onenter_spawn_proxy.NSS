@@ -26,7 +26,7 @@ void main()
 	
  // Custom code goes here.
  object oPC;
- if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && (FindSubString(GetName(oPC), "Banite") == -1) && ((GetIsPC(GetEnteringObject())) || (FindSubString(GetName(oPC), "Bert") == -1) || (FindSubString(GetName(oPC), "Sae") == -1) || (FindSubString(GetName(oPC), "Bae") == -1) || (FindSubString(GetName(oPC), "Jhes") == -1) || (FindSubString(GetName(oPC), "Bell") == -1)|| (GetIsDMPossessed(GetEnteringObject())))) {
+ if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && (FindSubString(GetName(oPC), "Banite") == -1) && ((GetIsPC(GetEnteringObject())) || (FindSubString(GetName(oPC), "Bert") != -1) || (FindSubString(GetName(oPC), "Sae") != -1) || (FindSubString(GetName(oPC), "Bae") != -1) || (FindSubString(GetName(oPC), "Jhes") != -1) || (FindSubString(GetName(oPC), "Bell") != -1)|| (GetIsDMPossessed(GetEnteringObject())))) {
  	SendMessageToAllDMs(GetName(oPC) + " triggering " + GetName(OBJECT_SELF));
     SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 	oPC = GetEnteringObject();
