@@ -26,7 +26,7 @@ void main()
 	
  // Custom code goes here.
  object oPC;
- if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject())))) {
+ if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && ((FindSubString(GetName(oPC), "Bert") != -1) ||  (GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject())))) {
  	SendMessageToAllDMs("onEnter firing for " + GetName(OBJECT_SELF));
     SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 	oPC = GetEnteringObject();
@@ -47,7 +47,8 @@ void main()
 				eEffect = GetNextEffect(oMyCreature);
 				}
 		   	object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
-			ActionAttack(oAttack, FALSE);
+			DelayCommand(2.0, AssignCommand(oMyCreature, ActionForceMoveToObject(oAttack, TRUE)));
+			DelayCommand(3.0, AssignCommand(oMyCreature, ActionAttack(oAttack, FALSE)));
 			}
 		}
 	}

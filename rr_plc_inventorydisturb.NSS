@@ -146,7 +146,10 @@ void main()
 		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
 		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
 		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_relay_black", 0);
-		     object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
+		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
+			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
+			 
+			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
 		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
 		     object oHiveC = GetObjectByTag("PLC_hive_si", 0);
 		     object oHiveD = GetObjectByTag("PLC_hive_aloisus", 0);
@@ -224,6 +227,9 @@ void main()
 		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
 		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
+			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
+			 object oWallA = GetObjectByTag("phaedra_wall_a", 0);
+			 object oWallB = GetObjectByTag("phaedra_wall_b", 0);
 			 
 			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
 		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
@@ -249,6 +255,16 @@ void main()
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1), 1.5, 1);
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_4", OBJECT_SELF, 1), 2.0, 1);
 			 
+			 object oGlyphItemA = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_1");
+			 object oGlyphItemB = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_2");
+			 object oGlyphItemC = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_3");
+			 object oGlyphItemD = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_4");
+			 
+			 DestroyObject(oGlyphItemA, 1.0);
+			 DestroyObject(oGlyphItemB, 1.5);
+			 DestroyObject(oGlyphItemC, 2.0);
+			 DestroyObject(oGlyphItemD, 2.5);
+			 	 	 
 			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 25.0));
 			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 25.0));
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 21.0));
@@ -280,9 +296,20 @@ void main()
 			 DelayCommand(30.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_20), GetLocation(oSoulReaper), 5.0));
 			 DelayCommand(31.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_30), GetLocation(oCenter), 5.0));
 			 
+			 DelayCommand(30.0, AssignCommand(oBlackCrystal, ActionSpeakString("*Explodes", TALKVOLUME_TALK)));
+			 DelayCommand(31.0, AssignCommand(oSoulReaper, ActionSpeakString("*Throws arms wide in triumph, then stiffens and screams, eyes widening in sudden terror...and vanishes.", TALKVOLUME_TALK)));
+		     DelayCommand(31.0, AssignCommand(oParsifal, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
+			 DelayCommand(31.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
+			 DelayCommand(34.0, AssignCommand(oCenter, ActionSpeakString("*Sinks out of sight, into the crystal globe, where its green glow immediately vanishes.", TALKVOLUME_TALK)));
+			 
+			 DelayCommand(32.0, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
+			 
 			 DestroyObject(oBlackCrystal, 31.5);
-			 DestroyObject(oPC, 32.0);
+			 DestroyObject(oSoulReaper, 32.0);
+			 DestroyObject(oWallA, 32.0);
+			 DestroyObject(oWallB, 32.0);
 			 DestroyObject(oParsifal, 32.0);
+			 DestroyObject(oCenter, 35.0);
 			 
 			 
 			 }

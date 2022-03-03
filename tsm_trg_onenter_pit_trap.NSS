@@ -82,9 +82,10 @@ void main()
 		 int nRunOnce = GetLocalInt(OBJECT_SELF, "RUN_ONCE");
 	     
 		 
-		 if((nRunOnce == 0)&& (nFlying == 0) && (nIncorporeal == 0)) {
+		 if((nRunOnce == 0) && (oPLCDestroy != OBJECT_INVALID) && (nFlying == 0) && (nIncorporeal == 0)) {
 		 	 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 			 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
+			 SendMessageToAllDMs(GetName(oPC) + " triggered " + GetName(OBJECT_SELF));
 			 SendMessageToPC(oPC, sMessage);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SCREEN_SHAKE), oPC);
              AssignCommand(oPC, ActionPlayAnimation(ANIMATION_LOOPING_DEAD_BACK, 1.0, 5.0));
