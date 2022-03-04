@@ -17,14 +17,17 @@ void main()
 	object oCenter = GetObjectByTag("phalorm_globe_green2", 0);
 	object oCreate = GetNearestObjectByTag("WP_phalorm_globe_platform_green2", OBJECT_SELF, 1);	
 	location lCreate = GetLocation(oCreate);
-	string sCreate = "003_cr_un_ghost_corrupt";	
+	string sCreate = "003_cr_un_ghost_aloisus";	
 	object oCreateWeird = GetWaypointByTag("phalorm_earth_down_wp");
 	location lCreateWeird = GetLocation(oCreateWeird);
 	int nRandom = Random(3);
 	if(nRandom==1) 
-		{sCreate = "003_cr_un_ghost_moan";}
+		{sCreate = "003_cr_un_ghost_si";}
 	if(nRandom==2) 
-		{sCreate = "003_cr_un_ghost_horrific";}
+		{sCreate = "003_cr_un_ghost_valbrace";}
+	if(nRandom==3) 
+		{sCreate = "003_cr_undead_wraith_jarra";}
+	
 	object oWPOne = GetWaypointByTag("rr_hglyph_wp1");
 	object oWPTwo = GetWaypointByTag("rr_hglyph_wp2");
 	object oWPThree = GetWaypointByTag("rr_hglyph_wp3");
@@ -126,6 +129,7 @@ void main()
 	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
 		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_4")) { 
 			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
+			 DestroyObject(GetObjectByTag(sCreate, 0));
 			 object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
 			 }
 		 }
@@ -330,6 +334,7 @@ void main()
 		 }
 		 else if(nCount == 4) {
 		 	AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
+			DestroyObject(GetObjectByTag(sCreate, 0));
 			object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
 		}
 }
