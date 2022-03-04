@@ -231,6 +231,7 @@ void main()
 			 object oLight = GetObjectByTag("fx_phalorm_light_green_up", 0);
 			 object oCloud = GetObjectByTag("phalorm_black_cloud", 0);
 			 object oContain = GetObjectByTag("phalorm_containment", 0);
+			 object oLightWhite = GetObjectByTag("phalorm_light_white", 0);
 			 
 			 
 			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
@@ -322,7 +323,7 @@ void main()
 			 DestroyObject(oCenter, 35.0);
 			 DestroyObject(oContain, 36.0);
 			 DestroyObject(oCloud, 37.0);
-			 
+			 DestroyObject(oLightWhite, 36.0);
 			 
 		 
 			 }
