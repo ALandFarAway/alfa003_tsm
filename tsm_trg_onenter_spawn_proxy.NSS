@@ -45,8 +45,13 @@ void main()
 				RemoveEffect(oMyCreature, eEffect);
 				eEffect = GetNextEffect(oMyCreature);
 				}
-		   	DelayCommand(2.0, AssignCommand(oMyCreature, ActionForceMoveToObject(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), TRUE)));
-			DelayCommand(5.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
+			
+		   	object oCrystal = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
+			if((FindSubString(GetTag(oMyCreature), "ghost_si") != -1) || (FindSubString(GetTag(oMyCreature), "ghost_valbrace") != -1) || (FindSubString(GetTag(oMyCreature), "ghost_aloisus") != -1) || (FindSubString(GetTag(oMyCreature), "wraith_jarra") != -1)) {
+				DelayCommand(2.0, AssignCommand(oMyCreature, ActionForceMoveToObject(oCrystal, TRUE)));
+				DelayCommand(5.0, AssignCommand(oMyCreature, ActionForceMoveToObject(oCrystal, TRUE)));
+			}
+			DelayCommand(6.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
 			}
 		}
 	}
