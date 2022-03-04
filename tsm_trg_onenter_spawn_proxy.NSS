@@ -45,9 +45,8 @@ void main()
 				RemoveEffect(oMyCreature, eEffect);
 				eEffect = GetNextEffect(oMyCreature);
 				}
-		   	object oAttack = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
-			DelayCommand(2.0, AssignCommand(oMyCreature, ActionForceMoveToObject(oAttack, TRUE)));
-			DelayCommand(3.0, AssignCommand(oMyCreature, ActionAttack(oAttack, FALSE)));
+		   	DelayCommand(2.0, AssignCommand(oMyCreature, ActionForceMoveToObject(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), TRUE)));
+			DelayCommand(5.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
 			}
 		}
 	}
