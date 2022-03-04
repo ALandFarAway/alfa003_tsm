@@ -1,6 +1,10 @@
 //OnInventoryDisturb for tsm placeables
 //Wynna Feb 2022
 
+void ActionCreateCreature(string sCreature, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocPlace, FALSE);
+}
 
 #include "acr_placeable_i"
 
@@ -204,7 +208,7 @@ void main()
 			 DestroyObject(oWebC, 12.0);
 			 DestroyObject(oWebD, 12.0);
 			 
-			 object oWeird = CreateObject(OBJECT_TYPE_CREATURE, "phalorm_cr_el_earthweird", lCreateWeird, FALSE);
+			 DelayCommand(30.0, ActionCreateCreature("phalorm_cr_el_earthweird", lCreateWeird));
 			 }
 			 
 			 if(FindSubString(GetName(oPC), "Banite") != -1) {
