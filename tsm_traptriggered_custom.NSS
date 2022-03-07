@@ -74,7 +74,7 @@ void main()
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
 			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
-			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 while((oVictimDmg != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1))  {
 			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
@@ -95,8 +95,9 @@ void main()
 				 		    }				  
 						  }
 					 }
-				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
-				}
+				 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+				 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
+				 }
 				
 				if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
 					  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
