@@ -31,12 +31,14 @@ void main()
 
 	
 	if((GetIsPC(oVictim)) || (FindSubString(GetName(oVictim), "Bert") != -1)|| (FindSubString(GetName(oVictim), "Bell") != -1)|| (FindSubString(GetName(oVictim), "Nio") != -1)|| (FindSubString(GetName(oVictim), "Jhess") != -1)){
-		string sPlaceableString=GetLocalString(OBJECT_SELF, "PLACEABLE_TAG");
-		object oPlaceable = GetNearestObjectByTag(sPlaceableString, OBJECT_SELF,1);
-	    string sEntered = GetLocalString(OBJECT_SELF, "MSG_ENTERED");
+		string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
+		string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
+		object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
+		object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
+		string sEntered = GetLocalString(OBJECT_SELF, "MSG_ENTERED");
 		string sDisarmFail = GetLocalString(OBJECT_SELF, "MSG_DISARM_FAIL");
-		string sDmgSuccess=GetLocalString(OBJECT_SELF, "MSG_DMG_FAIL");
-		string sDmgFail=GetLocalString(OBJECT_SELF, "MSG_DMG_SUCCEED");
+		string sDmgFail=GetLocalString(OBJECT_SELF, "MSG_DMG_FAIL");
+		string sDmgSuccess=GetLocalString(OBJECT_SELF, "MSG_DMG_SUCCEED");
 			 
 		int nReflexDC = GetLocalInt(OBJECT_SELF, "ACR_TRAP_SAVE_DC");
 		int nDiceType = GetLocalInt(OBJECT_SELF, "ACR_TRAP_DICE_TYPE");
@@ -64,35 +66,37 @@ void main()
 			{SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
 			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sDisarmFail + " from " + GetTag(OBJECT_SELF));
 			 SendMessageToPC(oVictim, sDisarmFail);
-			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
+			 SetTrapDisabled(oTrapPlc);
+   			 SetTrapDisabled(oTrapTrg);
+   			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
-			 AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
-			 oVictim = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
-			 while(oVictim != OBJECT_INVALID) {
-			 int nAC = GetAC(oVictim, 0);
+			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+			 while(oVictimDmg != OBJECT_INVALID) {
+			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
 			 if(nAttack < nAC) {
-				 	SendMessageToPC(oVictim, sDmgSuccess);
-					SendMessageToAllDMs("Spike trap fails attack on " + GetName(oVictim) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+				 	SendMessageToPC(oVictimDmg, sDmgSuccess);
+					SendMessageToAllDMs("Spike trap fails attack on " + GetName(oVictimDmg) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
 			 		}
 			 else {
-					//ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); 
-					SendMessageToPC(oVictim, sDmgFail);
-					SendMessageToAllDMs("Spike trap hits " + GetName(oVictim) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
-			 		if(ReflexSave(oVictim, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
-						ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictim, 3.0);
-					    SendMessageToAllDMs(GetName(oVictim) + " knocked down.");
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+					SendMessageToPC(oVictimDmg, sDmgFail);
+					SendMessageToAllDMs("Spike trap hits " + GetName(oVictimDmg) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+			 		if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+						ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
+					    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
 			 		    }				  
 					  }
-				 oVictim = GetNextObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 				}
 			if(FindSubString(GetName(OBJECT_SELF), "Locked") == -1) { 
-				AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
+				AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));
 			 	}
 			else {SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "plc_spike_trap_collision", GetLocation(OBJECT_SELF), FALSE));
 				  DelayCommand(1800.0, DestroyObject(GetLocalObject(OBJECT_SELF, "oCollision")));
-			      DelayCommand(1801.0, AssignCommand(oPlaceable, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0)));
+			      DelayCommand(1801.0, AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0)));
 			 	
 				}
 			}
