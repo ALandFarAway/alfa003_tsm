@@ -28,24 +28,19 @@ void main()
 	string sSprung = sDisarmFail;
 			
    	object oVictim = GetLocalObject(OBJECT_SELF, "oVictim");
-	if(oVictim != OBJECT_INVALID) 
-		{SendMessageToAllDMs("oVictim is Local Valid");
-		 }
-	else if(GetEnteringObject() != OBJECT_INVALID) 
+	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_TRIGGER)
 		{oVictim = GetEnteringObject();
-		 SendMessageToAllDMs("oVictim set to EnteringObject " + GetName(oVictim));
 		 sSprung = sEntered;
-		 SendMessageToAllDMs("sSprung set to " + sSprung);
-		}
-	else if(GetClickingObject() != OBJECT_INVALID) 
-		{oVictim = GetClickingObject();
-		 SendMessageToAllDMs("oVictim set to ClickingObject " + GetName(oVictim));
 		 }
-	else if(GetPlaceableLastClickedBy() != OBJECT_INVALID) 
+	else if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_PLACEABLE)
 		{oVictim = GetPlaceableLastClickedBy();
-		 SendMessageToAllDMs("oVictim set to PlaceableLastClickedBy " + GetName(oVictim)); 
-		}
+		 sSprung = sDisarmFail;
+		 }
 	else {SendMessageToAllDMs("oVictim is Invalid");}
+	
+	SendMessageToAllDMs("sSprung set to " + sSprung);
+	SendMessageToAllDMs(GetName(oVictim) + " is oVictim");
+		 
 	
 
 	
@@ -71,7 +66,7 @@ void main()
 		//Spike Traps
 		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_spike") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
 			{SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
-			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetTag(OBJECT_SELF));
+			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
 			 SendMessageToPC(oVictim, sSprung);
 			 DestroyObject(oTrapPlc);
    			 DestroyObject(oTrapTrg);
@@ -79,31 +74,35 @@ void main()
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
 			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
-			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 while((oVictimDmg != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1))  {
 			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
-			 if(nAttack < nAC) {
-				 	SendMessageToPC(oVictimDmg, sDmgSuccess);
-					SendMessageToAllDMs("Spike trap fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
-			 		}
-			 else {
-					SendMessageToPC(oVictimDmg, sDmgFail);
-					SendMessageToAllDMs("Spike trap hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
-			 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
-					if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
-						ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
-					    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
-			 		    }				  
-					  }
-				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 if((GetRacialType(oVictimDmg) != RACIAL_TYPE_INCORPOREAL) && (GetSubRace(oVictimDmg) != RACIAL_SUBTYPE_INCORPOREAL))
+				 {if(nAttack < nAC) {
+					 	SendMessageToPC(oVictimDmg, sDmgSuccess);
+						SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+				 		}
+				 else {
+						SendMessageToPC(oVictimDmg, sDmgFail);
+						SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+				 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+						if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+							ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
+						    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
+				 		    }				  
+						  }
+					 }
+				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 				}
-			if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
-				  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
-				  DelayCommand(1800.0, DestroyObject(GetLocalObject(OBJECT_SELF, "oCollision")));
-			      }
+				
+				if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
+					  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
+					  DelayCommand(1800.0, DestroyObject(GetLocalObject(OBJECT_SELF, "oCollision")));
+				      }
+				
 			}
 			
 		//Snare Trap	
