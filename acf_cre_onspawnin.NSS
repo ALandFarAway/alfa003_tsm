@@ -59,7 +59,6 @@ void main()
 	if(GetTag(OBJECT_SELF) == "abr_cr_mb_hydra5") {
 	SetBaseAttackBonus(5, OBJECT_SELF);
 	int nBAB = GetBaseAttackBonus(OBJECT_SELF);
-	SendMessageToAllDMs("Hydra base attacks at " + IntToString(nBAB));
 	}
 	
 	//Unhallowed Turn Resistance Increase
@@ -68,7 +67,6 @@ void main()
 		 effect eTurnInc = EffectTurnResistanceIncrease(4);
 		 int nBefore = GetTurnResistanceHD(OBJECT_SELF);
 		 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eTurnInc, OBJECT_SELF);
-		 SendMessageToAllDMs(GetName(OBJECT_SELF) + " turn resistance increased from " + IntToString(nBefore) + " to " + IntToString(GetTurnResistanceHD(OBJECT_SELF)));
 		 }
 	
 	}

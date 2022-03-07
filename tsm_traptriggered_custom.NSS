@@ -37,6 +37,8 @@ void main()
 		object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
 		string sEntered = GetLocalString(OBJECT_SELF, "MSG_ENTERED");
 		string sDisarmFail = GetLocalString(OBJECT_SELF, "MSG_DISARM_FAIL");
+		string sSprung = sEntered;
+		if(oVictim == GetEnteringObject()){sSprung = sEntered;}
 		string sDmgFail=GetLocalString(OBJECT_SELF, "MSG_DMG_FAIL");
 		string sDmgSuccess=GetLocalString(OBJECT_SELF, "MSG_DMG_SUCCEED");
 			 
@@ -64,15 +66,15 @@ void main()
 		//Spike Traps
 		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_spike") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
 			{SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
-			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sDisarmFail + " from " + GetTag(OBJECT_SELF));
-			 SendMessageToPC(oVictim, sDisarmFail);
+			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetTag(OBJECT_SELF));
+			 SendMessageToPC(oVictim, sSprung);
 			 SetTrapDisabled(oTrapPlc);
    			 SetTrapDisabled(oTrapTrg);
    			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
 			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
-			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			 while(oVictimDmg != OBJECT_INVALID) {
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
@@ -89,7 +91,7 @@ void main()
 					    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
 			 		    }				  
 					  }
-				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 				}
 			if(FindSubString(GetName(OBJECT_SELF), "Locked") == -1) { 
 				AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 4.0));

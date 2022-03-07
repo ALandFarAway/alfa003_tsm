@@ -5,9 +5,7 @@
 #include "acr_quest_i"
  
 void main()
-{ SendMessageToAllDMs("onSpawn firing");
-
-  object oMyTrigger = GetNearestObjectByTag("tsm_trg_undead_proxy", OBJECT_SELF,1);
+{ object oMyTrigger = GetNearestObjectByTag("tsm_trg_undead_proxy", OBJECT_SELF,1);
   object oMyCorpse = GetNearestObjectByTag("tsm_plc_undead_proxy", OBJECT_SELF, 1);
   int nAppearance = GetAppearanceType(OBJECT_SELF);	
   int nRate = GetMovementRate(OBJECT_SELF);
