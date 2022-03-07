@@ -115,6 +115,11 @@ void main()
 	if((GetLocalInt(OBJECT_SELF, "Activated") != 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "abr_it_rng_orbacid") && (GetInventoryDisturbType() == 0))
 		{ 
 	     SetLocalInt(OBJECT_SELF, "Activated", 1);
+		 if(FindSubString(GetName(oPC), "Soulreaper") == -1) {
+			 AssignCommand(oPC, ActionSpeakString("I Remake the Ritual of Making! I command the Weave to accept Sayen's spell from outside the master's kiss! Bind the spirits I prepared! OBEY me!", TALKVOLUME_TALK));
+			 DelayCommand(1.0, AssignCommand(oPC, ActionCastSpellAtObject(SPELL_ORB_OF_ACID, OBJECT_SELF, METAMAGIC_EMPOWER, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			 }
+		 
 		 ActionSpeakString("*Hieroglyph inscribed tablets appear, standing up on top of the panel", TALKVOLUME_TALK);
 		 CreateItemOnObject("003_it_phalorm_hglyph_2", OBJECT_SELF, 1);	
 		 CreateItemOnObject("003_it_phalorm_hglyph_4", OBJECT_SELF, 1);	
@@ -131,12 +136,14 @@ void main()
 			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
 			 DestroyObject(GetObjectByTag(sCreate, 0));
 			 object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
+			 DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not bless the glyphs.", TALKVOLUME_TALK));	
+			 
 			 }
 		 }
 	
 	if((GetLocalInt(OBJECT_SELF, "H1") == 1) && (GetLocalInt(OBJECT_SELF, "H2") == 1) && (GetLocalInt(OBJECT_SELF, "H3") == 1) && (GetLocalInt(OBJECT_SELF, "H4") == 1))
 		{SendMessageToAllDMs(GetName(oPC) + " setting off crystals");	 
-		 if(FindSubString(GetName(oPC), "Banite") == -1) {	 
+		 if(FindSubString(GetName(oPC), "Banite", 0) == -1) {	 
 		
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
@@ -215,7 +222,7 @@ void main()
 			 DelayCommand(30.0, ActionCreateCreature("phalorm_cr_el_earthweird", lCreateWeird));
 			 }
 			 
-			 if(FindSubString(GetName(oPC), "Banite") != -1) {
+			 if(FindSubString(GetName(oPC), "Banite", 0) != -1) {
 			 
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
@@ -277,6 +284,9 @@ void main()
 			 DestroyObject(oGlyphItemC, 2.0);
 			 DestroyObject(oGlyphItemD, 2.5);
 			 	 	 
+			 DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*The tone of its weeping rises to a shriek somehow combining terror and hope.", TALKVOLUME_TALK)));
+			 
+			 
 			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 25.0));
 			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 25.0));
 			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 21.0));
@@ -297,9 +307,15 @@ void main()
 			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebC));
 			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebD));
 			 
-			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oBlackCrystal, 1.0));
-			 DelayCommand(22.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oBlackCrystal, 1.0));
-			 DelayCommand(24.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oBlackCrystal, 1.0));
+			 DelayCommand(17.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
+			 
+			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
+			 DelayCommand(22.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
+			 DelayCommand(24.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
+			 
+			 DelayCommand(24.5, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
+			 DelayCommand(25.0, AssignCommand(oVassal, ActionSpeakString("*Turns in mid-air and lunges towards the Soulreaper, as a fiery spell erupts from it at her.", TALKVOLUME_TALK)));
+			 DelayCommand(25.5, AssignCommand(oPC, ActionCastSpellAtObject(SPELL_ORB_OF_FIRE, oSoulReaper, METAMAGIC_EMPOWER, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			 
 			 DelayCommand(21.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), GetLocation(oSoulReaper)));
 			 DelayCommand(23.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), GetLocation(oSoulReaper), 1.0));
@@ -314,7 +330,7 @@ void main()
 			 DelayCommand(31.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
 			 DelayCommand(34.0, AssignCommand(oCenter, ActionSpeakString("*Sinks out of sight, into the crystal globe, where its green glow immediately vanishes.", TALKVOLUME_TALK)));
 			 
-			 DelayCommand(32.0, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
+			 
 			 
 			 DestroyObject(oLight, 35.0);
 			 DestroyObject(oBlackCrystal, 31.5);

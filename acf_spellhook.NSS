@@ -146,7 +146,15 @@ void main()
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
-	//Turning undead spirits that are currently represented by dead body placeables
+	//Stopping summons by non Banites in a Banite UnHallowed Area
+	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "rauvin_ruins") != -1) {
+		if((nSpellId == SPELL_SUMMON_CREATURE_I) || (nSpellId == SPELL_SUMMON_CREATURE_II) || (nSpellId == SPELL_SUMMON_CREATURE_III) || (nSpellId == SPELL_SUMMON_CREATURE_IV) || (nSpellId == SPELL_SUMMON_CREATURE_V) || (nSpellId == SPELL_SUMMON_CREATURE_VI))
+			{SetModuleOverrideSpellScriptFinished();
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
+			 SendMessageToPC(oCaster, "You feel something harsh and evil suppress your summoning spell.");
+			 SendMessageToAllDMs(GetName(oCaster) + "'s Summons  spell fizzled in " + sArea + ".");		
+		}
+	}
 	
 	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
 	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
@@ -398,7 +406,7 @@ if(GetSpellId() == 3056)
 	}
 	
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 
-	{SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " is in Aquatic Cave");
+	{//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " is in Aquatic Cave");
 	 object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
 	 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {

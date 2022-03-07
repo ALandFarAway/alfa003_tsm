@@ -48,6 +48,15 @@ void main()
     // Custom code goes here.
 	object oPerceived = GetLastPerceived();
 	
+	if((GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal")&& (GetLastPerceptionSeen())) {
+		if((FindSubString(GetName(oPerceived), "Ash", 0) != -1) || (FindSubString(GetName(oPerceived), "Jhess", 0) != -1) || (FindSubString(GetName(oPerceived), "Bell", 0) != -1))
+			{ClearAllActions(TRUE);
+			 ActionSpeakString(GetName(oPerceived), TALKVOLUME_TALK);
+			}
+	
+	}
+	
+	
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_profnec") {
 		object oMaster = GetLocalObject(OBJECT_SELF, "oMaster");
 		location lSafe = CalcSafeLocation(OBJECT_SELF, GetLocation(oMaster), 1.0, TRUE,FALSE);

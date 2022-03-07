@@ -1,49 +1,13 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  System Name : ACR Configuration File
-//     Filename : acf_trg_onenter.nss
-//    $Revision:: 236        $ current version of the file
-//        $Date:: 2007-01-21#$ date the file was created or modified
-//       Author : Cipher
-//
-//    Var Prefix:
-//  Dependencies:
-//
-//  Description
-//  This script calls the ACR's OnEnter code for triggers, and any
-//  custom code a server may need. It is not updated in ACR updates.
-//
-//  Revision History
-//  2007/01/20  Cipher  Inception
-////////////////////////////////////////////////////////////////////////////////
+//Custom Skill Checks with Messages and Results
+// Wynna 03/05/22
 
-////////////////////////////////////////////////////////////////////////////////
-// Includes ////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 #include "acr_trigger_i"
 #include "acr_quest_i"
 #include "acr_spawn_i"
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-// Constants ///////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Structures //////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Global Variables ////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Function Prototypes /////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Function Definitions ////////////////////////////////////////////////////////
+#include "acr_skills_i"
+#include "acr_language_i"
+#include "dmfi_inc_tool"
+#include "dmfi_inc_english"
 
 void ACR_ApplyNLDDamageToCreature(object oTarget, int nSubdualDamage)
 {
@@ -57,35 +21,54 @@ void ACR_ApplyNLDDamageToCreature(object oTarget, int nSubdualDamage)
 }
 
 
-
-////////////////////////////////////////////////////////////////////////////////
-
-
 void main()
 {
     ACR_TriggerOnEnter();
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
-	int nRace = GetRacialType(oPC);
-	int nSubRace = GetSubRace(oPC);
-	 
-	//SendMessageToPC(oPC, "Race = " + IntToString(nRace));
-	//SendMessageToPC(oPC, "Subrace = " + IntToString(nSubRace));
-	if((GetTag(oPC) != "abr_cr_hu_marpenoth") && (nRace != RACIAL_TYPE_DRAGON) && (nRace != RACIAL_TYPE_FEY)) {
 	
-    int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
+	if((GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) || (GetIsDMPossessed(oPC))) {
+	    SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
+	
+	int nSkillDC = GetLocalInt(OBJECT_SELF, "SKILL_DC_INT");
 	string sMessageSuccess=GetLocalString(OBJECT_SELF, "MESSAGE_SUCCESS_STRING");
+	string sMessagePartial=GetLocalString(OBJECT_SELF, "MESSAGE_PARTIAL_STRING");
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
-	string sSkillName = GetLocalString(OBJECT_SELF, "SKILL_NAME_STRING");
-	int	nSkillName;
-	if(sSkillName == "CLIMB")
-		{nSkillName = SKILL_CLIMB;}
-	else if(sSkillName == "BALANCE")
-		{nSkillName = SKILL_BALANCE;}
-	else if(sSkillName == "JUMP")
-		{nSkillName = SKILL_JUMP;}
-		
+	int	nSkill = GetLocalInt(OBJECT_SELF, "2DA_SKILL_NUMBER");
+	int nSkillRoll = d20() + GetSkillRank(nSkill, oPC, FALSE);
+	string sMessage = sMessageFail;
+	string sSucceed = "FAILS";
+	if(nSkillRoll >= nSkillDC - 5) {sSucceed = "PARTIALLY succeeds"; sMessage= sMessagePartial;}
+	if(nSkillRoll >= nSkillDC) {sSucceed = "SUCCEEDS"; sMessage= sMessageSuccess;}
+	string sSkill = "";
+	if(nSkill == 6) {sSkill = "Listen";}
+	if(nSkill == 14) {sSkill = "Search";}
+	if(nSkill == 30) {sSkill = "Balance";}
+	if(nSkill == 31) {sSkill = "Climb";}
+	if(nSkill == 39) {sSkill = "Jump";}
+	
+	SendMessageToAllDMs(GetName(oPC) + " rolls " + IntToString(nSkillRoll) + " against " + IntToString(nSkillDC) + " " + sSkill + " DC on " + GetName(OBJECT_SELF)); 
+					
+	//For language checks
+	string sLanguage = GetLocalString(OBJECT_SELF, "LANGUAGE");
+	int nUnderstands = 0;
+	object oTool = DMFI_GetTool(oPC);
+	int n;
+	int nMax = GetLocalInt(oTool, "LanguageMAX");
+	string sTest;
+	// All languages stored in lower case strings.
+	sLanguage = GetStringLowerCase(sLanguage);
+	for (n=0; n<nMax; n++)
+	{
+		sTest = GetLocalString(oTool, "Language" + IntToString(n));
+		SendMessageToAllDMs(sLanguage + " = " + sLanguage);
+		if (sTest==sLanguage) {
+		nUnderstands = 1;
+		}
+	}
+ 
+	//For skills that involve potentially falling
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
 	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess, OBJECT_SELF, 1);
@@ -93,71 +76,83 @@ void main()
 	int nKnockdown = GetLocalInt(OBJECT_SELF, "KNOCKDOWN");
 	effect eKnockdown = EffectKnockdown();
 	float fKDTime = GetLocalFloat(OBJECT_SELF, "KDTIME");
-	int nFallDistance = GetLocalInt(OBJECT_SELF, "FAIL_DISTANCE");	
-	int nTumbleDamage = Random(6*nFallDistance/10) + (nFallDistance/10);
-	int nFallDamage = nTumbleDamage*2;
+	int nFallDistance = GetLocalInt(OBJECT_SELF, "FALL_DISTANCE");	
+	int nFallDamage = d6(nFallDistance/10);
+	int nTumbleDamage = nFallDamage/2;
 	effect eDamage = EffectDamage(nFallDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	effect eTumbleDmg = EffectDamage(nTumbleDamage, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-	effect eFeatherFall = GetFirstEffect(oPC);
 	
-	while(GetIsEffectValid(eFeatherFall)) {
-		int nFeatherFall = FALSE;
-		int nEffectType = GetEffectType(eFeatherFall);
-		int nEffectSubType = GetEffectSubType(eFeatherFall);
-		//SendMessageToPC(oPC, IntToString(nEffectType) + " = Type. " + IntToString(nEffectSubType) + " = SubType.");
-		eFeatherFall = GetNextEffect(oPC);
-	}
-	
-	object oRope = GetFirstItemInInventory(oPC); 
-	string sRope = GetTag(oRope);
-	while (oRope != OBJECT_INVALID) {
-	if(FindSubString(sRope, "Rope", 0)!= -1) {
-		nSkillDC = nSkillDC - 10;
-		SendMessageToPC(oPC, "The rope you carry surely comes in handy in situations like this.");
-		break;
-		}
-	 oRope = GetNextItemInInventory(oPC);
-	}
-	
-	
- if(GetTag(OBJECT_SELF) == "003_tr_skillcheck")
-		{ if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
-		 	{SendMessageToPC(oPC, sMessageSuccess);
-			 
-		 	}
-		}
- if(GetTag(OBJECT_SELF) == "003_trg_skillmove")
-		{if(GetIsSkillSuccessful(oPC, nSkillName, nSkillDC, TRUE))
-		 	{SendMessageToPC(oPC, sMessageSuccess);
-			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
-		 	 //AssignCommand(oPC, ActionSpeakString("*Climbs safely*", TALKVOLUME_TALK));
-			 }
-		 else if(GetHasSpellEffect(SPELL_FEATHER_FALL, oPC)) {
-		 	 SendMessageToPC(oPC, "Falls...but a Feather Fall spell makes you float safely down.");
-			 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
-		 	 AssignCommand(oPC, ActionSpeakString("*Falls...and floats down safely.*", TALKVOLUME_TALK));
-			 
-		 	}
-	 	 else {
-			 AssignCommand(oPC, ActionSpeakString("*Falls!*", TALKVOLUME_TALK));
-			 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));
-		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
-			 	{SendMessageToPC(oPC, sMessageFail);
-			     SendMessageToPC(oPC, "You land heavily, but your ability to tumble saves you from hurting yourself worse than you did.");
-			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
-			     ACR_ApplyNLDDamageToCreature(oPC, d6());
-				 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
+	//Listen
+		if(nSkill == 6) {
+			if(nSkillRoll >= nSkillDC)
+		 		{if(nUnderstands == 1) {sMessage= sMessageSuccess;}
+			else if(nSkillRoll >= nSkillDC - 5) {sMessage = sMessagePartial;}
 				}
-			 else   
-			 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
-			     if(nKnockdown == 1) { 
-					 DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime));
-					 SendMessageToPC(oPC, sMessageFail);
-			         SendMessageToPC(oPC, "You fail to tumble to a safe landing and hurt yourself!");
-			 	     }
-				}
-			 }
+		  	}
+	
+	//Search
+		if(nSkill == 14) {
+			//for mechanical traps. Success reveals mechanical bypass and trap. Partial reveals trap.
+			if(nSkillRoll >= nSkillDC)
+		 	 {string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
+			  string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
+			  object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
+			  object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
+			  SetUseableFlag(oTrapPlc, TRUE);
+			  SetTrapDetectable(oTrapPlc, TRUE);
+			  SetTrapDetectable(oTrapTrg, TRUE);
+			  SetTrapDetectDC(oTrapPlc, 0);
+			  SetTrapDetectDC(oTrapTrg, 0);
+			  }
+		 }
+		
+				
+	//Movement
+		if((nSkill == 30) || (nSkill == 31) || (nSkill == 39)) {
+			if(nSkillRoll >= nSkillDC)
+		 	 	{AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
+			 	 AssignCommand(oPC, ActionSpeakString("*Arrives safely*", TALKVOLUME_TALK));
+				 }
+			 else if(GetHasSpellEffect(SPELL_FEATHER_FALL, oPC)) {
+			 	 effect eFeatherFall = GetFirstEffect(oPC);
+					while(GetIsEffectValid(eFeatherFall)) {
+						int nFeatherFall = FALSE;
+						int nEffectType = GetEffectType(eFeatherFall);
+						int nEffectSubType = GetEffectSubType(eFeatherFall);
+						SendMessageToAllDMs(GetName(oPC) + ": " + IntToString(nEffectType) + " = Type. " + IntToString(nEffectSubType) + " = SubType.");
+						eFeatherFall = GetNextEffect(oPC);
+					}
+					
+				 SendMessageToPC(oPC, "Falls...but a Feather Fall spell makes you float safely down.");
+				 AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess)));
+			 	 AssignCommand(oPC, ActionSpeakString("*Falls...and floats down safely.*", TALKVOLUME_TALK));
+				 
+			 	}
+		 	 else {
+				 AssignCommand(oPC, ActionSpeakString("*Falls!*", TALKVOLUME_TALK));
+				 DelayCommand(1.0, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));
+			 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
+				 	{SendMessageToPC(oPC, sMessageFail);
+				     SendMessageToPC(oPC, "You land heavily, but your ability to tumble saves you from hurting yourself worse than you did.");
+				 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
+				     ACR_ApplyNLDDamageToCreature(oPC, d6());
+					 DelayCommand(1.0, ACR_NLD_ReportTotal(oPC, oPC, 0));
+					}
+				 else   
+				 	{ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
+				     if(nKnockdown == 1) { 
+						 DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, fKDTime));
+						 SendMessageToPC(oPC, sMessageFail);
+				         SendMessageToPC(oPC, "You fail to tumble to a safe landing and hurt yourself!");
+				 	     }
+					}
+				 }
+			}
+		
+		SendMessageToPC(oPC, sMessage);
+		SendMessageToAllDMs(sMessage);
 		}
 	  
-	}		   
-}
+	  
+			
+}		   
