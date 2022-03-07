@@ -24,8 +24,8 @@ void main()
    object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
    string sDisarmSucceed = GetLocalString(OBJECT_SELF, "MSG_DISARM_SUCCEED");
    		
-   SetTrapDisabled(oTrapPlc);
-   SetTrapDisabled(oTrapTrg);
+   DestroyObject(oTrapPlc);
+   DestroyObject(oTrapTrg);
    SendMessageToPC(oDisarmer, sDisarmSucceed);
    SendMessageToAllDMs(GetName(oDisarmer) + " got " + sDisarmSucceed);
 			
