@@ -93,17 +93,21 @@ void main()
 	//Search
 		if(nSkill == 14) {
 			//for mechanical traps. Success reveals mechanical bypass and trap. Partial reveals trap.
+			string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
+			string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
+			object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
+			object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
 			if(nSkillRoll >= nSkillDC)
-		 	 {string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
-			  string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
-			  object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
-			  object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
-			  SetUseableFlag(oTrapPlc, TRUE);
-			  SetTrapDetectable(oTrapPlc, TRUE);
-			  SetTrapDetectable(oTrapTrg, TRUE);
-			  SetTrapDetectDC(oTrapPlc, 0);
-			  SetTrapDetectDC(oTrapTrg, 0);
-			  }
+			 	 {SetUseableFlag(oTrapPlc, TRUE);
+				  SetTrapDetectable(oTrapPlc, TRUE);
+				  SetTrapDetectDC(oTrapPlc, 0);
+				  SetTrapDetectable(oTrapTrg, TRUE);
+				  SetTrapDetectDC(oTrapTrg, 0);
+				  }
+			else if(nSkillRoll >= nSkillDC - 5)
+				{SetTrapDetectable(oTrapPlc, TRUE);
+				 SetTrapDetectDC(oTrapPlc, 0);
+				}
 		 }
 		
 				

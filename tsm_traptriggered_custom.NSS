@@ -35,7 +35,6 @@ void main()
 		object oPlaceable = GetNearestObjectByTag(sPlaceableString, OBJECT_SELF,1);
 	    string sEntered = GetLocalString(OBJECT_SELF, "MSG_ENTERED");
 		string sDisarmFail = GetLocalString(OBJECT_SELF, "MSG_DISARM_FAIL");
-		string sDisarmSucceed = GetLocalString(OBJECT_SELF, "MSG_DISARM_SUCCEED");
 		string sDmgSuccess=GetLocalString(OBJECT_SELF, "MSG_DMG_FAIL");
 		string sDmgFail=GetLocalString(OBJECT_SELF, "MSG_DMG_SUCCEED");
 			 
@@ -77,11 +76,11 @@ void main()
 				 	SendMessageToPC(oVictim, sDmgSuccess);
 					SendMessageToAllDMs("Spike trap fails attack on " + GetName(oVictim) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
 			 		}
-				 else {
-					  ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); 
-					  SendMessageToPC(oVictim, sDmgFail);
-					  SendMessageToAllDMs("Spike trap hits " + GetName(oVictim) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
-			 		  if(ReflexSave(oVictim, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+			 else {
+					//ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictim); 
+					SendMessageToPC(oVictim, sDmgFail);
+					SendMessageToAllDMs("Spike trap hits " + GetName(oVictim) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+			 		if(ReflexSave(oVictim, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
 						ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictim, 3.0);
 					    SendMessageToAllDMs(GetName(oVictim) + " knocked down.");
 			 		    }				  
