@@ -105,7 +105,8 @@ void main()
 				  SetTrapDetectDC(oTrapTrg, 0);
 				  }
 			else if(nSkillRoll >= nSkillDC - 5)
-				{SetTrapDetectable(oTrapPlc, TRUE);
+				{SetUseableFlag(oTrapPlc, TRUE);
+				 SetTrapDetectable(oTrapPlc, TRUE);
 				 SetTrapDetectDC(oTrapPlc, 0);
 				}
 		 }
