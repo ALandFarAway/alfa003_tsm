@@ -9,7 +9,7 @@ void main()
 {
     ACR_TriggerOnTrapTriggered();
 	SendMessageToAllDMs("traptriggered_custom called");
-	string sEntered = GetLocalString(OBJECT_SELF, "MSG_ENTERED");
+	string sEntered = GetLocalString(OBJECT_SELF, "MSG_ENTER");
 	string sDisarmFail = GetLocalString(OBJECT_SELF, "MSG_DISARM_FAIL");
 	string sSprung = sDisarmFail;
 			
@@ -76,18 +76,19 @@ void main()
 			 effect eKnockdown = EffectKnockdown();
 			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapPlc), FALSE, OBJECT_TYPE_CREATURE);
-			 while(oVictimDmg != OBJECT_INVALID) {
+			 while((oVictimDmg != OBJECT_INVALID) && (GetLastDamager(oVictimDmg) != OBJECT_SELF))  {
+			 float fDistance = GetDistanceBetween(OBJECT_SELF, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
 			 if(nAttack < nAC) {
 				 	SendMessageToPC(oVictimDmg, sDmgSuccess);
-					SendMessageToAllDMs("Spike trap fails attack on " + GetName(oVictimDmg) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					SendMessageToAllDMs("Spike trap fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 			 		}
 			 else {
-					ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
 					SendMessageToPC(oVictimDmg, sDmgFail);
-					SendMessageToAllDMs("Spike trap hits " + GetName(oVictimDmg) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
-			 		if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+					SendMessageToAllDMs("Spike trap hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+			 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+					if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
 						ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
 					    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
 			 		    }				  

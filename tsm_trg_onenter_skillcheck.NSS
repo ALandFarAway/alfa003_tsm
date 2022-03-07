@@ -2,6 +2,7 @@
 // Wynna 03/05/22
 
 #include "acr_trigger_i"
+#include "acr_traps_i"
 #include "acr_quest_i"
 #include "acr_spawn_i"
 #include "acr_skills_i"
