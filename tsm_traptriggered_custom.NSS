@@ -13,7 +13,9 @@ void main()
 	string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
 	string sTrapWP = GetLocalString(OBJECT_SELF, "TRAP_WP_TAG");
 	object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
+	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_PLACEABLE) {oTrapPlc = OBJECT_SELF;}
 	object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
+	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_TRIGGER) {oTrapTrg = OBJECT_SELF;}
 	object oTrapWP = GetNearestObjectByTag(sTrapWP, OBJECT_SELF, 1);
 	string sDmgFail=GetLocalString(oTrapTrg, "MSG_DMG_FAIL");
 	string sDmgSuccess=GetLocalString(oTrapTrg, "MSG_DMG_SUCCEED");
