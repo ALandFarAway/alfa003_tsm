@@ -18,11 +18,13 @@ void main()
    
    SendMessageToAllDMs("GetLastDisarmed is " + sDisarmer);
    
-   string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
-   string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
-   object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
-   object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
-   string sDisarmSucceed = GetLocalString(OBJECT_SELF, "MSG_DISARM_SUCCEED");
+    string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
+    string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
+    object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
+	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_PLACEABLE) {oTrapPlc = OBJECT_SELF;}
+	object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
+	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_TRIGGER) {oTrapTrg = OBJECT_SELF;}
+	string sDisarmSucceed = GetLocalString(OBJECT_SELF, "MSG_DISARM_SUCCEED");
    		
    DestroyObject(oTrapPlc);
    DestroyObject(oTrapTrg);

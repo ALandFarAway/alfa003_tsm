@@ -24,7 +24,7 @@ void main()
 	int nDiceType = GetLocalInt(oTrapTrg, "ACR_TRAP_DICE_TYPE");
 	int nDiceNumber = GetLocalInt(oTrapTrg, "ACR_TRAP_DICE_NUMBER");
 	string sEntered = GetLocalString(oTrapTrg, "MSG_ENTER");
-	string sDisarmFail = GetLocalString(oTrapTrg, "MSG_DISARM_FAIL");
+	string sDisarmFail = GetLocalString(OBJECT_SELF, "MSG_DISARM_FAIL");
 	string sSprung = sDisarmFail;
 			
    	object oVictim = GetLocalObject(OBJECT_SELF, "oVictim");
@@ -80,7 +80,8 @@ void main()
 			 effect eKnockdown = EffectKnockdown();
 			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
-			 while((oVictimDmg != OBJECT_INVALID) && (GetLastAttacker(oVictimDmg) != OBJECT_SELF))  {
+			 while((oVictimDmg != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1))  {
+			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
@@ -99,7 +100,7 @@ void main()
 					  }
 				 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 				}
-			if(FindSubString(GetName(OBJECT_SELF), "Locked") != -1) { 
+			if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
 				  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
 				  DelayCommand(1800.0, DestroyObject(GetLocalObject(OBJECT_SELF, "oCollision")));
 			      }
