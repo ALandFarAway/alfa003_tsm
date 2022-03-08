@@ -33,7 +33,7 @@ void main()
 		 sSprung = sEntered;
 		 }
 	else if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_PLACEABLE)
-		{oVictim = GetPlaceableLastClickedBy();
+		{oVictim = GetEnteringObject();
 		 sSprung = sDisarmFail;
 		 }
 	else {SendMessageToAllDMs("oVictim is Invalid");}
@@ -73,10 +73,10 @@ void main()
    			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
-			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
+			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_CLOSE, 1.0, 1.0));
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 int nInc;
-			 for(nInc = 0; nInc < 10; nInc ++)  {
+			 for(nInc = 0; nInc < 20; nInc ++)  {
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
@@ -100,15 +100,14 @@ void main()
 						  
 					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 					 }
-					 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
-					 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
+			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
 				}
-			/*	
+				
 				if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
-					  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
-					  DelayCommand(1800.0, DestroyObject(GetLocalObject(OBJECT_SELF, "oCollision")));
-				      }
-				*/
+					  CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE);
+					  }
+				
 			}
 			
 		//Snare Trap	
