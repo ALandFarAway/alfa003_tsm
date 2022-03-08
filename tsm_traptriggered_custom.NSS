@@ -80,9 +80,7 @@ void main()
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
-			 //if((GetRacialType(oVictimDmg) != RACIAL_TYPE_INCORPOREAL) && (GetSubRace(oVictimDmg) != RACIAL_SUBTYPE_INCORPOREAL))
-				 //{
-				 if(nAttack < nAC) {
+			 if(nAttack < nAC) {
 					 	SendMessageToPC(oVictimDmg, sDmgSuccess);
 						SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 				 		}
@@ -98,16 +96,16 @@ void main()
 						    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
 				 		    }				  
 					  }
-					// }
+				
 				 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 				 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
 				 }
-				
+			/*	
 				if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
 					  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
 					  DelayCommand(1800.0, DestroyObject(GetLocalObject(OBJECT_SELF, "oCollision")));
 				      }
-				
+				*/
 			}
 			
 		//Snare Trap	
