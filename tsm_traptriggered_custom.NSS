@@ -86,6 +86,9 @@ void main()
 					 	SendMessageToPC(oVictimDmg, sDmgSuccess);
 						SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 				 		}
+				 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
+				 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+				 		}
 				 else {
 						SendMessageToPC(oVictimDmg, sDmgFail);
 						SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
@@ -94,7 +97,7 @@ void main()
 							ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
 						    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
 				 		    }				  
-						  }
+					  }
 					// }
 				 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 				 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
