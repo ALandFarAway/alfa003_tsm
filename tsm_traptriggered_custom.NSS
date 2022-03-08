@@ -19,7 +19,7 @@ void main()
 	object oTrapWP = GetNearestObjectByTag(sTrapWP, OBJECT_SELF, 1);
 	string sDmgFail=GetLocalString(oTrapTrg, "MSG_DMG_FAIL");
 	string sDmgSuccess=GetLocalString(oTrapTrg, "MSG_DMG_SUCCEED");
-			 
+	int nBlocking = GetLocalInt(oTrapTrg, "TRAP_BLOCKING");
 	int nReflexDC = GetLocalInt(oTrapTrg, "ACR_TRAP_SAVE_DC");
 	int nDiceType = GetLocalInt(oTrapTrg, "ACR_TRAP_DICE_TYPE");
 	int nDiceNumber = GetLocalInt(oTrapTrg, "ACR_TRAP_DICE_NUMBER");
@@ -98,10 +98,11 @@ void main()
 			 DestroyObject(oTrapPlc, 2.0);
    			 DestroyObject(oTrapTrg, 2.0);
    			 	
-			 if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
+			 if(nBlocking == 1) { 
 			 	SendMessageToAllDMs("Locking Found");
 				CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE);
 				}
+			
 				
 			}
 			

@@ -26,8 +26,10 @@ void main()
 	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_TRIGGER) {oTrapTrg = OBJECT_SELF;}
 	string sDisarmSucceed = GetLocalString(OBJECT_SELF, "MSG_DISARM_SUCCEED");
    		
-   DestroyObject(oTrapPlc);
-   DestroyObject(oTrapTrg);
+   SetTrapActive(oTrapPlc, FALSE);
+   SetTrapActive(oTrapTrg, FALSE);
+   DelayCommand(1800.0, SetTrapActive(oTrapPlc, FALSE));
+   DelayCommand(1800.0, SetTrapActive(oTrapTrg, FALSE));
    SendMessageToPC(oDisarmer, sDisarmSucceed);
    SendMessageToAllDMs(GetName(oDisarmer) + " got " + sDisarmSucceed);
 			
