@@ -75,31 +75,34 @@ void main()
 			 effect eKnockdown = EffectKnockdown();
 			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 1.0));
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
-			 while((oVictimDmg != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1))  {
-			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
+			 int nInc;
+			 for(nInc = 0; nInc < 10; nInc ++)  {
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
-			 if(nAttack < nAC) {
-					 	SendMessageToPC(oVictimDmg, sDmgSuccess);
-						SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
-				 		}
-				 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
-				 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
-				 		}
-				 else {
-						SendMessageToPC(oVictimDmg, sDmgFail);
-						SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
-				 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
-						if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
-							ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
-						    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
-				 		    }				  
-					  }
-				
-				 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
-				 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
-				 }
+			 if(GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1) {
+				 if(nAttack < nAC) {
+						 	SendMessageToPC(oVictimDmg, sDmgSuccess);
+							SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					 		}
+					 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
+					 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					 		}
+					 else {
+							SendMessageToPC(oVictimDmg, sDmgFail);
+							SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+							if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
+							    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
+					 		    }				  
+						  }
+						  
+					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
+					 }
+					 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+					 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
+				}
 			/*	
 				if(FindSubString(GetName(oTrapPlc), "Locking") != -1) { 
 					  SetLocalObject(OBJECT_SELF, "oCollision", CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE));
