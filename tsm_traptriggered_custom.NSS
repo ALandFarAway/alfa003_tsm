@@ -17,6 +17,8 @@ void main()
 	object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
 	if(GetObjectType(OBJECT_SELF) == OBJECT_TYPE_TRIGGER) {oTrapTrg = OBJECT_SELF;}
 	object oTrapWP = GetNearestObjectByTag(sTrapWP, OBJECT_SELF, 1);
+	string sTrapSafetyWP = GetLocalString(OBJECT_SELF, "TRAP_SAFETY_WP_TAG");
+	object oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, OBJECT_SELF, 1);
 	string sDmgFail=GetLocalString(oTrapTrg, "MSG_DMG_FAIL");
 	string sDmgSuccess=GetLocalString(oTrapTrg, "MSG_DMG_SUCCEED");
 	int nBlocking = GetLocalInt(oTrapTrg, "TRAP_BLOCKING");
@@ -67,6 +69,7 @@ void main()
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 int nInc;
 			 for(nInc = 0; nInc < 20; nInc ++)  {
+			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
@@ -74,7 +77,8 @@ void main()
 				 if(nAttack < nAC) {
 						 	SendMessageToPC(oVictimDmg, sDmgSuccess);
 							SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
-					 		}
+					 		AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
+							}
 					 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
 					 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 					 		}
@@ -82,8 +86,9 @@ void main()
 							SendMessageToPC(oVictimDmg, sDmgFail);
 							SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
 					 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+							AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
 							if(ReflexSave(oVictimDmg, 20, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
-								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 3.0);
+								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 30.0);
 							    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
 					 		    }				  
 						  }
