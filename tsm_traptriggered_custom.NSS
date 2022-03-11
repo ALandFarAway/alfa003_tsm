@@ -114,14 +114,14 @@ void main()
    			 	
 			 if(nBlocking == 1) { 
 			 	SendMessageToAllDMs("Locking Found");
-				CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(OBJECT_SELF), FALSE);
+				CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(oTrapPlc), FALSE);
 				}
 			
 				
 			}
 			
 		//Pit Trap	
-		 if((GetTag(OBJECT_SELF) == "tsm_trigger_onenter_pit_trap") && ((GetIsPC(oVictim)) || (GetIsDMPossessed(oVictim))))
+		 if((GetTag(OBJECT_SELF) == "tsm_trigger_pit_trap") && ((GetIsPC(oVictim)) || (GetIsDMPossessed(oVictim))))
 			{string sMessage=GetLocalString(OBJECT_SELF, "ACR_MESSAGE");
 			 string sSpeak=GetLocalString(OBJECT_SELF, "ACR_SPEAK");
 			 string sJumpTo = GetLocalString(OBJECT_SELF, "ACR_WP_JUMP_TO");
