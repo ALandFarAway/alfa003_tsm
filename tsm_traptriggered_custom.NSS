@@ -13,7 +13,7 @@ void ActionCreateCreature(string sCreature, location lLocPlace)
 }
 
 void main()
-{
+{if(FindSubString(GetName(GetEnteringObject()), "Ghost") == -1) {
     ACR_TriggerOnTrapTriggered();
 	SendMessageToAllDMs("traptriggered_custom called");
 	string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
@@ -318,5 +318,6 @@ void main()
 						}
 					}	          
 				}		
-		}	 
+		}
+	}	 
 }
