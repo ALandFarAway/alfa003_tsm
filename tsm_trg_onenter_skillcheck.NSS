@@ -49,6 +49,8 @@ void main()
 	if(nSkill == 31) {sSkill = "Climb";}
 	if(nSkill == 39) {sSkill = "Jump";}
 	
+	
+	
 	SendMessageToAllDMs(GetName(oPC) + " rolls " + IntToString(nSkillRoll) + " against " + IntToString(nSkillDC) + " " + sSkill + " DC on " + GetName(OBJECT_SELF)); 
 					
 	//For language checks
@@ -98,8 +100,11 @@ void main()
 			string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
 			object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
 			object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
+			string sTrapDesc = GetLocalString(oTrapPlc, "TRAP_DESCRIPTION");
+			object oTrap = GetNearestTrapToObject(oPC, TRUE);
 			if(nSkillRoll >= nSkillDC)
-			 	 {SetUseableFlag(oTrapPlc, TRUE);
+			 	 {SetDescription(oTrapPlc, sTrapDesc);
+				  SetUseableFlag(oTrapPlc, TRUE);
 				  SetTrapDetectable(oTrapPlc, TRUE);
 				  SetTrapDetectDC(oTrapPlc, 0);
 				  SetTrapDetectable(oTrapTrg, TRUE);

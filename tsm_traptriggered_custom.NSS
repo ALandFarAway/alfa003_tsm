@@ -66,6 +66,65 @@ void main()
 		SendMessageToAllDMs(GetName(OBJECT_SELF) + " trap readiness is " + IntToString(GetLocalInt(OBJECT_SELF, "Trap_Readiness")));	
 		//Trap readiness: 0 = Set and ready to spring; 1 = Unsprung and on a thirty minute delay timer; 2 = Sprung and on thirty minute reset timer;
 		
+		
+		
+		//Axe Traps
+		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_axe") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
+			{SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
+			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
+			 SendMessageToPC(oVictim, sSprung);
+			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
+			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
+			 effect eKnockdown = EffectKnockdown();
+			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 int nInc;
+			 for(nInc = 0; nInc < 20; nInc ++)  {
+			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
+			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
+			 int nAC = GetAC(oVictimDmg, 0);
+			 int nAttack = d20() + 8;
+			 if(GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1) {
+				 if(nAttack < nAC) {
+						 	SendMessageToPC(oVictimDmg, sDmgSuccess);
+							SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					 		AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
+							}
+					 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
+					 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					 		}
+					 else {
+							SendMessageToPC(oVictimDmg, sDmgFail);
+							SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+					 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+							AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
+							if(ReflexSave(oVictimDmg, nReflexDC, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 6.0);
+							    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
+					 		    }				  
+						  }
+						  
+					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
+					 }
+			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
+			 if(oVictimDmg == OBJECT_INVALID) {break;}
+			 }
+				
+			 DestroyObject(oTrapTrg, 2.0);
+   			 	
+			 if(nBlocking == 1) { 
+			 	SendMessageToAllDMs("Locking Found");
+				//CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_axe_closed_plc", GetLocation(oTrapPlc), FALSE);
+				DelayCommand(5.0, AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0)));
+			 	int nAxeSwing = GetLocalInt(OBJECT_SELF, "Swing");
+				if(nAxeSwing < 5) {
+					SetLocalInt(OBJECT_SELF, "Swing", nAxeSwing +1);
+					DelayCommand(5.0, AssignCommand(oTrapPlc, ExecuteScript("tsm_traptriggered_custom", oTrapPlc)));
+				 	}
+				}	
+			}
+			
 		//Spike Traps
 		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_spike") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
 			{SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
@@ -115,9 +174,7 @@ void main()
 			 if(nBlocking == 1) { 
 			 	SendMessageToAllDMs("Locking Found");
 				CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_spike_closed_plc", GetLocation(oTrapPlc), FALSE);
-				}
-			
-				
+				}	
 			}
 			
 		//Pit Trap	
@@ -189,8 +246,9 @@ void main()
 			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_ACID, DAMAGE_POWER_NORMAL, FALSE);
 			 AssignCommand(oTrapPlc, ActionSpeakString("*Slides down out of the way, revealing a hallway beyond. The noise of chanting swelling to a triumphant finish is suddenly audible." , TALKVOLUME_TALK));
-			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));
-			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 effect eGas = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_ACID, FALSE);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGas, oVictim, 3.0);
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 int nInc;
 			 for(nInc = 0; nInc < 20; nInc ++)  {
 			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
@@ -213,7 +271,7 @@ void main()
 						  
 					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 					 }
-			 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 2.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
 			 if(oVictimDmg == OBJECT_INVALID) {break;}
 			 }

@@ -63,6 +63,7 @@ void main()
 			 float fDurationLengthTwo = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH_TWO");
 		
 			 SendMessageToPC(oPC, sMessage);
+			 SendMessageToAllDMs(GetName(oPC) + " got: " + sMessage);
 			 	
 			 if((nSpawnNumber > 0) && (sSpawn != "")) {
 					DelayCommand(fDelaySpawnOne, ActionCreateCreature(sSpawn, lSpawnWP)); 
