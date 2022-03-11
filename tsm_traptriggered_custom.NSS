@@ -76,7 +76,8 @@ void main()
 			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
-			 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));
+			 //AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));
+			 object oTrap = CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_axe_plc", GetLocation(oTrapWP), FALSE);
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 2.5, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 int nInc;
 			 for(nInc = 0; nInc < 20; nInc ++)  {
@@ -115,8 +116,7 @@ void main()
    			 	
 			 if(nBlocking == 1) { 
 			 	SendMessageToAllDMs("Locking Found");
-				//CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_axe_closed_plc", GetLocation(oTrapPlc), FALSE);
-				DelayCommand(5.0, AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0)));
+				//DelayCommand(5.0, AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0)));
 			 	int nAxeSwing = GetLocalInt(OBJECT_SELF, "Swing");
 				if(nAxeSwing < 5) {
 					SetLocalInt(OBJECT_SELF, "Swing", nAxeSwing +1);
