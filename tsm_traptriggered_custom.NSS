@@ -70,7 +70,7 @@ void main()
 		
 		//Axe Traps
 		
-		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_axe") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 2))
+		if((GetTag(OBJECT_SELF)== "003_trap_custom_axe_on") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 2))
 			{SendMessageToAllDMs(GetName(oVictim) + " reentered axe sweep area of " + GetName(OBJECT_SELF));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
@@ -78,7 +78,7 @@ void main()
 			 	object oTrapPlc = CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_axe_major_plc", GetLocation(oTrapWP), FALSE);
 			 }
 			 
-			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 int nInc;
 			 for(nInc = 0; nInc < 20; nInc ++)  {
 			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
@@ -107,14 +107,14 @@ void main()
 						  
 					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 					 }
-			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
 			 if(oVictimDmg == OBJECT_INVALID) {break;}
 			 }
 			}
 			
 			
-		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_axe") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
+		if((GetTag(OBJECT_SELF)== "003_trap_custom_axe_major") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
 			{SetLocalInt(oTrapTrg, "Trap_Readiness", 2);
 			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
 			 SendMessageToPC(oVictim, sSprung);
