@@ -75,6 +75,7 @@ void main()
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 0);
 			 int nInc;
 			 for(nInc = 0; nInc < 20; nInc ++)  {
 			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
@@ -104,6 +105,7 @@ void main()
 					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 					 }
 			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 0);
 			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
 			 if(oVictimDmg == OBJECT_INVALID) {break;}
 			 }
