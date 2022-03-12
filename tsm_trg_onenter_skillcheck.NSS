@@ -109,6 +109,7 @@ void main()
 				  SetTrapDetectDC(oTrapPlc, 0);
 				  SetTrapDetectable(oTrapTrg, TRUE);
 				  SetTrapDetectDC(oTrapTrg, 0);
+				  DestroyObject(OBJECT_SELF, 6.0);
 				  }
 			else if(nSkillRoll >= nSkillDC - 5)
 				{SetUseableFlag(oTrapPlc, TRUE);
