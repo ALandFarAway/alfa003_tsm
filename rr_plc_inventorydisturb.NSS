@@ -137,7 +137,7 @@ void main()
 			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
 			 DestroyObject(GetObjectByTag(sCreate, 0));
 			 object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
-			 DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not bless the glyphs.", TALKVOLUME_TALK)));	
+			 DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not blessed the glyphs.", TALKVOLUME_TALK)));	
 			 
 			 }
 		 }
