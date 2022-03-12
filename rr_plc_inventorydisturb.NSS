@@ -1,4 +1,4 @@
-//OnInventoryDisturb for tsm placeables
+//OnInventoryDisturb for Rauvin Ruins placeables
 //Wynna Feb 2022
 
 void ActionCreateCreature(string sCreature, location lLocPlace)
@@ -40,14 +40,15 @@ void main()
 	effect eWeb = EffectVisualEffect(VFX_AOE_WEB_OF_PURITY, FALSE);
 	effect ePurge = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
 	object oSoulReaper = GetObjectByTag("003_cr_bane_bp_elthonds", 0);
-	
+	SendMessageToPC(oPC, "Disturb called");
+			
 	int nCount = 0;
 	object oInventory = GetFirstItemInInventory(OBJECT_SELF);
 	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (FindSubString(GetTag(GetInventoryDisturbItem()), "003_it_phalorm_hglyph_", 0) != -1) && (GetInventoryDisturbType() == 0))
 		{
 		while(oInventory != OBJECT_INVALID) {
 		    nCount = nCount+1;
-			//SendMessageToPC(oPC, IntToString(nCount));
+			SendMessageToPC(oPC, IntToString(nCount));
 			if(nCount == 1) {lWPGlyph = lWPOne;}
 			else if(nCount == 2) {lWPGlyph = lWPTwo;}
 			else if(nCount == 3) {lWPGlyph = lWPThree;}
@@ -136,7 +137,7 @@ void main()
 			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
 			 DestroyObject(GetObjectByTag(sCreate, 0));
 			 object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
-			 DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not bless the glyphs.", TALKVOLUME_TALK));	
+			 DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not bless the glyphs.", TALKVOLUME_TALK)));	
 			 
 			 }
 		 }
