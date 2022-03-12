@@ -103,7 +103,7 @@ void main()
 			string sTrapDesc = GetLocalString(oTrapPlc, "TRAP_DESCRIPTION");
 			object oTrap = GetNearestTrapToObject(oPC, TRUE);
 			if(nSkillRoll >= nSkillDC)
-			 	 {SetDescription(oTrapPlc, sTrapDesc);
+			 	 {SetDescription(oTrap, sTrapDesc);
 				  SetUseableFlag(oTrapPlc, TRUE);
 				  SetTrapDetectable(oTrapPlc, TRUE);
 				  SetTrapDetectDC(oTrapPlc, 0);
