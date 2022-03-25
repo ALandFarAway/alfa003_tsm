@@ -4,6 +4,8 @@
 #include "x2_inc_switches"
 #include "acr_creature_i"
 #include "NW_I0_SPELLS"
+#include "acr_skills_i"
+
 
 
 void main()
@@ -178,4 +180,114 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GREATER_SHADOW")
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 			}
 		}
+		
+else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
+		{SendMessageToAllDMs("Crimson Death");
+		 object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
+		 if((oTarget != OBJECT_INVALID) && (oTarget != GetSpellTargetObject())) {
+		 	SendMessageToPC(GetSpellTargetObject(), GetName(OBJECT_SELF) + " floats a tendril at you, but misses.");
+			SendMessageToAllDMs(GetName(OBJECT_SELF) + " attacked " + GetName(GetSpellTargetObject()) + " but was engaged with " + GetName(oTarget) + " at the time. Touch attack truncated on " + GetName(GetSpellTargetObject()));
+			return;
+		 }
+		 if(oTarget == OBJECT_INVALID) {
+		 	oTarget = GetSpellTargetObject();
+			SetLocalObject(OBJECT_SELF, "oTarget", oTarget);
+		 	}
+	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
+			{int nDrain = d4(1);
+			 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
+				{effect eEffect = GetFirstEffect(oTarget);
+					 while(GetIsEffectValid(eEffect))
+						{
+							if(GetEffectSpellId(eEffect) == GetSpellId() &&
+							   GetEffectCreator(eEffect) == OBJECT_SELF)
+							{
+								nDrain += GetEffectInteger(eEffect, 1);
+								RemoveEffect(oTarget, eEffect);
+							}
+							eEffect = GetNextEffect(oTarget);
+						}
+					}
+					 
+			 int nInc = GetLocalInt(OBJECT_SELF, "nInc");
+			 if(nInc == 0) {	 
+				 SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Wounds open on your skin and blood rises out of them, weakening you.");
+				 SendMessageToAllDMs(GetName(OBJECT_SELF) + " touches " + GetName(oTarget) + "! Wounds open on their skin and blood rises out of them, weakening the PC.");
+				 ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
+			 	 ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
+				}
+			 else if ((nInc > 0) && (nInc < 4)) {	
+				 int nStrCD = GetAbilityModifier(ABILITY_STRENGTH, OBJECT_SELF);
+				 int nStrPC = GetAbilityModifier(ABILITY_STRENGTH, oTarget);
+				 int nBABCD = GetTRUEBaseAttackBonus(OBJECT_SELF);
+				 int nBABPC = GetTRUEBaseAttackBonus(oTarget);
+				 int nGrappleBonusCD = 11;
+				 int nGrappleCD = d20(1);
+				 int nGrapplePC = d20(1);
+				
+				 if((nInc > 1)&& (nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD > nGrapplePC + nStrPC + nBABPC)) {
+					effect eKnockdown = EffectKnockdown();
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oTarget, 6.0);
+					SendMessageToPC(oTarget, "You are lifted into the air by a telekinetic force!");
+					SendMessageToAllDMs(GetName(OBJECT_SELF) + " lifts " + GetName(oTarget) + " telekinetically.");
+					ActionSpeakString(GetName(oTarget) + " is lifted into the air by foggy red tendrils.", TALKVOLUME_TALK);
+					}
+					
+				if((GetIsSkillSuccessful(oTarget, 35, nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD, TRUE)) || (nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD < nGrapplePC + nStrPC + nBABPC)) {
+					ClearAllActions(FALSE);
+				    SetLocalInt(OBJECT_SELF, "nInc", 0);
+				    SetLocalObject(OBJECT_SELF, "oTarget", OBJECT_INVALID);
+		 	        SendMessageToPC(oTarget, "You break free of " + GetName(OBJECT_SELF) + ".");
+					SendMessageToAllDMs(GetName(oTarget) + " breaks free of " + GetName(OBJECT_SELF) + ".");
+					return;
+					}
+				 else {
+					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " wraps you in tendrils of fog and continues to feed.");
+					SendMessageToAllDMs(GetName(OBJECT_SELF) + " wraps " + GetName(oTarget) + " in tendrils of fog and continues to feed.");
+					ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
+			     	ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
+		            ActionForceFollowObject(oTarget, 0.5);
+					ActionWait(6.0);
+					DelayCommand(6.0, ExecuteScript("acr_touchattack_wyn", OBJECT_SELF)); 
+					}
+				 }
+				 
+			if(nInc == 4) {
+				 SetLocalInt(OBJECT_SELF, "nInc", 0);
+				 SetLocalObject(OBJECT_SELF, "oTarget", OBJECT_INVALID);
+		 	     SendMessageToPC(oTarget, "The " + GetName(OBJECT_SELF) + " looses you, temporarily sated.");
+				 SendMessageToAllDMs(GetName(OBJECT_SELF) + " looses " + GetName(oTarget) + "temporarily sated.");
+				 ClearAllActions(FALSE);
+				 return;
+				 }	
+			else if(nInc < 4) {
+				SetLocalInt(OBJECT_SELF, "nInc", nInc+1);
+				}
+			}
+		}
+  	
+	
+else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "BANSHEE")
+	{SendMessageToAllDMs("Banshee");
+	 if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
+		{int nDrain = d4();
+		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
+		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
+			{effect eEffect = GetFirstEffect(oTarget);
+				while(GetIsEffectValid(eEffect))
+					{
+						if(GetEffectSpellId(eEffect) == GetSpellId() &&
+						   GetEffectCreator(eEffect) == OBJECT_SELF)
+						{
+							nDrain += GetEffectInteger(eEffect, 1);
+							RemoveEffect(oTarget, eEffect);
+						}
+						eEffect = GetNextEffect(oTarget);
+					}
+				}
+				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CHARISMA, nDrain)), oTarget);
+				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your confidence falters");
+				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
+		}
+	}
 }
