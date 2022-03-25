@@ -40,7 +40,7 @@ void main()
 	effect eWeb = EffectVisualEffect(VFX_AOE_WEB_OF_PURITY, FALSE);
 	effect ePurge = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
 	object oSoulReaper = GetObjectByTag("003_cr_bane_bp_elthonds", 0);
-	SendMessageToPC(oPC, "Disturb called");
+	//SendMessageToPC(oPC, "Disturb called");
 			
 	int nCount = 0;
 	object oInventory = GetFirstItemInInventory(OBJECT_SELF);
@@ -48,7 +48,7 @@ void main()
 		{
 		while(oInventory != OBJECT_INVALID) {
 		    nCount = nCount+1;
-			SendMessageToPC(oPC, IntToString(nCount));
+			//SendMessageToPC(oPC, IntToString(nCount));
 			if(nCount == 1) {lWPGlyph = lWPOne;}
 			else if(nCount == 2) {lWPGlyph = lWPTwo;}
 			else if(nCount == 3) {lWPGlyph = lWPThree;}

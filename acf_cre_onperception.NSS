@@ -57,19 +57,7 @@ void main()
 	}
 	
 	
-	if(GetTag(OBJECT_SELF) == "003_cr_slv_profnec") {
-		object oMaster = GetLocalObject(OBJECT_SELF, "oMaster");
-		location lSafe = CalcSafeLocation(OBJECT_SELF, GetLocation(oMaster), 1.0, TRUE,FALSE);
-		if((oMaster == oPerceived) && (GetLastPerceptionVanished())) {
-			ActionForceFollowObject(oMaster, 1.0, 0);
-			ActionForceMoveToObject(oMaster, TRUE, 1.0, 30.0);
-			}
-		if(GetTag(oPerceived) == "003_cr_bane_bp_elthonds") {
-			ClearAllActions(TRUE);
-			ActionAttack(oPerceived, FALSE);
-			
-			}
-	}
+
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_ghost_corrupt") {
 		if((!GetIsPC(oPerceived)) && (!GetIsDMPossessed(oPerceived)))
