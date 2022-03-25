@@ -14,11 +14,11 @@ void main()
     object oItem = GetModuleItemAcquired();
 	object oPC = GetLastDisturbed();
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);
-	object oCenter = GetObjectByTag("phalorm_globe_green2", 0);
-	object oCreate = GetNearestObjectByTag("WP_phalorm_globe_platform_green2", OBJECT_SELF, 1);	
+	object oCenter = GetObjectByTag("phalorm_globe_black", 0);
+	object oCreate = GetNearestObjectByTag("WP_phalorm_globe_platform_black", OBJECT_SELF, 1);	
 	location lCreate = GetLocation(oCreate);
 	string sCreate = "003_cr_un_ghost_aloisus";	
-	object oCreateWeird = GetWaypointByTag("phalorm_earth_down_wp");
+	object oCreateWeird = GetWaypointByTag("phalorm_earth_up_wp");
 	location lCreateWeird = GetLocation(oCreateWeird);
 	int nRandom = Random(3);
 	if(nRandom==1) 
@@ -44,7 +44,7 @@ void main()
 			
 	int nCount = 0;
 	object oInventory = GetFirstItemInInventory(OBJECT_SELF);
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (FindSubString(GetTag(GetInventoryDisturbItem()), "003_it_phalorm_hglyph_", 0) != -1) && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (FindSubString(GetTag(GetInventoryDisturbItem()), "003_it_phalorm_hglyph_", 0) != -1) && (GetInventoryDisturbType() == 0))
 		{
 		while(oInventory != OBJECT_INVALID) {
 		    nCount = nCount+1;
@@ -58,7 +58,7 @@ void main()
 		}
 	}
 	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 0))
 		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_1", lWPGlyph);
 		 if(lWPGlyph==lWPOne) {
 		 	SetLocalInt(OBJECT_SELF, "H1", 1);
@@ -67,7 +67,7 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H1", 0);
 		 	}
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_2") && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_2") && (GetInventoryDisturbType() == 0))
 		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_2", lWPGlyph);
 		 if(lWPGlyph==lWPTwo) {
 		 	SetLocalInt(OBJECT_SELF, "H2", 1);
@@ -76,7 +76,7 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H2", 0);
 		 	}
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_3") && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_3") && (GetInventoryDisturbType() == 0))
 		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_3", lWPGlyph);
 		 if(lWPGlyph==lWPThree) {
 		 	SetLocalInt(OBJECT_SELF, "H3", 1);
@@ -85,7 +85,7 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H3", 0);
 		 	}
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4") && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4") && (GetInventoryDisturbType() == 0))
 		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_4", lWPGlyph);
 		 if(lWPGlyph==lWPFour) {
 		 	SetLocalInt(OBJECT_SELF, "H4", 1);
@@ -95,25 +95,25 @@ void main()
 		 	}
 		 }	
 		
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 1))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 1))
 		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H1", 0);
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_2") && (GetInventoryDisturbType() == 1))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_2") && (GetInventoryDisturbType() == 1))
 		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H2", 0);
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_3") && (GetInventoryDisturbType() == 1))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_3") && (GetInventoryDisturbType() == 1))
 		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H3", 0);
 		 }		
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4") && (GetInventoryDisturbType() == 1))
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4") && (GetInventoryDisturbType() == 1))
 		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_4", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H4", 0);
 		 }	
 			 
 		 
-	if((GetLocalInt(OBJECT_SELF, "Activated") != 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "abr_it_rng_orbacid") && (GetInventoryDisturbType() == 0))
+	if((GetLocalInt(OBJECT_SELF, "Activated") != 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetTag(GetInventoryDisturbItem()) == "abr_it_rng_orbacid") && (GetInventoryDisturbType() == 0))
 		{ 
 	     SetLocalInt(OBJECT_SELF, "Activated", 1);
 		 if(FindSubString(GetName(oPC), "Soulreaper") != -1) {
@@ -132,7 +132,7 @@ void main()
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_4", lWPTwo);
 		 }	 	
 	 	
-	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
+	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetInventoryDisturbType() == 0))
 		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_4")) { 
 			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
 			 DestroyObject(GetObjectByTag(sCreate, 0));
@@ -143,16 +143,16 @@ void main()
 		 }
 	
 	if((GetLocalInt(OBJECT_SELF, "H1") == 1) && (GetLocalInt(OBJECT_SELF, "H2") == 1) && (GetLocalInt(OBJECT_SELF, "H3") == 1) && (GetLocalInt(OBJECT_SELF, "H4") == 1))
-		{SendMessageToAllDMs(GetName(oPC) + " setting off crystals");	 
+		{SendMessageToAllDMs(GetName(oPC) + " setting off black crystals");	 
 		 if(FindSubString(GetName(oPC), "Banite", 0) == -1) {	 
 		
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 			 //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, lCreateWeird, 5.0);
-			 object oRelayGreenA = GetObjectByTag("rauvin_crystal_relay_green_a", 0);
-		     object oRelayGreenB = GetObjectByTag("rauvin_crystal_relay_green_b", 0);
-		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
-		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
+			 object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
+		     object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);
+		     object oRelayblackC = GetObjectByTag("rauvin_crystal_relay_black_c", 0);
+		     object oRelayblackD = GetObjectByTag("rauvin_crystal_relay_black_d", 0);
 		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_relay_black", 0);
 		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
 			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
@@ -169,11 +169,11 @@ void main()
 		     object oBugsB = GetObjectByTag("fx_butterflies_valbrace", 0);
 		     object oBugsC = GetObjectByTag("fx_butterflies_si", 0);
 		     object oBugsD = GetObjectByTag("fx_butterflies_aloisus", 0);
-		     effect eBeamGreenA = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
+		     effect eBeamblackA = EffectBeam(VFX_BEAM_BLACK, oRelayblackA, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackB = EffectBeam(VFX_BEAM_BLACK, oRelayblackB, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackC = EffectBeam(VFX_BEAM_BLACK, oRelayblackC, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackD = EffectBeam(VFX_BEAM_BLACK, oRelayblackD, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackCenter = EffectBeam(VFX_BEAM_BLACK, oCenter, BODY_NODE_CHEST, FALSE);
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
@@ -185,15 +185,15 @@ void main()
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_e", lWPThree);
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_n", lWPFour);
 			 
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 25.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 25.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 21.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 21.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 25.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 25.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 21.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 21.0));
 			 
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 16.0));
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 16.0));
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 16.0));
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, oCenter, 16.0));
 			 
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebA, 15.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebB, 15.0));
@@ -220,7 +220,7 @@ void main()
 			 DestroyObject(oWebC, 12.0);
 			 DestroyObject(oWebD, 12.0);
 			 
-			 DelayCommand(30.0, ActionCreateCreature("phalorm_cr_el_earthweird", lCreateWeird));
+			 DelayCommand(30.0, ActionCreateCreature("phalorm_cr_el_earthweird_b", lCreateWeird));
 			 }
 			 
 			 if(FindSubString(GetName(oPC), "Banite", 0) != -1) {
@@ -228,11 +228,11 @@ void main()
 			 ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 			 //DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 			 //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, lCreateWeird, 5.0);
-			 object oCenter = GetObjectByTag("phalorm_orb_green2", 0);
-		     object oRelayGreenA = GetObjectByTag("rauvin_crystal_relay_green_a", 0);
-		     object oRelayGreenB = GetObjectByTag("rauvin_crystal_relay_green_b", 0);
-		     object oRelayGreenC = GetObjectByTag("rauvin_crystal_relay_green_c", 0);
-		     object oRelayGreenD = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
+			 object oCenter = GetObjectByTag("phalorm_orb_black2", 0);
+		     object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
+		     object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);
+		     object oRelayblackC = GetObjectByTag("rauvin_crystal_relay_black_c", 0);
+		     object oRelayblackD = GetObjectByTag("rauvin_crystal_relay_black_d", 0);
 		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
 			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
@@ -240,7 +240,7 @@ void main()
 			 object oWallB = GetObjectByTag("phaedra_wall_b", 0);
 			 object oWallC = GetObjectByTag("phaedra_wall_c", 0);
 			 object oWallD = GetObjectByTag("phaedra_wall_d", 0);
-			 object oLight = GetObjectByTag("fx_phalorm_light_green_up", 0);
+			 object oLight = GetObjectByTag("fx_phalorm_light_black_up", 0);
 			 object oCloud = GetObjectByTag("phalorm_black_cloud", 0);
 			 object oContain = GetObjectByTag("phalorm_containment", 0);
 			 object oLightWhite = GetObjectByTag("phalorm_light_white", 0);
@@ -258,11 +258,11 @@ void main()
 		     object oBugsB = GetObjectByTag("fx_butterflies_valbrace", 0);
 		     object oBugsC = GetObjectByTag("fx_butterflies_si", 0);
 		     object oBugsD = GetObjectByTag("fx_butterflies_aloisus", 0);
-		     effect eBeamGreenA = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenA, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenB = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenB, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenC = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenC, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenD = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oRelayGreenD, BODY_NODE_CHEST, FALSE);
-			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
+		     effect eBeamblackA = EffectBeam(VFX_BEAM_BLACK, oRelayblackA, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackB = EffectBeam(VFX_BEAM_BLACK, oRelayblackB, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackC = EffectBeam(VFX_BEAM_BLACK, oRelayblackC, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackD = EffectBeam(VFX_BEAM_BLACK, oRelayblackD, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackCenter = EffectBeam(VFX_BEAM_BLACK, oCenter, BODY_NODE_CHEST, FALSE);
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
@@ -285,18 +285,18 @@ void main()
 			 DestroyObject(oGlyphItemC, 2.0);
 			 DestroyObject(oGlyphItemD, 2.5);
 			 	 	 
-			 DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*The tone of its weeping rises to a shriek somehow combining terror and hope.", TALKVOLUME_TALK)));
+			 //DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*The tone of its weeping rises to a shriek somehow combining terror and hope.", TALKVOLUME_TALK)));
 			 
 			 
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenB, 25.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oRelayGreenC, 25.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oRelayGreenD, 21.0));
-			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oRelayGreenD, 21.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 25.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 25.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 21.0));
+			 DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 21.0));
 			 
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenA, oCenter, 16.0));
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenB, oCenter, 16.0));
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenC, oCenter, 16.0));
-			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreenD, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oCenter, 16.0));
+			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, oCenter, 16.0));
 			 
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebA, 15.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebB, 15.0));
@@ -308,14 +308,14 @@ void main()
 			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebC));
 			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebD));
 			 
-			 DelayCommand(17.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
+			 //DelayCommand(17.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
 			 
 			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
 			 DelayCommand(22.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
 			 DelayCommand(24.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
 			 
 			 DelayCommand(24.5, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
-			 DelayCommand(25.0, AssignCommand(oVassal, ActionSpeakString("*Turns in mid-air and lunges towards the Soulreaper, as a fiery spell erupts from it at her.", TALKVOLUME_TALK)));
+			 //DelayCommand(25.0, AssignCommand(oVassal, ActionSpeakString("*Turns in mid-air and lunges towards the Soulreaper, as a fiery spell erupts from it at her.", TALKVOLUME_TALK)));
 			 DelayCommand(25.5, AssignCommand(oPC, ActionCastSpellAtObject(SPELL_ORB_OF_FIRE, oSoulReaper, METAMAGIC_EMPOWER, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			 
 			 DelayCommand(21.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), GetLocation(oSoulReaper)));
@@ -325,11 +325,11 @@ void main()
 			 DelayCommand(30.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_20), GetLocation(oSoulReaper), 5.0));
 			 DelayCommand(31.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_30), GetLocation(oCenter), 5.0));
 			 
-			 DelayCommand(30.0, AssignCommand(oBlackCrystal, ActionSpeakString("*Explodes", TALKVOLUME_TALK)));
-			 DelayCommand(31.0, AssignCommand(oSoulReaper, ActionSpeakString("*Throws arms wide in triumph, then stiffens and screams, eyes widening in sudden terror...and vanishes.", TALKVOLUME_TALK)));
-		     DelayCommand(30.0, AssignCommand(oParsifal, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
-			 DelayCommand(31.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
-			 DelayCommand(34.0, AssignCommand(oCenter, ActionSpeakString("*Sinks out of sight, into the crystal globe, where its green glow immediately vanishes.", TALKVOLUME_TALK)));
+			 //DelayCommand(30.0, AssignCommand(oBlackCrystal, ActionSpeakString("*Explodes", TALKVOLUME_TALK)));
+			 //DelayCommand(31.0, AssignCommand(oSoulReaper, ActionSpeakString("*Throws arms wide in triumph, then stiffens and screams, eyes widening in sudden terror...and vanishes.", TALKVOLUME_TALK)));
+		     //DelayCommand(30.0, AssignCommand(oParsifal, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
+			 //DelayCommand(31.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
+			 //DelayCommand(34.0, AssignCommand(oCenter, ActionSpeakString("*Sinks out of sight, into the crystal globe, where its black glow immediately vanishes.", TALKVOLUME_TALK)));
 			 
 			 
 			 
