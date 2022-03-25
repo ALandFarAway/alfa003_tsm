@@ -9,6 +9,7 @@
 #include "acr_language_i"
 #include "dmfi_inc_tool"
 #include "dmfi_inc_english"
+#include "acr_door_i"
 
 void ACR_ApplyNLDDamageToCreature(object oTarget, int nSubdualDamage)
 {
@@ -26,8 +27,7 @@ void main()
 {
     ACR_TriggerOnEnter();
 
-    // Custom code goes here.
-	object oPC = GetEnteringObject();
+    object oPC = GetEnteringObject();
 	
 	if((GetLocalInt(OBJECT_SELF, GetName(oPC)) != 1) || (GetIsDMPossessed(oPC))) {
 	    SetLocalInt(OBJECT_SELF, GetName(oPC), 1);
@@ -95,26 +95,50 @@ void main()
 	
 	//Search
 		if(nSkill == 14) {
-			//for mechanical traps. Success reveals mechanical bypass and trap. Partial reveals trap.
+		
+			//For secret doors
+			string sDoorPlc = GetLocalString(OBJECT_SELF, "DOOR_PLC_TAG");
+			object oDoorPlc = GetNearestObjectByTag(sDoorPlc, OBJECT_SELF, 1);
+			string sDoorSpawn = GetLocalString(OBJECT_SELF, "DOOR_SPAWN_TAG");
+			string sDoorWP = GetLocalString(OBJECT_SELF, "DOOR_WP_TAG");
+			object oDoorWP = GetWaypointByTag(sDoorWP);
+			
+			if((oDoorPlc != OBJECT_INVALID) || (oDoorWP != OBJECT_INVALID)) {
+				if(nSkillRoll >= nSkillDC) {
+					sMessage= sMessageSuccess;
+					DestroyObject(oDoorPlc);
+					object oDoorSpawn = CreateObject(OBJECT_TYPE_DOOR, sDoorSpawn, GetLocation(oDoorWP));
+				}
+			}
+			
+			//For mechanical traps. Success reveals mechanical bypass and trap. Partial reveals trap.
+			
 			string sTrapPlc = GetLocalString(OBJECT_SELF, "TRAP_PLC_TAG");
 			string sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
 			object oTrapPlc = GetNearestObjectByTag(sTrapPlc, OBJECT_SELF, 1);
 			object oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
 			string sTrapDesc = GetLocalString(oTrapPlc, "TRAP_DESCRIPTION");
-			object oTrap = GetNearestTrapToObject(oPC, TRUE);
-			if(nSkillRoll >= nSkillDC)
-			 	 {SetDescription(oTrap, sTrapDesc);
-				  SetUseableFlag(oTrapPlc, TRUE);
-				  SetTrapDetectable(oTrapPlc, TRUE);
-				  SetTrapDetectDC(oTrapPlc, 0);
-				  SetTrapDetectable(oTrapTrg, TRUE);
-				  SetTrapDetectDC(oTrapTrg, 0);
-				  DestroyObject(OBJECT_SELF, 6.0);
-				  }
-			else if(nSkillRoll >= nSkillDC - 5)
-				{SetUseableFlag(oTrapPlc, TRUE);
-				 SetTrapDetectable(oTrapPlc, TRUE);
-				 SetTrapDetectDC(oTrapPlc, 0);
+			object oTrap;
+			if((oTrapPlc != OBJECT_INVALID) || (oTrapTrg != OBJECT_INVALID)) {
+				if (sTrapDesc != "") {
+					 oTrap = GetNearestTrapToObject(oPC, TRUE);
+					}
+				if(nSkillRoll >= nSkillDC)
+				 	 {SetDescription(oTrap, sTrapDesc);
+					  SetUseableFlag(oTrapPlc, TRUE);
+					  SetTrapDetectable(oTrapPlc, TRUE);
+					  SetTrapDetectDC(oTrapPlc, 0);
+					  SetTrapDetectable(oTrapTrg, TRUE);
+					  SetTrapDetectDC(oTrapTrg, 0);
+					  DestroyObject(OBJECT_SELF, 6.0);
+					  sMessage= sMessageSuccess;
+					  }
+				else if(nSkillRoll >= nSkillDC - 5)
+					{SetUseableFlag(oTrapPlc, TRUE);
+					 SetTrapDetectable(oTrapPlc, TRUE);
+					 SetTrapDetectDC(oTrapPlc, 0);
+					 sMessage= sMessagePartial;
+					}
 				}
 		 }
 		
