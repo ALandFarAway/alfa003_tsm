@@ -22,9 +22,9 @@ if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "WRAITH")
 		 if(!FortitudeSave(oTarget, 14, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF))
 			{if(nDrain >  GetAbilityScore(oTarget, ABILITY_CONSTITUTION) &&
 			 !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
-				{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);
-				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Exhaustion overwhelms you. Darkness closes in on your vision. You feel yourself falling, as you die.");
-				}
+				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Exhaustion overwhelms you. Darkness closes in on your vision. You feel yourself falling, as you die.");
+				 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
+				 }
 				else
 				{if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{effect eEffect = GetFirstEffect(oTarget);
@@ -164,9 +164,9 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GREATER_SHADOW")
 			  
 			if(nDrain >  GetAbilityScore(oTarget, ABILITY_STRENGTH) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
-					{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);
-					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Death closes over you as the last of your strength leaves your limbs.");
-					}
+					{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Death closes over you as the last of your strength leaves your limbs.");
+					 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
+					 }
 				else
 				{if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
 					{effect eEffect = GetFirstEffect(oTarget);
@@ -204,8 +204,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 			{int nDrain = d4(1);
 			 if(nDrain >  GetAbilityScore(oTarget, ABILITY_CONSTITUTION) &&
 			 !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
-				{ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);
-				 SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You see the last of your blood rising out of you in a mist as you fall, drained and dead.");
+				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You see the last of your blood rising out of you in a mist as you fall, drained and dead.");
+				 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 				 }
 			else
 				{if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
@@ -225,8 +225,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 					 
 			 int nInc = GetLocalInt(OBJECT_SELF, "nInc");
 			 if(nInc == 0) {	 
-				 SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Wounds open on your skin and blood rises out of them, taking away stamina.");
-				 SendMessageToAllDMs(GetName(OBJECT_SELF) + " touches " + GetName(oTarget) + "! Wounds open on their skin and blood rises out of them, taking away stamina from the PC.");
+				 SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Wounds open on your skin and blood rises out of them into the crimson fog that surrounds you, reducing your stamina.");
+				 SendMessageToAllDMs(GetName(OBJECT_SELF) + " touches " + GetName(oTarget) + "! Wounds open on the PC's skin and blood rises out of them, reducing the PC's stamina.");
 				 ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
 			 	 ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 				}
@@ -244,10 +244,11 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oTarget, 6.0);
 					SendMessageToPC(oTarget, "You are lifted into the air by a telekinetic force!");
 					SendMessageToAllDMs(GetName(OBJECT_SELF) + " lifts " + GetName(oTarget) + " telekinetically.");
+					ClearAllActions(TRUE);
 					ActionSpeakString(GetName(oTarget) + " is lifted into the air by foggy red tendrils.", TALKVOLUME_TALK);
 					}
 					
-				if((GetIsSkillSuccessful(oTarget, 35, nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD, TRUE)) || (nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD < nGrapplePC + nStrPC + nBABPC)) {
+				if((GetIsSkillSuccessful(oTarget, 35, nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD, FALSE)) || (nGrappleCD + nStrCD + nBABCD + nGrappleBonusCD < nGrapplePC + nStrPC + nBABPC)) {
 					ClearAllActions(FALSE);
 				    SetLocalInt(OBJECT_SELF, "nInc", 0);
 				    SetLocalObject(OBJECT_SELF, "oTarget", OBJECT_INVALID);
@@ -271,7 +272,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 				 SetLocalObject(OBJECT_SELF, "oTarget", OBJECT_INVALID);
 		 	     SendMessageToPC(oTarget, "The " + GetName(OBJECT_SELF) + " looses you, temporarily sated.");
 				 SendMessageToAllDMs(GetName(OBJECT_SELF) + " looses " + GetName(oTarget) + "temporarily sated.");
-				 ClearAllActions(FALSE);
+				 ClearAllActions(TRUE);
 				 return;
 				 }	
 			else if(nInc < 4) {
@@ -323,7 +324,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "EFFIGY")
 		 && (!GetIsImmune(oTarget, IMMUNITY_TYPE_NEGATIVE_LEVEL))) {
 		 	 if(GetTotalLevels(oTarget, FALSE) <= 2) {
 				SendMessageToPC(oTarget, "You feel your life, the sum of all your experiences fading from memory as you die.");
-				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget);
+				DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 				}
 			 else {
 				 SendMessageToPC(oTarget, "You feel skills stemming from hard-won experience wiped from memory.");
