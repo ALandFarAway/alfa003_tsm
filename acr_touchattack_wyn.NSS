@@ -120,7 +120,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "ALLIP"){
 			 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)){
 				SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 				 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_WISDOM)){
-					ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectSleep(), oTarget);
+					ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectSleep()), oTarget);
 					DelayCommand(18.0 + (nLevel*6.0), RemoveEffect(oTarget, EffectSleep()));
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You feel safe, cozy, and so sleepy....");
 					}
@@ -338,8 +338,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "SIRINE"){
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_INTELLIGENCE)) {
-				ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectStunned(), oTarget);
-				DelayCommand(18.0 + (nLevel*6.0), RemoveEffect(oTarget, EffectStunned()));
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectStunned()), oTarget, 18.0 + (nLevel*6.0));
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your mind dulls to the point that you can only stand there without conscious thought.");
 				}
 			 else
@@ -369,7 +368,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CINDERSPAWN"){
 			if(!FortitudeSave(oTarget, 18, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF)) {
 				SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 				if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-					ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectParalyze(), oTarget);
+					ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectParalyze()), oTarget);
 					DelayCommand(nLevel*6.0, RemoveEffect(oTarget, EffectParalyze()));
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 					}
