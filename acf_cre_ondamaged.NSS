@@ -48,7 +48,10 @@ void main()
     // Custom code goes here.
 	object oDamager = GetLastDamager();
 	object oWeapon = GetLastWeaponUsed(oDamager);
-	SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with " + GetTag(oWeapon)); 
+	if(GetLastWeaponUsed(oDamager) != OBJECT_INVALID) 	
+		{SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with " + GetTag(oWeapon));}
+	else {SendMessageToAllDMs(GetName(oDamager) + " damaged " + GetName(OBJECT_SELF) + " with bare hands.");} 
+	
 		
 	if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
 	    SetLocalInt(OBJECT_SELF, "Proxy", 2);	
