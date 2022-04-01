@@ -370,7 +370,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CINDERSPAWN"){
 			if(!FortitudeSave(oTarget, 18, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF)) {
 				SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 				if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget, 30.0);
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget);
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 					}
 				else
@@ -413,7 +413,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "FOREST_HAUNT")
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget, 30.0);
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget);
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 				}
 			 else
@@ -442,7 +442,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "TAUNTING_HAUNT")
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget, 30.0);
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget);
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 				}
 			 else
