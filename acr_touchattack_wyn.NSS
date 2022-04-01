@@ -92,19 +92,30 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GHOST")
 				string sMessageAbility;
 				if(nAbility == 0) {sMessageAbility = "Your muscles go slack.";}
 				else if(nAbility == 1) {sMessageAbility = "Your limbs freeze up.";}
-				else if(nAbility == 2) {sMessageAbility = "Your feel faint.";}
+				else if(nAbility == 2) {sMessageAbility = "You feel faint.";}
 				else if(nAbility == 3) {sMessageAbility = "Your mind dulls.";}
-				else if(nAbility == 4) {sMessageAbility = "Your panic clouds your judgement.";}
+				else if(nAbility == 4) {sMessageAbility = "Panic clouds your judgement.";}
 				else if((nAbility == 5) && GetLevelByClass(CLASS_TYPE_BARD, oTarget)) {sMessageAbility = "Your voice stutters.";}
 				else if(nAbility == 5) {sMessageAbility = "Your confidence fails.";}
 				
 				
 				if(nDrain >=  GetAbilityScore(oTarget, nAbility) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
-					{ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget);}
-				
+					{if(nAbility == 0) {sMessageAbility = "Your muscles go slack.";}
+						else if(nAbility == 1) {SendMessageToPC(oTarget,"The last strength flees your limbs as you die.");}
+						else if(nAbility == 2) {SendMessageToPC(oTarget, "The last of your constitition drains away with your life.");}
+						else if(nAbility == 3) {SendMessageToPC(oTarget, "All mental activity ceases and you fall, dead.");}
+						else if(nAbility == 4) {SendMessageToPC(oTarget, "You lose the will to live, and the wisest course seems to be to accept the death that closes in on you.");}
+						else if((nAbility == 5) && GetLevelByClass(CLASS_TYPE_BARD, oTarget)) {SendMessageToPC(oTarget, "Your voice siezes and your breath falters, as you die.");}
+						else if(nAbility == 5) {SendMessageToPC(oTarget, "The last of your charisma drains. Self-doubt swells into a recognition of absolute failure, as you die.");}
+					DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
+					 }
+					 
+				else {
 				SendMessageToPC(oTarget, sMessage);
 				SendMessageToPC(oTarget, sMessageAbility);
+				}
+				
         		ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), OBJECT_SELF);
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(nAbility, nDrain)), oTarget);
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
@@ -123,8 +134,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "ALLIP"){
 				    effect eSleep = EffectSleep();
 					effect eDurIcon = EffectVisualEffect( VFX_DUR_SLEEP );
 					effect eLinkedEffect = EffectLinkEffects( eSleep, eDurIcon );
-					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectSleep()), oTarget, 30.0);
-					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You feel safe, cozy, and so sleepy....");
+					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You lose the will to live, and the wisest course seems to be to accept the death that closes in on you.");
+					DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 					}
 				 else {SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Panic clouds your judgement.");}
 				
@@ -286,8 +297,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "BANSHEE") {
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget, 30.0);
-				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
+				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! The last of your charisma drains. Self-doubt swells into a recognition of absolute failure, as you die.");
+				DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 				}
 			 else
 				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your confidence falters.");}
@@ -340,8 +351,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "SIRINE"){
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_INTELLIGENCE)) {
 				effect eStun = EffectStunned();
-			    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(eStun), oTarget, 30.0);
-				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your mind dulls to the point that you can only stand there without conscious thought.");
+			    SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! All mental activity drains away. Unable to breathe or keep your heart beating, your body falls, lifeless.");
+				DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 				}
 			 else
 				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your mind dulls.");}
@@ -370,8 +381,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CINDERSPAWN"){
 			if(!FortitudeSave(oTarget, 18, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF)) {
 				SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 				if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget);
-					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
+					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! The last of your charisma drains. Self-doubt swells into a recognition of absolute failure, as you die.");
+					DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 					}
 				else
 					{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your confidence falters.");}
@@ -413,8 +424,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "FOREST_HAUNT")
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget);
-				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
+				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! The last of your charisma drains. Self-doubt swells into a recognition of absolute failure, as you die.");
+				DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 				}
 			 else
 				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your confidence falters.");}
@@ -442,8 +453,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "TAUNTING_HAUNT")
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, TRUE)), oTarget);
-				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
+				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! The last of your charisma drains. Self-doubt swells into a recognition of absolute failure, as you die.");
+				DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
 				}
 			 else
 				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your confidence falters.");}
