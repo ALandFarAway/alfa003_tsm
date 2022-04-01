@@ -101,11 +101,11 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "GHOST")
 				
 				if(nDrain >=  GetAbilityScore(oTarget, nAbility) &&
 				   !GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE))
-					{ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectParalyze(), oTarget, RoundsToSeconds(nLevel));}
+					{ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget);}
 				
 				SendMessageToPC(oTarget, sMessage);
 				SendMessageToPC(oTarget, sMessageAbility);
-        		ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectHeal(5), OBJECT_SELF);
+        		ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), OBJECT_SELF);
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(nAbility, nDrain)), oTarget);
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDamage(nDamage), oTarget);
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
@@ -123,8 +123,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "ALLIP"){
 				    effect eSleep = EffectSleep();
 					effect eDurIcon = EffectVisualEffect( VFX_DUR_SLEEP );
 					effect eLinkedEffect = EffectLinkEffects( eSleep, eDurIcon );
-					ApplyEffectToObject(DURATION_TYPE_INSTANT, eLinkedEffect, oTarget);
-					//DelayCommand(18.0 + (nLevel*6.0), RemoveEffect(oTarget, EffectSleep()));
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectSleep()), oTarget);
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You feel safe, cozy, and so sleepy....");
 					}
 				 else {SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Panic clouds your judgement.");}
@@ -235,7 +234,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 			 if(nInc == 0) {	 
 				 SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Wounds open on your skin and blood rises out of them into the crimson fog that surrounds you, reducing your stamina.");
 				 SendMessageToAllDMs(GetName(OBJECT_SELF) + " touches " + GetName(oTarget) + "! Wounds open on the PC's skin and blood rises out of them, reducing the PC's stamina.");
-				 ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
+				 ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
 			 	 ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 				 return;
 				}
@@ -268,7 +267,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 				 else {
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " wraps you in tendrils of fog and continues to feed.");
 					SendMessageToAllDMs(GetName(OBJECT_SELF) + " wraps " + GetName(oTarget) + " in tendrils of fog and continues to feed.");
-					ApplyEffectToObject(DURATION_TYPE_PERMANENT, ExtraordinaryEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
+					ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CONSTITUTION, nDrain)), oTarget);
 			     	ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 		            ActionForceFollowObject(oTarget, 0.5);
 					ActionWait(6.0);
@@ -287,7 +286,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "BANSHEE") {
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 		 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE), oTarget, 30.0);
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget);
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 				}
 			 else
@@ -302,7 +301,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "BANSHEE") {
 						}
 					eEffect = GetNextEffect(oTarget);
 					}
-				ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectHeal(5), OBJECT_SELF);
+				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), OBJECT_SELF);
 				ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CHARISMA, nDrain)), oTarget);
 				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 				}
@@ -324,7 +323,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "EFFIGY"){
 			 else {
 				 SendMessageToPC(oTarget, "You feel skills stemming from hard-won experience wiped from memory.");
 				 }
-		ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectHeal(10), OBJECT_SELF);
+		ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(10)), OBJECT_SELF);
 		ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(eNegative), oTarget);
 		ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 		}	 
@@ -341,11 +340,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "SIRINE"){
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_INTELLIGENCE)) {
 				effect eStun = EffectStunned();
-			    effect eVis = EffectVisualEffect( VFX_HIT_SPELL_ENCHANTMENT );
-				effect eDur = EffectVisualEffect( VFX_DUR_STUN );
-				eStun = EffectLinkEffects( eStun, eDur );
-			    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTarget);
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eStun, oTarget);
+			    ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(eStun), oTarget);
             	SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your mind dulls to the point that you can only stand there without conscious thought.");
 				}
 			 else
@@ -375,7 +370,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CINDERSPAWN"){
 			if(!FortitudeSave(oTarget, 18, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF)) {
 				SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 				if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-					ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE), oTarget);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget);
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 					}
 				else
@@ -391,7 +386,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CINDERSPAWN"){
 				eEffect = GetNextEffect(oTarget);
 				}
 				
-			ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectHeal(5), OBJECT_SELF);
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectTemporaryHitpoints(5)), OBJECT_SELF);
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, SupernaturalEffect(EffectAbilityDecrease(ABILITY_CHARISMA, nDrain)), oTarget);
 			ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectVisualEffect( VFX_IMP_PULSE_NEGATIVE ), oTarget );
 			}
@@ -404,9 +399,9 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "BRIDGE_HAUNT")
 		{SendMessageToAllDMs("Bridge Haunt");
 	     if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)
 			{int nDamage = d6(3);
-				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectDamage( nDamage, DAMAGE_TYPE_NEGATIVE ), oTarget );
+				ApplyEffectToObject( DURATION_TYPE_INSTANT, EffectDamage(nDamage, DAMAGE_TYPE_NEGATIVE ), oTarget );
 			    SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You feel the chill of the grave.");
-				ApplyEffectToObject( DURATION_TYPE_TEMPORARY, EffectBeam( VFX_BEAM_BLACK, OBJECT_SELF, BODY_NODE_CHEST, FALSE ), oTarget, 1.0f );
+				ApplyEffectToObject( DURATION_TYPE_TEMPORARY, EffectBeam(VFX_BEAM_BLACK, OBJECT_SELF, BODY_NODE_CHEST, FALSE ), oTarget, 1.0f );
 			}
   		 }
 		 
@@ -418,7 +413,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "FOREST_HAUNT")
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE), oTarget, 30.0);
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget);
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 				}
 			 else
@@ -447,7 +442,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "TAUNTING_HAUNT")
 		 if(!GetIsImmune(oTarget, IMMUNITY_TYPE_ABILITY_DECREASE)) {
 			 SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE), oTarget, 30.0);
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, SupernaturalEffect(EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE)), oTarget);
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 				}
 			 else
