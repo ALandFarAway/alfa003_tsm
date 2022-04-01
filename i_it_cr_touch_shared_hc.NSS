@@ -123,7 +123,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "ALLIP"){
 				    effect eSleep = EffectSleep();
 					effect eDurIcon = EffectVisualEffect( VFX_DUR_SLEEP );
 					effect eLinkedEffect = EffectLinkEffects( eSleep, eDurIcon );
-					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLinkedEffect, oTarget, 30.0);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eLinkedEffect, oTarget);
 					//DelayCommand(18.0 + (nLevel*6.0), RemoveEffect(oTarget, EffectSleep()));
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You feel safe, cozy, and so sleepy....");
 					}
@@ -345,7 +345,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "SIRINE"){
 				effect eDur = EffectVisualEffect( VFX_DUR_STUN );
 				eStun = EffectLinkEffects( eStun, eDur );
 			    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTarget);
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eStun, oTarget, 30.0);
+                ApplyEffectToObject(DURATION_TYPE_INSTANT, eStun, oTarget);
             	SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your mind dulls to the point that you can only stand there without conscious thought.");
 				}
 			 else
@@ -375,7 +375,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CINDERSPAWN"){
 			if(!FortitudeSave(oTarget, 18, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF)) {
 				SendMessageToAllDMs("nDrain = " + IntToString(nDrain));
 				if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
-					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE), oTarget, 30.0);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectParalyze(10+nLevel, SAVING_THROW_WILL, FALSE), oTarget);
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! You are paralyzed with self-doubt, your muscles locking into place.");
 					}
 				else
