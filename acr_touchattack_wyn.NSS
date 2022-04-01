@@ -279,8 +279,8 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "CRIMSON_DEATH")
 					SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " wraps you in tendrils of fog and continues to feed.");
 					SendMessageToAllDMs(GetName(OBJECT_SELF) + " wraps " + GetName(oTarget) + " in tendrils of fog and continues to feed.");
 					ActionForceFollowObject(oTarget, 0.5);
-					ActionWait(6.0);
 					DelayCommand(6.0, ExecuteScript("acr_touchattack_wyn", OBJECT_SELF)); 
+					return;
 					}
 				 }
 			}
