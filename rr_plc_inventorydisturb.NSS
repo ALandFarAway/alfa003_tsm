@@ -134,10 +134,10 @@ void main()
 	 	
 	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
 		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_4")) { 
-			 AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
-			 DestroyObject(GetObjectByTag(sCreate, 0));
-			 object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
-			 DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not blessed the glyphs.", TALKVOLUME_TALK)));	
+			 //AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
+			 //DestroyObject(GetObjectByTag(sCreate, 0));
+			 //object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
+			 //DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not blessed the glyphs.", TALKVOLUME_TALK)));	
 			 
 			 }
 		 }

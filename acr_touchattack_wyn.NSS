@@ -453,6 +453,7 @@ else if(GetLocalString(OBJECT_SELF, "ACR_TOUCH_ATTACK") == "TAUNTING_HAUNT")
 		 	 if(nDrain >=  GetAbilityScore(oTarget, ABILITY_CHARISMA)) {
 				SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! The last of your charisma drains. Self-doubt swells into a recognition of absolute failure, as you die.");
 				DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectDeath(), oTarget));
+				return;
 				}
 			 else
 				{SendMessageToPC(oTarget, GetName(OBJECT_SELF) + " touches you! Your confidence falters.");}
