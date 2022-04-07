@@ -1921,4 +1921,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="34DB556042C4CE5398443F5B1842B1C909D58BFE" downloadHash="82AD4B92014CE0841ACCA296B9A4E27E347B946F" name="8e_int_highforest_oh_argent_post.trx" dlsize="23579" size="23705" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
