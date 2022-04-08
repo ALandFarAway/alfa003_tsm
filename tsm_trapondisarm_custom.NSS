@@ -35,8 +35,8 @@ void main()
    
    SendMessageToPC(oDisarmer, sDisarmSucceed);
    SendMessageToAllDMs(GetName(oDisarmer) + " got " + sDisarmSucceed);
-   if(GetTag(OBJECT_SELF) == "rr_door_ritual_plc") {
-  		 AssignCommand(oTrapPlc, ActionSpeakString("*Slides down out of the way, revealing a hallway beyond. The noise of chanting swelling to a triumphant finish is suddenly audible." , TALKVOLUME_TALK));
+   if(GetTag(OBJECT_SELF) == "rr_plc_crypt_secret_door") {
+  		 AssignCommand(oTrapPlc, ActionSpeakString("*Slides down out of the way, revealing a hallway beyond." , TALKVOLUME_TALK));
 		 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));
 		 DestroyObject(OBJECT_SELF, 2.0);
 		 DestroyObject(oTrapDoor, 2.0); 

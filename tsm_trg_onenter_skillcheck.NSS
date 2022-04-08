@@ -103,13 +103,22 @@ void main()
 			object oDoor = GetObjectByTag(sDoor, 0);
 			string sDoorWP = GetLocalString(OBJECT_SELF, "DOOR_WP_TAG");
 			object oDoorWP = GetWaypointByTag(sDoorWP);
+			sMessageSuccess = GetLocalString(oDoor, "MESSAGE_SUCCESS_STRING");
+			sMessagePartial = GetLocalString(oDoor, "MESSAGE_PARTIAL_STRING");
 			
-			if((oDoorPlc != OBJECT_INVALID) || (oDoorWP != OBJECT_INVALID)) {
+			if((oDoorPlc != OBJECT_INVALID) || (oDoor != OBJECT_INVALID)) {
 				if(nSkillRoll >= nSkillDC) {
 					sMessage= sMessageSuccess;
 					DestroyObject(oDoorPlc);
-					
+					SetUseableFlag(oDoor, 1);
+					SetTrapDetectable(oDoor, TRUE);
+					SetTrapDetectDC(oDoor, 0);
 				}
+				else if(nSkillRoll >= nSkillDC - 5)
+					{SetUseableFlag(oDoor, TRUE);
+					 SetTrapDetectable(oDoor, TRUE);
+					 sMessage= sMessagePartial;
+					}
 			}
 			
 			//For mechanical traps. Success reveals mechanical bypass and trap. Partial reveals trap.

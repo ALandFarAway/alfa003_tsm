@@ -356,7 +356,51 @@ void main()
 						DelayCommand(fEntangle, RemoveEffect(oVictim, eEntangle));
 						}
 					}	          
-				}		
+				}
+				
+			//negative	
+			else if((GetTag(OBJECT_SELF) == "rr_plc_crypt_secret_door") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0)) {
+			 SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
+			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
+			 SendMessageToPC(oVictim, sSprung);
+			 DelayCommand(1800.0, SetLocalInt(OBJECT_SELF, "Trap_Readiness", 0));
+			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, FALSE);
+			 AssignCommand(oTrapPlc, ActionSpeakString("*Slides down out of the way, revealing a hallway beyond." , TALKVOLUME_TALK));
+			 effect eNeg = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL, FALSE);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eNeg, oVictim, 3.0);
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 int nInc;
+			 for(nInc = 0; nInc < 20; nInc ++)  {
+			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
+			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
+			 if(GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1) {
+				 if(ReflexSave(oVictimDmg, nReflexDC, SAVING_THROW_TYPE_NEGATIVE, OBJECT_SELF) != 0) {
+						 	SendMessageToPC(oVictimDmg, sDmgSuccess);
+							SendMessageToAllDMs(GetName(oVictimDmg) + " succeeds on reflex against " + GetName(OBJECT_SELF) + " at " + FloatToString(fDistance) + " distance against " + IntToString(nReflexDC));
+					 		AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
+							}
+					 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
+					 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. ");
+					 		}
+					 else {
+							SendMessageToPC(oVictimDmg, sDmgFail);
+							SendMessageToAllDMs(GetName(oVictimDmg) + " fails a reflex against " + GetName(OBJECT_SELF) + " at " + FloatToString(fDistance) + " distance against " + IntToString(nReflexDC));
+					 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
+							AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
+							}
+						  
+					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
+					 }
+			 oVictimDmg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
+			 if(oVictimDmg == OBJECT_INVALID) {break;}
+			 }
+				
+			 DestroyObject(oTrapPlc, 2.0);
+   			 DestroyObject(oTrapDoor, 2.0);
+
+			} 
+					
 		}
 	}	 
 }
