@@ -99,7 +99,8 @@ void main()
 			//For secret doors
 			string sDoorPlc = GetLocalString(OBJECT_SELF, "DOOR_PLC_TAG");
 			object oDoorPlc = GetNearestObjectByTag(sDoorPlc, OBJECT_SELF, 1);
-			string sDoorSpawn = GetLocalString(OBJECT_SELF, "DOOR_SPAWN_TAG");
+			string sDoor = GetLocalString(OBJECT_SELF, "DOOR_TAG");
+			object oDoor = GetObjectByTag(sDoor, 0);
 			string sDoorWP = GetLocalString(OBJECT_SELF, "DOOR_WP_TAG");
 			object oDoorWP = GetWaypointByTag(sDoorWP);
 			
@@ -107,7 +108,7 @@ void main()
 				if(nSkillRoll >= nSkillDC) {
 					sMessage= sMessageSuccess;
 					DestroyObject(oDoorPlc);
-					object oDoorSpawn = CreateObject(OBJECT_TYPE_DOOR, sDoorSpawn, GetLocation(oDoorWP));
+					
 				}
 			}
 			

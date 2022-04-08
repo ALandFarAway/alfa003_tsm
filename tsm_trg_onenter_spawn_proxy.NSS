@@ -29,12 +29,13 @@ void main()
  if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && (FindSubString(GetName(GetEnteringObject()), "Banite") == -1) && ((GetIsPC(GetEnteringObject())) || (FindSubString(GetName(GetEnteringObject()), "Bert") != -1) || (FindSubString(GetName(GetEnteringObject()), "Sae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Jhes") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bell") != -1)|| (GetIsDMPossessed(GetEnteringObject())))) {
  	SendMessageToAllDMs(GetName(oPC) + " triggering " + GetName(OBJECT_SELF));
     SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
-	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");     
-    object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");	     
+	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");
+	object oMyCreature = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Cre");	     
     if((GetIsObjectValid(oMyCreature)) && (GetLocalInt(oMyCreature, "Proxy") == 1)) {
 		SetLocalInt(oMyCreature, "Proxy", 2);	
 		object oMyCorpse = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc");
-	    if(GetIsObjectValid(oMyCorpse)) {
+	    int nDestroyPLC = GetLocalInt(oMyCorpse, "Destroy_PLC");     
+        if(GetIsObjectValid(oMyCorpse)) {
 			effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
 			DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
@@ -45,13 +46,13 @@ void main()
 				RemoveEffect(oMyCreature, eEffect);
 				eEffect = GetNextEffect(oMyCreature);
 				}
-			
-		   	object oCrystal = GetObjectByTag("rauvin_crystal_relay_green_d", 0);
-			if((FindSubString(GetTag(oMyCreature), "ghost_si") != -1) || (FindSubString(GetTag(oMyCreature), "ghost_valbrace") != -1) || (FindSubString(GetTag(oMyCreature), "ghost_aloisus") != -1) || (FindSubString(GetTag(oMyCreature), "wraith_jarra") != -1)) {
-				DelayCommand(2.0, AssignCommand(oMyCreature, ActionForceMoveToObject(oCrystal, TRUE)));
-				DelayCommand(5.0, AssignCommand(oMyCreature, ActionForceMoveToObject(oCrystal, TRUE)));
+			if(nDestroyPLC == 1) {
+				DestroyObject(oMyCorpse, 2.0);
+				object oAirborne = GetObjectByTag("rr_cr_undead_airborne", 0);
+				DestroyObject(oAirborne, 2.0);
 			}
-			DelayCommand(6.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
+			
+		   	DelayCommand(6.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
 			}
 		}
 	}
