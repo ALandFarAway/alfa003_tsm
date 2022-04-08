@@ -99,7 +99,8 @@ void main()
 			//For secret doors that are placeables hidden by another placeable
 			string sDoorPlc = GetLocalString(OBJECT_SELF, "DOOR_PLC_TAG");
 			object oDoorPlc = GetNearestObjectByTag(sDoorPlc, OBJECT_SELF, 1);
-			object oDoor = OBJECT_SELF;
+			string sDoor = GetLocalString(OBJECT_SELF, "DOOR_TAG");
+			object oDoor = GetNearestObjectByTag(sDoor, OBJECT_SELF, 1);
 			string sDoorWP = GetLocalString(OBJECT_SELF, "DOOR_WP_TAG");
 			object oDoorWP = GetWaypointByTag(sDoorWP);
 			sMessageSuccess = GetLocalString(oDoor, "MESSAGE_SUCCESS_STRING");
