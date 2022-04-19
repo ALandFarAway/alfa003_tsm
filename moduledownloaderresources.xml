@@ -1575,7 +1575,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7EFB520F1CBFCCD10BDCC1B96DF1A611EB1F8232" downloadHash="D44E01BA6A53BC180F79064BFD996ED494FAF744" name="5h_int_sundabar_shops.trx" dlsize="540686" size="548656" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4C7A6CEF8192ECB92ADA45E82F1FE1E2EE07542F" downloadHash="9C8C388472D0E1B5C8FEE702507CC8CE522CF7ED" name="5h_int_sundabar_shops.trx" dlsize="537421" size="545499" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
