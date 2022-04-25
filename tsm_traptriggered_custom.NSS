@@ -164,7 +164,7 @@ void main()
 			}
 		
 			
-		//Spike Traps
+		//Spike Wall Traps
 		if((FindSubString(GetTag(OBJECT_SELF), "003_trap_custom_spike") != -1) && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
 			{SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
 			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
@@ -325,8 +325,8 @@ void main()
 			
 			
 			//Snare Trap	
-			if((GetTag(OBJECT_SELF) == "003_trap_custom_snare") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0)) {
-				object oMod = GetModule();
+			if((GetTag(OBJECT_SELF) == "003_trap_custom_snare") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0)) 
+			   {object oMod = GetModule();
 				effect eKnockdown = EffectKnockdown();
 				effect eEntangle = EffectEntangle();
 				if(GetIsSkillSuccessful(oVictim, SKILL_SEARCH, 23, TRUE)) {
@@ -357,6 +357,8 @@ void main()
 						}
 					}	          
 				}
+				
+				
 				
 			//Negative	
 			else if((GetTag(OBJECT_SELF) == "rr_plc_crypt_secret_door") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0)) {

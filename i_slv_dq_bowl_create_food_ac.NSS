@@ -5,7 +5,7 @@
 void main()
 {
              
-//OnActivate Script for the quest reward Staff of the Forked Tongue for Wynna's Dean Sphinx quest of 2020
+//OnActivate Script for the quest reward Bowl of Create Food for Wynna's Dean Sphinx quest of 2020
     object oUser = GetItemActivator();
     effect eGlimmer = EffectVisualEffect(VFX_DUR_PIXIEDUST, FALSE);
     effect eSummon = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_1, FALSE);

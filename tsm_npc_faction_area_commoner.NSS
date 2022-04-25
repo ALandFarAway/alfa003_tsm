@@ -1,4 +1,4 @@
-//Secondary script for all tsm execute scripts
+//Change NPCs in the area to Commoner Faction
 //Wynna February 2021
 
 
