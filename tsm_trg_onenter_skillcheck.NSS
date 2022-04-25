@@ -45,8 +45,10 @@ void main()
 	string sSkill = "";
 	if(nSkill == 6) {sSkill = "Listen";}
 	if(nSkill == 14) {sSkill = "Search";}
+	if(nSkill == 29) {sSkill = "Survival";}
 	if(nSkill == 30) {sSkill = "Balance";}
 	if(nSkill == 31) {sSkill = "Climb";}
+	if(nSkill == 37) {sSkill = "Gather Information";}
 	if(nSkill == 39) {sSkill = "Jump";}
 	
 	
@@ -152,7 +154,15 @@ void main()
 				}
 		 }
 		
+	//Survival (29), Gather Information (37)
+		
+		if((nSkill == 29) || (nSkill == 37)) {
+			if(nSkillRoll >= nSkillDC)
+		 		{sMessage= sMessageSuccess;}
+			else if(nSkillRoll >= nSkillDC - 5) {sMessage = sMessagePartial;}
 				
+		  	}
+						
 	//Movement
 		if((nSkill == 30) || (nSkill == 31) || (nSkill == 39)) {
 			if(nSkillRoll >= nSkillDC)
@@ -195,6 +205,10 @@ void main()
 				 }
 			}
 		
+	
+	
+		
+			
 		SendMessageToPC(oPC, sMessage);
 		SendMessageToAllDMs(sMessage);
 		}
