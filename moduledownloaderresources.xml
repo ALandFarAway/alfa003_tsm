@@ -1745,7 +1745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B414FF06E85E989F27D688E5F2E1589A778113C5" downloadHash="A5F039CAA82015D4AC218604867BCC33AAF1828E" name="5b_int_frosthills_glacier_plat.trx" dlsize="652907" size="665331" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B4B8752A34D08CEFF4F38A6771F09C293F03F2A9" downloadHash="F8645AB9C2B5B8054615CC6A90E96B71D563B064" name="5b_int_frosthills_glacier_plat.trx" dlsize="1202498" size="1229209" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1926,7 +1926,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="34DB556042C4CE5398443F5B1842B1C909D58BFE" downloadHash="82AD4B92014CE0841ACCA296B9A4E27E347B946F" name="8e_int_highforest_oh_argent_post.trx" dlsize="23579" size="23705" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3417A5A7D879341AF27AF03D5C38C401FA72700D" downloadHash="2A38F0287CF643A0750B24F8D6550806EF8BB27D" name="8e_int_highforest_oh_argent_post.trx" dlsize="15065" size="15128" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
