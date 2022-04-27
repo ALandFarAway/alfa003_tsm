@@ -1936,4 +1936,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="F8D1F1445A19E393E57912C08847E43875D6D0E0" downloadHash="4FCE52FBB2DAF7C3407849C7136862176DB05BFF" name="6d_int_silvy_everlund_emb.trx" dlsize="5484" size="5453" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
