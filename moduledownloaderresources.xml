@@ -1615,7 +1615,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="59BD67507FB0198580FC5EBEEBCF8034F58D8657" downloadHash="A56E266FA9F3F9E33A62E7B2B30320C0DBB7B634" name="8e_ext_highforest_north.trx" dlsize="3779254" size="20688442" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D9D569C23080FF6FC35F5001A3AA982C78D4ADC1" downloadHash="4E506159EB831D2BED38D094810F388F3EA419A3" name="8e_ext_highforest_north.trx" dlsize="3811834" size="20717834" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1916,7 +1916,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C3DA1F674ED0D4FC9E7E0FF4A9202AD335DDBBBC" downloadHash="2A9588638B5CABA82CDA84E71D9393C39F16A796" name="8e_int_highforest_north_cave.trx" dlsize="4848" size="4857" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="10D42B89437CDC4B8B5839306D0F616CECDCF6F4" downloadHash="2C07B9E1E09376F4CC5F5E813F16472B686C565C" name="8e_int_highforest_north_cave.trx" dlsize="162016" size="974068" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
