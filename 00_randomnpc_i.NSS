@@ -34,8 +34,8 @@ void RandomizeNPCName(object oNPC = OBJECT_SELF)
 					s0 = RandomNameDrow(gender);
 					break;
 				default:
-					s0 = RandomNameElf(gender);
-					s1 = RandomNameElf(0);
+					s0 = RandomNameHuman(gender);
+					s1 = RandomNameHuman(0);
 			}
 			break;
 		default:
@@ -198,37 +198,57 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 		return "";
 
 	switch (race) {
-		case RACIAL_TYPE_DWARF: 
-			switch (Random(4)) {
+		case RACIAL_TYPE_DWARF://set up with the Sundabar Dwarf commoners
+			switch (Random(8)) {
 				case 0:
-					sResRef="03_cre_sundabar_1";
+					switch (Random(6)) {
+						case 0:
+							sResRef="03_cre_sundabar_1";
+							break;
+						case 1:
+							sResRef="03_cre_sundabar_2";
+							break;
+						case 2:
+							sResRef="03_cre_sundabar_3";
+							break;
+						case 3:
+							sResRef="03_cre_sundabar_5";
+							break;
+						case 4:
+							sResRef="03_cre_sundabar_6";
+							break;
+						case 5:
+							sResRef="03_cre_sundabar_7";
+							break;
+					}
 					break;
 				case 1:
-					sResRef="03_cre_sundabar_2";
+					sResRef="abr_cr_dwarf_commoner_m0";
 					break;
 				case 2:
-					sResRef="03_cre_sundabar_3";
+					sResRef="abr_cr_dwarf_commoner_m1";
 					break;
 				case 3:
-					sResRef="03_silvy_commoner_eee";
+					sResRef="abr_cr_dwarf_commoner_m2";
 					break;
-				}
+				case 4:
+					sResRef="abr_cr_dwarf_commoner_m3";
+					break;
+				case 5:
+					sResRef="abr_cr_dwarf_commoner_f0";
+					break;
+				case 6:
+					sResRef="abr_cr_dwarf_commoner_f1";
+					break;
+				case 7:
+					sResRef="abr_cr_dwarf_commoner_f2";
+					break;
+			}
 			break;
-				
 		case RACIAL_TYPE_GNOME:
-			switch ( GetSubRace( oNPC ) ) {
-				case RACIAL_SUBTYPE_SVIRFNEBLIN:
-				    switch (Random(2)) {
-						case 0:
-					 		sResRef="03_silvy_commoner_hhh";
-							break;
-						case 1: 
-							sResRef="03_silvy_commoner_h";
-							break;
-						}
-				break;			
-				default:
-					switch (Random(8)) {
+			switch (Random(7)) {
+				case 0:
+					switch (Random(6)) {
 						case 0:
 							sResRef="abr_cr_GnomeExpertM";
 							break;
@@ -247,108 +267,122 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 						case 5:
 							sResRef="abr_cr_GnomeAdeptF";
 							break;
-						case 6:
-							sResRef="03_silvy_commoner_b";
-							break;
-						case 7:
-							sResRef="03_silvy_commoner_i";
-							break;
-						}
-					break;
-				}	
-				break;
-				
-		case RACIAL_TYPE_HALFORC:
-			switch(Random(2)) {
-				case 0:
-					sResRef="03_silvy_commoner_w";
-					break;
-				case 1: 
-					sResRef="03_silvy_commoner_ww";
-					break;
-				}
-			break;
-			
-		case RACIAL_TYPE_HALFLING:  
-			switch (Random(2)) {
-				case 0:
-					sResRef="03_silvy_commoner_kk";
+					}
 					break;
 				case 1:
-					sResRef="03_silvy_commoner_a";
+					sResRef="010_cr_gnome_comm0";
+					break;
+				case 2:
+					sResRef="010_cr_gnome_comm1";
+					break;
+				case 3:
+					sResRef="010_cr_gnome_comm2";
+					break;
+				case 4:
+					sResRef="010_cr_gnome_comm3";
+					break;
+				case 5:
+					sResRef="010_cr_gnome_comm4";
+					break;
+				case 6:
+					sResRef="010_cr_gnome_comm5";
 					break;
 				}
 			break;
-			
-		case RACIAL_TYPE_HUMAN:  
-			switch (Random(2)) {
+		case RACIAL_TYPE_GRAYORC:
+			switch(Random(4)) {
 				case 0:
-					sResRef="03_silvy_commoner_n";
+					sResRef = "010_cr_deepgnome0";
 					break;
 				case 1:
-					sResRef="03_silvy_commoner_q";
+					sResRef = "010_cr_deepgnome1";
 					break;
-				}
-			break;
-			
-		case RACIAL_SUBTYPE_HALFELF:  
-			switch (Random(2)) {
-				case 0:
-					sResRef="03_silvy_commoner_pp";
+				case 2:
+					sResRef = "010_cr_deepgnome2";
 					break;
-				case 1:
-					sResRef="03_silvy_commoner_ppp";
+				case 3:
+					sResRef = "010_cr_deepgnome1";
 					break;
-				}
-			break;
-			
-		case RACIAL_TYPE_ELF:
-			switch ( GetSubRace( oNPC ) ) {
-				case RACIAL_SUBTYPE_DROW:
-					switch (Random(2)) {
-						case 0:
-							sResRef="abr_cr_drow_ftr_1";
-							break;
-						case 1:
-							sResRef="abr_cr_drow_cleric02";
-							break;
-						}
-				break;
-				case RACIAL_SUBTYPE_SUN_ELF:
-					switch (Random(2)) {
-						case 0:
-							sResRef="03_silvy_commoner_m";
-							break;
-						case 1:
-							sResRef="03_silvy_commoner_nn";
-							break;
-						}
-				break;
-				case RACIAL_SUBTYPE_MOON_ELF:
-					switch (Random(2)) {
-						case 0:
-							sResRef="03_silvy_commoner_d";
-							break;
-						case 1:
-							sResRef="03_silvy_commoner_s";
-							break;
-						}
-				break;
-				case RACIAL_SUBTYPE_WOOD_ELF:
-					switch (Random(2)) {
-						case 0:
-							sResRef="03_silvy_commoner_bbb";
-							break;
-						case 1:
-							sResRef="03_silvy_commoner_bb";
-							break;
-						}
-				break;
-				
-				}
-			
-			break;
 			}
+			break;
+		case RACIAL_TYPE_HUMAN:  //first 6 are for Sundabar
+		default:
+			switch (Random(24)) {
+				case 0:
+					sResRef="03_cre_sundabar_8";
+					break;
+				case 1:
+					sResRef="03_cre_sundabar_9";
+					break;
+				case 2:
+					sResRef="03_cre_sundabar_10";
+					break;
+				case 3:
+					sResRef="03_cre_sundabar_11";
+					break;
+				case 4:
+					sResRef="03_cre_sundabar_12";
+					break;
+				case 5:
+					sResRef="03_cre_sundabar_13";
+					break;
+				case 6:
+					sResRef="03_cre_sundabar_14";
+					break;
+				case 7:
+					sResRef="010_cr_comm_human_f07";
+					break;
+				case 8:
+					sResRef="010_cr_comm_human_f08";
+					break;
+				case 9:
+					sResRef="010_cr_comm_human_f09";
+					break;
+				case 10:
+					sResRef="010_cr_comm_human_f10";
+					break;
+				case 11:
+					sResRef="010_cr_comm_human_f11";
+					break;
+				case 12:
+					sResRef="010_cr_comm_human_m00";
+					break;
+				case 13:
+					sResRef="010_cr_comm_human_m01";
+					break;
+				case 14:
+					sResRef="010_cr_comm_human_m02";
+					break;
+				case 15:
+					sResRef="010_cr_comm_human_m03";
+					break;
+				case 16:
+					sResRef="010_cr_comm_human_m04";
+					break;
+				case 17:
+					sResRef="010_cr_comm_human_m05";
+					break;
+				case 18:
+					sResRef="010_cr_comm_human_m06";
+					break;
+				case 19:
+					sResRef="010_cr_comm_human_m07";
+					break;
+				case 20:
+					sResRef="010_cr_comm_human_m08";
+					break;
+				case 21:
+					sResRef="010_cr_comm_human_m09";
+					break;
+				case 22:
+					sResRef="010_cr_comm_human_m10";
+					break;
+				case 23:
+					sResRef="010_cr_comm_human_m11";
+					break;
+		}
+		break;
+	}
 	return sResRef;
 }
 
