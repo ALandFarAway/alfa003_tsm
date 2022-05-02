@@ -234,7 +234,7 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 					sResRef="03_silvy_commoner_bbb";
 					break;
 				case 1:
-					sResRef="03_silvy_commoner_bb";
+					sResRef="03_silvy_commoner_oo";
 					break;
 				
 		}
