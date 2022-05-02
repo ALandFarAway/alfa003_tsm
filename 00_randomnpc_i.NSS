@@ -34,8 +34,8 @@ void RandomizeNPCName(object oNPC = OBJECT_SELF)
 					s0 = RandomNameDrow(gender);
 					break;
 				default:
-					s0 = RandomNameHuman(gender);
-					s1 = RandomNameHuman(0);
+					s0 = RandomNameElf(gender);
+					s1 = RandomNameElf(0);
 			}
 			break;
 		default:
