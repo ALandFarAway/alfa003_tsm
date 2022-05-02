@@ -226,6 +226,19 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 					break;
 			}
 			break;
+			
+		case RACIAL_TYPE_ELF:  
+		default:
+			switch (Random(2)) {
+				case 0:
+					sResRef="03_silvy_commoner_bbb";
+					break;
+				case 1:
+					sResRef="03_silvy_commoner_bb";
+					break;
+				
+		}
+		break;
 		case RACIAL_TYPE_GNOME:
 			switch (Random(7)) {
 				case 0:
@@ -279,6 +292,7 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 				
 		}
 		break;
+		
 	}
 	return sResRef;
 }
