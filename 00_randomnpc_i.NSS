@@ -34,8 +34,8 @@ void RandomizeNPCName(object oNPC = OBJECT_SELF)
 					s0 = RandomNameDrow(gender);
 					break;
 				default:
-					s0 = RandomNameHuman(gender);
-					s1 = RandomNameHuman(0);
+					s0 = RandomNameElf(gender);
+					s1 = RandomNameElf(0);
 			}
 			break;
 		default:
@@ -198,29 +198,10 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 		return "";
 
 	switch (race) {
-		case RACIAL_TYPE_DWARF://set up with the Sundabar Dwarf commoners
+		case RACIAL_TYPE_DWARF:
 			switch (Random(8)) {
 				case 0:
-					switch (Random(6)) {
-						case 0:
-							sResRef="03_cre_sundabar_1";
-							break;
-						case 1:
-							sResRef="03_cre_sundabar_2";
-							break;
-						case 2:
-							sResRef="03_cre_sundabar_3";
-							break;
-						case 3:
-							sResRef="03_cre_sundabar_5";
-							break;
-						case 4:
-							sResRef="03_cre_sundabar_6";
-							break;
-						case 5:
-							sResRef="03_cre_sundabar_7";
-							break;
-					}
+					sResRef="03_cre_sundabar_1";
 					break;
 				case 1:
 					sResRef="abr_cr_dwarf_commoner_m0";
@@ -248,29 +229,10 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 		case RACIAL_TYPE_GNOME:
 			switch (Random(7)) {
 				case 0:
-					switch (Random(6)) {
-						case 0:
-							sResRef="abr_cr_GnomeExpertM";
-							break;
-						case 1:
-							sResRef="abr_cr_GnomeExpertF";
-							break;
-						case 2:
-							sResRef="abr_cr_GnomeWarriorX";
-							break;
-						case 3:
-							sResRef="abr_cr_GnomeWarriorH";
-							break;
-						case 4:
-							sResRef="abr_cr_GnomeAdeptM";
-							break;
-						case 5:
-							sResRef="abr_cr_GnomeAdeptF";
-							break;
-					}
+					sResRef="abr_cr_GnomeExpertM";
 					break;
 				case 1:
-					sResRef="010_cr_gnome_comm0";
+					sResRef="abr_cr_GnomeExpertF";
 					break;
 				case 2:
 					sResRef="010_cr_gnome_comm1";
@@ -289,7 +251,7 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 					break;
 				}
 			break;
-		case RACIAL_TYPE_GRAYORC:
+		case RACIAL_TYPE_HALFORC:
 			switch(Random(4)) {
 				case 0:
 					sResRef = "010_cr_deepgnome0";
@@ -305,81 +267,16 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 					break;
 			}
 			break;
-		case RACIAL_TYPE_HUMAN:  //first 6 are for Sundabar
+		case RACIAL_TYPE_HUMAN:  
 		default:
-			switch (Random(24)) {
+			switch (Random(2)) {
 				case 0:
 					sResRef="03_cre_sundabar_8";
 					break;
 				case 1:
 					sResRef="03_cre_sundabar_9";
 					break;
-				case 2:
-					sResRef="03_cre_sundabar_10";
-					break;
-				case 3:
-					sResRef="03_cre_sundabar_11";
-					break;
-				case 4:
-					sResRef="03_cre_sundabar_12";
-					break;
-				case 5:
-					sResRef="03_cre_sundabar_13";
-					break;
-				case 6:
-					sResRef="03_cre_sundabar_14";
-					break;
-				case 7:
-					sResRef="010_cr_comm_human_f07";
-					break;
-				case 8:
-					sResRef="010_cr_comm_human_f08";
-					break;
-				case 9:
-					sResRef="010_cr_comm_human_f09";
-					break;
-				case 10:
-					sResRef="010_cr_comm_human_f10";
-					break;
-				case 11:
-					sResRef="010_cr_comm_human_f11";
-					break;
-				case 12:
-					sResRef="010_cr_comm_human_m00";
-					break;
-				case 13:
-					sResRef="010_cr_comm_human_m01";
-					break;
-				case 14:
-					sResRef="010_cr_comm_human_m02";
-					break;
-				case 15:
-					sResRef="010_cr_comm_human_m03";
-					break;
-				case 16:
-					sResRef="010_cr_comm_human_m04";
-					break;
-				case 17:
-					sResRef="010_cr_comm_human_m05";
-					break;
-				case 18:
-					sResRef="010_cr_comm_human_m06";
-					break;
-				case 19:
-					sResRef="010_cr_comm_human_m07";
-					break;
-				case 20:
-					sResRef="010_cr_comm_human_m08";
-					break;
-				case 21:
-					sResRef="010_cr_comm_human_m09";
-					break;
-				case 22:
-					sResRef="010_cr_comm_human_m10";
-					break;
-				case 23:
-					sResRef="010_cr_comm_human_m11";
-					break;
+				
 		}
 		break;
 	}
