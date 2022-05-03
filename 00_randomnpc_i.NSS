@@ -199,93 +199,86 @@ string RandomNPCResref(int race=RACIAL_TYPE_HUMAN, float prob = 0.2)
 
 	switch (race) {
 		case RACIAL_TYPE_DWARF:
-			switch (Random(8)) {
+			switch (Random(4)) {
 				case 0:
-					sResRef="03_cre_sundabar_1";
+					sResRef="03_tsm_commoner_sdw_f";
 					break;
 				case 1:
-					sResRef="abr_cr_dwarf_commoner_m0";
+					sResRef="03_tsm_commoner_gdw_f";
 					break;
 				case 2:
-					sResRef="abr_cr_dwarf_commoner_m1";
+					sResRef="03_tsm_commoner_sdw_m";
 					break;
 				case 3:
-					sResRef="abr_cr_dwarf_commoner_m2";
-					break;
-				case 4:
-					sResRef="abr_cr_dwarf_commoner_m3";
-					break;
-				case 5:
-					sResRef="abr_cr_dwarf_commoner_f0";
-					break;
-				case 6:
-					sResRef="abr_cr_dwarf_commoner_f1";
-					break;
-				case 7:
-					sResRef="abr_cr_dwarf_commoner_f2";
+					sResRef="03_tsm_commoner_gdw_m";
 					break;
 			}
 			break;
 			
 		case RACIAL_TYPE_ELF:  
-			switch (Random(2)) {
+			switch (Random(4)) {
 				case 0:
-					sResRef="03_silvy_commoner_bbb";
+					sResRef="03_tsm_commoner_melf_f";
 					break;
 				case 1:
-					sResRef="03_silvy_commoner_oo";
-					break;
-			}
-		break;
-		case RACIAL_TYPE_GNOME:
-			switch (Random(7)) {
-				case 0:
-					sResRef="abr_cr_GnomeExpertM";
-					break;
-				case 1:
-					sResRef="abr_cr_GnomeExpertF";
+					sResRef="03_tsm_commoner_self_f";
 					break;
 				case 2:
-					sResRef="010_cr_gnome_comm1";
+					sResRef="03_tsm_commoner_melf_m";
 					break;
 				case 3:
-					sResRef="010_cr_gnome_comm2";
+					sResRef="03_tsm_commoner_self_m";
 					break;
-				case 4:
-					sResRef="010_cr_gnome_comm3";
+			}
+			break;
+			
+		case RACIAL_TYPE_GNOME:
+			switch (Random(2)) {
+				case 0:
+					sResRef="03_tsm_commoner_gn_m";
 					break;
-				case 5:
-					sResRef="010_cr_gnome_comm4";
-					break;
-				case 6:
-					sResRef="010_cr_gnome_comm5";
+				case 1:
+					sResRef="03_tsm_commoner_gn_f";
 					break;
 				}
 			break;
-		case RACIAL_TYPE_HALFORC:
-			switch(Random(4)) {
+			
+		case RACIAL_TYPE_HALFLING:  
+			switch (Random(4)) {
 				case 0:
-					sResRef = "010_cr_deepgnome0";
+					sResRef="03_tsm_commoner_shalf_f";
 					break;
 				case 1:
-					sResRef = "010_cr_deepgnome1";
+					sResRef="03_tsm_commoner_lhalf_f";
 					break;
 				case 2:
-					sResRef = "010_cr_deepgnome2";
+					sResRef="03_tsm_commoner_shalf_m";
 					break;
 				case 3:
-					sResRef = "010_cr_deepgnome1";
+					sResRef="03_tsm_commoner_lhalf_m";
 					break;
 			}
 			break;
+				
+		case RACIAL_TYPE_HALFORC:
+			switch(Random(4)) {
+				case 0:
+					sResRef = "03_tsm_commoner_horc_m";
+					break;
+				case 1:
+					sResRef = "03_tsm_commoner_horc_f";
+					break;
+			}
+			break;
+			
 		case RACIAL_TYPE_HUMAN:  
 		default:
 			switch (Random(2)) {
 				case 0:
-					sResRef="03_cre_sundabar_8";
+					sResRef="03_tsm_commoner_hum_m";
 					break;
 				case 1:
-					sResRef="03_cre_sundabar_9";
+					sResRef="03_tsm_commoner_hum_f";
 					break;
 				
 		}
