@@ -1745,7 +1745,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F36453CA3EB4216BF8673C800E07CDE6D1102CBB" downloadHash="EAD425AE404163335DDE6104401CDE0FFE48F9EF" name="5b_int_frosthills_glacier_plat.trx" dlsize="1153521" size="1176878" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2CAA14AA23BE9B86D8BE2DFB09D01EFC7263B223" downloadHash="EE1CD55D14AA86B242D1D5442F56BA27821C4F6A" name="5b_int_frosthills_glacier_plat.trx" dlsize="1172317" size="1195623" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
