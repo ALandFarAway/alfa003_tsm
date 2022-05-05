@@ -39,32 +39,36 @@
 void main()
 {
 
-	
+	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	
 	//Delay Spawn In functions to allow for creature to fully spawn first
 	DelayCommand(2.0, ACR_CreatureOnSpawnIn());
-
-
 	
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
-	
-    object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF, 1);
-	int nOccupied = GetLocalInt(oChair, "Occupied");
-	float fFacing = GetFacing(oChair);
-	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
-	
-	if(nOccupied == 0) {
-	SetLocalInt(oChair, "Occupied", 1);
-	DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair), TALKVOLUME_TALK));
-	DelayCommand(11.0, ActionSit(oChair));
-	DelayCommand(19.0, ClearAllActions(TRUE));
-	DelayCommand(20.0, SetFacing(fFacing, TRUE));
-	DelayCommand(21.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
-    DelayCommand(22.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
-	}
-	
-	else {
-		DelayCommand(10.0, ActionSpeakString("Oh no, somebody else is in " + GetResRef(oChair), TALKVOLUME_TALK));
+
+	int i = 1;
+    object oChair = GetNearestObject(OBJECT_TYPE_PLACEABLE, OBJECT_SELF, i);
+	while (oChair != OBJECT_INVALID) {
+		if (FindSubString(GetStringLowerCase(GetTag(oChair)), "chair") != -1) {
+			int nOccupied = GetLocalInt(oChair, "Occupied");
+			float fFacing = GetFacing(oChair);
+			
+			if(nOccupied == 0) {
+				SetLocalInt(oChair, "Occupied", 1);
+				DelayCommand(5.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair), TALKVOLUME_TALK));
+				DelayCommand(6.0, ActionSit(oChair));
+				DelayCommand(10.0, ClearAllActions(TRUE));
+				DelayCommand(11.0, SetFacing(fFacing, TRUE));
+				DelayCommand(12.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+			    DelayCommand(13.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
+				return;
+				}
+			else {
+				DelayCommand(10.0, ActionSpeakString("Oh no, somebody else is in " + GetResRef(oChair), TALKVOLUME_TALK));
+				i++;
+				}
+			}
+		oChair = GetNearestObject(OBJECT_TYPE_PLACEABLE, OBJECT_SELF, i);
 		}
 }
