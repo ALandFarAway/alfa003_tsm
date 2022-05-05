@@ -47,7 +47,7 @@ void main()
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
 	SetLocalFloat(OBJECT_SELF, "f", f);//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 10.0);
 	
-	ActionSpeakString("onspawn_sit", TALKVOLUME_TALK);
+	//ActionSpeakString("onspawn_sit", TALKVOLUME_TALK);
 			    
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
@@ -60,13 +60,13 @@ void main()
 			
 			if(nOccupied == 0) {
 				SetLocalInt(oChair, "Occupied", 1);
-				DelayCommand(20.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
-				DelayCommand(31.0, AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oChair, FALSE, 0.25, 30.0)));
-				DelayCommand(36.0, AssignCommand(OBJECT_SELF, ActionJumpToObject(oChair, TRUE)));
-				DelayCommand(37.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair)-180.0, FALSE)));
-				DelayCommand(39.0, AssignCommand(OBJECT_SELF, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE))); //Keeps NPCs from being bumped to a standing position 
-				DelayCommand(40.0, AssignCommand(OBJECT_SELF, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK)));
-				DelayCommand(45.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+				//DelayCommand(20.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
+				DelayCommand(5.0, AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oChair, FALSE, 0.25, 30.0)));
+				DelayCommand(10.0, AssignCommand(OBJECT_SELF, ActionJumpToObject(oChair, TRUE)));
+				DelayCommand(11.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair)-180.0, FALSE)));
+				DelayCommand(12.0, AssignCommand(OBJECT_SELF, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE))); //Keeps NPCs from being bumped to a standing position 
+				//DelayCommand(40.0, AssignCommand(OBJECT_SELF, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK)));
+				DelayCommand(13.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
 			    break;
 				}
 			else {

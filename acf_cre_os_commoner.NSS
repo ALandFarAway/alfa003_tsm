@@ -48,7 +48,7 @@
 
 void main()
 {
-/*	float f;
+	float f;
 
 	f = ACR_RandomFloat(0.0,1.0);
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
@@ -57,8 +57,8 @@ void main()
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 	
-	ActionSpeakString("os_commoner", TALKVOLUME_TALK);
+	//ActionSpeakString("os_commoner", TALKVOLUME_TALK);
 	
-	//RandomizeNPC(OBJECT_SELF, 1,1);
- */
+	RandomizeNPC(OBJECT_SELF, 1,1);
+ 
 }
