@@ -40,7 +40,7 @@ void main()
 {
     ACR_CreatureOnSpawnIn();
 	
-	
+	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	DelayCommand(4.0, ActionSpeakString("I think I will sit.", TALKVOLUME_TALK));
 	DelayCommand(5.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
     DelayCommand(6.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
