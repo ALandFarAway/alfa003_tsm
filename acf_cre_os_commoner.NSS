@@ -53,7 +53,7 @@ void main()
 	f = ACR_RandomFloat(0.0,1.0);
 
 	
-	DelayCommand(f, ACR_CreatureOnSpawnIn());
+	//DelayCommand(f, ACR_CreatureOnSpawnIn());
 
 
 	SetLocalFloat(OBJECT_SELF, "f", f);

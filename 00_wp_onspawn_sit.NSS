@@ -42,8 +42,15 @@ void main()
 	//SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	
 	//Delay Spawn In functions to allow for creature to fully spawn first
-	ACR_CreatureOnSpawnIn();
-	//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 10.0);
+	float f = ACR_RandomFloat(0.0,1.0);
+
+	DelayCommand(5.0, ActionSpeakString("Here!", TALKVOLUME_TALK));
+	DelayCommand(7.5, AssignCommand(OBJECT_SELF, ActionSpeakString("Assigned Here!", TALKVOLUME_TALK)));
+				
+	DelayCommand(f, ACR_CreatureOnSpawnIn());
+
+
+	SetLocalFloat(OBJECT_SELF, "f", f);//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 10.0);
 			    
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
