@@ -2,7 +2,7 @@
 
 //
 //  Description
-//  Put the name of this script into a spawnpoint's ACR_SPAWN_IN_SCRIPT to run
+//  Put the name of this script into a spawnpoint's ACR_SPAWN_IN_SCRIPT_1 to run
 //  the code beneath on each creature spawned by the spawnpoint
 
 //  Revision History - Creation 05/05/22 : Wynna
@@ -39,25 +39,32 @@
 void main()
 {
 
-	float f;
+	
+	
+	//Delay Spawn In functions to allow for creature to fully spawn first
+	DelayCommand(2.0, ACR_CreatureOnSpawnIn());
 
-	f = ACR_RandomFloat(0.0,1.0);
 
 	
-	DelayCommand(f, ACR_CreatureOnSpawnIn());
-
-
-	SetLocalFloat(OBJECT_SELF, "f", f);
-
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 	
     object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF, 1);
+	int nOccupied = GetLocalInt(oChair, "Occupied");
+	float fFacing = GetFacing(oChair);
 	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
-	DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetTag(oChair), TALKVOLUME_TALK));
+	
+	if(nOccupied == 0) {
+	SetLocalInt(oChair, "Occupied", 1);
+	DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair), TALKVOLUME_TALK));
 	DelayCommand(11.0, ActionSit(oChair));
-	DelayCommand(20.0, ClearAllActions(TRUE));
+	DelayCommand(19.0, ClearAllActions(TRUE));
+	DelayCommand(20.0, SetFacing(fFacing, TRUE));
 	DelayCommand(21.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
     DelayCommand(22.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
+	}
 	
+	else {
+		DelayCommand(10.0, ActionSpeakString("Oh no, somebody else is in " + GetResRef(oChair), TALKVOLUME_TALK));
+		}
 }
