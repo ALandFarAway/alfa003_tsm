@@ -43,14 +43,10 @@ void main()
 	
 	//Delay Spawn In functions to allow for creature to fully spawn first
 	float f = ACR_RandomFloat(0.0,1.0);
-
-	DelayCommand(5.0, ActionSpeakString("Here!", TALKVOLUME_TALK));
-	DelayCommand(7.5, AssignCommand(OBJECT_SELF, ActionSpeakString("Assigned Here!", TALKVOLUME_TALK)));
-				
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
-
-
 	SetLocalFloat(OBJECT_SELF, "f", f);//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 10.0);
+	
+	ActionSpeakString("onspawn_sit", TALKVOLUME_TALK);
 			    
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
@@ -64,14 +60,12 @@ void main()
 			if(nOccupied == 0) {
 				SetLocalInt(oChair, "Occupied", 1);
 				DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
-				//DelayCommand(11.0, ActionSit(oChair));
-				//DelayCommand(16.0, ClearAllActions(TRUE));
 				DelayCommand(11.0, ActionForceMoveToObject(oChair, FALSE, 0.25, 30.0));
 				DelayCommand(16.0, ActionJumpToObject(oChair, TRUE));
 				DelayCommand(17.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair), FALSE)));
-				DelayCommand(21.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
-				DelayCommand(22.0, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
-				DelayCommand(25.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+				DelayCommand(19.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
+				DelayCommand(20.0, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
+				DelayCommand(21.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
 			    break;
 				}
 			else {
