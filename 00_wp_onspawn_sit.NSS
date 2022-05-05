@@ -62,10 +62,10 @@ void main()
 				DelayCommand(11.0, ActionForceMoveToObject(oChair, FALSE, 0.25, 30.0));
 				DelayCommand(16.0, ActionJumpToObject(oChair, TRUE));
 				DelayCommand(17.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair), FALSE)));
-				DelayCommand(20.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
-			    DelayCommand(21.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
+				DelayCommand(21.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
 				DelayCommand(22.0, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
-				break;
+				DelayCommand(25.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+			    break;
 				}
 			else {
 				DelayCommand(10.0, ActionSpeakString("Oh no, somebody else is in " + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));

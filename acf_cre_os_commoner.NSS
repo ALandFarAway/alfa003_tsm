@@ -61,6 +61,6 @@ void main()
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 	
-	DelayCommand(25.0, RandomizeNPC(OBJECT_SELF));
+	//DelayCommand(25.0, RandomizeNPC(OBJECT_SELF));
  
 }
