@@ -42,8 +42,9 @@ void main()
 	//SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	
 	//Delay Spawn In functions to allow for creature to fully spawn first
-	DelayCommand(2.0, ACR_CreatureOnSpawnIn());
-	
+	ACR_CreatureOnSpawnIn();
+	//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 10.0);
+			    
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 
@@ -58,6 +59,8 @@ void main()
 				DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
 				//DelayCommand(11.0, ActionSit(oChair));
 				//DelayCommand(16.0, ClearAllActions(TRUE));
+				DelayCommand(11.0, ActionForceMoveToObject(oChair, FALSE, 0.25, 30.0));
+				DelayCommand(16.0, ActionJumpToObject(oChair, TRUE));
 				DelayCommand(17.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair), FALSE)));
 				DelayCommand(20.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
 			    DelayCommand(21.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
