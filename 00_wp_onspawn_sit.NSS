@@ -56,8 +56,8 @@ void main()
 			if(nOccupied == 0) {
 				SetLocalInt(oChair, "Occupied", 1);
 				DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
-				DelayCommand(11.0, ActionSit(oChair));
-				DelayCommand(16.0, ClearAllActions(TRUE));
+				//DelayCommand(11.0, ActionSit(oChair));
+				//DelayCommand(16.0, ClearAllActions(TRUE));
 				DelayCommand(17.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair), FALSE)));
 				DelayCommand(20.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
 			    DelayCommand(21.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
