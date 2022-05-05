@@ -61,7 +61,7 @@ void main()
 				DelayCommand(16.0, ClearAllActions(TRUE));
 				DelayCommand(17.0, SetFacing(GetFacing(oChair), TRUE));
 				DelayCommand(19.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
-			    DelayCommand(20.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
+			    DelayCommand(20.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
 				return;
 				}
 			else {

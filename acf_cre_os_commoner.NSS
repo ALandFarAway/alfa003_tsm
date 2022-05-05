@@ -53,7 +53,7 @@ void main()
 	f = ACR_RandomFloat(0.0,1.0);
 
 	
-	DelayCommand(f, ACR_CreatureOnSpawnIn());
+	//DelayCommand(f, ACR_CreatureOnSpawnIn());
 
 
 	SetLocalFloat(OBJECT_SELF, "f", f);
@@ -61,8 +61,6 @@ void main()
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 	
-	//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0);
-    //SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE); //Keeps NPCs from being bumped to a standing postition 
 	RandomizeNPC(OBJECT_SELF);
  
 }
