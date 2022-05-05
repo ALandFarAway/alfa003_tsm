@@ -74,11 +74,11 @@ void main()
           if (GetIsObjectValid(GetSittingCreature(oChair)) == FALSE)
           {
               bFoundChair = TRUE;
-			  ActionMoveToObject(oChair, FALSE, 0.0);
+			  DelayCommand(2.0, ActionForceMoveToObject(oChair, FALSE, 0.5));
 			  float fFacing = GetFacing(oChair);
-			  SpeakString("I think I will sit on " + GetResRef(oChair));
-              DelayCommand(2.0, SetFacing(fFacing));
-			  DelayCommand(3.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+			  DelayCommand(3.0, SpeakString("I think I will sit on " + GetResRef(oChair)));
+              DelayCommand(4.0, SetFacing(fFacing));
+			  DelayCommand(5.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
           }
           else
           {
@@ -88,7 +88,7 @@ void main()
         }
         if (bFoundChair == FALSE)
         {
-           SpeakString("This sucks I have no place to sit");
+           DelayCommand(3.0, SpeakString("I have no place to sit."));
            ClearAllActions();
            ActionPlayAnimation(ANIMATION_FIREFORGET_PAUSE_SCRATCH_HEAD);
         }
