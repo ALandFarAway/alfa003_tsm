@@ -51,8 +51,7 @@ void main()
 
 	f = ACR_RandomFloat(0.0,1.0);
 
-	RandomizeNPC(OBJECT_SELF);
-
+	
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
 
 
@@ -61,36 +60,13 @@ void main()
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 	
-	 if (!GetIsInCombat() && !IsInConversation(OBJECT_SELF))
-    	{
-        ClearAllActions();
-        int i = 1;
-        // * find first free chair
-        object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF,i);
-        int bFoundChair = FALSE;
-        while (bFoundChair == FALSE && GetIsObjectValid(oChair) == TRUE)
-        {
-          // * This chair is free
-          if (GetIsObjectValid(GetSittingCreature(oChair)) == FALSE)
-          {
-              bFoundChair = TRUE;
-			  DelayCommand(2.0, ActionForceMoveToObject(oChair, FALSE, 0.5));
-			  float fFacing = GetFacing(oChair);
-			  DelayCommand(3.0, SpeakString("I think I will sit on " + GetResRef(oChair)));
-              DelayCommand(4.0, SetFacing(fFacing));
-			  DelayCommand(5.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
-          }
-          else
-          {
-              i++;
-              oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF,i);
-          }
-        }
-        if (bFoundChair == FALSE)
-        {
-           DelayCommand(3.0, SpeakString("I have no place to sit."));
-           ClearAllActions();
-           ActionPlayAnimation(ANIMATION_FIREFORGET_PAUSE_SCRATCH_HEAD);
-        }
-    }
+	 object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF,1);
+     float fFacing = GetFacing(oChair);
+	 ActionForceMoveToObject(oChair, FALSE, 0.5);
+	 DelayCommand(3.0, SpeakString("I think I will sit on " + GetResRef(oChair)));
+     DelayCommand(4.0, AssignCommand(OBJECT_SELF, SetFacing(fFacing)));
+	 DelayCommand(5.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+     
+	 DelayCommand(6.0, RandomizeNPC(OBJECT_SELF));
+ 
 }
