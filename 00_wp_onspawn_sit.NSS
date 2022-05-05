@@ -43,7 +43,7 @@ void main()
 	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	RandomizeNPC(OBJECT_SELF, 1,1);	
 	//Delay Spawn In functions to allow for creature to randomize first
-	float f = ACR_RandomFloat(0.0,2.0);
+	float f = ACR_RandomFloat(2.0,3.0);
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
 	SetLocalFloat(OBJECT_SELF, "f", f); 
 			    
