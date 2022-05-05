@@ -1,27 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////
-//
-//  System Name : ACR Configuration File
-//     Filename : acf_cre_onspawnin
-//    $Revision:: 280        $ current version of the file
-//        $Date:: 2007-03-20#$ date the file was created or modified
-//       Author : Cipher
-//
-//    Var Prefix:
-//  Dependencies:
+
 //
 //  Description
-//  This script calls the ACR's OnSpawnIn event handler for creatures
-//  and any custom code a server may need. It is not updated in ACR updates.
-//
-//  Revision History
+//  Put the name of this script into a spawnpoint's ACR_SPAWN_IN_SCRIPT to run
+//  the code beneath on each creature spawned by the spawnpoint
+
+//  Revision History - Creation 05/05/22 : Wynna
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-#include "acr_creature_i"
-#include "00_randomnpc_i"
-#include "acr_spawn_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -42,27 +31,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+#include "acr_creature_i"
+#include "acr_spawn_i"
 
-///////FLOCKING CODE REMOVED - SAND////////////////
 
-
+ 
 void main()
 {
-	float f;
-
-	f = ACR_RandomFloat(0.0,1.0);
-
+    ACR_CreatureOnSpawnIn();
 	
-	DelayCommand(f, ACR_CreatureOnSpawnIn());
-
-
-	SetLocalFloat(OBJECT_SELF, "f", f);
-
-	// dumb (non-combat) ai
-	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
 	
-	//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0);
-    //SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE); //Keeps NPCs from being bumped to a standing postition 
-	RandomizeNPC(OBJECT_SELF);
- 
+	DelayCommand(4.0, ActionSpeakString("I think I will sit.", TALKVOLUME_TALK));
+	DelayCommand(5.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+    DelayCommand(6.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
+	
 }
