@@ -60,4 +60,37 @@ void main()
 
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
+	
+	 if (!GetIsInCombat() && !IsInConversation(OBJECT_SELF))
+    	{
+        ClearAllActions();
+        int i = 1;
+        // * find first free chair
+        object oChair = GetNearestObjectByTag("kemo_chair_1", OBJECT_SELF,i);
+        int bFoundChair = FALSE;
+        while (bFoundChair == FALSE && GetIsObjectValid(oChair) == TRUE)
+        {
+          // * This chair is free
+          if (GetIsObjectValid(GetSittingCreature(oChair)) == FALSE)
+          {
+              bFoundChair = TRUE;
+			  ActionMoveToObject(oChair, FALSE, 0.0);
+			  float fFacing = GetFacing(oChair);
+			  SpeakString("I think I will sit on " + GetResRef(oChair));
+              DelayCommand(2.0, SetFacing(fFacing));
+			  DelayCommand(3.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+          }
+          else
+          {
+              i++;
+              oChair = GetNearestObjectByTag("kemo_chair_1", OBJECT_SELF,i);
+          }
+        }
+        if (bFoundChair == FALSE)
+        {
+           SpeakString("This sucks I have no place to sit");
+           ClearAllActions();
+           ActionPlayAnimation(ANIMATION_FIREFORGET_PAUSE_SCRATCH_HEAD);
+        }
+    }
 }

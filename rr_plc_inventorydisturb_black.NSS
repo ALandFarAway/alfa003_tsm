@@ -20,13 +20,29 @@ void main()
 	string sCreate = "003_cr_un_ghost_aloisus";	
 	object oCreateWeird = GetWaypointByTag("phalorm_earth_up_wp");
 	location lCreateWeird = GetLocation(oCreateWeird);
-	int nRandom = Random(3);
+	int nRandom = Random(12);
 	if(nRandom==1) 
 		{sCreate = "003_cr_un_ghost_si";}
 	if(nRandom==2) 
 		{sCreate = "003_cr_un_ghost_valbrace";}
 	if(nRandom==3) 
 		{sCreate = "003_cr_undead_wraith_jarra";}
+	if(nRandom==4) 
+		{sCreate = "003_cr_un_ghost_aloisus";}
+	if(nRandom==5) 
+		{sCreate = "003_cr_undead_shadow_medium";}
+	if(nRandom==6) 
+		{sCreate = "abr_cr_un_monkey_ghost";}
+	if(nRandom==7) 
+		{sCreate = "abr_cr_un_panther_ghost";}
+	if(nRandom==8) 
+		{sCreate = "abr_cr_un_lion_ghost";}
+	if(nRandom==9) 
+		{sCreate = "abr_cr_un_harpy_ghost";}
+	if(nRandom==10) 
+		{sCreate = "abr_cr_un_scorpion_ghost";}
+	if(nRandom==11) 
+		{sCreate = "003_cr_undead_wraith_dread";}
 	
 	object oWPOne = GetWaypointByTag("rr_hglyph_wp1");
 	object oWPTwo = GetWaypointByTag("rr_hglyph_wp2");
