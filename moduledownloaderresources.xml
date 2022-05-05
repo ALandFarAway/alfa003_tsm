@@ -1931,7 +1931,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8F799578C7CE6D5F95E57A5C4B40FAE8FAF43486" downloadHash="774B8A66810A64969EF870CABB7CB514A181C629" name="8e_int_highforest_oh_stables.trx" dlsize="7603" size="7611" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9BDF0C20C76515FA06ADA714263793BC601D7E7A" downloadHash="23B36DA8C4CA21D4F2BD32FEBE73156B88C83D92" name="8e_int_highforest_oh_stables.trx" dlsize="16220" size="16215" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
