@@ -39,10 +39,10 @@
 void main()
 {
 
-	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
+	//SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	
 	//Delay Spawn In functions to allow for creature to fully spawn first
-	//DelayCommand(2.0, ACR_CreatureOnSpawnIn());
+	DelayCommand(2.0, ACR_CreatureOnSpawnIn());
 	
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
@@ -61,7 +61,7 @@ void main()
 				DelayCommand(17.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair), FALSE)));
 				DelayCommand(19.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
 			    DelayCommand(20.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing position 
-				return;
+				break;
 				}
 			else {
 				DelayCommand(10.0, ActionSpeakString("Oh no, somebody else is in " + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
@@ -71,5 +71,5 @@ void main()
 		oChair = GetNearestObject(OBJECT_TYPE_PLACEABLE, OBJECT_SELF, i);
 		}
 		
-	DelayCommand(21.0, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2), TALKVOLUME_TALK));
+	DelayCommand(21.0, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
 }
