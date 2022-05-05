@@ -41,7 +41,7 @@
 void main()
 {
 
-	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
+	//SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	RandomizeNPC(OBJECT_SELF, 1,1);	
 	//Delay Spawn In functions to allow for creature to randomize first
 	float f = ACR_RandomFloat(2.0,3.0);
@@ -59,17 +59,14 @@ void main()
 			
 			if(nOccupied == 0) {
 				SetLocalInt(oChair, "Occupied", 1);
-				//DelayCommand(20.0, ActionSpeakString("I think I will sit on" + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
 				DelayCommand(5.0, AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oChair, FALSE, 0.25, 30.0)));
 				DelayCommand(10.0, AssignCommand(OBJECT_SELF, ActionJumpToObject(oChair, TRUE)));
 				DelayCommand(11.0, AssignCommand(OBJECT_SELF, SetFacing(GetFacing(oChair)-180.0, FALSE)));
 				DelayCommand(12.0, AssignCommand(OBJECT_SELF, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE))); //Keeps NPCs from being bumped to a standing position 
-				//DelayCommand(40.0, AssignCommand(OBJECT_SELF, ActionSpeakString("My facing is " + FloatToString(GetFacing(OBJECT_SELF), 2, 2) + "My chair's facing is " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK)));
 				DelayCommand(13.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
 			    break;
 				}
 			else {
-				DelayCommand(10.0, ActionSpeakString("Oh no, somebody else is in " + GetResRef(oChair) + " at facing " + FloatToString(GetFacing(oChair), 2, 2), TALKVOLUME_TALK));
 				i++;
 				}
 			}
