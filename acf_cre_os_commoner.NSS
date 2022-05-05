@@ -62,7 +62,8 @@ void main()
 	
 	 object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF,1);
      float fFacing = GetFacing(oChair);
-	 ActionForceMoveToObject(oChair, FALSE, 0.5);
+	 ActionSit(oChair);
+	 //ActionForceMoveToObject(oChair, FALSE, 0.5);
 	 DelayCommand(3.0, SpeakString("I think I will sit on " + GetResRef(oChair)));
      DelayCommand(4.0, AssignCommand(OBJECT_SELF, SetFacing(fFacing)));
 	 DelayCommand(5.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
