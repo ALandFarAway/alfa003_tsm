@@ -66,7 +66,7 @@ void main()
         ClearAllActions();
         int i = 1;
         // * find first free chair
-        object oChair = GetNearestObjectByTag("kemo_chair_1", OBJECT_SELF,i);
+        object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF,i);
         int bFoundChair = FALSE;
         while (bFoundChair == FALSE && GetIsObjectValid(oChair) == TRUE)
         {
@@ -83,7 +83,7 @@ void main()
           else
           {
               i++;
-              oChair = GetNearestObjectByTag("kemo_chair_1", OBJECT_SELF,i);
+              oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF,i);
           }
         }
         if (bFoundChair == FALSE)
