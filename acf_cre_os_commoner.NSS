@@ -59,6 +59,6 @@ void main()
 	
 	ActionSpeakString("os_commoner", TALKVOLUME_TALK);
 	
-	RandomizeNPC(OBJECT_SELF, 1,1);
+	//RandomizeNPC(OBJECT_SELF, 1,1);
  
 }
