@@ -40,14 +40,12 @@
 void main()
 {
 
-	//SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
+	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	RandomizeNPC(OBJECT_SELF, 1,1);	
-	//Delay Spawn In functions to allow for creature to fully spawn first
-	float f = ACR_RandomFloat(0.0,1.0);
+	//Delay Spawn In functions to allow for creature to randomize first
+	float f = ACR_RandomFloat(0.0,2.0);
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
-	SetLocalFloat(OBJECT_SELF, "f", f);//ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 10.0);
-	
-	//ActionSpeakString("onspawn_sit", TALKVOLUME_TALK);
+	SetLocalFloat(OBJECT_SELF, "f", f); 
 			    
 	// dumb (non-combat) ai
 	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
