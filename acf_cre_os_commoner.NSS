@@ -48,7 +48,7 @@
 
 void main()
 {
-	float f;
+/*	float f;
 
 	f = ACR_RandomFloat(0.0,1.0);
 	DelayCommand(f, ACR_CreatureOnSpawnIn());
@@ -60,5 +60,5 @@ void main()
 	ActionSpeakString("os_commoner", TALKVOLUME_TALK);
 	
 	//RandomizeNPC(OBJECT_SELF, 1,1);
- 
+ */
 }
