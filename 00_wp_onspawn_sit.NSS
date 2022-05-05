@@ -38,12 +38,26 @@
  
 void main()
 {
-    ACR_CreatureOnSpawnIn();
-	object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF, 1);
+
+	float f;
+
+	f = ACR_RandomFloat(0.0,1.0);
+
+	
+	DelayCommand(f, ACR_CreatureOnSpawnIn());
+
+
+	SetLocalFloat(OBJECT_SELF, "f", f);
+
+	// dumb (non-combat) ai
+	SetLocalInt(OBJECT_SELF,"ACR_NPC",2);
+	
+    object oChair = GetNearestObjectByTag("NPC_Sit_Chair", OBJECT_SELF, 1);
 	SendMessageToAllDMs("WP Onspawn Sit called for " + GetTag(OBJECT_SELF));
 	DelayCommand(10.0, ActionSpeakString("I think I will sit on" + GetTag(oChair), TALKVOLUME_TALK));
 	DelayCommand(11.0, ActionSit(oChair));
-	DelayCommand(15.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
-    DelayCommand(16.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
+	DelayCommand(20.0, ClearAllActions(TRUE));
+	DelayCommand(21.0, ActionPlayAnimation(ANIMATION_LOOPING_SIT_CHAIR, 1.0, 1800.0));
+    DelayCommand(22.0, SetBumpState(OBJECT_SELF,BUMPSTATE_UNBUMPABLE)); //Keeps NPCs from being bumped to a standing postition 
 	
 }
