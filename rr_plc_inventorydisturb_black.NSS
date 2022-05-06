@@ -44,10 +44,10 @@ void main()
 	if(nRandom==11) 
 		{sCreate = "003_cr_undead_wraith_dread";}
 	
-	object oWPOne = GetWaypointByTag("rr_hglyph_wp1");
-	object oWPTwo = GetWaypointByTag("rr_hglyph_wp2");
-	object oWPThree = GetWaypointByTag("rr_hglyph_wp3");
-	object oWPFour = GetWaypointByTag("rr_hglyph_wp4");
+	object oWPOne = GetWaypointByTag("rr_hglyph_wp1b");
+	object oWPTwo = GetWaypointByTag("rr_hglyph_wp2b");
+	object oWPThree = GetWaypointByTag("rr_hglyph_wp3b");
+	object oWPFour = GetWaypointByTag("rr_hglyph_wp4b");
 	location lWPOne = GetLocation(oWPOne);
 	location lWPTwo = GetLocation(oWPTwo);
 	location lWPThree = GetLocation(oWPThree);
@@ -169,27 +169,15 @@ void main()
 		     object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);
 		     object oRelayblackC = GetObjectByTag("rauvin_crystal_relay_black_c", 0);
 		     object oRelayblackD = GetObjectByTag("rauvin_crystal_relay_black_d", 0);
-		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_relay_black", 0);
+		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
 			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
 			 
-			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
-		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
-		     object oHiveC = GetObjectByTag("PLC_hive_si", 0);
-		     object oHiveD = GetObjectByTag("PLC_hive_aloisus", 0);
-		     object oWebA = GetObjectByTag("PLC_web_jarra", 0);
-		     object oWebB = GetObjectByTag("PLC_web_valbrace", 0);
-		     object oWebC = GetObjectByTag("PLC_web_si", 0);
-		     object oWebD = GetObjectByTag("PLC_web_aloisus", 0);
-		     object oBugsA = GetObjectByTag("fx_butterflies_jarra", 0);
-		     object oBugsB = GetObjectByTag("fx_butterflies_valbrace", 0);
-		     object oBugsC = GetObjectByTag("fx_butterflies_si", 0);
-		     object oBugsD = GetObjectByTag("fx_butterflies_aloisus", 0);
-		     effect eBeamblackA = EffectBeam(VFX_BEAM_BLACK, oRelayblackA, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackB = EffectBeam(VFX_BEAM_BLACK, oRelayblackB, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackC = EffectBeam(VFX_BEAM_BLACK, oRelayblackC, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackD = EffectBeam(VFX_BEAM_BLACK, oRelayblackD, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackCenter = EffectBeam(VFX_BEAM_BLACK, oCenter, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackA = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackA, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackB = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackB, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackC = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackC, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackD = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackD, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
@@ -211,15 +199,11 @@ void main()
 			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oCenter, 16.0));
 			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, oCenter, 16.0));
 			 
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebA, 15.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebB, 15.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebC, 15.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebD, 15.0));
 			 
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebA));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebB));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebC));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebD));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackA));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackB));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackC));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackD));
 			 
 			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
 			 DelayCommand(22.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
@@ -227,14 +211,6 @@ void main()
 			 
 			 DelayCommand(31.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_LOS_EVIL_30), GetLocation(oCenter), 5.0));
 			 
-			 DestroyObject(oHiveA, 12.0);
-			 DestroyObject(oHiveB, 12.0);
-			 DestroyObject(oHiveC, 12.0);
-			 DestroyObject(oHiveD, 12.0);
-			 DestroyObject(oWebA, 12.0);
-			 DestroyObject(oWebB, 12.0);
-			 DestroyObject(oWebC, 12.0);
-			 DestroyObject(oWebD, 12.0);
 			 
 			 DelayCommand(30.0, ActionCreateCreature("phalorm_cr_el_earthweird_b", lCreateWeird));
 			 }
@@ -252,33 +228,14 @@ void main()
 		     object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 		     object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
 			 object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
-			 object oWallA = GetObjectByTag("phaedra_wall_a", 0);
-			 object oWallB = GetObjectByTag("phaedra_wall_b", 0);
-			 object oWallC = GetObjectByTag("phaedra_wall_c", 0);
-			 object oWallD = GetObjectByTag("phaedra_wall_d", 0);
 			 object oLight = GetObjectByTag("fx_phalorm_light_black_up", 0);
-			 object oCloud = GetObjectByTag("phalorm_black_cloud", 0);
-			 object oContain = GetObjectByTag("phalorm_containment", 0);
-			 object oLightWhite = GetObjectByTag("phalorm_light_white", 0);
 			 
 			 
-			 object oHiveA = GetObjectByTag("PLC_hive_jarra", 0);
-		     object oHiveB = GetObjectByTag("PLC_hive_valbrace", 0);
-		     object oHiveC = GetObjectByTag("PLC_hive_si", 0);
-		     object oHiveD = GetObjectByTag("PLC_hive_aloisus", 0);
-		     object oWebA = GetObjectByTag("PLC_web_jarra", 0);
-		     object oWebB = GetObjectByTag("PLC_web_valbrace", 0);
-		     object oWebC = GetObjectByTag("PLC_web_si", 0);
-		     object oWebD = GetObjectByTag("PLC_web_aloisus", 0);
-		     object oBugsA = GetObjectByTag("fx_butterflies_jarra", 0);
-		     object oBugsB = GetObjectByTag("fx_butterflies_valbrace", 0);
-		     object oBugsC = GetObjectByTag("fx_butterflies_si", 0);
-		     object oBugsD = GetObjectByTag("fx_butterflies_aloisus", 0);
-		     effect eBeamblackA = EffectBeam(VFX_BEAM_BLACK, oRelayblackA, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackB = EffectBeam(VFX_BEAM_BLACK, oRelayblackB, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackC = EffectBeam(VFX_BEAM_BLACK, oRelayblackC, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackD = EffectBeam(VFX_BEAM_BLACK, oRelayblackD, BODY_NODE_CHEST, FALSE);
-			 effect eBeamblackCenter = EffectBeam(VFX_BEAM_BLACK, oCenter, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackA = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackA, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackB = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackB, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackC = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackC, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackD = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackD, BODY_NODE_CHEST, FALSE);
+			 effect eBeamblackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
@@ -313,16 +270,11 @@ void main()
 			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oCenter, 16.0));
 			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oCenter, 16.0));
 			 DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, oCenter, 16.0));
-			 
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebA, 15.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebB, 15.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebC, 15.0));
-			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamBlackCenter, oWebD, 15.0));
-			 
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebA));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebB));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebC));
-			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oWebD));
+			  
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackA));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackB));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackC));
+			 DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oRelayblackD));
 			 
 			 //DelayCommand(17.0, AssignCommand(oVassal, ActionSpeakString("*Flickers, then brightens, the spinning faces of screaming spirits that make it up receding into obscurity within a general glow.", TALKVOLUME_TALK)));
 			 
@@ -330,9 +282,9 @@ void main()
 			 DelayCommand(22.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
 			 DelayCommand(24.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), oCenter, 1.0));
 			 
-			 DelayCommand(24.5, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
+			 //DelayCommand(24.5, ChangeToStandardFaction(oVassal, STANDARD_FACTION_DEFENDER));
 			 //DelayCommand(25.0, AssignCommand(oVassal, ActionSpeakString("*Turns in mid-air and lunges towards the Soulreaper, as a fiery spell erupts from it at her.", TALKVOLUME_TALK)));
-			 DelayCommand(25.5, AssignCommand(oPC, ActionCastSpellAtObject(SPELL_ORB_OF_FIRE, oSoulReaper, METAMAGIC_EMPOWER, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			 //DelayCommand(25.5, AssignCommand(oPC, ActionCastSpellAtObject(SPELL_ORB_OF_FIRE, oSoulReaper, METAMAGIC_EMPOWER, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			 
 			 DelayCommand(21.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), GetLocation(oSoulReaper)));
 			 DelayCommand(23.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD), GetLocation(oSoulReaper), 1.0));
@@ -349,18 +301,9 @@ void main()
 			 
 			 
 			 
-			 DestroyObject(oLight, 35.0);
 			 DestroyObject(oBlackCrystal, 31.5);
-			 DestroyObject(oSoulReaper, 32.0);
-			 DestroyObject(oWallA, 32.0);
-			 DestroyObject(oWallB, 32.0);
-			 DestroyObject(oWallC, 32.0);
-			 DestroyObject(oWallD, 32.0);
 			 DestroyObject(oParsifal, 32.0);
 			 DestroyObject(oCenter, 35.0);
-			 DestroyObject(oContain, 36.0);
-			 DestroyObject(oCloud, 37.0);
-			 DestroyObject(oLightWhite, 36.0);
 			 
 		 
 			 }
