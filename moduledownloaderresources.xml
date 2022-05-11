@@ -1760,7 +1760,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="Tlk" hash="365EC05E4DD03AE38351D31962897EEAA17874AF" downloadHash="8390DB3754682450BC68AB8C41CF5428DB7F4759" name="alfa_acr02.tlk" dlsize="165764" size="1273873" critical="false" exclude="false" urlOverride="">
+  <resource type="Tlk" hash="811F9D7E082E14D5EAC4F026D1F8F81A12766DFA" downloadHash="C2DE4471A3B0863FF1D21B3FAD96FED246AB026F" name="alfa_acr02.tlk" dlsize="164380" size="1268732" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1931,12 +1931,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="9BDF0C20C76515FA06ADA714263793BC601D7E7A" downloadHash="23B36DA8C4CA21D4F2BD32FEBE73156B88C83D92" name="8e_int_highforest_oh_stables.trx" dlsize="16220" size="16215" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9C0FB8C75056221E356FEB45FDA055679CEBB639" downloadHash="C12726848FB05F7978E3894037B3782C28176C4C" name="8e_int_highforest_oh_stables.trx" dlsize="16221" size="16215" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F8D1F1445A19E393E57912C08847E43875D6D0E0" downloadHash="4FCE52FBB2DAF7C3407849C7136862176DB05BFF" name="6d_int_silvy_everlund_emb.trx" dlsize="5484" size="5453" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="AA17203EFC02EC0498701839485BD6F9F2D28A90" downloadHash="07EEABF1A64415713DEFA00FC80622C2CB0E314F" name="6d_int_silvy_everlund_emb.trx" dlsize="51882" size="52552" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
