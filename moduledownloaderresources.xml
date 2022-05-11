@@ -1630,7 +1630,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0A0F9F75CAE92EBDE856584578EA95BA1A458BDC" downloadHash="36F3F2CC109C20F15E733D8A81C9F9ADAA4FB2A4" name="8e_ext_highforest_northwest.trx" dlsize="4613834" size="21814527" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="10A581BF5F269D048F567E045A4E477F722469AF" downloadHash="DC8278832B8C5772208E40F09EF704B94688D78C" name="8e_ext_highforest_northwest.trx" dlsize="4715332" size="22111332" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
