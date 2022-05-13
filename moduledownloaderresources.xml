@@ -1941,7 +1941,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="219ABB6CAB945B9B345ED1B8975EBC5E00968D20" downloadHash="0B38EAE698D9AA53BF1B8332401EEA33FC1FE7F2" name="8e_ext_highforest_nthwst.trx" dlsize="4358938" size="21805341" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="17A0A860EB9D2E299981DDCBA5956B4383D8B0E1" downloadHash="6A5C2DACF29DF881050F052B80EEE3770EBC3F3A" name="8e_ext_highforest_nthwst.trx" dlsize="3753004" size="20842477" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
