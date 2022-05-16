@@ -70,7 +70,18 @@ void main()
 					  }
 		 }
 	
-		 
+	if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
+		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6010) {
+			ActionSpeakString("An image forms.", TALKVOLUME_TALK);
+		}
+		if(nMatch >= 6011) {
+		 	string sMatch = GetMatchedSubstring(nMatch);
+			ActionSpeakString(sMatch, TALKVOLUME_TALK);
+		}	 
+		
+	}	 
+	
 		 
 	if(GetTag(OBJECT_SELF) == "003_cr_voice") 
 		{int nMatch = GetListenPatternNumber();

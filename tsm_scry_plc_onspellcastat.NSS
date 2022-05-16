@@ -47,30 +47,26 @@ void main() {
 
 	ACR_PlaceableOnSpellCastAt();
 
-
-	if((FindSubString(GetTag(OBJECT_SELF), "_scry") != -1) && (GetSpellId() == 3056))
-	{object oScryer = GetLastUsedBy();
-	 string sScryName = GetName(OBJECT_SELF);
-	 string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
-	 location lHere = GetLocation(OBJECT_SELF);
-	 int nScryerLevel = GetCasterLevel(oScryer);
-	 float fScryTimer;
-	 effect eDivination = EffectVisualEffect(VFX_BEAM_DIVINATION, FALSE);
-	 if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 0) && (GetSpellId() == 3056)) {
-			SendMessageToPC(oScryer, "The " + sScryName + "responds!");
-			SendMessageToPC(oScryer, sSpeak);
-			SetLocalInt(OBJECT_SELF, "SCRY_ACTIVE", 1);
-			SetLocalFloat(OBJECT_SELF, "SCRY_TIMER", 60.0 * nScryerLevel);
-			}
-	 else if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (GetSpellId() == 3056)) {
-			SendMessageToPC(oScryer, "The " + sScryName + "absorbs the spell you cast, and remains active.");
-			fScryTimer = fScryTimer + (60.0 * nScryerLevel);
-			}
-			
-	fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");			
-	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivination, lHere, fScryTimer);
-			
+	  if(GetSpellId() == 3056) {
+			object oScryer = GetLastSpellCaster();
+			object oScried; 
+			string sScryName = GetName(OBJECT_SELF);
+			string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
+			location lHere = GetLocation(OBJECT_SELF);
+			int nScryerLevel = GetCasterLevel(oScryer);
+			float fScryTimer;
+			effect eDivination = EffectVisualEffect(VFX_BEAM_DIVINATION, FALSE);
 	
-	}
-		
+			object oScry = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
+            SetLocalInt(OBJECT_SELF, "SCRY_ACTIVE", 1);
+			SetLocalFloat(OBJECT_SELF, "SCRY_TIMER", 60.0 * nScryerLevel);
+			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivination, lHere, fScryTimer);
+			ActionSpeakString(sSpeak, TALKVOLUME_TALK);
+			DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the " + sScryName + " is ready to receive a name to scry."));
+			fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");	
+			DelayCommand(fScryTimer, SendMessageToPC(oScryer, "The scry spell ends and the scrying object goes dark."));		
+			DestroyObject(oScry, fScryTimer+1.0);
+			DelayCommand(fScryTimer+2.0, SetLocalInt(OBJECT_SELF, "SCRY_ACTIVE", 0));
+		}	
+	
 }
