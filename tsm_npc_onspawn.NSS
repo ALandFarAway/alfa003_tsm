@@ -6,7 +6,10 @@
  
 void main()
 {
-	     
+	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
+	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
+	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
+	    	      
          
 	if(GetTag(OBJECT_SELF)== "003_cr_lath_cyrthol")
         { 	 
@@ -15,7 +18,23 @@ void main()
          SetListening(OBJECT_SELF, TRUE);
     	}
 		
-	     	 
+		
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
+			 SetListenPattern(OBJECT_SELF, "**Scry**", 6010);
+			 int nListenPattern = 6011;
+         	 object oPC = GetFirstPC(FALSE);
+			 while (oPC != OBJECT_INVALID) {
+				 string sPCName = GetName(oPC);
+				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
+				 nListenPattern++;
+				 oPC = GetNextPC(FALSE);
+			 }
+			 
+			 SetListening(OBJECT_SELF, TRUE);
+    	
+		}  
+		
+		 	 
 	if(GetTag(OBJECT_SELF)== "003_cr_voice")
         {SetActionMode(OBJECT_SELF, ACTION_MODE_STEALTH, STEALTH_MODE_ACTIVATED);
 		 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));

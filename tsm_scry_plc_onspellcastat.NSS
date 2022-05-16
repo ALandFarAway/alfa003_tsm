@@ -47,30 +47,6 @@ void main() {
 
 	ACR_PlaceableOnSpellCastAt();
 
-
-	if((FindSubString(GetTag(OBJECT_SELF), "_scry") != -1) && (GetSpellId() == 3056))
-	{object oScryer = GetLastUsedBy();
-	 string sScryName = GetName(OBJECT_SELF);
-	 string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
-	 location lHere = GetLocation(OBJECT_SELF);
-	 int nScryerLevel = GetCasterLevel(oScryer);
-	 float fScryTimer;
-	 effect eDivination = EffectVisualEffect(VFX_BEAM_DIVINATION, FALSE);
-	 if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 0) && (GetSpellId() == 3056)) {
-			SendMessageToPC(oScryer, "The " + sScryName + "responds!");
-			SendMessageToPC(oScryer, sSpeak);
-			SetLocalInt(OBJECT_SELF, "SCRY_ACTIVE", 1);
-			SetLocalFloat(OBJECT_SELF, "SCRY_TIMER", 60.0 * nScryerLevel);
-			}
-	 else if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (GetSpellId() == 3056)) {
-			SendMessageToPC(oScryer, "The " + sScryName + "absorbs the spell you cast, and remains active.");
-			fScryTimer = fScryTimer + (60.0 * nScryerLevel);
-			}
-			
-	fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");			
-	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivination, lHere, fScryTimer);
-			
+	  
 	
-	}
-		
 }
