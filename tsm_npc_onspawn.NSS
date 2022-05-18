@@ -25,6 +25,7 @@ void main()
          	 object oPC = GetFirstPC(FALSE);
 			 while (oPC != OBJECT_INVALID) {
 				 string sPCName = GetName(oPC);
+				 ActionSpeakString(sPCName, TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
