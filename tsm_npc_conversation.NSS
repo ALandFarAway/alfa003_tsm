@@ -142,14 +142,14 @@ void main()
 								sGenderAdj = "her";
 							}
 							
-							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". From nearest to furthest, these objects are around " + sGenderAdj + " within 5 feet:" );
+							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". From furthest to nearest, these objects are around " + sGenderAdj + " within 10 feet:" );
 							DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 							 	
-							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_DOOR);
+							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 							string sObjectName = GetName(oObject);
 							int nInc = 1;
-							while ((oObject != OBJECT_INVALID) && (nInc <= 5)){
-								oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_DOOR);
+							while ((oObject != OBJECT_INVALID) && (nInc <= 10)){
+								oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 							    sObjectName = GetName(oObject);
 							    SendMessageToPC(oScryer, sObjectName);
 								nInc++;
