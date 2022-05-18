@@ -73,7 +73,7 @@ void main()
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() != OBJECT_SELF)) {
 		 	 
 		int nMatch = GetListenPatternNumber();
-		if(nMatch >= 6011) {
+		if(nMatch >= 6010) {
 		 	string sMatch = GetMatchedSubstring(0);
 			ActionSpeakString("sMatch = " + sMatch, TALKVOLUME_TALK);
 			
