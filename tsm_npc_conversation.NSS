@@ -77,17 +77,28 @@ void main()
 		 	string sMatchPre = GetMatchedSubstring(0);
 			string sMatch = GetMatchedSubstring(1);
 			string sMatchPost = GetMatchedSubstring(2);
-			string sMatchFirst = GetMatchedSubstring(6010);
 			ActionSpeakString("sMatch0 = " + sMatchPre, TALKVOLUME_TALK);
 			ActionSpeakString("sMatch1 = " + sMatch, TALKVOLUME_TALK);
 			ActionSpeakString("sMatch2 = " + sMatchPost, TALKVOLUME_TALK);
-			ActionSpeakString("sMatchFirst = " + sMatchFirst, TALKVOLUME_TALK);
+			object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+			ActionSpeakString("convo: oScryer " + GetName(oScryer), TALKVOLUME_TALK);
+				 
+			int nListenPattern = 6010;
+         	object oPC = GetFirstPC(FALSE);
+			while ((oPC != OBJECT_INVALID) && (nListenPattern < 6020)) {
+				 string sPCName = GetName(oPC);
+				 ActionSpeakString("convo: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
+				 if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
+					{ActionSpeakString("looped sPCName = " + sPCName, TALKVOLUME_TALK);
+					 WillSave(oPC, 15, SAVING_THROW_TYPE_MIND_SPELLS, oScryer);
+					 SendMessageToPC(oPC, "Did I get a WillSave?");
+					}
+				 if(TestStringAgainstPattern("**" + GetMatchedSubstring(1) + "**", sPCName))
+					{ActionSpeakString("looped MatchedSubstring1 = " + GetMatchedSubstring(1), TALKVOLUME_TALK);}
+				 nListenPattern++;
+				 oPC = GetNextPC(FALSE);
+			 }
 			
-			string sPCName = GetName(GetFirstPC(FALSE));
-			ActionSpeakString("sPCName = " + sPCName, TALKVOLUME_TALK);
-			
-			if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
-				{ActionSpeakString("sPCName = " + sPCName, TALKVOLUME_TALK);}
 			
 		}	 
 		

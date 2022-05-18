@@ -391,9 +391,13 @@ if(GetSpellId() == 3056)
 			int nScryerLevel = GetCasterLevel(oScryer);
 			float fScryTimer;
 			effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
-			object oScryListen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
-            SetLocalObject(oScryListen, "oScry", oScry);
+			object oScryListen = GetLocalObject(oScry, "oScryListen");
+			if(oScryListen == OBJECT_INVALID) {
+				oScryListen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
+            	}
+			SetLocalObject(oScryListen, "oScry", oScry);
 			SetLocalObject(oScryListen, "oScryer", oScryer);
+			SetLocalObject(oScry, "oScryListen", oScryListen);
 			SetFirstName(oScryListen, sScryName);
 			
 			SetLocalInt(oScry, "SCRY_ACTIVE", 1);
@@ -404,7 +408,8 @@ if(GetSpellId() == 3056)
 			fScryTimer = GetLocalFloat(oScry, "SCRY_TIMER");	
 			DelayCommand(fScryTimer, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
 			DestroyObject(oScryListen, fScryTimer+1.0);
-			DelayCommand(fScryTimer+2.0, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
+			DelayCommand(fScryTimer+1.5, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
+			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
 		}
 	}
 	
