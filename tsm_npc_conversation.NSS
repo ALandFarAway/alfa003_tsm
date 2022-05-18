@@ -70,15 +70,18 @@ void main()
 					  }
 		 }
 	
-	if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
-		object oPC = GetFirstPC(FALSE);
-			 while (oPC != OBJECT_INVALID) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() != OBJECT_SELF)) {
+		
+		 int nListenPattern = 6011;
+         object oPC = GetFirstPC(FALSE);
+			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6015)) {
 				 string sPCName = GetName(oPC);
-				 ActionSpeakString("convo: " + sPCName, TALKVOLUME_TALK);
+				 ActionSpeakString("convo: " + IntToString(nListenPattern) + " " + GetSubString(sPCName, 1, 5), TALKVOLUME_TALK);
 				 //SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
-				 //nListenPattern++;
+				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
 			 }
+			 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6010) {
 			ActionSpeakString("An image forms.", TALKVOLUME_TALK);

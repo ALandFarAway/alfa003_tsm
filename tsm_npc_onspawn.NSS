@@ -23,9 +23,9 @@ void main()
 			 SetListenPattern(OBJECT_SELF, "**Scry**", 6010);
 			 int nListenPattern = 6011;
          	 object oPC = GetFirstPC(FALSE);
-			 while (oPC != OBJECT_INVALID) {
+			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6015)) {
 				 string sPCName = GetName(oPC);
-				 ActionSpeakString(sPCName, TALKVOLUME_TALK);
+				 ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + GetSubString(sPCName, 1, 10), TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
