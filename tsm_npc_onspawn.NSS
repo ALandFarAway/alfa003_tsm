@@ -20,10 +20,9 @@ void main()
 		
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
-			 SetListenPattern(OBJECT_SELF, "**Scry**", 6010);
-			 int nListenPattern = 6011;
+			 int nListenPattern = 6010;
          	 object oPC = GetFirstPC(FALSE);
-			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6015)) {
+			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6020)) {
 				 string sPCName = GetName(oPC);
 				 ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + GetName(oPC), TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);

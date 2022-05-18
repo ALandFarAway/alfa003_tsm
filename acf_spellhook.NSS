@@ -375,31 +375,34 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 
 if(GetSpellId() == 3056)
 	{object oScryer = OBJECT_SELF;
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_scry") == -1)) {
-	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
+	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	  
 	if(oScry == OBJECT_INVALID) {
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
-	else {  SendMessageToPC(oScryer, "oScry = " + GetTag(oScry));
-		    object oScried; 
+	else {  
+			object oScried; 
 			string sScryName = GetName(oScry);
 			string sSpeak = GetLocalString(oScry, "SCRY_SPEAK");
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 			float fScryTimer;
-			effect eDivination = EffectVisualEffect(VFX_BEAM_DIVINATION, FALSE);
-	
+			effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			object oScryListen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
-            SetLocalInt(oScry, "SCRY_ACTIVE", 1);
+            SetLocalObject(oScryListen, "oScry", oScry);
+			SetLocalObject(oScryListen, "oScryer", oScryer);
+			SetFirstName(oScryListen, sScryName);
+			
+			SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 			SetLocalFloat(oScry, "SCRY_TIMER", 60.0 * nScryerLevel);
-			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivination, lHere, fScryTimer);
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
 			ActionSpeakString(sSpeak, TALKVOLUME_TALK);
 			DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the " + sScryName + " is ready to receive a name to scry."));
 			fScryTimer = GetLocalFloat(oScry, "SCRY_TIMER");	
-			DelayCommand(fScryTimer, ActionSpeakString("The scry spell ends and the scrying object goes dark.", TALKVOLUME_TALK));		
+			DelayCommand(fScryTimer, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			DestroyObject(oScryListen, fScryTimer+1.0);
 			DelayCommand(fScryTimer+2.0, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
 		}

@@ -73,12 +73,14 @@ void main()
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() != OBJECT_SELF)) {
 		 	 
 		int nMatch = GetListenPatternNumber();
-		if(nMatch == 6010) {
-			ActionSpeakString("An image forms.", TALKVOLUME_TALK);
-		}
 		if(nMatch >= 6011) {
-		 	string sMatch = GetMatchedSubstring(nMatch);
-			ActionSpeakString(sMatch, TALKVOLUME_TALK);
+		 	string sMatch = GetMatchedSubstring(0);
+			ActionSpeakString("sMatch = " + sMatch, TALKVOLUME_TALK);
+			
+			string sPCName = GetName(GetFirstPC(FALSE));
+			if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(0)))
+				{ActionSpeakString("sPCName = " + sPCName, TALKVOLUME_TALK);}
+			
 		}	 
 		
 	}	 
