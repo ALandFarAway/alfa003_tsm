@@ -389,6 +389,16 @@ if(GetSpellId() == 3056)
 			string sSpeak = GetLocalString(oScry, "SCRY_SPEAK");
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
+			int nSpellLevel = GetSpellLevel(GetSpellId());
+			int nAbilityMod = GetAbilityModifier(ABILITY_INTELLIGENCE);
+			if(GetLastSpellCastClass()== CLASS_TYPE_BARD || CLASS_TYPE_SORCERER || CLASS_TYPE_PALADIN) {
+				nAbilityMod = GetAbilityModifier(ABILITY_CHARISMA);
+				}
+			if(GetLastSpellCastClass()== CLASS_TYPE_CLERIC || CLASS_TYPE_DRUID || CLASS_TYPE_RANGER) {
+				nAbilityMod = GetAbilityModifier(ABILITY_WISDOM);
+				}
+			int nDC = 10 + nSpellLevel + nAbilityMod;
+			
 			float fScryTimer;
 			effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			object oScryListen = GetLocalObject(oScry, "oScryListen");
@@ -398,17 +408,21 @@ if(GetSpellId() == 3056)
 			SetLocalObject(oScryListen, "oScry", oScry);
 			SetLocalObject(oScryListen, "oScryer", oScryer);
 			SetLocalObject(oScry, "oScryListen", oScryListen);
+			SetLocalInt(oScryListen, "nScryDC", nDC);
 			SetFirstName(oScryListen, sScryName);
 			
-			SetLocalInt(oScry, "SCRY_ACTIVE", 1);
-			SetLocalFloat(oScry, "SCRY_TIMER", 60.0 * nScryerLevel);
+			SetLocalInt(oScryListen, "SCRY_ACTIVE", 1);
+			SetLocalFloat(oScryListen, "SCRY_TIMER", 60.0 * nScryerLevel);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
 			AssignCommand(oScryListen, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-			DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the " + sScryName + " is ready to receive a name to scry."));
-			fScryTimer = GetLocalFloat(oScry, "SCRY_TIMER");	
+			DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand' or 'Familiar'."));
+			DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have an 'Image', 'Possession', or 'Body Part' of the scrying subject."));
+			DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
+			fScryTimer = GetLocalFloat(oScryListen, "SCRY_TIMER");	
 			DelayCommand(fScryTimer, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
+			DelayCommand(fScryTimer+0.5, SetLocalFloat(oScryListen, "SCRY_TIMER", 0.0));
 			DestroyObject(oScryListen, fScryTimer+1.0);
-			DelayCommand(fScryTimer+1.5, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
+			DelayCommand(fScryTimer+1.5, SetLocalInt(oScryListen, "SCRY_ACTIVE", 0));
 			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
 		}
 	}

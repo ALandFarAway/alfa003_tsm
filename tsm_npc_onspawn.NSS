@@ -20,9 +20,18 @@ void main()
 		
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
-			 int nListenPattern = 6010;
+			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
+			 SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
+			 SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
+			 SetListenPattern(OBJECT_SELF, "**Familiar**", 6013);
+			 SetListenPattern(OBJECT_SELF, "**Picture**", 6014);
+			 SetListenPattern(OBJECT_SELF, "**Possession**", 6015);
+			 SetListenPattern(OBJECT_SELF, "**Body**", 6016);
+				 
+		
+			 int nListenPattern = 6020;
          	 object oPC = GetFirstPC(FALSE);
-			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6020)) {
+			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
 				 ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
