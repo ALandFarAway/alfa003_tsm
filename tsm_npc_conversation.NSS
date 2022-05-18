@@ -134,8 +134,28 @@ void main()
 						 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
 						 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
 							SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
+							string sSubjectArea = GetName(GetArea(oPC));
+							string sGenderNoun = "He";
+							string sGenderAdj = "him";
+							if(GetGender(oPC) == GENDER_FEMALE) {
+								sGenderNoun = "She";
+								sGenderAdj = "her";
+							}
+							
+							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". From nearest to furthest, these objects are around " + sGenderAdj + " within 5 feet:" );
 							DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
-						 	}
+							 	
+							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oPC), FALSE);
+							string sObjectName = GetName(oObject);
+							int nInc = 1;
+							while ((oObject != OBJECT_INVALID) && (nInc <= 6)){
+								SendMessageToPC(oScryer, sObjectName);
+								oObject = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oPC), FALSE);
+							    sObjectName = GetName(oObject);
+							    nInc++;
+								}
+							}
+						 break;
 						 }
 					 nListenPattern++;
 					 oPC = GetNextPC(FALSE);
