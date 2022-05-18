@@ -145,14 +145,14 @@ void main()
 							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". From nearest to furthest, these objects are around " + sGenderAdj + " within 5 feet:" );
 							DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 							 	
-							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oPC), FALSE);
+							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_DOOR);
 							string sObjectName = GetName(oObject);
 							int nInc = 1;
-							while ((oObject != OBJECT_INVALID) && (nInc <= 6)){
-								SendMessageToPC(oScryer, sObjectName);
-								oObject = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oPC), FALSE);
+							while ((oObject != OBJECT_INVALID) && (nInc <= 5)){
+								oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_DOOR);
 							    sObjectName = GetName(oObject);
-							    nInc++;
+							    SendMessageToPC(oScryer, sObjectName);
+								nInc++;
 								}
 							}
 						 break;
