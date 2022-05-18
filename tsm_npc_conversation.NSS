@@ -81,64 +81,68 @@ void main()
 			
 			if((nMatch >= 6010) && (nMatch <= 6013)) {
 				if(nMatch == 6010) {
-				 	nKnowledge = 10;
+				 	nKnowledge = -10;
 				}
 				if(nMatch == 6011) {
-				 	nKnowledge = 5;
+				 	nKnowledge = -5;
 				}
 				if(nMatch == 6012) {
 				 	nKnowledge = 0;
 				}
 				if(nMatch == 6013) {
-				 	nKnowledge = -5;
+				 	nKnowledge = 5;
 				}
 				
 				SetLocalInt(OBJECT_SELF, "nScryKnowledge", nKnowledge);
-				ActionSpeakString("Your knowledge of the subject is: " + GetMatchedSubstring(1));
+				SendMessageToPC(oScryer, "Your knowledge of the subject is: " + GetMatchedSubstring(1));
 			}
 			
-			if((nMatch >= 6014) && (nMatch <= 6016)) {
+			if((nMatch >= 6014) && (nMatch <= 6017)) {
 				if(nMatch == 6014) {
-			 	nConnection = -2;
+			 	nConnection = 0;
 				}
 				if(nMatch == 6015) {
-				 	nConnection = -4;
+			 	nConnection = 2;
 				}
 				if(nMatch == 6016) {
-				 	nConnection = -10;
+				 	nConnection = 4;
+				}
+				if(nMatch == 6017) {
+				 	nConnection = 10;
 				}
 				
 				SetLocalInt(OBJECT_SELF, "nScryConnection", nConnection);
-				ActionSpeakString("Your connection to the subject is: " + GetMatchedSubstring(1));
+				SendMessageToPC(oScryer, "Your connection to the subject is: " + GetMatchedSubstring(1));
 			}
 			
 			int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
-			ActionSpeakString("DC = " + IntToString(nDC));
+			SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
 			
 			if(nMatch >= 6020) {
 				int nListenPattern = 6020;
 	         	object oPC = GetFirstPC(FALSE);
 				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 					 string sPCName = GetName(oPC);
-					 ActionSpeakString("convo: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
 					 if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
-						{ActionSpeakString("looped sPCName = " + sPCName, TALKVOLUME_TALK);
-						 if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
+						{if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 						 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
-						 	}
+						 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
+								SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
+								SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
+							}
 						 else {
 						 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
 						 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
+							SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
 							DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 						 	}
 						 }
 					 nListenPattern++;
 					 oPC = GetNextPC(FALSE);
-				 }
-			
-			 if(oPC == OBJECT_INVALID) {
-			 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
-			 	}	
+					 if(oPC == OBJECT_INVALID) {
+					 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
+					 }	
+				 }	
 			}	
 		} 	
 	}	 

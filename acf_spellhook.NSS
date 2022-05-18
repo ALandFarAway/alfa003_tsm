@@ -415,8 +415,8 @@ if(GetSpellId() == 3056)
 			SetLocalFloat(oScryListen, "SCRY_TIMER", 60.0 * nScryerLevel);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
 			AssignCommand(oScryListen, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-			DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand' or 'Familiar'."));
-			DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have an 'Image', 'Possession', or 'Body Part' of the scrying subject."));
+			DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
+			DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
 			DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
 			fScryTimer = GetLocalFloat(oScryListen, "SCRY_TIMER");	
 			DelayCommand(fScryTimer, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		

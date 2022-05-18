@@ -24,10 +24,11 @@ void main()
 			 SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
 			 SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
 			 SetListenPattern(OBJECT_SELF, "**Familiar**", 6013);
-			 SetListenPattern(OBJECT_SELF, "**Picture**", 6014);
-			 SetListenPattern(OBJECT_SELF, "**Possession**", 6015);
-			 SetListenPattern(OBJECT_SELF, "**Body**", 6016);
-				 
+			 SetListenPattern(OBJECT_SELF, "**Nothing**", 6014);
+			 SetListenPattern(OBJECT_SELF, "**Picture**", 6015);
+			 SetListenPattern(OBJECT_SELF, "**Possession**", 6016);
+			 SetListenPattern(OBJECT_SELF, "**Body**", 6017);
+			 	 
 		
 			 int nListenPattern = 6020;
          	 object oPC = GetFirstPC(FALSE);
