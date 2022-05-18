@@ -399,10 +399,10 @@ if(GetSpellId() == 3056)
 			SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 			SetLocalFloat(oScry, "SCRY_TIMER", 60.0 * nScryerLevel);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
-			ActionSpeakString(sSpeak, TALKVOLUME_TALK);
+			AssignCommand(oScryListen, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the " + sScryName + " is ready to receive a name to scry."));
 			fScryTimer = GetLocalFloat(oScry, "SCRY_TIMER");	
-			DelayCommand(fScryTimer, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
+			DelayCommand(fScryTimer, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
 			DestroyObject(oScryListen, fScryTimer+1.0);
 			DelayCommand(fScryTimer+2.0, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
 		}

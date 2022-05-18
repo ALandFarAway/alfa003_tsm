@@ -74,11 +74,19 @@ void main()
 		 	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch >= 6010) {
-		 	string sMatch = GetMatchedSubstring(0);
-			ActionSpeakString("sMatch = " + sMatch, TALKVOLUME_TALK);
+		 	string sMatchPre = GetMatchedSubstring(0);
+			string sMatch = GetMatchedSubstring(1);
+			string sMatchPost = GetMatchedSubstring(2);
+			string sMatchFirst = GetMatchedSubstring(6010);
+			ActionSpeakString("sMatch0 = " + sMatchPre, TALKVOLUME_TALK);
+			ActionSpeakString("sMatch1 = " + sMatch, TALKVOLUME_TALK);
+			ActionSpeakString("sMatch2 = " + sMatchPost, TALKVOLUME_TALK);
+			ActionSpeakString("sMatchFirst = " + sMatchFirst, TALKVOLUME_TALK);
 			
 			string sPCName = GetName(GetFirstPC(FALSE));
-			if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(0)))
+			ActionSpeakString("sPCName = " + sPCName, TALKVOLUME_TALK);
+			
+			if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
 				{ActionSpeakString("sPCName = " + sPCName, TALKVOLUME_TALK);}
 			
 		}	 
