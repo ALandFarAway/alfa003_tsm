@@ -144,6 +144,8 @@ void main() {
 				sGenderAdj = "her";
 				}
 								
+			SendMessageToPC(oScryer, "" );
+			SendMessageToPC(oScryer, "********************" );
 			SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". Rain is " + IntToString(nWeatherRain) + ". Snow is " + IntToString(nWeatherSnow) + ". " + sGenderNoun + " is facing " + sFacing + "." );
 								 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
@@ -161,16 +163,21 @@ void main() {
 					nInc++;
 				}
 			
-			SetLocalLocation(oPC, "lNew", GetLocation(oPC));
-			location lNew = GetLocalLocation(oPC, "lNew");
+			SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
+			location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
 			SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
 			string sMoving = "standing still.";
 			string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
-			if(fDistanceMoved > 0.0) {
+			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
 			SendMessageToPC(oScryer, GetName(oPC) + " is " + sMoving);
+			
+			SendMessageToPC(oScryer, "********************" );
+			SendMessageToPC(oScryer, "" );
+			
+			
 		}	
 	}
 		
