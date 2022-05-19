@@ -75,16 +75,18 @@ void main()
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
+			string sRelayPre = GetMatchedSubstring(0);
 			string sRelay = GetMatchedSubstring(1);
-			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
+			string sRelayPost = GetMatchedSubstring(2);
+			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelayPre, TALKVOLUME_TALK));
+		    AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
+		    AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelayPost, TALKVOLUME_TALK));
 		    
 		}
 	}	 
 	
-	ActionSpeakString("oScryer= " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));
-	ActionSpeakString("LastSpeaker= " + GetName(GetLastSpeaker()));
 	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker() != OBJECT_SELF) && ((GetIsPC(GetLastSpeaker())) || (GetIsDMPossessed(GetLastPerceived())))) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer"))) {
 		 	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch >= 6010) {
