@@ -77,11 +77,19 @@ void main()
 			string sSpokenBy = GetName(GetLastPerceived());
 			string sRelay = GetMatchedSubstring(1);
 			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
-		
+		    
 		}
 	}	 
-		 
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() == GetLocalObject(OBJECT_SELF, "oScryer"))) {
+	
+	ActionSpeakString("oScryer= " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));
+	object oHeard;
+	ActionSpeakString("LastPerceived= " + GetName(GetLastPerceived()));
+	
+	if(GetLastPerceptionHeard()== 1) {
+	oHeard = GetLastPerceived();
+	ActionSpeakString("LastPerceptionHeard = " + GetName(oHeard));	 
+	}	 
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() != OBJECT_SELF) && (GetLastPerceptionHeard())) {
 		 	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch >= 6010) {
@@ -153,6 +161,8 @@ void main()
 								SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
 								SetFirstName(oScrySend, "Scrying Sensor");
 								DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
+								DestroyObject(oScrySend, fScryActive); 
+								DelayCommand(fScryActive, SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID));
 								}
 							
 							string sSubjectArea = GetName(GetArea(oPC));
