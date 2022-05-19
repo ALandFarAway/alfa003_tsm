@@ -404,10 +404,10 @@ if(GetSpellId() == 3056)
 			object oScryListen = GetLocalObject(oScry, "oScryListen");
 			if(oScryListen == OBJECT_INVALID) {
 				oScryListen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
-            	}
+            	SetLocalObject(oScry, "oScryListen", oScryListen);
+				}
 			SetLocalObject(oScryListen, "oScry", oScry);
 			SetLocalObject(oScryListen, "oScryer", oScryer);
-			SetLocalObject(oScry, "oScryListen", oScryListen);
 			SetLocalInt(oScryListen, "nScryDC", nDC);
 			SetFirstName(oScryListen, sScryName);
 			

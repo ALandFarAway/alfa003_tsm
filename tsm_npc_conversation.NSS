@@ -70,7 +70,18 @@ void main()
 					  }
 		 }
 	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() != OBJECT_SELF)) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastPerceived() != OBJECT_SELF)  && (GetTag(GetLastPerceived()) != "003_cr_scry_listen")) {
+		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
+		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6031) {
+			string sSpokenBy = GetName(GetLastPerceived());
+			string sRelay = GetMatchedSubstring(1);
+			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
+		
+		}
+	}	 
+		 
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() == GetLocalObject(OBJECT_SELF, "oScryer"))) {
 		 	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch >= 6010) {
@@ -134,6 +145,16 @@ void main()
 						 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
 						 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
 							SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
+							location lThere = GetLocation(oPC);
+							object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
+							if(oScrySend == OBJECT_INVALID) {
+								oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);
+				            	SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
+								SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
+								SetFirstName(oScrySend, "Scrying Sensor");
+								DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
+								}
+							
 							string sSubjectArea = GetName(GetArea(oPC));
 							string sGenderNoun = "He";
 							string sGenderAdj = "him";
@@ -142,16 +163,22 @@ void main()
 								sGenderAdj = "her";
 							}
 							
-							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". From furthest to nearest, these objects are around " + sGenderAdj + " within 10 feet:" );
+							
+							
+							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". These objects are around " + sGenderAdj + " within 10 feet:" );
 							DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 							 	
 							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 							string sObjectName = GetName(oObject);
+							float fDistance = GetDistanceBetween(oPC, oObject);
 							int nInc = 1;
 							while ((oObject != OBJECT_INVALID) && (nInc <= 10)){
 								oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 							    sObjectName = GetName(oObject);
-							    SendMessageToPC(oScryer, sObjectName);
+								fDistance = GetDistanceBetween(oPC, oObject);
+								if(sObjectName != GetName(oPC)) {
+							    	SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet away from " + sGenderAdj + ".");
+								}
 								nInc++;
 								}
 							}

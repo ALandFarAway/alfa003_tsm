@@ -18,6 +18,10 @@ void main()
          SetListening(OBJECT_SELF, TRUE);
     	}
 		
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_send") {
+			 SetListenPattern(OBJECT_SELF, "**", 6031);
+			 SetListening(OBJECT_SELF, TRUE);
+			 }
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
 			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
@@ -34,7 +38,7 @@ void main()
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
-				 ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
+				 //ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
