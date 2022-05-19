@@ -1,5 +1,95 @@
 #include "acr_quest_i"
 #include "acr_creature_i"
+#include "x0_i0_position"
+
+////////////////////////////////////////////////////////////////////////////////
+// Constants ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+const float NUMBER_OF_COMPASS_DIRECTIONS = 16.0;
+const float HALF_COMPASS_ANGLE = 360.0/(NUMBER_OF_COMPASS_DIRECTIONS * 2.0);
+
+string GetCompassDirectionOfBearing(float fDegrees);
+string GetCompassDirectionOfAngle(float fAngle);
+
+////////////////////////////////////////////////////////////////////////////////
+// Function Definitions ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+string GetCompassDirectionOfBearing(float fDegrees)
+{
+    /* Takes a bearing from degrees (0.0 -> 360.0)
+     * where 0.0 is North and 90.0 is West and
+     * returns its corresponding compass direction
+     */
+
+    // Handle cases when the caller is lazy
+    while (fDegrees < 0.0) {
+        fDegrees += 360.0;
+    }
+    while (fDegrees > 360.0) {
+        fDegrees -= 360.0;
+    }
+
+    // Do the mapping
+    if (fDegrees < HALF_COMPASS_ANGLE || fDegrees > HALF_COMPASS_ANGLE * 31) {
+        return "north";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 3) {
+        return "north-northeast";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 5) {
+        return "northeast";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 7) {
+        return "east-northeast";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 9) {
+        return "east";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 11) {
+        return "east-southeast";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 13) {
+        return "southeast";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 15) {
+        return "south-southeast";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 17) {
+        return "south";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 19) {
+        return "south-southwest";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 21) {
+        return "southwest";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 23) {
+        return "west-southwest";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 25) {
+        return "west";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 27) {
+        return "west-northwest";
+    }
+    else if (fDegrees < HALF_COMPASS_ANGLE * 29) {
+        return "northwest";
+    }
+    return "north-northwest";
+}
+
+
+string GetCompassDirectionOfAngle(float fAngle)
+{
+    /* Takes an angle from degrees (0.0 -> 360.0)
+     * where 0.0 is the positive X-axis and 90.0
+     * is the positive Y-axis and returns its
+     * corresponding compass direction
+     */
+    return GetCompassDirectionOfBearing(-fAngle + 90.0);
+}
 
 
 void main()
@@ -75,12 +165,8 @@ void main()
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
-			string sRelayPre = GetMatchedSubstring(0);
-			string sRelay = GetMatchedSubstring(1);
-			string sRelayPost = GetMatchedSubstring(2);
-			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelayPre, TALKVOLUME_TALK));
-		    AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
-		    AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelayPost, TALKVOLUME_TALK));
+			string sRelay = GetMatchedSubstring(0);
+			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
 		    
 		}
 	}	 
@@ -132,7 +218,7 @@ void main()
 			}
 			
 			int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
-			SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
+			//SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
 			
 			if(nMatch >= 6020) {
 				int nListenPattern = 6020;
@@ -140,61 +226,72 @@ void main()
 				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 					 string sPCName = GetName(oPC);
 					 if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
-						{if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
-						 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
-						 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
-								SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
-								SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
-							}
+						{if(GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1)
+							{SendMessageToPC(oScryer, "You are currently scrying " + GetName(oPC) + ". You must wait until this spell ends to scry again.");}
+						
 						 else {
-						 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
-						 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
-							SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
-							location lThere = GetLocation(oPC);
-							object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-							if(oScrySend == OBJECT_INVALID) {
-								oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);
-				            	SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
-								SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
-								SetFirstName(oScrySend, "Scrying Sensor");
-								DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
-								DestroyObject(oScrySend, fScryActive); 
-								DelayCommand(fScryActive, SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID));
+						
+							 if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
+							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
+							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
+									SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
+									SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
 								}
-							
-							string sSubjectArea = GetName(GetArea(oPC));
-							string sGenderNoun = "He";
-							string sGenderAdj = "him";
-							if(GetGender(oPC) == GENDER_FEMALE) {
-								sGenderNoun = "She";
-								sGenderAdj = "her";
-							}
-							
-							
-							
-							SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". These objects are around " + sGenderAdj + " within 10 feet:" );
-							DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
-							 	
-							object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
-							string sObjectName = GetName(oObject);
-							float fDistance = GetDistanceBetween(oPC, oObject);
-							int nInc = 1;
-							while ((oObject != OBJECT_INVALID) && (nInc <= 10)){
-								oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
-							    sObjectName = GetName(oObject);
-								fDistance = GetDistanceBetween(oPC, oObject);
-								if(sObjectName != GetName(oPC)) {
-							    	SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet away from " + sGenderAdj + ".");
+							 else {
+							 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
+							 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
+								SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
+								location lThere = GetLocation(oPC);
+								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
+								if(oScrySend == OBJECT_INVALID) {
+									oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);
+					            	SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
+									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
+									SetFirstName(oScrySend, "Scrying Sensor");
+									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
+									DestroyObject(oScrySend, fScryActive); 
+									DelayCommand(fScryActive, SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID));
+									}
+								
+								object oArea = GetArea(oPC);
+								string sSubjectArea = GetName(oArea);
+								string sAreaTag = GetTag(oArea);
+								int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
+								int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
+								string sFacing = GetCompassDirectionOfBearing(GetFacing(oPC));
+								
+								string sGenderNoun = "He";
+								string sGenderAdj = "him";
+								if(GetGender(oPC) == GENDER_FEMALE) {
+									sGenderNoun = "She";
+									sGenderAdj = "her";
 								}
-								nInc++;
+								
+								SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". Rain is " + IntToString(nWeatherRain) + ". Snow is " + IntToString(nWeatherSnow) + ". " + sGenderNoun + " is facing " + sFacing + "." );
+								DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
+								 	
+								object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
+								string sObjectName = GetName(oObject);
+								float fDistance = GetDistanceBetween(oPC, oObject);
+								int nInc = 1;
+								while ((oObject != OBJECT_INVALID) && (nInc <= 12)){
+									string sObjectPrevious = GetName(oObject);
+								    oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
+								    sObjectName = GetName(oObject);
+									fDistance = GetDistanceBetween(oPC, oObject);
+									if((sObjectName != GetName(oPC)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
+								    	SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".");
+									}
+									nInc++;
+									}
 								}
-							}
-						 break;
+							 break;
+							 }
+						 nListenPattern++;
+						 oPC = GetNextPC(FALSE);
+						 if(oPC == OBJECT_INVALID) {
+						 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
 						 }
-					 nListenPattern++;
-					 oPC = GetNextPC(FALSE);
-					 if(oPC == OBJECT_INVALID) {
-					 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
 					 }	
 				 }	
 			}	
