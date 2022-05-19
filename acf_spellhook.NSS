@@ -410,7 +410,9 @@ if(GetSpellId() == 3056)
 			SetLocalObject(oScryListen, "oScryer", oScryer);
 			SetLocalInt(oScryListen, "nScryDC", nDC);
 			SetFirstName(oScryListen, sScryName);
-			
+			SetLocalObject(oScry, "oScryListen", oScryListen);
+			SetLocalObject(oScry, "oScryer", oScryer);
+			SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 			SetLocalInt(oScryListen, "SCRY_ACTIVE", 1);
 			SetLocalFloat(oScryListen, "SCRY_TIMER", 60.0 * nScryerLevel);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
@@ -419,11 +421,14 @@ if(GetSpellId() == 3056)
 			DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
 			DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
 			fScryTimer = GetLocalFloat(oScryListen, "SCRY_TIMER");	
-			DelayCommand(fScryTimer, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
+			DelayCommand(fScryTimer - 1.0, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
+			DestroyObject(oScryListen, fScryTimer);
 			DelayCommand(fScryTimer+0.5, SetLocalFloat(oScryListen, "SCRY_TIMER", 0.0));
-			DestroyObject(oScryListen, fScryTimer+1.0);
 			DelayCommand(fScryTimer+1.5, SetLocalInt(oScryListen, "SCRY_ACTIVE", 0));
+			DelayCommand(fScryTimer+1.5, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
 			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
+			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
+			
 		}
 	}
 	

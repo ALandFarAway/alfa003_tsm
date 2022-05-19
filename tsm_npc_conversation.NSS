@@ -173,7 +173,7 @@ void main()
 	
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer"))) {
-		 	 
+		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch >= 6010) {
 		 	string sMatch = GetMatchedSubstring(1);
@@ -239,14 +239,17 @@ void main()
 									SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
 								}
 							 else {
+							 	SetLocalObject(oScry, "oScried", oPC);
 							 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
 							 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
+								DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 								SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
 								location lThere = GetLocation(oPC);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
 									oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);
-					            	SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
+					            	SetLocalObject(oScry, "oScrySend", oScrySend);
+									SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
 									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
 									SetFirstName(oScrySend, "Scrying Sensor");
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
@@ -271,7 +274,6 @@ void main()
 								}
 								
 								SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". Rain is " + IntToString(nWeatherRain) + ". Snow is " + IntToString(nWeatherSnow) + ". " + sGenderNoun + " is facing " + sFacing + "." );
-								DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 								 	
 								object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 								string sObjectName = GetName(oObject);
@@ -301,7 +303,7 @@ void main()
 							 }
 						 nListenPattern++;
 						 oPC = GetNextPC(FALSE);
-						 if(oPC == OBJECT_INVALID) {
+						 if((oPC == OBJECT_INVALID) && (GetLocalInt(oPC, "SCRY_ACTIVE")==0)) {
 						 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
 						 }
 					 	
