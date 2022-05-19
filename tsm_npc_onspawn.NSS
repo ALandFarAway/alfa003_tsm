@@ -8,22 +8,25 @@ void main()
 {
 	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
 	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
-	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
-	    	      
+	effect eInvis = EffectInvisibility(EFFECT_TYPE_GREATERINVISIBILITY);
+		 		     	      
          
 	if(GetTag(OBJECT_SELF)== "003_cr_lath_cyrthol")
-        { 	 
+        { AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
+		 
          AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
     	 SetListenPattern(OBJECT_SELF, "**Sylune**", 6001);
          SetListening(OBJECT_SELF, TRUE);
     	}
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_send") {
-			 SetListenPattern(OBJECT_SELF, "**", 6031);
+			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,OBJECT_SELF));
+    	     SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
 			 }
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
+			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
 			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
 			 SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
 			 SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
@@ -52,7 +55,7 @@ void main()
 	if(GetTag(OBJECT_SELF)== "003_cr_voice")
         {SetActionMode(OBJECT_SELF, ACTION_MODE_STEALTH, STEALTH_MODE_ACTIVATED);
 		 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
-    	 effect eInvis = EffectInvisibility(EFFECT_TYPE_GREATERINVISIBILITY);
+    	  AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
 		 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,OBJECT_SELF));
     	 SetListenPattern(OBJECT_SELF, "**Sylune**", 6001);
          SetListenPattern(OBJECT_SELF, "**Alustriel**", 6002);
