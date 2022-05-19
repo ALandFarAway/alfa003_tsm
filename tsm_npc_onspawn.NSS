@@ -38,7 +38,7 @@ void main()
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
-				 ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
+				 //ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);

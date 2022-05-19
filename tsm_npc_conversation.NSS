@@ -160,7 +160,7 @@ void main()
 					  }
 		 }
 	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")  && ((GetIsPC(GetLastPerceived())) || (GetIsDMPossessed(GetLastPerceived())))) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -225,9 +225,13 @@ void main()
 	         	object oPC = GetFirstPC(FALSE);
 				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 					 string sPCName = GetName(oPC);
-					 if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
-						{int nActive = GetLocalInt(oPC, "SCRY_ACTIVE");
-						 SendMessageToPC(oPC, "Active = " + IntToString(nActive));
+					 int nActive = GetLocalInt(oPC, "SCRY_ACTIVE");
+					 if(GetLocalInt(oPC, "SCRY_ACTIVE")==1) {
+						 SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
+						 SendMessageToPC(oScryer, "You are scrying" + GetName(oPC) + " and must wait for this spell to end before scrying again.");
+						 }
+					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oPC, "SCRY_ACTIVE")==0))
+						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 							 if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
 							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
@@ -255,7 +259,7 @@ void main()
 								string sAreaTag = GetTag(oArea);
 								int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
 								int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
-								string sFacing = GetCompassDirectionOfBearing(GetFacing(oPC));
+								string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));
 								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
 								
