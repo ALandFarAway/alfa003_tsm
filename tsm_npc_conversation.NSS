@@ -226,11 +226,8 @@ void main()
 				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 					 string sPCName = GetName(oPC);
 					 if(TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))
-						{if(GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1)
-							{SendMessageToPC(oScryer, "You are currently scrying " + GetName(oPC) + ". You must wait until this spell ends to scry again.");}
-						
-						 else {
-						
+						{int nActive = GetLocalInt(oPC, "SCRY_ACTIVE");
+						 SendMessageToPC(oPC, "Active = " + IntToString(nActive));
 							 if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
 							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
@@ -259,6 +256,8 @@ void main()
 								int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
 								int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
 								string sFacing = GetCompassDirectionOfBearing(GetFacing(oPC));
+								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));
+								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
 								
 								string sGenderNoun = "He";
 								string sGenderAdj = "him";
@@ -281,7 +280,7 @@ void main()
 									fDistance = GetDistanceBetween(oPC, oObject);
 									if((sObjectName != GetName(oPC)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
 								    	SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".");
-									}
+										}
 									nInc++;
 									}
 								}
@@ -292,7 +291,7 @@ void main()
 						 if(oPC == OBJECT_INVALID) {
 						 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
 						 }
-					 }	
+					 	
 				 }	
 			}	
 		} 	
