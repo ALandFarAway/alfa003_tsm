@@ -46,7 +46,7 @@ void main()
 {
     ACR_CreatureOnSpawnIn();
 	
-	SetLocalInt(OBJECT_SELF, "ACR_FLOCKING", FALSE);
+	SetLocalString(OBJECT_SELF, "sMyTag", GetTag(OBJECT_SELF));
 	
 	//animation code
 	if (GetLocalInt(OBJECT_SELF,"USE_IMMOBILE_AMBIENT_ANIM")==1)
