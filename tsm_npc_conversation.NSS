@@ -70,11 +70,11 @@ void main()
 					  }
 		 }
 	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastPerceived() != OBJECT_SELF)  && (GetTag(GetLastPerceived()) != "003_cr_scry_listen")) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")  && ((GetIsPC(GetLastPerceived())) || (GetIsDMPossessed(GetLastPerceived())))) {
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
-			string sSpokenBy = GetName(GetLastPerceived());
+			string sSpokenBy = GetName(GetLastSpeaker());
 			string sRelay = GetMatchedSubstring(1);
 			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
 		    
@@ -82,14 +82,9 @@ void main()
 	}	 
 	
 	ActionSpeakString("oScryer= " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));
-	object oHeard;
-	ActionSpeakString("LastPerceived= " + GetName(GetLastPerceived()));
+	ActionSpeakString("LastSpeaker= " + GetName(GetLastSpeaker()));
 	
-	if(GetLastPerceptionHeard()== 1) {
-	oHeard = GetLastPerceived();
-	ActionSpeakString("LastPerceptionHeard = " + GetName(oHeard));	 
-	}	 
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastPerceived() != OBJECT_SELF) && (GetLastPerceptionHeard())) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker() != OBJECT_SELF) && ((GetIsPC(GetLastSpeaker())) || (GetIsDMPossessed(GetLastPerceived())))) {
 		 	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch >= 6010) {
