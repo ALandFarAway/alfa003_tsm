@@ -283,6 +283,15 @@ void main()
 										}
 									nInc++;
 									}
+								SetLocalLocation(oPC, "lNew", GetLocation(oPC));
+								location lNew = GetLocalLocation(oPC, "lNew");
+								float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
+								SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
+								string sMoving = "standing still.";
+								string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
+								if(fDistanceMoved > 0.0) {
+									sMoving = "moving " + sDirection + ".";
+									}
 								}
 							 break;
 							 }
