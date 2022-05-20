@@ -447,158 +447,158 @@ void main()
 								string sOther;
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToA") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextToA") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextToA");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}
 								else if(GetLocalString(OBJECT_SELF, "sFurtherA") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherA") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherA");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherA") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOtherA") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherA");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 										
 								if(GetLocalString(OBJECT_SELF, "sNextToB") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToB") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToB");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherB") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherB") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherB");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherB") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherB") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherB");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 											
 								if(GetLocalString(OBJECT_SELF, "sNextToC") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToC") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToC");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherC") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherC") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherC");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherC") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherC") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherC");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 										
 								if(GetLocalString(OBJECT_SELF, "sNextToD") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToD") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToD");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherD") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherD") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherD");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherD") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherD") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherD");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToE") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToE") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToE");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherE") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherE") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherE");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherE") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherE") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherE");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToF") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToF") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToF");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherF") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherF") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherF");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherF") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherF") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherF");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToG") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToG") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToG");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherG") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherG") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherG");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherG") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherG") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherG");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToH") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToH") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToH");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherH") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherH") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherH");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherH") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherH") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherH");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToI") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToI") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToI");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherI") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherI") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherI");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherI") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sNextToOtherI") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sNextToOtherI");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToJ") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToJ") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToJ");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherJ") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherJ") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherJ");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherJ") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherJ") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherJ");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToK") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToK") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToK");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherK") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherK") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherK");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherK") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherK") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherK");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToL") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToL") + ", ";
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToL");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherL") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + GetLocalString(OBJECT_SELF, "sFurtherL") + ", ";
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherL");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherL") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + GetLocalString(OBJECT_SELF, "sOtherL") + ", ";
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherL");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
