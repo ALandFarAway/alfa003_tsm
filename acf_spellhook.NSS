@@ -412,7 +412,6 @@ if(GetSpellId() == 3056)
 			SetFirstName(oScryListen, sScryName);
 			SetLocalObject(oScry, "oScryListen", oScryListen);
 			SetLocalObject(oScry, "oScryer", oScryer);
-			SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 			SetLocalInt(oScryListen, "SCRY_ACTIVE", 1);
 			SetLocalFloat(oScryListen, "SCRY_TIMER", 60.0 * nScryerLevel);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
@@ -425,7 +424,6 @@ if(GetSpellId() == 3056)
 			DestroyObject(oScryListen, fScryTimer);
 			DelayCommand(fScryTimer+0.5, SetLocalFloat(oScryListen, "SCRY_TIMER", 0.0));
 			DelayCommand(fScryTimer+1.5, SetLocalInt(oScryListen, "SCRY_ACTIVE", 0));
-			DelayCommand(fScryTimer+1.5, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
 			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
 			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
 			

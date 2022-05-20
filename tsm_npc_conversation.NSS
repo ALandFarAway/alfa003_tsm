@@ -230,7 +230,7 @@ void main()
 						 SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 						 SendMessageToPC(oScryer, "You are scrying" + GetName(oPC) + " and must wait for this spell to end before scrying again.");
 						 }
-					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oPC, "SCRY_ACTIVE")==0))
+					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
 						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 							 if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
@@ -242,7 +242,7 @@ void main()
 							 	SetLocalObject(oScry, "oScried", oPC);
 							 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
 							 	SetLocalInt(oScry, "SCRY_ACTIVE", 1);
-								DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
+								DelayCommand(fScryActive, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
 								SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
 								location lThere = GetLocation(oPC);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
@@ -441,7 +441,6 @@ void main()
 									nInc++;
 									}
 								
-									
 								string sNextTo;
 								string sFurther;
 								string sOther;
@@ -460,204 +459,168 @@ void main()
 									}	
 										
 								if(GetLocalString(OBJECT_SELF, "sNextToB") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToB");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToB");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherB") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherB");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherB");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherB") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherB");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherB");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 											
 								if(GetLocalString(OBJECT_SELF, "sNextToC") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToC");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToC");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherC") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherC");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherC");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherC") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherC");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherC");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 										
 								if(GetLocalString(OBJECT_SELF, "sNextToD") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToD");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToD");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherD") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherD");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherD");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherD") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherD");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherD");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToE") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToE");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToE");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherE") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherE");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherE");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherE") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherE");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherE");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToF") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToF");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToF");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherF") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherF");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherF");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherF") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherF");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherF");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToG") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToG");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToG");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherG") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherG");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherG");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherG") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherG");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherG");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToH") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToH");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToH");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherH") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherH");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherH");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherH") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherH");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherH");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToI") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToI");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToI");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherI") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherI");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherI");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherI") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sNextToOtherI");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sNextToOtherI");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToJ") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToJ");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToJ");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherJ") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherJ");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherJ");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherJ") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherJ");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherJ");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToK") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToK");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToK");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherK") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherK");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherK");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherK") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherK");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherK");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
 								if(GetLocalString(OBJECT_SELF, "sNextToL") != "")
-									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + ", " + GetLocalString(OBJECT_SELF, "sNextToL");
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + " and " + GetLocalString(OBJECT_SELF, "sNextToL");
 									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sFurtherL") != "")
-									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + ", " + GetLocalString(OBJECT_SELF, "sFurtherL");
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurther") + " and " + GetLocalString(OBJECT_SELF, "sFurtherL");
 									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
 									}	
 								else if(GetLocalString(OBJECT_SELF, "sOtherL") != "")
-									{sOther = GetLocalString(OBJECT_SELF, "sOther") + ", " + GetLocalString(OBJECT_SELF, "sOtherL");
+									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherL");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
 								
-								
 								sNextTo = GetLocalString(OBJECT_SELF, "sNextTo");
-								int nStrLgth = GetStringLength(sNextTo);
-								int nCountBack = 1;
-								while (nCountBack < 20) {
-									if(FindSubString(sNextTo, ",", nStrLgth - nCountBack) == -1) {
-									    nCountBack ++;
-										}
-									else {sNextTo = InsertString(sNextTo,  " and ", nStrLgth - nCountBack + 1);
-										 break;
-										 }
-									}
-								
 								sFurther = GetLocalString(OBJECT_SELF, "sFurther");
-								int nStrLgthB = GetStringLength(sFurther);
-								int nCountBackB = 1;
-								while (nCountBackB < 20) {
-									if(FindSubString(sFurther, ",", nStrLgthB - nCountBackB) == -1) {
-									    nCountBackB ++;
-										}
-									else {sFurther = InsertString(sFurther,  " and ", nStrLgthB - nCountBackB + 1);
-										 break;
-										 }
-									}
-								
 								sOther = GetLocalString(OBJECT_SELF, "sOther");
-								int nStrLgthC = GetStringLength(sOther);
-								int nCountBackC = 1;
-								while (nCountBackC < 20) {
-									if(FindSubString(sOther, ",", nStrLgthC - nCountBackC) == -1) {
-									    nCountBackC ++;
-										}
-									else {sOther = InsertString(sOther,  " and ", nStrLgthC - nCountBackC + 1);
-										 break;
-										 }
-									}
-									
-								//if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
-									//{
-									SendMessageToPC(oScryer, sGenderNoun + " is standing next to " + sNextTo + ".");
-									SendMessageToPC(oScryer, sFurther + " can be seen nearby.");
-									SendMessageToPC(oScryer, "Also within view: " + sOther + ".");
 								
-									//	}
-								
+								if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
+									{SendMessageToPC(oScryer, sGenderNoun + " is standing next to " + sNextTo + ".");}
+								if((GetLocalString(OBJECT_SELF, "sFurtherA") != "") || (GetLocalString(OBJECT_SELF, "sFurtherB") != "") || (GetLocalString(OBJECT_SELF, "sFurtherC") != "") || (GetLocalString(OBJECT_SELF, "sFurtherD") != "") || (GetLocalString(OBJECT_SELF, "sFurtherE") != "") || (GetLocalString(OBJECT_SELF, "sFurtherF") != "") || (GetLocalString(OBJECT_SELF, "sFurtherG") != "") || (GetLocalString(OBJECT_SELF, "sFurtherH") != "") || (GetLocalString(OBJECT_SELF, "sFurtherI") != "") || (GetLocalString(OBJECT_SELF, "sFurtherJ") != "") || (GetLocalString(OBJECT_SELF, "sFurtherK") != "") || (GetLocalString(OBJECT_SELF, "sFurtherL") != ""))	
+									{SendMessageToPC(oScryer, sFurther + " can be seen nearby.");}
+								if((GetLocalString(OBJECT_SELF, "sOtherA") != "") || (GetLocalString(OBJECT_SELF, "sOtherB") != "") || (GetLocalString(OBJECT_SELF, "sOtherC") != "") || (GetLocalString(OBJECT_SELF, "sOtherD") != "") || (GetLocalString(OBJECT_SELF, "sOtherE") != "") || (GetLocalString(OBJECT_SELF, "sOtherF") != "") || (GetLocalString(OBJECT_SELF, "sOtherG") != "") || (GetLocalString(OBJECT_SELF, "sOtherH") != "") || (GetLocalString(OBJECT_SELF, "sOtherI") != "") || (GetLocalString(OBJECT_SELF, "sOtherJ") != "") || (GetLocalString(OBJECT_SELF, "sOtherK") != "") || (GetLocalString(OBJECT_SELF, "sOtherL") != ""))	
+									{SendMessageToPC(oScryer, "Within view: " + sOther + ".");}
 								}
 							 break;
 							 }
 						 nListenPattern++;
 						 oPC = GetNextPC(FALSE);
-						 if((oPC == OBJECT_INVALID) && (GetLocalInt(oPC, "SCRY_ACTIVE")==0)) {
-						 	SendMessageToPC(oScryer, "Your scrying spell fails to show you the one you seek.");
-						 }
-					 	
-				 }	
-			}	
+				}	
+			}
+			
+		if(nMatch == 6018) {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
+				
 		} 	
 	}	 
 	
