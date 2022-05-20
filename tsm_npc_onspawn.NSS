@@ -35,7 +35,7 @@ void main()
 			 SetListenPattern(OBJECT_SELF, "**Picture**", 6015);
 			 SetListenPattern(OBJECT_SELF, "**Possession**", 6016);
 			 SetListenPattern(OBJECT_SELF, "**Body**", 6017);
-			 SetListenPattern(OBJECT_SELF, "**", 6018);
+			 //SetListenPattern(OBJECT_SELF, "**", 6018);
 			 	 
 		
 			 int nListenPattern = 6020;

@@ -199,7 +199,7 @@ void main()
 				SendMessageToPC(oScryer, "Your knowledge of the subject is: " + GetMatchedSubstring(1));
 			}
 			
-			if((nMatch >= 6014) && (nMatch <= 6017)) {
+		else if((nMatch >= 6014) && (nMatch <= 6017)) {
 				if(nMatch == 6014) {
 			 	nConnection = 0;
 				}
@@ -217,10 +217,9 @@ void main()
 				SendMessageToPC(oScryer, "Your connection to the subject is: " + GetMatchedSubstring(1));
 			}
 			
-			int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 			//SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
 			
-			if(nMatch >= 6020) {
+		else if(nMatch >= 6020) {
 				int nListenPattern = 6020;
 	         	object oPC = GetFirstPC(FALSE);
 				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
@@ -232,7 +231,8 @@ void main()
 						 }
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
 						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
-							 if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
+						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
+				 		if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
 							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
 									SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
@@ -619,7 +619,7 @@ void main()
 				}	
 			}
 			
-		if(nMatch == 6018) {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
+		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 				
 		} 	
 	}	 
