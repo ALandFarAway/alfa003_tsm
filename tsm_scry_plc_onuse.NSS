@@ -122,11 +122,9 @@ void main() {
 			SendMessageToPC(oUser, "The scrying object requires the casting of the Scry spell.");
 		}
 		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser != oScryer)) {
-			SendMessageToPC(oUser, sSpeak);
 			SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
 		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser == oScryer)) {
-			SendMessageToPC(oUser, sSpeak);
 			
 			object oPC = GetLocalObject(OBJECT_SELF, "oScried");
 			object oArea = GetArea(oPC);
