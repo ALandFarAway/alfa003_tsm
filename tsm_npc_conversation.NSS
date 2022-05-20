@@ -225,8 +225,8 @@ void main()
 	         	object oPC = GetFirstPC(FALSE);
 				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 					 string sPCName = GetName(oPC);
-					 int nActive = GetLocalInt(oPC, "SCRY_ACTIVE");
-					 if(GetLocalInt(oPC, "SCRY_ACTIVE")==1) {
+					 int nActive = GetLocalInt(oScry, "SCRY_ACTIVE");
+					 if(GetLocalInt(oScry, "SCRY_ACTIVE")==1) {
 						 SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 						 SendMessageToPC(oScryer, "You are scrying" + GetName(oPC) + " and must wait for this spell to end before scrying again.");
 						 }
@@ -241,7 +241,7 @@ void main()
 							 else {
 							 	SetLocalObject(oScry, "oScried", oPC);
 							 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
-							 	SetLocalInt(oPC, "SCRY_ACTIVE", 1);
+							 	SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 								DelayCommand(fScryActive, SetLocalInt(oPC, "SCRY_ACTIVE", 0));
 								SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
 								location lThere = GetLocation(oPC);
@@ -261,7 +261,30 @@ void main()
 								string sSubjectArea = GetName(oArea);
 								string sAreaTag = GetTag(oArea);
 								int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
+								string sWeatherRain = "The sun is shining.";
+								if(nWeatherRain == 1)  
+									{sWeatherRain = "It is drizzling rain.";}
+								if(nWeatherRain == 2)  
+									{sWeatherRain = "It is raining lightly.";}
+								if(nWeatherRain == 3)  
+									{sWeatherRain = "Rain is falling.";}
+								if(nWeatherRain == 4)  
+									{sWeatherRain = "Rain is pouring down.";}
+								if(nWeatherRain == 5)  
+									{sWeatherRain = "A storm rages.";}
+								
+								string sWeatherSnow = "The sun is shining.";
 								int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
+								if(nWeatherSnow == 1)  
+									{sWeatherSnow = "A few flakes of snow are falling.";}
+								if(nWeatherSnow == 2)  
+									{sWeatherSnow = "It is snowing lightly.";}
+								if(nWeatherSnow == 3)  
+									{sWeatherSnow = "Snow is falling.";}
+								if(nWeatherSnow == 4)  
+									{sWeatherSnow = "Snow is falling heavily.";}
+								if(nWeatherSnow == 5)  
+									{sWeatherSnow = "A blizzard rages.";}
 								string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));
 								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
@@ -273,31 +296,349 @@ void main()
 									sGenderAdj = "her";
 								}
 								
-								SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". Rain is " + IntToString(nWeatherRain) + ". Snow is " + IntToString(nWeatherSnow) + ". " + sGenderNoun + " is facing " + sFacing + "." );
+								SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". "  + sWeatherRain + " " + sWeatherSnow);
 								 	
 								object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 								string sObjectName = GetName(oObject);
 								float fDistance = GetDistanceBetween(oPC, oObject);
 								int nInc = 1;
 								while ((oObject != OBJECT_INVALID) && (nInc <= 12)){
-									string sObjectPrevious = GetName(oObject);
-								    oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
+									oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 								    sObjectName = GetName(oObject);
 									fDistance = GetDistanceBetween(oPC, oObject);
-									if((sObjectName != GetName(oPC)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
-								    	SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".");
+									if((sObjectName != GetName(oPC)) && (sObjectName != "")) {
+								    	if(nInc == 1) {
+											string sObjectNameA = GetName(oObject);
+											float fDistanceA = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeA = GetObjectType(oObject);
+											if((nObjectTypeA == OBJECT_TYPE_CREATURE) && (fDistanceA < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToA", sObjectNameA);}
+											else if(nObjectTypeA == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherA", sObjectNameA);}
+											else {SetLocalString(OBJECT_SELF, "sOtherA", sObjectNameA);}
+											}
+										else if(nInc == 2) {
+											string sObjectNameB = GetName(oObject);
+											float fDistanceB = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeB = GetObjectType(oObject);
+											if((nObjectTypeB == OBJECT_TYPE_CREATURE) && (fDistanceB < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToB", sObjectNameB);}
+											else if(nObjectTypeB == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherB", sObjectNameB);}
+											else {SetLocalString(OBJECT_SELF, "sOtherB", sObjectNameB);}
+											}
+										else if(nInc == 3) {
+											string sObjectNameC = GetName(oObject);
+											float fDistanceC = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeC = GetObjectType(oObject);
+											if((nObjectTypeC == OBJECT_TYPE_CREATURE) && (fDistanceC < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToC", sObjectNameC);}
+											else if(nObjectTypeC == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherC", sObjectNameC);}
+											else {SetLocalString(OBJECT_SELF, "sOtherC", sObjectNameC);}
+											}
+										else if(nInc == 4) {
+											string sObjectNameD = GetName(oObject);
+											float fDistanceD = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeD = GetObjectType(oObject);
+											if((nObjectTypeD == OBJECT_TYPE_CREATURE) && (fDistanceD < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToD", sObjectNameD);}
+											else if(nObjectTypeD == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherD", sObjectNameD);}
+											else {SetLocalString(OBJECT_SELF, "sOtherD", sObjectNameD);}
+											}
+										if(nInc == 5) {
+											string sObjectNameE = GetName(oObject);
+											float fDistanceE = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeE = GetObjectType(oObject);
+											if((nObjectTypeE == OBJECT_TYPE_CREATURE) && (fDistanceE < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToE", sObjectNameE);}
+											else if(nObjectTypeE == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherE", sObjectNameE);}
+											else {SetLocalString(OBJECT_SELF, "sOtherE", sObjectNameE);}
+											}
+										else if(nInc == 6) {
+											string sObjectNameF = GetName(oObject);
+											float fDistanceF = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeF = GetObjectType(oObject);
+											if((nObjectTypeF == OBJECT_TYPE_CREATURE) && (fDistanceF < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToF", sObjectNameF);}
+											else if(nObjectTypeF == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherF", sObjectNameF);}
+											else {SetLocalString(OBJECT_SELF, "sOtherF", sObjectNameF);}
+											}
+										else if(nInc == 7) {
+											string sObjectNameG = GetName(oObject);
+											float fDistanceG = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeG = GetObjectType(oObject);
+											if((nObjectTypeG == OBJECT_TYPE_CREATURE) && (fDistanceG < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToG", sObjectNameG);}
+											else if(nObjectTypeG == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherG", sObjectNameG);}
+											else {SetLocalString(OBJECT_SELF, "sOtherG", sObjectNameG);}
+											}
+										else if(nInc == 8) {
+											string sObjectNameH = GetName(oObject);
+											float fDistanceH = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeH = GetObjectType(oObject);
+											if((nObjectTypeH == OBJECT_TYPE_CREATURE) && (fDistanceH < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToH", sObjectNameH);}
+											else if(nObjectTypeH == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherH", sObjectNameH);}
+											else {SetLocalString(OBJECT_SELF, "sOtherH", sObjectNameH);}
+											}
+										if(nInc == 9) {
+											string sObjectNameI = GetName(oObject);
+											float fDistanceI = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeI = GetObjectType(oObject);
+											if((nObjectTypeI == OBJECT_TYPE_CREATURE) && (fDistanceI < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToI", sObjectNameI);}
+											else if(nObjectTypeI == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherI", sObjectNameI);}
+											else {SetLocalString(OBJECT_SELF, "sOtherI", sObjectNameI);}
+											}
+										else if(nInc == 10) {
+											string sObjectNameJ = GetName(oObject);
+											float fDistanceJ = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeJ = GetObjectType(oObject);
+											if((nObjectTypeJ == OBJECT_TYPE_CREATURE) && (fDistanceJ < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToJ", sObjectNameJ);}
+											else if(nObjectTypeJ == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherJ", sObjectNameJ);}
+											else {SetLocalString(OBJECT_SELF, "sOtherJ", sObjectNameJ);}
+											}
+										else if(nInc == 11) {
+											string sObjectNameK = GetName(oObject);
+											float fDistanceK = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeK = GetObjectType(oObject);
+											if((nObjectTypeK == OBJECT_TYPE_CREATURE) && (fDistanceK < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToK", sObjectNameK);}
+											else if(nObjectTypeK == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherK", sObjectNameK);}
+											else {SetLocalString(OBJECT_SELF, "sOtherK", sObjectNameK);}
+											}
+										else if(nInc == 12) {
+											string sObjectNameL = GetName(oObject);
+											float fDistanceL = GetDistanceBetween(oPC, oObject);
+											int nObjectTypeL = GetObjectType(oObject);
+											if((nObjectTypeL == OBJECT_TYPE_CREATURE) && (fDistanceL < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextToL", sObjectNameL);}
+											else if(nObjectTypeL == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurtherL", sObjectNameL);}
+											else {SetLocalString(OBJECT_SELF, "sOtherL", sObjectNameL);}
+											}
+											
+										//SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".");
 										}
 									nInc++;
 									}
-								SetLocalLocation(oPC, "lNew", GetLocation(oPC));
-								location lNew = GetLocalLocation(oPC, "lNew");
-								float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-								SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
-								string sMoving = "standing still.";
-								string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
-								if(fDistanceMoved > 0.0) {
-									sMoving = "moving " + sDirection + ".";
+								
+									
+								string sNextTo;
+								string sFurther;
+								string sOther;
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToA") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextToA") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
 									}
+								else if(GetLocalString(OBJECT_SELF, "sFurtherA") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherA") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherA") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherA") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+										
+								if(GetLocalString(OBJECT_SELF, "sNextToB") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToB") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherB") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherB") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherB") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherB") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+											
+								if(GetLocalString(OBJECT_SELF, "sNextToC") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToC") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherC") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherC") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherC") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherC") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+										
+								if(GetLocalString(OBJECT_SELF, "sNextToD") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToD") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherD") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherD") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherD") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherD") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToE") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToE") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherE") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherE") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherE") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherE") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToF") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToF") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherF") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherF") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherF") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherF") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToG") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToG") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherG") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherG") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherG") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherG") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToH") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToH") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherH") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherH") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherH") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherH") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToI") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToI") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherI") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherI") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherI") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherI") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToJ") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToJ") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherJ") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherJ") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherJ") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherJ") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToK") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToK") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherK") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherK") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherK") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherK") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextToL") != "")
+									{sNextTo = GetLocalString(OBJECT_SELF, "sNextTo") + GetLocalString(OBJECT_SELF, "sNextToL") + ", ";
+									 SetLocalString(OBJECT_SELF, "sNextTo", sNextTo);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sFurtherL") != "")
+									{sFurther = GetLocalString(OBJECT_SELF, "sFurtherL") + ", ";
+									 SetLocalString(OBJECT_SELF, "sFurther", sFurther);
+									}	
+								else if(GetLocalString(OBJECT_SELF, "sOtherL") != "")
+									{sOther = GetLocalString(OBJECT_SELF, "sOtherL") + ", ";
+									 SetLocalString(OBJECT_SELF, "sOther", sOther);
+									}	
+								
+								
+								sNextTo = GetLocalString(OBJECT_SELF, "sNextTo");
+								int nStrLgth = GetStringLength(sNextTo);
+								int nCountBack = 1;
+								while (nCountBack < 20) {
+									if(FindSubString(sNextTo, ",", nStrLgth - nCountBack) == -1) {
+									    nCountBack ++;
+										}
+									else {InsertString(sNextTo,  " and ", nStrLgth - nCountBack + 1);
+										 break;
+										 }
+									}
+								
+								sFurther = GetLocalString(OBJECT_SELF, "sFurther");
+								int nStrLgthB = GetStringLength(sFurther);
+								int nCountBackB = 1;
+								while (nCountBackB < 20) {
+									if(FindSubString(sFurther, ",", nStrLgthB - nCountBackB) == -1) {
+									    nCountBackB ++;
+										}
+									else {InsertString(sFurther,  " and ", nStrLgthB - nCountBackB + 1);
+										 break;
+										 }
+									}
+								
+								sOther = GetLocalString(OBJECT_SELF, "sOther");
+								int nStrLgthC = GetStringLength(sOther);
+								int nCountBackC = 1;
+								while (nCountBackC < 20) {
+									if(FindSubString(sOther, ",", nStrLgthC - nCountBackC) == -1) {
+									    nCountBackC ++;
+										}
+									else {InsertString(sOther,  " and ", nStrLgthC - nCountBackC + 1);
+										 break;
+										 }
+									}
+									
+								//if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
+									//{
+									SendMessageToPC(oScryer, sGenderNoun + " is standing next to " + sNextTo + ".");
+									SendMessageToPC(oScryer, sFurther + " can be seen nearby.");
+									SendMessageToPC(oScryer, "Also within view: " + sOther + ".");
+								
+									//	}
+								
 								}
 							 break;
 							 }
