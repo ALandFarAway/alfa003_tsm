@@ -131,9 +131,39 @@ void main() {
 			string sSubjectArea = GetName(oArea);
 			string sAreaTag = GetTag(oArea);
 			int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
+			string sWeatherRain = "";
 			int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
+			string sWeatherSnow = "";
+								
+			if(FindSubString(sAreaTag, "ext", 1) != -1)
+				{if(nWeatherRain == 0)  
+					{sWeatherRain = "The sun is shining.";}
+				if(nWeatherRain == 1)  
+					{sWeatherRain = "It is drizzling rain. ";}
+				if(nWeatherRain == 2)  
+					{sWeatherRain = "It is raining lightly. ";}
+				if(nWeatherRain == 3)  
+					{sWeatherRain = "Rain is falling. ";}
+				if(nWeatherRain == 4)  
+					{sWeatherRain = "Rain is pouring down. ";}
+				if(nWeatherRain == 5)  
+					{sWeatherRain = "A storm rages. ";}
+										
+				if(nWeatherSnow == 0)  
+					{sWeatherSnow = "The sky is clear. ";}
+				if(nWeatherSnow == 1)  
+					{sWeatherSnow = "A few flakes of snow are falling. ";}
+				if(nWeatherSnow == 2)  
+					{sWeatherSnow = "It is snowing lightly. ";}
+				if(nWeatherSnow == 3)  
+					{sWeatherSnow = "Snow is falling. ";}
+				if(nWeatherSnow == 4)  
+					{sWeatherSnow = "Snow is falling heavily. ";}
+				if(nWeatherSnow == 5)  
+					{sWeatherSnow = "A blizzard rages. ";}
+				}
+				
 			string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
-			location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
 								
 			string sGenderNoun = "He";
 			string sGenderAdj = "him";
@@ -144,7 +174,7 @@ void main() {
 								
 			SendMessageToPC(oScryer, "" );
 			SendMessageToPC(oScryer, "********************" );
-			SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". Rain is " + IntToString(nWeatherRain) + ". Snow is " + IntToString(nWeatherSnow) + ". " + sGenderNoun + " is facing " + sFacing + "." );
+			SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + sWeatherRain + sWeatherSnow + sGenderNoun + " is facing " + sFacing + "." );
 								 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			string sObjectName = GetName(oObject);
@@ -161,8 +191,9 @@ void main() {
 					nInc++;
 				}
 			
-			SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
-			location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
+			location lStart = GetLocalLocation(oScryListen, "lScryStart");
+			SetLocalLocation(oScryListen, "lNew", GetLocation(oPC));
+			location lNew = GetLocalLocation(oScryListen, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
 			SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
 			string sMoving = "standing still.";

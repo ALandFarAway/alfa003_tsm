@@ -270,35 +270,32 @@ void main()
 								
 								if(FindSubString(sAreaTag, "ext", 1) != -1)
 								   {if(nWeatherRain == 0)  
-										{sWeatherRain = "The sun is shining.";}
+										{sWeatherRain = "The sun is shining. ";}
 									if(nWeatherRain == 1)  
-										{sWeatherRain = "It is drizzling rain.";}
+										{sWeatherRain = "It is drizzling rain. ";}
 									if(nWeatherRain == 2)  
-										{sWeatherRain = "It is raining lightly.";}
+										{sWeatherRain = "It is raining lightly. ";}
 									if(nWeatherRain == 3)  
-										{sWeatherRain = "Rain is falling.";}
+										{sWeatherRain = "Rain is falling. ";}
 									if(nWeatherRain == 4)  
-										{sWeatherRain = "Rain is pouring down.";}
+										{sWeatherRain = "Rain is pouring down. ";}
 									if(nWeatherRain == 5)  
-										{sWeatherRain = "A storm rages.";}
+										{sWeatherRain = "A storm rages. ";}
 										
 									if(nWeatherSnow == 0)  
-										{sWeatherSnow = "The sky is clear.";}
+										{sWeatherSnow = "The sky is clear. ";}
 									if(nWeatherSnow == 1)  
-										{sWeatherSnow = "A few flakes of snow are falling.";}
+										{sWeatherSnow = "A few flakes of snow are falling. ";}
 									if(nWeatherSnow == 2)  
-										{sWeatherSnow = "It is snowing lightly.";}
+										{sWeatherSnow = "It is snowing lightly. ";}
 									if(nWeatherSnow == 3)  
-										{sWeatherSnow = "Snow is falling.";}
+										{sWeatherSnow = "Snow is falling. ";}
 									if(nWeatherSnow == 4)  
-										{sWeatherSnow = "Snow is falling heavily.";}
+										{sWeatherSnow = "Snow is falling heavily. ";}
 									if(nWeatherSnow == 5)  
-										{sWeatherSnow = "A blizzard rages.";}
+										{sWeatherSnow = "A blizzard rages. ";}
 									}
 									
-								string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
-								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));
-								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
 								
 								string sGenderNoun = "He";
 								string sGenderAdj = "him";
@@ -307,7 +304,11 @@ void main()
 									sGenderAdj = "her";
 								}
 								
-								SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". "  + sWeatherRain + " " + sWeatherSnow);
+								SendMessageToPC(oScryer, GetName(oPC) + " is in " + sSubjectArea + ". "  + sWeatherRain + sWeatherSnow);
+								
+								string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
+								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));
+								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
 								 	
 								object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 								string sObjectName = GetName(oObject);
@@ -607,17 +608,29 @@ void main()
 								sNextTo = GetLocalString(OBJECT_SELF, "sNextTo");
 								if(FindSubString(GetStringLeft(sNextTo, 4), "and") != -1)
 									{int nStrLgthN = GetStringLength(sNextTo);
-									sNextTo = GetStringRight(sNextTo, nStrLgthN - 4);
+									 sNextTo = GetStringRight(sNextTo, nStrLgthN - 4);
+									}
+								if(FindSubString(GetStringRight(sNextTo, 4), "and") != -1)
+									{int nStrLgthN = GetStringLength(sNextTo);
+									 sNextTo = GetStringLeft(sNextTo, nStrLgthN - 4) + ".";
 									}
 								sFurther = GetLocalString(OBJECT_SELF, "sFurther");
 								if(FindSubString(GetStringLeft(sFurther, 4), "and") != -1)
 									{int nStrLgthF = GetStringLength(sFurther);
-									sFurther = GetStringRight(sFurther, nStrLgthF - 4);
+									 sFurther = GetStringRight(sFurther, nStrLgthF - 4);
+									}
+								if(FindSubString(GetStringRight(sFurther, 4), "and") != -1)
+									{int nStrLgthF = GetStringLength(sFurther);
+									 sFurther = GetStringLeft(sFurther, nStrLgthF - 4) + ".";
 									}
 								sOther = GetLocalString(OBJECT_SELF, "sOther");
 								if(FindSubString(GetStringLeft(sOther, 4), "and") != -1)
 									{int nStrLgthO = GetStringLength(sOther);
 									sOther = GetStringRight(sOther, nStrLgthO - 4);
+									}
+								if(FindSubString(GetStringRight(sOther, 4), "and") != -1)
+									{int nStrLgthO = GetStringLength(sOther);
+									sOther = GetStringLeft(sOther, nStrLgthO - 4) + ".";
 									}
 									
 								if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
@@ -626,6 +639,17 @@ void main()
 									{SendMessageToPC(oScryer, sFurther + " can be seen nearby.");}
 								if((GetLocalString(OBJECT_SELF, "sOtherA") != "") || (GetLocalString(OBJECT_SELF, "sOtherB") != "") || (GetLocalString(OBJECT_SELF, "sOtherC") != "") || (GetLocalString(OBJECT_SELF, "sOtherD") != "") || (GetLocalString(OBJECT_SELF, "sOtherE") != "") || (GetLocalString(OBJECT_SELF, "sOtherF") != "") || (GetLocalString(OBJECT_SELF, "sOtherG") != "") || (GetLocalString(OBJECT_SELF, "sOtherH") != "") || (GetLocalString(OBJECT_SELF, "sOtherI") != "") || (GetLocalString(OBJECT_SELF, "sOtherJ") != "") || (GetLocalString(OBJECT_SELF, "sOtherK") != "") || (GetLocalString(OBJECT_SELF, "sOtherL") != ""))	
 									{SendMessageToPC(oScryer, "Within view: " + sOther + ".");}
+								
+								SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
+								location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
+								float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
+								SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
+								string sMoving = "standing still.";
+								string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
+								if(fDistanceMoved != 0.0) {
+										sMoving = "moving " + sDirection + ".";
+									}
+								SendMessageToPC(oScryer, GetName(oPC) + " is " + sMoving);
 								}
 							 break;
 							 }
