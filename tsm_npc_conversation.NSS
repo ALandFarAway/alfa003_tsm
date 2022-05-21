@@ -231,7 +231,7 @@ void main()
 						 break;
 						 }
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
-						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
+						{//SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
@@ -242,7 +242,7 @@ void main()
 							 else {
 							 	SetLocalObject(oScry, "oScried", oPC);
 							 	float fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
-								SendMessageToPC(oScryer, "fScryTimer= " + FloatToString(fScryTimer, 2, 0));
+								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
 							 	SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 								DelayCommand(fScryTimer, SetLocalFloat(oScry, "SCRY_TIMER", 0.0));
 								DelayCommand(fScryTimer, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
@@ -638,12 +638,12 @@ void main()
 								if((GetLocalString(OBJECT_SELF, "sFurtherA") != "") || (GetLocalString(OBJECT_SELF, "sFurtherB") != "") || (GetLocalString(OBJECT_SELF, "sFurtherC") != "") || (GetLocalString(OBJECT_SELF, "sFurtherD") != "") || (GetLocalString(OBJECT_SELF, "sFurtherE") != "") || (GetLocalString(OBJECT_SELF, "sFurtherF") != "") || (GetLocalString(OBJECT_SELF, "sFurtherG") != "") || (GetLocalString(OBJECT_SELF, "sFurtherH") != "") || (GetLocalString(OBJECT_SELF, "sFurtherI") != "") || (GetLocalString(OBJECT_SELF, "sFurtherJ") != "") || (GetLocalString(OBJECT_SELF, "sFurtherK") != "") || (GetLocalString(OBJECT_SELF, "sFurtherL") != ""))	
 									{SendMessageToPC(oScryer, sFurther + " can be seen nearby.");}
 								if((GetLocalString(OBJECT_SELF, "sOtherA") != "") || (GetLocalString(OBJECT_SELF, "sOtherB") != "") || (GetLocalString(OBJECT_SELF, "sOtherC") != "") || (GetLocalString(OBJECT_SELF, "sOtherD") != "") || (GetLocalString(OBJECT_SELF, "sOtherE") != "") || (GetLocalString(OBJECT_SELF, "sOtherF") != "") || (GetLocalString(OBJECT_SELF, "sOtherG") != "") || (GetLocalString(OBJECT_SELF, "sOtherH") != "") || (GetLocalString(OBJECT_SELF, "sOtherI") != "") || (GetLocalString(OBJECT_SELF, "sOtherJ") != "") || (GetLocalString(OBJECT_SELF, "sOtherK") != "") || (GetLocalString(OBJECT_SELF, "sOtherL") != ""))	
-									{SendMessageToPC(oScryer, "Within view: " + sOther + ".");}
+									{SendMessageToPC(oScryer, "Within view: " + sOther );}
 								
 								SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
 								location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
 								float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-								SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
+								SendMessageToPC(oScryer, "Distance between where the scrying began and where " + sGenderNoun + " is now is " + FloatToString(fDistanceMoved, 2, 0));
 								string sMoving = "standing still.";
 								string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
 								if(fDistanceMoved != 0.0) {
