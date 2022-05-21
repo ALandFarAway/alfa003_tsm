@@ -226,8 +226,9 @@ void main()
 					 string sPCName = GetName(oPC);
 					 int nActive = GetLocalInt(oScry, "SCRY_ACTIVE");
 					 if(GetLocalInt(oScry, "SCRY_ACTIVE")==1) {
-						 SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
-						 SendMessageToPC(oScryer, "You are scrying" + GetName(oPC) + " and must wait for this spell to end before scrying again.");
+						 //SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
+						 SendMessageToPC(oScryer, "You are scrying" + GetName(oPC) + " and must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
+						 break;
 						 }
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
 						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
@@ -240,10 +241,12 @@ void main()
 								}
 							 else {
 							 	SetLocalObject(oScry, "oScried", oPC);
-							 	float fScryActive = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
+							 	float fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
+								SendMessageToPC(oScryer, "fScryTimer= " + FloatToString(fScryTimer, 2, 0));
 							 	SetLocalInt(oScry, "SCRY_ACTIVE", 1);
-								DelayCommand(fScryActive, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
-								SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryActive, 2, 0) + " seconds."); 
+								DelayCommand(fScryTimer, SetLocalFloat(oScry, "SCRY_TIMER", 0.0));
+								DelayCommand(fScryTimer, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
+								SendMessageToAllDMs(GetName(oPC) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								location lThere = GetLocation(oPC);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
@@ -253,8 +256,8 @@ void main()
 									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
 									SetFirstName(oScrySend, "Scrying Sensor");
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
-									DestroyObject(oScrySend, fScryActive); 
-									DelayCommand(fScryActive, SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID));
+									DestroyObject(oScrySend, fScryTimer); 
+									DelayCommand(fScryTimer, SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID));
 									}
 								
 								object oArea = GetArea(oPC);
@@ -602,9 +605,21 @@ void main()
 									}	
 								
 								sNextTo = GetLocalString(OBJECT_SELF, "sNextTo");
+								if(FindSubString(GetStringLeft(sNextTo, 4), "and") != -1)
+									{int nStrLgthN = GetStringLength(sNextTo);
+									sNextTo = GetStringRight(sNextTo, nStrLgthN - 4);
+									}
 								sFurther = GetLocalString(OBJECT_SELF, "sFurther");
+								if(FindSubString(GetStringLeft(sFurther, 4), "and") != -1)
+									{int nStrLgthF = GetStringLength(sFurther);
+									sFurther = GetStringRight(sFurther, nStrLgthF - 4);
+									}
 								sOther = GetLocalString(OBJECT_SELF, "sOther");
-								
+								if(FindSubString(GetStringLeft(sOther, 4), "and") != -1)
+									{int nStrLgthO = GetStringLength(sOther);
+									sOther = GetStringRight(sOther, nStrLgthO - 4);
+									}
+									
 								if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
 									{SendMessageToPC(oScryer, sGenderNoun + " is standing next to " + sNextTo + ".");}
 								if((GetLocalString(OBJECT_SELF, "sFurtherA") != "") || (GetLocalString(OBJECT_SELF, "sFurtherB") != "") || (GetLocalString(OBJECT_SELF, "sFurtherC") != "") || (GetLocalString(OBJECT_SELF, "sFurtherD") != "") || (GetLocalString(OBJECT_SELF, "sFurtherE") != "") || (GetLocalString(OBJECT_SELF, "sFurtherF") != "") || (GetLocalString(OBJECT_SELF, "sFurtherG") != "") || (GetLocalString(OBJECT_SELF, "sFurtherH") != "") || (GetLocalString(OBJECT_SELF, "sFurtherI") != "") || (GetLocalString(OBJECT_SELF, "sFurtherJ") != "") || (GetLocalString(OBJECT_SELF, "sFurtherK") != "") || (GetLocalString(OBJECT_SELF, "sFurtherL") != ""))	
