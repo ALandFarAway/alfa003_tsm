@@ -161,6 +161,8 @@ void main()
 		 }
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+		ActionForceFollowObject(oScried, 0.5f, 0);
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -171,6 +173,19 @@ void main()
 		}
 	}	 
 	
+	
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+		ActionForceFollowObject(oScried, 0.5f, 0);
+		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6031) {
+			string sSpokenBy = GetName(GetLastSpeaker());
+			string sRelay = GetMatchedSubstring(0);
+			SendMessageToAllDMs(sSpokenBy + ": " + sRelay);
+		    
+		}
+	}	 
+
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer"))) {
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
@@ -254,6 +269,7 @@ void main()
 					            	SetLocalObject(oScry, "oScrySend", oScrySend);
 									SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
 									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
+									SetLocalObject(oScrySend, "oScried", oPC);
 									SetFirstName(oScrySend, "Scrying Sensor");
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
 									DestroyObject(oScrySend, fScryTimer); 
@@ -643,7 +659,7 @@ void main()
 								SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
 								location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
 								float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-								SendMessageToPC(oScryer, "Distance between where the scrying began and where " + sGenderNoun + " is now is " + FloatToString(fDistanceMoved, 2, 0));
+								SendMessageToPC(oScryer, "Distance between where the scrying began and where " + GetStringLowerCase(sGenderNoun) + " is now is " + FloatToString(fDistanceMoved, 2, 0));
 								string sMoving = "standing still.";
 								string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
 								if(fDistanceMoved != 0.0) {
