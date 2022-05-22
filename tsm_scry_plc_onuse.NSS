@@ -363,9 +363,9 @@ void main() {
 				sGenderAdj = "her";
 				}
 								
-			SendMessageToPC(oScryer, "" );
-			SendMessageToPC(oScryer, "********************" );
-			SendMessageToPC(oScryer, GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow );
+			ActionSpeakString( "", TALKVOLUME_TALK);
+			ActionSpeakString( "********************", TALKVOLUME_TALK);
+			ActionSpeakString(GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
 								 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			string sObjectName = GetName(oObject);
@@ -377,7 +377,7 @@ void main() {
 					sObjectName = GetName(oObject);
 					fDistance = GetDistanceBetween(oPC, oObject);
 					if((sObjectName != GetName(oPC)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
-						SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".");
+						ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".", TALKVOLUME_TALK);
 						}
 					nInc++;
 				}
@@ -392,10 +392,10 @@ void main() {
 			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
-			SendMessageToPC(oScryer, GetName(oPC) + " is " + sMoving);
+			ActionSpeakString(GetName(oPC) + " is " + sMoving, TALKVOLUME_TALK);
 			
-			SendMessageToPC(oScryer, "********************" );
-			SendMessageToPC(oScryer, "" );
+			ActionSpeakString( "********************", TALKVOLUME_TALK);
+			ActionSpeakString( "", TALKVOLUME_TALK);
 			
 			
 		}	

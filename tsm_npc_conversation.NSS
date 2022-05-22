@@ -511,7 +511,7 @@ void main()
 									sGenderAdj = "her";
 								}
 								
-								SendMessageToPC(oScryer, GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
+								ActionSpeakString( GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
 								
 								string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));
@@ -841,11 +841,11 @@ void main()
 									}
 									
 								if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
-									{SendMessageToPC(oScryer, sGenderNoun + " is standing next to " + sNextTo + ".");}
+									{ActionSpeakString(sGenderNoun + " is standing next to " + sNextTo + ".", TALKVOLUME_TALK);}
 								if((GetLocalString(OBJECT_SELF, "sFurtherA") != "") || (GetLocalString(OBJECT_SELF, "sFurtherB") != "") || (GetLocalString(OBJECT_SELF, "sFurtherC") != "") || (GetLocalString(OBJECT_SELF, "sFurtherD") != "") || (GetLocalString(OBJECT_SELF, "sFurtherE") != "") || (GetLocalString(OBJECT_SELF, "sFurtherF") != "") || (GetLocalString(OBJECT_SELF, "sFurtherG") != "") || (GetLocalString(OBJECT_SELF, "sFurtherH") != "") || (GetLocalString(OBJECT_SELF, "sFurtherI") != "") || (GetLocalString(OBJECT_SELF, "sFurtherJ") != "") || (GetLocalString(OBJECT_SELF, "sFurtherK") != "") || (GetLocalString(OBJECT_SELF, "sFurtherL") != ""))	
-									{SendMessageToPC(oScryer, sFurther + " can be seen nearby.");}
+									{ActionSpeakString(sFurther + " can be seen nearby.", TALKVOLUME_TALK);}
 								if((GetLocalString(OBJECT_SELF, "sOtherA") != "") || (GetLocalString(OBJECT_SELF, "sOtherB") != "") || (GetLocalString(OBJECT_SELF, "sOtherC") != "") || (GetLocalString(OBJECT_SELF, "sOtherD") != "") || (GetLocalString(OBJECT_SELF, "sOtherE") != "") || (GetLocalString(OBJECT_SELF, "sOtherF") != "") || (GetLocalString(OBJECT_SELF, "sOtherG") != "") || (GetLocalString(OBJECT_SELF, "sOtherH") != "") || (GetLocalString(OBJECT_SELF, "sOtherI") != "") || (GetLocalString(OBJECT_SELF, "sOtherJ") != "") || (GetLocalString(OBJECT_SELF, "sOtherK") != "") || (GetLocalString(OBJECT_SELF, "sOtherL") != ""))	
-									{SendMessageToPC(oScryer, "Within view: " + sOther );}
+									{ActionSpeakString("Within view: " + sOther, TALKVOLUME_TALK );}
 								
 								SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
 								location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
@@ -856,7 +856,7 @@ void main()
 								if(fDistanceMoved != 0.0) {
 										sMoving = "moving " + sDirection + ".";
 									}
-								SendMessageToPC(oScryer, GetName(oPC) + " is " + sMoving);
+								ActionSpeakString(GetName(oPC) + " is " + sMoving, TALKVOLUME_TALK);
 								}
 							 break;
 							 }
