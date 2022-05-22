@@ -378,8 +378,14 @@ if(GetSpellId() == 3058) {
 	int nInc = 0;
 	while((oSensor != OBJECT_INVALID) && (nInc < 50)) {
 	if(FindSubString(GetTag(oSensor), "scry_send") != -1)
-		{effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
-		 RemoveEffect(oSensor, eInvis);
+		{SendMessageToPC(OBJECT_SELF, "You see a small glowing orb floating in the air.");
+		 effect eEffect = GetFirstEffect(oSensor);
+		 int nRep = 0;
+		 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+			 RemoveEffect(oSensor, eEffect);
+			 eEffect = GetNextEffect(oSensor);
+			 nRep ++;
+			}
 		}
 	oSensor = GetNextObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	nInc++;
@@ -437,10 +443,12 @@ if(GetSpellId() == 3056)
 			
 			DelayCommand(fScryTimer - 1.0, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
 			DelayCommand(fScryTimer, SetLocalFloat(oScryListen, "SCRY_TIMER", 0.0));
-			DelayCommand(fScryTimer+0.5, SetLocalInt(oScryListen, "SCRY_ACTIVE", 0));
-			DelayCommand(fScryTimer+1.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
-			DelayCommand(fScryTimer+1.5, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
-			DestroyObject(oScryListen, fScryTimer + 2.0);
+			DelayCommand(fScryTimer+0.5, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
+			DelayCommand(fScryTimer+1.0, SetLocalInt(oScryListen, "SCRY_ACTIVE", 0));
+			DelayCommand(fScryTimer+1.5, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
+			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
+			DelayCommand(fScryTimer+2.5, SetLocalObject(oScry, "oScried", OBJECT_INVALID));
+			DestroyObject(oScryListen, fScryTimer + 3.0);
 			
 		}
 	}

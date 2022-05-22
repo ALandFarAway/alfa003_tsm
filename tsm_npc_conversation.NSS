@@ -162,13 +162,15 @@ void main()
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+		
 		ActionForceFollowObject(oScried, 0.5f, 0);
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
+			SetFirstName(oScryListen, sSpokenBy);
 			string sRelay = GetMatchedSubstring(0);
-			AssignCommand(oScryListen, ActionSpeakString(sSpokenBy + ": " + sRelay, TALKVOLUME_TALK));
+			AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK));
 		    
 		}
 	}	 
@@ -176,11 +178,13 @@ void main()
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		ActionForceFollowObject(oScried, 0.5f, 0);
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
 			string sRelay = GetMatchedSubstring(0);
+			AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK));
 			SendMessageToAllDMs(sSpokenBy + ": " + sRelay);
 		    
 		}
