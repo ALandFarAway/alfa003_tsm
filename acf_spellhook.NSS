@@ -389,7 +389,7 @@ if(GetSpellId() == 3058) {
 if(GetSpellId() == 3056)
 	{object oScryer = OBJECT_SELF;
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
-	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_scry") == -1)) {
+	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
 	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	  
