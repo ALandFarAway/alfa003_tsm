@@ -373,6 +373,19 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 	} 
 }
 
+if(GetSpellId() == 3058) {
+	object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+	int nInc = 0;
+	while((oSensor != OBJECT_INVALID) && (nInc < 50)) {
+	if(FindSubString(GetTag(oSensor), "scry_send") != -1)
+		{effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
+		 RemoveEffect(oSensor, eInvis);
+		}
+	oSensor = GetNextObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+	nInc++;
+		}
+	}
+
 if(GetSpellId() == 3056)
 	{object oScryer = OBJECT_SELF;
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);

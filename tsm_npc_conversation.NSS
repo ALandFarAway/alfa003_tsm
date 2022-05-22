@@ -832,9 +832,9 @@ void main()
 									{int nStrLgthO = GetStringLength(sOther);
 									sOther = GetStringRight(sOther, nStrLgthO - 4);
 									}
-								if(FindSubString(GetStringRight(sOther, 4), "and") != -1)
+								if(FindSubString(GetStringRight(sOther, 5), "and") != -1)
 									{int nStrLgthO = GetStringLength(sOther);
-									sOther = GetStringLeft(sOther, nStrLgthO - 4) + ".";
+									sOther = GetStringLeft(sOther, nStrLgthO - 5) + ".";
 									}
 									
 								if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
@@ -847,7 +847,7 @@ void main()
 								SetLocalLocation(OBJECT_SELF, "lNew", GetLocation(oPC));
 								location lNew = GetLocalLocation(OBJECT_SELF, "lNew");
 								float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-								SendMessageToPC(oScryer, "Distance between where the scrying began and where " + GetStringLowerCase(sGenderNoun) + " is now is " + FloatToString(fDistanceMoved, 2, 0));
+								//SendMessageToPC(oScryer, "Distance between where the scrying began and where " + GetStringLowerCase(sGenderNoun) + " is now is " + FloatToString(fDistanceMoved, 2, 0));
 								string sMoving = "standing still.";
 								string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
 								if(fDistanceMoved != 0.0) {
