@@ -111,7 +111,7 @@ void main() {
 	ACR_PlaceableOnUsed();
 
 
-	if(FindSubString(GetTag(OBJECT_SELF), "_scry") != -1)
+	if(FindSubString(GetTag(OBJECT_SELF), "_SCRY") != -1)
 	{object oUser = GetLastUsedBy();
 	 object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
 	 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
