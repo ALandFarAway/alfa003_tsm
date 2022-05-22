@@ -8,8 +8,9 @@ void main()
 {
 	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
 	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
-	effect eInvis = EffectInvisibility(EFFECT_TYPE_GREATERINVISIBILITY);
-		 		     	      
+	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
+	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
+			 	 		     	      
          
 	if(GetTag(OBJECT_SELF)== "003_cr_lath_cyrthol")
         { AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
@@ -20,7 +21,7 @@ void main()
     	}
 		
 		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
-			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,OBJECT_SELF));
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
     	     SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
 			 }
