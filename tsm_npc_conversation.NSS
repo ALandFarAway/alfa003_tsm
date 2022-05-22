@@ -265,7 +265,8 @@ void main()
 								location lThere = GetLocation(oPC);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
-									oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);
+									if(GetIsDMPossessed(oScryer)) {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
+									else {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);}
 					            	SetLocalObject(oScry, "oScrySend", oScrySend);
 									SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
 									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
@@ -508,7 +509,7 @@ void main()
 									sGenderAdj = "her";
 								}
 								
-								SendMessageToPC(oScryer, GetName(oPC) + " is " + sSubjectArea +  sWeatherRain + sWeatherSnow);
+								SendMessageToPC(oScryer, GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
 								
 								string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oPC));

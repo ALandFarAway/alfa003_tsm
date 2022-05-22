@@ -402,6 +402,7 @@ if(GetSpellId() == 3056)
 			string sSpeak = GetLocalString(oScry, "SCRY_SPEAK");
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
+
 			int nSpellLevel = GetSpellLevel(GetSpellId());
 			int nAbilityMod = GetAbilityModifier(ABILITY_INTELLIGENCE);
 			if(GetLastSpellCastClass()== CLASS_TYPE_BARD || CLASS_TYPE_SORCERER || CLASS_TYPE_PALADIN) {

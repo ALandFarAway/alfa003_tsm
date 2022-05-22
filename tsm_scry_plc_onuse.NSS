@@ -325,19 +325,21 @@ void main() {
 			string sWeatherSnow = "";
 								
 			if(FindSubString(sAreaTag, "ext", 1) != -1)
-				{if(nWeatherRain == 0)  
-					{sWeatherRain = "The sun is shining.";}
-				if(nWeatherRain == 1)  
-					{sWeatherRain = "It is drizzling rain. ";}
-				if(nWeatherRain == 2)  
-					{sWeatherRain = "It is raining lightly. ";}
-				if(nWeatherRain == 3)  
-					{sWeatherRain = "Rain is falling. ";}
-				if(nWeatherRain == 4)  
-					{sWeatherRain = "Rain is pouring down. ";}
-				if(nWeatherRain == 5)  
-					{sWeatherRain = "A storm rages. ";}
-										
+				{if(nWeatherSnow < 1) {
+					if(nWeatherRain == 0)  
+						{sWeatherRain = "The sun is shining. ";}
+					if(nWeatherRain == 1)  
+						{sWeatherRain = "It is drizzling rain. ";}
+					if(nWeatherRain == 2)  
+						{sWeatherRain = "It is raining lightly. ";}
+					if(nWeatherRain == 3)  
+						{sWeatherRain = "Rain is falling. ";}
+					if(nWeatherRain == 4)  
+						{sWeatherRain = "Rain is pouring down. ";}
+					if(nWeatherRain == 5)  
+						{sWeatherRain = "A storm rages. ";}
+				}						
+				 
 				if(nWeatherSnow == 0)  
 					{sWeatherSnow = "The sky is clear. ";}
 				if(nWeatherSnow == 1)  
@@ -363,7 +365,7 @@ void main() {
 								
 			SendMessageToPC(oScryer, "" );
 			SendMessageToPC(oScryer, "********************" );
-			SendMessageToPC(oScryer, GetName(oPC) + " is " + sSubjectArea + sWeatherRain + sWeatherSnow );
+			SendMessageToPC(oScryer, GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow );
 								 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			string sObjectName = GetName(oObject);
@@ -384,7 +386,7 @@ void main() {
 			SetLocalLocation(oScryListen, "lNew", GetLocation(oPC));
 			location lNew = GetLocalLocation(oScryListen, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-			//SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
+			SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
 			string sMoving = "standing still.";
 			string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
 			if(fDistanceMoved != 0.0) {
