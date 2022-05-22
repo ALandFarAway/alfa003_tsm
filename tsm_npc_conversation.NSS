@@ -170,8 +170,7 @@ void main()
 			string sSpokenBy = GetName(GetLastSpeaker());
 			SetFirstName(oScryListen, sSpokenBy);
 			string sRelay = GetMatchedSubstring(0);
-			AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK));
-		    
+			DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 		}
 	}	 
 	
@@ -184,9 +183,8 @@ void main()
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
 			string sRelay = GetMatchedSubstring(0);
-			AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK));
 			SendMessageToAllDMs(sSpokenBy + ": " + sRelay);
-		    
+		    DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 		}
 	}	 
 
