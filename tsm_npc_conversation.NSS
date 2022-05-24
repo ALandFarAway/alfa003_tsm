@@ -266,7 +266,7 @@ void main()
 							SendMessageToPC(oScryer, "RosterName is " + sRosterName);
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sPCName = sRosterName;
-								 oPC = GetObjectFromRosterName(sPCName);
+								 oPC = SpawnRosterMember(sPCName, GetLocation(OBJECT_SELF));
 								 int nNPCWill = GetAbilityScore(oPC, ABILITY_WISDOM, FALSE);
 								 SendMessageToPC(oScryer, sPCName + "'s Wisdom is " + IntToString(nNPCWill));
 							  }
