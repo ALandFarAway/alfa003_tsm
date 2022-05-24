@@ -197,21 +197,12 @@ void main()
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sMatch = GetMatchedSubstring(1);
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-		
 		string sRosterOne = GetFirstRosterMember();
 		string sRosterTwo = GetNextRosterMember();
-			 
-		ActionSpeakString("convo: " + "sRosterOne = " + sRosterOne, TALKVOLUME_TALK);
-		ActionSpeakString("convo: " + "sRosterTwo = " + sRosterTwo, TALKVOLUME_TALK);
-			 
-		
-		AddRosterMemberToParty("Aedelvana", oScryer);
-		
-		SpawnRosterMember("Aedelvana", GetLocation(oScryer));
-			
+				 	
 		
 		int nMatch = GetListenPatternNumber();
-		if((nMatch >= 6010) && (nMatch <= 6030)) {
+		if((nMatch >= 6010) && (nMatch <= 6031)) {
 		 	int nKnowledge;
 			int nConnection;
 			
@@ -254,18 +245,44 @@ void main()
 			//SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
 			
 		else if(nMatch >= 6020) {
-				int nListenPattern = 6020;
+				int nTestPattern = 6020;
 	         	object oPC = GetFirstPC(FALSE);
-				while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
-					 string sPCName = GetName(oPC);
+				string sPCName = GetName(oPC);
+				
+				while ((oPC != OBJECT_INVALID) && (nTestPattern <= 6031)) {
+					
+					
 					 int nActive = GetLocalInt(oScry, "SCRY_ACTIVE");
 					 if(GetLocalInt(oScry, "SCRY_ACTIVE")==1) {
 						 //SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 						 SendMessageToPC(oScryer, "You are scrying" + GetName(oPC) + " and must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
 						 break;
 						 }
-					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1))) && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
-						{//SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
+					
+					string sRosterName = GetFirstRosterMember();
+					if(nTestPattern == 6020) {
+						int nRosterInc = 0;
+						while ((sRosterName != "") && (nRosterInc < 5)) {
+							SendMessageToPC(oScryer, "RosterName is " + sRosterName);
+							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
+								{sPCName = sRosterName;}
+							sRosterName = GetNextRosterMember();
+							nRosterInc++;
+							}
+						} 
+					  
+					 SendMessageToPC(oScryer, "PCName is " + sPCName);
+					 SendMessageToPC(oScryer, "RosterName is " + sRosterName);
+							
+					 if(sPCName == "") {
+					 	sPCName = GetName(oPC);
+					 }
+					 SendMessageToPC(oScryer, "2. PCName is " + sPCName);
+					 SendMessageToPC(oScryer, "2. RosterName is " + sRosterName);
+						 
+						 
+					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))  && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
+						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
@@ -877,7 +894,7 @@ void main()
 								}
 							 break;
 							 }
-						 nListenPattern++;
+						 nTestPattern++;
 						 oPC = GetNextPC(FALSE);
 				}	
 			}
@@ -885,6 +902,8 @@ void main()
 		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 				
 		} 	
+		
+		 
 	}	 
 	
 		 
