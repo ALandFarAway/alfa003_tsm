@@ -170,7 +170,9 @@ void main()
 			string sSpokenBy = GetName(GetLastSpeaker());
 			SetFirstName(oScryListen, sSpokenBy);
 			string sRelay = GetMatchedSubstring(0);
-			DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
+			if(GetLastSpeaker() != oScryListen) {
+				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
+			}
 		}
 	}	 
 	
@@ -184,18 +186,33 @@ void main()
 			string sSpokenBy = GetName(GetLastSpeaker());
 			string sRelay = GetMatchedSubstring(0);
 			SendMessageToAllDMs(sSpokenBy + ": " + sRelay);
-		    DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
+		    if(GetLastSpeaker() != oScryListen) {
+				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
+			}
 		}
 	}	 
 
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer"))) {
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
+		string sMatch = GetMatchedSubstring(1);
+		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		
+		string sRosterOne = GetFirstRosterMember();
+		string sRosterTwo = GetNextRosterMember();
+			 
+		ActionSpeakString("convo: " + "sRosterOne = " + sRosterOne, TALKVOLUME_TALK);
+		ActionSpeakString("convo: " + "sRosterTwo = " + sRosterTwo, TALKVOLUME_TALK);
+			 
+		
+		AddRosterMemberToParty("Aedelvana", oScryer);
+		
+		SpawnRosterMember("Aedelvana", GetLocation(oScryer));
+			
+		
 		int nMatch = GetListenPatternNumber();
-		if(nMatch >= 6010) {
-		 	string sMatch = GetMatchedSubstring(1);
-			object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-			int nKnowledge;
+		if((nMatch >= 6010) && (nMatch <= 6030)) {
+		 	int nKnowledge;
 			int nConnection;
 			
 			if((nMatch >= 6010) && (nMatch <= 6013)) {

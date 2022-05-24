@@ -124,9 +124,7 @@ void main() {
 		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser != oScryer)) {
 			SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
-		int nDoOnce = 0;
-		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser == oScryer) && (nDoOnce == 0)) {
-			nDoOnce = 1;
+		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser == oScryer)) {
 			object oPC = GetLocalObject(OBJECT_SELF, "oScried");
 			object oArea = GetArea(oPC);
 			string sSubjectArea = GetName(oArea);
@@ -387,7 +385,7 @@ void main() {
 			SetLocalLocation(oScryListen, "lNew", GetLocation(oPC));
 			location lNew = GetLocalLocation(oScryListen, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-			SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
+			//SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
 			string sMoving = "standing still.";
 			string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
 			if(fDistanceMoved != 0.0) {
