@@ -202,7 +202,7 @@ void main()
 							 			 	
 		
 		int nMatch = GetListenPatternNumber();
-		if((nMatch >= 6010) && (nMatch <= 6031)) {
+		if((nMatch >= 6010) && (nMatch <= 6040)) {
 		 	int nKnowledge;
 			int nConnection;
 			
@@ -249,7 +249,7 @@ void main()
 	         	object oPC = GetFirstPC(FALSE);
 				string sPCName = GetName(oPC);
 				
-				while ((oPC != OBJECT_INVALID) && (nTestPattern <= 6031)) {
+				while ((oPC != OBJECT_INVALID) && (nTestPattern <= 6040)) {
 					
 					
 					 int nActive = GetLocalInt(oScry, "SCRY_ACTIVE");
@@ -287,7 +287,7 @@ void main()
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
-							 	SendMessageToPC(oScryer, "You feel no resolution of your intended scrying subject.");
+							 	SendMessageToPC(oScryer, "You feel your spell fail.");
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
 									SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }

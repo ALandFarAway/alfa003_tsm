@@ -144,7 +144,7 @@ void main()
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
-	SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
+	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
 	//Stopping summons by non Banites in a Banite UnHallowed Area
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "rauvin_ruins") != -1) {

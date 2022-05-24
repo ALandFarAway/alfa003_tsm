@@ -53,16 +53,15 @@ void main()
 			 AddRosterMemberByTemplate("Xavier", "003_cr_firegen_xavier");
 			 AddRosterMemberByTemplate("Ostelle", "003_cr_silv_profnec");
 			 
-			 string sRosterOne = GetFirstRosterMember();
-			 string sRosterTwo = GetNextRosterMember();
-			 string sRosterThree = GetNextRosterMember();
-			 SetListenPattern(OBJECT_SELF, "**" + sRosterOne + "**", 6031);
-			 SetListenPattern(OBJECT_SELF, "**" + sRosterTwo + "**", 6032); 
-			 SetListenPattern(OBJECT_SELF, "**" + sRosterThree + "**", 6033); 
-				 
-			 //ActionSpeakString("spawn: " + "sRosterOne = " + sRosterOne, TALKVOLUME_TALK);
-			 //ActionSpeakString("spawn: " + "sRosterTwo = " + sRosterTwo, TALKVOLUME_TALK);
-			 
+			 nListenPattern = 6031;
+			 string sRoster = GetFirstRosterMember();
+			 while ((sRoster != "") && (nListenPattern <= 6040)) {
+				 ActionSpeakString("spawn: "  + " sRoster = " + sRoster, TALKVOLUME_TALK);
+				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
+				 nListenPattern++;
+				 sRoster = GetNextRosterMember();
+			 }
+			  	 
 			 	 
 			 SetListening(OBJECT_SELF, TRUE);
     	
