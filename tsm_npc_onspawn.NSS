@@ -10,7 +10,7 @@ void main()
 	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
-			 	 		     	      
+	effect eGhost = EffectCutsceneGhost();	 	 		     	      
          
 	if(GetTag(OBJECT_SELF)== "003_cr_lath_cyrthol")
         { AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
@@ -28,6 +28,8 @@ void main()
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
 			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
+			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost,OBJECT_SELF));
+			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,OBJECT_SELF));
 			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
 			 SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
 			 SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
@@ -36,14 +38,12 @@ void main()
 			 SetListenPattern(OBJECT_SELF, "**Picture**", 6015);
 			 SetListenPattern(OBJECT_SELF, "**Possession**", 6016);
 			 SetListenPattern(OBJECT_SELF, "**Body**", 6017);
-			 //SetListenPattern(OBJECT_SELF, "**", 6031);
 			 	 
 			 
 			 int nListenPattern = 6020;
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
-				 //ActionSpeakString("spawn: " + IntToString(nListenPattern) + " " + sPCName, TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
