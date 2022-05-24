@@ -197,9 +197,9 @@ void main()
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sMatch = GetMatchedSubstring(1);
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-		string sRosterOne = GetFirstRosterMember();
-		string sRosterTwo = GetNextRosterMember();
-				 	
+		float fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
+		effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
+							 			 	
 		
 		int nMatch = GetListenPatternNumber();
 		if((nMatch >= 6010) && (nMatch <= 6031)) {
@@ -263,12 +263,15 @@ void main()
 					if(nTestPattern == 6020) {
 						int nRosterInc = 0;
 						while ((sRosterName != "") && (nRosterInc < 5)) {
-							SendMessageToPC(oScryer, "RosterName is " + sRosterName);
+							//SendMessageToPC(oScryer, "RosterName is " + sRosterName);
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sPCName = sRosterName;
 								 oPC = SpawnRosterMember(sPCName, GetLocation(OBJECT_SELF));
+								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,oPC);
+			 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oPC);
+								 DestroyObject(oPC, fScryTimer);
 								 int nNPCWill = GetAbilityScore(oPC, ABILITY_WISDOM, FALSE);
-								 SendMessageToPC(oScryer, sPCName + "'s Wisdom is " + IntToString(nNPCWill));
+								 //SendMessageToPC(oScryer, sPCName + "'s Wisdom is " + IntToString(nNPCWill));
 							  }
 							sRosterName = GetNextRosterMember();
 							nRosterInc++;
@@ -279,23 +282,19 @@ void main()
 					 	sPCName = GetName(oPC);
 					 }
 					 
-					 SendMessageToPC(oScryer, "PCName is " + sPCName);
-					 SendMessageToPC(oScryer, "RosterName is " + sRosterName);
-					 SendMessageToPC(oScryer, "GetName oPC is " + GetName(oPC));
-						 
-						 
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))  && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
-						{SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
+						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sPCName + "'s willpower to resist it.");
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		if(WillSave(oPC, nDC, SAVING_THROW_TYPE_MIND_SPELLS, oScryer)) {
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
-							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
+							 	SendMessageToPC(oScryer, "You feel no resolution of your intended scrying subject.");
+								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
 									SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
 								}
 							 else {
 							 	SetLocalObject(oScry, "oScried", oPC);
-							 	float fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
+							 	SendMessageToPC(oScryer, "You feel your spell overcome " + sPCName + "'s willpower.");
 								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
 							 	SetLocalInt(oScry, "SCRY_ACTIVE", 1);
 								DelayCommand(fScryTimer, SetLocalFloat(oScry, "SCRY_TIMER", 0.0));
