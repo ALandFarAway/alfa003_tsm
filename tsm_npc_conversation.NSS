@@ -270,9 +270,9 @@ void main()
 							nRosterInc++;
 							}
 						} 
-					  
-					 SendMessageToPC(oScryer, "PCName is " + sPCName);
-					 SendMessageToPC(oScryer, "RosterName is " + sRosterName);
+					 
+					 SendMessageToPC(oScryer, "1. PCName is " + sPCName);
+					 SendMessageToPC(oScryer, "1. RosterName is " + sRosterName);
 							
 					 if(sPCName == "") {
 					 	sPCName = GetName(oPC);

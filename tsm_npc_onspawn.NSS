@@ -51,6 +51,7 @@ void main()
 			 
 			 AddRosterMemberByTemplate("Aedelvana", "003_cr_oh_aedelvana");
 			 AddRosterMemberByTemplate("Xavier", "003_cr_firegen_xavier");
+			 AddRosterMemberByTemplate("Ostelle", "003_cr_silv_profnec");
 			 
 			 string sRosterOne = GetFirstRosterMember();
 			 string sRosterTwo = GetNextRosterMember();
