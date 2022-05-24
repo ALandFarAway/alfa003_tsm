@@ -265,20 +265,23 @@ void main()
 						while ((sRosterName != "") && (nRosterInc < 5)) {
 							SendMessageToPC(oScryer, "RosterName is " + sRosterName);
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
-								{sPCName = sRosterName;}
+								{sPCName = sRosterName;
+								 oPC = GetObjectFromRosterName(sPCName);
+								 int nNPCWill = GetAbilityScore(oPC, ABILITY_WISDOM, FALSE);
+								 SendMessageToPC(oScryer, sPCName + "'s Wisdom is " + IntToString(nNPCWill));
+							  }
 							sRosterName = GetNextRosterMember();
 							nRosterInc++;
 							}
 						} 
-					 
-					 SendMessageToPC(oScryer, "1. PCName is " + sPCName);
-					 SendMessageToPC(oScryer, "1. RosterName is " + sRosterName);
 							
 					 if(sPCName == "") {
 					 	sPCName = GetName(oPC);
 					 }
-					 SendMessageToPC(oScryer, "2. PCName is " + sPCName);
-					 SendMessageToPC(oScryer, "2. RosterName is " + sRosterName);
+					 
+					 SendMessageToPC(oScryer, "PCName is " + sPCName);
+					 SendMessageToPC(oScryer, "RosterName is " + sRosterName);
+					 SendMessageToPC(oScryer, "GetName oPC is " + GetName(oPC));
 						 
 						 
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))  && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))

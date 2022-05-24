@@ -55,8 +55,10 @@ void main()
 			 
 			 string sRosterOne = GetFirstRosterMember();
 			 string sRosterTwo = GetNextRosterMember();
+			 string sRosterThree = GetNextRosterMember();
 			 SetListenPattern(OBJECT_SELF, "**" + sRosterOne + "**", 6031);
 			 SetListenPattern(OBJECT_SELF, "**" + sRosterTwo + "**", 6032); 
+			 SetListenPattern(OBJECT_SELF, "**" + sRosterThree + "**", 6033); 
 				 
 			 //ActionSpeakString("spawn: " + "sRosterOne = " + sRosterOne, TALKVOLUME_TALK);
 			 //ActionSpeakString("spawn: " + "sRosterTwo = " + sRosterTwo, TALKVOLUME_TALK);
