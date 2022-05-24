@@ -124,8 +124,9 @@ void main() {
 		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser != oScryer)) {
 			SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
-		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser == oScryer)) {
-			
+		int nDoOnce = 0;
+		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser == oScryer) && (nDoOnce == 0)) {
+			nDoOnce = 1;
 			object oPC = GetLocalObject(OBJECT_SELF, "oScried");
 			object oArea = GetArea(oPC);
 			string sSubjectArea = GetName(oArea);
