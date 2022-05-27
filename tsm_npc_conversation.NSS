@@ -200,8 +200,9 @@ void main()
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		float fScryTimer = GetLocalFloat(OBJECT_SELF, "SCRY_TIMER");
 		effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
-							 			 	
-		
+		effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
+		effect eEthereal = EffectEthereal();
+	    				 			 	
 		int nMatch = GetListenPatternNumber();
 		if((nMatch >= 6010) && (nMatch <= 6040)) {
 		 	int nKnowledge;
@@ -269,6 +270,8 @@ void main()
 								{sPCName = sRosterName;
 								 oPC = SpawnRosterMember(sPCName, GetLocation(OBJECT_SELF));
 								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,oPC);
+			 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,oPC);
+			 					 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal,OBJECT_SELF));
 			 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oPC);
 								 DelayCommand(fScryTimer-5.5, SendMessageToPC(oScryer, "Destroying " + sPCName));
 								 DestroyObject(oPC, fScryTimer- 5.0);

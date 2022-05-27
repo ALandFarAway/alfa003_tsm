@@ -9,6 +9,7 @@ void main()
 	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));
 	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
+	effect eEthereal = EffectEthereal();
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
          
@@ -31,6 +32,7 @@ void main()
 		     AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
 			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost,OBJECT_SELF));
 			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,OBJECT_SELF));
+			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal,OBJECT_SELF));
 			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
 			 SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
 			 SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
