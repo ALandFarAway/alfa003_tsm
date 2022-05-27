@@ -27,7 +27,8 @@ void main()
 			 }
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
-			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
+			 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		     AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));
 			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost,OBJECT_SELF));
 			 AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,OBJECT_SELF));
 			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
@@ -44,6 +45,7 @@ void main()
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
+				 SendMessageToPC(oScryer, "sPCName = " + sPCName);
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);

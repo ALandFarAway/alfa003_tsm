@@ -162,7 +162,7 @@ void main()
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-		
+		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		ActionForceFollowObject(oScried, 0.5f, 0);
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		int nMatch = GetListenPatternNumber();
@@ -170,7 +170,7 @@ void main()
 			string sSpokenBy = GetName(GetLastSpeaker());
 			SetFirstName(oScryListen, sSpokenBy);
 			string sRelay = GetMatchedSubstring(0);
-			if(GetLastSpeaker() != oScryListen) {
+			if((GetLastSpeaker() != oScryListen) && (GetLastSpeaker() != oScryer)) {
 				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 			}
 		}
@@ -179,6 +179,7 @@ void main()
 	
 	if((GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
 		ActionForceFollowObject(oScried, 0.5f, 0);
 		int nMatch = GetListenPatternNumber();
@@ -186,14 +187,14 @@ void main()
 			string sSpokenBy = GetName(GetLastSpeaker());
 			string sRelay = GetMatchedSubstring(0);
 			SendMessageToAllDMs(sSpokenBy + ": " + sRelay);
-		    if(GetLastSpeaker() != oScryListen) {
+		    if((GetLastSpeaker() != oScryListen) && (GetLastSpeaker() != oScryer)) {
 				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 			}
 		}
 	}	 
 
 	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer"))) {
+	if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sMatch = GetMatchedSubstring(1);
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
@@ -269,7 +270,9 @@ void main()
 								 oPC = SpawnRosterMember(sPCName, GetLocation(OBJECT_SELF));
 								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,oPC);
 			 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oPC);
-								 DestroyObject(oPC, fScryTimer);
+								 DelayCommand(fScryTimer-5.5, SendMessageToPC(oScryer, "Destroying " + sPCName));
+								 DestroyObject(oPC, fScryTimer- 5.0);
+								 DelayCommand(fScryTimer, SendMessageToPC(oScryer, "This is fScryTimer when Roster PC would be destroyed."));
 								 int nNPCWill = GetAbilityScore(oPC, ABILITY_WISDOM, FALSE);
 								 //SendMessageToPC(oScryer, sPCName + "'s Wisdom is " + IntToString(nNPCWill));
 							  }
@@ -309,6 +312,7 @@ void main()
 									SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
 									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
 									SetLocalObject(oScrySend, "oScried", oPC);
+									SetLocalObject(oScrySend, "oScryer", oScryer);
 									SetFirstName(oScrySend, "Scrying Sensor");
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oPC, 0.5f, 0)));
 									DestroyObject(oScrySend, fScryTimer); 
