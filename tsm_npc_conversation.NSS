@@ -250,8 +250,10 @@ void main()
 				int nTestPattern = 6020;
 	         	object oPC = GetFirstPC(FALSE);
 				string sPCName = GetName(oPC);
-				
+				SendMessageToPC(oScryer, "PreWhile nMatch >= 6020 : sPCName" +  sPCName);
+				SendMessageToPC(oScryer, "Pre Outer While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
 				while ((oPC != OBJECT_INVALID) && (nTestPattern <= 6040)) {
+				SendMessageToPC(oScryer, "During Outer While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
 					
 					
 					 int nActive = GetLocalInt(oScry, "SCRY_ACTIVE");
@@ -265,9 +267,12 @@ void main()
 					if(nTestPattern == 6020) {
 						int nRosterInc = 0;
 						while ((sRosterName != "") && (nRosterInc < 5)) {
-							//SendMessageToPC(oScryer, "RosterName is " + sRosterName);
+							SendMessageToPC(oScryer, "Inner While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
+							SendMessageToPC(oScryer, "Inner While RosterName is " + sRosterName + " : sPCName = " + sPCName);
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sPCName = sRosterName;
+								 SendMessageToPC(oScryer, "Inner While If nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
+								 SendMessageToPC(oScryer, "Inner While If RosterName is " + sRosterName + " : sPCName = " + sPCName);
 								 oPC = SpawnRosterMember(sPCName, GetLocation(OBJECT_SELF));
 								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,oPC);
 			 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,oPC);
@@ -283,11 +288,16 @@ void main()
 							nRosterInc++;
 							}
 						} 
-							
+						
+					SendMessageToPC(oScryer, "After Inner While RosterName is " + sRosterName + " : sPCName = " + sPCName);
+								
 					 if(sPCName == "") {
-					 	sPCName = GetName(oPC);
+					 	oPC = GetFirstPC(FALSE);
+				 		sPCName = GetName(oPC);
+				
 					 }
-					 
+					 SendMessageToPC(oScryer, "After ifSPCName == '' RosterName is " + sRosterName + " : sPCName = " + sPCName);
+					
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))  && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
 						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sPCName + "'s willpower to resist it.");
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
