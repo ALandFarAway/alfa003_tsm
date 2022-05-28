@@ -47,7 +47,7 @@ void main()
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
-				 SendMessageToPC(oScryer, "sPCName = " + sPCName);
+				 SendMessageToPC(oScryer, "Listener Spawn : sPCName = " + sPCName  + " : " + IntToString(nListenPattern));
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
@@ -56,11 +56,11 @@ void main()
 			 AddRosterMemberByTemplate("Aedelvana", "003_cr_oh_aedelvana");
 			 AddRosterMemberByTemplate("Xavier", "003_cr_firegen_xavier");
 			 AddRosterMemberByTemplate("Ostelle", "003_cr_silv_profnec");
-			 
+			  
 			 nListenPattern = 6031;
 			 string sRoster = GetFirstRosterMember();
 			 while ((sRoster != "") && (nListenPattern <= 6040)) {
-				 //ActionSpeakString("spawn: "  + " sRoster = " + sRoster, TALKVOLUME_TALK);
+				 ActionSpeakString("spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern), TALKVOLUME_TALK);
 				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
 				 nListenPattern++;
 				 sRoster = GetNextRosterMember();

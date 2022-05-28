@@ -250,10 +250,10 @@ void main()
 				int nTestPattern = 6020;
 	         	object oPC = GetFirstPC(FALSE);
 				string sPCName = GetName(oPC);
-				SendMessageToPC(oScryer, "PreWhile nMatch >= 6020 : sPCName" +  sPCName);
-				SendMessageToPC(oScryer, "Pre Outer While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
+				//SendMessageToPC(oScryer, "PreWhile nMatch >= 6020 : sPCName = " +  sPCName);
+				//SendMessageToPC(oScryer, "Pre Outer While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) + " : " + GetMatchedSubstring(1) );
 				while ((oPC != OBJECT_INVALID) && (nTestPattern <= 6040)) {
-				SendMessageToPC(oScryer, "During Outer While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
+				SendMessageToPC(oScryer, "A. nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sPCName = " + sPCName);
 					
 					
 					 int nActive = GetLocalInt(oScry, "SCRY_ACTIVE");
@@ -267,12 +267,12 @@ void main()
 					if(nTestPattern == 6020) {
 						int nRosterInc = 0;
 						while ((sRosterName != "") && (nRosterInc < 5)) {
-							SendMessageToPC(oScryer, "Inner While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
-							SendMessageToPC(oScryer, "Inner While RosterName is " + sRosterName + " : sPCName = " + sPCName);
+							//SendMessageToPC(oScryer, "Roster While nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1) );
+							//SendMessageToPC(oScryer, "Roster While RosterName is " + sRosterName + " : sPCName = " + sPCName);
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sPCName = sRosterName;
-								 SendMessageToPC(oScryer, "Inner While If nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) );
-								 SendMessageToPC(oScryer, "Inner While If RosterName is " + sRosterName + " : sPCName = " + sPCName);
+								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
+								 //SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sPCName = " + sPCName);
 								 oPC = SpawnRosterMember(sPCName, GetLocation(OBJECT_SELF));
 								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,oPC);
 			 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis,oPC);
@@ -289,14 +289,9 @@ void main()
 							}
 						} 
 						
-					SendMessageToPC(oScryer, "After Inner While RosterName is " + sRosterName + " : sPCName = " + sPCName);
 								
-					 if(sPCName == "") {
-					 	oPC = GetFirstPC(FALSE);
-				 		sPCName = GetName(oPC);
-				
-					 }
-					 SendMessageToPC(oScryer, "After ifSPCName == '' RosterName is " + sRosterName + " : sPCName = " + sPCName);
+					 
+					 SendMessageToPC(oScryer, "After Roster Loop -- sPCName = " + sPCName);
 					
 					 if((TestStringAgainstPattern("**" + sPCName + "**", GetMatchedSubstring(1)))  && (GetLocalInt(oScry, "SCRY_ACTIVE")==0))
 						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sPCName + "'s willpower to resist it.");
@@ -909,12 +904,15 @@ void main()
 								if(fDistanceMoved != 0.0) {
 										sMoving = "moving " + sDirection + ".";
 									}
-								ActionSpeakString(GetName(oPC) + " is " + sMoving, TALKVOLUME_TALK);
+								//ActionSpeakString(GetName(oPC) + " is " + sMoving, TALKVOLUME_TALK);
 								}
 							 break;
 							 }
 						 nTestPattern++;
 						 oPC = GetNextPC(FALSE);
+						 sPCName = GetName(oPC);
+						 SendMessageToPC(oScryer, "B. nTestPattern = " + IntToString(nTestPattern) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sPCName = " + sPCName);
+				
 				}	
 			}
 			
