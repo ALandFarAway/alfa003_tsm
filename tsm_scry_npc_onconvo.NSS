@@ -102,14 +102,17 @@ void main()
 if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
-		ActionForceFollowObject(oScried, 0.5, 0);
+		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
+		ActionSpeakString(GetName(OBJECT_SELF) + ": oScryListen = " + GetTag(oScryListen), TALKVOLUME_TALK);	 
+		ActionSpeakString(GetName(OBJECT_SELF) + ": oScryer = " + GetName(oScryer), TALKVOLUME_TALK);	 
+		ActionSpeakString(GetName(OBJECT_SELF) + ": oScried = " + GetName(oScried), TALKVOLUME_TALK);	 
+		ActionForceFollowObject(oScried, 0.5, 0); 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
 			SetFirstName(oScryListen, sSpokenBy);
 			string sRelay = GetMatchedSubstring(0);
-			if((GetLastSpeaker() != oScryListen) && (GetLastSpeaker() != oScryer)) {
+			if(GetLastSpeaker() != oScryListen)  {
 				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 			}
 			//Scrying Sensor won't force follow across ATs, so here it checks to make sure oScried hasn't left the area and jumps to oScried if so
@@ -223,12 +226,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						while ((sRosterName != "") && (nRosterInc < 10)) {
 							//SendMessageToPC(oScryer, "Roster While nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1) );
 							//SendMessageToPC(oScryer, "Roster While RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
-							/*
 							
-							If the spoken name matches the Roster Name of one of the Roster NPCs
+							/*If the spoken name matches the Roster Name of one of the Roster NPCs
 							then create an OOC invisible version of that NPC where it should be found
-							so that WillSave and location data may be gotten  later on in this script.
-							*/
+							so that WillSave and location data may be gotten  later on in this script.*/
+							
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sScriedName = sRosterName;
 								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
@@ -252,16 +254,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 					 SendMessageToPC(oScryer, "After Roster Loop -- sScriedName = " + sScriedName);
 					
 					 /*If the spoken name matches the name of one of the PCs currently logged in
-					   give that potential oScried a WillSave vs oScryer's DC
-					 */
+					   give that potential oScried a WillSave vs oScryer's DC*/
+					 
 					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
 						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
 						//If oScried makes a privately rolled WillSave vs. stored DC:
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
-				 		int nWillSave = d20(1) + GetWillSavingThrow(oScried);
+				 		int nWillSaveRoll = d20(1);
+						int nWillSaveBase = GetWillSavingThrow(oScried);
+						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToAllDMs("nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-					 
+					    SendMessageToAllDMs("nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
+						
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 							 	SendMessageToPC(oScryer, "You feel your spell fail.");
@@ -273,6 +279,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as of somebody you had met once or twice but can't quite recall." );
 									}
 							}
+							
 						//If oScried fails their WillSave they become the oScried object
 						else {//Add oScried to the collection of objects
 							 	SetLocalObject(oScry, "oScried", oScried);
@@ -284,11 +291,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
 								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
 							 	SetLocalInt(oScry, "nScryActive", 1);
+								
 								//Throw oScried a bone if their roll was within 5 of the DC
 								if (nDC - nWillSave < 5) 
 								 	{SendMessageToPC(oScryer, "You feel watched.");
+								 	 SendMessageToPC(oScried, "You feel watched.");
 								 	 SendMessageToAllDMs(GetName(oScried) + "'s saving roll was within 5 of the DC and feels watched.");
 								 	}
+									
 								//Spawn an invisible Scrying Sensor on oScried and add it to the collective
 								//Detect Scrying or See Invisible will reveal it
 								//It will forcefollow oScried but not across ATs
@@ -311,7 +321,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 									}
 								
-								//Find out information about oScried
+								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
 								string sSubjectArea = GetName(oArea);
 								string sAreaTag = GetTag(oArea);
