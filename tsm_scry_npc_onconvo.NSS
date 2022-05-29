@@ -103,9 +103,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SEL
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
-		ActionSpeakString(GetName(OBJECT_SELF) + ": oScryListen = " + GetTag(oScryListen), TALKVOLUME_TALK);	 
-		ActionSpeakString(GetName(OBJECT_SELF) + ": oScryer = " + GetName(oScryer), TALKVOLUME_TALK);	 
-		ActionSpeakString(GetName(OBJECT_SELF) + ": oScried = " + GetName(oScried), TALKVOLUME_TALK);	 
+		//ActionSpeakString(GetName(OBJECT_SELF) + ": oScryListen = " + GetTag(oScryListen), TALKVOLUME_TALK);	 
+		//ActionSpeakString(GetName(OBJECT_SELF) + ": oScryer = " + GetName(oScryer), TALKVOLUME_TALK);	 
+		//ActionSpeakString(GetName(OBJECT_SELF) + ": oScried = " + GetName(oScried), TALKVOLUME_TALK);	 
 		ActionForceFollowObject(oScried, 0.5, 0); 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -893,8 +893,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									{ActionSpeakString("Within view: " + sOther, TALKVOLUME_TALK );}
 								
 								//Notify oScryer and DMs of the end of the spell
-								DelayCommand(fScryTimer - 1.0, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
-			 					DelayCommand(fScryTimer - 1.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
+								DelayCommand(fScryTimer - 5.0, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
+			 					DelayCommand(fScryTimer - 5.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
+			 					DelayCommand(fScryTimer - 5.0, SendMessageToPC(oScryer, "Your scry spell ends and the images in the " + sScryName + " fade."));		
 			 
 								//Unset ALL local objects at the end of the successful spell
 								//Destroy Scrying Sensor and ScryListen
@@ -923,8 +924,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								DelayCommand(fScryTimer, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
 								DelayCommand(fScryTimer, SetLocalInt(oScry, "nScryActive", 0));
 								
-								DestroyObject(oScrySend, fScryTimer); 
-								DestroyObject(OBJECT_SELF, fScryTimer);
+								DestroyObject(oScrySend, fScryTimer + 2.0); 
+								//DestroyObject(OBJECT_SELF, fScryTimer + 2.0);
 								break;
 								}
 							 

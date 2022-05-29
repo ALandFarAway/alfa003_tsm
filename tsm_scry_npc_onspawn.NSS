@@ -85,14 +85,14 @@ void main()
 			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
-			 DelayCommand(fScryTimer + 2.0, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
-			 DelayCommand(fScryTimer + 2.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
-			 DelayCommand(fScryTimer + 2.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
-			 DelayCommand(fScryTimer + 2.0, SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID));
-			 DelayCommand(fScryTimer + 2.0, SetLocalObject(oScryer, "oScry", OBJECT_INVALID));
-			 DelayCommand(fScryTimer + 2.0, SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID));
-			 DelayCommand(fScryTimer + 2.0, SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID));
-			 DestroyObject(OBJECT_SELF, fScryTimer + 3.0);
+			 DelayCommand(fScryTimer + 15.0, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScryer, "oScry", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID));
+			 //DestroyObject(OBJECT_SELF, fScryTimer + 6.0);
 			 
 			 //Over to conversation script: tsm_scry_npc_onconvo
 			 
