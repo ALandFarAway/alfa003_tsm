@@ -928,7 +928,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								DelayCommand(fScryTimer, SetLocalInt(oScry, "nScryActive", 0));
 								
 								DestroyObject(oScrySend, fScryTimer + 2.0); 
-								//DestroyObject(OBJECT_SELF, fScryTimer + 2.0);
+								DestroyObject(OBJECT_SELF, fScryTimer + 5.0);
 								break;
 								}
 							 
