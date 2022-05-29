@@ -400,11 +400,14 @@ if(GetSpellId() == 3056)
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
 	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	   	}
-	 if(oScry == OBJECT_INVALID) {
+	 if(GetLocalInt(oScry, "nScryActive") == 1) {
+	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used as the focus of a Scry spell.");
+		}
+	 else if(oScry == OBJECT_INVALID) {
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
 		
-	else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
+	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
