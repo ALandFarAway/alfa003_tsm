@@ -393,23 +393,21 @@ if(GetSpellId() == 3058) {
 	}
 
 if(GetSpellId() == 3056)
-	{object oScryer = OBJECT_SELF;
+	{//Define Scryer and Scrying Object
+	 object oScryer = OBJECT_SELF;
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
 	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	   	}
-	  
-	if(oScry == OBJECT_INVALID) {
+	 if(oScry == OBJECT_INVALID) {
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
-	else {  
-			object oScried; 
+		
+	else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
-			string sSpeak = GetLocalString(oScry, "SCRY_SPEAK");
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
-
-			int nSpellLevel = GetSpellLevel(GetSpellId());
+	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
 			int nAbilityMod = GetAbilityModifier(ABILITY_INTELLIGENCE);
 			if(GetLastSpellCastClass()== CLASS_TYPE_BARD || CLASS_TYPE_SORCERER || CLASS_TYPE_PALADIN) {
 				nAbilityMod = GetAbilityModifier(ABILITY_CHARISMA);
@@ -419,37 +417,27 @@ if(GetSpellId() == 3056)
 				}
 			int nDC = 10 + nSpellLevel + nAbilityMod;
 			
-			float fScryTimer;
-			effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
+			//Create undetectable OOC Scrying Listener at location of Scrying Object to receive scrying information about future scrying target
 			object oScryListen = GetLocalObject(oScry, "oScryListen");
 			if(oScryListen == OBJECT_INVALID) {
 				oScryListen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
             	SetLocalObject(oScry, "oScryListen", oScryListen);
 				}
+			
+			//Set all objects on each other
 			SetLocalObject(oScryListen, "oScry", oScry);
 			SetLocalObject(oScryListen, "oScryer", oScryer);
-			SetLocalInt(oScryListen, "nScryDC", nDC);
-			SetFirstName(oScryListen, sScryName);
 			SetLocalObject(oScry, "oScryListen", oScryListen);
 			SetLocalObject(oScry, "oScryer", oScryer);
-			SetLocalInt(oScryListen, "SCRY_ACTIVE", 1);
-			SetLocalFloat(oScryListen, "SCRY_TIMER", 60.0 * nScryerLevel);
-			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDivination, oScry, fScryTimer);
-			AssignCommand(oScryListen, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-			DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
-			DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
-			DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
-			fScryTimer = GetLocalFloat(oScryListen, "SCRY_TIMER");	
+			SetLocalObject(oScryer, "oScryListen", oScryListen);
+			SetLocalObject(oScryer, "oScry", oScry);
 			
-			DelayCommand(fScryTimer - 1.0, AssignCommand(oScryListen, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK)));		
-			DelayCommand(fScryTimer, SetLocalFloat(oScryListen, "SCRY_TIMER", 0.0));
-			DelayCommand(fScryTimer+0.5, SetLocalInt(oScry, "SCRY_ACTIVE", 0));
-			DelayCommand(fScryTimer+1.0, SetLocalInt(oScryListen, "SCRY_ACTIVE", 0));
-			DelayCommand(fScryTimer+1.5, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
-			DelayCommand(fScryTimer+2.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
-			DelayCommand(fScryTimer+2.5, SetLocalObject(oScry, "oScried", OBJECT_INVALID));
-			DestroyObject(oScryListen, fScryTimer + 3.0);
+			//Set all other variables on ScryListen
+			SetLocalInt(oScryListen, "nScryDC", nDC);
+			SetLocalFloat(oScryListen, "fScryTimer", 60.0 * nScryerLevel);
+			SetFirstName(oScryListen, sScryName);
 			
+			//Over to ScryListener's onspawn: tsm_scry_npc_onspawn
 		}
 	}
 	

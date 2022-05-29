@@ -109,26 +109,29 @@ void main() {
 		return;
 
 	ACR_PlaceableOnUsed();
-
-
-	if(FindSubString(GetTag(OBJECT_SELF), "_SCRY") != -1)
-	{object oUser = GetLastUsedBy();
-	 object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
-	 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-	 object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-			
-	 string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
-	 	   if(GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 0) {
+	//Get oUser and existing local objects
+ 	object oUser = GetLastUsedBy();
+	object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
+	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
+				
+	string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
+	//Has Scry been successfully cast?
+	if(GetLocalInt(OBJECT_SELF, "nScryActive") == 0) {
 			SendMessageToPC(oUser, "The scrying object requires the casting of the Scry spell.");
 		}
-		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser != oScryer)) {
+	//If so, was it cast by oUser?
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oUser != oScryer) && (!GetIsDM(oUser))&& (!GetIsDMPossessed(oUser))) {
 			SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
-		if((GetLocalInt(OBJECT_SELF, "SCRY_ACTIVE") == 1) && (oUser == oScryer)) {
-			object oPC = GetLocalObject(OBJECT_SELF, "oScried");
-			object oArea = GetArea(oPC);
-			string sSubjectArea = GetName(oArea);
-			string sAreaTag = GetTag(oArea);
+	//If Scry has been successfully cast, then oScried exists	
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && ((oUser == oScryer) || (GetIsDM(oUser)) || (GetIsDMPossessed(oUser)))) {
+	object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+	//Check area information about oScried
+	object oArea = GetArea(oScried);
+	string sSubjectArea = GetName(oArea);
+	string sAreaTag = GetTag(oArea);
+	
 			if(FindSubString(sAreaTag, "caravan", 0) != -1) 
 				{sSubjectArea = "inside a caravan.";}
 			else if(FindSubString(sAreaTag, "ferry", 0) != -1)
@@ -315,9 +318,8 @@ void main() {
 			else if(FindSubString(sAreaTag, "_ext_", 0) != -1)
 				{sSubjectArea = "outside, though nothing uniquely identifiable is visible.";}
 			else {sSubjectArea = "somewhere where you can see no identifying details of the surroundings.";}	
-								
-			
-			
+				
+			//Check weather information in oScried's area				
 			int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
 			string sWeatherRain = "";
 			int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
@@ -352,37 +354,39 @@ void main() {
 				if(nWeatherSnow == 5)  
 					{sWeatherSnow = "A blizzard rages. ";}
 				}
-				
-			string sFacing = GetCompassDirectionOfAngle(GetFacing(oPC));
-								
+			
+			string sFacing = GetCompassDirectionOfAngle(GetFacing(oScried));
 			string sGenderNoun = "He";
 			string sGenderAdj = "him";
-			if(GetGender(oPC) == GENDER_FEMALE) {
+			if(GetGender(oScried) == GENDER_FEMALE) {
 				sGenderNoun = "She";
 				sGenderAdj = "her";
 				}
-								
+				
+			//Send area and weather info to oScryer 	
 			ActionSpeakString( "", TALKVOLUME_TALK);
 			ActionSpeakString( "********************", TALKVOLUME_TALK);
-			ActionSpeakString(GetName(oPC) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
-								 	
-			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
+			ActionSpeakString(GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
+			
+			//Send oScried's detailed object information to oScryer					 	
+			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			string sObjectName = GetName(oObject);
-			float fDistance = GetDistanceBetween(oPC, oObject);
+			float fDistance = GetDistanceBetween(oScried, oObject);
 			int nInc = 1;
 			while ((oObject != OBJECT_INVALID) && (nInc <= 12)){
 					string sObjectPrevious = GetName(oObject);
-					oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oPC), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
+					oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 					sObjectName = GetName(oObject);
-					fDistance = GetDistanceBetween(oPC, oObject);
-					if((sObjectName != GetName(oPC)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
-						ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".", TALKVOLUME_TALK);
+					fDistance = GetDistanceBetween(oScried, oObject);
+					if((sObjectName != GetName(oScried)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
+						ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oScried, oObject)) + ".", TALKVOLUME_TALK);
 						}
 					nInc++;
 				}
 			
+			//Is oScried on the move?
 			location lStart = GetLocalLocation(oScryListen, "lScryStart");
-			SetLocalLocation(oScryListen, "lNew", GetLocation(oPC));
+			SetLocalLocation(oScryListen, "lNew", GetLocation(oScried));
 			location lNew = GetLocalLocation(oScryListen, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
 			//SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
@@ -391,13 +395,17 @@ void main() {
 			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
-			ActionSpeakString(GetName(oPC) + " is " + sMoving, TALKVOLUME_TALK);
+			ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK);
 			
 			ActionSpeakString( "********************", TALKVOLUME_TALK);
 			ActionSpeakString( "", TALKVOLUME_TALK);
 			
-			
+			//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
+			if(GetArea(oScrySend) != GetArea(oScried)) {
+				AssignCommand(oScrySend, ActionJumpToObject(oScried, TRUE));
+			}
+			 
 		}	
-	}
+	
 		
 }

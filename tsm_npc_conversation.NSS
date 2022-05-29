@@ -300,7 +300,7 @@ void main()
 							 	SendMessageToPC(oPC, "You have a momentary sense of being watched...but it passes.");
 							 	SendMessageToPC(oScryer, "You feel your spell fail.");
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
-									SendMessageToPC(oScryer, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
+									SendMessageToPC(oPC, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									SendMessageToAllDMs(GetName(oPC) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
 								}
 							 else {
