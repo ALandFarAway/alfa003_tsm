@@ -65,7 +65,7 @@ void main()
 			 nListenPattern = 6030;
 			 string sRoster = GetFirstRosterMember();
 			 while ((sRoster != "") && (nListenPattern < 6040)) {
-				 ActionSpeakString("spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern), TALKVOLUME_TALK);
+				 SendMessageToPC(oScryer, "Listener Spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern));
 				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
 				 nListenPattern++;
 				 sRoster = GetNextRosterMember();

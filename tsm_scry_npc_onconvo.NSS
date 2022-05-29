@@ -259,19 +259,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						//If oScried makes a privately rolled WillSave vs. stored DC:
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		int nWillSave = d20(1) + GetWillSavingThrow(oScried);
-						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave));
-						SendMessageToAllDMs("nWillSave was " + IntToString(nWillSave));
+						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						SendMessageToAllDMs("nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 					 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 							 	SendMessageToPC(oScryer, "You feel your spell fail.");
-								SendMessageToAllDMs(GetName(oScried) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); }
+								SendMessageToAllDMs(GetName(oScried) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
 									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									}
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") == 0) {
 									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as of somebody you had met once or twice but can't quite recall." );
 									}
+							}
 						//If oScried fails their WillSave they become the oScried object
 						else {//Add oScried to the collection of objects
 							 	SetLocalObject(oScry, "oScried", oScried);
@@ -914,8 +915,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								
 								DestroyObject(oScrySend, fScryTimer); 
 								DestroyObject(OBJECT_SELF, fScryTimer);
+								break;
 								}
-							 break;
+							 
 							 }
 						 nIncA++;
 						 oScried = GetNextPC(FALSE);
