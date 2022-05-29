@@ -319,6 +319,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									
 									SetFirstName(oScrySend, "Scrying Sensor");
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
+									
+									
+									
 									}
 								
 								//Find out information about oScried's area and area weather

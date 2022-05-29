@@ -21,6 +21,21 @@ void main()
 			 SetListening(OBJECT_SELF, TRUE);
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			 ActionForceFollowObject(oScried, 0.5f, 0);
+			 
+			 object oDetector = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+			 while (oDetector != OBJECT_INVALID) {
+				if(GetLocalInt(oDetector, "nDetectScrying") == 1) {
+					SendMessageToPC(oDetector, "You see a small glowing orb appear in the air above " + GetName(oScried));
+					effect eEffect = GetFirstEffect(OBJECT_SELF);
+					int nRep = 0;
+					while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+						RemoveEffect(OBJECT_SELF, eEffect);
+						eEffect = GetNextEffect(OBJECT_SELF);
+						nRep ++;
+						}
+					}
+				oDetector = GetNextObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+			}
 		}
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
