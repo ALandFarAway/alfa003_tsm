@@ -263,15 +263,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				 		int nWillSaveRoll = d20(1);
 						int nWillSaveBase = GetWillSavingThrow(oScried);
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
-						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
+						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						//SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToAllDMs("nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-					    SendMessageToAllDMs("nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
-						
+					    //SendMessageToAllDMs("nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
+						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 							 	SendMessageToPC(oScryer, "You feel your spell fail.");
-								SendMessageToAllDMs(GetName(oScried) + " WillSaved DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
+								SendMessageToAllDMs(GetName(oScried) + "saved and will not be scried by " + GetName(oScryer));
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
 									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									}
@@ -287,14 +287,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								SetLocalObject(oScryer, "oScried", oScried);
 							 	
 								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
-								SendMessageToAllDMs(GetName(oScried) + " failed a WillSave DC " + IntToString(nDC) + " and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
+								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
 								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
 							 	SetLocalInt(oScry, "nScryActive", 1);
 								
 								//Throw oScried a bone if their roll was within 5 of the DC
 								if (nDC - nWillSave < 5) 
-								 	{SendMessageToPC(oScryer, "You feel watched.");
+								 	{SendMessageToPC(oScryer, "You have a feeling that " + GetName(oScried) + " might have sensed something.");
 								 	 SendMessageToPC(oScried, "You feel watched.");
 								 	 SendMessageToAllDMs(GetName(oScried) + "'s saving roll was within 5 of the DC and feels watched.");
 								 	}
