@@ -114,6 +114,7 @@ void main() {
 	object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
+	SendMessageToPC(oScryer, "oScrySend = " + GetName(oScrySend));
 				
 	string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
 	//Has Scry been successfully cast?
@@ -134,6 +135,14 @@ void main() {
 	object oArea = GetArea(oScried);
 	string sSubjectArea = GetName(oArea);
 	string sAreaTag = GetTag(oArea);
+	
+	//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
+	SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(oScrySend)));
+	if(GetArea(oScrySend) != oArea) {
+		SendMessageToPC(oScryer, "Areas don't match. Scrying Sensor should be jumping to " + GetName(oScried));
+	 	AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oScried)));
+		}
+			
 	
 			if(FindSubString(sAreaTag, "caravan", 0) != -1) 
 				{sSubjectArea = "inside a caravan.";}
@@ -403,10 +412,6 @@ void main() {
 			ActionSpeakString( "********************", TALKVOLUME_TALK);
 			ActionSpeakString( "", TALKVOLUME_TALK);
 			
-			//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
-			if(GetArea(oScrySend) != GetArea(oScried)) {
-				AssignCommand(oScrySend, ActionJumpToObject(oScried, TRUE));
-			}
 			 
 		}	
 	

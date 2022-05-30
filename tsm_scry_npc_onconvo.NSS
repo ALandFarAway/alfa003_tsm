@@ -211,7 +211,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				//SendMessageToPC(oScryer, "PreWhile nMatch >= 6020 : sScriedName = " +  sScriedName);
 				//SendMessageToPC(oScryer, "Pre Outer While nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : " + GetMatchedSubstring(1) );
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
-					SendMessageToPC(oScryer, "A. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
+					//SendMessageToPC(oScryer, "A. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
 					int nScryActive = GetLocalInt(oScry, "nScryActive");
 					if(nScryActive == 1) {
 						 //SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
@@ -898,7 +898,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								//Notify oScryer and DMs of the end of the spell
 								DelayCommand(fScryTimer - 5.0, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			 					DelayCommand(fScryTimer - 5.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
-			 					DelayCommand(fScryTimer - 5.0, SendMessageToPC(oScryer, "Your scry spell ends and the images in the " + sScryName + " fade."));		
+			 					//DelayCommand(fScryTimer - 5.0, SendMessageToPC(oScryer, "Your scry spell ends and the images in the " + sScryName + " fade."));		
 			 
 								//Unset ALL local objects at the end of the successful spell
 								//Destroy Scrying Sensor and ScryListen
@@ -936,7 +936,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						 nIncA++;
 						 oScried = GetNextPC(FALSE);
 						 sScriedName = GetName(oScried);
-						 SendMessageToPC(oScryer, "B. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
+						 //SendMessageToPC(oScryer, "B. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
 				
 				}	
 			}

@@ -60,8 +60,8 @@ void main()
 		//Unset all local variables and destroy oScryListener, too
 		SetLocalInt(oScry, "nScryActive", 0);
 		
-		SendMessageToPC(oScryer, "nScryActive is now " + IntToString(GetLocalInt(oScry, "nScryActive")));
-		SendMessageToAllDMs("nScryActive is now " + IntToString(GetLocalInt(oScry, "nScryActive")));
+		//SendMessageToPC(oScryer, "nScryActive is now " + IntToString(GetLocalInt(oScry, "nScryActive")));
+		//SendMessageToAllDMs("nScryActive is now " + IntToString(GetLocalInt(oScry, "nScryActive")));
 		
 		SetLocalObject(oScry, "oScried", OBJECT_INVALID);
 		SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
