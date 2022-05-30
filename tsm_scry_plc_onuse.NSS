@@ -137,12 +137,12 @@ void main() {
 	string sAreaTag = GetTag(oArea);
 	
 	//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
-	SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(oScrySend)));
+	//SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(oScrySend)));
 	if(GetArea(oScrySend) != oArea) {
-		SendMessageToPC(oScryer, "PLC Use: Areas don't match. Scrying Sensor should be jumping to " + GetName(oScried));
+		//SendMessageToPC(oScryer, "PLC Use: Areas don't match. Scrying Sensor should be jumping to " + GetName(oScried));
 	 	AssignCommand(oScrySend, ClearAllActions(TRUE));
 		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oScried)));
-		AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0));
+		DelayCommand(5.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 		}
 			
 	

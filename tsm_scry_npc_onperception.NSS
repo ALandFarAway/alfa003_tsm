@@ -58,12 +58,12 @@ void main()
 		string sAreaTag = GetTag(oArea);
 		if(GetLastPerceptionVanished()) {
 			//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
-			SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(OBJECT_SELF)));
+			//SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(OBJECT_SELF)));
 			if(GetArea(OBJECT_SELF) != oArea) {
-				SendMessageToPC(oScryer, "Perception: Areas don't match. Scrying Sensor should be jumping to " + GetName(oScried));
+				//SendMessageToPC(oScryer, "Perception: Areas don't match. Scrying Sensor should be jumping to " + GetName(oScried));
 				ClearAllActions(TRUE);
 				DelayCommand(10.0, ActionJumpToLocation(GetLocation(oScried)));
-				DelayCommand(11.0, ActionForceFollowObject(oScried, 0.5f, 0));
+				DelayCommand(15.0, ActionForceFollowObject(oScried, 0.5f, 0));
 				}
 			}
 		}		
