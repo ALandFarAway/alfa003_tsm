@@ -107,7 +107,7 @@ void main()
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScryer, "oScry", OBJECT_INVALID));
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID));
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID));
-			 //DestroyObject(OBJECT_SELF, fScryTimer + 6.0);
+			 DestroyObject(OBJECT_SELF, fScryTimer + 15.0);
 			 
 			 //Over to conversation script: tsm_scry_npc_onconvo
 			 
