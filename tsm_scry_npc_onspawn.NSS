@@ -17,7 +17,6 @@ void main()
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target
 			 //Detect Scrying or See Invisibility will reveal it IC
 			 //Silverymoon's mythal reveals all scrying sensors
-			 
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
@@ -27,10 +26,30 @@ void main()
 				 SendMessageToPC(oScried, "You abruptly know that you are being scried.");
 				}
     	     
+			 
 			 object oDetector = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			 while (oDetector != OBJECT_INVALID) {
 				if(GetLocalInt(oDetector, "nDetectScrying") == 1) {
 					SendMessageToPC(oDetector, "You see a small glowing orb appear in the air above " + GetName(oScried));
+					
+					 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+					 string sScryerDesc = GetDescription(oScryer);
+					 object oScryerArea = GetArea(oScryer);
+					 string sScryerArea = GetName(oScryerArea);
+					 int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
+					 int nCasterRoll = d20(1);
+					 int nCasterOpposed = nCasterLevel + nCasterRoll;
+					 int nDetectorLevel = GetCasterLevel(oDetector);
+					 int nDetectorRoll = d20(1);
+					 int nDetectorOpposed = nDetectorLevel + nDetectorRoll;
+					 if(nDetectorOpposed >= nCasterOpposed) {
+					  	SendMessageToPC(oDetector, "You feel your Detect Scrying spell best the defences of the person scrying you.");
+						SendMessageToPC(oDetector, "You get a visual image of the scryer: " + sScryerDesc);
+						SendMessageToPC(oDetector, "You know that this person is located at the direction and distance of " + sScryerArea );
+						}
+					 else {SendMessageToPC(oDetector, "You feel your Detect Scrying spell try and fail to identify the person scrying you.");}
+		 	
+					
 					effect eEffect = GetFirstEffect(OBJECT_SELF);
 					int nRep = 0;
 					while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 

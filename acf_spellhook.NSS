@@ -380,6 +380,22 @@ if(GetSpellId() == 3058) {
 	while((oSensor != OBJECT_INVALID) && (nInc < 50)) {
 	if(FindSubString(GetTag(oSensor), "scry_send") != -1)
 		{SendMessageToPC(OBJECT_SELF, "You see a small glowing orb floating in the air.");
+		 object oScryer = GetLocalObject(oSensor, "oScryer");
+		 string sScryerDesc = GetDescription(oScryer);
+		 object oScryerArea = GetArea(oScryer);
+		 string sScryerArea = GetName(oScryerArea);
+		 int nCasterLevel = GetLocalInt(oSensor, "nCasterLevel");
+		 int nCasterRoll = d20(1);
+		 int nCasterOpposed = nCasterLevel + nCasterRoll;
+		 int nDetectorLevel = GetCasterLevel(OBJECT_SELF);
+		 int nDetectorRoll = d20(1);
+		 int nDetectorOpposed = nDetectorLevel + nDetectorRoll;
+		 if(nDetectorOpposed >= nCasterOpposed) {
+		  	SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell best the defences of the person scrying you.");
+			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer: " + sScryerDesc);
+			SendMessageToPC(OBJECT_SELF, "You know that this person is located at the direction and distance of " + sScryerArea );
+			}
+		 else {SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell try and fail to identify the person scrying you.");}
 		 effect eEffect = GetFirstEffect(oSensor);
 		 int nRep = 0;
 		 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
@@ -438,6 +454,7 @@ if(GetSpellId() == 3056)
 			
 			//Set all other variables on ScryListen
 			SetLocalInt(oScryListen, "nScryDC", nDC);
+			SetLocalInt(oScryListen, "nCasterLevel", nScryerLevel);
 			SetLocalFloat(oScryListen, "fScryTimer", 60.0 * nScryerLevel);
 			SetFirstName(oScryListen, sScryName);
 			

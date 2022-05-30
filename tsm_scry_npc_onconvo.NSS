@@ -260,7 +260,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
 						//If oScried makes a privately rolled WillSave vs. stored DC:
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
-				 		int nWillSaveRoll = d20(1);
+				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
+						int nWillSaveRoll = d20(1);
 						int nWillSaveBase = GetWillSavingThrow(oScried);
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
@@ -301,7 +302,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									
 								//Spawn an invisible Scrying Sensor on oScried and add it to the collective
 								//Detect Scrying or See Invisible will reveal it
-								//It will forcefollow oScried but not across ATs
 								location lThere = GetLocation(oScried);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
@@ -318,10 +318,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									SetLocalObject(oScrySend, "oScry", oScry);
 									
 									SetFirstName(oScrySend, "Scrying Sensor");
+									SetLocalInt(oScrySend, "nCasterLevel", nCasterLevel);
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
-									
-									
-									
 									}
 								
 								//Find out information about oScried's area and area weather
