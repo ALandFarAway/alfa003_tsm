@@ -251,7 +251,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							}
 						} 
 						
-					 SendMessageToPC(oScryer, "After Roster Loop -- sScriedName = " + sScriedName);
+					 //SendMessageToPC(oScryer, "After Roster Loop -- sScriedName = " + sScriedName);
 					
 					 /*If the spoken name matches the name of one of the PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
