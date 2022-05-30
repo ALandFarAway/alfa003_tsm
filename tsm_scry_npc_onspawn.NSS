@@ -99,7 +99,8 @@ void main()
 			 //These should be pulled from the Scryer somehow. Currently hardcoded here.
 			 AddRosterMemberByTemplate("Aedelvana", "003_cr_oh_aedelvana");
 			 AddRosterMemberByTemplate("Xavier", "003_cr_firegen_xavier");
-			 AddRosterMemberByTemplate("Ostelle", "003_cr_silv_profnec");
+			 AddRosterMemberByTemplate("Ostelle", "003_cr_slv_profnec");
+			 
 			  
 			 nListenPattern = 6030;
 			 string sRoster = GetFirstRosterMember();
