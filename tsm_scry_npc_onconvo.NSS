@@ -252,8 +252,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 object oScriedArea = GetFirstArea();
 								 while(oScriedArea != OBJECT_INVALID) {
 								 	if(GetTag(oScriedArea) == sScriedArea) {
-										DestroyObject(oScried);
-										SendMessageToPC(oScryer, "Mirror spawned oScried should be destroyed now.");
+										DespawnRosterMember(sScriedName);
+										SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
 								 		ACR_PreSpawnArea(oScriedArea);
 										oScried = GetObjectFromRosterName(sRosterName);
 										SendMessageToPC(oScryer, "New prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
