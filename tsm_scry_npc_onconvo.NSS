@@ -257,7 +257,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										ACR_PreSpawnArea(oScriedArea);
 										DespawnRosterMember(sScriedName);
 										SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
-								 		oScried = GetObjectFromRosterName(sScriedName);
+								 		object oFirst = GetFirstObjectInArea(oScriedArea);
+										SendMessageToPC(oScryer, "oFirst = " + GetName(oFirst));
+								 		int nNPC = 1;
+										object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
+										while (oNPC != OBJECT_INVALID) {
+											SendMessageToPC(oScryer, sScriedName + " : " + GetName(oNPC));
+											if(sScriedName == GetName(oNPC))
+												{oScried = oNPC;
+												 SendMessageToPC(oScryer, "oScried = " + GetName(oNPC));
+												 break;
+												 }
+											oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
+											nNPC++;
+										}
 										SendMessageToPC(oScryer, "New prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
 								 		break;
 										}
