@@ -249,16 +249,17 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									 }
 								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
 								 SendMessageToPC(oScryer, sScriedName + "'s Scry Area Tag is " + sScriedArea);
+								 int nWillSaveBase = GetWillSavingThrow(oScried);
+								 SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 								 object oScriedArea = GetFirstArea();
 								 while(oScriedArea != OBJECT_INVALID) {
 								 	if(GetTag(oScriedArea) == sScriedArea) {
+										ACR_PreSpawnArea(oScriedArea);
 										DespawnRosterMember(sScriedName);
 										SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
-								 		ACR_PreSpawnArea(oScriedArea);
-										oScried = GetObjectFromRosterName(sRosterName);
+								 		oScried = GetObjectFromRosterName(sScriedName);
 										SendMessageToPC(oScryer, "New prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
-								 
-										break;
+								 		break;
 										}
 									oScriedArea = GetNextArea();
 								 	}
@@ -279,7 +280,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
-						int nWillSaveBase = GetWillSavingThrow(oScried);
+						int nWillSaveBase = GetLocalInt(OBJECT_SELF, "oScriedWSBase");
+						if(nWillSaveBase == 0) {
+							nWillSaveBase = GetWillSavingThrow(oScried);
+							}
+						if(oScried == OBJECT_INVALID) {
+							oScried = GetObjectFromRosterName(sScriedName);
+							SendMessageToPC(oScryer, "Second prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
+							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
