@@ -283,11 +283,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						int nWillSaveBase = GetLocalInt(OBJECT_SELF, "oScriedWSBase");
 						if(nWillSaveBase == 0) {
 							nWillSaveBase = GetWillSavingThrow(oScried);
-							}
-						if(oScried == OBJECT_INVALID) {
-							oScried = GetObjectFromRosterName(sScriedName);
-							SendMessageToPC(oScryer, "Second prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
-							}
+						}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
@@ -307,7 +303,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							
 						//If oScried fails their WillSave they become the oScried object
 						else {//Add oScried to the collection of objects
-							 	SetLocalObject(oScry, "oScried", oScried);
+							 	if(GetName(oScried) == "") {
+									oScried = GetObjectFromRosterName(sScriedName);
+									SendMessageToPC(oScryer, "Second shot at prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
+									}
+						
+								SetLocalObject(oScry, "oScried", oScried);
 							 	SetLocalObject(OBJECT_SELF, "oScried", oScried);
 								SetLocalObject(oScryer, "oScried", oScried);
 							 	
