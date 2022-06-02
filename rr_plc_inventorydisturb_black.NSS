@@ -213,27 +213,35 @@ void main()
 		
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_blue") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_blue", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_n", OBJECT_SELF, 1));
 			 }	
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_green") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_green", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_e", OBJECT_SELF, 1));
 			 }	
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_gold") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_gold", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_p", OBJECT_SELF, 1));
 			 }		
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_red") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_red", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_o", OBJECT_SELF, 1));
 			 }
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_violet") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_violet", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_i", OBJECT_SELF, 1));
 			 }	
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_orange") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_orange", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_s", OBJECT_SELF, 1));
 			 }	
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_indigo") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_indigo", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_d", OBJECT_SELF, 1));
 			 }	
 		if((GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_white") && (GetInventoryDisturbType() == 1))
 			{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_white", OBJECT_SELF, 1));
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_r", OBJECT_SELF, 1));
 			 }	
 			
 		}		 
@@ -257,16 +265,11 @@ void main()
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_green", lWPTwo);
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_blue", lWPFive);
 		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_indigo", lWPSix);
-		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_violet", lWPSix);
+		 //CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_violet", lWPSix);
 		 }	 	
 	 	
 	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel_b") && (GetInventoryDisturbType() == 0))
 		{if((GetTag(GetInventoryDisturbItem()) != "abr_it_rng_orbacid") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_1") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_2") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_3") && (GetTag(GetInventoryDisturbItem()) != "003_it_phalorm_hglyph_4")) { 
-			 //AssignCommand(oCenter, ActionSpeakString("A ghostly figure rises up though the sand filling the central shaft and drifts into the room.", TALKVOLUME_TALK));	
-			 //DestroyObject(GetObjectByTag(sCreate, 0));
-			 //object oGhost = CreateObject(OBJECT_TYPE_CREATURE, sCreate, lCreate, FALSE); 
-			 //DelayCommand(1.0, AssignCommand(oGhost, ActionSpeakString("The master's kiss has not blessed the glyphs.", TALKVOLUME_TALK)));	
-			 
 			 }
 		 }
 	
@@ -318,10 +321,11 @@ void main()
 			
 		 }
 		 
-	if((GetLocalInt(OBJECT_SELF, "H1") == 2) && (GetLocalInt(OBJECT_SELF, "H2") == 2) && (GetLocalInt(OBJECT_SELF, "H3") == 2) && (GetLocalInt(OBJECT_SELF, "H4") == 2) && (GetLocalInt(OBJECT_SELF, "H5") == 2) && (GetLocalInt(OBJECT_SELF, "H6") == 2))
+	else if((GetLocalInt(OBJECT_SELF, "H1") == 2) && (GetLocalInt(OBJECT_SELF, "H2") == 2) && (GetLocalInt(OBJECT_SELF, "H3") == 2) && (GetLocalInt(OBJECT_SELF, "H4") == 2) && (GetLocalInt(OBJECT_SELF, "H5") == 2) && (GetLocalInt(OBJECT_SELF, "H6") == 2))
 		{	 SendMessageToAllDMs(GetName(oPC) + " removing barrier into Sayan's crypt.");	 
 		 	 SetLocalInt(OBJECT_SELF, "Activated", 2);
 			 CreateItemOnObject("003_it_phalorm_hglyph_white", OBJECT_SELF, 1);	
+		 	 CreateItemOnObject("003_it_phalorm_hglyph_orange", OBJECT_SELF, 1);	
 		 
 			 
 			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_violet", OBJECT_SELF, 1), 0.5, 1);
@@ -368,7 +372,7 @@ void main()
 			 
 		 }
 		 
-		 if((GetLocalInt(OBJECT_SELF, "H1") == 3) && (GetLocalInt(OBJECT_SELF, "H2") == 3) && (GetLocalInt(OBJECT_SELF, "H3") == 3) && (GetLocalInt(OBJECT_SELF, "H4") == 3) && (GetLocalInt(OBJECT_SELF, "H5") == 3) && (GetLocalInt(OBJECT_SELF, "H6") == 3))
+		 else if((GetLocalInt(OBJECT_SELF, "H1") == 3) && (GetLocalInt(OBJECT_SELF, "H2") == 3) && (GetLocalInt(OBJECT_SELF, "H3") == 3) && (GetLocalInt(OBJECT_SELF, "H4") == 3) && (GetLocalInt(OBJECT_SELF, "H5") == 3) && (GetLocalInt(OBJECT_SELF, "H6") == 3))
 		{	 SendMessageToAllDMs(GetName(oPC) + " opening access to Sayan's sarc.");	 
 		 	 SetLocalInt(OBJECT_SELF, "Activated", 3);
 			 CreateItemOnObject("003_it_phalorm_hglyph_white", OBJECT_SELF, 1);	

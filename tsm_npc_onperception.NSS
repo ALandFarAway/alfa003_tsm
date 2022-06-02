@@ -50,7 +50,7 @@ void main()
 	object oPerceived = GetLastPerceived();
 	
 	
-	if(GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal")
+	if((GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal") && (GetLastPerceptionSeen()))
 		{string sRandom;
 		switch(Random(11)) {
         case 0:
