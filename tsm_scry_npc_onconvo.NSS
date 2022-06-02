@@ -234,21 +234,21 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sScriedName = sRosterName;
-								 SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
-								 SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
-								 SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
+								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
+								 //SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
+								 //SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
 								 if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
 									 oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
-									 SendMessageToPC(oScryer, "Roster PC was invalid. Now spawned and Tag = " + GetTag(oScried));
-								     //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
-				 					 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
-				 					 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
-				 					 //SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
+									 //SendMessageToPC(oScryer, "Roster PC was invalid. Now spawned and Tag = " + GetTag(oScried));
+								     ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
+				 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
+				 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
+				 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
 									 //DelayCommand(fScryTimer-5.5, SendMessageToPC(oScryer, "Destroying spawned " + sScriedName));
 									 //DestroyObject(oScried, fScryTimer- 5.0);
 									 }
 								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
-								 SendMessageToPC(oScryer, sScriedName + "'s Scry Area Tag is " + sScriedArea);
+								 //SendMessageToPC(oScryer, sScriedName + "'s Scry Area Tag is " + sScriedArea);
 								 int nWillSaveBase = GetWillSavingThrow(oScried);
 								 SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 								 object oScriedArea = GetFirstArea();
@@ -256,16 +256,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 	if(GetTag(oScriedArea) == sScriedArea) {
 										ACR_PreSpawnArea(oScriedArea);
 										DespawnRosterMember(sScriedName);
-										SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
+										//SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
 								 		object oFirst = GetFirstObjectInArea(oScriedArea);
-										SendMessageToPC(oScryer, "oFirst = " + GetName(oFirst));
+										//SendMessageToPC(oScryer, "oFirst = " + GetName(oFirst));
 								 		int nNPC = 1;
 										object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
 										while (oNPC != OBJECT_INVALID) {
-											SendMessageToPC(oScryer, sScriedName + " : " + GetName(oNPC));
-											if(sScriedName == GetName(oNPC))
+											//SendMessageToPC(oScryer, sScriedName + " : " + GetName(oNPC));
+											if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1))
 												{oScried = oNPC;
-												 SendMessageToPC(oScryer, "oScried = " + GetName(oNPC));
+												 //SendMessageToPC(oScryer, "oScried = " + GetName(oNPC));
 												 break;
 												 }
 											oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
@@ -282,7 +282,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							}
 						} 
 						
-					 SendMessageToPC(oScryer, "After Roster Loop -- sScriedName = " + sScriedName);
+					 //SendMessageToPC(oScryer, "After Roster Loop -- sScriedName = " + sScriedName);
 					
 					 /*If the spoken name matches the name of one of the Roster NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
@@ -298,8 +298,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							nWillSaveBase = GetWillSavingThrow(oScried);
 						}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
-						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
+						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						//SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						//SendMessageToAllDMs("nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						if(nWillSave >= nDC){
@@ -316,12 +316,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							
 						//If oScried fails their WillSave they become the oScried object
 						else {//Add oScried to the collection of objects
-							 	if(GetName(oScried) == "") {
-									oScried = GetObjectFromRosterName(sScriedName);
-									SendMessageToPC(oScryer, "Second shot at prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
-									}
-						
-								SetLocalObject(oScry, "oScried", oScried);
+							 	SetLocalObject(oScry, "oScried", oScried);
 							 	SetLocalObject(OBJECT_SELF, "oScried", oScried);
 								SetLocalObject(oScryer, "oScried", oScried);
 							 	

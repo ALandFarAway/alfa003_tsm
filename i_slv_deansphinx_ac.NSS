@@ -19,7 +19,7 @@ void main()
     effect eSummon = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_1, FALSE);
     
 	if((GetName(GetItemActivator()) == "Wynna") || (FindSubString(GetName(GetItemActivator()), "Wynna", 0) != -1))
-        {SendMessageToAllDMs(GetName(GetItemActivator()) + " activated Carved Sphinx");
+        {SendMessageToAllDMs(GetName(GetItemActivator()) + " activated " + GetName(oItem));
 		 SetLocalObject(GetModule(), "oWynna", GetItemActivator());}
         {}
     SetLocalObject(OBJECT_SELF, "oNPC", oNPC);

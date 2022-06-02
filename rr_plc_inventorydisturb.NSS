@@ -58,8 +58,8 @@ void main()
 		}
 	}
 	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 0))
-		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_1", lWPGlyph);
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_red") && (GetInventoryDisturbType() == 0))
+		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_red", lWPGlyph);
 		 if(lWPGlyph==lWPOne) {
 		 	SetLocalInt(OBJECT_SELF, "H1", 1);
 			}
@@ -67,8 +67,8 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H1", 0);
 		 	}
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_2") && (GetInventoryDisturbType() == 0))
-		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_2", lWPGlyph);
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_gold") && (GetInventoryDisturbType() == 0))
+		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_gold", lWPGlyph);
 		 if(lWPGlyph==lWPTwo) {
 		 	SetLocalInt(OBJECT_SELF, "H2", 1);
 			}
@@ -76,8 +76,8 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H2", 0);
 		 	}
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_3") && (GetInventoryDisturbType() == 0))
-		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_3", lWPGlyph);
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_green") && (GetInventoryDisturbType() == 0))
+		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_green", lWPGlyph);
 		 if(lWPGlyph==lWPThree) {
 		 	SetLocalInt(OBJECT_SELF, "H3", 1);
 			}
@@ -85,8 +85,8 @@ void main()
 		 	SetLocalInt(OBJECT_SELF, "H3", 0);
 		 	}
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4") && (GetInventoryDisturbType() == 0))
-		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_4", lWPGlyph);
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_blue") && (GetInventoryDisturbType() == 0))
+		{CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_blue", lWPGlyph);
 		 if(lWPGlyph==lWPFour) {
 		 	SetLocalInt(OBJECT_SELF, "H4", 1);
 			}
@@ -95,20 +95,20 @@ void main()
 		 	}
 		 }	
 		
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_1") && (GetInventoryDisturbType() == 1))
-		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1));
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_red") && (GetInventoryDisturbType() == 1))
+		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_red", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H1", 0);
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_2") && (GetInventoryDisturbType() == 1))
-		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1));
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_gold") && (GetInventoryDisturbType() == 1))
+		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_gold", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H2", 0);
 		 }	
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_3") && (GetInventoryDisturbType() == 1))
-		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1));
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_grren") && (GetInventoryDisturbType() == 1))
+		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_green", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H3", 0);
 		 }		
-	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_4") && (GetInventoryDisturbType() == 1))
-		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_4", OBJECT_SELF, 1));
+	if((GetLocalInt(OBJECT_SELF, "Activated") == 1) && (GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetTag(GetInventoryDisturbItem()) == "003_it_phalorm_hglyph_blue") && (GetInventoryDisturbType() == 1))
+		{DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_blue", OBJECT_SELF, 1));
 		 SetLocalInt(OBJECT_SELF, "H4", 0);
 		 }	
 			 
@@ -122,14 +122,14 @@ void main()
 			 }
 		 
 		 ActionSpeakString("*Hieroglyph inscribed tablets appear, standing up on top of the panel", TALKVOLUME_TALK);
-		 CreateItemOnObject("003_it_phalorm_hglyph_2", OBJECT_SELF, 1);	
-		 CreateItemOnObject("003_it_phalorm_hglyph_4", OBJECT_SELF, 1);	
-		 CreateItemOnObject("003_it_phalorm_hglyph_3", OBJECT_SELF, 1);	
-		 CreateItemOnObject("003_it_phalorm_hglyph_1", OBJECT_SELF, 1);	
-		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_1", lWPFour);
-		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_2", lWPOne);
-		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_3", lWPThree);
-		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_4", lWPTwo);
+		 CreateItemOnObject("003_it_phalorm_hglyph_gold", OBJECT_SELF, 1);	
+		 CreateItemOnObject("003_it_phalorm_hglyph_blue", OBJECT_SELF, 1);	
+		 CreateItemOnObject("003_it_phalorm_hglyph_green", OBJECT_SELF, 1);	
+		 CreateItemOnObject("003_it_phalorm_hglyph_red", OBJECT_SELF, 1);	
+		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_red", lWPFour);
+		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_gold", lWPOne);
+		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_green", lWPThree);
+		 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_blue", lWPTwo);
 		 }	 	
 	 	
 	if((GetTag(OBJECT_SELF) == "phalorm_rauvin_panel") && (GetInventoryDisturbType() == 0))
@@ -176,10 +176,10 @@ void main()
 			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1), 1.0, 1);
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1), 1.5, 1);
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_4", OBJECT_SELF, 1), 2.0, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_red", OBJECT_SELF, 1), 0.5, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_gold", OBJECT_SELF, 1), 1.0, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_green", OBJECT_SELF, 1), 1.5, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_blue", OBJECT_SELF, 1), 2.0, 1);
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_o", lWPOne);
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_p", lWPTwo);
 			 CreateObject(OBJECT_TYPE_PLACEABLE, "rr_plc_hglyph_e", lWPThree);
@@ -265,15 +265,15 @@ void main()
 			 effect eBeamGreenCenter = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, oCenter, BODY_NODE_CHEST, FALSE);
 			 effect eBeamBlackCenter = EffectBeam(VFX_BEAM_NECROMANCY, oCenter, BODY_NODE_CHEST, FALSE);
 			 
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_1", OBJECT_SELF, 1), 0.5, 1);
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_2", OBJECT_SELF, 1), 1.0, 1);
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_3", OBJECT_SELF, 1), 1.5, 1);
-			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_4", OBJECT_SELF, 1), 2.0, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_red", OBJECT_SELF, 1), 0.5, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_gold", OBJECT_SELF, 1), 1.0, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_green", OBJECT_SELF, 1), 1.5, 1);
+			 DestroyObject(GetNearestObjectByTag("rr_plc_hglyph_blue", OBJECT_SELF, 1), 2.0, 1);
 			 
-			 object oGlyphItemA = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_1");
-			 object oGlyphItemB = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_2");
-			 object oGlyphItemC = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_3");
-			 object oGlyphItemD = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_4");
+			 object oGlyphItemA = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_red");
+			 object oGlyphItemB = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_gold");
+			 object oGlyphItemC = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_green");
+			 object oGlyphItemD = GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_hglyph_blue");
 			 
 			 SetLocalInt(OBJECT_SELF, "H1", 0);
 		     SetLocalInt(OBJECT_SELF, "H2", 0);

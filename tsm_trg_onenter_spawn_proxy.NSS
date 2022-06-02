@@ -26,7 +26,7 @@ void main()
 	
  // Custom code goes here.
  object oPC = GetEnteringObject();
- if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && (FindSubString(GetName(GetEnteringObject()), "Banite") == -1) && ((GetIsPC(GetEnteringObject())) || (FindSubString(GetName(GetEnteringObject()), "Bert") != -1) || (FindSubString(GetName(GetEnteringObject()), "Sae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Jhes") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bell") != -1)|| (GetIsDMPossessed(GetEnteringObject())))) {
+ if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && ((GetIsPC(GetEnteringObject())) || (FindSubString(GetName(GetEnteringObject()), "Bert") != -1) || (FindSubString(GetName(GetEnteringObject()), "Sae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Jhes") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bell") != -1)|| (GetIsDMPossessed(GetEnteringObject())))) {
  	SendMessageToAllDMs(GetName(oPC) + " triggering " + GetName(OBJECT_SELF));
     SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");
@@ -48,9 +48,7 @@ void main()
 				}
 			if(nDestroyPLC == 1) {
 				DestroyObject(oMyCorpse, 2.0);
-				object oAirborne = GetObjectByTag("rr_cr_undead_airborne", 0);
-				DestroyObject(oAirborne, 2.0);
-			}
+				}
 			
 		   	DelayCommand(6.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
 			}

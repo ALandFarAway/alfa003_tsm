@@ -49,6 +49,53 @@ void main()
     ACR_CreatureOnPerception();
 	object oPerceived = GetLastPerceived();
 	
+	
+	if(GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal")
+		{string sRandom;
+		switch(Random(11)) {
+        case 0:
+            sRandom = "*Weeps";
+            break;
+        case 1:
+            sRandom = "*Moans";
+            break;
+        case 2:
+            sRandom = "*Shrieks in torment";
+            break;
+        case 3:
+            sRandom = "*Howls with loss";
+            break;			
+		case 4:
+            sRandom = "Mistress?";
+            break;			
+		case 5:
+            sRandom = "Lost...lost!";
+            break;			
+		case 6:
+            sRandom = "So long...";
+            break;			
+		case 7:
+            sRandom = "Help...me....";
+            break;			
+		case 8:
+            sRandom = "Who...am...I?";
+            break;			
+		case 9:
+            sRandom = "What has happened to me!";
+            break;			
+		case 10:
+            sRandom = "No. No!";
+            break;			
+		}
+		
+		
+		 ActionSpeakString(sRandom, TALKVOLUME_TALK);
+		 if((FindSubString(GetName(oPerceived), "Jhessi") != -1) || (FindSubString(GetName(oPerceived), "Bellie") != -1) || (FindSubString(GetName(oPerceived), "Ash") != -1)) {
+		 	ActionSpeakString(GetName(oPerceived), TALKVOLUME_TALK);
+		 }
+		}	
+
+	
 	if((GetTag(OBJECT_SELF) == "abr_cr_hu_duergarsap_03") || (GetTag(OBJECT_SELF) == "abr_cr_hu_duergarsap_03b"))  {
 		//SendMessageToAllDMs("Debug: Duergar Sapper = " + GetTag(OBJECT_SELF));
 		object oBomb = GetItemPossessedBy(OBJECT_SELF, "abr_it_msc_firebomb");
