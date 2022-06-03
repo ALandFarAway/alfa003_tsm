@@ -363,7 +363,7 @@ void main()
 			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eQuake, oRelayInvis, 5.0));
 			 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBurst, oRelayInvis, 1.0));
 			 object oDamaged = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oRelayInvis), FALSE, OBJECT_TYPE_CREATURE);
-			 while (oDamaged != OBJECT_INVALID) {
+			 while ((oDamaged != OBJECT_INVALID) && (GetIsPC(oDamaged))) {
 				  DelayCommand(26.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oDamaged, 3.0));
 				  DelayCommand(27.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eNegDamage, oDamaged, 1.0));
 				  oDamaged = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oRelayInvis), FALSE, OBJECT_TYPE_CREATURE);

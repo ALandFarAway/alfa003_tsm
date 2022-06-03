@@ -271,7 +271,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 											oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
 											nNPC++;
 										}
-										SendMessageToPC(oScryer, "New prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
+										//SendMessageToPC(oScryer, "New prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
 								 		break;
 										}
 									oScriedArea = GetNextArea();
