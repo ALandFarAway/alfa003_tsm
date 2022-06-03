@@ -76,7 +76,10 @@ void main()
 	object oRelayInvis = GetObjectByTag("rauvin_crystal_relay_invis", 0);
 	object oBlackCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 	object oSayanWall = GetObjectByTag("plc_sayen_wall", 0);
+	object oSayanEffect = GetObjectByTag("fx_portal_sayan", 0);
 	object oDracoSkel = GetObjectByTag("rr_dragon_skeleton", 0);
+	
+	
 	
 	
 	object oParsifal = GetObjectByTag("003_cr_un_lich_parsifal", 0);
@@ -413,6 +416,7 @@ void main()
 			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eQuake, oRelayblackF, 5.0));
 			 DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBurst, oRelayblackF, 1.0));
 			 DestroyObject(oSayanWall, 26.0);
+			 DestroyObject(oSayanEffect, 26.0);
 			 
 		}
 		 
