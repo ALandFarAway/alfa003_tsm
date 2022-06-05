@@ -117,12 +117,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		string sRosterName = GetMatchedSubstring(0);
 		SendMessageToPC(oMaster, "The Roster Name for " + sTargetRes + " is set to " + sRosterName);
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
-		//SendMessageToPC(oMaster, "Campaign String res_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "res_" + sShard, oMaster));
-		//SendMessageToPC(oMaster, "Campaign String name_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "name_" + sShard, oMaster));
-		SetCampaignString("ALFA_SCRY", "res_" + sShard, "", oMaster); 
-		SetCampaignString("ALFA_SCRY", "name_" + sShard, "", oMaster); 
-		//SendMessageToPC(oMaster, "Campaign String res_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "res_" + sShard, oMaster));
-		//SendMessageToPC(oMaster, "Campaign String name_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "name_" + sShard, oMaster));
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
 		while((sRoster != "") && (nInc < 5)) {
