@@ -99,6 +99,39 @@ void main()
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
 	    
+
+//Any time the Scrying Namer hears spoken words, assigns them to the Roster as a Roster Name associated with a ResRef
+if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
+	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
+	string sShard = GetLocalString(OBJECT_SELF, "sShard");
+	string sTargetRes = GetLocalString(OBJECT_SELF, "sTargetRes");
+	SendMessageToPC(oMaster, "oTarget = " + GetName(oTarget));
+	SendMessageToPC(oMaster, "sShard = " + sShard);
+	SendMessageToPC(oMaster, "sTargetRes= " + sTargetRes);
+	location lTarget = GetLocation(oTarget);
+	effect eBeam = EffectBeam(VFX_BEAM_DIVINATION, oMaster, BODY_NODE_CHEST, FALSE);
+	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
+	int nMatch = GetListenPatternNumber();
+	if(nMatch == 6031) {
+		string sRosterName = GetMatchedSubstring(0);
+		SendMessageToPC(oMaster, "The Roster Name for " + sTargetRes + " is set to " + sRosterName);
+		AddRosterMemberByTemplate(sRosterName, sTargetRes);
+		SetCampaignString("ALFA_SCRY", "res_" + sShard, "", oMaster); 
+		SetCampaignString("ALFA_SCRY", "name_" + sShard, "", oMaster); 
+		string sRoster = GetFirstRosterMember();
+		int nInc = 0;
+		while((sRoster != "") && (nInc < 5)) {
+			SendMessageToPC(oMaster, "sRoster = " + sRoster);
+			sRoster = GetNextRosterMember();
+			nInc++;
+		}
+		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eBeam, lTarget, 2.0);
+		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
+		DestroyObject(OBJECT_SELF, 7.0);
+		}	 				
+	}	
+
 //Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
 if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");

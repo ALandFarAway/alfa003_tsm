@@ -13,6 +13,18 @@ void main()
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
          
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
+			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
+			 
+			 SetListenPattern(OBJECT_SELF, "**", 6031);
+			 SetListening(OBJECT_SELF, TRUE);
+			 
+		}
+	
 		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target
 			 //Detect Scrying or See Invisibility will reveal it IC
@@ -95,13 +107,6 @@ void main()
 				 oPC = GetNextPC(FALSE);
 			 }
 			 
-			 //Tell ScryListen the names of up to ten NPCs that it will be able to scry on. 
-			 //These should be pulled from the Scryer somehow. Currently hardcoded here.
-			 AddRosterMemberByTemplate("Aedelvana", "003_cr_oh_aedelvana");
-			 AddRosterMemberByTemplate("Xavier", "003_cr_firegen_xavier");
-			 AddRosterMemberByTemplate("Ostelle", "003_cr_slv_profnec");
-			 
-			  
 			 nListenPattern = 6030;
 			 string sRoster = GetFirstRosterMember();
 			 while ((sRoster != "") && (nListenPattern < 6040)) {

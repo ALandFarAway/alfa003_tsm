@@ -114,7 +114,7 @@ void main() {
 	object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-	SendMessageToPC(oScryer, "oScrySend = " + GetName(oScrySend));
+	//SendMessageToPC(oScryer, "oScrySend = " + GetName(oScrySend));
 				
 	string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
 	//Has Scry been successfully cast?
