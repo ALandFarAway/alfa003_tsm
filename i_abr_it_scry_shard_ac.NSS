@@ -8,7 +8,7 @@ void main()
     object oMaster = GetItemActivator();
 	object oTarget = GetItemActivatedTarget();
 	object oShard = GetItemActivated();
-	string sTargetRes = GetDescription(oShard);
+	string sTargetRes = GetLastName(oShard);
 	//string sTargetRes = GetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), oMaster);
 	SendMessageToPC(oMaster, "sTargetRes = " + sTargetRes);
 	SendMessageToPC(oMaster, "oTarget Tag = " + GetTag(oTarget));
@@ -31,13 +31,13 @@ void main()
 		}
 		
 	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
-		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the " + GetName(oShard) + " and remain fixed there, unmoving.");
+		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the scrying shard and remain fixed there, unmoving.");
 		//SendMessageToPC(oMaster, "oShard Tag = " + GetTag(oShard));
 		//SetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), GetResRef(oTarget), oMaster); 
 		//string sName = GetName(oShard);
-		SetFirstName(oShard, GetName(oTarget) + " Scrying Shard");
-		SetDescription(oShard, GetResRef(oTarget));
-		//SetDescription(oShard, "A " + sName + " with a reflection of " + GetName(oTarget) + " somehow fixed into it.");
+		SetFirstName(oShard, GetName(oTarget));
+		SetLastName(oShard, GetResRef(oTarget));
+		SetDescription(oShard, "A scrying shard showing a reflection of " + GetName(oTarget));
 		}
 	
 

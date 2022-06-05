@@ -105,10 +105,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	//object oShard = GetLocalObject(OBJECT_SELF, "oShard");
-	string sShard = GetLocalString(OBJECT_SELF, "sShard");
+	//string sShard = GetLocalString(OBJECT_SELF, "sShard");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sTargetRes");
 	SendMessageToPC(oMaster, "oTarget = " + GetName(oTarget));
-	SendMessageToPC(oMaster, "sShard = " + sShard);
+	//SendMessageToPC(oMaster, "sShard = " + sShard);
 	SendMessageToPC(oMaster, "sTargetRes= " + sTargetRes);
 	location lTarget = GetLocation(oTarget);
 	effect eBeam = EffectBeam(VFX_BEAM_DIVINATION, oMaster, BODY_NODE_CHEST, FALSE);
