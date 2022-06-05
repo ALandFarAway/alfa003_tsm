@@ -8,9 +8,12 @@ void main()
     object oMaster = GetItemActivator();
 	object oTarget = GetItemActivatedTarget();
 	object oShard = GetItemActivated();
+	int nCountName = GetStringLength(GetFirstName(oShard));
+	string sTargetName = GetStringLeft(GetFirstName(oShard), nCountName - 6);
 	string sTargetRes = GetLastName(oShard);
 	//string sTargetRes = GetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), oMaster);
 	SendMessageToPC(oMaster, "sTargetRes = " + sTargetRes);
+	SendMessageToPC(oMaster, "sTargetName = " + sTargetName);
 	SendMessageToPC(oMaster, "oTarget Tag = " + GetTag(oTarget));
 
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
@@ -26,18 +29,18 @@ void main()
 				//SetLocalString(oScryNamer, "sShard", GetTag(oShard));
 				}
 			 
-			SendMessageToPC(oMaster, "*An image of " + GetName(oTarget) + " appears in the " + GetName(oTarget));	
+			SendMessageToPC(oMaster, "*An image of " + sTargetName + " appears in the " + GetName(oTarget));	
 		    AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this subject. *Pleasant voice.", TALKVOLUME_TALK));	
 		}
 		
 	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
-		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the scrying shard and remain fixed there, unmoving.");
+		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the scrying token and remain fixed there, unmoving.");
 		//SendMessageToPC(oMaster, "oShard Tag = " + GetTag(oShard));
 		//SetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), GetResRef(oTarget), oMaster); 
 		//string sName = GetName(oShard);
-		SetFirstName(oShard, GetName(oTarget));
+		SetFirstName(oShard, GetName(oTarget) + " Image");
 		SetLastName(oShard, GetResRef(oTarget));
-		SetDescription(oShard, "A scrying shard showing a reflection of " + GetName(oTarget));
+		SetDescription(oShard, "A scrying token showing a reflection of " + GetName(oTarget));
 		}
 	
 
