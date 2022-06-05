@@ -27,7 +27,7 @@ void main()
 	            SetLocalObject(oScryNamer, "oScryer", oMaster);
 				SetLocalObject(oScryNamer, "oTarget", oTarget);
 				SetLocalString(oScryNamer, "sTargetRes", sTargetRes);
-				SetLocalString(oScryNamer, "sShard", GetName(oShard));
+				SetLocalString(oScryNamer, "sShard", GetTag(oShard));
 				}
 			 
 			SendMessageToPC(oMaster, "*An image of " + sTargetName + " appears in the " + GetName(oTarget));	
