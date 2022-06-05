@@ -101,7 +101,7 @@ void main()
 	    
 
 //Any time the Scrying Namer hears spoken words, assigns them to the Roster as a Roster Name associated with a ResRef
-if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	string sShard = GetLocalString(OBJECT_SELF, "sShard");
@@ -117,8 +117,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != OBJECT_SE
 		string sRosterName = GetMatchedSubstring(0);
 		SendMessageToPC(oMaster, "The Roster Name for " + sTargetRes + " is set to " + sRosterName);
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
+		SendMessageToPC(oMaster, "Campaign String res_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "res_" + sShard, oMaster));
+		SendMessageToPC(oMaster, "Campaign String name_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "name_" + sShard, oMaster));
 		SetCampaignString("ALFA_SCRY", "res_" + sShard, "", oMaster); 
 		SetCampaignString("ALFA_SCRY", "name_" + sShard, "", oMaster); 
+		SendMessageToPC(oMaster, "Campaign String res_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "res_" + sShard, oMaster));
+		SendMessageToPC(oMaster, "Campaign String name_" + sShard + " = " + GetCampaignString("ALFA_SCRY", "name_" + sShard, oMaster));
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
 		while((sRoster != "") && (nInc < 5)) {
@@ -237,7 +241,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 			
 			//SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
 		
-		//oScryer must speak the full name of the PC or allowable NPC he/she wishes to Scry	
+		//oScryer must speak the full name of the PC or Roster Name of the allowable NPC he/she wishes to Scry	
 		else if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
@@ -259,7 +263,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						int nRosterInc = 0;
 						while ((sRosterName != "") && (nRosterInc < 10)) {
 							//SendMessageToPC(oScryer, "Roster While nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1) );
-							//SendMessageToPC(oScryer, "Roster While RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
+							SendMessageToPC(oScryer, "Roster While RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
 							
 							/*If the spoken name matches the Roster Name of one of the Roster NPCs
 							then create an OOC invisible version of that NPC where it should be found
@@ -269,7 +273,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								{sScriedName = sRosterName;
 								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
 								 //SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
-								 //SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
+								 SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
 								 if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
 									 oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
 									 //SendMessageToPC(oScryer, "Roster PC was invalid. Now spawned and Tag = " + GetTag(oScried));
