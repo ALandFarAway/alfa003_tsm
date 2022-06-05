@@ -10,7 +10,8 @@ void main()
 	object oShard = GetItemActivated();
 	string sTargetRes = GetDescription(oShard);
 	//string sTargetRes = GetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), oMaster);
-	//SendMessageToPC(oMaster, GetTag(oShard) + "_" + GetResRef(oTarget) + " = " + sTargetRes);
+	SendMessageToPC(oMaster, "sTargetRes = " + sTargetRes);
+	SendMessageToPC(oMaster, "oTarget Tag = " + GetTag(oTarget));
 
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
 		
@@ -20,9 +21,9 @@ void main()
 				oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
 	            SetLocalObject(oScryNamer, "oScryer", oMaster);
 				SetLocalObject(oScryNamer, "oTarget", oTarget);
-				SetLocalObject(oScryNamer, "oShard", oShard);
+				//SetLocalObject(oScryNamer, "oShard", oShard);
 				SetLocalString(oScryNamer, "sTargetRes", sTargetRes);
-				SetLocalString(oScryNamer, "sShard", GetTag(oShard));
+				//SetLocalString(oScryNamer, "sShard", GetTag(oShard));
 				}
 			 
 			SendMessageToPC(oMaster, "*An image of " + GetName(oTarget) + " appears in the " + GetName(oTarget));	
@@ -31,10 +32,10 @@ void main()
 		
 	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
 		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the " + GetName(oShard) + " and remain fixed there, unmoving.");
-		SendMessageToPC(oMaster, "oShard Tag = " + GetTag(oShard));
+		//SendMessageToPC(oMaster, "oShard Tag = " + GetTag(oShard));
 		//SetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), GetResRef(oTarget), oMaster); 
-		string sName = GetName(oShard);
-		SetFirstName(oShard, GetName(oTarget) + " " + sName);
+		//string sName = GetName(oShard);
+		SetFirstName(oShard, GetName(oTarget) + " Scrying Shard");
 		SetDescription(oShard, GetResRef(oTarget));
 		//SetDescription(oShard, "A " + sName + " with a reflection of " + GetName(oTarget) + " somehow fixed into it.");
 		}
