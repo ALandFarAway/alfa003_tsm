@@ -47,6 +47,33 @@ void main() {
 
 	ACR_PlaceableOnSpellCastAt();
 
-	  
+	 //3141 = Silent Image
+	 //3149 = Bless Water
+	 //3068 = Create Water
+	 
+	 int nLastSpell = GetLastSpell();
+	 object oCaster = GetLastSpellCaster();
+	 object oTarget = OBJECT_SELF;
+	 string sTag = GetTag(OBJECT_SELF);
+	 string sResRef = GetResRef(OBJECT_SELF);
+	 string sBless;
+	 
+	 if(((nLastSpell == 3149) || (nLastSpell == 3068)) && ((sResRef == "abr_pl_so_holyfont") || (sResRef == "abr_pl_so_pool"))) {
+	 	if(nLastSpell == 3149)
+			{sBless = "blessed";}
+	    if(nLastSpell == 3068)
+			{sBless = "freshly called forth";}
+	    CreateItemOnObject("abr_it_scry_vial", oCaster, 1);
+		SendMessageToPC(oCaster, "You catch a droplet of " + sBless + " water from " + GetName(oTarget) + " in a small vial.");
+	 
+	 }
+	 
+	 else if((nLastSpell == 3141) && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
+	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
+		SendMessageToPC(oCaster, "A shard shimmers out of the " + GetName(oTarget) +", leaving the glass unblemished.");
+	 
+	 }
+	 
+	 
 	
 }

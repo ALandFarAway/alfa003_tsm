@@ -395,7 +395,7 @@ if(GetSpellId() == 3058) {
 			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer: " + sScryerDesc);
 			SendMessageToPC(OBJECT_SELF, "You know that this person is located at the direction and distance of " + sScryerArea );
 			}
-		 else {SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell try and fail to identify the person scrying you.");}
+		 else {SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell attempt to identify the person scrying you, but fail.");}
 		 effect eEffect = GetFirstEffect(oSensor);
 		 int nRep = 0;
 		 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
@@ -416,6 +416,7 @@ if(GetSpellId() == 3056)
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
 	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	   	}
+	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
 	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used as the focus of a Scry spell.");
 		}
@@ -423,6 +424,15 @@ if(GetSpellId() == 3056)
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
 		
+	 else if((GetLastSpellCastClass()== CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
+	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
+		}
+	 else if((GetLastSpellCastClass()== CLASS_TYPE_CLERIC) && (GetResRef(oScry) != "abr_pl_so_holyfont")) {
+	 	SendMessageToPC(oScryer, "There is no holy font suitable for scrying within range.");
+		}
+	 else if((GetLastSpellCastClass()== CLASS_TYPE_DRUID) && (GetResRef(oScry) != "abr_pl_so_pool")) {
+	 	SendMessageToPC(oScryer, "There is no natural pool of water suitable for scrying within range.");
+		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
 			location lHere = GetLocation(oScry);
