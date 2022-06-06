@@ -369,6 +369,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								//Spawn an invisible Scrying Sensor on oScried and add it to the collective
 								//Detect Scrying or See Invisible will reveal it
 								location lThere = GetLocation(oScried);
+								location lHere = GetLocation(oScryer);
+								SetLocalLocation(oScryer, "ACR_SCRY_LOCATION", lHere);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
 									if(GetIsDMPossessed(oScryer)) {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
@@ -388,10 +390,49 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 									}
 									
-								 SetLocalObject(oScryer, "ACR_SCRY_TARGET", oScried);
-								 SetLocalLocation(oScryer, "ACR_SCRY_TARGET", lThere);	
-								 ACR_ScryBegin(oScryer, 1.0);
+								//Replicate Cypher's ACR_ScryBegin without the camera hijacking	
+								// Fade out the PC
+								ActionDoCommand(FadeToBlack(oScryer, FADE_SPEED_FAST));
+								
+								ActionWait(1.0);
+								
+								// Disable then re-enable cutscene mode to avoid any possibility of stacking
+								SetCutsceneMode(oScryer, FALSE);
+								SetCutsceneMode(oScryer, TRUE);
+								
+								 // Make the PC completely invisible
+								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
+								 effect eGhost = EffectCutsceneGhost();
+								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eVFX, oScryer);
+								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, oScryer);
+								
+								 // Check if a valid creature target exists
+								 if (GetIsObjectValid(oScried))
+								    {
+								        // Jump to the target
+								        AssignCommand(oScryer, JumpToLocation(lThere));
+								
+								        // Fade in the PC
+								        ActionDoCommand(FadeFromBlack(oScryer, FADE_SPEED_FAST));
+								
+								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
+								        AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5));
+								    }
+								    // Otherwise assume a location target
+								  else
+								    {
+								        // Jump to the location
+								        AssignCommand(oScryer, JumpToLocation(lThere));
+								
+								        // Fade in the PC
+								        ActionDoCommand(FadeFromBlack(oScryer, FADE_SPEED_FAST));
+								    }
+								
+								    // Fade out when the spell expires
+								  DelayCommand(fScryTimer, ACR_ScryEnd(oScryer));
+							
 								 
+
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
 								string sSubjectArea = GetName(oArea);
