@@ -403,8 +403,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 // Make the PC completely invisible
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 								 effect eGhost = EffectCutsceneGhost();
-								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eVFX, oScryer);
-								 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, oScryer);
+								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 30.0);
+								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 30.0);
 								
 								 // Check if a valid creature target exists
 								 if (GetIsObjectValid(oScried))
@@ -430,21 +430,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								
 								    
 									// Stop whatever it is we're doing
-							        DelayCommand(fScryTimer, AssignCommand(oScryer, ClearAllActions()));
+							        DelayCommand(19.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							
 							        // Fade out the PC
-							        ActionDoCommand(FadeToBlack(oScryer, FADE_SPEED_FAST));
+							        DelayCommand(20.0, FadeToBlack(oScryer, FADE_SPEED_FAST));
 							
 							        // Return to the original scrying location
-							        DelayCommand(fScryTimer, AssignCommand(oScryer, JumpToLocation(lHere)));
+							        DelayCommand(21.0, AssignCommand(oScryer, JumpToLocation(lHere)));
 							
-							        
-							        // Make sure the effects are removed
-							        DelayCommand(fScryTimer, RemoveSpecificEffect(EFFECT_TYPE_VISUALEFFECT, oScryer));
-							        DelayCommand(fScryTimer, RemoveSpecificEffect(EFFECT_TYPE_CUTSCENEGHOST, oScryer));
-							 
 							        // Fade in the PC
-							        DelayCommand(fScryTimer, FadeFromBlack(oScryer, FADE_SPEED_FAST));
+							        DelayCommand(30.0, FadeFromBlack(oScryer, FADE_SPEED_FAST));
 							
 							        
 								//Find out information about oScried's area and area weather
