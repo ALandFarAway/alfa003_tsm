@@ -29,19 +29,18 @@ void main()
 				//SetLocalString(oScryNamer, "sShard", GetTag(oShard));
 				}
 			 
-			SendMessageToPC(oMaster, "*An image of " + sTargetName + " appears in the " + GetName(oTarget));
-			string sRosterMember = GetFirstRosterMember();
-			AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this subject. *Pleasant voice.", TALKVOLUME_TALK));	
+			SendMessageToPC(oMaster, "*An image of " + sTargetName + " appears in the " + GetName(oTarget));	
+		    AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this subject. *Pleasant voice.", TALKVOLUME_TALK));	
 		}
 		
 	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
-		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the scrying shard and remain fixed there, unmoving.");
+		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the scrying droplet and remain fixed there, unmoving.");
 		//SendMessageToPC(oMaster, "oShard Tag = " + GetTag(oShard));
 		//SetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), GetResRef(oTarget), oMaster); 
 		//string sName = GetName(oShard);
 		SetFirstName(oShard, GetName(oTarget) + " Image");
 		SetLastName(oShard, GetResRef(oTarget));
-		SetDescription(oShard, "A scrying shard showing a reflection of " + GetName(oTarget));
+		SetDescription(oShard, "A scrying droplet showing a reflection of " + GetName(oTarget));
 		}
 	
 

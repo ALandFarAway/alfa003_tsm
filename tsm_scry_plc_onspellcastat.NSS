@@ -59,14 +59,14 @@ void main() {
 	 
 	 SendMessageToPC(oCaster, "sResRef of target = " + sResRef + ". nLastSpell = " + IntToString(nLastSpell));
 	 if((nLastSpell == 3068) && ((sResRef == "abr_pl_so_holyfont") || (sResRef == "abr_pl_so_pool"))) {
-	 	CreateItemOnObject("abr_it_scry_vial", oCaster, 1);
+	 	CreateItemOnObject("abr_it_scry_droplet", oCaster, 1);
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
 	 
 	 }
 	 
 	 else if((nLastSpell == 3066) && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
 	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
-		SendMessageToPC(oCaster, "A shard shimmers into your hand, out of the " + GetName(oTarget) + " where you draw your mark, leaving the glass unblemished.");
+		SendMessageToPC(oCaster, "A shard shimmers into your hand, out of the " + GetName(oTarget) + " on which you draw your mark, leaving the glass unblemished.");
 	 
 	 }
 	 
