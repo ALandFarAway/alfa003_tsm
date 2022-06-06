@@ -268,7 +268,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								{sScriedName = sRosterName;
 								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
 								 //SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
-								 SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
+								 //SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
 								 if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
 									 oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
 									 //SendMessageToPC(oScryer, "Roster PC was invalid. Now spawned and Tag = " + GetTag(oScried));
