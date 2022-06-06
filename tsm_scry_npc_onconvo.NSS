@@ -2,6 +2,7 @@
 #include "acr_creature_i"
 #include "x0_i0_position"
 #include "acr_spawn_i"
+#include "acr_scry_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -386,7 +387,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									SetLocalInt(oScrySend, "nCasterLevel", nCasterLevel);
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 									}
-								
+									
+								 ACR_ScryBegin(oScryer, 1.0);
+								 
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
 								string sSubjectArea = GetName(oArea);

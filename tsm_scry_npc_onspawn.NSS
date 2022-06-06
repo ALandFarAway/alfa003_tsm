@@ -3,7 +3,8 @@
 #include "acr_db_persist_i"
 #include "silvy_univ_func"
 #include "acr_quest_i"
- 
+#include "acr_scry_i"
+
 void main()
 {
 	AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF));

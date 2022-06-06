@@ -24,6 +24,7 @@
 #include "acr_placeable_i"
 #include "dmfi_inc_langexe" 
 #include "acr_quest_i"
+#include "acr_scry_i"
 
 void ActionCreateWynPlacedEffect(string sPlacedEffect, location lLocPlaceEffect)
 {

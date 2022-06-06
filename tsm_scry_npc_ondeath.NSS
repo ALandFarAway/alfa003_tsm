@@ -21,6 +21,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "acr_creature_i"
 #include "acr_db_persist_i"
+#include "acr_scry_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -56,6 +57,7 @@ void main()
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
 		SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
+		ACR_ScryEnd(oScryer);
 		
 		//Unset all local variables and destroy oScryListener, too
 		SetLocalInt(oScry, "nScryActive", 0);

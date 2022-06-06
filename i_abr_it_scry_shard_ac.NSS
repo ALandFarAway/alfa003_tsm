@@ -1,6 +1,7 @@
 
 #include "acr_spawn_i"
 #include "acr_db_persist_i"
+#include "acr_scry_i"
 
 void main()
 {
