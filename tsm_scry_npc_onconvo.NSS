@@ -388,6 +388,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 									}
 									
+								 SetLocalObject(oScryer, "ACR_SCRY_TARGET", oScried);
+								 SetLocalLocation(oScryer, "ACR_SCRY_TARGET", lThere);	
 								 ACR_ScryBegin(oScryer, 1.0);
 								 
 								//Find out information about oScried's area and area weather
