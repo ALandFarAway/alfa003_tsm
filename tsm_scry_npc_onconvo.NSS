@@ -393,6 +393,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								// Make the PC completely invisible
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 								 effect eGhost = EffectCutsceneGhost();
+								 effect eFreeze = EffectCutsceneImmobilize();
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 60.0);
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
@@ -400,15 +401,18 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 if (GetIsObjectValid(oScried))
 								    {
 								        object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
-										DestroyObject(oDupe, 120.0);
-									
+										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
+										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
+									    DestroyObject(oDupe, 60.0);
+										 
 										// Jump to the target
-										DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThere)));
+										DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								        DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								        DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								    }
+								    	DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								    	}
 								    // Otherwise assume a location target
 								  else
 								    {
