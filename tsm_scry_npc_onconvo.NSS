@@ -394,11 +394,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								// Fade out the PC
 								ActionDoCommand(FadeToBlack(oScryer, FADE_SPEED_FAST));
 								
-								ActionWait(1.0);
+								//ActionWait(1.0);
 								
 								// Disable then re-enable cutscene mode to avoid any possibility of stacking
-								SetCutsceneMode(oScryer, FALSE);
-								SetCutsceneMode(oScryer, TRUE);
+								//SetCutsceneMode(oScryer, FALSE);
+								//SetCutsceneMode(oScryer, TRUE);
 								
 								 // Make the PC completely invisible
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
@@ -428,11 +428,25 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								        ActionDoCommand(FadeFromBlack(oScryer, FADE_SPEED_FAST));
 								    }
 								
-								    // Fade out when the spell expires
-								  DelayCommand(fScryTimer, ACR_ScryEnd(oScryer));
+								    
+									// Stop whatever it is we're doing
+							        DelayCommand(fScryTimer, AssignCommand(oScryer, ClearAllActions()));
 							
-								 
-
+							        // Fade out the PC
+							        ActionDoCommand(FadeToBlack(oScryer, FADE_SPEED_FAST));
+							
+							        // Return to the original scrying location
+							        DelayCommand(fScryTimer, AssignCommand(oScryer, JumpToLocation(lHere)));
+							
+							        
+							        // Make sure the effects are removed
+							        DelayCommand(fScryTimer, RemoveSpecificEffect(EFFECT_TYPE_VISUALEFFECT, oScryer));
+							        DelayCommand(fScryTimer, RemoveSpecificEffect(EFFECT_TYPE_CUTSCENEGHOST, oScryer));
+							 
+							        // Fade in the PC
+							        DelayCommand(fScryTimer, FadeFromBlack(oScryer, FADE_SPEED_FAST));
+							
+							        
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
 								string sSubjectArea = GetName(oArea);
