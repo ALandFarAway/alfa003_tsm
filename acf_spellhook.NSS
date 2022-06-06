@@ -373,6 +373,10 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 	} 
 }
 
+if(GetSpellId() == 3066) {
+	SendMessageToPC(OBJECT_SELF, "Arcane Mark cast on " + GetTag(oTarget));
+}
+
 if(GetSpellId() == 3058) {
 	SetLocalInt(OBJECT_SELF, "nDetectScrying", 1);
     object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
