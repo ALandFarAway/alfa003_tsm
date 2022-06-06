@@ -390,33 +390,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 									}
 									
-								//Replicate Cypher's ACR_ScryBegin without the camera hijacking	
-								// Fade out the PC
-								ActionDoCommand(FadeToBlack(oScryer, FADE_SPEED_FAST));
-								
-								//ActionWait(1.0);
-								
-								// Disable then re-enable cutscene mode to avoid any possibility of stacking
-								//SetCutsceneMode(oScryer, FALSE);
-								//SetCutsceneMode(oScryer, TRUE);
-								
-								 // Make the PC completely invisible
+								// Make the PC completely invisible
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 								 effect eGhost = EffectCutsceneGhost();
-								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 30.0);
-								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 30.0);
+								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 60.0);
+								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
 								 // Check if a valid creature target exists
 								 if (GetIsObjectValid(oScried))
 								    {
 								        // Jump to the target
-								        AssignCommand(oScryer, JumpToLocation(lThere));
-								
-								        // Fade in the PC
-								        ActionDoCommand(FadeFromBlack(oScryer, FADE_SPEED_FAST));
+								        DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
-								        AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5));
+								        DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								    }
 								    // Otherwise assume a location target
 								  else
@@ -424,24 +411,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								        // Jump to the location
 								        AssignCommand(oScryer, JumpToLocation(lThere));
 								
-								        // Fade in the PC
-								        ActionDoCommand(FadeFromBlack(oScryer, FADE_SPEED_FAST));
-								    }
+								     }
 								
-								    
-									// Stop whatever it is we're doing
-							        DelayCommand(19.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
-							
-							        // Fade out the PC
-							        DelayCommand(20.0, FadeToBlack(oScryer, FADE_SPEED_FAST));
+								    // Stop whatever it is we're doing
+							        DelayCommand(59.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							
 							        // Return to the original scrying location
-							        DelayCommand(21.0, AssignCommand(oScryer, JumpToLocation(lHere)));
+							        DelayCommand(60.0, AssignCommand(oScryer, JumpToLocation(lHere)));
 							
-							        // Fade in the PC
-							        DelayCommand(30.0, FadeFromBlack(oScryer, FADE_SPEED_FAST));
-							
-							        
+							       
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
 								string sSubjectArea = GetName(oArea);
@@ -638,10 +616,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								string sWeatherRain = "";
 								int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
 								string sWeatherSnow = "";
+								int nDay = GetIsDay();
 								
 								if(FindSubString(sAreaTag, "ext", 1) != -1)
-								   {if(nWeatherRain == 0)  
+								   {if((nWeatherRain == 0)  && (nDay == TRUE))
 										{sWeatherRain = "The sun is shining. ";}
+									if((nWeatherRain == 0)  && (nDay == FALSE))
+										{sWeatherRain = "It is a clear night. ";}
 									if(nWeatherRain == 1)  
 										{sWeatherRain = "It is drizzling rain. ";}
 									if(nWeatherRain == 2)  
@@ -677,6 +658,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								
 								//Send oScried's area and weather description to oScryer
 								ActionSpeakString( GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
+								SendMessageToPC(oScryer, GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
 								
 								string sFacing = GetCompassDirectionOfAngle(GetFacing(oScried));
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oScried));
