@@ -399,10 +399,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 // Check if a valid creature target exists
 								 if (GetIsObjectValid(oScried))
 								    {
-								        // Jump to the target
-								        DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
+								        object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
+										DestroyObject(oDupe, 120.0);
+									
+										// Jump to the target
+										DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
+								        DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								        DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								    }
 								    // Otherwise assume a location target
