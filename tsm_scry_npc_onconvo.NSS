@@ -176,7 +176,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier") && (GetLastSpeaker() != OBJ
 		}
 	}	 
 	
-//Action queue for OOC Scrying Listener that handles most Scrying interaction	
+//Action queue for OOC Scrying Listener that handles most Scrying interaction
+SendMessageToPC(GetLocalObject(OBJECT_SELF, "oScryer"), "oScryer = " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));	
 if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		//Get existing local objects set by Spellhook
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
@@ -242,7 +243,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
 				string sScriedName = GetName(oScried);
-				//SendMessageToPC(oScryer, "PreWhile nMatch >= 6020 : sScriedName = " +  sScriedName);
+				SendMessageToPC(oScryer, "PreWhile nMatch >= 6020 : sScriedName = " +  sScriedName);
 				//SendMessageToPC(oScryer, "Pre Outer While nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : " + GetMatchedSubstring(1) );
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					//SendMessageToPC(oScryer, "A. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
@@ -268,7 +269,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sScriedName = sRosterName;
 								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
-								 //SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
+								 SendMessageToPC(oScryer, "Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
 								 //SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
 								 if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
 									 oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
@@ -281,7 +282,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									 //DestroyObject(oScried, fScryTimer- 5.0);
 									 }
 								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
-								 //SendMessageToPC(oScryer, sScriedName + "'s Scry Area Tag is " + sScriedArea);
+								 SendMessageToPC(oScryer, sScriedName + "'s Scry Area Tag is " + sScriedArea);
 								 int nWillSaveBase = GetWillSavingThrow(oScried);
 								 SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 								 object oScriedArea = GetFirstArea();
@@ -291,14 +292,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										DespawnRosterMember(sScriedName);
 										//SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
 								 		object oFirst = GetFirstObjectInArea(oScriedArea);
-										//SendMessageToPC(oScryer, "oFirst = " + GetName(oFirst));
+										SendMessageToPC(oScryer, "oFirst = " + GetName(oFirst));
 								 		int nNPC = 1;
 										object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
 										while (oNPC != OBJECT_INVALID) {
-											//SendMessageToPC(oScryer, sScriedName + " : " + GetName(oNPC));
+											SendMessageToPC(oScryer, sScriedName + " : " + GetName(oNPC));
 											if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1))
 												{oScried = oNPC;
-												 //SendMessageToPC(oScryer, "oScried = " + GetName(oNPC));
+												 SendMessageToPC(oScryer, "oScried = " + GetName(oNPC));
 												 break;
 												 }
 											oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);

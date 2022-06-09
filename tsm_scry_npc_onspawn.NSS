@@ -102,7 +102,7 @@ void main()
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
-				 //SendMessageToPC(oScryer, "Listener Spawn : sPCName = " + sPCName  + " : " + IntToString(nListenPattern));
+				 SendMessageToPC(oScryer, "Listener Spawn : sPCName = " + sPCName  + " : " + IntToString(nListenPattern));
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
@@ -111,7 +111,7 @@ void main()
 			 nListenPattern = 6030;
 			 string sRoster = GetFirstRosterMember();
 			 while ((sRoster != "") && (nListenPattern < 6040)) {
-				 //SendMessageToPC(oScryer, "Listener Spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern));
+				 SendMessageToPC(oScryer, "Listener Spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern));
 				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
 				 nListenPattern++;
 				 sRoster = GetNextRosterMember();
@@ -127,7 +127,7 @@ void main()
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
 			 //DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
 		 	 //DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
-			 //DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
+			 DelayCommand(2.0, SendMessageToPC(oScryer, "Speak the full name of an adventurer to be scried, or a name of ten or fewer characters of a member of the general populace to be scried."));
 			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
