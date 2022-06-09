@@ -16,10 +16,10 @@ void main()
          
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
 			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
-			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
-			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
-			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
-			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
 			 
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
@@ -87,22 +87,12 @@ void main()
 		     object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 			 string sScryName = GetName(oScry);
 			 
-			 //Tell ScryListen what words it is listening for to determine adjustments to Scryer's DC carried out later by tsm_scry_npc_convo
-			 //SetListenPattern(OBJECT_SELF, "**None**", 6010);
-			 //SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
-			 //SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
-			 //SetListenPattern(OBJECT_SELF, "**Familiar**", 6013);
-			 //SetListenPattern(OBJECT_SELF, "**Nothing**", 6014);
-			 //SetListenPattern(OBJECT_SELF, "**Picture**", 6015);
-			 //SetListenPattern(OBJECT_SELF, "**Possession**", 6016);
-			 //SetListenPattern(OBJECT_SELF, "**Body**", 6017);
-			 
 			 //Tell ScryListen the names of ten PCs logged in at the time it spawns	 
 			 int nListenPattern = 6020;
          	 object oPC = GetFirstPC(FALSE);
 			 while ((oPC != OBJECT_INVALID) && (nListenPattern < 6030)) {
 				 string sPCName = GetName(oPC);
-				 SendMessageToPC(oScryer, "Listener Spawn : sPCName = " + sPCName  + " : " + IntToString(nListenPattern));
+				 //SendMessageToPC(oScryer, "Listener Spawn : sPCName = " + sPCName  + " : " + IntToString(nListenPattern));
 				 SetListenPattern(OBJECT_SELF, "**" + sPCName + "**", nListenPattern);
 				 nListenPattern++;
 				 oPC = GetNextPC(FALSE);
@@ -111,7 +101,7 @@ void main()
 			 nListenPattern = 6030;
 			 string sRoster = GetFirstRosterMember();
 			 while ((sRoster != "") && (nListenPattern < 6040)) {
-				 SendMessageToPC(oScryer, "Listener Spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern));
+				 //SendMessageToPC(oScryer, "Listener Spawn: "  + " sRoster = " + sRoster + " : " + IntToString(nListenPattern));
 				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
 				 nListenPattern++;
 				 sRoster = GetNextRosterMember();
@@ -125,9 +115,7 @@ void main()
 			 ActionSpeakString(sSpeak, TALKVOLUME_TALK);
 			 effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
-			 //DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
-		 	 //DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
-			 DelayCommand(2.0, SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying token imbued with the image of a member of the general populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them."));
+			 DelayCommand(2.0, SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying token imbued with the image of a member of the wider populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them."));
 			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	

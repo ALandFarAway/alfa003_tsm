@@ -117,12 +117,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
-		//SendMessageToPC(oMaster, "Convo Namer The Roster Name for " + sTargetRes + " is set to " + sRosterName);
+		SendMessageToPC(oMaster, "Currently keyed names of the wider populace:");
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
 		while((sRoster != "") && (nInc < 5)) {
-			//SendMessageToPC(oMaster, "Convo Namer sRoster = " + sRoster);
+			SendMessageToPC(oMaster, sRoster);
 			sRoster = GetNextRosterMember();
 			nInc++;
 		}
@@ -286,16 +286,18 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
 								string sToken = GetFirstName(oToken);
+								SendMessageToPC(oScryer, "oToken = " + sToken);
 								string sTokenLast = GetLastName(oToken);
 								string sScryerName = GetFirstName(oScryer);
 								int nCountName = GetStringLength(sToken);
-								string sTargetName = GetStringLeft(sToken, nCountName - 6);
 								int nCountScryerName = GetStringLength(sScryerName);
+								string sTargetName = GetStringLeft(sToken, nCountName - 8 - nCountScryerName);
 								int nScryer = 0;
-								if(sScryerName == GetStringRight(sTokenLast, nCountScryerName)) {
+								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
-								//SendMessageToPC(oScryer, "Convo Listener sTargetName = " + sTargetName + ". sScriedName = " + sScriedName);
+								SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
+								SendMessageToPC(oScryer, "Convo Listener sTargetName = " + sTargetName + ". sScriedName = " + sScriedName);
 								if(sTargetName == sScriedName) {
 									//SendMessageToPC(oScryer, "Convo Listener match!");
 									nConnection = 2;
@@ -341,6 +343,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
+						SendMessageToPC(oScryer, "nKnowledge was " + IntToString(nKnowledge) + ". nConnection was " + IntToString(nConnection));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						//SendMessageToAllDMs("nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						if(nWillSave >= nDC){

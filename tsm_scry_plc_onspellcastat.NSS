@@ -58,7 +58,7 @@ void main() {
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 string sBless;
 	 
-	 SendMessageToPC(oCaster, "sResRef of target = " + sResRef + ". nLastSpell = " + IntToString(nLastSpell));
+	 //SendMessageToPC(oCaster, "sResRef of target = " + sResRef + ". nLastSpell = " + IntToString(nLastSpell));
 	 if((nLastSpell == 3068) && ((sResRef == "abr_pl_so_holyfont") || (sResRef == "abr_pl_so_pool"))) {
 	 	CreateItemOnObject("abr_it_scry_droplet", oCaster, 1);
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
