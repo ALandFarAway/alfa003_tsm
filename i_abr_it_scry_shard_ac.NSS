@@ -23,7 +23,7 @@ void main()
 		}
 	
 	
-	//SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
+	/*SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
 	SendMessageToPC(oScryer, "sTargetName = " + sTargetName);
 	SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 	SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
@@ -31,7 +31,7 @@ void main()
 	SendMessageToPC(oScryer, "sFirstName = " + sToken);
 	SendMessageToPC(oScryer, "sScryerName = " + sScryerName);
 	SendMessageToPC(oScryer, "sScryerName from Token's First Name = " + GetStringRight(sToken, nCountScryerName)); 
-
+*/
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
 		
 		//Create undetectable OOC Scrying Namer at location of Scrying Object to receive 10 letter Roster Name for stored scrying target

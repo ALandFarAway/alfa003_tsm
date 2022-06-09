@@ -461,7 +461,6 @@ if(GetSpellId() == 3056)
 			//Set all objects on each other
 			SetLocalObject(oScryListen, "oScry", oScry);
 			SetLocalObject(oScryListen, "oScryer", oScryer);
-			SetLocalObject(oScry, "oScryListen", oScryListen);
 			SetLocalObject(oScry, "oScryer", oScryer);
 			SetLocalObject(oScryer, "oScryListen", oScryListen);
 			SetLocalObject(oScryer, "oScry", oScry);
