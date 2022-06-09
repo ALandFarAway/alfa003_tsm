@@ -88,14 +88,14 @@ void main()
 			 string sScryName = GetName(oScry);
 			 
 			 //Tell ScryListen what words it is listening for to determine adjustments to Scryer's DC carried out later by tsm_scry_npc_convo
-			 SetListenPattern(OBJECT_SELF, "**None**", 6010);
-			 SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
-			 SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
-			 SetListenPattern(OBJECT_SELF, "**Familiar**", 6013);
-			 SetListenPattern(OBJECT_SELF, "**Nothing**", 6014);
-			 SetListenPattern(OBJECT_SELF, "**Picture**", 6015);
-			 SetListenPattern(OBJECT_SELF, "**Possession**", 6016);
-			 SetListenPattern(OBJECT_SELF, "**Body**", 6017);
+			 //SetListenPattern(OBJECT_SELF, "**None**", 6010);
+			 //SetListenPattern(OBJECT_SELF, "**Firsthand**", 6011);
+			 //SetListenPattern(OBJECT_SELF, "**Secondhand**", 6012);
+			 //SetListenPattern(OBJECT_SELF, "**Familiar**", 6013);
+			 //SetListenPattern(OBJECT_SELF, "**Nothing**", 6014);
+			 //SetListenPattern(OBJECT_SELF, "**Picture**", 6015);
+			 //SetListenPattern(OBJECT_SELF, "**Possession**", 6016);
+			 //SetListenPattern(OBJECT_SELF, "**Body**", 6017);
 			 
 			 //Tell ScryListen the names of ten PCs logged in at the time it spawns	 
 			 int nListenPattern = 6020;
@@ -125,9 +125,9 @@ void main()
 			 ActionSpeakString(sSpeak, TALKVOLUME_TALK);
 			 effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
-			 DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
-		 	 DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
-			 DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
+			 //DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
+		 	 //DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
+			 //DelayCommand(6.0, SendMessageToPC(oScryer, "In a third statement, speak the full name of the person to be scried."));
 			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	

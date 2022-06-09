@@ -191,12 +191,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		string sMatch = GetMatchedSubstring(1);
 		int nMatch = GetListenPatternNumber();
 		if((nMatch >= 6010) && (nMatch < 6040)) {
-		 	int nKnowledge;
-			int nConnection;
+		 	//int nKnowledge;
+			//int nConnection;
 			
 			//oScryer must speak his/her level of knowledge of the intended oScried
 			//Choices are None, Familiar, Firsthand or Secondhand
-			if((nMatch >= 6010) && (nMatch <= 6013)) {
+			/*if((nMatch >= 6010) && (nMatch <= 6013)) {
 				if(nMatch == 6010) {
 				 	nKnowledge = -10;
 				}
@@ -233,12 +233,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				
 				SetLocalInt(OBJECT_SELF, "nScryConnection", nConnection);
 				SendMessageToPC(oScryer, "Your connection to the subject is: " + GetMatchedSubstring(1));
-			}
+			}*/
 			
 			//SendMessageToPC(oScryer, "DC = " + IntToString(nDC));
 		
 		//oScryer must speak the full name of the PC or Roster Name of the allowable NPC he/she wishes to Scry	
-		else if(nMatch >= 6020) {
+		if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
 				string sScriedName = GetName(oScried);
@@ -323,6 +323,58 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
 						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
 						//If oScried makes a privately rolled WillSave vs. stored DC:
+						
+						int nKnowledge = -10;	
+						int nConnection = 0;
+						object oToken = GetFirstItemInInventory(oScryer);
+						while(oToken != OBJECT_INVALID) {
+							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
+								string sToken = GetFirstName(oToken);
+								string sTokenLast = GetLastName(oToken);
+								string sScryerName = GetFirstName(oScryer);
+								int nCountName = GetStringLength(sToken);
+								string sTargetName = GetStringLeft(sToken, nCountName - 6);
+								int nCountScryerName = GetStringLength(sScryerName);
+								int nScryer = 0;
+								if(sScryerName == GetStringRight(sTokenLast, nCountScryerName)) {
+									nScryer = 1;
+									}
+								SendMessageToPC(oScryer, "sTargetName = " + sTargetName + ". sScriedName = " + sScriedName);
+								if(sTargetName == sScriedName) {
+									SendMessageToPC(oScryer, "match!");
+									nConnection = 2;
+									if(FindSubString(sTokenLast, "possess", 0) != -1) {
+										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
+										nConnection = 4;
+										}
+									if(FindSubString(sTokenLast, "body", 0) != -1) {
+										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sTargetName + ".");
+										nConnection = 10;
+										}
+									if(nConnection == 2) {
+										SendMessageToPC(oScryer, "*You are holding a magically created image of " + sTargetName + ".");
+										}
+									if(nScryer == 1) {
+										if(FindSubString(sToken, "Imago", 0) != -1) {
+											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: familiar.");
+											nKnowledge = 5;
+											}
+										
+										else if(FindSubString(sToken, "Image", 0) != -1) {
+											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: firsthand.");
+											nKnowledge = 0;
+											}
+										}
+									if(nScryer == 0) {
+										SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is secondhand.");
+										nKnowledge = -5;
+										}
+								break;
+								}
+							 }
+							oToken = GetNextItemInInventory(oScryer);
+								
+						}	
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
