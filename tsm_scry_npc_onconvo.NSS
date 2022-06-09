@@ -118,7 +118,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
 		SendMessageToPC(oMaster, "Convo Namer The Roster Name for " + sTargetRes + " is set to " + sRosterName);
-		CreateObject(OBJECT_TYPE_CREATURE, sTargetRes, lTarget);
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
