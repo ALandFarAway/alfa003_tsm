@@ -13,7 +13,7 @@ void main()
 	string sTargetName = GetStringLeft(GetFirstName(oShard), nCountName - 6);
 	int nCountMasterName = GetStringLength(GetFirstName(oMaster));
 	int nTargetRes = GetStringLength(GetLastName(oShard));
-	string sTargetRes = GetStringLeft(GetLastName(oShard), nCountMasterName - nTargetRes);
+	string sTargetRes = GetStringLeft(GetLastName(oShard), nTargetRes - nCountMasterName);
 	int nDC = 20 + GetAbilityModifier(ABILITY_DEXTERITY, oTarget);
 	//string sTargetRes = GetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), oMaster);
 	SendMessageToPC(oMaster, "sLastName = " + GetLastName(oShard));
