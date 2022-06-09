@@ -16,10 +16,10 @@ void main()
          
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
 			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
-			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
-			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
-			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
-			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
+			 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
 			 
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
