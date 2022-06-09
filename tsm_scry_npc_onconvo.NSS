@@ -117,7 +117,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
-		SendMessageToPC(oMaster, "Currently keyed names of the wider populace:");
+		SendMessageToPC(oMaster, "Adventurers do not need to be keyed first. Currently keyed names of the wider populace:");
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
@@ -286,7 +286,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
 								string sToken = GetFirstName(oToken);
-								SendMessageToPC(oScryer, "oToken = " + sToken);
+								//SendMessageToPC(oScryer, "oToken = " + sToken);
 								string sTokenLast = GetLastName(oToken);
 								string sScryerName = GetFirstName(oScryer);
 								int nCountName = GetStringLength(sToken);
@@ -296,11 +296,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
-								SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
-								SendMessageToPC(oScryer, "Convo Listener sTargetName = " + sTargetName + ". sScriedName = " + sScriedName);
+								//SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
+								//SendMessageToPC(oScryer, "Convo Listener sTargetName = " + sTargetName + ". sScriedName = " + sScriedName);
 								if(sTargetName == sScriedName) {
 									//SendMessageToPC(oScryer, "Convo Listener match!");
-									nConnection = 2;
 									if(FindSubString(sToken, "Possess", 0) != -1) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
 										nConnection = 4;
@@ -309,24 +308,31 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sTargetName + ".");
 										nConnection = 10;
 										}
-									if(nConnection == 2) {
-										SendMessageToPC(oScryer, "*You are holding a magically created image of " + sTargetName + ".");
-										}
 									if(nScryer == 1) {
 										if(FindSubString(sToken, "Imago", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: familiar.");
 											nKnowledge = 5;
+											nConnection = 4;
 											}
 										
 										else if(FindSubString(sToken, "Image", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: firsthand.");
 											nKnowledge = 0;
+											nConnection = 2;
 											}
 										}
 									if(nScryer == 0) {
 										SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is secondhand.");
 										nKnowledge = -5;
 										}
+										
+									if(nConnection == 2) {
+										SendMessageToPC(oScryer, "*You are holding a magically created firsthand image of " + sTargetName + " that gives you a minor connection to the subject.");
+										}
+									if(nConnection == 4) {
+										SendMessageToPC(oScryer, "*You are holding a magically created, fully representative, animated imago of " + sTargetName + " that gives you the same connection to the subject as would a possession of that subject.");
+										}
+									
 								break;
 								}
 							 }
