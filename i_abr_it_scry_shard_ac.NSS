@@ -11,11 +11,14 @@ void main()
 	object oShard = GetItemActivated();
 	int nCountName = GetStringLength(GetFirstName(oShard));
 	string sTargetName = GetStringLeft(GetFirstName(oShard), nCountName - 6);
-	string sTargetRes = GetLastName(oShard);
+	int nCountMasterName = GetStringLength(GetFirstName(oMaster));
+	int nTargetRes = GetStringLength(GetLastName(oShard));
+	string sTargetRes = GetStringLeft(GetLastName(oShard), nCountMasterName - nTargetRes);
+	int nDC = 20 + GetAbilityModifier(ABILITY_DEXTERITY, oTarget);
 	//string sTargetRes = GetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), oMaster);
-	//SendMessageToPC(oMaster, "sTargetRes = " + sTargetRes);
-	//SendMessageToPC(oMaster, "sTargetName = " + sTargetName);
-	//SendMessageToPC(oMaster, "oTarget Tag = " + GetTag(oTarget));
+	SendMessageToPC(oMaster, "sTargetRes = " + sTargetRes);
+	SendMessageToPC(oMaster, "sTargetName = " + sTargetName);
+	SendMessageToPC(oMaster, "nDC = " + IntToString(nDC));
 
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
 		
@@ -25,9 +28,7 @@ void main()
 				oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
 	            SetLocalObject(oScryNamer, "oScryer", oMaster);
 				SetLocalObject(oScryNamer, "oTarget", oTarget);
-				//SetLocalObject(oScryNamer, "oShard", oShard);
 				SetLocalString(oScryNamer, "sTargetRes", sTargetRes);
-				//SetLocalString(oScryNamer, "sShard", GetTag(oShard));
 				}
 			 
 			SendMessageToPC(oMaster, "*An image of " + sTargetName + " appears in the " + GetName(oTarget));
@@ -35,15 +36,25 @@ void main()
 			AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this subject. *Pleasant voice.", TALKVOLUME_TALK));	
 		}
 		
-	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
-		SendMessageToPC(oMaster, "You see the image of " + GetName(oTarget) + " shimmer into the scrying shard and remain fixed there, unmoving.");
-		//SendMessageToPC(oMaster, "oShard Tag = " + GetTag(oShard));
-		//SetCampaignString("ALFA_SCRY", GetTag(oShard) + "_" + GetResRef(oTarget), GetResRef(oTarget), oMaster); 
-		//string sName = GetName(oShard);
-		SetFirstName(oShard, GetName(oTarget) + " Image");
-		SetLastName(oShard, GetResRef(oTarget));
-		SetDescription(oShard, "A scrying shard showing a reflection of " + GetName(oTarget));
+	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetLastName(oShard) == "")) {
+		if(GetIsSkillSuccessful(oMaster, SKILL_CONCENTRATION, nDC, TRUE)) {
+			SendMessageToPC(oMaster, "You memorize the defining characteristics of " + GetName(oTarget) + " and focus your perception of them into the scrying shard. The image of " + GetName(oTarget) + " shimmers into the reflective surface and remains fixed there faintly, unmoving.");
+			SetFirstName(oShard, GetName(oTarget) + " Image");
+			SetLastName(oShard, GetResRef(oTarget) + " " + GetFirstName(oMaster));
+			SetDescription(oShard, "A scrying shard showing a faint reflection of " + GetName(oTarget) + ". This shard was created by " + GetName(oMaster) + " and establishes firsthand knowledge of " + GetName(oTarget) + " for " + GetName(oMaster) + " or secondhand knowledge for anybody else who holds it.");
+			}
+		else {SendMessageToPC(oMaster, "You are unable to concentrate enough to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
+			}
 		}
 	
+	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oShard) != "")) {
+		 if(GetIsSkillSuccessful(oMaster, SKILL_CONCENTRATION, nDC, TRUE)) {
+			SendMessageToPC(oMaster, "Your familiarity with " + GetName(oTarget) + " increases. You see the existing image of " + GetName(oTarget) + " in the scrying shard take on depth, dimension, and movement, blinking every now and then.");
+			SetFirstName(oShard, GetName(oTarget) + " Imago");
+			SetDescription(oShard, "A scrying shard showing the imago of " + GetName(oTarget) + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This shard was enspelled by " + GetName(oMaster) + " and establishes familiar knowledge of " + GetName(oTarget) + " for " + GetName(oMaster) + " or secondhand knowledge for anybody else who holds it.");
+			}
+	     else {SendMessageToPC(oMaster, "You are unable to concentrate enough to improve your grasp of the defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
+			}
+		}
 
 }
