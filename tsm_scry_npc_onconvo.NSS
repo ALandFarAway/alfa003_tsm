@@ -343,11 +343,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sTargetName == sScriedName) {
 									SendMessageToPC(oScryer, "match!");
 									nConnection = 2;
-									if(FindSubString(sTokenLast, "possess", 0) != -1) {
+									if(FindSubString(sToken, "Possess", 0) != -1) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
 										nConnection = 4;
 										}
-									if(FindSubString(sTokenLast, "body", 0) != -1) {
+									if(FindSubString(sToken, "Body", 0) != -1) {
 										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sTargetName + ".");
 										nConnection = 10;
 										}
@@ -375,7 +375,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							oToken = GetNextItemInInventory(oScryer);
 								
 						}	
-						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + GetLocalInt(OBJECT_SELF, "nScryKnowledge") + GetLocalInt(OBJECT_SELF, "nScryConnection");
+						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
 						int nWillSaveBase = GetLocalInt(OBJECT_SELF, "oScriedWSBase");
