@@ -15,8 +15,9 @@ void main()
 	string sTargetName = GetStringLeft(sToken, nCountName - 6);
 	string sScryerName = GetFirstName(oScryer);
 	int nCountScryerName = GetStringLength(sScryerName);
-	int nTargetRes = GetStringLength(sTokenLast);
-	string sTargetRes = GetStringLeft(sTokenLast, nTargetRes - nCountScryerName);
+	//int nTargetRes = GetStringLength(sTokenLast);
+	//string sTargetRes = GetStringLeft(sTokenLast, nTargetRes - nCountScryerName);
+	string sTargetRes = sTokenLast;
 	int nDC = 20 + GetAbilityModifier(ABILITY_DEXTERITY, oTarget);
 	int nScryer = 0;
 	if(sScryerName == GetStringRight(sTokenLast, nCountScryerName)) {
@@ -24,7 +25,7 @@ void main()
 		}
 	
 	
-	SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
+	//SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
 	SendMessageToPC(oScryer, "sTargetName = " + sTargetName);
 	SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 	SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
@@ -39,7 +40,7 @@ void main()
 				oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
 	            SetLocalObject(oScryNamer, "oScryer", oScryer);
 				SetLocalObject(oScryNamer, "oTarget", oTarget);
-				SetLocalString(oScryNamer, "sTargetRes", sTargetRes);
+				SetLocalString(oScryNamer, "sTargetRes", sTokenLast);
 				}
 			 
 			if(nScryer == 1) {
@@ -67,7 +68,7 @@ void main()
 		if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
 			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + GetName(oTarget) + " and focus your perception of them into the scrying shard. The image of " + GetName(oTarget) + " shimmers into the reflective surface and remains fixed there faintly, unmoving.");
 			SetFirstName(oToken, GetName(oTarget) + " Image");
-			SetLastName(oToken, GetResRef(oTarget) + " " + GetFirstName(oScryer));
+			SetLastName(oToken, GetResRef(oTarget));
 			SetDescription(oToken, "A scrying shard showing a faint reflection of " + GetName(oTarget) + ". This shard was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
 			}
 		else {SendMessageToPC(oScryer, "You are unable to concentrate enough to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the Token. You will have to try again another time.");
