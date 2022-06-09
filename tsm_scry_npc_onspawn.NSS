@@ -127,7 +127,7 @@ void main()
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
 			 //DelayCommand(2.0, SendMessageToPC(oScryer, "Inform the " + sScryName + " whether your knowledge of the person you intend to scry is 'None', 'Firsthand', 'Secondhand', or 'Familiar'."));
 		 	 //DelayCommand(4.0, SendMessageToPC(oScryer, "In a separate statement, inform the " + sScryName + " whether you have a 'Picture', 'Possession', 'Body Part', or 'Nothing' of the scrying subject."));
-			 DelayCommand(2.0, SendMessageToPC(oScryer, "Speak the full name of an adventurer to be scried, or a name of ten or fewer characters of a member of the general populace to be scried."));
+			 DelayCommand(2.0, SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying token imbued with the image of a member of the general populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them."));
 			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
