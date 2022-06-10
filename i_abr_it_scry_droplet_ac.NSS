@@ -6,18 +6,19 @@ void main()
 {
              
     object oScryer = GetItemActivator();
-	object oTarget = GetItemActivatedTarget();
 	object oToken = GetItemActivated();
 	string sToken = GetFirstName(oToken);
 	string sTokenLast = GetLastName(oToken);
 	string sTargetRes = sTokenLast;
+	object oTarget = GetItemActivatedTarget();
+	string sTriggerRes;
 	if(oTarget == OBJECT_INVALID) {
 		location lTarget = GetItemActivatedTargetLocation();
 		oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
 		while(oTarget != OBJECT_INVALID) {
-			sTargetRes = GetResRef(oTarget);
-			SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
-			if((FindSubString(sTargetRes, "_scry_") != -1) || (FindSubString(sTargetRes, "_so_") != -1)) {
+			sTriggerRes = GetResRef(oTarget);
+			SendMessageToPC(oScryer, "sTriggerRes = " + sTriggerRes);
+			if((FindSubString(sTriggerRes, "_scry_") != -1) || (FindSubString(sTriggerRes, "_so_") != -1)) {
 				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
 				break;
 				}
