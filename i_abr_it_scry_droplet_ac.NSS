@@ -7,23 +7,28 @@ void main()
              
     object oScryer = GetItemActivator();
 	object oTarget = GetItemActivatedTarget();
+	SetLocalObject(oScryer, "oTarget", oTarget);
 	object oToken = GetItemActivated();
+	SetFirstName(oToken, "Scrying Droplet");
 	string sToken = GetFirstName(oToken);
 	string sTokenLast = GetLastName(oToken);
 	if(oTarget == OBJECT_INVALID) {
 		location lTarget = GetItemActivatedTargetLocation();
-		object oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
 		string sTargetRes;
 		while(oTarget != OBJECT_INVALID) {
 			sTargetRes = GetResRef(oTarget);
 			SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
 			if((FindSubString(sTargetRes, "_scry_") != -1) || (FindSubString(sTargetRes, "_so_") != -1)) {
 				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
+				SetLocalObject(oScryer, "oTarget", oTarget);
 				break;
 				}
-			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
 			}
 		}
+	
+	oTarget = GetLocalObject(oScryer, "oTarget");	
 	if(oTarget == OBJECT_INVALID) {
 		SendMessageToPC(oScryer, "You must use your " + sToken + " on a scrying object within three feet.");
 		return;
