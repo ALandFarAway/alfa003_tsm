@@ -11,18 +11,18 @@ void main()
 	string sTokenLast = GetLastName(oToken);
 	string sTargetRes = sTokenLast;
 	object oTarget = GetItemActivatedTarget();
-	string sTriggerRes;
+	string sTriggerTag;
 	if(oTarget == OBJECT_INVALID) {
 		location lTarget = GetItemActivatedTargetLocation();
-		oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+		oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oTarget != OBJECT_INVALID) {
-			sTriggerRes = GetResRef(oTarget);
-			SendMessageToPC(oScryer, "sTriggerRes = " + sTriggerRes);
-			if((FindSubString(sTriggerRes, "_scry_") != -1) || (FindSubString(sTriggerRes, "_so_") != -1)) {
+			sTriggerTag = GetTag(oTarget);
+			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
 				break;
 				}
-			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
 	
