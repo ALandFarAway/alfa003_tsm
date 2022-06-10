@@ -12,16 +12,16 @@ void main()
 	string sTokenLast = GetLastName(oToken);
 	if(oTarget == OBJECT_INVALID) {
 		location lTarget = GetItemActivatedTargetLocation();
-		object oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
-		string sTargetTag;
+		object oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		string sTargetRes;
 		while(oTarget != OBJECT_INVALID) {
-			sTargetTag = GetTag(oTarget);
-			SendMessageToPC(oScryer, "sTargetTag = " + sTargetTag);
-			if((FindSubString(sTargetTag, "_scry_") != -1) || (FindSubString(sTargetTag, "_so_") != -1)) {
+			sTargetRes = GetResRef(oTarget);
+			SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
+			if((FindSubString(sTargetRes, "_scry_") != -1) || (FindSubString(sTargetRes, "_so_") != -1)) {
 				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
 				break;
 				}
-			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
 	if(oTarget == OBJECT_INVALID) {
