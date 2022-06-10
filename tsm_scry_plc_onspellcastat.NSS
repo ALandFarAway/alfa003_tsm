@@ -22,30 +22,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "acr_placeable_i"
-#include "dmfi_inc_langexe" 
-#include "acr_quest_i"
 #include "acr_scry_i"
-
-void ActionCreateWynPlacedEffect(string sPlacedEffect, location lLocPlaceEffect)
-{
-    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sPlacedEffect, lLocPlaceEffect);
-}
 
 void main() {
  
-
-	//
-	// GetLastUsedBy must not be called if OBJECT_SELF has been deleted.  If we
-	// are called by a DelayCommand / ExecuteScript continuation then it is
-	// possible that the object has been deleted in the mean time.
-	//
-	// The test for OBJECT_SELF being invalid has to be done before calling the
-	// ACR hook.
-	//
-
-	if (!GetIsObjectValid(OBJECT_SELF))
-		return;
-
 	ACR_PlaceableOnSpellCastAt();
 
 	 //3068 = Create Water Cantrip
@@ -58,19 +38,13 @@ void main() {
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 string sBless;
 	 
-	 //SendMessageToPC(oCaster, "sResRef of target = " + sResRef + ". nLastSpell = " + IntToString(nLastSpell));
 	 if((nLastSpell == 3068) && ((sResRef == "abr_pl_so_holyfont") || (sResRef == "abr_pl_so_pool"))) {
 	 	CreateItemOnObject("abr_it_scry_droplet", oCaster, 1);
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
-	 
 	 }
 	 
 	 else if((nLastSpell == 3066) && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
 	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
 		SendMessageToPC(oCaster, "A shard shimmers into your hand, out of the " + GetName(oTarget) + " on which you draw your mark, leaving the glass unblemished.");
-	 
-	 }
-	 
-	 
-	
+	 }	
 }

@@ -112,7 +112,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
-		SendMessageToPC(oMaster, "You have keyed these names of the wider populace:");
+		SendMessageToPC(oMaster, "These names of the wider populace are already keyed on this " + GetName(oTarget) + ":");
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
@@ -344,8 +344,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
 								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
-								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds. During that time you may touch the mirror to hear an update on the person being scried.");
-							 	SetLocalInt(oScry, "nScryActive", 1);
+								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
+							 	if(GetObjectType(oScry) == OBJECT_TYPE_PLACEABLE) {
+									SendMessageToPC(oScryer, "During that time you, as the scryer, may touch the " + GetName(oScry) + " to hear an update on the person being scried.");
+							 		}
+								
+								SetLocalInt(oScry, "nScryActive", 1);
 								
 								//Throw oScried a bone if their roll was within 5 of the DC
 								if (nDC - nWillSave < 5) 

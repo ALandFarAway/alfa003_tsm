@@ -10,6 +10,24 @@ void main()
 	object oToken = GetItemActivated();
 	string sToken = GetFirstName(oToken);
 	string sTokenLast = GetLastName(oToken);
+	if(oTarget == OBJECT_INVALID) {
+		location lTarget = GetItemActivatedTargetLocation();
+		object oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+		string sTargetTag;
+		while(oTarget != OBJECT_INVALID) {
+			sTargetTag = GetTag(oTarget);
+			SendMessageToPC(oScryer, "sTargetTag = " + sTargetTag);
+			if((FindSubString(sTargetTag, "_scry_") != -1) || (FindSubString(sTargetTag, "_so_") != -1)) {
+				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
+				break;
+				}
+			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+			}
+		}
+	if(oTarget == OBJECT_INVALID) {
+		SendMessageToPC(oScryer, "You must use your " + sToken + " on a scrying object within three feet.");
+		return;
+		}
 	int nCountName = GetStringLength(sToken);
 	string sScryerName = GetFirstName(oScryer);
 	int nCountScryerName = GetStringLength(sScryerName);
@@ -22,7 +40,7 @@ void main()
 		}
 	
 	
-	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
+	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE || OBJECT_TYPE_TRIGGER) && (sTargetRes != "")) {
 		
 		//Create undetectable OOC Scrying Namer at location of Scrying Object to receive 10 letter Roster Name for stored scrying target
 		    object oScryNamer = GetLocalObject(oTarget, "oScryNamer");
@@ -50,7 +68,6 @@ void main()
 				
 			}
 			
-			DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this potential scrying subject.", TALKVOLUME_TALK)));	
 			SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oTarget) +":");
 			string sRoster = GetFirstRosterMember();
 			int nInc = 0;
@@ -60,6 +77,7 @@ void main()
 				nInc++;
 			}
 			
+			DelayCommand(4.0, SendMessageToPC(oScryer, "*Speak a name no longer than 10 letters for this potential scrying subject."));	
 		}
 		
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetLastName(oToken) == "")) {

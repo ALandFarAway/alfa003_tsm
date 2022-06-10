@@ -416,9 +416,9 @@ if(GetSpellId() == 3058) {
 if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE || OBJECT_TYPE_TRIGGER);
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
-	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
+	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE || OBJECT_TYPE_TRIGGER);
 	   	}
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
@@ -431,10 +431,10 @@ if(GetSpellId() == 3056)
 	 else if((GetLastSpellCastClass()== CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
 	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
 		}
-	 else if((GetLastSpellCastClass()== CLASS_TYPE_CLERIC) && (GetResRef(oScry) != "abr_pl_so_holyfont")) {
+	 else if((GetLastSpellCastClass()== CLASS_TYPE_CLERIC) && ((GetResRef(oScry) != "abr_pl_so_holyfont") || (GetResRef(oScry) != "abr_trg_so_water"))) {
 	 	SendMessageToPC(oScryer, "There is no holy font suitable for scrying within range.");
 		}
-	 else if((GetLastSpellCastClass()== CLASS_TYPE_DRUID) && (GetResRef(oScry) != "abr_pl_so_pool")) {
+	 else if((GetLastSpellCastClass()== CLASS_TYPE_DRUID) && ((GetResRef(oScry) != "abr_pl_so_pool") || (GetResRef(oScry) != "abr_trg_so_water"))) {
 	 	SendMessageToPC(oScryer, "There is no natural pool of water suitable for scrying within range.");
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
