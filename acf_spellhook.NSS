@@ -416,10 +416,18 @@ if(GetSpellId() == 3058) {
 if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE || OBJECT_TYPE_TRIGGER);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
-	 	   oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE || OBJECT_TYPE_TRIGGER);
+	 	  SendMessageToPC(oScryer, "oScry = " + GetTag(oScry));
+	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
 	   	}
+	 if(oScry == OBJECT_INVALID) {
+	 	 oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_TRIGGER);
+		 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
+		 	   SendMessageToPC(oScryer, "oScry = " + GetTag(oScry));
+	 	       oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_TRIGGER);
+		   	}
+	 	}
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
 	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used as the focus of a Scry spell.");

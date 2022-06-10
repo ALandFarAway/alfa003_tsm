@@ -69,15 +69,6 @@ void main()
 				
 			}
 			
-			SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oTarget) +":");
-			string sRoster = GetFirstRosterMember();
-			int nInc = 0;
-			while((sRoster != "") && (nInc < 10)) {
-				SendMessageToPC(oScryer, sRoster);
-				sRoster = GetNextRosterMember();
-				nInc++;
-			}
-			
 			DelayCommand(4.0, SendMessageToPC(oScryer, "*Speak a name no longer than 10 letters for this potential scrying subject."));	
 		}
 		

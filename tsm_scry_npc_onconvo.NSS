@@ -112,7 +112,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
-		SendMessageToPC(oMaster, "These names of the wider populace are already keyed on this " + GetName(oTarget) + ":");
+		SendMessageToPC(oMaster, "These names of the wider populace are keyed on this " + GetName(oTarget) + ":");
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
