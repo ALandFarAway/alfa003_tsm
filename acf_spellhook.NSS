@@ -417,23 +417,28 @@ if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
-	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
-	 	  SendMessageToPC(oScryer, "oScry = " + GetTag(oScry));
+	 while(oScry != OBJECT_INVALID) {
+	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
+		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
+		   break;
+		   }
 	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	 
+	SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
+		   
 	string sTriggerTag;
-	if(oTarget == OBJECT_INVALID) {
+	if(oScry == OBJECT_INVALID) {
 		location lTarget = GetLocation(oScryer);
-		oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-		while(oTarget != OBJECT_INVALID) {
-			sTriggerTag = GetTag(oTarget);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		while(oScry != OBJECT_INVALID) {
+			sTriggerTag = GetTag(oScry);
 			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
+				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
 				break;
 				}
-			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
 	 //Usage, range, and class restrictions
