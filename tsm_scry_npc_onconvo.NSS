@@ -268,13 +268,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
-								SendMessageToPC(oScryer, sTargetName + "==" + sScriedName);
+								//SendMessageToPC(oScryer, sTargetName + "==" + sScriedName);
 								if(sTargetName == sScriedName) {
-									if(FindSubString(sToken, "Possess", 0) != -1) {
+									if((FindSubString(sToken, "Possess", 0) != -1) && (nConnection < 4)) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
 										nConnection = 4;
 										}
-									if(FindSubString(sToken, "Body", 0) != -1) {
+									if((FindSubString(sToken, "Body", 0) != -1)  && (nConnection < 10)){
 										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sTargetName + ".");
 										nConnection = 10;
 										}
@@ -282,13 +282,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										if(FindSubString(sToken, "Imago", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: familiar.");
 											nKnowledge = 5;
-											nConnection = 4;
+											if(nConnection <= 4) {nConnection = 4;}
 											}
 										
 										else if(FindSubString(sToken, "Image", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: firsthand.");
 											nKnowledge = 0;
-											nConnection = 2;
+											if(nConnection <= 2) {nConnection = 2;}
 											}
 										}
 									if(nScryer == 0) {
@@ -300,18 +300,17 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										SendMessageToPC(oScryer, "*You are holding a magically created firsthand image of " + sTargetName + " that gives you a minor connection to the subject.");
 										}
 									if(nConnection == 4) {
-										SendMessageToPC(oScryer, "*You are holding a magically created, fully representative imago of " + sTargetName + " that heightens your connection as if you held a possession of that subject.");
+										SendMessageToPC(oScryer, "*You are holding either a magically created, fully representative imago or a possession of " + sTargetName + " that heightens your connection to that subject.");
 										}
 									
-								break;
 								}
 							 }
 							oToken = GetNextItemInInventory(oScryer);
 								
 						}	
-						SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
-						SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
-						SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
+						//SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
+						//SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
+						//SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
@@ -321,7 +320,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
+						//SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");

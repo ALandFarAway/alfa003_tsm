@@ -462,7 +462,7 @@ if(GetSpellId() == 3056)
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
-			SendMessageToPC(oScryer, "sScryName = " + sScryName);
+			//SendMessageToPC(oScryer, "sScryName = " + sScryName);
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
@@ -475,8 +475,8 @@ if(GetSpellId() == 3056)
 				}
 				
 			int nDC = 10 + nSpellLevel + nAbilityMod;
-			SendMessageToPC(oScryer, "nSpellLevel = " + IntToString(nSpellLevel));
-			SendMessageToPC(oScryer, "nAbilityMod = " + IntToString(nAbilityMod));
+			//SendMessageToPC(oScryer, "nSpellLevel = " + IntToString(nSpellLevel));
+			//SendMessageToPC(oScryer, "nAbilityMod = " + IntToString(nAbilityMod));
 						
 			//Create undetectable OOC Scrying Listener at location of Scrying Object to receive scrying information about future scrying target
 			object oScryListen = GetLocalObject(oScry, "oScryListen");
