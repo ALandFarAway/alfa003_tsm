@@ -216,6 +216,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
 									 }
 								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
+								 
 								 int nWillSaveBase = GetWillSavingThrow(oScried);
 								 SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 								 object oScriedArea = GetFirstArea();
@@ -422,8 +423,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							       
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
-								string sSubjectArea = GetName(oArea);
+								string sSubjectArea = "somewhere where you can see no identifying details of the surroundings.";	
 								string sAreaTag = GetTag(oArea);
+								 
 								
 								if(FindSubString(sAreaTag, "caravan", 0) != -1) 
 									{sSubjectArea = "inside a caravan.";}
@@ -611,6 +613,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								else if(FindSubString(sAreaTag, "_ext_", 0) != -1)
 									{sSubjectArea = "outside, though nothing uniquely identifiable is visible.";}
 								else {sSubjectArea = "somewhere where you can see no identifying details of the surroundings.";}	
+								
+								
 									
 								int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
 								string sWeatherRain = "";
