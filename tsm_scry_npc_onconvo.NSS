@@ -105,12 +105,7 @@ void main()
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
-	//object oShard = GetLocalObject(OBJECT_SELF, "oShard");
-	//string sShard = GetLocalString(OBJECT_SELF, "sShard");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sTargetRes");
-	//SendMessageToPC(oMaster, "Convo Namer oTarget = " + GetName(oTarget));
-	//SendMessageToPC(oMaster, "sShard = " + sShard);
-	//SendMessageToPC(oMaster, "Convo Namer sTargetRes= " + sTargetRes);
 	location lTarget = GetLocation(oTarget);
 	effect eBeam = EffectBeam(VFX_BEAM_DIVINATION, oMaster, BODY_NODE_CHEST, FALSE);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
@@ -121,7 +116,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
-		while((sRoster != "") && (nInc < 5)) {
+		while((sRoster != "") && (nInc < 10)) {
 			SendMessageToPC(oMaster, sRoster);
 			sRoster = GetNextRosterMember();
 			nInc++;
@@ -138,9 +133,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SEL
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
-		//ActionSpeakString(GetName(OBJECT_SELF) + ": oScryListen = " + GetTag(oScryListen), TALKVOLUME_TALK);	 
-		//ActionSpeakString(GetName(OBJECT_SELF) + ": oScryer = " + GetName(oScryer), TALKVOLUME_TALK);	 
-		//ActionSpeakString(GetName(OBJECT_SELF) + ": oScried = " + GetName(oScried), TALKVOLUME_TALK);	 
 		ActionForceFollowObject(oScried, 0.5, 0); 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -187,7 +179,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");
 		
 		//This NPC was set to listen for specific words in tsm_scry_npc_onspawn
-		//6010 thru 6019 are words that will adjust the DC of the impending Scry spell
 		//6020 thru 6029 are the names of the first ten PCs currently logged in
 		//6030 thru 6039 are the names of up to ten NPCs this Scryer can Scry
 		string sMatch = GetMatchedSubstring(1);
@@ -199,13 +190,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
 				string sScriedName = GetName(oScried);
-				//SendMessageToPC(oScryer, "Convo Listener nMatch >= 6020 : sScriedName = " +  sScriedName);
-				//SendMessageToPC(oScryer, "Pre Outer While nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : " + GetMatchedSubstring(1) );
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
-					//SendMessageToPC(oScryer, "A. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
 					int nScryActive = GetLocalInt(oScry, "nScryActive");
 					if(nScryActive == 1) {
-						 //SendMessageToPC(oScryer, "Active = " + IntToString(nActive));
 						 SendMessageToPC(oScryer, "You are scrying" + GetName(oScried) + " and must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
 						 break;
 						 }
@@ -215,30 +202,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 					if(nIncA == 6020) {
 						int nRosterInc = 0;
 						while ((sRosterName != "") && (nRosterInc < 10)) {
-							//SendMessageToPC(oScryer, "Roster While nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1) );
-							//SendMessageToPC(oScryer, "Convo Listener Roster While RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
-							
 							/*If the spoken name matches the Roster Name of one of the Roster NPCs
 							then create an OOC invisible version of that NPC where it should be found
 							so that WillSave and location data may be gotten  later on in this script.*/
 							
 							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
 								{sScriedName = sRosterName;
-								 //SendMessageToPC(oScryer, "Roster While If nTestPattern = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch)  + " : " + GetMatchedSubstring(1)  );
-								 //SendMessageToPC(oScryer, "Convo Listener Roster While If RosterName is " + sRosterName + " : sScriedName = " + sScriedName);
-								 //SendMessageToPC(oScryer, "Tag of Roster PC = " + GetTag(GetObjectFromRosterName(sRosterName)));
 								 if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
 									 oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
-									 //SendMessageToPC(oScryer, "Roster PC was invalid. Now spawned and Tag = " + GetTag(oScried));
-								     ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
+									 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
 				 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
 				 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
 				 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
-									 //DelayCommand(fScryTimer-5.5, SendMessageToPC(oScryer, "Destroying spawned " + sScriedName));
-									 //DestroyObject(oScried, fScryTimer- 5.0);
 									 }
 								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
-								 //SendMessageToPC(oScryer, "Convo Listener " + sScriedName + "'s Scry Area Tag is " + sScriedArea);
 								 int nWillSaveBase = GetWillSavingThrow(oScried);
 								 SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 								 object oScriedArea = GetFirstArea();
@@ -246,23 +223,18 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 	if(GetTag(oScriedArea) == sScriedArea) {
 										ACR_PreSpawnArea(oScriedArea);
 										DespawnRosterMember(sScriedName);
-										//SendMessageToPC(oScryer, "Mirror spawned oScried should be despawned now.");
-								 		object oFirst = GetFirstObjectInArea(oScriedArea);
-										//SendMessageToPC(oScryer, "Convo Listener oFirst = " + GetName(oFirst));
-								 		int nNPC = 1;
+										object oFirst = GetFirstObjectInArea(oScriedArea);
+										int nNPC = 1;
 										object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
 										while (oNPC != OBJECT_INVALID) {
-											//SendMessageToPC(oScryer, sScriedName + " : " + GetName(oNPC));
-											if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1))
+										if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1))
 												{oScried = oNPC;
-												 //SendMessageToPC(oScryer, "Convo Listener oScried = " + GetName(oNPC));
 												 break;
 												 }
 											oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
 											nNPC++;
 										}
-										//SendMessageToPC(oScryer, "New prespawned oScried = " + GetName(oScried) + " is in " + GetName(GetArea(oScried)));
-								 		break;
+										break;
 										}
 									oScriedArea = GetNextArea();
 								 	}
@@ -272,8 +244,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							}
 						} 
 						
-					 //SendMessageToPC(oScryer, "After Roster Loop -- sScriedName = " + sScriedName);
-					
+					 
 					 /*If the spoken name matches the name of one of the Roster NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
 					 
@@ -287,7 +258,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
 								string sToken = GetFirstName(oToken);
-								//SendMessageToPC(oScryer, "oToken = " + sToken);
 								string sTokenLast = GetLastName(oToken);
 								string sScryerName = GetFirstName(oScryer);
 								int nCountName = GetStringLength(sToken);
@@ -297,10 +267,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
-								//SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
-								//SendMessageToPC(oScryer, "Convo Listener sTargetName = " + sTargetName + ". sScriedName = " + sScriedName);
 								if(sTargetName == sScriedName) {
-									//SendMessageToPC(oScryer, "Convo Listener match!");
 									if(FindSubString(sToken, "Possess", 0) != -1) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
 										nConnection = 4;
@@ -352,7 +319,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToPC(oScryer, "nKnowledge was " + IntToString(nKnowledge) + ". nConnection was " + IntToString(nConnection));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
-						//SendMessageToAllDMs("nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 							 	SendMessageToPC(oScryer, "You feel your spell fail.");
@@ -686,7 +652,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									sGenderAdj = "her";
 								}
 								
-								//Send oScried's area and weather description to oScryer
+								//Speak oScried's area and weather description 
 								ActionSpeakString( GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
 								SendMessageToPC(oScryer, GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
 								
@@ -824,7 +790,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 											else {SetLocalString(OBJECT_SELF, "sOtherL", sObjectNameL);}
 											}
 											
-										//SendMessageToPC(oScryer, sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oPC, oObject)) + ".");
 										}
 									nInc++;
 									}
@@ -1066,8 +1031,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						 nIncA++;
 						 oScried = GetNextPC(FALSE);
 						 sScriedName = GetName(oScried);
-						 //SendMessageToPC(oScryer, "B. nIncA = " + IntToString(nIncA) + " : nMatch = " + IntToString(nMatch) + " : GetMatchedSubstring1 = " + GetMatchedSubstring(1) + " : sScriedName = " + sScriedName);
-				
+						 
 				}	
 			}
 			

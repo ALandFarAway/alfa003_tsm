@@ -23,15 +23,6 @@ void main()
 		}
 	
 	
-	/*SendMessageToPC(oScryer, "sTargetRes = " + sTargetRes);
-	SendMessageToPC(oScryer, "sTargetName = " + sTargetName);
-	SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
-	SendMessageToPC(oScryer, "nScryer = " + IntToString(nScryer));
-	SendMessageToPC(oScryer, "sLastName = " + sTokenLast);
-	SendMessageToPC(oScryer, "sFirstName = " + sToken);
-	SendMessageToPC(oScryer, "sScryerName = " + sScryerName);
-	SendMessageToPC(oScryer, "sScryerName from Token's First Name = " + GetStringRight(sToken, nCountScryerName)); 
-*/
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
 		
 		//Create undetectable OOC Scrying Namer at location of Scrying Object to receive 10 letter Roster Name for stored scrying target
@@ -61,6 +52,15 @@ void main()
 			}
 			
 			DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this potential scrying subject.", TALKVOLUME_TALK)));	
+			SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oTarget) +":");
+			string sRoster = GetFirstRosterMember();
+			int nInc = 0;
+			while((sRoster != "") && (nInc < 10)) {
+				SendMessageToPC(oScryer, sRoster);
+				sRoster = GetNextRosterMember();
+				nInc++;
+			}
+			
 		}
 		
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetLastName(oToken) == "")) {

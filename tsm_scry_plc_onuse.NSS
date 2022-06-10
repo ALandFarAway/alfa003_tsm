@@ -115,7 +115,6 @@ void main() {
 	object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-	//SendMessageToPC(oScryer, "oScrySend = " + GetName(oScrySend));
 				
 	string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
 	//Has Scry been successfully cast?
@@ -124,8 +123,6 @@ void main() {
 		}
 	//If so, was it cast by oUser?
 	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oUser != oScryer) && (!GetIsDM(oUser))&& (!GetIsDMPossessed(oUser))) {
-		//SendMessageToPC(oUser, "nScryActive = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryActive")));	
-		//SendMessageToPC(oUser, "oScryer = " + GetName(oScryer));
 		SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
 		
@@ -138,10 +135,8 @@ void main() {
 	string sAreaTag = GetTag(oArea);
 	
 	//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
-	//SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(oScrySend)));
 	if(GetArea(oScrySend) != oArea) {
-		//SendMessageToPC(oScryer, "PLC Use: Areas don't match. Scrying Sensor should be jumping to " + GetName(oScried));
-	 	AssignCommand(oScrySend, ClearAllActions(TRUE));
+		AssignCommand(oScrySend, ClearAllActions(TRUE));
 		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oScried)));
 		DelayCommand(5.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 		}
@@ -378,12 +373,12 @@ void main() {
 				sGenderAdj = "her";
 				}
 				
-			//Send area and weather info to oScryer 	
+			//Speak area and weather info  	
 			ActionSpeakString( "", TALKVOLUME_TALK);
 			ActionSpeakString( "********************", TALKVOLUME_TALK);
 			ActionSpeakString(GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
 			
-			//Send oScried's detailed object information to oScryer					 	
+			//Speak oScried's detailed object information 					 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			string sObjectName = GetName(oObject);
 			float fDistance = GetDistanceBetween(oScried, oObject);
@@ -404,7 +399,6 @@ void main() {
 			SetLocalLocation(oScryListen, "lNew", GetLocation(oScried));
 			location lNew = GetLocalLocation(oScryListen, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
-			//SendMessageToPC(oScryer, "Distance between start and new is " + FloatToString(fDistanceMoved, 2, 0));
 			string sMoving = "standing still.";
 			string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));
 			if(fDistanceMoved != 0.0) {

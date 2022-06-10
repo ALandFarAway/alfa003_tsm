@@ -47,23 +47,16 @@ void main()
 {
     ACR_CreatureOnDeath();
 
-    // Custom code goes here.
-	
-	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
+    if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
 		SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
-		//ACR_ScryEnd(oScryer);
 		
 		//Unset all local variables and destroy oScryListener, too
 		SetLocalInt(oScry, "nScryActive", 0);
-		
-		//SendMessageToPC(oScryer, "nScryActive is now " + IntToString(GetLocalInt(oScry, "nScryActive")));
-		//SendMessageToAllDMs("nScryActive is now " + IntToString(GetLocalInt(oScry, "nScryActive")));
 		
 		SetLocalObject(oScry, "oScried", OBJECT_INVALID);
 		SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
