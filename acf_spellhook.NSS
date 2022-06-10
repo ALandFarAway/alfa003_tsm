@@ -416,18 +416,26 @@ if(GetSpellId() == 3058) {
 if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
 	 	  SendMessageToPC(oScryer, "oScry = " + GetTag(oScry));
-	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE);
+	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
-	 if(oScry == OBJECT_INVALID) {
-	 	 oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_TRIGGER);
-		 while((oScry != OBJECT_INVALID) && (FindSubString(GetTag(oScry), "_SCRY") == -1)) {
-		 	   SendMessageToPC(oScryer, "oScry = " + GetTag(oScry));
-	 	       oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_TRIGGER);
-		   	}
-	 	}
+	 
+	string sTriggerTag;
+	if(oTarget == OBJECT_INVALID) {
+		location lTarget = GetLocation(oScryer);
+		oTarget = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		while(oTarget != OBJECT_INVALID) {
+			sTriggerTag = GetTag(oTarget);
+			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
+				SendMessageToPC(oScryer, "oTarget = " + GetName(oTarget));
+				break;
+				}
+			oTarget = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			}
+		}
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
 	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used as the focus of a Scry spell.");
