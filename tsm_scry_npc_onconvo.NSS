@@ -268,6 +268,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
+								SendMessageToPC(oScryer, sTargetName + "==" + sScriedName);
 								if(sTargetName == sScriedName) {
 									if(FindSubString(sToken, "Possess", 0) != -1) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
@@ -299,7 +300,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										SendMessageToPC(oScryer, "*You are holding a magically created firsthand image of " + sTargetName + " that gives you a minor connection to the subject.");
 										}
 									if(nConnection == 4) {
-										SendMessageToPC(oScryer, "*You are holding a magically created, fully representative, animated imago of " + sTargetName + " that gives you the same connection to the subject as would a possession of that subject.");
+										SendMessageToPC(oScryer, "*You are holding a magically created, fully representative imago of " + sTargetName + " that heightens your connection as if you held a possession of that subject.");
 										}
 									
 								break;
@@ -308,6 +309,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							oToken = GetNextItemInInventory(oScryer);
 								
 						}	
+						SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
+						SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
+						SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
@@ -318,7 +322,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
-						SendMessageToPC(oScryer, "nKnowledge was " + IntToString(nKnowledge) + ". nConnection was " + IntToString(nConnection));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");

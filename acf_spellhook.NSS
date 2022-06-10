@@ -420,8 +420,8 @@ if(GetSpellId() == 3056)
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
 		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
-		   break;
-		   }
+		   SetLocalObject(oScryer, "oScry", oScry);
+			}
 	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	 
@@ -436,11 +436,13 @@ if(GetSpellId() == 3056)
 			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
-				break;
+				SetLocalObject(oScryer, "oScry", oScry);
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
+	oScry = GetLocalObject(oScryer, "oScry");
+			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
 	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used as the focus of a Scry spell.");
@@ -460,6 +462,7 @@ if(GetSpellId() == 3056)
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
+			SendMessageToPC(oScryer, "sScryName = " + sScryName);
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
@@ -470,8 +473,11 @@ if(GetSpellId() == 3056)
 			if(GetLastSpellCastClass()== CLASS_TYPE_CLERIC || CLASS_TYPE_DRUID || CLASS_TYPE_RANGER) {
 				nAbilityMod = GetAbilityModifier(ABILITY_WISDOM);
 				}
+				
 			int nDC = 10 + nSpellLevel + nAbilityMod;
-			
+			SendMessageToPC(oScryer, "nSpellLevel = " + IntToString(nSpellLevel));
+			SendMessageToPC(oScryer, "nAbilityMod = " + IntToString(nAbilityMod));
+						
 			//Create undetectable OOC Scrying Listener at location of Scrying Object to receive scrying information about future scrying target
 			object oScryListen = GetLocalObject(oScry, "oScryListen");
 			if(oScryListen == OBJECT_INVALID) {
