@@ -57,7 +57,7 @@ void main()
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
 		SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
-		ACR_ScryEnd(oScryer);
+		//ACR_ScryEnd(oScryer);
 		
 		//Unset all local variables and destroy oScryListener, too
 		SetLocalInt(oScry, "nScryActive", 0);
@@ -77,7 +77,8 @@ void main()
 		SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
 		SetLocalObject(oScried, "oScry", OBJECT_INVALID);
 		SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
-		DestroyObject(oScryListen);		
+		SetLocalInt(oScry, "nScryActive", 0);
+		DestroyObject(oScryListen, 2.0);		
 	}
 		
 }

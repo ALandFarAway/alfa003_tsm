@@ -117,7 +117,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
-		SendMessageToPC(oMaster, "Adventurers do not need to be keyed first. Currently keyed names of the wider populace:");
+		SendMessageToPC(oMaster, "You have keyed these names of the wider populace:");
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
@@ -128,6 +128,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		}
 		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eBeam, lTarget, 2.0);
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
+		SendMessageToPC(oMaster, "In addition to the above, adventurers may be scried and do not require keying first.");
 		DestroyObject(OBJECT_SELF, 7.0);
 		}	 				
 	}	
@@ -364,6 +365,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") == 0) {
 									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as of somebody you had met once or twice but can't quite recall." );
 									}
+								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
 							}
 							
@@ -376,7 +378,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
 								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
-								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
+								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds. During that time you may touch the mirror to hear an update on the person being scried.");
 							 	SetLocalInt(oScry, "nScryActive", 1);
 								
 								//Throw oScried a bone if their roll was within 5 of the DC

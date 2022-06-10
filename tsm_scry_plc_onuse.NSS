@@ -119,18 +119,18 @@ void main() {
 				
 	string sSpeak = GetLocalString(OBJECT_SELF, "SCRY_SPEAK");
 	//Has Scry been successfully cast?
-	if(GetLocalInt(OBJECT_SELF, "nScryActive") == 0) {
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == "")) {
 			SendMessageToPC(oUser, "The scrying object requires the casting of the Scry spell.");
 		}
 	//If so, was it cast by oUser?
 	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oUser != oScryer) && (!GetIsDM(oUser))&& (!GetIsDMPossessed(oUser))) {
-		SendMessageToPC(oUser, "nScryActive = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryActive")));	
-		SendMessageToPC(oUser, "oScryer = " + GetName(oScryer));
+		//SendMessageToPC(oUser, "nScryActive = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryActive")));	
+		//SendMessageToPC(oUser, "oScryer = " + GetName(oScryer));
 		SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
 		
 	//If Scry has been successfully cast, then oScried exists	
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && ((oUser == oScryer) || (GetIsDM(oUser)) || (GetIsDMPossessed(oUser)))) {
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (GetName(GetLocalObject(OBJECT_SELF, "oScried")) != "") && ((oUser == oScryer) || (GetIsDM(oUser)) || (GetIsDMPossessed(oUser)))) {
 	object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 	//Check area information about oScried
 	object oArea = GetArea(oScried);
