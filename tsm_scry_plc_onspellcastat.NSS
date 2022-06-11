@@ -30,6 +30,7 @@ void main() {
 
 	 //3068 = Create Water Cantrip
 	 //3066 = Arcane Mark Cantrip
+	 //3060 = Dancing Lights Cantrip
 	 
 	 int nLastSpell = GetLastSpell();
 	 object oCaster = GetLastSpellCaster();
@@ -43,8 +44,13 @@ void main() {
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
 	 }
 	 
-	 else if((nLastSpell == 3066) && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
+	 else if((nLastSpell == 3066)  && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
 	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
 		SendMessageToPC(oCaster, "A shard shimmers into your hand, out of the " + GetName(oTarget) + " on which you draw your mark, leaving the glass unblemished.");
+	 }
+	 
+	 else if((nLastSpell == 3060)  && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
+	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
+		SendMessageToPC(oCaster, "You call a small, humanoid figure made of light into being on the surface of the " + GetName(oTarget) + ". At your touch, it shrinks down and a fragment of glass shimmers into your hand, leaving the mirror unblemished.");
 	 }	
 }

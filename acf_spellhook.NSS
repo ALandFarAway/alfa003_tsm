@@ -416,11 +416,12 @@ if(GetSpellId() == 3058) {
 if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
+	 object oArea = GetArea(oScryer);
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
 		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
-		   SetLocalObject(oScryer, "oScry", oScry);
+		   SetLocalObject(oArea, "oScry", oScry);
 			}
 	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
@@ -436,12 +437,12 @@ if(GetSpellId() == 3056)
 			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
-				SetLocalObject(oScryer, "oScry", oScry);
+				SetLocalObject(oArea, "oScry", oScry);
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
-	oScry = GetLocalObject(oScryer, "oScry");
+	oScry = GetLocalObject(oArea, "oScry");
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
@@ -462,7 +463,7 @@ if(GetSpellId() == 3056)
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
-			//SendMessageToPC(oScryer, "sScryName = " + sScryName);
+			SendMessageToPC(oScryer, "sScryName = " + sScryName);
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
@@ -494,6 +495,7 @@ if(GetSpellId() == 3056)
 			
 			//Set all other variables on ScryListen
 			SetLocalInt(oScryListen, "nScryDC", nDC);
+			SendMessageToPC(oScryer, "nScryDC = " + IntToString(GetLocalInt(oScryListen, "nScryDC")));
 			SetLocalInt(oScryListen, "nCasterLevel", nScryerLevel);
 			SetLocalFloat(oScryListen, "fScryTimer", 60.0 * nScryerLevel);
 			SetFirstName(oScryListen, sScryName);

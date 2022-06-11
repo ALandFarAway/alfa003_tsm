@@ -29,5 +29,5 @@ void main() {
 	  object oScryer = GetEnteringObject();
 	  
 	  CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
-	  SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(OBJECT_SELF) + ".");
+	  SendMessageToPC(oScryer, "You scoop up a droplet of water in a small vial.");
 }		   

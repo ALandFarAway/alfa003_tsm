@@ -308,7 +308,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							oToken = GetNextItemInInventory(oScryer);
 								
 						}	
-						//SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
+						SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
 						//SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
 						//SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
