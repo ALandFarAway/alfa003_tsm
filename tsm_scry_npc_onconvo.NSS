@@ -269,45 +269,46 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									nScryer = 1;
 									}
 								//SendMessageToPC(oScryer, sTargetName + "==" + sScriedName);
-								if(sTargetName == sScriedName) {
-									if((FindSubString(sToken, "Possess", 0) != -1) && (nConnection < 4)) {
-										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sTargetName + ".");
+								if((sTargetName == sScriedName) || (GetIsPC(oScried))) {
+									if(((FindSubString(sToken, "Possess", 0) != -1) || (FindSubString(sToken, "Cloth", 0) != -1)) && (nConnection < 4)) {
+										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sScriedName + ".");
 										nConnection = 4;
 										}
-									if((FindSubString(sToken, "Body", 0) != -1)  && (nConnection < 10)){
-										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sTargetName + ".");
+									if(((FindSubString(sToken, "Body", 0) != -1) || (FindSubString(sToken, "ail", 0) != -1) || (FindSubString(sToken, "air", 0) != -1) || (FindSubString(sToken, "lood", 0) != -1)  || (FindSubString(sToken, "ooth", 0) != -1) || (FindSubString(sToken, "one", 0) != -1))  && (nConnection < 10)){
+										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sScriedName + ".");
 										nConnection = 10;
 										}
 									if(nScryer == 1) {
 										if(FindSubString(sToken, "Imago", 0) != -1) {
-											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: familiar.");
+											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: familiar.");
 											nKnowledge = 5;
 											if(nConnection <= 4) {nConnection = 4;}
 											}
 										
 										else if(FindSubString(sToken, "Image", 0) != -1) {
-											SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is: firsthand.");
+											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: firsthand.");
 											nKnowledge = 0;
 											if(nConnection <= 2) {nConnection = 2;}
 											}
 										}
 									if(nScryer == 0) {
-										SendMessageToPC(oScryer, "*Your knowledge of " + sTargetName + " is secondhand.");
+										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is secondhand.");
 										nKnowledge = -5;
 										}
 										
 									if(nConnection == 2) {
-										SendMessageToPC(oScryer, "*You are holding a magically created firsthand image of " + sTargetName + " that gives you a minor connection to the subject.");
+										SendMessageToPC(oScryer, "*You are holding a magically created firsthand image of " + sScriedName + " that gives you a minor connection to the subject.");
 										}
 									if(nConnection == 4) {
-										SendMessageToPC(oScryer, "*You are holding either a magically created, fully representative imago or a possession of " + sTargetName + " that heightens your connection to that subject.");
+										SendMessageToPC(oScryer, "*You are holding either a magically created, fully representative imago or a possession of " + sScriedName + " that heightens your connection to that subject.");
 										}
 									
 								}
 							 }
 							oToken = GetNextItemInInventory(oScryer);
 								
-						}	
+						}
+							
 						SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
 						//SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
 						//SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
