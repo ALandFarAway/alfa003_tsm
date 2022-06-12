@@ -420,13 +420,13 @@ if(GetSpellId() == 3056)
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
-		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
+		   //SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
 		   SetLocalObject(oArea, "oScry", oScry);
 			}
 	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	 
-	SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
+	//SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
 		   
 	string sTriggerTag;
 	if(oScry == OBJECT_INVALID) {
@@ -434,9 +434,9 @@ if(GetSpellId() == 3056)
 		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
-			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
+			//SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
+				//SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
 				SetLocalObject(oArea, "oScry", oScry);
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
@@ -463,7 +463,7 @@ if(GetSpellId() == 3056)
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
-			SendMessageToPC(oScryer, "sScryName = " + sScryName);
+			//SendMessageToPC(oScryer, "sScryName = " + sScryName);
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
@@ -495,7 +495,7 @@ if(GetSpellId() == 3056)
 			
 			//Set all other variables on ScryListen
 			SetLocalInt(oScryListen, "nScryDC", nDC);
-			SendMessageToPC(oScryer, "nScryDC = " + IntToString(GetLocalInt(oScryListen, "nScryDC")));
+			//SendMessageToPC(oScryer, "nScryDC = " + IntToString(GetLocalInt(oScryListen, "nScryDC")));
 			SetLocalInt(oScryListen, "nCasterLevel", nScryerLevel);
 			SetLocalFloat(oScryListen, "fScryTimer", 60.0 * nScryerLevel);
 			SetFirstName(oScryListen, sScryName);

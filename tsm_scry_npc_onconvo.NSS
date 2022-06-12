@@ -268,7 +268,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
-								SendMessageToPC(oScryer, sTargetName + "==" + sScriedName + "==" + sTokenLast);
+								//SendMessageToPC(oScryer, sTargetName + "==" + sScriedName + "==" + sTokenLast);
 								if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
 									if(((FindSubString(sToken, "Possess", 0) != -1) || (FindSubString(sToken, "Cloth", 0) != -1)) && (nConnection < 4)) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sScriedName + ".");
@@ -310,7 +310,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								
 						}
 							
-						SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
+						//SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
 						//SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
 						//SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
@@ -395,9 +395,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
 								 // Check if a valid creature target exists
-								 if (GetIsObjectValid(oScried))
-								    {
-								        object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
+								 if ((GetIsObjectValid(oScried)) && (GetIsPC(oScried) == TRUE))
+								    {	
+										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
 									    DestroyObject(oDupe, 60.0);
