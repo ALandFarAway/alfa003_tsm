@@ -268,8 +268,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
-								//SendMessageToPC(oScryer, sTargetName + "==" + sScriedName);
-								if((sTargetName == sScriedName) || (GetIsPC(oScried))) {
+								SendMessageToPC(oScryer, sTargetName + "==" + sScriedName + "==" + sTokenLast);
+								if((sTargetName == sScriedName) || (sTokenLast == sScriedName)) {
 									if(((FindSubString(sToken, "Possess", 0) != -1) || (FindSubString(sToken, "Cloth", 0) != -1)) && (nConnection < 4)) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sScriedName + ".");
 										nConnection = 4;
