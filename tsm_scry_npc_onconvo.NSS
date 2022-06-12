@@ -269,7 +269,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									nScryer = 1;
 									}
 								SendMessageToPC(oScryer, sTargetName + "==" + sScriedName + "==" + sTokenLast);
-								if((sTargetName == sScriedName) || (sTokenLast == sScriedName)) {
+								if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
 									if(((FindSubString(sToken, "Possess", 0) != -1) || (FindSubString(sToken, "Cloth", 0) != -1)) && (nConnection < 4)) {
 										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sScriedName + ".");
 										nConnection = 4;
@@ -328,7 +328,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							 	SendMessageToPC(oScryer, "You feel your spell fail.");
 								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
-								SendMessageToAllDMs(GetName(oScried) + "saved and will not be scried by " + GetName(oScryer));
+								SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
 									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									}
