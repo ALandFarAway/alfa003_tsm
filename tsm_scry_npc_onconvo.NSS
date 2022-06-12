@@ -278,6 +278,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sScriedName + ".");
 										nConnection = 10;
 										}
+									if((nScryer == 0) && (FindSubString(sToken, "Imag", 0) != -1)) {
+										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is secondhand.");
+										nKnowledge = -5;
+										}
+									
 									if(nScryer == 1) {
 										if(FindSubString(sToken, "Imago", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: familiar.");
@@ -285,15 +290,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 											if(nConnection <= 4) {nConnection = 4;}
 											}
 										
-										else if(FindSubString(sToken, "Image", 0) != -1) {
+										else if((FindSubString(sToken, "Image", 0) != -1) && (nKnowledge <= 0)) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: firsthand.");
 											nKnowledge = 0;
 											if(nConnection <= 2) {nConnection = 2;}
 											}
-										}
-									if(nScryer == 0) {
-										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is secondhand.");
-										nKnowledge = -5;
 										}
 										
 									if(nConnection == 2) {
