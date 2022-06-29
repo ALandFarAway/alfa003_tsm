@@ -258,6 +258,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						object oToken = GetFirstItemInInventory(oScryer);
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
+								nConnection = 2;
 								string sToken = GetFirstName(oToken);
 								string sTokenLast = GetLastName(oToken);
 								string sScryerName = GetFirstName(oScryer);
@@ -283,7 +284,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										nKnowledge = -5;
 										}
 									
-									if(nScryer == 1) {
+									if((nScryer == 1) || (GetIsPC(oScried)== TRUE); {
 										if(FindSubString(sToken, "Imago", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: familiar.");
 											nKnowledge = 5;
