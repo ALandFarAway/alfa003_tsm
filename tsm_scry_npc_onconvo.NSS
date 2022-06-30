@@ -17,7 +17,7 @@ string GetCompassDirectionOfAngle(float fAngle);
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
+ 
 string GetCompassDirectionOfBearing(float fDegrees)
 {
     /* Takes a bearing from degrees (0.0 -> 360.0)
@@ -284,7 +284,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										nKnowledge = -5;
 										}
 									
-									if((nScryer == 1) || (GetIsPC(oScried)== TRUE); {
+									if((nScryer == 1) || (GetIsPC(oScried)== TRUE)) {
 										if(FindSubString(sToken, "Imago", 0) != -1) {
 											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: familiar.");
 											nKnowledge = 5;
