@@ -377,6 +377,23 @@ if(GetSpellId() == 3066) {
 	SendMessageToPC(OBJECT_SELF, "Arcane Mark cast on " + GetTag(oTarget));
 }
 
+if(GetSpellId() == 3068) {
+	object oScryer = OBJECT_SELF;
+	location lTarget = GetLocation(oScryer);
+	object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+	string sTriggerTag = GetTag(oScry);
+		while(oScry != OBJECT_INVALID) {
+			sTriggerTag = GetTag(oScry);
+			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
+				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
+				CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
+				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
+	 			}
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			}		
+}
+
 if(GetSpellId() == 3058) {
 	SetLocalInt(OBJECT_SELF, "nDetectScrying", 1);
     object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
