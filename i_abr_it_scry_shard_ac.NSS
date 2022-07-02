@@ -1,4 +1,3 @@
-
 #include "acr_spawn_i"
 #include "acr_db_persist_i"
 #include "acr_scry_i"
@@ -16,12 +15,31 @@ void main()
 	int nCountScryerName = GetStringLength(sScryerName);
 	string sTargetName = GetStringLeft(sToken, nCountName - 8 - nCountScryerName);
 	string sTargetRes = sTokenLast;
-	int nDC = 20 + GetAbilityModifier(ABILITY_DEXTERITY, oTarget);
+	int nDCRoll = d20(1);
+	int nDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6 ;
+	float fDCAbility = pow(IntToFloat(nDCAbility), 2.0);
+	float fDC = IntToFloat(nDCRoll) + fDCAbility;
+	int nDC = 0; 
+	if(fDC < 1.5)
+		{nDC = 1;}
+	else if(fDC < 2.5)
+		{nDC = 2;}
+	else if(fDC < 3.5)
+		{nDC = 3;}
+	else if(fDC < 4.5)
+		{nDC = 4;}
+	else if(fDC < 5.5)
+		{nDC = 5;}
+	
 	int nScryer = 0;
 	if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 		nScryer = 1;
 		}
 	
+	if(oTarget == OBJECT_INVALID) {
+		SendMessageToPC(oScryer, "You must use your scrying shard on a scrying object within three feet.");
+		return;
+		}
 	
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
 		
@@ -64,30 +82,38 @@ void main()
 		}
 		
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetLastName(oToken) == "")) {
-		if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
-			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + GetName(oTarget) + " and focus your perception of them into the scrying shard. The image of " + GetName(oTarget) + " shimmers into the shard and remains fixed there faintly, unmoving.");
-			SetFirstName(oToken, GetName(oTarget) + " Image: " + GetFirstName(oScryer));
-			SetDescription(oToken, "A scrying shard showing a faint reflection of " + GetName(oTarget) + ". This shard was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-			if(GetIsPC(oTarget) == FALSE) {
-				SetLastName(oToken, GetResRef(oTarget));
+		if(GetLocalInt(oTarget, "Tokenized_" + GetName(oScryer)) == 0) {
+			if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
+				SendMessageToPC(oScryer, "You memorize the defining characteristics of " + GetName(oTarget) + " and focus your perception of them into the scrying shard. The image of " + GetName(oTarget) + " shimmers into the shard and remains fixed there faintly, unmoving.");
+				SetFirstName(oToken, GetName(oTarget) + " Image: " + GetFirstName(oScryer));
+				SetDescription(oToken, "A scrying shard showing a faint reflection of " + GetName(oTarget) + ". This shard was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
+				if(GetIsPC(oTarget) == FALSE) {
+					SetLastName(oToken, GetResRef(oTarget));
+					}
+				else if(GetIsPC(oTarget) == TRUE) {
+					SetLastName(oToken, GetName(oTarget));
+					}
 				}
-			else if(GetIsPC(oTarget) == TRUE) {
-				SetLastName(oToken, GetName(oTarget));
+			else {SendMessageToPC(oScryer, "You are unable to concentrate enough to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
 				}
 			}
-		else {SendMessageToPC(oScryer, "You are unable to concentrate enough to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
-			}
+		else {SendMessageToPC(oScryer, "You have already tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again at a later time.");
 		}
+	}
 	
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oToken) != "")) {
-		 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
-			SendMessageToPC(oScryer, "Your familiarity with " + GetName(oTarget) + " increases. You see the existing image of " + GetName(oTarget) + " in the scrying shard take on depth, dimension, and movement, blinking every now and then.");
-			SetFirstName(oToken, GetName(oTarget) + " Imago: " + GetFirstName(oScryer));
-			SetDescription(oToken, "A scrying shard showing the imago of " + GetName(oTarget) + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This shard was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
+		if(GetLocalInt(oTarget, "Tokenized_" + GetName(oScryer)) == 0) {
+			 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
+				SendMessageToPC(oScryer, "Your familiarity with " + GetName(oTarget) + " increases. You see the existing image of " + GetName(oTarget) + " in the scrying shard take on depth, dimension, and movement, blinking every now and then.");
+				SetFirstName(oToken, GetName(oTarget) + " Imago: " + GetFirstName(oScryer));
+				SetDescription(oToken, "A scrying shard showing the imago of " + GetName(oTarget) + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This shard was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
+				}
+		     else {SendMessageToPC(oScryer, "You are unable to concentrate enough to improve your grasp of the defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
+				}
 			}
-	     else {SendMessageToPC(oScryer, "You are unable to concentrate enough to improve your grasp of the defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
-			}
+		else {SendMessageToPC(oScryer, "You have already tried and failed to improve your grasp of the defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again at a later time.");
 		}
+	}
 	
 	
 
