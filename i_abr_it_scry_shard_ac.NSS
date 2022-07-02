@@ -16,9 +16,13 @@ void main()
 	string sTargetName = GetStringLeft(sToken, nCountName - 8 - nCountScryerName);
 	string sTargetRes = sTokenLast;
 	int nDCRoll = d20(1);
+	SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	int nDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6 ;
+	SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
 	float fDCAbility = pow(IntToFloat(nDCAbility), 2.0);
+	SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	float fDC = IntToFloat(nDCRoll) + fDCAbility;
+	SendMessageToPC(oScryer, "fDC = " + FloatToString(fDC));
 	int nDC = 0; 
 	if(fDC < 1.5)
 		{nDC = 1;}
@@ -30,6 +34,7 @@ void main()
 		{nDC = 4;}
 	else if(fDC < 5.5)
 		{nDC = 5;}
+	SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 	
 	int nScryer = 0;
 	if(sScryerName == GetStringRight(sToken, nCountScryerName)) {

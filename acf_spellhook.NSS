@@ -394,6 +394,24 @@ if(GetSpellId() == 3068) {
 			}		
 }
 
+if(GetSpellId() == 3071) {
+	object oScryer = OBJECT_SELF;
+	location lTarget = GetLocation(oScryer);
+	object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+	string sPlaceableTag = GetTag(oScry);
+		while(oScry != OBJECT_INVALID) {
+			sPlaceableTag = GetTag(oScry);
+			SendMessageToPC(oScryer, "sPlaceableTag = " + sPlaceableTag);
+			if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
+				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
+				CreateItemOnObject("abr_it_scry_shard", oScryer, 1);
+				SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
+	 			}
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+			}		
+}
+
+
 if(GetSpellId() == 3058) {
 	SetLocalInt(OBJECT_SELF, "nDetectScrying", 1);
     object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
