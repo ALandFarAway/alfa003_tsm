@@ -105,6 +105,8 @@ void main()
 		
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetLastName(oToken) == "")) {
 		if(GetLocalInt(oTarget, "Tokenized_" + GetName(oScryer)) == 0) {
+			SetLocalInt(oTarget, "Tokenized_" + GetName(oScryer), 1);
+			DelayCommand(900.0, SetLocalInt(oTarget, "Tokenized_" + GetName(oScryer), 0));
 			if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
 				SendMessageToPC(oScryer, "You memorize the defining characteristics of " + GetName(oTarget) + " and focus your perception of them into the scrying droplet. The image of " + GetName(oTarget) + " shimmers into the droplet and remains fixed there faintly, unmoving.");
 				SetFirstName(oToken, GetName(oTarget) + " Image: " + GetFirstName(oScryer));
@@ -125,7 +127,9 @@ void main()
 	
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oToken) != "")) {
 		if(GetLocalInt(oTarget, "Tokenized_" + GetName(oScryer)) == 0) {
-			 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
+			SetLocalInt(oTarget, "Tokenized_" + GetName(oScryer), 1);
+			DelayCommand(900.0, SetLocalInt(oTarget, "Tokenized_" + GetName(oScryer), 0));
+			if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
 				SendMessageToPC(oScryer, "Your familiarity with " + GetName(oTarget) + " increases. You see the existing image of " + GetName(oTarget) + " in the scrying droplet take on depth, dimension, and movement, blinking every now and then.");
 				SetFirstName(oToken, GetName(oTarget) + " Imago: " + GetFirstName(oScryer));
 				SetDescription(oToken, "A scrying droplet showing the imago of " + GetName(oTarget) + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This droplet was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
