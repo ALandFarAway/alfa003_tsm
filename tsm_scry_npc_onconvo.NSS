@@ -107,7 +107,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sTargetRes");
 	location lTarget = GetLocation(oTarget);
-	effect eBeam = EffectBeam(VFX_BEAM_DIVINATION, oMaster, BODY_NODE_CHEST, FALSE);
+	//effect eBeam = EffectBeam(VFX_BEAM_DIVINATION, oMaster, BODY_NODE_CHEST, FALSE);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
@@ -121,7 +121,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 			sRoster = GetNextRosterMember();
 			nInc++;
 		}
-		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eBeam, lTarget, 2.0);
+		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eBeam, lTarget, 2.0);
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
 		SendMessageToPC(oMaster, "In addition to the above, adventurers may be scried and do not require keying first.");
 		DestroyObject(OBJECT_SELF, 7.0);
@@ -129,7 +129,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	}	
 
 //Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
-if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
@@ -149,26 +149,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != OBJECT_SEL
 		}
 	}	 
 
-//Everything as above, but for a specific NPC scryer
-if((GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier") && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
-		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");	 
-		ActionForceFollowObject(oScried, 0.5f, 0);
-		int nMatch = GetListenPatternNumber();
-		if(nMatch == 6031) {
-			string sSpokenBy = GetName(GetLastSpeaker());
-			string sRelay = GetMatchedSubstring(0);
-			SendMessageToAllDMs(sSpokenBy + ": " + sRelay);
-		    if((GetLastSpeaker() != oScryListen) && (GetLastSpeaker() != oScryer)) {
-				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
-			}
-			if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
-				ActionJumpToObject(oScried, TRUE);
-			}
-		}
-	}	 
-	
+
 //Action queue for OOC Scrying Listener that handles most Scrying interaction
 //SendMessageToPC(GetLocalObject(OBJECT_SELF, "oScryer"), "Convo " + GetTag(OBJECT_SELF) + " oScryer = " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));	
 if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
@@ -1050,6 +1031,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 			
 		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 				
-		} 		 
+		}
+	else {SendMessageToPC(oScryer, "That is not the name of an adventurer or a member of the wider populace recently keyed onto this " + GetName(oScry));} 		 
 	}	 	   	 
 }

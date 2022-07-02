@@ -114,7 +114,14 @@ void main()
 			 effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
 			 DelayCommand(2.0, SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying token imbued with the image of a member of the wider populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them."));
-			
+			 SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oScry) +":");
+			 sRoster = GetFirstRosterMember();
+			 int nInc = 0;
+			 while((sRoster != "") && (nInc < 10)) {
+				DelayCommand(3.0, SendMessageToPC(oScryer, sRoster));
+				sRoster = GetNextRosterMember();
+				nInc++;
+			 }
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
 			 DelayCommand(fScryTimer + 15.0, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));

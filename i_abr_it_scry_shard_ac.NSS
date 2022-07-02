@@ -17,25 +17,25 @@ void main()
 	string sTargetRes = sTokenLast;
 	int nDCRoll = d20(1);
 	SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
-	int nDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6 ;
-	SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
-	float fDCAbility = pow(IntToFloat(nDCAbility), 2.0);
+	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
 	SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
-	float fDC = IntToFloat(nDCRoll) + fDCAbility;
-	SendMessageToPC(oScryer, "fDC = " + FloatToString(fDC));
-	int nDC = 0; 
-	if(fDC < 1.5)
-		{nDC = 1;}
-	else if(fDC < 2.5)
-		{nDC = 2;}
-	else if(fDC < 3.5)
-		{nDC = 3;}
-	else if(fDC < 4.5)
-		{nDC = 4;}
-	else if(fDC < 5.5)
-		{nDC = 5;}
+	fDCAbility = pow(fDCAbility, 2.0);
+	SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
+	int nDCAbility = 0; 
+	if(fDCAbility < 1.5)
+		{nDCAbility = 1;}
+	else if(fDCAbility < 2.5)
+		{nDCAbility = 2;}
+	else if(fDCAbility < 3.5)
+		{nDCAbility = 3;}
+	else if(fDCAbility < 4.5)
+		{nDCAbility = 4;}
+	else if(fDCAbility < 5.5)
+		{nDCAbility = 5;}
+	SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
+	int nDC = nDCRoll + nDCAbility;
 	SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
-	
+		
 	int nScryer = 0;
 	if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 		nScryer = 1;
