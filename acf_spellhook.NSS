@@ -407,7 +407,7 @@ if(GetSpellId() == 3071) {
 				CreateItemOnObject("abr_it_scry_shard", oScryer, 1);
 				SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
 	 			}
-			else {oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);}
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
 			}		
 }
 
@@ -452,16 +452,15 @@ if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
-		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
-		   SetLocalObject(oArea, "oScry", oScry);
-			}
-	 	  else {oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);}
+			   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
+			   SetLocalObject(oArea, "oScry", oScry);
+			   }
+		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	 
-	SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
 		   
 	string sTriggerTag;
 	if(oScry == OBJECT_INVALID) {
@@ -478,6 +477,7 @@ if(GetSpellId() == 3056)
 			}
 		}
 	oScry = GetLocalObject(oArea, "oScry");
+	SendMessageToPC(oScryer, "2. oScry = " + GetName(oScry));
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
