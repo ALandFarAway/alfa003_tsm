@@ -151,11 +151,14 @@ if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpe
 
 //Action queue for OOC Scrying Listener that handles most Scrying interaction
 //SendMessageToPC(GetLocalObject(OBJECT_SELF, "oScryer"), "Convo " + GetTag(OBJECT_SELF) + " oScryer = " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));	
+ActionSpeakString("Listen script called.", TALKVOLUME_TALK);
+		
 if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		//Get existing local objects set by Spellhook
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sScryName = GetName(oScry);
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		ActionSpeakString("Listener triggered.", TALKVOLUME_TALK);
 		SendMessageToPC(oScryer, "Listener triggered.");
 		float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");
 		
@@ -274,7 +277,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										nKnowledge = -5;
 										}
 									
-									if(nScryer == 1) {
+									if((nScryer == 1) || (GetIsDMPossessed(oScryer))) {
 										if(FindSubString(sToken, "image", 0) != -1) {
 											nKnowledge = 0;
 											if(nConnection < 2) {nConnection = 2;}
