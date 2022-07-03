@@ -125,7 +125,7 @@ void main()
 				sRoster = GetNextRosterMember();
 				nInc++;
 			 }
-			 SendMessageToPC(oScryer, "oListen spawned.");
+			 
 			 
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	

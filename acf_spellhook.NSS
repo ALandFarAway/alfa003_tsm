@@ -452,13 +452,13 @@ if(GetSpellId() == 3056)
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
-		   //SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
+		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
 		   SetLocalObject(oArea, "oScry", oScry);
 			}
-	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	 
 	SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
@@ -487,7 +487,7 @@ if(GetSpellId() == 3056)
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
 		
-	 else if((GetLastSpellCastClass()== CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
+	 if((GetLastSpellCastClass()== CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
 	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
 		}
 	 else if((GetLastSpellCastClass()== CLASS_TYPE_BARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
