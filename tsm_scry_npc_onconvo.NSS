@@ -411,7 +411,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
 								 // Check if a valid creature target exists
-								 if ((GetIsObjectValid(oScried)) && (GetIsPC(oScryer) == TRUE))
+								 if ((GetIsObjectValid(oScried)) && (GetIsDMPossessed(oScryer) == FALSE))
 								    {	
 										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);

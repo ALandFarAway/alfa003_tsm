@@ -407,7 +407,7 @@ if(GetSpellId() == 3071) {
 				CreateItemOnObject("abr_it_scry_shard", oScryer, 1);
 				SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
 	 			}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+			else {oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);}
 			}		
 }
 
@@ -458,7 +458,7 @@ if(GetSpellId() == 3056)
 		   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
 		   SetLocalObject(oArea, "oScry", oScry);
 			}
-	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 	  else {oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);}
 	   	}
 	 
 	SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
