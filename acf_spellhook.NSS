@@ -461,7 +461,7 @@ if(GetSpellId() == 3056)
 	 	  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	 
-	//SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
+	SendMessageToPC(oScryer, "2. oScry = " + GetTag(oScry));
 		   
 	string sTriggerTag;
 	if(oScry == OBJECT_INVALID) {
@@ -488,6 +488,9 @@ if(GetSpellId() == 3056)
 		}
 		
 	 else if((GetLastSpellCastClass()== CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
+	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
+		}
+	 else if((GetLastSpellCastClass()== CLASS_TYPE_BARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
 	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
 		}
 	 else if((GetLastSpellCastClass()== CLASS_TYPE_CLERIC) && (GetResRef(oScry) != "abr_pl_so_holyfont") && (GetResRef(oScry) != "abr_trg_so_water")) {

@@ -100,6 +100,7 @@ void main()
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
 	    
+ActionSpeakString("Listen script called.", TALKVOLUME_TALK);
 
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the Roster as a Roster Name associated with a ResRef
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
@@ -151,7 +152,6 @@ if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpe
 
 //Action queue for OOC Scrying Listener that handles most Scrying interaction
 //SendMessageToPC(GetLocalObject(OBJECT_SELF, "oScryer"), "Convo " + GetTag(OBJECT_SELF) + " oScryer = " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));	
-ActionSpeakString("Listen script called.", TALKVOLUME_TALK);
 		
 if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		//Get existing local objects set by Spellhook
@@ -167,6 +167,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		//6030 thru 6039 are the names of up to ten NPCs this Scryer can Scry
 		string sMatch = GetMatchedSubstring(1);
 		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6041) {
+			SendMessageToPC(oScryer, "Listen pattern 6041.");
+			ActionSpeakString("Listen pattern 6041.", TALKVOLUME_TALK);
+		}
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		 
 		//oScryer must speak the full name of the PC or Roster Name of the allowable NPC he/she wishes to Scry	
@@ -1067,9 +1071,21 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				}	
 			}
 			
-		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
+		else {
+		if(nMatch == 6041) {
+			SendMessageToPC(oScryer, "B. Listen pattern 6041.");
+			ActionSpeakString("B. Listen pattern 6041.", TALKVOLUME_TALK);
+			}
+		SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 		}
-	else {SendMessageToPC(oScryer, "Outermost");} 		 
+	else {if(nMatch == 6041) {
+			SendMessageToPC(oScryer, "C. Listen pattern 6041.");
+			ActionSpeakString("C. Listen pattern 6041.", TALKVOLUME_TALK);
+			}
+			SendMessageToPC(oScryer, "Outermost");} 		 
 	}
-		 	   	 
+	
+ActionSpeakString("End of onConvo.", TALKVOLUME_TALK);
+				 	   	 
 }
+

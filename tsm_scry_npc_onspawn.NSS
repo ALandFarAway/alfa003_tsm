@@ -104,6 +104,8 @@ void main()
 				 nListenPattern++;
 				 sRoster = GetNextRosterMember();
 			 }
+			 
+			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			  
 			 //Tell ScryListen to Listen	 
 			 SetListening(OBJECT_SELF, TRUE);
@@ -123,6 +125,8 @@ void main()
 				sRoster = GetNextRosterMember();
 				nInc++;
 			 }
+			 SendMessageToPC(oScryer, "oListen spawned.");
+			 
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
 			 DelayCommand(fScryTimer + 15.0, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
