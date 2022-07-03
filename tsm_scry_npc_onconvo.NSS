@@ -342,7 +342,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if (nDC - nWillSave < 5) 
 								 	{SendMessageToPC(oScryer, "You have a feeling that " + GetName(oScried) + " might have sensed something.");
 								 	 SendMessageToPC(oScried, "You feel watched.");
-								 	 SendMessageToAllDMs(GetName(oScried) + "'s saving roll was within 5 of the DC and feels watched.");
+								 	 SendMessageToAllDMs( "Saving roll was within 5 of the DC. " + GetName(oScried) + " feels watched.");
 								 	}
 									
 								//Spawn an invisible Scrying Sensor on oScried and add it to the collective

@@ -118,7 +118,7 @@ void main()
 			 sRoster = GetFirstRosterMember();
 			 int nInc = 0;
 			 while((sRoster != "") && (nInc < 10)) {
-				DelayCommand(3.0, SendMessageToPC(oScryer, sRoster));
+				SendMessageToPC(oScryer, sRoster);
 				sRoster = GetNextRosterMember();
 				nInc++;
 			 }

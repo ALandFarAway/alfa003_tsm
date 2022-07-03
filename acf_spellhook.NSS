@@ -384,9 +384,9 @@ if(GetSpellId() == 3068) {
 	string sTriggerTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
-			SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
+			//SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
+				//SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
 				CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
 				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
 	 			}
@@ -401,9 +401,9 @@ if(GetSpellId() == 3071) {
 	string sPlaceableTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sPlaceableTag = GetTag(oScry);
-			SendMessageToPC(oScryer, "sPlaceableTag = " + sPlaceableTag);
+			//SendMessageToPC(oScryer, "sPlaceableTag = " + sPlaceableTag);
 			if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
-				SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
+				//SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
 				CreateItemOnObject("abr_it_scry_shard", oScryer, 1);
 				SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
 	 			}
