@@ -156,6 +156,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sScryName = GetName(oScry);
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		SendMessageToPC(oScryer, "Listener triggered.");
 		float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");
 		
 		//This NPC was set to listen for specific words in tsm_scry_npc_onspawn
@@ -1064,8 +1065,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 			}
 			
 		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
-				
 		}
-	else {SendMessageToPC(oScryer, "That is not the name of an adventurer or a member of the wider populace recently keyed onto this " + GetName(oScry));} 		 
-	}	 	   	 
+	else {SendMessageToPC(oScryer, "Outermost");} 		 
+	}
+		 	   	 
 }
