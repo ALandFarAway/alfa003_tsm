@@ -101,7 +101,7 @@ void main()
 	effect eEthereal = EffectEthereal();
 	    
 
-//Any time the Scrying Namer hears spoken words, assigns them to the Roster as a Roster Name associated with a ResRef
+//The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the Roster as a Roster Name associated with a ResRef
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
@@ -112,7 +112,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
-		SendMessageToPC(oMaster, "These names of the wider populace are keyed on this " + GetName(oTarget) + ":");
+		SendMessageToPC(oMaster, "These names of the wider populace are now keyed on this " + GetName(oTarget) + ":");
 		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
@@ -123,7 +123,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		}
 		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eBeam, lTarget, 2.0);
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
-		SendMessageToPC(oMaster, "In addition to the above, adventurers may be scried and do not require keying first.");
 		DestroyObject(OBJECT_SELF, 7.0);
 		}	 				
 	}	
@@ -232,14 +231,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 					 
 					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
 						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
-						//If oScried makes a privately rolled WillSave vs. stored DC:
+						//oScried makes a privately rolled WillSave vs. stored DC:
 						
 						int nKnowledge = -10;	
 						int nConnection = 0;
 						object oToken = GetFirstItemInInventory(oScryer);
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
-								nConnection = 2;
+								nConnection = 0;
 								string sToken = GetFirstName(oToken);
 								string sTokenLast = GetLastName(oToken);
 								string sScryerName = GetFirstName(oScryer);
@@ -250,42 +249,76 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
 									nScryer = 1;
 									}
+								int nImage = 0;
+								int nPossession = 0;
+								int nBody = 0;
+								
 								//SendMessageToPC(oScryer, sTargetName + "==" + sScriedName + "==" + sTokenLast);
 								if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
-									if(((FindSubString(sToken, "Possess", 0) != -1) || (FindSubString(sToken, "Cloth", 0) != -1)) && (nConnection < 4)) {
-										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sScriedName + ".");
+									sToken = GetStringLowerCase(sToken);
+									if((FindSubString(sToken, "image", 0) != -1) || (FindSubString(sToken, "picture", 0) != -1)) {
+										nImage = 1;
+										nConnection = 2;
+										}
+									if(((FindSubString(sToken, "possess", 0) != -1) || (FindSubString(sToken, "cloth", 0) != -1)) && (nConnection < 4)) {
+										nPossession = 1;
 										nConnection = 4;
 										}
-									if(((FindSubString(sToken, "Body", 0) != -1) || (FindSubString(sToken, "ail", 0) != -1) || (FindSubString(sToken, "air", 0) != -1) || (FindSubString(sToken, "lood", 0) != -1)  || (FindSubString(sToken, "ooth", 0) != -1) || (FindSubString(sToken, "one", 0) != -1))  && (nConnection < 10)){
-										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sScriedName + ".");
+									if(((FindSubString(sToken, "body", 0) != -1) || (FindSubString(sToken, "nail", 0) != -1) || (FindSubString(sToken, "hair", 0) != -1) || (FindSubString(sToken, "blood", 0) != -1)  || (FindSubString(sToken, "tooth", 0) != -1) || (FindSubString(sToken, "bone", 0) != -1))  && (nConnection < 10)){
+										nBody = 1;
 										nConnection = 10;
 										}
-									if((nScryer == 0) && (FindSubString(sToken, "Imag", 0) != -1)) {
-										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is secondhand.");
+										
+									if((nScryer == 0) && (FindSubString(sToken, "imag", 0) != -1)) {
 										nKnowledge = -5;
 										}
 									
-									if((nScryer == 1) || (GetIsPC(oScried)== TRUE)) {
-										if(FindSubString(sToken, "Imago", 0) != -1) {
-											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: familiar.");
-											nKnowledge = 5;
-											if(nConnection <= 4) {nConnection = 4;}
-											}
-										
-										else if((FindSubString(sToken, "Image", 0) != -1) && (nKnowledge <= 0)) {
-											SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: firsthand.");
+									if(nScryer == 1) {
+										if(FindSubString(sToken, "image", 0) != -1) {
 											nKnowledge = 0;
-											if(nConnection <= 2) {nConnection = 2;}
+											if(nConnection < 2) {nConnection = 2;}
 											}
-										}
-										
-									if(nConnection == 2) {
-										SendMessageToPC(oScryer, "*You are holding a magically created firsthand image of " + sScriedName + " that gives you a minor connection to the subject.");
-										}
-									if(nConnection == 4) {
-										SendMessageToPC(oScryer, "*You are holding either a magically created, fully representative imago or a possession of " + sScriedName + " that heightens your connection to that subject.");
+										if(FindSubString(sToken, "imago", 0) != -1) {
+											nKnowledge = 5;
+											if(nConnection < 4) {nConnection = 4;}
+											}
 										}
 									
+									if(nKnowledge == -10) {
+										SendMessageToPC(oScryer, "*You have no knowledge of " + sScriedName + ".");
+										}
+									else if(nKnowledge == -5) {
+										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is secondhand.");
+										}
+									else if(nKnowledge == 0) {
+										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: firsthand.");
+										}
+									else if(nKnowledge == 5) {
+										SendMessageToPC(oScryer, "*Your knowledge of " + sScriedName + " is: familiar.");
+										}
+									
+									if(nBody == 1) {
+										SendMessageToPC(oScryer, "*You are holding a body part that belonged to " + sScriedName + ".");
+										}			
+									else if(nPossession == 1) {
+										SendMessageToPC(oScryer, "*You are holding a possession that belonged to " + sScriedName + ".");
+										}
+									else if(nImage == 1) {
+										SendMessageToPC(oScryer, "*You are holding an image of " + sScriedName + ".");
+										}
+											
+									if(nConnection == 0) {
+										SendMessageToPC(oScryer, "*You have no connection to " + sScriedName + ".");
+										}
+									else if(nConnection == 2) {
+										SendMessageToPC(oScryer, "*You have a minor connection to " + sScriedName + ".");
+										}
+									else if(nConnection == 4) {
+										SendMessageToPC(oScryer, "*You have an average connection to " + sScriedName + ".");
+										}
+									else if(nConnection == 10) {
+										SendMessageToPC(oScryer, "*You have a very strong connection to " + sScriedName + ".");
+										}
 								}
 							 }
 							oToken = GetNextItemInInventory(oScryer);
@@ -377,7 +410,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
 								 // Check if a valid creature target exists
-								 if ((GetIsObjectValid(oScried)) && (GetIsPC(oScried) == TRUE))
+								 if ((GetIsObjectValid(oScried)) && (GetIsPC(oScryer) == TRUE))
 								    {	
 										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
@@ -985,7 +1018,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									{ActionSpeakString("Within view: " + sOther, TALKVOLUME_TALK );}
 								
 								//Notify oScryer and DMs of the end of the spell
-								DelayCommand(fScryTimer - 5.0, ActionSpeakString("The scry spell ends and the images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
+								DelayCommand(fScryTimer - 5.0, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
+			 					DelayCommand(fScryTimer - 1.0, SendMessageToPC(oScryer, "The scry spell ends."));		
 			 					DelayCommand(fScryTimer - 5.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
 			 					//DelayCommand(fScryTimer - 5.0, SendMessageToPC(oScryer, "Your scry spell ends and the images in the " + sScryName + " fade."));		
 			 

@@ -59,18 +59,18 @@ void main()
 			 
 			if(nScryer == 1) {
 				if(FindSubString(sToken, "Image", 0) != -1) {
-					ActionSpeakString("*A faint, still image of " + sTargetName + " appears in the " + GetName(oTarget), TALKVOLUME_TALK);
-					DelayCommand(2.0, AssignCommand(oTarget, ActionSpeakString("The match between the arcane signature of this scrying shard and its holder is noted. Future scrying of this subject will proceed with the firsthand knowledge imbued herewith. *Pleasant voice.", TALKVOLUME_TALK)));	
+					SendMessageToPC(oScryer, "*A faint, still image of " + sTargetName + " appears in the " + GetName(oTarget));
+					DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying shard, as its creator. Future scrying of this subject will proceed with the firsthand knowledge imbued herewith."));	
 				}
 				
 				else if(FindSubString(sToken, "Imago", 0) != -1) {
-					ActionSpeakString("*A lifelike, animated image of " + sTargetName + " appears in the " + GetName(oTarget), TALKVOLUME_TALK);
-				    DelayCommand(2.0, AssignCommand(oTarget, ActionSpeakString("The match between the arcane signature of this scrying shard and its holder is noted. Future scrying of this subject will benefit from the familiarity imbued herewith. *Pleasant voice.", TALKVOLUME_TALK)));	
+					SendMessageToPC(oScryer, "*A lifelike, animated image of " + sTargetName + " appears in the " + GetName(oTarget));
+				    DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying shard, as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith."));	
 				}
 			}
 			if(nScryer == 0) {
-				ActionSpeakString("*A nearly translucent, roughly sketched image of " + sTargetName + " appears in the " + GetName(oTarget), TALKVOLUME_TALK);
-				DelayCommand(2.0, AssignCommand(oTarget, ActionSpeakString("The arcane signature of this scrying shard and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only. *Pleasant voice.", TALKVOLUME_TALK)));	
+				SendMessageToPC(oScryer, "*A nearly translucent, roughly sketched image of " + sTargetName + " appears in the " + GetName(oTarget));
+				DelayCommand(2.0, SendMessageToPC(oScryer, "The arcane signature of this scrying shard and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only."));	
 				
 			}
 			
