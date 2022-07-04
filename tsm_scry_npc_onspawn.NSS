@@ -34,7 +34,6 @@ void main()
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 			 SendMessageToPC(oScryer, "Distantly, you are aware of activity or voices where you stood when you cast Scrying, but for now your focus through the sensor is so clear it feels as if you are there with " + GetName(oScried) + "." );
-			 DelayCommand(60.0, SetListening(OBJECT_SELF, FALSE));
 			 }
 	
 		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
