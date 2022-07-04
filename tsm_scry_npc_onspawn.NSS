@@ -27,14 +27,15 @@ void main()
 			 
 		}
 	
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_wisp") {
-			 //Initialize Invisible Listener that will feed local conversation to PC Scryer
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_eye") {
+			 //Initialize Invisible Listener that will feed local conversation to PC Scryer while PC Scryer is with oScried
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
-			 //ActionSpeakString("Wisp spawned");
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-			 SendMessageToPC(oScried, "Wisp spawned.");
-		}
+			 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+			 SendMessageToPC(oScryer, "Distantly, you are aware of activity or voices where you stood when you cast Scrying, but for now your focus through the sensor is so clear it feels as if you are there with " + GetName(oScried) + "." );
+			 DelayCommand(60.0, SetListening(OBJECT_SELF, FALSE));
+			 }
 	
 		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target

@@ -35,11 +35,11 @@ void main()
 	int nCountScryerName = GetStringLength(sScryerName);
 	string sTargetName = GetStringLeft(sFocus, nCountName - 8 - nCountScryerName);
 	int nDCRoll = 10 + d10(1);
-	SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
+	//SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
-	SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
+	//SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	fDCAbility = pow(fDCAbility, 2.0);
-	SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
+	//SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	int nDCAbility = 0; 
 	if(fDCAbility < 1.5)
 		{nDCAbility = 1;}
@@ -51,9 +51,9 @@ void main()
 		{nDCAbility = 4;}
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
-	SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
+	//SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
 	int nDC = nDCRoll + nDCAbility;
-	SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
+	//SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 	
 	int nScryer = 0;
 	if(sScryerName == GetStringRight(sFocus, nCountScryerName)) {
@@ -74,18 +74,18 @@ void main()
 			 
 			if(nScryer == 1) {
 				if(FindSubString(sFocus, "Image", 0) != -1) {
-					SendMessageToPC(oScryer, "*A faint, still image of " + sTargetName + " appears in the " + GetName(oTarget));
-					DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying droplet, as its creator. Future scrying of this subject will proceed with the firsthand knowledge imbued herewith."));	
+					SendMessageToPC(oScryer, "A faint, still image of " + sTargetName + " appears in the " + GetName(oTarget));
+					SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying droplet, as its creator. Future scrying of this subject will proceed with the firsthand knowledge imbued herewith.");	
 				}
 				
 				else if(FindSubString(sFocus, "Imago", 0) != -1) {
-					SendMessageToPC(oScryer, "*A lifelike, animated image of " + sTargetName + " appears in the " + GetName(oTarget));
-				    DelayCommand(2.0, SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying droplet, as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith."));	
+					SendMessageToPC(oScryer, "A lifelike, animated image of " + sTargetName + " appears in the " + GetName(oTarget));
+				    SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying droplet, as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
 				}
 			}
 			if(nScryer == 0) {
-				SendMessageToPC(oScryer, "*A nearly translucent, roughly sketched image of " + sTargetName + " appears in the " + GetName(oTarget));
-				DelayCommand(2.0, SendMessageToPC(oScryer, "The arcane signature of this scrying droplet and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only."));	
+				SendMessageToPC(oScryer, "A nearly translucent, roughly sketched image of " + sTargetName + " appears in the " + GetName(oTarget));
+				SendMessageToPC(oScryer, "The arcane signature of this scrying droplet and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
 				
 			}
 			
