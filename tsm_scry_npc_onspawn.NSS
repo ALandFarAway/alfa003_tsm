@@ -25,7 +25,7 @@ void main()
 			 SetListening(OBJECT_SELF, TRUE);
 		}
 	
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_eye") {
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_self") {
 			 //Initialize Invisible Listener that will feed local conversation to PC Scryer while PC Scryer is with oScried
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);

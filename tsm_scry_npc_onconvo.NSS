@@ -128,7 +128,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	}	
 
 	//A listener feeds any conversation to oScryer while oScryer is with oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_eye") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -265,7 +265,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									nScryer = 1;
 									}
 								
-								//SendMessageToPC(oScryer, sTargetName + "==" + sScriedName + "==" + sTokenLast);
 								if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
 									sToken = GetStringLowerCase(sToken);
 									if((FindSubString(sToken, "image", 0) != -1) || (FindSubString(sToken, "picture", 0) != -1)) {
@@ -336,19 +335,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								SendMessageToPC(oScryer, "You have a very strong connection to " + sScriedName + ".");
 								}	
 							 	
-						//SendMessageToPC(oScryer, "Stored DC = " + IntToString(GetLocalInt(OBJECT_SELF, "nScryDC")));
-						//SendMessageToPC(oScryer, "nKnowledge = " + IntToString(nKnowledge));
-						//SendMessageToPC(oScryer, "nConnection = " + IntToString(nConnection));
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
 						int nWillSaveBase = GetLocalInt(OBJECT_SELF, "oScriedWSBase");
 						if(nWillSaveBase == 0) {
 							nWillSaveBase = GetWillSavingThrow(oScried);
-						}
+							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-						//SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScryer, "You feel your spell fail.");
@@ -402,7 +397,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								SetLocalLocation(oScryer, "ACR_SCRY_LOCATION", lHere);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
-									if(GetIsDMPossessed(oScryer)) {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
+									if(GetName(oScryer)== "Xavier") {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
 									else {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);}
 					            	SetLocalObject(oScry, "oScrySend", oScrySend);
 									SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
@@ -426,32 +421,36 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 60.0);
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
-								 // Dupe the PC to leave behind and jump scrying PC to location
+								 // Dupe the PC to leave Dupe behind 
 									
 										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
-										object oScryEye = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_eye", GetLocation(oScry));
-										SetLocalObject(oScryEye, "oScryer", oScryer);
-										SetLocalObject(oScryEye, "oScried", oScried);
+										object oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
+										SetLocalObject(oScrySelf, "oScryer", oScryer);
+										SetLocalObject(oScrySelf, "oScried", oScried);
+										SetLocalObject(oScrySend, "oScrySelf", oScrySelf);
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
-									    ChangeToStandardFaction(oScryEye, STANDARD_FACTION_COMMONER);
-										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryEye, fScryTimer);
-									    DestroyObject(oScryEye, 60.0);
+									    ChangeToStandardFaction(oScrySelf, STANDARD_FACTION_COMMONER);
+										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScrySelf, fScryTimer);
+									    DestroyObject(oScrySelf, 60.0);
 										DestroyObject(oDupe, 60.0);
 										DelayCommand(60.0, SendCreatureToLimbo(oDupe));
 										
 										
 										// Jump to the target
-										DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThere)));
-								
+										if(GetIsDMPossessed(oScryer) == FALSE) {
+											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
+											}
+									    DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
+										
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
-								        DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								        DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								    	DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								   
+								        DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								    	DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								   		DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								    	DelayCommand(40.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								    	DelayCommand(50.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								    	 
 								     
-								  
-								
 								    // Stop whatever it is we're doing
 							        DelayCommand(59.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							
@@ -1070,7 +1069,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								DelayCommand(fScryTimer, SetLocalInt(oScry, "nScryActive", 0));
 								 
 								DestroyObject(oScrySend, fScryTimer + 2.0);  
-								DestroyObject(oScryEye, fScryTimer + 3.0);
+								DestroyObject(oScrySelf, fScryTimer + 3.0);
 								DestroyObject(OBJECT_SELF, fScryTimer + 5.0);
 								break;
 								}

@@ -71,9 +71,9 @@ void main()
 				}
 			 
 			if(nScryer == 1) {
-				SendMessageToPC(oScryer, "A faint, still image of " + sTargetName + " appears in the " + GetName(oTarget));
-				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying droplet, as its creator. Future scrying of this subject will proceed with the firsthand knowledge imbued herewith.");	
-			}
+				SendMessageToPC(oScryer, "A lifelike, animated image of " + sTargetName + " appears in the " + GetName(oTarget));
+				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying droplet, as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
+				}
 			if(nScryer == 0) {
 				SendMessageToPC(oScryer, "A nearly translucent, roughly sketched image of " + sTargetName + " appears in the " + GetName(oTarget));
 				SendMessageToPC(oScryer, "The arcane signature of this scrying droplet and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
@@ -97,27 +97,21 @@ void main()
 			}
 		}
 		
-	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetLastName(oFocus) == "")) {
+if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oFocus) != "")) {
 		if((GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 0) || (GetIsDMPossessed(oScryer))) {
 			DelayCommand(900.0, SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 0));
 			if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
 				SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 1);
-				SendMessageToPC(oScryer, "You memorize the defining characteristics of " + GetName(oTarget) + " and focus your perception of them into the scrying droplet. The image of " + GetName(oTarget) + " shimmers into the droplet and remains fixed there faintly, unmoving.");
-				object oImage = CreateItemOnObject("abr_it_scry_sh_imago", oScryer, 1);
-				SetFirstName(oImage, GetName(oTarget) + " Image: " + GetFirstName(oScryer));
-				SetDescription(oImage, "A scrying droplet showing a faint reflection of " + GetName(oTarget) + ". This droplet was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				if(GetIsPC(oTarget) == FALSE) {
-					SetLastName(oFocus, GetResRef(oTarget));
-					}
-				else if(GetIsPC(oTarget) == TRUE) {
-					SetLastName(oFocus, GetName(oTarget));
-					}
-				DestroyObject(oFocus);
+				SendMessageToPC(oScryer, "Your familiarity with " + GetName(oTarget) + " increases. You see the existing image of " + GetName(oTarget) + " in the scrying droplet take on depth, dimension, and movement, blinking every now and then.");
+				object oImago = CreateItemOnObject("abr_it_scry_sh_imago", oScryer, 1);
+				SetFirstName(oImago, GetName(oTarget) + " Imago: " + GetFirstName(oScryer));
+				SetDescription(oImago, "A scrying droplet showing the imago of " + GetName(oTarget) + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This droplet was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
 				}
-			else {
-				SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 2);
-				SendMessageToPC(oScryer, "You are unable to concentrate enough to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the droplet. You will have to try again another time.");
+		     else {
+			 	SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 2);
+				SendMessageToPC(oScryer, "You are unable to concentrate enough to improve your grasp of the defining details of " + GetName(oTarget) + " and focus them into the droplet. You will have to try again another time.");
 				}
+			DestroyObject(oFocus);
 			}
 		else if(GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 1) {
 		SendMessageToPC(oScryer, "You have already memorized the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " today and focused them into the droplet. You will have to try to improve on your understandings at a later time.");
@@ -126,4 +120,5 @@ void main()
 		SendMessageToPC(oScryer, "You have already tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the droplet. You will have to try again at a later time.");
 		}
 	}
+
 }

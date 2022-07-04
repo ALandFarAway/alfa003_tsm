@@ -421,6 +421,11 @@ if(GetSpellId() == 3058) {
 		{SendMessageToPC(OBJECT_SELF, "You see a small glowing orb floating in the air.");
 		 object oScryer = GetLocalObject(oSensor, "oScryer");
 		 string sScryerDesc = GetDescription(oScryer);
+		 object oScrySelf = GetLocalObject(oSensor, "oScrySelf");
+		 if(oScrySelf != OBJECT_INVALID)
+		 	{SetDescription(oScrySelf, sScryerDesc);
+			 oScryer = oScrySelf;
+			 }
 		 object oScryerArea = GetArea(oScryer);
 		 string sScryerArea = GetName(oScryerArea);
 		 int nCasterLevel = GetLocalInt(oSensor, "nCasterLevel");
