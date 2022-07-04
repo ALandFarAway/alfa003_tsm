@@ -10,17 +10,17 @@ void main()
 	object oToken;
 	
 	if(oScryer == oTarget) {
-		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1, "abr_it_scry_b_" + GetStringRight(GetName(oScryer), 15));
+		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 		SetFirstName(oToken, GetName(oScryer) + "'s Body Part");
 		}
 		
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
-		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1, "abr_it_scry_b_" + GetStringRight(GetName(oScryer), 15));
+		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 		SetFirstName(oToken, GetName(oTarget) + "'s Body Part");
 		}
 	
 	if(GetObjectType(oTarget) == OBJECT_TYPE_ITEM) {
-		oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1, "abr_it_scry_p_" + GetStringRight(GetName(oScryer), 15));
+		oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
 		SetFirstName(oToken, GetName(oScryer) + "'s Possession");
 		}
 		
