@@ -40,17 +40,21 @@ void main() {
 	 string sBless;
 	 
 	 if((nLastSpell == 3068) && ((sResRef == "abr_pl_so_holyfont") || (sResRef == "abr_pl_so_pool"))) {
-	 	CreateItemOnObject("abr_it_scry_droplet", oCaster, 1);
+	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
+		SetFirstName(oFocus, "Scrying Droplet");
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
-	 }
+	    SetItemIcon(oFocus, 1896);
+		}
 	 
 	 else if((nLastSpell == 3066)  && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
-	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
+	    object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
+		SetFirstName(oFocus, "Scrying Shard");
 		SendMessageToPC(oCaster, "A shard shimmers into your hand, out of the " + GetName(oTarget) + " on which you draw your mark, leaving the glass unblemished.");
 	 }
 	 
 	 else if((nLastSpell == 3071)  && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
-	    CreateItemOnObject("abr_it_scry_shard", oCaster, 1);
+	    object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
+		SetFirstName(oFocus, "Scrying Shard");
 		SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oTarget) + ", leaving the glass unblemished.");
 	 }	
 }

@@ -1,8 +1,7 @@
-#include "acr_quest_i"
 #include "acr_creature_i"
 #include "x0_i0_position"
-#include "acr_spawn_i"
 #include "acr_scry_i"
+#include "acr_db_persist_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -258,42 +257,38 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								string sTokenLast = GetLastName(oToken);
 								string sTokenTag = GetTag(oToken);
 								string sScryerName = GetFirstName(oScryer);
-								int nCountName = GetStringLength(sToken);
-								int nCountScryerName = GetStringLength(sScryerName);
-								string sTargetName = GetStringLeft(sToken, nCountName - 8 - nCountScryerName);
+								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
+								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								int nScryer = 0;
-								if(sScryerName == GetStringRight(sToken, nCountScryerName)) {
+								if(sScryerName == sPScryerName) {
 									nScryer = 1;
 									}
-								
-								//if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
-								if(sTargetName == sScriedName) {
-									sToken = GetStringLowerCase(sToken);
-									if((FindSubString(sToken, "image", 0) != -1) || (FindSubString(sToken, "picture", 0) != -1)) {
+								SendMessageToPC(oScryer, "sPTargetName = " + sPTargetName);
+								SendMessageToPC(oScryer, "sPScryerName = " + sPScryerName);
+								if((sPTargetName == sScriedName) || (FindSubString(sPTargetName, sScriedName) != -1)) {
+									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
 										if(nConnection < 2) {nConnection = 2;}
 										}
-									if(((FindSubString(sToken, "possess", 0) != -1) || (FindSubString(sToken, "cloth", 0) != -1)) && (nConnection < 4)) {
+									if(FindSubString(sTokenTag, "possess", 0) != -1) {
 										nPossession = 1;
 										if(nConnection < 4) {nConnection = 4;}
 										}
-									if(((FindSubString(sToken, "body", 0) != -1) || (FindSubString(sToken, "nail", 0) != -1) || (FindSubString(sToken, "hair", 0) != -1) || (FindSubString(sToken, "blood", 0) != -1)  || (FindSubString(sToken, "tooth", 0) != -1) || (FindSubString(sToken, "bone", 0) != -1))  && (nConnection < 10)){
+									if(FindSubString(sTokenTag, "body", 0) != -1) {
 										nBody = 1;
 										if(nConnection < 10) {nConnection = 10;}
 										}
 										
-									if((nScryer == 0) && (FindSubString(sToken, "imag", 0) != -1)) {
+									if((nScryer == 0) && (FindSubString(sTokenTag, "imag", 0) != -1)) {
 										if(nKnowledge < -5) {nKnowledge = -5;}
 										}
 									
-									if((nScryer == 1) || (GetIsDMPossessed(oScryer))) {
-										if(FindSubString(sToken, "image", 0) != -1) {
+									if(nScryer == 1) {
+										if(FindSubString(sTokenTag, "image", 0) != -1) {
 											if(nKnowledge < 0) {nKnowledge = 0;}
-											if(nConnection < 2) {nConnection = 2;}
 											}
-										if(FindSubString(sToken, "imago", 0) != -1) {
+										if(FindSubString(sTokenTag, "imago", 0) != -1) {
 											if(nKnowledge < 5) {nKnowledge = 5;}
-											if(nConnection < 2) {nConnection = 2;}
 											}
 										}
 									}
