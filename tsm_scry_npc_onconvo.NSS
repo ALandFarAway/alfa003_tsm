@@ -256,6 +256,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
 								string sToken = GetFirstName(oToken);
 								string sTokenLast = GetLastName(oToken);
+								string sTokenTag = GetTag(oToken);
 								string sScryerName = GetFirstName(oScryer);
 								int nCountName = GetStringLength(sToken);
 								int nCountScryerName = GetStringLength(sScryerName);
@@ -265,7 +266,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									nScryer = 1;
 									}
 								
-								if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
+								//if((sTargetName == sScriedName) || (FindSubString(sToken, sScriedName) != -1) || (sTokenLast == sScriedName)) {
+								if(sTargetName == sScriedName) {
 									sToken = GetStringLowerCase(sToken);
 									if((FindSubString(sToken, "image", 0) != -1) || (FindSubString(sToken, "picture", 0) != -1)) {
 										nImage = 1;

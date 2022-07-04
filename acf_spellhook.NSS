@@ -435,7 +435,7 @@ if(GetSpellId() == 3058) {
 		 int nDetectorRoll = d20(1);
 		 int nDetectorOpposed = nDetectorLevel + nDetectorRoll;
 		 if(nDetectorOpposed >= nCasterOpposed) {
-		  	SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell best the defences of the person scrying you.");
+		  	SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell best the defences of the caster of the scrying sensor.");
 			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer: " + sScryerDesc);
 			SendMessageToPC(OBJECT_SELF, "You know that this person is located at the direction and distance of " + sScryerArea );
 			}

@@ -4,15 +4,13 @@ void main()
 {
              
     object oScryer = GetItemActivator();
+	string sScryerName = GetName(oScryer);
 	object oTarget = GetItemActivatedTarget();
+	string sTargetName = GetName(oTarget);
 	object oFocus = GetItemActivated();
-	string sFocus = GetFirstName(oFocus);
-	string sFocusLast = GetLastName(oFocus);
-	int nCountName = GetStringLength(sFocus);
-	string sScryerName = GetFirstName(oScryer);
-	int nCountScryerName = GetStringLength(sScryerName);
-	string sTargetName = GetStringLeft(sFocus, nCountName - 8 - nCountScryerName);
-	string sTargetRes = sFocusLast;
+	string sPTargetRes = ACR_GetPersistentString(oFocus, "sPTargetRes");
+	string sPTargetName = ACR_GetPersistentString(oFocus, "sPTargetName");
+	string sPScryerName = ACR_GetPersistentString(oFocus, "sPScryerName");
 	int nDCRoll = 10+ d10(1);
 	//SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
@@ -35,16 +33,11 @@ void main()
 	//SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 		
 	int nScryer = 0;
-	if(sScryerName == GetStringRight(sFocus, nCountScryerName)) {
+	if(sScryerName == sPScryerName) {
 		nScryer = 1;
 		}
 	
-	if(oTarget == OBJECT_INVALID) {
-		SendMessageToPC(oScryer, "You must use your scrying shard on something within physical reach.");
-		return;
-		}
-	
-	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sTargetRes != "")) {
+	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sPTargetRes != "")) {
 		
 		//Create undetectable OOC Scrying Namer at location of Scrying Object to receive 10 letter Roster Name for stored scrying target
 		    object oScryNamer = GetLocalObject(oTarget, "oScryNamer");
@@ -52,15 +45,15 @@ void main()
 				oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
 	            SetLocalObject(oScryNamer, "oScryer", oScryer);
 				SetLocalObject(oScryNamer, "oTarget", oTarget);
-				SetLocalString(oScryNamer, "sTargetRes", sFocusLast);
+				SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
 				}
 			 
 			if(nScryer == 1) {
-				SendMessageToPC(oScryer, "A lifelike, animated image of " + sTargetName + " appears in the " + GetName(oTarget));
+				SendMessageToPC(oScryer, "A lifelike, animated image of " + sPTargetName + " appears in the " + GetName(oTarget));
 				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying shard, as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
 			}
 			if(nScryer == 0) {
-				SendMessageToPC(oScryer, "A nearly translucent, roughly sketched image of " + sTargetName + " appears in the " + GetName(oTarget));
+				SendMessageToPC(oScryer, "A nearly translucent, roughly sketched image of " + sPTargetName + " appears in the " + GetName(oTarget));
 				SendMessageToPC(oScryer, "The arcane signature of this scrying shard and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
 			}
 			
@@ -81,26 +74,26 @@ void main()
 		     
 		}
 		
-	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oFocus) != "")) {
-		if((GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 0) || (GetIsDMPossessed(oScryer))) {
-			 DelayCommand(900.0, SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 0));
+	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName == sPTargetName) && (sTargetName != "")) {
+		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
+			 DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
 			 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
-				SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 1);
+				SetLocalInt(oTarget, "Focus_" + sScryerName, 1);
 			 	SendMessageToPC(oScryer, "Your familiarity with " + GetName(oTarget) + " increases. You see the existing image of " + GetName(oTarget) + " in the scrying shard take on depth, dimension, and movement, blinking every now and then.");
 				object oImago = CreateItemOnObject("abr_it_scry_sh_imago", oScryer, 1);
-				SetFirstName(oImago, GetName(oTarget) + " Imago: " + GetFirstName(oScryer));
+				SetFirstName(oImago, GetName(oTarget) + " Imago: " + GetName(oTarget));
 				SetDescription(oImago, "A scrying shard showing the imago of " + GetName(oTarget) + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This shard was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + GetName(oTarget) + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
 				}
 		     else {
-			    SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 2);
+			    SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
 				SendMessageToPC(oScryer, "You are unable to concentrate enough to improve your grasp of the defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again another time.");
 				}
 			DestroyObject(oFocus);
 			}
-		else if(GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 1) {
+		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 1) {
 			SendMessageToPC(oScryer, "You have already memorized the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " today and focused them into the shard. You will have to try to improve on your understandings at a later time.");
 		}
-		else if(GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 2) {
+		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 2) {
 			SendMessageToPC(oScryer, "You have already tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again at a later time.");
 		}
 	}
