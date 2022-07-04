@@ -127,8 +127,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		}	 				
 	}	
 
-//Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
-if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+	//A duplicate Scryer holds the position of the PC scryer and feeds any conversation to them
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_dupe") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+		ActionSpeakString("Dupe convo");
+		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6031) {
+			string sSpokenBy = GetName(GetLastSpeaker());
+			string sRelay = GetMatchedSubstring(0);
+			DelayCommand(1.0, SendMessageToPC(oScryer, sSpokenBy + ": " + sRelay));
+		}
+	}	 
+
+	//Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
@@ -410,26 +422,32 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 60.0);
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
-								 // Check if a valid creature target exists
-								 if ((GetIsObjectValid(oScried)) && (GetIsDMPossessed(oScryer) == FALSE))
+								 // Dupe the PC to leave behind and jump scrying PC to location
+								 if (GetIsDMPossessed(oScryer) == FALSE)
 								    {	
-										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
+										//object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
+										int nAppearance = GetAppearanceType(oScryer);
+										object oDupe = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_dupe", GetLocation(oScryer));
+										SetCreatureAppearanceType(oDupe, nAppearance);
+										SetLocalObject(oDupe, "oOriginal", oScryer);
+										SetLocalObject(oScryer, "oDupe", oDupe);
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
 									    DestroyObject(oDupe, 60.0);
 										 
 										// Jump to the target
-										DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
+										//DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								        DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								        DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								        //DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0));
+									    DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								    	DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								    	}
-								    // Otherwise assume a location target
+								     
 								  else
 								    {
-								        // Jump to the location
+								        // Jump NPC to the location
 								        AssignCommand(oScryer, JumpToLocation(lThere));
 								
 								     }
@@ -1067,7 +1085,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 		}
 	else {if(nMatch == 6041) {
-			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed with their identity from an imbued scrying token.");}	
+			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed with their identity from an imbued scrying focus.");}	
 		}
 	}
 					 	   	 

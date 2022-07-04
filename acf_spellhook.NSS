@@ -477,7 +477,7 @@ if(GetSpellId() == 3056)
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
-	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used as the focus of a Scry spell.");
+	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used in a Scry spell.");
 		}
 	 else if(oScry == OBJECT_INVALID) {
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");

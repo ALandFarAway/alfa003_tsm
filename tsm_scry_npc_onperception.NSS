@@ -56,7 +56,7 @@ void main()
 		object oArea = GetArea(oScried);
 		string sSubjectArea = GetName(oArea);
 		string sAreaTag = GetTag(oArea);
-		if(GetLastPerceptionVanished()) {
+		//if(GetLastPerceptionVanished()) {
 			//if Scrying Sensor has not ATd but oScried has, make Scrying Sensor jump to oScried
 			//SendMessageToPC(oScryer, GetName(oScried) + "'s area = " + sSubjectArea + ". oScrySend's area = " + GetName(GetArea(OBJECT_SELF)));
 			if(GetArea(OBJECT_SELF) != oArea) {
@@ -65,6 +65,6 @@ void main()
 				DelayCommand(10.0, ActionJumpToLocation(GetLocation(oScried)));
 				DelayCommand(15.0, ActionForceFollowObject(oScried, 0.5f, 0));
 				}
-			}
+		//	}
 		}		
 }

@@ -26,6 +26,14 @@ void main()
 			 
 		}
 	
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_dupe") {
+			 //Initialize Invisible Listener that will feed local conversation to PC Scryer
+			 SetListenPattern(OBJECT_SELF, "**", 6031);
+			 SetListening(OBJECT_SELF, TRUE);
+			 ActionSpeakString("Dupe spawned");
+			 
+		}
+	
 		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target
 			 //Detect Scrying or See Invisibility will reveal it IC
@@ -113,7 +121,7 @@ void main()
 			 ActionSpeakString(sSpeak, TALKVOLUME_TALK);
 			 effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
-			 SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying token imbued with the image of a member of the wider populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them.");
+			 SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying focus imbued with the image of a member of the wider populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them.");
 			 SendMessageToPC(oScryer, "Holding an imbued scrying shard or droplet will improve *both* the connection to *and* knowledge of any target. Holding a possession or body part will improve the connection to *any* target.");
 			 SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oScry) +":");
 			 sRoster = GetFirstRosterMember();
