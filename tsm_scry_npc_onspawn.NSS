@@ -14,8 +14,7 @@ void main()
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
       
-    //ActionSpeakString(GetTag(OBJECT_SELF) + " spawned.", TALKVOLUME_TALK);   
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
+    	if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
 			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
@@ -24,7 +23,6 @@ void main()
 			 
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
-			 
 		}
 	
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_eye") {

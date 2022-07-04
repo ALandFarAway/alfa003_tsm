@@ -254,7 +254,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						object oToken = GetFirstItemInInventory(oScryer);
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
-								nConnection = 0;
 								string sToken = GetFirstName(oToken);
 								string sTokenLast = GetLastName(oToken);
 								string sScryerName = GetFirstName(oScryer);
@@ -428,36 +427,30 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
 								 // Dupe the PC to leave behind and jump scrying PC to location
-								// if (GetIsDMPossessed(oScryer) == FALSE)
-								    //{	
+									
 										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
 										object oScryEye = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_eye", GetLocation(oScry));
 										SetLocalObject(oScryEye, "oScryer", oScryer);
-										SetLocalObject(oScryer, "oEye", oScryEye);
+										SetLocalObject(oScryEye, "oScried", oScried);
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
 									    ChangeToStandardFaction(oScryEye, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryEye, fScryTimer);
-									    DestroyObject(oDupe, 60.0);
+									    DestroyObject(oScryEye, 60.0);
+										DestroyObject(oDupe, 60.0);
 										DelayCommand(60.0, SendCreatureToLimbo(oDupe));
 										
 										
 										// Jump to the target
-										//DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
+										DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
-								        //DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								        //DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0));
-									    //DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								    	//DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								    //	}
+								        DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								        DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								    	DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								   
 								     
-								  //else
-								  //  {
-								        // Jump NPC to the location
-								        //AssignCommand(oScryer, JumpToLocation(lThere));
-								
-								    // }
+								  
 								
 								    // Stop whatever it is we're doing
 							        DelayCommand(59.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
