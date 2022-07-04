@@ -100,7 +100,7 @@ void main()
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
 	    
-ActionSpeakString(GetTag(OBJECT_SELF) + " convo.", TALKVOLUME_TALK);   
+//ActionSpeakString(GetTag(OBJECT_SELF) + " convo.", TALKVOLUME_TALK);   
 	
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the Roster as a Roster Name associated with a ResRef
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
@@ -108,7 +108,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sTargetRes");
 	location lTarget = GetLocation(oTarget);
-	//effect eBeam = EffectBeam(VFX_BEAM_DIVINATION, oMaster, BODY_NODE_CHEST, FALSE);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
@@ -122,7 +121,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 			sRoster = GetNextRosterMember();
 			nInc++;
 		}
-		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eBeam, lTarget, 2.0);
+		
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
 		DestroyObject(OBJECT_SELF, 7.0);
 		}	 				
@@ -130,7 +129,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 
 	//A duplicate Scryer holds the position of the PC scryer and feeds any conversation to them
 	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_wisp") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
-		ActionSpeakString("Wisp convo");
+		//ActionSpeakString("Wisp convo");
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -434,10 +433,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								    //{	
 										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
 										object oScryWisp = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_wisp", GetLocation(oScryer));
-										SetLocalObject(oDupe, "oOriginal", oScryer);
-										SetLocalObject(oScryer, "oDupe", oDupe);
+										SetLocalObject(oScryWisp, "oScryer", oScryer);
+										SetLocalObject(oScryer, "oWisp", oScryWisp);
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
+									    ChangeToStandardFaction(oScryWisp, STANDARD_FACTION_COMMONER);
+										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryWisp, fScryTimer);
 									    DestroyObject(oDupe, 60.0);
 										 
 										// Jump to the target

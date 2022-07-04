@@ -14,7 +14,7 @@ void main()
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
       
-    ActionSpeakString(GetTag(OBJECT_SELF) + " spawned.", TALKVOLUME_TALK);   
+    //ActionSpeakString(GetTag(OBJECT_SELF) + " spawned.", TALKVOLUME_TALK);   
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
 			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
@@ -31,7 +31,7 @@ void main()
 			 //Initialize Invisible Listener that will feed local conversation to PC Scryer
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
-			 ActionSpeakString("Wisp spawned");
+			 //ActionSpeakString("Wisp spawned");
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			 SendMessageToPC(oScried, "Wisp spawned.");
 		}
