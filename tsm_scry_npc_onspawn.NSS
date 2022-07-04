@@ -31,7 +31,8 @@ void main()
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
 			 ActionSpeakString("Dupe spawned");
-			 
+			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+			 SendMessageToPC(oScried, "Dupe spawned.");
 		}
 	
 		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
