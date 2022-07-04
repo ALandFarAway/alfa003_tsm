@@ -127,15 +127,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		}	 				
 	}	
 
-	//A duplicate Scryer holds the position of the PC scryer and feeds any conversation to them
+	//A listener feeds any conversation to oScryer while oScryer is with oScried
 	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_wisp") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
-		//ActionSpeakString("Wisp convo");
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
 			string sRelay = GetMatchedSubstring(0);
-			DelayCommand(1.0, SendMessageToPC(oScryer, sSpokenBy + ": " + sRelay));
+			SendMessageToPC(oScryer, sSpokenBy + ": " + sRelay);
 		}
 	}	 
 
@@ -186,7 +185,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					int nScryActive = GetLocalInt(oScry, "nScryActive");
 					if(nScryActive == 1) {
-						 SendMessageToPC(oScryer, "You are scrying" + GetName(oScried) + " and must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
+						 SendMessageToPC(oScryer, "You must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
 						 break;
 						 }
 					
@@ -439,8 +438,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
 									    ChangeToStandardFaction(oScryWisp, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryWisp, fScryTimer);
-									    DestroyObject(oDupe, 60.0);
-										 
+									    DelayCommand(60.0, SendCreatureToLimbo(oDupe));
+										DestroyObject(oDupe, 60.0);
+										
+										
 										// Jump to the target
 										//DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
@@ -1091,7 +1092,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 			
 		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 		}
-	else {if(nMatch == 6041) {
+	else {if((nMatch == 6041) && (GetLocalInt(oScry, "nScryActive") == 0))  {
 			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed with their identity from an imbued scrying focus.");}	
 		}
 	}
