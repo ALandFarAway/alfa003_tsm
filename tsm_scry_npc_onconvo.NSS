@@ -106,7 +106,7 @@ void main()
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
-	string sTargetRes = GetLocalString(OBJECT_SELF, "sTargetRes");
+	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();

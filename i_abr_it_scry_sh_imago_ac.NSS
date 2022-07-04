@@ -49,8 +49,8 @@ void main()
 				}
 			 
 			if(nScryer == 1) {
-				SendMessageToPC(oScryer, "A one-dimensional, still image of " + sPTargetName + " appears in the " + sTargetName);
-				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying shard, as its creator.  Future scrying of this subject will benefit from the firsthand knowledge imbued herewith.");	
+				SendMessageToPC(oScryer, "A lifelike, animated image of " + sPTargetName + " appears in the " + sTargetName);
+				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this scrying shard, as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
 			}
 			if(nScryer == 0) {
 				SendMessageToPC(oScryer, "A nearly translucent, roughly sketched image of " + sPTargetName + " appears in the " + sTargetName);
@@ -74,27 +74,7 @@ void main()
 		     
 		}
 		
-	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName == sPTargetName) && (sPTargetName != "")) {
-		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
-			 DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
-			 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
-				SetLocalInt(oTarget, "Focus_" + sScryerName, 1);
-			 	SendMessageToPC(oScryer, "Your familiarity with " + sPTargetName + " increases. You see the existing image of " + sTargetName + " in the scrying shard take on depth, dimension, and movement, blinking every now and then.");
-				object oImago = CreateItemOnObject("abr_it_scry_sh_imago", oScryer, 1);
-				SetFirstName(oImago, "Scrying Imago: " + sPTargetName);
-				SetDescription(oImago, "A scrying shard showing the imago of " + sPTargetName + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This shard was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				}
-		     else {
-			    SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
-				SendMessageToPC(oScryer, "You are unable to concentrate enough to improve your grasp of the defining details of " + sTargetName + " and focus them into the shard. You will have to try again another time.");
-				}
-			DestroyObject(oFocus);
-			}
-		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 1) {
-			SendMessageToPC(oScryer, "You have already memorized the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " today and focused them into the shard. You will have to try to improve on your understandings at a later time.");
+	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
+		SendMessageToPC(oScryer, "You cannot improve further on your knowledge of " + sPTargetName + ". This is as good as it gets.");
 		}
-		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 2) {
-			SendMessageToPC(oScryer, "You have already tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focus them into the shard. You will have to try again at a later time.");
-		}
-	}
 }
