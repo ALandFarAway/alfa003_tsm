@@ -129,6 +129,10 @@ void main()
 		}
 	}
 	
+	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oFocus) != "") && (FindSubString(GetFirstName(oFocus), "Imago") != -1)) {
+		SendMessageToPC(oScryer, "This droplet holds as realistic a representation of " + GetName(oTarget) + " as possible. It cannot improve your knowledge for scrying purposes any more than it does now.");
+	} 
+	
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oFocus) != "")) {
 		if((GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 0) || (GetIsDMPossessed(oScryer))) {
 			DelayCommand(900.0, SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 0));

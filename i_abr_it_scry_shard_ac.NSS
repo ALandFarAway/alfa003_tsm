@@ -113,7 +113,9 @@ void main()
 			SendMessageToPC(oScryer, "You have already tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + GetName(oTarget) + " and focus them into the shard. You will have to try again at a later time.");
 		}
 	}
-	
+	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oFocus) != "") && (FindSubString(GetFirstName(oFocus), "Imago") != -1)) {
+		SendMessageToPC(oScryer, "This shard holds as realistic a representation of " + GetName(oTarget) + " as possible. It cannot improve your knowledge for scrying purposes any more than it does now.");
+	} 
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (GetName(oTarget) == sTargetName) && (GetLastName(oFocus) != "")) {
 		if((GetLocalInt(oTarget, "Focusized_" + GetName(oScryer)) == 0) || (GetIsDMPossessed(oScryer))) {
 			 DelayCommand(900.0, SetLocalInt(oTarget, "Focusized_" + GetName(oScryer), 0));
