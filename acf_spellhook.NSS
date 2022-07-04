@@ -455,7 +455,6 @@ if(GetSpellId() == 3056)
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
-			   SendMessageToPC(oScryer, "1. oScry = " + GetTag(oScry));
 			   SetLocalObject(oArea, "oScry", oScry);
 			   }
 		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
@@ -468,16 +467,13 @@ if(GetSpellId() == 3056)
 		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
-			//SendMessageToPC(oScryer, "sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				//SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
 				SetLocalObject(oArea, "oScry", oScry);
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
 	oScry = GetLocalObject(oArea, "oScry");
-	SendMessageToPC(oScryer, "2. oScry = " + GetName(oScry));
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {

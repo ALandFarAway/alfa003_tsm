@@ -34,12 +34,10 @@ void main()
 			 SetListening(OBJECT_SELF, TRUE);
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			 ActionForceFollowObject(oScried, 0.5f, 0);
-			 if((FindSubString(GetTag(GetArea(OBJECT_SELF)), "6d_int_silvy") == -1)  && (!GetLocalInt(GetArea(OBJECT_SELF), "IS_SILVERYMOON_EXT")))
-				{ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
-				 SendMessageToPC(oScried, "You abruptly know that you are being scried.");
-				}
-    	     
-			 
+			 if((FindSubString(GetTag(GetArea(OBJECT_SELF)), "6d_int_silvy") == -1)  && (FindSubString(GetTag(GetArea(OBJECT_SELF)), "6d_ext_silv") == -1))
+				{ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);}
+			 else {SendMessageToPC(oScried, "You abruptly know that you are being scried.");}
+			
 			 object oDetector = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			 while (oDetector != OBJECT_INVALID) {
 				if(GetLocalInt(oDetector, "nDetectScrying") == 1) {
