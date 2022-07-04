@@ -293,7 +293,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 											}
 										if(FindSubString(sToken, "imago", 0) != -1) {
 											nKnowledge = 5;
-											if(nConnection < 4) {nConnection = 4;}
+											if(nConnection < 2) {nConnection = 2;}
 											}
 										}
 									
@@ -416,6 +416,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									}
 									
 								// Make the PC completely invisible
+								 int nAppearance = GetAppearanceType(oScryer);
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 								 effect eGhost = EffectCutsceneGhost();
 								 effect eFreeze = EffectCutsceneImmobilize();
@@ -423,10 +424,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
 								 // Dupe the PC to leave behind and jump scrying PC to location
-								 if (GetIsDMPossessed(oScryer) == FALSE)
-								    {	
+								// if (GetIsDMPossessed(oScryer) == FALSE)
+								    //{	
 										//object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
-										int nAppearance = GetAppearanceType(oScryer);
 										object oDupe = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_dupe", GetLocation(oScryer));
 										SetCreatureAppearanceType(oDupe, nAppearance);
 										SetLocalObject(oDupe, "oOriginal", oScryer);
@@ -439,18 +439,18 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										//DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
 								
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
-								        DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								        //DelayCommand(2.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
 								        //DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0));
-									    DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								    	DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
-								    	}
+									    //DelayCommand(10.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								    	//DelayCommand(20.0, AssignCommand(oScryer, ActionForceFollowObject(oScried, 0.5)));
+								    //	}
 								     
-								  else
-								    {
+								  //else
+								  //  {
 								        // Jump NPC to the location
-								        AssignCommand(oScryer, JumpToLocation(lThere));
+								        //AssignCommand(oScryer, JumpToLocation(lThere));
 								
-								     }
+								    // }
 								
 								    // Stop whatever it is we're doing
 							        DelayCommand(59.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
