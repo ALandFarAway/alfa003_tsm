@@ -100,7 +100,8 @@ void main()
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
 	    
-
+ActionSpeakString(GetTag(OBJECT_SELF) + " convo.", TALKVOLUME_TALK);   
+	
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the Roster as a Roster Name associated with a ResRef
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
@@ -353,16 +354,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						//SendMessageToPC(oScryer, "nWillSaveRoll is " + IntToString(nWillSaveRoll) + " : WillSaveBase is " + IntToString(nWillSaveBase));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
-							    SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
-							 	SendMessageToPC(oScryer, "You feel your spell fail.");
+							    SendMessageToPC(oScryer, "You feel your spell fail.");
 								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
 								SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
-								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
-									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
+								if(nWillSave >= nDC + 5){SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");}
+							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
+									SendMessageToPC(oScried, "A passing sensation has a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
 									}
 								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") == 0) {
-									SendMessageToPC(oScried, "The passing sensation had a familiar presence to it, as of somebody you had met once or twice but can't quite recall." );
+									SendMessageToPC(oScried, "A passing sensation has a familiar presence to it, as of hearing the voice of somebody you had met once or twice but can't quite recall." );
 									}
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
@@ -388,7 +389,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								if (nDC - nWillSave < 5) 
 								 	{SendMessageToPC(oScryer, "You have a feeling that " + GetName(oScried) + " might have sensed something.");
 								 	 SendMessageToPC(oScried, "You feel watched.");
-								 	 SendMessageToAllDMs( "Saving roll was within 5 of the DC. " + GetName(oScried) + " feels watched.");
+								 	 if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
+										SendMessageToPC(oScried, "There is a familiarity to the sensation. You have felt this attention before." );
+										}
+									 if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") == 0) {
+										SendMessageToPC(oScried, "The sensation feels vaguely familiar." );
+										}
+									SendMessageToAllDMs( "Saving roll was within 5 of the DC. " + GetName(oScried) + " feels watched.");
 								 	}
 									
 								//Spawn an invisible Scrying Sensor on oScried and add it to the collective

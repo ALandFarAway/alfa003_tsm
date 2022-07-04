@@ -13,7 +13,8 @@ void main()
 	effect eEthereal = EffectEthereal();
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
-         
+      
+    ActionSpeakString(GetTag(OBJECT_SELF) + " spawned.", TALKVOLUME_TALK);   
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
 			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
