@@ -128,8 +128,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	}	
 
 	//A duplicate Scryer holds the position of the PC scryer and feeds any conversation to them
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_dupe") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
-		ActionSpeakString("Dupe convo");
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_wisp") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+		ActionSpeakString("Wisp convo");
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -416,7 +416,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									}
 									
 								// Make the PC completely invisible
-								 int nAppearance = GetAppearanceType(oScryer);
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 								 effect eGhost = EffectCutsceneGhost();
 								 effect eFreeze = EffectCutsceneImmobilize();
@@ -426,9 +425,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 // Dupe the PC to leave behind and jump scrying PC to location
 								// if (GetIsDMPossessed(oScryer) == FALSE)
 								    //{	
-										//object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "oScryCopy");
-										object oDupe = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_dupe", GetLocation(oScryer));
-										SetCreatureAppearanceType(oDupe, nAppearance);
+										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
+										object oScryWisp = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_wisp", GetLocation(oScryer));
 										SetLocalObject(oDupe, "oOriginal", oScryer);
 										SetLocalObject(oScryer, "oDupe", oDupe);
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
@@ -1070,6 +1068,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								DelayCommand(fScryTimer, SetLocalInt(oScry, "nScryActive", 0));
 								
 								DestroyObject(oScrySend, fScryTimer + 2.0); 
+								DestroyObject(oScryWisp, fScryTimer + 3.0);
 								DestroyObject(OBJECT_SELF, fScryTimer + 5.0);
 								break;
 								}
