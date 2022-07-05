@@ -54,6 +54,17 @@ void main()
     object oDisturb = GetInventoryDisturbItem();
 	string sDisturb = GetName(oDisturb);
 	ActionSpeakString("UD Object: " + sDisturb);
+    object oInventory = GetFirstItemInInventory(OBJECT_SELF);
+		int nPickable = 0;
+		while (oInventory != OBJECT_INVALID) {
+		if(GetPickpocketableFlag(oInventory) == TRUE) {
+			nPickable++;
+			}
+		
+		oInventory = GetNextItemInInventory(OBJECT_SELF);
+		}
+		
+		ActionSpeakString("UD Pickable: " + IntToString(nPickable));
     
 	}
     // Custom code goes here.
