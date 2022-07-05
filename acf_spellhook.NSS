@@ -373,10 +373,6 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 	} 
 }
 
-if(GetSpellId() == 3066) {
-	SendMessageToPC(OBJECT_SELF, "Arcane Mark cast on " + GetTag(oTarget));
-}
-
 if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
 	location lTarget = GetLocation(oScryer);

@@ -55,17 +55,17 @@ void main()
 			 
 			if(nScryer == 1) {
 				SendMessageToPC(oScryer, "A lifelike, animated image of " + sPTargetName + " appears in the " + sTargetName);
-				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this Scrying" + sFocusType + ", as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
+				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this Scrying " + sFocusType + ", as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
 			}
 			if(nScryer == 0) {
 				SendMessageToPC(oScryer, "A nearly translucent, roughly sketched image of " + sPTargetName + " appears in the " + sTargetName);
-				SendMessageToPC(oScryer, "The arcane signature of this Scrying" + sFocusType + " and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
+				SendMessageToPC(oScryer, "The arcane signature of this Scrying " + sFocusType + " and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
 			}
 			
 			DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this potential scrying subject.", TALKVOLUME_TALK)));	
 			string sRoster = GetFirstRosterMember();
 			if(sRoster == ""){
-				SendMessageToPC(oScryer, "There are no names of the wider populace keyed into this " + sTargetName +":");
+				SendMessageToPC(oScryer, "There are no names of the wider populace keyed into this " + sTargetName +".");
 				}
 			else {
 				SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + sTargetName +":");
@@ -79,6 +79,11 @@ void main()
 		     
 		}
 		
+	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName != sPTargetName)) {
+		 SendMessageToPC(oScryer, "This imago is of somebody other than the person you just attempted to commit to it. That won't work. Besides, you cannot improve further on your knowledge of " + sPTargetName + ".");
+		 return;
+		 }
+	 
 	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
 		SendMessageToPC(oScryer, "You cannot improve further on your knowledge of " + sPTargetName + ". This is as good as it gets.");
 		}

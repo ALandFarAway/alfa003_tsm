@@ -253,18 +253,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						object oToken = GetFirstItemInInventory(oScryer);
 						while(oToken != OBJECT_INVALID) {
 							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
-								string sToken = GetFirstName(oToken);
-								string sTokenLast = GetLastName(oToken);
 								string sTokenTag = GetTag(oToken);
-								string sScryerName = GetFirstName(oScryer);
+								string sScryerName = GetName(oScryer);
 								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								int nScryer = 0;
 								if(sScryerName == sPScryerName) {
 									nScryer = 1;
 									}
-								SendMessageToPC(oScryer, "sPTargetName = " + sPTargetName);
-								SendMessageToPC(oScryer, "sPScryerName = " + sPScryerName);
 								if((sPTargetName == sScriedName) || (FindSubString(sPTargetName, sScriedName) != -1)) {
 									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
