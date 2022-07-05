@@ -17,7 +17,6 @@ void main()
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
 		int nSleight = ActionUseSkill(SKILL_SLEIGHT_OF_HAND, oTarget);
 		SendMessageToPC(oScryer, "nSleight = " + IntToString(nSleight));
-		ActionDoCommand(ACTION_PICKPOCKET);
 		
 		
 		//oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);

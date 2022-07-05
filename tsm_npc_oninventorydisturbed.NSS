@@ -47,5 +47,6 @@ void main()
 	object oDisturber = GetLastDisturbed();
 	int nDisturbed = GetInventoryDisturbType();
 	SendMessageToPC(oDisturber, "Disturbed: " + IntToString(nDisturbed));
-    // Custom code goes here.
+    SignalEvent(OBJECT_SELF, EventUserDefined(EVENT_DISTURBED));
+	// Custom code goes here.
 }
