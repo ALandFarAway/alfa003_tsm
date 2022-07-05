@@ -109,12 +109,58 @@ void main()
 			 }
 			 
 			 nListenPattern = 6030;
-			 string sRoster = GetFirstRosterMember();
+			 /*string sRoster = GetFirstRosterMember();
 			 while ((sRoster != "") && (nListenPattern < 6040)) {
 				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
 				 nListenPattern++;
 				 sRoster = GetNextRosterMember();
-			 }
+			 }*/
+			 
+			 string sScryTargetA = GetLocalString(oScry, "sScryTargetA");
+			 string sScryTargetB = GetLocalString(oScry, "sScryTargetB");
+			 string sScryTargetC = GetLocalString(oScry, "sScryTargetC");
+			 string sScryTargetD = GetLocalString(oScry, "sScryTargetD");
+			 string sScryTargetE = GetLocalString(oScry, "sScryTargetE");
+			 string sScryTargetF = GetLocalString(oScry, "sScryTargetF");
+			 string sScryTargetG = GetLocalString(oScry, "sScryTargetG");
+			 string sScryTargetH = GetLocalString(oScry, "sScryTargetH");
+			 string sScryTargetI = GetLocalString(oScry, "sScryTargetI");
+			 string sScryTargetJ = GetLocalString(oScry, "sScryTargetJ");
+			 
+			 if(sScryTargetA != "") {
+				 SendMessageToPC(oScryer, "Listener Spawn A = " + sScryTargetA);
+		         SetListenPattern(OBJECT_SELF, "**" + sScryTargetA + "**", 6030);
+				 }
+			 if(sScryTargetB != "") {
+				 SendMessageToPC(oScryer, "Listener Spawn B = " + sScryTargetB);
+		         SetListenPattern(OBJECT_SELF, "**" + sScryTargetB + "**", 6031);
+				 }
+			 if(sScryTargetC != "") {
+				 SendMessageToPC(oScryer, "Listener Spawn C = " + sScryTargetC);
+		         SetListenPattern(OBJECT_SELF, "**" + sScryTargetC + "**", 6032);
+				 }
+			 if(sScryTargetD != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetD + "**", 6033);
+				 }
+			 if(sScryTargetE != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetE + "**", 6034);
+				 }
+			 if(sScryTargetF != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetF + "**", 6035);
+				 }
+			 if(sScryTargetG != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetG + "**", 6036);
+				 }
+			 if(sScryTargetH != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetH + "**", 6037);
+				 }
+			 if(sScryTargetI != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetI + "**", 6038);
+				 }
+			 if(sScryTargetJ != "") {
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetJ + "**", 6039);
+				 }
+			 
 			 
 			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			  
@@ -128,7 +174,7 @@ void main()
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
 			 SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying focus imbued with the image of a member of the wider populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them.");
 			 SendMessageToPC(oScryer, "Holding an imbued scrying shard or droplet will improve *both* the connection to *and* knowledge of any target. Holding a possession or body part will improve the connection to *any* target.");
-			 SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oScry) +":");
+			 /*SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oScry) +":");
 			 sRoster = GetFirstRosterMember();
 			 int nInc = 0;
 			 while((sRoster != "") && (nInc < 10)) {
@@ -136,7 +182,7 @@ void main()
 				sRoster = GetNextRosterMember();
 				nInc++;
 			 }
-			 
+			 */
 			 
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	

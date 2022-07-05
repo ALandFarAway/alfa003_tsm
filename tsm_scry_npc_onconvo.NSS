@@ -103,14 +103,19 @@ void main()
 	
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the Roster as a Roster Name associated with a ResRef
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
-	object oMaster = GetLocalObject(OBJECT_SELF, "oScryer");
+	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
-		string sRosterName = GetMatchedSubstring(0);
+		string sMatch = GetMatchedSubstring(0);
+		SendMessageToPC(oScryer, "sMatch = " + sMatch);
+		string sMatchOne = GetMatchedSubstring(1);
+		SendMessageToPC(oScryer, "sMatchOne = " + sMatchOne);
+		string sMatchTwo = GetMatchedSubstring(2);
+		SendMessageToPC(oScryer, "sMatchTwo = " + sMatchTwo);
 		
 		/*AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		SendMessageToPC(oMaster, "These names of the wider populace are now keyed on this " + GetName(oTarget) + ":");
@@ -123,11 +128,57 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		}
 		*/
 		
-		SetLocalString(oTarget, sTargetRes, sRosterName );
-		SetLocalString(oTarget, sRosterName, sTargetRes );
+		SetLocalString(oTarget, sTargetRes, sMatch);
+		SetLocalString(oTarget, sMatch, sTargetRes);
+		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
+		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
+		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
+		string sScryTargetD = GetLocalString(oTarget, "sScryTargetD");
+		string sScryTargetE = GetLocalString(oTarget, "sScryTargetE");
+		string sScryTargetF = GetLocalString(oTarget, "sScryTargetF");
+		string sScryTargetG = GetLocalString(oTarget, "sScryTargetG");
+		string sScryTargetH = GetLocalString(oTarget, "sScryTargetH");
+		string sScryTargetI = GetLocalString(oTarget, "sScryTargetI");
+		string sScryTargetJ = GetLocalString(oTarget, "sScryTargetJ");
+		
+		if(sScryTargetA == "") {
+			SendMessageToPC(oScryer, "A");
+		    SetLocalString(oTarget, "sScryTargetA", sMatch);
+		}
+		else if(sScryTargetB == "") {
+			SendMessageToPC(oScryer, "B");
+		    SetLocalString(oTarget, "sScryTargetB", sMatch);
+		}
+		else if(sScryTargetC == "") {
+			SendMessageToPC(oScryer, "C");
+		    SetLocalString(oTarget, "sScryTargetC", sMatch);
+		}
+		else if(sScryTargetD == "") {
+			SendMessageToPC(oScryer, "D");
+		    SetLocalString(oTarget, "sScryTargetD", sMatch);
+		}
+		else if(sScryTargetE == "") {
+			SendMessageToPC(oScryer, "E");
+		    SetLocalString(oTarget, "sScryTargetE", sMatch);
+		}
+		else if(sScryTargetF == "") {
+			SetLocalString(oTarget, "sScryTargetF", sMatch);
+		}
+		else if(sScryTargetG == "") {
+			SetLocalString(oTarget, "sScryTargetG", sMatch);
+		}
+		else if(sScryTargetH == "") {
+			SetLocalString(oTarget, "sScryTargetH", sMatch);
+		}
+		else if(sScryTargetI == "") {
+			SetLocalString(oTarget, "sScryTargetI", sMatch);
+		}
+		else if(sScryTargetJ == "") {
+			SetLocalString(oTarget, "sScryTargetJ", sMatch);
+		}
 		
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
-		DestroyObject(OBJECT_SELF, 7.0);
+		DestroyObject(OBJECT_SELF, 5.0);
 		}	 				
 	}	
 
