@@ -18,8 +18,8 @@ void main()
 		int nSleight = ActionUseSkill(SKILL_SLEIGHT_OF_HAND, oTarget);
 		SendMessageToPC(oScryer, "nSleight = " + IntToString(nSleight));
 		
-		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
-		SetFirstName(oToken, GetName(oTarget) + "'s Body Part");
+		//oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
+		//SetFirstName(oToken, GetName(oTarget) + "'s Body Part");
 		}
 	
 	if(GetObjectType(oTarget) == OBJECT_TYPE_ITEM) {
