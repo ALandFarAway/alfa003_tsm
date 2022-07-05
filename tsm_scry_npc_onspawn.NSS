@@ -27,6 +27,11 @@ void main()
 	
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_self") {
 			 //Initialize Invisible Listener that will feed local conversation to PC Scryer while PC Scryer is with oScried
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
+			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
+			 
 			 SetListenPattern(OBJECT_SELF, "**", 6031);
 			 SetListening(OBJECT_SELF, TRUE);
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");

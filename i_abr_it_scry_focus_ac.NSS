@@ -64,7 +64,7 @@ void main()
 				}
 			}
 		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 2) {
-			SendMessageToPC(oScryer, "You have already tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focus them into the " + sFocusName + ". You will have to try again at a later time.");
+			SendMessageToPC(oScryer, "You have recently tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focus them into the " + sFocusName + ". You will have to try again at a later time.");
 		}
 	}
 }

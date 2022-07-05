@@ -15,6 +15,7 @@ void main()
 		}
 		
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
+		
 		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 		SetFirstName(oToken, GetName(oTarget) + "'s Body Part");
 		}

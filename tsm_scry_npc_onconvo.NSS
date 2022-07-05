@@ -111,8 +111,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sRosterName = GetMatchedSubstring(0);
+		
+		/*AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		SendMessageToPC(oMaster, "These names of the wider populace are now keyed on this " + GetName(oTarget) + ":");
-		AddRosterMemberByTemplate(sRosterName, sTargetRes);
 		string sRoster = GetFirstRosterMember();
 		int nInc = 0;
 		while((sRoster != "") && (nInc < 10)) {
@@ -120,6 +121,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 			sRoster = GetNextRosterMember();
 			nInc++;
 		}
+		*/
+		
+		SetLocalString(oTarget, sTargetRes, sRosterName );
+		SetLocalString(oTarget, sRosterName, sTargetRes );
 		
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
 		DestroyObject(OBJECT_SELF, 7.0);
@@ -168,14 +173,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		string sScryName = GetName(oScry);
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");
-		
 		//This NPC was set to listen for specific words in tsm_scry_npc_onspawn
 		//6020 thru 6029 are the names of the first ten PCs currently logged in
 		//6030 thru 6039 are the names of up to ten NPCs this Scryer can Scry
 		string sMatch = GetMatchedSubstring(1);
+		SendMessageToPC(oScryer, "sMatch = " + sMatch);
+		string sPTargetRes = GetLocalString(oScry, sMatch);
+		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
 		int nMatch = GetListenPatternNumber();
 		if((nMatch >= 6020) && (nMatch < 6040)) {
-		 
+		  
 		//oScryer must speak the full name of the PC or Roster Name of the allowable NPC he/she wishes to Scry	
 		if(nMatch >= 6020) {
 				int nIncA = 6020;
@@ -189,23 +196,26 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						 }
 					
 					//First, the script checks the roster of up to ten allowable NPCs
-					string sRosterName = GetFirstRosterMember();
+					//string sRosterName = GetFirstRosterMember();
 					if(nIncA == 6020) {
-						int nRosterInc = 0;
-						while ((sRosterName != "") && (nRosterInc < 10)) {
+						//int nRosterInc = 0;
+						//while ((sRosterName != "") && (nRosterInc < 10)) {
 							/*If the spoken name matches the Roster Name of one of the Roster NPCs
 							then create an OOC invisible version of that NPC where it should be found
 							so that WillSave and location data may be gotten  later on in this script.*/
 							
-							if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))) 
-								{sScriedName = sRosterName;
-								 if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
-									 oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
-									 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
-				 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
-				 					 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
-				 					 SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
-									 }
+							//if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))){ 
+								 sScriedName = sMatch;
+								 //if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
+									 //oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
+									 if(sPTargetRes != "") {
+									 	oScried = CreateObject(OBJECT_TYPE_CREATURE, sPTargetRes, GetLocation(OBJECT_SELF));
+									 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
+				 					 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
+				 					 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
+				 					 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
+									 
+									 //}
 								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
 								 
 								 int nWillSaveBase = GetWillSavingThrow(oScried);
@@ -214,7 +224,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								 while(oScriedArea != OBJECT_INVALID) {
 								 	if(GetTag(oScriedArea) == sScriedArea) {
 										ACR_PreSpawnArea(oScriedArea);
-										DespawnRosterMember(sScriedName);
+										//DespawnRosterMember(sScriedName);
+										DestroyObject(oScried);
 										object oFirst = GetFirstObjectInArea(oScriedArea);
 										int nNPC = 1;
 										object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
@@ -230,12 +241,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 										}
 									oScriedArea = GetNextArea();
 								 	}
-								 }
-							sRosterName = GetNextRosterMember();
-							nRosterInc++;
-							}
-						} 
-						
+								// }
+							//sRosterName = GetNextRosterMember();
+							//nRosterInc++;
+							//}
+							} 
+						}
 					 
 					 /*If the spoken name matches the name of one of the Roster NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
@@ -292,19 +303,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								oToken = GetNextItemInInventory(oScryer);
 							}
 						
-							if(nKnowledge == -10) {
-								SendMessageToPC(oScryer, "You have no knowledge of " + sScriedName + ".");
-								}
-							else if(nKnowledge == -5) {
-								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is secondhand.");
-								}
-							else if(nKnowledge == 0) {
-								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: firsthand.");
-								}
-							else if(nKnowledge == 5) {
-								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: familiar.");
-								}
-									
 							if(nBody == 1) {
 								SendMessageToPC(oScryer, "You are holding a body part that belonged to " + sScriedName + ".");
 								}			
@@ -327,7 +325,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							else if(nConnection == 10) {
 								SendMessageToPC(oScryer, "You have a very strong connection to " + sScriedName + ".");
 								}	
-							 	
+							 
+							if(nKnowledge == -10) {
+								SendMessageToPC(oScryer, "You have no knowledge of " + sScriedName + ".");
+								}
+							else if(nKnowledge == -5) {
+								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is secondhand.");
+								}
+							else if(nKnowledge == 0) {
+								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: firsthand.");
+								}
+							else if(nKnowledge == 5) {
+								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: familiar.");
+								}
+								
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 						int nWillSaveRoll = d20(1);
