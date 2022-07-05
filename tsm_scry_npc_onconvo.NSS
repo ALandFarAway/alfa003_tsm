@@ -99,9 +99,8 @@ void main()
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
 	    
-//ActionSpeakString(GetTag(OBJECT_SELF) + " convo.", TALKVOLUME_TALK);   
 	
-//The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the Roster as a Roster Name associated with a ResRef
+//The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the scrying object as a nickname associated with a ResRef
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
@@ -111,23 +110,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	int nMatch = GetListenPatternNumber();
 	if(nMatch == 6031) {
 		string sMatch = GetMatchedSubstring(0);
-		SendMessageToPC(oScryer, "sMatch = " + sMatch);
-		string sMatchOne = GetMatchedSubstring(1);
-		SendMessageToPC(oScryer, "sMatchOne = " + sMatchOne);
-		string sMatchTwo = GetMatchedSubstring(2);
-		SendMessageToPC(oScryer, "sMatchTwo = " + sMatchTwo);
-		
-		/*AddRosterMemberByTemplate(sRosterName, sTargetRes);
-		SendMessageToPC(oMaster, "These names of the wider populace are now keyed on this " + GetName(oTarget) + ":");
-		string sRoster = GetFirstRosterMember();
-		int nInc = 0;
-		while((sRoster != "") && (nInc < 10)) {
-			SendMessageToPC(oMaster, sRoster);
-			sRoster = GetNextRosterMember();
-			nInc++;
-		}
-		*/
-		
 		SetLocalString(oTarget, sTargetRes, sMatch);
 		SetLocalString(oTarget, sMatch, sTargetRes);
 		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
@@ -142,24 +124,19 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		string sScryTargetJ = GetLocalString(oTarget, "sScryTargetJ");
 		
 		if(sScryTargetA == "") {
-			SendMessageToPC(oScryer, "A");
-		    SetLocalString(oTarget, "sScryTargetA", sMatch);
+			SetLocalString(oTarget, "sScryTargetA", sMatch);
 		}
 		else if(sScryTargetB == "") {
-			SendMessageToPC(oScryer, "B");
-		    SetLocalString(oTarget, "sScryTargetB", sMatch);
+			SetLocalString(oTarget, "sScryTargetB", sMatch);
 		}
 		else if(sScryTargetC == "") {
-			SendMessageToPC(oScryer, "C");
-		    SetLocalString(oTarget, "sScryTargetC", sMatch);
+			SetLocalString(oTarget, "sScryTargetC", sMatch);
 		}
 		else if(sScryTargetD == "") {
-			SendMessageToPC(oScryer, "D");
-		    SetLocalString(oTarget, "sScryTargetD", sMatch);
+			SetLocalString(oTarget, "sScryTargetD", sMatch);
 		}
 		else if(sScryTargetE == "") {
-			SendMessageToPC(oScryer, "E");
-		    SetLocalString(oTarget, "sScryTargetE", sMatch);
+			SetLocalString(oTarget, "sScryTargetE", sMatch);
 		}
 		else if(sScryTargetF == "") {
 			SetLocalString(oTarget, "sScryTargetF", sMatch);
@@ -216,7 +193,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 
 
 //Action queue for OOC Scrying Listener that handles most Scrying interaction
-//SendMessageToPC(GetLocalObject(OBJECT_SELF, "oScryer"), "Convo " + GetTag(OBJECT_SELF) + " oScryer = " + GetName(GetLocalObject(OBJECT_SELF, "oScryer")));	
 		
 if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		//Get existing local objects set by Spellhook
@@ -226,15 +202,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");
 		//This NPC was set to listen for specific words in tsm_scry_npc_onspawn
 		//6020 thru 6029 are the names of the first ten PCs currently logged in
-		//6030 thru 6039 are the names of up to ten NPCs this Scryer can Scry
+		//6030 thru 6039 are the names of up to ten NPCs stored on the scrying object
 		string sMatch = GetMatchedSubstring(1);
-		SendMessageToPC(oScryer, "sMatch = " + sMatch);
 		string sPTargetRes = GetLocalString(oScry, sMatch);
-		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
 		int nMatch = GetListenPatternNumber();
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
-		//oScryer must speak the full name of the PC or Roster Name of the allowable NPC he/she wishes to Scry	
+		//oScryer must speak the full name of the PC or Nickname of the allowable NPC he/she wishes to Scry	
 		if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
@@ -245,61 +219,42 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						 SendMessageToPC(oScryer, "You must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
 						 break;
 						 }
-					
-					//First, the script checks the roster of up to ten allowable NPCs
-					//string sRosterName = GetFirstRosterMember();
+					//First, if the spoken name matches a stored NPC's nickname, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
-						//int nRosterInc = 0;
-						//while ((sRosterName != "") && (nRosterInc < 10)) {
-							/*If the spoken name matches the Roster Name of one of the Roster NPCs
-							then create an OOC invisible version of that NPC where it should be found
-							so that WillSave and location data may be gotten  later on in this script.*/
-							
-							//if(TestStringAgainstPattern("**" + sRosterName + "**", GetMatchedSubstring(1))){ 
-								 sScriedName = sMatch;
-								 //if(GetObjectFromRosterName(sRosterName) == OBJECT_INVALID) {
-									 //oScried = SpawnRosterMember(sScriedName, GetLocation(OBJECT_SELF));
-									 if(sPTargetRes != "") {
-									 	oScried = CreateObject(OBJECT_TYPE_CREATURE, sPTargetRes, GetLocation(OBJECT_SELF));
-									 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
-				 					 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
-				 					 //ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
-				 					 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
-									 
-									 //}
-								 string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
-								 
-								 int nWillSaveBase = GetWillSavingThrow(oScried);
-								 SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
-								 object oScriedArea = GetFirstArea();
-								 while(oScriedArea != OBJECT_INVALID) {
-								 	if(GetTag(oScriedArea) == sScriedArea) {
-										ACR_PreSpawnArea(oScriedArea);
-										//DespawnRosterMember(sScriedName);
-										DestroyObject(oScried);
-										object oFirst = GetFirstObjectInArea(oScriedArea);
-										int nNPC = 1;
-										object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
-										while (oNPC != OBJECT_INVALID) {
-										if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1))
-												{oScried = oNPC;
-												 break;
-												 }
-											oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
-											nNPC++;
+						sScriedName = sMatch;
+						if(sPTargetRes != "") {
+							oScried = CreateObject(OBJECT_TYPE_CREATURE, sPTargetRes, GetLocation(OBJECT_SELF));
+							ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
+				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
+				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
+				 			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
+							string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
+							int nWillSaveBase = GetWillSavingThrow(oScried);
+							SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
+							object oScriedArea = GetFirstArea();
+							while(oScriedArea != OBJECT_INVALID) {
+								if(GetTag(oScriedArea) == sScriedArea) {
+									ACR_PreSpawnArea(oScriedArea);
+									DestroyObject(oScried);
+									object oFirst = GetFirstObjectInArea(oScriedArea);
+									int nNPC = 1;
+									object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
+									while (oNPC != OBJECT_INVALID) {
+										if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1)){
+											 oScried = oNPC;
+											 break;
+											}
+										oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
+										nNPC++;
 										}
-										break;
-										}
-									oScriedArea = GetNextArea();
-								 	}
-								// }
-							//sRosterName = GetNextRosterMember();
-							//nRosterInc++;
-							//}
+									break;
+									}
+								oScriedArea = GetNextArea();
+								 }
 							} 
 						}
 					 
-					 /*If the spoken name matches the name of one of the Roster NPCs or PCs currently logged in
+					 /*If the spoken name matches the name of one of the keyed NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
 					 
 					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
@@ -712,7 +667,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								string sWeatherRain = "";
 								int nWeatherSnow = GetWeather(oArea, WEATHER_TYPE_SNOW);
 								string sWeatherSnow = "";
-								int nDay = GetIsDay();
+								int nHour = GetTimeHour();
+								int nDay = TRUE;
+								if((nHour >= 18) || (nHour <= 6))
+									{nDay = FALSE;}
 								
 								if(FindSubString(sAreaTag, "ext", 1) != -1)
 								   {if((nWeatherRain == 0)  && (nDay == TRUE))

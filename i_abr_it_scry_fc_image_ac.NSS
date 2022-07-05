@@ -58,7 +58,7 @@ void main()
 			}
 			
 			else if(sTargetNick == "") {
-				//Create undetectable OOC Scrying Namer at location of Scrying Object to receive 10 letter Roster Name for stored scrying target
+				//Create undetectable OOC Scrying Namer at location of Scrying Object to receive nickname for stored scrying target
 			    object oScryNamer = GetLocalObject(oTarget, "oScryNamer");
 				if(oScryNamer == OBJECT_INVALID) {
 					oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
@@ -67,21 +67,8 @@ void main()
 					SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
 					}
 					
-				DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this potential scrying subject.", TALKVOLUME_TALK)));	
-				/*string sRoster = GetFirstRosterMember();
-				if(sRoster == ""){
-					SendMessageToPC(oScryer, "There are no names of the wider populace keyed into this " + sTargetName +".");
-					}
-				else {
-					SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + sTargetName +":");
-					}
-				int nInc = 0;
-				while((sRoster != "") && (nInc < 10)) {
-					SendMessageToPC(oScryer, sRoster);
-					sRoster = GetNextRosterMember();
-					nInc++;
-				}*/
-		   	}  
+				DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name for this potential scrying subject.", TALKVOLUME_TALK)));	
+			}  
 		}
 		
 	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName != sPTargetName)) {

@@ -16,6 +16,8 @@ void main()
 	string sPTargetRes = ACR_GetPersistentString(oFocus, "sPTargetRes");
 	string sPTargetName = ACR_GetPersistentString(oFocus, "sPTargetName");
 	string sPScryerName = ACR_GetPersistentString(oFocus, "sPScryerName");
+	string sTargetNick = GetLocalString(oTarget, sPTargetRes);
+	
 	int nDCRoll = 10+ d10(1);
 	//SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
@@ -44,15 +46,6 @@ void main()
 	
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && (sPTargetRes != "")) {
 		
-		//Create undetectable OOC Scrying Namer at location of Scrying Object to receive 10 letter Roster Name for stored scrying target
-		    object oScryNamer = GetLocalObject(oTarget, "oScryNamer");
-			if(oScryNamer == OBJECT_INVALID) {
-				oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
-	            SetLocalObject(oScryNamer, "oScryer", oScryer);
-				SetLocalObject(oScryNamer, "oTarget", oTarget);
-				SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
-				}
-			 
 			if(nScryer == 1) {
 				SendMessageToPC(oScryer, "A lifelike, animated image of " + sPTargetName + " appears in the " + sTargetName);
 				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this Scrying " + sFocusType + ", as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
@@ -62,21 +55,22 @@ void main()
 				SendMessageToPC(oScryer, "The arcane signature of this Scrying " + sFocusType + " and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
 			}
 			
-			DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name no longer than 10 letters for this potential scrying subject.", TALKVOLUME_TALK)));	
-			string sRoster = GetFirstRosterMember();
-			if(sRoster == ""){
-				SendMessageToPC(oScryer, "There are no names of the wider populace keyed into this " + sTargetName +".");
-				}
-			else {
-				SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + sTargetName +":");
-				}
-			int nInc = 0;
-			while((sRoster != "") && (nInc < 10)) {
-				SendMessageToPC(oScryer, sRoster);
-				sRoster = GetNextRosterMember();
-				nInc++;
+			if(sTargetNick != "") {
+				SendMessageToPC(oScryer, sPTargetName + "'s identity is already imbued into this " + sTargetName + " under the nickname " + sTargetNick);	
 			}
-		     
+			
+			else if(sTargetNick == "") {
+				//Create undetectable OOC Scrying Namer at location of Scrying Object to receive nickname for stored scrying target
+			    object oScryNamer = GetLocalObject(oTarget, "oScryNamer");
+				if(oScryNamer == OBJECT_INVALID) {
+					oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
+		            SetLocalObject(oScryNamer, "oScryer", oScryer);
+					SetLocalObject(oScryNamer, "oTarget", oTarget);
+					SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
+					}
+					
+				DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name for this potential scrying subject.", TALKVOLUME_TALK)));	
+			} 
 		}
 		
 	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName != sPTargetName)) {

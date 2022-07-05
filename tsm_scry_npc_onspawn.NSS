@@ -108,14 +108,6 @@ void main()
 				 oPC = GetNextPC(FALSE);
 			 }
 			 
-			 nListenPattern = 6030;
-			 /*string sRoster = GetFirstRosterMember();
-			 while ((sRoster != "") && (nListenPattern < 6040)) {
-				 SetListenPattern(OBJECT_SELF, "**" + sRoster + "**", nListenPattern);
-				 nListenPattern++;
-				 sRoster = GetNextRosterMember();
-			 }*/
-			 
 			 string sScryTargetA = GetLocalString(oScry, "sScryTargetA");
 			 string sScryTargetB = GetLocalString(oScry, "sScryTargetB");
 			 string sScryTargetC = GetLocalString(oScry, "sScryTargetC");
@@ -128,16 +120,13 @@ void main()
 			 string sScryTargetJ = GetLocalString(oScry, "sScryTargetJ");
 			 
 			 if(sScryTargetA != "") {
-				 SendMessageToPC(oScryer, "Listener Spawn A = " + sScryTargetA);
-		         SetListenPattern(OBJECT_SELF, "**" + sScryTargetA + "**", 6030);
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetA + "**", 6030);
 				 }
 			 if(sScryTargetB != "") {
-				 SendMessageToPC(oScryer, "Listener Spawn B = " + sScryTargetB);
-		         SetListenPattern(OBJECT_SELF, "**" + sScryTargetB + "**", 6031);
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetB + "**", 6031);
 				 }
 			 if(sScryTargetC != "") {
-				 SendMessageToPC(oScryer, "Listener Spawn C = " + sScryTargetC);
-		         SetListenPattern(OBJECT_SELF, "**" + sScryTargetC + "**", 6032);
+				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetC + "**", 6032);
 				 }
 			 if(sScryTargetD != "") {
 				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetD + "**", 6033);
@@ -161,7 +150,6 @@ void main()
 				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetJ + "**", 6039);
 				 }
 			 
-			 
 			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			  
 			 //Tell ScryListen to Listen	 
@@ -174,16 +162,7 @@ void main()
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
 			 SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying focus imbued with the image of a member of the wider populace, provide that person's scrying name of 10 or fewer characters to attempt to scry them.");
 			 SendMessageToPC(oScryer, "Holding an imbued scrying shard or droplet will improve *both* the connection to *and* knowledge of any target. Holding a possession or body part will improve the connection to *any* target.");
-			 /*SendMessageToPC(oScryer, "These are the names of the wider populace keyed into this " + GetName(oScry) +":");
-			 sRoster = GetFirstRosterMember();
-			 int nInc = 0;
-			 while((sRoster != "") && (nInc < 10)) {
-				SendMessageToPC(oScryer, sRoster);
-				sRoster = GetNextRosterMember();
-				nInc++;
-			 }
-			 */
-			 
+			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
 			 DelayCommand(fScryTimer + 15.0, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
