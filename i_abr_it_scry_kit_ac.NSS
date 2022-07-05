@@ -15,6 +15,11 @@ void main()
 		}
 		
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
+		int nPickDC = 20;
+		if(GetIsEnemy(oScryer, oTarget)) {
+			nPickDC = 30;
+		}
+		
 		int nSleightRank = GetSkillRank(SKILL_SLEIGHT_OF_HAND, oScryer, FALSE);
 		if(nSleightRank > 0) {
 			object oInventory = GetFirstItemInInventory(oTarget);
@@ -30,6 +35,7 @@ void main()
 			
 			int nPickCount = 0;
 			object oPickInventory = GetFirstItemInInventory(oTarget);
+			string sPickInventory = GetName(oPickInventory);
 			while (oPickInventory != OBJECT_INVALID) {
 			if(GetPickpocketableFlag(oPickInventory) == TRUE) {
 				nPickCount++;
@@ -40,19 +46,34 @@ void main()
 			oPickInventory = GetNextItemInInventory(oTarget);
 			}
 			
-			SendMessageToPC(oScryer, "oPickInventory = " + GetName(oPickInventory));
+			sPickInventory = GetName(oPickInventory);
+			SendMessageToPC(oScryer, "oPickInventory = " + sPickInventory);
 			
-			int nSleightCheck = d20(1) + nSleightRank;
+			int nSleightRoll = d20(1);
+			int nSleightCheck = nSleightRoll + nSleightRank;
+			string sSuccess = "success";
+			if (nSleightCheck < nPickDC) {
+				sSuccess = "failure";
+			}
 			
-			if(nSleightCheck >= 25) {
+			SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + "</color><color=blue>Sleight of Hand: *" + sSuccess + "*: " + IntToString(nSleightRoll) + " + " + IntToString(nSleightRank) + " = " + IntToString(nSleightCheck) + " vs DC" + IntToString(nPickDC) + "</color>");
+			
+			
+			if(nSleightCheck >= nPickDC + 5) {
 				oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 				SetFirstName(oToken, GetName(oTarget) + "'s Body Part");
 			}
-			else if(nSleightCheck >= 20) {
+			else if(nSleightCheck >= nPickDC) {
 				oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
-				SetFirstName(oToken, GetName(oTarget) + "'s Possession");
+				SetFirstName(oToken, "Fragment of " + GetName(oTarget) + "'s " + sPickInventory);
 			}
-			else {AssignCommand(oTarget, ActionSpeakString("Hey! What are you doing?", TALKVOLUME_TALK));}
+			
+			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
+			int nSpotCheck = d20(1) + nSpotRank;
+			if(nSpotCheck >= nSleightCheck) {
+				SendMessageToPC(oScryer, "You have been detected!");
+			}
+			
 		}
 		
 		SignalEvent(oTarget, EventUserDefined(EVENT_DISTURBED));
