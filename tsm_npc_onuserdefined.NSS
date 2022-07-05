@@ -47,6 +47,8 @@ void main()
 
 	int nEvent = GetUserDefinedEventNumber();
 	ActionSpeakString("Event: " + IntToString(nEvent));
+    string sEvent = GetEventHandler(OBJECT_SELF, 1008);
+	ActionSpeakString("Event Handler: " + sEvent);
     
     // Custom code goes here.
 }
