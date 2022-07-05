@@ -44,9 +44,12 @@
 void main()
 {
     ACR_CreatureOnInventoryDisturbed();
+	SignalEvent(OBJECT_SELF, EventUserDefined(EVENT_DISTURBED));
 	object oDisturber = GetLastDisturbed();
 	int nDisturbed = GetInventoryDisturbType();
 	SendMessageToPC(oDisturber, "Disturbed: " + IntToString(nDisturbed));
-    SignalEvent(OBJECT_SELF, EventUserDefined(EVENT_DISTURBED));
-	// Custom code goes here.
+    object oDisturb = GetInventoryDisturbItem();
+	string sDisturb = GetName(oDisturb);
+	SendMessageToPC(oDisturber, "Object: " + sDisturb);
+    
 }

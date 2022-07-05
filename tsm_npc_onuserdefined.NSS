@@ -47,8 +47,14 @@ void main()
 
 	int nEvent = GetUserDefinedEventNumber();
 	ActionSpeakString("Event: " + IntToString(nEvent));
-    string sEvent = GetEventHandler(OBJECT_SELF, 1008);
-	ActionSpeakString("Event Handler: " + sEvent);
     
+	if(nEvent == 1008) {
+	int nDisturbed = GetInventoryDisturbType();
+	ActionSpeakString("UD Disturbed: " + IntToString(nDisturbed));
+    object oDisturb = GetInventoryDisturbItem();
+	string sDisturb = GetName(oDisturb);
+	ActionSpeakString("UD Object: " + sDisturb);
+    
+	}
     // Custom code goes here.
 }
