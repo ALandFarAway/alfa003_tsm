@@ -258,7 +258,43 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 					   give that potential oScried a WillSave vs oScryer's DC*/
 					 
 					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
-						{SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
+						{if(GetLocalInt(oScried, "nNonDetection") != 0) {
+							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
+							int nCLRoll = d20(1);
+							int nNDDC = GetLocalInt(oScried, "nNonDetection");
+							if(nCL + nCLRoll <  nNDDC) {
+								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
+								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
+								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
+								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
+								SendMessageToAllDMs(GetName(oScried) + " is under a non-detection spell. " + GetName(oScryer) + " failed a CL Check DC" + IntToString(nNDDC) + " and their Scrying fails.");
+								SetLocalInt(oScry, "nScryActive", 0);
+								DestroyObject(OBJECT_SELF, 2.0);
+								}
+							else {
+								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken.");
+								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you...then pausing, and returning.");
+								}
+							}
+							
+							if(GetTag(GetItemInSlot(INVENTORY_SLOT_NECK, oScried)) == "abr_it_ne_amu_noscry") {
+							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
+							int nCLRoll = d20(1);
+							if(nCL + nCLRoll <= 19) {
+								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
+								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel it warding off a divination attempt.");
+								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
+								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
+								SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " failed a CL Check DC19 and their Scrying fails.");
+								SetLocalInt(oScry, "nScryActive", 0);
+								DestroyObject(OBJECT_SELF, 2.0);
+								}
+							else {
+								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken.");
+								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel its non-detection powers fail...and your will struggling with another's divination attempt.");
+								}
+							}
+						SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
 						//oScried makes a privately rolled WillSave vs. stored DC:
 						
 						int nKnowledge = -10;	
@@ -353,23 +389,19 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							nWillSaveBase = GetWillSavingThrow(oScried);
 							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
-						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScryer, "You feel your spell fail.");
 								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
 								SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
-								if(nWillSave >= nDC + 5){SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");}
-							 	if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
-									SendMessageToPC(oScried, "A passing sensation has a familiar presence to it, as if you had heard " + GetName(oScryer) + " call your name." );
-									}
-								if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") == 0) {
-									SendMessageToPC(oScried, "A passing sensation has a familiar presence to it, as of hearing the voice of somebody you had met once or twice but can't quite recall." );
+								if(nWillSave >= nDC + 5){
+									SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 									}
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
-							}
+								}
 							
 						//If oScried fails their WillSave they become the oScried object
 						else {//Add oScried to the collection of objects
@@ -388,16 +420,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								SetLocalInt(oScry, "nScryActive", 1);
 								
 								//Throw oScried a bone if their roll was within 5 of the DC
-								if (nDC - nWillSave < 5) 
+								if (nWillSave + 5 > nDC) 
 								 	{SendMessageToPC(oScryer, "You have a feeling that " + GetName(oScried) + " might have sensed something.");
-								 	 SendMessageToPC(oScried, "You feel watched.");
-								 	 if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") > 0) {
-										SendMessageToPC(oScried, "There is a familiarity to the sensation. You have felt this attention before." );
-										}
-									 if(GetLocalInt(OBJECT_SELF, "nScryKnowledge") == 0) {
-										SendMessageToPC(oScried, "The sensation feels vaguely familiar." );
-										}
-									SendMessageToAllDMs( "Saving roll was within 5 of the DC. " + GetName(oScried) + " feels watched.");
+								 	 SendMessageToPC(oScried, "You feel like someone is watching you.");
+								 	 SendMessageToAllDMs( "Saving roll was within 5 of the DC. " + GetName(oScried) + " feels watched.");
 								 	}
 									
 								//Spawn an invisible Scrying Sensor on oScried and add it to the collective

@@ -407,6 +407,21 @@ if(GetSpellId() == 3071) {
 			}		
 }
 
+if(GetSpellId() == 3092) {
+	object oCaster = OBJECT_SELF;
+	object oTarget = GetSpellTargetObject();
+	int nCL = GetCasterLevel(OBJECT_SELF);
+	int nDuration = nCL * 60 * 60;
+	int nDC = 15 + nCL;
+	if(oCaster != oTarget) {
+		nDC = 11 + nCL;
+		}
+	SetLocalInt(oTarget, "nNonDetection", nDC);
+	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external prying.");
+	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, FALSE);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
+	DelayCommand(IntToFloat(nDuration), SetLocalInt(OBJECT_SELF, "nNonDetection", 0));
+}
 
 if(GetSpellId() == 3058) {
 	SetLocalInt(OBJECT_SELF, "nDetectScrying", 1);
@@ -460,8 +475,7 @@ if(GetSpellId() == 3056)
 			   }
 		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
-	 
-		   
+	
 	string sTriggerTag;
 	if(oScry == OBJECT_INVALID) {
 		location lTarget = GetLocation(oScryer);
@@ -498,7 +512,6 @@ if(GetSpellId() == 3056)
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration
 			string sScryName = GetName(oScry);
-			//SendMessageToPC(oScryer, "sScryName = " + sScryName);
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
@@ -511,8 +524,6 @@ if(GetSpellId() == 3056)
 				}
 				
 			int nDC = 10 + nSpellLevel + nAbilityMod;
-			//SendMessageToPC(oScryer, "nSpellLevel = " + IntToString(nSpellLevel));
-			//SendMessageToPC(oScryer, "nAbilityMod = " + IntToString(nAbilityMod));
 						
 			//Create undetectable OOC Scrying Listener at location of Scrying Object to receive scrying information about future scrying target
 			object oScryListen = GetLocalObject(oScry, "oScryListen");
@@ -530,7 +541,6 @@ if(GetSpellId() == 3056)
 			
 			//Set all other variables on ScryListen
 			SetLocalInt(oScryListen, "nScryDC", nDC);
-			//SendMessageToPC(oScryer, "nScryDC = " + IntToString(GetLocalInt(oScryListen, "nScryDC")));
 			SetLocalInt(oScryListen, "nCasterLevel", nScryerLevel);
 			SetLocalFloat(oScryListen, "fScryTimer", 60.0 * nScryerLevel);
 			SetFirstName(oScryListen, sScryName);

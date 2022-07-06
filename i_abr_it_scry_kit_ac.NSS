@@ -46,7 +46,6 @@ void main()
 					}
 				oInventory = GetNextItemInInventory(oTarget);
 				}
-				SendMessageToPC(oScryer, "nPickable = " + IntToString(nPickable));
 				
 				if(nPickable > 0) {
 					int nPickRand = Random(nPickable);
