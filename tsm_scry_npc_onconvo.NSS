@@ -262,8 +262,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
 							int nNDDC = GetLocalInt(oScried, "nNonDetection");
-							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC" + IntToString(nNDDC) + " and their Scrying fails.");
-							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC" + IntToString(nNDDC) + " and their Scrying fails.");
+							SendMessageToPC(oScryer, GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
+							SendMessageToAllDMs(GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
 							if(nCL + nCLRoll <  nNDDC) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
@@ -282,8 +282,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							if(GetTag(GetItemInSlot(INVENTORY_SLOT_NECK, oScried)) == "abr_it_ne_amu_noscry") {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
-							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC19 and their Scrying fails.");
-							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC19 and their Scrying fails.");
+							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
+							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
 								
 							if(nCL + nCLRoll <= 19) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
