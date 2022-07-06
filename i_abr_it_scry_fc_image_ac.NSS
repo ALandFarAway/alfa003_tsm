@@ -78,6 +78,22 @@ void main()
 	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName == sPTargetName) && (sPTargetName != "")) {
 		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
 			 DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
+			
+			 int nDexRank = GetAbilityModifier(ABILITY_DEXTERITY, oScryer);
+			int nDexCheck = d20(1) + nDexRank;
+			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
+			int nSpotCheck = d20(1) + nSpotRank;
+			if(nSpotCheck >= nDexCheck) {
+				SendMessageToPC(oScryer, "You  have been detected!");
+				SendMessageToPC(oTarget, "You feel observed.");
+				if(GetIsPC(oTarget) == FALSE) {
+					AssignCommand(oTarget, ActionMoveAwayFromObject(oScryer, FALSE, 20.0));
+					SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
+					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " . You will have to try again another time.");
+					return;
+					}
+				}
+			
 			 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
 				SetLocalInt(oTarget, "Focus_" + sScryerName, 1);
 			 	SendMessageToPC(oScryer, "Your familiarity with " + sPTargetName + " increases. You see the existing image of " + sTargetName + " in the Scrying " + sFocusType + " take on depth, dimension, and movement, blinking every now and then.");
