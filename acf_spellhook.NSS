@@ -418,7 +418,7 @@ if(GetSpellId() == 3092) {
 		}
 	SetLocalInt(oTarget, "nNonDetection", nDC);
 	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external prying.");
-	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, FALSE);
+	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
 	DelayCommand(IntToFloat(nDuration), SetLocalInt(OBJECT_SELF, "nNonDetection", 0));
 }

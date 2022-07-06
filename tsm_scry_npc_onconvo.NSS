@@ -262,14 +262,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
 							int nNDDC = GetLocalInt(oScried, "nNonDetection");
+							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC" + IntToString(nNDDC) + " and their Scrying fails.");
+							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC" + IntToString(nNDDC) + " and their Scrying fails.");
 							if(nCL + nCLRoll <  nNDDC) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
 								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
-								SendMessageToAllDMs(GetName(oScried) + " is under a non-detection spell. " + GetName(oScryer) + " failed a CL Check DC" + IntToString(nNDDC) + " and their Scrying fails.");
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
+								return;
 								}
 							else {
 								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken.");
@@ -280,14 +282,17 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							if(GetTag(GetItemInSlot(INVENTORY_SLOT_NECK, oScried)) == "abr_it_ne_amu_noscry") {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
+							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC19 and their Scrying fails.");
+							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + "CL Check vs. DC19 and their Scrying fails.");
+								
 							if(nCL + nCLRoll <= 19) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel it warding off a divination attempt.");
 								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
-								SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " failed a CL Check DC19 and their Scrying fails.");
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
+								return;
 								}
 							else {
 								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken.");
