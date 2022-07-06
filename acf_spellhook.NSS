@@ -376,10 +376,10 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
 	object oTarget = GetSpellTargetObject();
-	location lTarget = GetLocation(oScryer);
-	object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-	string sTriggerTag = GetTag(oScry);
-	if(oTarget == OBJECT_INVALID) {
+	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (GetObjectType(oTarget) != OBJECT_TYPE_CREATURE)) {
+		location lTarget = GetLocation(oScryer);
+		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		string sTriggerTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
@@ -389,11 +389,6 @@ if(GetSpellId() == 3068) {
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
-			
-		if(oScry == OBJECT_INVALID) {
-			CreateItemOnObject("abr_it_food_water", oScryer, 1);
-			SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
-		 	}
 		}
 	else {
 		CreateItemOnObject("abr_it_food_water", oScryer, 1);
