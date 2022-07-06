@@ -72,10 +72,10 @@ void main()
 					DestroyObject(oPickInventory);
 					}
 					
-					else {
+				else {
 					SendMessageToPC(oScryer, "You snip away a fragment of clothing from " + GetName(oTarget) + ".");
 					oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
-					SetFirstName(oToken, "Fragment of " + GetName(oTarget) + "'s clothing.");
+					SetFirstName(oToken, "Fragment of " + GetName(oTarget) + "'s Clothing.");
 					SetStolenFlag(oToken, TRUE);
 					}
 				}
@@ -99,7 +99,7 @@ void main()
 			}
 			
 		else {
-			SendMessageToPC(oScryer, "Snipping a purse takes skill. Snipping a body part takes even more skill. If the target won't give a token to you out of friendship, you'll need those skills to get it otherwise.");
+			SendMessageToPC(oScryer, "Snipping a purse takes skill. Snipping a body part takes even more skill. If the target won't give a personal token to you out of friendship, you'll need those skills to get it otherwise.");
 		}
 		
 		SignalEvent(oTarget, EventUserDefined(EVENT_DISTURBED));
@@ -110,7 +110,7 @@ void main()
 		SetFirstName(oToken, GetName(oScryer) + "'s Possession");
 		}
 		
-	//ACR_SetPersistentString(oToken, "sPScryerName", sScryer);
-	//ACR_SetPersistentString(oToken, "sPTargetName", sTarget);
+	ACR_SetPersistentString(oToken, "sPScryerName", sScryer);
+	ACR_SetPersistentString(oToken, "sPTargetName", sTarget);
 									
 }

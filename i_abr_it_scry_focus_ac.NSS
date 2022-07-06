@@ -32,7 +32,7 @@ void main()
 	//SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 		
 	if(GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) {
-		SendMessageToPC(oScryer, "This " + sTargetName + " has not been imbued.");
+		SendMessageToPC(oScryer, "This " + sFocusName + " has not been imbued.");
 		return;
 		}
 		
