@@ -101,7 +101,7 @@ void main()
 	    
 	
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the scrying object as a nickname associated with a ResRef
-if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
@@ -160,7 +160,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	}	
 
 	//A listener feeds any conversation to oScryer while oScryer is with oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
@@ -171,18 +171,18 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	}	 
 
 	//Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_listen")) {
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
+		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 		ActionForceFollowObject(oScried, 0.5, 0); 
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {
 			string sSpokenBy = GetName(GetLastSpeaker());
-			SetFirstName(oScryListen, sSpokenBy);
+			SetFirstName(oScrySpeak, sSpokenBy);
 			string sRelay = GetMatchedSubstring(0);
-			if(GetLastSpeaker() != oScryListen)  {
-				DelayCommand(1.0, AssignCommand(oScryListen, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
+			if(GetLastSpeaker() != oScrySpeak)  {
+				DelayCommand(1.0, AssignCommand(oScrySpeak, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 			}
 			//Scrying Sensor won't force follow across ATs, so here it checks to make sure oScried hasn't left the area and jumps to oScried if so
 			if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
@@ -192,9 +192,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	}	 
 
 
-//Action queue for OOC Scrying Listener that handles most Scrying interaction
+//Action queue for OOC Scrying Speaker that handles most Scrying interaction
 		
-if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
+if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		//Get existing local objects set by Spellhook
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sScryName = GetName(oScry);
@@ -204,8 +204,50 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 		//6020 thru 6029 are the names of the first ten PCs currently logged in
 		//6030 thru 6039 are the names of up to ten NPCs stored on the scrying object
 		string sMatch = GetMatchedSubstring(1);
-		string sPTargetRes = GetLocalString(oScry, sMatch);
 		int nMatch = GetListenPatternNumber();
+		//6040 will end an ongoing scrying session
+		if(nMatch == 6040) {
+		//End Spell
+			object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
+			object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
+			ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK);		
+			SendMessageToPC(oScryer, "The scry spell ends.");		
+			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+			 					
+			//Unset ALL local objects at the end of the spell
+			//Destroy Scrying Sensor and ScryListen
+			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScrySend, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScrySend, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScrySend, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScry", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScrySend, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
+								
+			SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0);
+			SetLocalInt(oScry, "nScryActive", 0);
+								 
+			DestroyObject(oScrySend);  
+			DestroyObject(oScrySelf);
+			DestroyObject(OBJECT_SELF);
+			return;
+		}
+		
+		string sPTargetRes = GetLocalString(oScry, sMatch);
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
 		//oScryer must speak the full name of the PC or Nickname of the allowable NPC he/she wishes to Scry	
@@ -258,7 +300,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 					   give that potential oScried a WillSave vs oScryer's DC*/
 					 
 					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
-						{if(GetLocalInt(oScried, "nNonDetection") != 0) {
+						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
 							int nNDDC = GetLocalInt(oScried, "nNonDetection");
@@ -267,19 +309,19 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							if(nCL + nCLRoll <  nNDDC) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
-								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
-								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
+								SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+								SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
 								return;
 								}
 							else {
-								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken.");
+								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken, and you know you must still win a battle of wills with your now detectable target.");
 								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you...then pausing, and returning.");
 								}
 							}
 							
-							if(GetTag(GetItemInSlot(INVENTORY_SLOT_NECK, oScried)) == "abr_it_ne_amu_noscry") {
+						else if(GetTag(GetItemInSlot(INVENTORY_SLOT_NECK, oScried)) == "abr_it_ne_amu_noscry") {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
 							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
@@ -288,14 +330,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 							if(nCL + nCLRoll <= 19) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel it warding off a divination attempt.");
-								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
-								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
+								SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+								SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
 								return;
 								}
 							else {
-								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken.");
+								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken, and you know you must still win a battle of wills with your now detectable target.");
 								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel its non-detection powers fail...and your will struggling with another's divination attempt.");
 								}
 							}
@@ -398,8 +440,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScryer, "You feel your spell fail.");
-								SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
-								SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
+								SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+								SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
 								SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
 								if(nWillSave >= nDC + 5){
 									SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
@@ -445,7 +487,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 									SetLocalObject(oScryer, "oScrySend", oScrySend);
 									SetLocalObject(oScried, "oScrySend", oScrySend);
 									
-									SetLocalObject(oScrySend, "oScryListen", OBJECT_SELF);
+									SetLocalObject(oScrySend, "oScrySpeak", OBJECT_SELF);
 									SetLocalObject(oScrySend, "oScried", oScried);
 									SetLocalObject(oScrySend, "oScryer", oScryer);
 									SetLocalObject(oScrySend, "oScry", oScry);
@@ -1083,8 +1125,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								DelayCommand(fScryTimer - 5.0, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			 					DelayCommand(fScryTimer - 1.0, SendMessageToPC(oScryer, "The scry spell ends."));		
 			 					DelayCommand(fScryTimer - 5.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
-			 					//DelayCommand(fScryTimer - 5.0, SendMessageToPC(oScryer, "Your scry spell ends and the images in the " + sScryName + " fade."));		
-			 
+			 					
 								//Unset ALL local objects at the end of the successful spell
 								//Destroy Scrying Sensor and ScryListen
 								//Backup in tsm_scry_npc_onspawn in case this successful branch doesn't fire
@@ -1092,10 +1133,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_listen") && ((GetLastSpeaker()== GetLocal
 								DelayCommand(fScryTimer, SetLocalObject(OBJECT_SELF, "oScried", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(oScryer, "oScried", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(oScrySend, "oScried", OBJECT_INVALID));
-								DelayCommand(fScryTimer, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
-								DelayCommand(fScryTimer, SetLocalObject(oScried, "oScryListen", OBJECT_INVALID));
-								DelayCommand(fScryTimer, SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID));
-								DelayCommand(fScryTimer, SetLocalObject(oScrySend, "oScryListen", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScrySend, "oScrySpeak", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(oScried, "oScryer", OBJECT_INVALID));

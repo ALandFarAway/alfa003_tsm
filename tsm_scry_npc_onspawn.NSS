@@ -53,7 +53,7 @@ void main()
 			
 			 object oDetector = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			 while (oDetector != OBJECT_INVALID) {
-				if(GetLocalInt(oDetector, "nDetectScrying") == 1) {
+				if(GetLocalInt(oDetector, "nTSM_sp_detectScry") == 1) {
 					SendMessageToPC(oDetector, "You see a small glowing orb appear in the air above " + GetName(oScried));
 					
 					 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
@@ -86,7 +86,7 @@ void main()
 			}
 		}
 		
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_listen") {
+		if(GetTag(OBJECT_SELF)== "003_cr_scry_speak") {
 			 //Initialize OOC undetectable Scrying Listener that receives information from the Scrying Sensor	 
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
@@ -150,6 +150,7 @@ void main()
 				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetJ + "**", 6039);
 				 }
 			 
+			 SetListenPattern(OBJECT_SELF, "** End Scrying**", 6040);
 			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			  
 			 //Tell ScryListen to Listen	 
@@ -166,9 +167,9 @@ void main()
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	
 			 DelayCommand(fScryTimer + 15.0, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
-			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScry, "oScryListen", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID));
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScry, "oScryer", OBJECT_INVALID));
-			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID));
+			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID));
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(oScryer, "oScry", OBJECT_INVALID));
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID));
 			 DelayCommand(fScryTimer + 15.0, SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID));

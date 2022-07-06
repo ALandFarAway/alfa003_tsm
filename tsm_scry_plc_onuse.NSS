@@ -112,7 +112,7 @@ void main() {
 	ACR_PlaceableOnUsed();
 	//Get oUser and existing local objects
  	object oUser = GetLastUsedBy();
-	object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
+	object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 				
@@ -395,9 +395,9 @@ void main() {
 				}
 			
 			//Is oScried on the move?
-			location lStart = GetLocalLocation(oScryListen, "lScryStart");
-			SetLocalLocation(oScryListen, "lNew", GetLocation(oScried));
-			location lNew = GetLocalLocation(oScryListen, "lNew");
+			location lStart = GetLocalLocation(oScrySpeak, "lScryStart");
+			SetLocalLocation(oScrySpeak, "lNew", GetLocation(oScried));
+			location lNew = GetLocalLocation(oScrySpeak, "lNew");
 			float fDistanceMoved = GetDistanceBetweenLocations(lStart, lNew);
 			string sMoving = "standing still.";
 			string sDirection = GetCompassDirectionOfAngle(GetAngleBetweenLocations(lStart, lNew));

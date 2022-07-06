@@ -416,26 +416,25 @@ if(GetSpellId() == 3092) {
 	if(oCaster != oTarget) {
 		nDC = 11 + nCL;
 		}
-	SetLocalInt(oTarget, "nNonDetection", nDC);
+	SetLocalInt(oTarget, "nTSM_sp_nonDetect", nDC);
 	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external prying.");
 	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
-	DelayCommand(IntToFloat(nDuration), SetLocalInt(OBJECT_SELF, "nNonDetection", 0));
+	DelayCommand(IntToFloat(nDuration), SetLocalInt(OBJECT_SELF, "nTSM_sp_nonDetect", 0));
 }
 
 if(GetSpellId() == 3058) {
-	SetLocalInt(OBJECT_SELF, "nDetectScrying", 1);
+	SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 1);
+    DelayCommand(86400.0, SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 0));
     object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	int nInc = 0;
 	while((oSensor != OBJECT_INVALID) && (nInc < 50)) {
 	if(FindSubString(GetTag(oSensor), "scry_send") != -1)
 		{SendMessageToPC(OBJECT_SELF, "You see a small glowing orb floating in the air.");
 		 object oScryer = GetLocalObject(oSensor, "oScryer");
-		 string sScryerDesc = GetDescription(oScryer);
 		 object oScrySelf = GetLocalObject(oSensor, "oScrySelf");
 		 if(oScrySelf != OBJECT_INVALID)
-		 	{SetDescription(oScrySelf, sScryerDesc);
-			 oScryer = oScrySelf;
+		 	{oScryer = oScrySelf;
 			 }
 		 object oScryerArea = GetArea(oScryer);
 		 string sScryerArea = GetName(oScryerArea);
@@ -447,7 +446,7 @@ if(GetSpellId() == 3058) {
 		 int nDetectorOpposed = nDetectorLevel + nDetectorRoll;
 		 if(nDetectorOpposed >= nCasterOpposed) {
 		  	SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell best the defences of the caster of the scrying sensor.");
-			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer: " + sScryerDesc);
+			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer. They look like " + GetName(oScryer));
 			SendMessageToPC(OBJECT_SELF, "You know that this person is located at the direction and distance of " + sScryerArea );
 			}
 		 else {SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell attempt to identify the person scrying you, but fail.");}
@@ -526,24 +525,24 @@ if(GetSpellId() == 3056)
 			int nDC = 10 + nSpellLevel + nAbilityMod;
 						
 			//Create undetectable OOC Scrying Listener at location of Scrying Object to receive scrying information about future scrying target
-			object oScryListen = GetLocalObject(oScry, "oScryListen");
-			if(oScryListen == OBJECT_INVALID) {
-				oScryListen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_listen", lHere);
-            	SetLocalObject(oScry, "oScryListen", oScryListen);
+			object oScrySpeak = GetLocalObject(oScry, "oScrySpeak");
+			if(oScrySpeak == OBJECT_INVALID) {
+				oScrySpeak = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_speak", lHere);
+            	SetLocalObject(oScry, "oScrySpeak", oScrySpeak);
 				}
 			
 			//Set all objects on each other
-			SetLocalObject(oScryListen, "oScry", oScry);
-			SetLocalObject(oScryListen, "oScryer", oScryer);
+			SetLocalObject(oScrySpeak, "oScry", oScry);
+			SetLocalObject(oScrySpeak, "oScryer", oScryer);
 			SetLocalObject(oScry, "oScryer", oScryer);
-			SetLocalObject(oScryer, "oScryListen", oScryListen);
+			SetLocalObject(oScryer, "oScrySpeak", oScrySpeak);
 			SetLocalObject(oScryer, "oScry", oScry);
 			
 			//Set all other variables on ScryListen
-			SetLocalInt(oScryListen, "nScryDC", nDC);
-			SetLocalInt(oScryListen, "nCasterLevel", nScryerLevel);
-			SetLocalFloat(oScryListen, "fScryTimer", 60.0 * nScryerLevel);
-			SetFirstName(oScryListen, sScryName);
+			SetLocalInt(oScrySpeak, "nScryDC", nDC);
+			SetLocalInt(oScrySpeak, "nCasterLevel", nScryerLevel);
+			SetLocalFloat(oScrySpeak, "fScryTimer", 60.0 * nScryerLevel);
+			SetFirstName(oScrySpeak, sScryName);
 			
 			//Over to ScryListener's onspawn: tsm_scry_npc_onspawn
 		}

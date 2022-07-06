@@ -50,28 +50,28 @@ void main()
     if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
-		object oScryListen = GetLocalObject(OBJECT_SELF, "oScryListen");
+		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
 		SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
 		
-		//Unset all local variables and destroy oScryListener, too
+		//Unset all local variables and destroy oScrySpeaker, too
 		SetLocalInt(oScry, "nScryActive", 0);
 		
 		SetLocalObject(oScry, "oScried", OBJECT_INVALID);
-		SetLocalObject(oScry, "oScryListen", OBJECT_INVALID);
+		SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
 		SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
 		SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
 		SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
-		SetLocalObject(oScryer, "oScryListen", OBJECT_INVALID);
+		SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
 		SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
 		SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
-		SetLocalObject(oScried, "oScryListen", OBJECT_INVALID);
+		SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID);
 		SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
 		SetLocalObject(oScried, "oScry", OBJECT_INVALID);
 		SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
 		SetLocalInt(oScry, "nScryActive", 0);
-		DestroyObject(oScryListen, 2.0);		
+		DestroyObject(oScrySpeak, 2.0);		
 	}
 		
 }
