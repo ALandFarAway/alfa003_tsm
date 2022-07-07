@@ -104,7 +104,9 @@ void main()
 if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
+	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
+	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
@@ -154,6 +156,17 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 			SetLocalString(oTarget, "sScryTargetJ", sMatch);
 		}
 		
+		ACR_SetPersistentString(oFocus, "sPTargetNick", sMatch);
+		object oToken = GetFirstItemInInventory(oScryer);
+		while(oToken != OBJECT_INVALID) {
+			if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
+				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
+				if(sPTokenName == sTargetName) {
+					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
+					}
+				}	
+			oToken = GetNextItemInInventory(oScryer);
+			}
 		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
 		DestroyObject(OBJECT_SELF, 5.0);
 		}	 				
@@ -247,25 +260,29 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			return;
 		}
 		
+		int nScryActive = GetLocalInt(oScry, "nScryActive");
+		if(nScryActive == 1) {
+			SendMessageToPC(oScryer, "You must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
+			return;
+			}
+			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
 		//oScryer must speak the full name of the PC or Nickname of the allowable NPC he/she wishes to Scry	
-		if(nMatch >= 6020) {
+		//if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
-				string sScriedName = GetName(oScried);
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
-					int nScryActive = GetLocalInt(oScry, "nScryActive");
-					if(nScryActive == 1) {
-						 SendMessageToPC(oScryer, "You must wait for this spell to end before scrying again. Use your scrying object for an update on your current subject.");
-						 break;
-						 }
-					//First, if the spoken name matches a stored NPC's nickname, then spawn the associated resref and grab some variables off it, then get rid of it again
+					string sScriedName = GetName(oScried);
+					string sScriedNick = sMatch;
+								
+					//First, if the spoken name matches a stored NPC's nickname or full name, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
-						sScriedName = sMatch;
 						if(sPTargetRes != "") {
 							oScried = CreateObject(OBJECT_TYPE_CREATURE, sPTargetRes, GetLocation(OBJECT_SELF));
+							sScriedName = GetName(oScried);
+							sScriedNick = sMatch;
 							ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
@@ -282,7 +299,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									int nNPC = 1;
 									object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
 									while (oNPC != OBJECT_INVALID) {
-										if((sScriedName == GetName(oNPC)) || (FindSubString(GetName(oNPC), sScriedName, 0) != -1)){
+										if(sScriedName == GetName(oNPC)) {
 											 oScried = oNPC;
 											 break;
 											}
@@ -299,7 +316,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 /*If the spoken name matches the name of one of the keyed NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
 					 
-					 if((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1)))  && (nScryActive == 0))
+					 if(((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1))) || (TestStringAgainstPattern("**" + sScriedNick + "**", GetMatchedSubstring(1)))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
@@ -357,11 +374,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								string sScryerName = GetName(oScryer);
 								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
+								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
 								int nScryer = 0;
 								if(sScryerName == sPScryerName) {
 									nScryer = 1;
 									}
-								if((sPTargetName == sScriedName) || (FindSubString(sPTargetName, sScriedName) != -1)) {
+								if((sPTargetName == sScriedName) || (sPTargetNick == sScriedNick) || (FindSubString(sPTargetName, sScriedName) != -1)) {
 									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
 										if(nConnection < 2) {nConnection = 2;}
@@ -524,7 +542,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										if(GetIsDMPossessed(oScryer) == FALSE) {
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
 											}
-									    DelayCommand(1.0, AssignCommand(oScryer, JumpToLocation(lThere)));
+									    AssignCommand(oScryer, JumpToLocation(lThere));
 										
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								        DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
@@ -1162,12 +1180,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							 }
 						 nIncA++;
 						 oScried = GetNextPC(FALSE);
-						 sScriedName = GetName(oScried);
-						 
-				}	
-			}
+					}	
+			//}
 			
-		else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
+		//else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 		}
 	else {if((nMatch == 6041) && (GetLocalInt(oScry, "nScryActive") == 0))  {
 			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed with their identity from an imbued scrying focus.");}	

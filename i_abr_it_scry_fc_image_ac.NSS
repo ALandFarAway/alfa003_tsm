@@ -19,11 +19,8 @@ void main()
 	string sTargetNick = GetLocalString(oTarget, sPTargetRes);
 	
 	int nDCRoll = 10+ d10(1);
-	//SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
-	//SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	fDCAbility = pow(fDCAbility, 2.0);
-	//SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	int nDCAbility = 0; 
 	if(fDCAbility < 1.5)
 		{nDCAbility = 1;}
@@ -35,9 +32,7 @@ void main()
 		{nDCAbility = 4;}
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
-	//SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
 	int nDC = nDCRoll + nDCAbility;
-	//SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 		
 	int nScryer = 0;
 	if(sScryerName == sPScryerName) {
@@ -63,8 +58,10 @@ void main()
 				if(oScryNamer == OBJECT_INVALID) {
 					oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
 		            SetLocalObject(oScryNamer, "oScryer", oScryer);
+					SetLocalObject(oScryNamer, "oFocus", oFocus);
 					SetLocalObject(oScryNamer, "oTarget", oTarget);
 					SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
+					SetLocalString(oScryNamer, "sPTargetName", sPTargetName);
 					}
 					
 				DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name for this potential scrying subject.", TALKVOLUME_TALK)));	

@@ -64,7 +64,6 @@ void main()
 					
 					sPickInventory = GetName(oPickInventory);
 					SendMessageToPC(oScryer, "You steal " + sPickInventory + " from " + GetName(oTarget) + ".");
-					//oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
 					oToken = CopyObject(oPickInventory, GetLocation(oScryer), oScryer, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);

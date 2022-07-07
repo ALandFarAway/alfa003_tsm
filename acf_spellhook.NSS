@@ -373,12 +373,19 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 	} 
 }
 
+if(GetSpellId() == 3066) {
+	object oMarked = GetSpellTargetObject();
+	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 2.0);
+}
+
 if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
 	object oTarget = GetSpellTargetObject();
-	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (GetObjectType(oTarget) != OBJECT_TYPE_CREATURE)) {
+	object oScry;
+	if(GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) {
 		location lTarget = GetLocation(oScryer);
-		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		string sTriggerTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
@@ -390,7 +397,8 @@ if(GetSpellId() == 3068) {
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
-	else {
+		
+	if(oScry == OBJECT_INVALID) {
 		CreateItemOnObject("abr_it_food_water", oScryer, 1);
 		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
 	 	}		
@@ -403,9 +411,7 @@ if(GetSpellId() == 3071) {
 	string sPlaceableTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sPlaceableTag = GetTag(oScry);
-			//SendMessageToPC(oScryer, "sPlaceableTag = " + sPlaceableTag);
 			if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
-				//SendMessageToPC(oScryer, "oScry = " + GetName(oScry));
 				CreateItemOnObject("abr_it_scry_shard", oScryer, 1);
 				SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
 	 			}
@@ -417,7 +423,9 @@ if(GetSpellId() == 3092) {
 	object oCaster = OBJECT_SELF;
 	object oTarget = GetSpellTargetObject();
 	int nCL = GetCasterLevel(OBJECT_SELF);
-	int nDuration = nCL * 60 * 60;
+	float fDuration = nCL * 60.0 * 60.0;
+	effect eIcon = EffectEffectIcon(52);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fDuration);
 	int nDC = 15 + nCL;
 	if(oCaster != oTarget) {
 		nDC = 11 + nCL;
@@ -426,12 +434,15 @@ if(GetSpellId() == 3092) {
 	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external prying.");
 	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
-	DelayCommand(IntToFloat(nDuration), SetLocalInt(OBJECT_SELF, "nTSM_sp_nonDetect", 0));
+	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "nTSM_sp_nonDetect", 0));
 }
 
 if(GetSpellId() == 3058) {
 	SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 1);
-    DelayCommand(86400.0, SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 0));
+    float fDuration = 24 * 60.0 * 60.0;
+	effect eIcon = EffectEffectIcon(54);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fDuration);
+	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 0));
     object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	int nInc = 0;
 	while((oSensor != OBJECT_INVALID) && (nInc < 50)) {
@@ -469,16 +480,16 @@ if(GetSpellId() == 3058) {
 		}
 	}
 
-if(GetSpellId() == 3056)
+if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
 			   SetLocalObject(oArea, "oScry", oScry);
 			   }
-		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 3.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	
 	string sTriggerTag;
@@ -499,7 +510,8 @@ if(GetSpellId() == 3056)
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
 	 	SendMessageToPC(oScryer, GetName(oScry) + " is already being used in a Scry spell.");
 		}
-	 else if(oScry == OBJECT_INVALID) {
+		
+	 if(oScry == OBJECT_INVALID) {
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
 		
@@ -520,6 +532,12 @@ if(GetSpellId() == 3056)
 			location lHere = GetLocation(oScry);
 			int nScryerLevel = GetCasterLevel(oScryer);
 	 	 	int nSpellLevel = GetSpellLevel(GetSpellId());
+			float fScryTimer = nScryerLevel * 60.0;
+			if(GetSpellId() == 3057) {
+				fScryTimer = nScryerLevel * 60.0 * 60.0;
+			}
+			effect eIcon = EffectEffectIcon(53);
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fScryTimer);
 			int nAbilityMod = GetAbilityModifier(ABILITY_INTELLIGENCE);
 			if(GetLastSpellCastClass()== CLASS_TYPE_BARD || CLASS_TYPE_SORCERER || CLASS_TYPE_PALADIN) {
 				nAbilityMod = GetAbilityModifier(ABILITY_CHARISMA);
@@ -547,7 +565,7 @@ if(GetSpellId() == 3056)
 			//Set all other variables on ScryListen
 			SetLocalInt(oScrySpeak, "nScryDC", nDC);
 			SetLocalInt(oScrySpeak, "nCasterLevel", nScryerLevel);
-			SetLocalFloat(oScrySpeak, "fScryTimer", 60.0 * nScryerLevel);
+			SetLocalFloat(oScrySpeak, "fScryTimer", fScryTimer);
 			SetFirstName(oScrySpeak, sScryName);
 			
 			//Over to ScryListener's onspawn: tsm_scry_npc_onspawn
