@@ -1,4 +1,7 @@
 #include "acr_scry_i"
+//#include "nwnx_objectattributes_include"
+//#include "acr_pps_i"
+#include "acr_vanity_i"
 
 void main()
 {
@@ -8,6 +11,8 @@ void main()
 	string sTarget = GetName(oTarget);
 	object oKit = GetItemActivated();
 	object oToken;
+	string sNatHair = GetNaturalHairColor(oScryer);
+	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
 	
 	if(oScryer == oTarget) {
 		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
