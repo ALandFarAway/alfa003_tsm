@@ -1,7 +1,23 @@
 #include "acr_scry_i"
-//#include "nwnx_objectattributes_include"
-//#include "acr_pps_i"
 #include "acr_vanity_i"
+#include "nwnx_objectattributes_include"
+
+void ActionCreateWynPlace(string sPlace, location lLocPlace)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
+}
+
+string XPObjectAttributesGetHairVariation(object Creature)
+
+{
+	string sHairVar = 	NWNXGetString(
+						"OBJECTATTRIBUTES",
+						"GetHairVariation",
+						"",
+						ObjectToInt( Creature ));
+	return sHairVar;	
+}
+
 
 void main()
 {
@@ -11,9 +27,16 @@ void main()
 	string sTarget = GetName(oTarget);
 	object oKit = GetItemActivated();
 	object oToken;
+	string sHairStyle = XPObjectAttributesGetHairVariation(oScryer);
 	string sNatHair = GetNaturalHairColor(oScryer);
+	string sRawHair = GetRawHairTintSet(oScryer);
 	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
-	
+	SendMessageToPC(oScryer, "sRawHair = " + sRawHair);
+	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
+	SendMessageToPC(oScryer, "sHairStyle = " + sHairStyle);
+	SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
+	//Bald Dwarf = 17, Facial Hair 0;
+	//Bald Human = 17, Facial Hair 0;
 	if(oScryer == oTarget) {
 		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oToken));
