@@ -11,6 +11,7 @@ void main()
 	
 	if(oScryer == oTarget) {
 		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
+		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oToken));
 		SetFirstName(oToken, GetName(oScryer) + "'s Body Part");
 		}
 		
@@ -34,10 +35,13 @@ void main()
 			
 			if(nSleightCheck >= nPickDC + 5) {
 				oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
+				SendMessageToPC(oScryer, "You snip a lock of hair from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the lock of hair.");
 				SetFirstName(oToken, "Lock of " + GetName(oTarget) + "'s Hair");
 				SetStolenFlag(oToken, TRUE);
+				DelayCommand(1.0, SendMessageToPC(oTarget, "You catch a brief shimmer near your head out of the corner of your eye."));
 				}
 			else if(nSleightCheck >= nPickDC) {
+				DelayCommand(1.0, SendMessageToPC(oTarget, "A brief shimmer near your gear catches your eye."));
 				object oInventory = GetFirstItemInInventory(oTarget);
 				int nPickable = 0;
 				while (oInventory != OBJECT_INVALID) {
@@ -63,7 +67,7 @@ void main()
 					}
 					
 					sPickInventory = GetName(oPickInventory);
-					SendMessageToPC(oScryer, "You steal " + sPickInventory + " from " + GetName(oTarget) + ".");
+					SendMessageToPC(oScryer, "You snip " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
 					oToken = CopyObject(oPickInventory, GetLocation(oScryer), oScryer, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);
@@ -85,8 +89,34 @@ void main()
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank + nSpotBonus;
 			if(nSpotCheck >= nSleightCheck) {
+				int nRace = GetRacialType(oScryer);
+				string sRace = "human";
+				if(nRace == RACIAL_TYPE_DWARF) {
+					sRace = "dwarf";
+					}
+				if(nRace == RACIAL_TYPE_ELF) {
+					sRace = "elf";
+					}
+				if(nRace == RACIAL_TYPE_GNOME) {
+					sRace = "gnome";
+					}
+				if(nRace == RACIAL_TYPE_HALFELF) {
+					sRace = "half elf";
+					}
+				if(nRace == RACIAL_TYPE_HALFLING) {
+					sRace = "halfling";
+					}
+				if(nRace == RACIAL_TYPE_HALFORC) {
+					sRace = "half orc";
+					}
+				
+				int nGender = GetGender(oScryer);
+				string sGender = "male";
+				if(nGender == GENDER_FEMALE) {
+					sGender = "female";
+					}
 				SendMessageToPC(oScryer, "You have been detected!");
-				SendMessageToPC(oTarget, "You detect somebody trying to steal from you!");
+				SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
 				if(GetIsPC(oTarget) == FALSE) {
 					AssignCommand(oTarget, ActionSpeakString("Thief!", TALKVOLUME_TALK));
 					if(GetStealthMode(oScryer) == STEALTH_MODE_DISABLED) {
@@ -105,7 +135,9 @@ void main()
 	
 	if(GetObjectType(oTarget) == OBJECT_TYPE_ITEM) {
 		oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
-		SetFirstName(oToken, GetName(oScryer) + "'s Possession");
+		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oTarget));
+		SetFirstName(oToken, GetName(oScryer) + "'s " + GetName(oTarget));
+		DestroyObject(oTarget);
 		}
 		
 	ACR_SetPersistentString(oToken, "sPScryerName", sScryer);

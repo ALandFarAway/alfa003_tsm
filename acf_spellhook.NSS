@@ -376,14 +376,15 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 2.0);
+	ApplyEffectToObject(DURATION_TYPE_INSTANT, eMark, oMarked);
 }
-
+ 
 if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
+	int nCasterType = GetLastSpellCastClass();
 	object oTarget = GetSpellTargetObject();
 	object oScry;
-	if(GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) {
+	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (nCasterType == CLASS_TYPE_DRUID)) {
 		location lTarget = GetLocation(oScryer);
 		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		string sTriggerTag = GetTag(oScry);
@@ -391,14 +392,14 @@ if(GetSpellId() == 3068) {
 			sTriggerTag = GetTag(oScry);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
-				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
+				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oScry) + ".");
 	 			return;
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
 		
-	if(oScry == OBJECT_INVALID) {
+	else {
 		CreateItemOnObject("abr_it_food_water", oScryer, 1);
 		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
 	 	}		

@@ -34,12 +34,20 @@ void main() {
 	 
 	 int nLastSpell = GetLastSpell();
 	 object oCaster = GetLastSpellCaster();
+	 int nCasterType = GetLastSpellCastClass();
 	 object oTarget = OBJECT_SELF;
 	 string sTag = GetTag(OBJECT_SELF);
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 string sBless;
 	 
-	 if((nLastSpell == 3068) && ((sResRef == "abr_pl_so_holyfont") || (sResRef == "abr_pl_so_pool"))) {
+	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && (nCasterType == CLASS_TYPE_CLERIC)) {
+	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
+		SetFirstName(oFocus, "Scrying Droplet");
+		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
+	    SetItemIcon(oFocus, 1896);
+		}
+	 
+	 else if((nLastSpell == 3068) && (sResRef == "abr_pl_so_pool") && (nCasterType == CLASS_TYPE_DRUID)) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");

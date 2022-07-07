@@ -114,6 +114,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		string sMatch = GetMatchedSubstring(0);
 		SetLocalString(oTarget, sTargetRes, sMatch);
 		SetLocalString(oTarget, sMatch, sTargetRes);
+		SetLocalString(oScryer, sTargetName, sMatch);
 		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
 		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
 		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
@@ -275,14 +276,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 	         	object oScried = GetFirstPC(FALSE);
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					string sScriedName = GetName(oScried);
-					string sScriedNick = sMatch;
+					SendMessageToPC(oScryer, IntToString(nIncA) + ": sScried = " + GetName(oScried));
+					//string sScriedNickSpoken = sMatch;
+					string sScriedNickStored = GetLocalString(oScryer, sScriedName);
 								
 					//First, if the spoken name matches a stored NPC's nickname or full name, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
 						if(sPTargetRes != "") {
 							oScried = CreateObject(OBJECT_TYPE_CREATURE, sPTargetRes, GetLocation(OBJECT_SELF));
+							SendMessageToPC(oScryer, IntToString(nIncA) + ": sScried = " + GetName(oScried));
 							sScriedName = GetName(oScried);
-							sScriedNick = sMatch;
 							ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
@@ -316,7 +319,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 /*If the spoken name matches the name of one of the keyed NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
 					 
-					 if(((TestStringAgainstPattern("**" + sScriedName + "**", GetMatchedSubstring(1))) || (TestStringAgainstPattern("**" + sScriedNick + "**", GetMatchedSubstring(1)))) && (nScryActive == 0))
+					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
@@ -379,7 +382,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								if(sScryerName == sPScryerName) {
 									nScryer = 1;
 									}
-								if((sPTargetName == sScriedName) || (sPTargetNick == sScriedNick) || (FindSubString(sPTargetName, sScriedName) != -1)) {
+								if((sPTargetName == sScriedName) || (sPTargetNick == sMatch) || (FindSubString(sPTargetName, sScriedName) != -1)) {
 									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
 										if(nConnection < 2) {nConnection = 2;}
@@ -454,7 +457,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							nWillSaveBase = GetWillSavingThrow(oScried);
 							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
-						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScryer, "You feel your spell fail.");
@@ -466,6 +469,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									}
 								SetLocalInt(oScry, "nScryActive", 0);
 								DestroyObject(OBJECT_SELF, 2.0);
+								return;
 								}
 							
 						//If oScried fails their WillSave they become the oScried object
