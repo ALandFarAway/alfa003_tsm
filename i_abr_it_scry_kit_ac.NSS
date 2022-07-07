@@ -27,13 +27,15 @@ void main()
 	string sTarget = GetName(oTarget);
 	object oKit = GetItemActivated();
 	object oToken;
-	string sHairStyle = XPObjectAttributesGetHairVariation(oScryer);
+	string sHairVar = XPObjectAttributesGetHairVariation(oScryer);
 	string sNatHair = GetNaturalHairColor(oScryer);
 	string sRawHair = GetRawHairTintSet(oScryer);
+	SendMessageToPC(oScryer, "Object to String = " + ObjectToString(oScryer));
+	SendMessageToPC(oScryer, "Object to Int = " + IntToString(ObjectToInt(oScryer)));
 	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
 	SendMessageToPC(oScryer, "sRawHair = " + sRawHair);
 	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
-	SendMessageToPC(oScryer, "sHairStyle = " + sHairStyle);
+	SendMessageToPC(oScryer, "sHairVar = " + sHairVar);
 	SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
 	//Bald Dwarf = 17, Facial Hair 0;
 	//Bald Human = 17, Facial Hair 0;
