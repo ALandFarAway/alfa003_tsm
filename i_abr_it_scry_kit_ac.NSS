@@ -12,7 +12,7 @@ string XPObjectAttributesGetHairVariation(object Creature)
 {
 	string sHairVar = 	NWNXGetString(
 						"OBJECTATTRIBUTES",
-						"SetHairVariation",
+						"GetHairVariation",
 						"",
 						ObjectToInt( Creature ));
 	return sHairVar;	

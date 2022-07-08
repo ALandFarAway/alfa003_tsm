@@ -150,7 +150,7 @@ void main()
 				 SetListenPattern(OBJECT_SELF, "**" + sScryTargetJ + "**", 6039);
 				 }
 			 
-			 SetListenPattern(OBJECT_SELF, "** End Scrying**", 6040);
+			 SetListenPattern(OBJECT_SELF, "**End Scry**", 6040);
 			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			  
 			 //Tell ScryListen to Listen	 

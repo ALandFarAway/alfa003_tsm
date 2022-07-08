@@ -225,7 +225,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 			object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
-			ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK);		
+			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
 			 					
@@ -257,7 +257,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 
 			DestroyObject(oScrySend);  
 			DestroyObject(oScrySelf);
-			DestroyObject(OBJECT_SELF);
+			DestroyObject(OBJECT_SELF, 1.0);
 			return;
 		}
 		
@@ -1190,7 +1190,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		//else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 		}
 	else {if((nMatch == 6041) && (GetLocalInt(oScry, "nScryActive") == 0))  {
-			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed with their identity from an imbued scrying focus.");}	
+			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that nickname. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed under that name with their identity from an imbued scrying focus. Your spell is still active and you may speak a different name.");}	
 		}
 	}
 					 	   	 
