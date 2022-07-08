@@ -115,6 +115,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		SetLocalString(oTarget, sTargetRes, sMatch);
 		SetLocalString(oTarget, sMatch, sTargetRes);
 		SetLocalString(oScryer, sTargetName, sMatch);
+					
 		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
 		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
 		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
@@ -276,7 +277,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		//if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
-				SendMessageToPC(oScryer, "FirstPC Name = " + GetName(oScried));
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					string sScriedName = GetName(oScried);
 					SendMessageToPC(oScryer, "1. sScriedName = " + sScriedName);
@@ -324,7 +324,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 SendMessageToPC(oScryer, "sMatch = " + sMatch);
 					 SendMessageToPC(oScryer, "sScriedName = " + sScriedName);
 					 SendMessageToPC(oScryer, "sScriedNickStored = " + sScriedNickStored);
-					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || ((TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch)) && (sPTargetRes != ""))) && (nScryActive == 0))
+					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);

@@ -71,9 +71,6 @@ void main()
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 					}
-				else if(GetIsPC(oTarget) == TRUE) {
-					ACR_SetPersistentString(oImage, "sPTargetRes", sTargetName);
-					}
 				DestroyObject(oFocus);
 				}
 			else {

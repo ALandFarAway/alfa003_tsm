@@ -107,9 +107,6 @@ void main()
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
 					}
-				else if(GetIsPC(oTarget) == TRUE) {
-					ACR_SetPersistentString(oImago, "sPTargetRes", sTargetName);
-					}
 				}
 		     else {
 			    SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
