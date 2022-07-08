@@ -493,28 +493,29 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 int nCasterType = GetLastSpellCastClass();
 	 SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	 object oTarget = GetSpellTargetObject();
-	 object oScry;
-	 if(nCasterType != CLASS_TYPE_DRUID) {
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 //object oScry;
+	 //if(nCasterType != CLASS_TYPE_DRUID) {
+	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	 	while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
 			   SetLocalObject(oArea, "oScry", oScry);
 			   }
 		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
-	}
+	//}
 	
+	oScry = GetLocalObject(oArea, "oScry");
 	string sTriggerTag;
-	if(nCasterType == CLASS_TYPE_DRUID) {
+	if((nCasterType == CLASS_TYPE_DRUID) && (GetObjectType(oScry) != OBJECT_TYPE_PLACEABLE)) {
 		location lTarget = GetLocation(oScryer);
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
 			SendMessageToPC(oScryer, "sScry tag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SetLocalObject(oArea, "oScry", oScry);
 				}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER  || OBJECT_TYPE_PLACEABLE);
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
 		
