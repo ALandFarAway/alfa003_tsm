@@ -6,6 +6,22 @@ void main()
     object oScryer = GetItemActivator();
 	string sScryerName = GetName(oScryer);
 	object oTarget = GetItemActivatedTarget();
+	object oArea = GetArea(oScryer);
+	string sTriggerTag;
+	int nCasterType = GetLocalInt(oScryer, "nSpellCasterType");
+	if(nCasterType == CLASS_TYPE_DRUID) {
+		location lTarget = GetLocation(oScryer);
+		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+		while(oScry != OBJECT_INVALID) {
+			sTriggerTag = GetTag(oScry);
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
+				SetLocalObject(oArea, "oScry", oScry);
+				}
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER  || OBJECT_TYPE_PLACEABLE);
+			}
+		
+		oTarget = GetLocalObject(oArea, "oScry");
+	}
 	string sTargetName = GetName(oTarget);
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);

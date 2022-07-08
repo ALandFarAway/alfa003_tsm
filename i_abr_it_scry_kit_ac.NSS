@@ -24,11 +24,11 @@ void main()
 	object oKit = GetItemActivated();
 	object oToken;
 	string sHairVar = XPObjectAttributesGetHairVariation(oScryer);
-	SendMessageToPC(oScryer, "sHairVar = " + sHairVar);
+	//SendMessageToPC(oScryer, "sHairVar = " + sHairVar);
 	string sNatHair = GetNaturalHairColor(oScryer);
 	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
 	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
-	SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
+	//SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
 	//Bald Dwarf = 17, Facial Hair 0;
 	//Bald Human = 17, Facial Hair 0;
 	if(oScryer == oTarget) {

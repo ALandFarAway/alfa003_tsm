@@ -508,13 +508,13 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	string sTriggerTag;
 	if(nCasterType == CLASS_TYPE_DRUID) {
 		location lTarget = GetLocation(oScryer);
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SetLocalObject(oArea, "oScry", oScry);
 				}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER  || OBJECT_TYPE_PLACEABLE);
 			}
 		}
 		
