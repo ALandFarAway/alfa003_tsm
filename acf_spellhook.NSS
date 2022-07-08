@@ -507,10 +507,10 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		  oScryPlc = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	//}
-	
-	object oScry = oScryPlc;
-	 
+	float fDistancePlc = GetDistanceBetween(oScryer, oScryPlc);
+	SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
 	oScryPlc = GetLocalObject(oArea, "oScryPLC");
+	object oScry = oScryPlc;
 	SendMessageToPC(oScryer, "1. sScry ResRefPlc = " + GetResRef(oScryPlc));
 	int nObjectTypePlc = GetObjectType(oScryPlc);
 	SendMessageToPC(oScryer, "1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
@@ -528,12 +528,10 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			oScryTrg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		 
-		 float fDistancePlc = GetDistanceBetween(oScryer, oScryPlc);
 		 float fDistanceTrg = GetDistanceBetween(oScryer, oScryTrg);
-		 SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
 		 SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
-		 	
-		 
+		 if((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc))
+		 	{oScry = oScryTrg;}
 		}
 	
 			
@@ -541,6 +539,9 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	int nObjectTypeTrg = GetObjectType(oScryTrg);
 	SendMessageToPC(oScryer, "2. nObjectTypeTrg = " + IntToString(nObjectTypeTrg));
 	
+	SendMessageToPC(oScryer, "3. sScry ResRef = " + GetResRef(oScry));
+	int nObjectType = GetObjectType(oScry);
+	SendMessageToPC(oScryer, "3. nObjectType = " + IntToString(nObjectType));
 	
 	
 			
