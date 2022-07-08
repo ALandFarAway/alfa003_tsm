@@ -161,8 +161,8 @@ void main()
 			 ActionSpeakString(sSpeak, TALKVOLUME_TALK);
 			 effect eDivination = EffectVisualEffect(VFX_HIT_SPELL_DIVINATION, FALSE);
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDivination, oScry);
-			 SendMessageToPC(oScryer, "Speak the full name of an adventurer you wish to attempt to scry. Alternatively, if this " + GetName(oScry) + " has been keyed with a scrying focus imbued with the image of a member of the wider populace, provide that person's scrying nickname to attempt to scry them.");
-			 SendMessageToPC(oScryer, "Holding an imbued scrying shard or droplet will improve *both* the connection to *and* knowledge of any target. Holding a possession or body part will improve the connection to *any* target.");
+			 SendMessageToPC(oScryer, "Speak the name or nickname of a subject you wish to attempt to scry. This " + GetName(oScry) + " must have been keyed recently by a scrying focus imbued with their identity.");
+			 SendMessageToPC(oScryer, "Holding an imbued scrying shard or droplet will improve *both* the connection to *and* knowledge of any target. Holding a possession or body part will improve the connection to any target.");
 			
 			 //Unset all currently existing local variables before self destruction at the end of the potential Scry spell as a backup in case the Scry spell itself fails
 			 float fScryTimer = GetLocalFloat(OBJECT_SELF, "fScryTimer");	

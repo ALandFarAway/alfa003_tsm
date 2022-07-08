@@ -106,7 +106,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
-	SendMessageToPC(oScryer, "Namer spawn sTargetRes = " + sTargetRes);
+	//SendMessageToPC(oScryer, "Namer spawn sTargetRes = " + sTargetRes);
 	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
@@ -270,7 +270,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			}
 			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
-		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
+		//SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
 					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
@@ -280,9 +280,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 	         	object oScried = GetFirstPC(FALSE);
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					string sScriedName = GetName(oScried);
-					SendMessageToPC(oScryer, "1. sScriedName = " + sScriedName);
+					//SendMessageToPC(oScryer, "1. sScriedName = " + sScriedName);
 					string sScriedNickStored = GetLocalString(oScryer, sScriedName);
-					SendMessageToPC(oScryer, "1. sScriedNickStored = " + sScriedNickStored);
+					//SendMessageToPC(oScryer, "1. sScriedNickStored = " + sScriedNickStored);
 										
 					//First, if the spoken name matches a stored NPC's nickname or full name, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
@@ -322,9 +322,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 
 					 /*If the spoken name matches the name of one of the keyed NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
-					 SendMessageToPC(oScryer, IntToString(nIncA) + ": sMatch = " + sMatch);
-					 SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedName = " + sScriedName);
-					 SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedNickStored = " + sScriedNickStored);
+					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sMatch = " + sMatch);
+					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedName = " + sScriedName);
+					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedNickStored = " + sScriedNickStored);
 					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
@@ -385,8 +385,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								int nScryer = 0;
 								if(sScryerName == sPScryerName) {
 									nScryer = 1;

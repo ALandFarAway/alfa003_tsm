@@ -376,7 +376,7 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
-	ApplyEffectToObject(DURATION_TYPE_INSTANT, eMark, oMarked);
+	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
 }
  
 
@@ -491,19 +491,19 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
 	 int nCasterType = GetLastSpellCastClass();
-	 SendMessageToPC(oScryer, "nCasterType = " + IntToString(nCasterType));
+	 //SendMessageToPC(oScryer, "nCasterType = " + IntToString(nCasterType));
 	 SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	 object oTarget = GetSpellTargetObject();
 	 //object oScry;
 	 //if(nCasterType != CLASS_TYPE_DRUID) {
 	 float fDistancePlc = 0.0;
 	 object oScryPlc = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
-	 	SendMessageToPC(oScryer, "0. sScry Name = " + GetName(oScryPlc));
+	 	//SendMessageToPC(oScryer, "0. sScry Name = " + GetName(oScryPlc));
 		while(oScryPlc != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScryPlc), "_SCRY") != -1){
 			    string sPlcTag = GetTag(oScryPlc);
-				SendMessageToPC(oScryer, "1. sScryPlc Name = " + GetName(oScryPlc));
-				SendMessageToPC(oScryer, "1. sPlcTag = " + sPlcTag);
+				//SendMessageToPC(oScryer, "1. sScryPlc Name = " + GetName(oScryPlc));
+				//SendMessageToPC(oScryer, "1. sPlcTag = " + sPlcTag);
 			    SetLocalObject(oArea, "oScryPlc", oScryPlc);
 			    fDistancePlc = GetDistanceBetween(oScryer, oScryPlc);
 				SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
@@ -514,9 +514,9 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	oScryPlc = GetLocalObject(oArea, "oScryPlc");
 	object oScry = GetLocalObject(oArea, "oScryPlc");
 	SetLocalObject(oArea, "oScry", oScry);
-	SendMessageToPC(oScryer, "1. sScry ResRefPlc = " + GetResRef(oScryPlc));
+	//SendMessageToPC(oScryer, "1. sScry ResRefPlc = " + GetResRef(oScryPlc));
 	int nObjectTypePlc = GetObjectType(oScryPlc);
-	SendMessageToPC(oScryer, "1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
+	//SendMessageToPC(oScryer, "1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
 	SetLocalObject(oArea, "oScryPlc", OBJECT_INVALID);
 			   
 	float fDistanceTrg = 0.0;		
@@ -525,12 +525,12 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
-			SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
+			//SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
+			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);
 				 fDistanceTrg = GetDistanceBetween(oScryer, oScryTrg);
-				 SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
+				 //SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
 				 if(((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc)) ||(oScryPlc == OBJECT_INVALID))
 				 	{oScry = oScryTrg;
 					 SetLocalObject(oArea, "oScry", oScryTrg);
@@ -543,13 +543,13 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	
 	oScry = GetLocalObject(oArea, "oScry");
 		 
-	SendMessageToPC(oScryer, "2. sScry ResRefTrg = " + GetResRef(oScryTrg));
+	//SendMessageToPC(oScryer, "2. sScry ResRefTrg = " + GetResRef(oScryTrg));
 	int nObjectTypeTrg = GetObjectType(oScryTrg);
-	SendMessageToPC(oScryer, "2. nObjectTypeTrg = " + IntToString(nObjectTypeTrg));
+	//SendMessageToPC(oScryer, "2. nObjectTypeTrg = " + IntToString(nObjectTypeTrg));
 	
-	SendMessageToPC(oScryer, "3. sScry ResRef = " + GetResRef(oScry));
+	//SendMessageToPC(oScryer, "3. sScry ResRef = " + GetResRef(oScry));
 	int nObjectType = GetObjectType(oScry);
-	SendMessageToPC(oScryer, "3. nObjectType = " + IntToString(nObjectType));
+	//SendMessageToPC(oScryer, "3. nObjectType = " + IntToString(nObjectType));
 	
 	
 			

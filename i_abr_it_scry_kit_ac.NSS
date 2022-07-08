@@ -26,7 +26,7 @@ void main()
 	string sHairVar = XPObjectAttributesGetHairVariation(oScryer);
 	//SendMessageToPC(oScryer, "sHairVar = " + sHairVar);
 	string sNatHair = GetNaturalHairColor(oScryer);
-	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
+	//SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
 	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
 	//SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
 	//Bald Dwarf = 17, Facial Hair 0;

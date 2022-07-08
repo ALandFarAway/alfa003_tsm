@@ -13,8 +13,8 @@ void main()
 		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
-			SendMessageToPC(oScryer, "Image. oScry Name = " + GetName(oScry));
-			SendMessageToPC(oScryer, "Image. sTriggerTag = " + sTriggerTag);
+			//SendMessageToPC(oScryer, "Image. oScry Name = " + GetName(oScry));
+			//SendMessageToPC(oScryer, "Image. sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SetLocalObject(oArea, "oScry", oScry);
 				}
