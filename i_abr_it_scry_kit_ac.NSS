@@ -2,10 +2,6 @@
 #include "acr_vanity_i"
 #include "nwnx_objectattributes_include"
 
-void ActionCreateWynPlace(string sPlace, location lLocPlace)
-{
-    CreateObject(OBJECT_TYPE_PLACEABLE, sPlace, lLocPlace);
-}
 
 string XPObjectAttributesGetHairVariation(object Creature)
 
@@ -28,14 +24,10 @@ void main()
 	object oKit = GetItemActivated();
 	object oToken;
 	string sHairVar = XPObjectAttributesGetHairVariation(oScryer);
-	string sNatHair = GetNaturalHairColor(oScryer);
-	string sRawHair = GetRawHairTintSet(oScryer);
-	SendMessageToPC(oScryer, "Object to String = " + ObjectToString(oScryer));
-	SendMessageToPC(oScryer, "Object to Int = " + IntToString(ObjectToInt(oScryer)));
-	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
-	SendMessageToPC(oScryer, "sRawHair = " + sRawHair);
-	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
 	SendMessageToPC(oScryer, "sHairVar = " + sHairVar);
+	string sNatHair = GetNaturalHairColor(oScryer);
+	SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
+	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
 	SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
 	//Bald Dwarf = 17, Facial Hair 0;
 	//Bald Human = 17, Facial Hair 0;

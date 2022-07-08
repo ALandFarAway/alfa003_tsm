@@ -318,7 +318,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 
 					 /*If the spoken name matches the name of one of the keyed NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
-					 
+					 SendMessageToPC(oScryer, "sMatch = " + sMatch);
+					 SendMessageToPC(oScryer, "sScriedName = " + sScriedName);
+					 SendMessageToPC(oScryer, "sScriedNickStored = " + sScriedNickStored);
 					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
@@ -361,6 +363,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel its non-detection powers fail...and your will struggling with another's divination attempt.");
 								}
 							}
+							
 						SendMessageToPC(oScryer, "You feel your spell contesting with " + sScriedName + "'s willpower to resist it.");
 						//oScried makes a privately rolled WillSave vs. stored DC:
 						
