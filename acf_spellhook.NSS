@@ -496,22 +496,30 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 //object oScry;
 	 //if(nCasterType != CLASS_TYPE_DRUID) {
 	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
-	 	while(oScry != OBJECT_INVALID) {
+	 	SendMessageToPC(oScryer, "0. sScry Name = " + GetName(oScry));
+		while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
-			   SetLocalObject(oArea, "oScry", oScry);
+			    string sPlcTag = GetTag(oScry);
+				SendMessageToPC(oScryer, "1. sScry Name = " + GetName(oScry));
+				SendMessageToPC(oScryer, "1. sPlcTag = " + sPlcTag);
+			    SetLocalObject(oArea, "oScry", oScry);
 			   }
 		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	//}
 	
 	oScry = GetLocalObject(oArea, "oScry");
-	string sTriggerTag;
+	SendMessageToPC(oScryer, "1. sScry ResRef = " + GetResRef(oScry));
+	int nObjectType = GetObjectType(oScry);
+	SendMessageToPC(oScryer, "1. nObjectType = " + IntToString(nObjectType));
+			
 	if((nCasterType == CLASS_TYPE_DRUID) && (GetObjectType(oScry) != OBJECT_TYPE_PLACEABLE)) {
 		location lTarget = GetLocation(oScryer);
 		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
-			sTriggerTag = GetTag(oScry);
-			SendMessageToPC(oScryer, "sScry tag = " + sTriggerTag);
+			string sTriggerTag = GetTag(oScry);
+			SendMessageToPC(oScryer, "2. sScry Name = " + GetName(oScry));
+			SendMessageToPC(oScryer, "2. sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SetLocalObject(oArea, "oScry", oScry);
 				}
@@ -520,6 +528,9 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		}
 		
 	oScry = GetLocalObject(oArea, "oScry");
+	SendMessageToPC(oScryer, "2. sScry ResRef = " + GetResRef(oScry));
+	nObjectType = GetObjectType(oScry);
+	SendMessageToPC(oScryer, "2. nObjectType = " + IntToString(nObjectType));
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
