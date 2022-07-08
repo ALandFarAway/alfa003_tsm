@@ -276,16 +276,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 	         	object oScried = GetFirstPC(FALSE);
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					string sScriedName = GetName(oScried);
-					SendMessageToPC(oScryer, IntToString(nIncA) + ": sScried = " + GetName(oScried));
-					//string sScriedNickSpoken = sMatch;
 					string sScriedNickStored = GetLocalString(oScryer, sScriedName);
-								
+										
 					//First, if the spoken name matches a stored NPC's nickname or full name, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
 						if(sPTargetRes != "") {
 							oScried = CreateObject(OBJECT_TYPE_CREATURE, sPTargetRes, GetLocation(OBJECT_SELF));
-							SendMessageToPC(oScryer, IntToString(nIncA) + ": sScried = " + GetName(oScried));
 							sScriedName = GetName(oScried);
+							sScriedNickStored = GetLocalString(oScryer, sScriedName);
 							ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oScried);
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, oScried);
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
