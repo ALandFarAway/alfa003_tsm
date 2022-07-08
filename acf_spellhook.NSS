@@ -463,6 +463,7 @@ if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
 	int nCasterType = GetLastSpellCastClass();
 	object oTarget = GetSpellTargetObject();
+	SetLocalInt(oTarget, "nSpellCasterType", nCasterType);
 	object oScry;
 	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (nCasterType == CLASS_TYPE_DRUID)) {
 		location lTarget = GetLocation(oScryer);

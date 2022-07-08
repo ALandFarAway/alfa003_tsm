@@ -34,8 +34,8 @@ void main() {
 	 
 	 int nLastSpell = GetLastSpell();
 	 object oCaster = GetLastSpellCaster();
-	 int nCasterType = GetLastSpellCastClass();
 	 object oTarget = OBJECT_SELF;
+	 int nCasterType = GetLocalInt(oTarget, "nSpellCasterType");
 	 string sTag = GetTag(OBJECT_SELF);
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 string sBless;
