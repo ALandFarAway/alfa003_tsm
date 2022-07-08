@@ -69,7 +69,12 @@ void main()
 				ACR_SetPersistentString(oImage, "sPTargetName", sTargetName);
 				ACR_SetPersistentString(oImage, "sPScryerName", sScryerName);
 				if(GetIsPC(oTarget) == FALSE) {
+					SendMessageToPC(oScryer, "IsPC == FALSE");
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
+					}
+				if(GetIsPC(oTarget) == TRUE) {
+					SendMessageToPC(oScryer, "IsPC == TRUE");
+					ACR_SetPersistentString(oImage, "sPTargetRes", "");
 					}
 				DestroyObject(oFocus);
 				}
