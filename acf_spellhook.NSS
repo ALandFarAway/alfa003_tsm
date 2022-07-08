@@ -533,7 +533,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		 
 		 float fDistanceTrg = GetDistanceBetween(oScryer, oScryTrg);
 		 SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
-		 if(((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc)) ||( fDistancePlc = 0.0))
+		 if(((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc)) ||( fDistancePlc == 0.0))
 		 	{oScry = oScryTrg;}
 		}
 	
