@@ -379,31 +379,6 @@ if(GetSpellId() == 3066) {
 	ApplyEffectToObject(DURATION_TYPE_INSTANT, eMark, oMarked);
 }
  
-if(GetSpellId() == 3068) {
-	object oScryer = OBJECT_SELF;
-	int nCasterType = GetLastSpellCastClass();
-	object oTarget = GetSpellTargetObject();
-	object oScry;
-	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (nCasterType == CLASS_TYPE_DRUID)) {
-		location lTarget = GetLocation(oScryer);
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-		string sTriggerTag = GetTag(oScry);
-		while(oScry != OBJECT_INVALID) {
-			sTriggerTag = GetTag(oScry);
-			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
-				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oScry) + ".");
-	 			return;
-				}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-			}
-		}
-		
-	else {
-		CreateItemOnObject("abr_it_food_water", oScryer, 1);
-		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
-	 	}		
-}
 
 if(GetSpellId() == 3071) {
 	object oScryer = OBJECT_SELF;
@@ -481,20 +456,51 @@ if(GetSpellId() == 3058) {
 		}
 	}
 
+if(GetSpellId() == 3068) {
+	object oScryer = OBJECT_SELF;
+	int nCasterType = GetLastSpellCastClass();
+	object oTarget = GetSpellTargetObject();
+	object oScry;
+	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (nCasterType == CLASS_TYPE_DRUID)) {
+		location lTarget = GetLocation(oScryer);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		string sTriggerTag = GetTag(oScry);
+		while(oScry != OBJECT_INVALID) {
+			sTriggerTag = GetTag(oScry);
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
+				CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
+				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oScry) + ".");
+	 			return;
+				}
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			}
+		}
+		
+	else if(FindSubString(GetTag(oScry), "_SCRY") == -1){
+		CreateItemOnObject("abr_it_food_water", oScryer, 1);
+		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
+	 	}		
+}
+
 if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
-	 while(oScry != OBJECT_INVALID) {
+	 int nCasterType = GetLastSpellCastClass();
+	 object oTarget = GetSpellTargetObject();
+	 object oScry;
+	 if(nCasterType != CLASS_TYPE_DRUID) {
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 	while(oScry != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
 			   SetLocalObject(oArea, "oScry", oScry);
 			   }
 		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
+	}
 	
 	string sTriggerTag;
-	if(oScry == OBJECT_INVALID) {
+	if(nCasterType == CLASS_TYPE_DRUID) {
 		location lTarget = GetLocation(oScryer);
 		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
@@ -505,6 +511,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
+		
 	oScry = GetLocalObject(oArea, "oScry");
 			
 	 //Usage, range, and class restrictions
@@ -516,16 +523,16 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		SendMessageToPC(oScryer, "You must be near enough to touch a scrying object for your spell to activate it.");
 		}
 		
-	 if((GetLastSpellCastClass()== CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
+	 if((nCasterType == CLASS_TYPE_WIZARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
 	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
 		}
-	 else if((GetLastSpellCastClass()== CLASS_TYPE_BARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
+	 else if((nCasterType == CLASS_TYPE_BARD) && (GetResRef(oScry) != "abr_pl_so_mirror") && (GetResRef(oScry) != "tsm_plc_scry_mirror")) {
 	 	SendMessageToPC(oScryer, "There is no scrying mirror within range.");
 		}
-	 else if((GetLastSpellCastClass()== CLASS_TYPE_CLERIC) && (GetResRef(oScry) != "abr_pl_so_holyfont") && (GetResRef(oScry) != "abr_trg_so_water")) {
+	 else if((nCasterType == CLASS_TYPE_CLERIC) && (GetResRef(oScry) != "abr_pl_so_holyfont") && (GetResRef(oScry) != "abr_trg_so_water")) {
 	 	SendMessageToPC(oScryer, "There is no holy font suitable for scrying within range.");
 		}
-	 else if((GetLastSpellCastClass()== CLASS_TYPE_DRUID) && (GetResRef(oScry) != "abr_pl_so_pool") && (GetName(oScry) != "Scrying Trigger")) {
+	 else if((nCasterType == CLASS_TYPE_DRUID) && (GetResRef(oScry) != "abr_trg_so_water")) {
 	 	SendMessageToPC(oScryer, "There is no natural pool of water suitable for scrying within range.");
 		}
 	 else {//Get Scrying Object's location and calculate Scryer's spell DC and spell duration

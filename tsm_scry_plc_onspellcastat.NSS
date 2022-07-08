@@ -40,6 +40,7 @@ void main() {
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 string sBless;
 	 
+	 SendMessageToPC(oCaster, "nCasterType = " + IntToString(nCasterType));
 	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && (nCasterType == CLASS_TYPE_CLERIC)) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
