@@ -388,9 +388,10 @@ if(GetSpellId() == 3071) {
 		while(oScry != OBJECT_INVALID) {
 			sPlaceableTag = GetTag(oScry);
 			if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
-				CreateItemOnObject("abr_it_scry_shard", oScryer, 1);
-				SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
-	 			}
+				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
+				SetFirstName(oFocus, "Scrying Shard");
+				SendMessageToPC(oScryer, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
+			 }
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
 			}		
 }
@@ -455,7 +456,9 @@ if(GetSpellId() == 3058) {
 	nInc++;
 		}
 	}
-
+int nCasterType = GetLastSpellCastClass();
+SendMessageToPC(oCaster, "nCasterType = " + IntToString(nCasterType));
+	 
 if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
 	int nCasterType = GetLastSpellCastClass();
@@ -468,9 +471,11 @@ if(GetSpellId() == 3068) {
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				CreateItemOnObject("abr_it_scry_droplet", oScryer, 1);
+				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
+				SetFirstName(oFocus, "Scrying Droplet");
 				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oScry) + ".");
-	 			return;
+			    SetItemIcon(oFocus, 1896);
+				return;
 				}
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
