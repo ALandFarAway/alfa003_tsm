@@ -64,7 +64,7 @@ void main()
 					SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
 					}
 					
-				DelayCommand(4.0, AssignCommand(oTarget, ActionSpeakString("Please speak a name for this potential scrying subject.", TALKVOLUME_TALK)));	
+				DelayCommand(4.0, SendMessageToPC(oScryer, "You must speak a name for this potential scrying subject."));	
 			} 
 		}
 		

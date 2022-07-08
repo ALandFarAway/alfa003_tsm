@@ -321,7 +321,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 SendMessageToPC(oScryer, "sMatch = " + sMatch);
 					 SendMessageToPC(oScryer, "sScriedName = " + sScriedName);
 					 SendMessageToPC(oScryer, "sScriedNickStored = " + sScriedNickStored);
-					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
+					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || ((TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch)) && (sPTargetRes != ""))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
