@@ -60,11 +60,13 @@ void main()
 				if(oScryNamer == OBJECT_INVALID) {
 					oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
 		            SetLocalObject(oScryNamer, "oScryer", oScryer);
+					SetLocalObject(oScryNamer, "oFocus", oFocus);
 					SetLocalObject(oScryNamer, "oTarget", oTarget);
 					SetLocalString(oScryNamer, "sPTargetRes", sPTargetRes);
+					SetLocalString(oScryNamer, "sPTargetName", sPTargetName);
 					}
 					
-				DelayCommand(4.0, SendMessageToPC(oScryer, "You must speak a name for this potential scrying subject."));	
+				DelayCommand(2.0, SendMessageToPC(oScryer, "You must speak a name for this potential scrying subject."));	
 			} 
 		}
 		

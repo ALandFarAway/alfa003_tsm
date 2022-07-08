@@ -64,7 +64,7 @@ void main()
 					SetLocalString(oScryNamer, "sPTargetName", sPTargetName);
 					}
 					
-				DelayCommand(4.0, SendMessageToPC(oScryer, "You must speak a name for this potential scrying subject."));	
+				DelayCommand(2.0, SendMessageToPC(oScryer, "You must speak a name for this potential scrying subject."));	
 			}  
 		}
 		
@@ -76,7 +76,7 @@ void main()
 		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
 			 DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
 			
-			 int nDexRank = GetAbilityModifier(ABILITY_DEXTERITY, oScryer);
+			int nDexRank = GetAbilityModifier(ABILITY_DEXTERITY, oScryer);
 			int nDexCheck = d20(1) + nDexRank;
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank;
