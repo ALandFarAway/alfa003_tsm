@@ -8,16 +8,17 @@ void main()
 	object oTarget = GetItemActivatedTarget();
 	object oArea = GetArea(oScryer);
 	string sTriggerTag;
-	int nCasterType = GetLocalInt(oScryer, "nSpellCasterType");
-	if(nCasterType == CLASS_TYPE_DRUID) {
+		if(oTarget == OBJECT_INVALID) {
 		location lTarget = GetLocation(oScryer);
-		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER || OBJECT_TYPE_PLACEABLE);
+		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
+			SendMessageToPC(oScryer, "Imago. oScry Name = " + GetName(oScry));
+			SendMessageToPC(oScryer, "Imago. sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SetLocalObject(oArea, "oScry", oScry);
 				}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER  || OBJECT_TYPE_PLACEABLE);
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		
 		oTarget = GetLocalObject(oArea, "oScry");
