@@ -495,42 +495,54 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 object oTarget = GetSpellTargetObject();
 	 //object oScry;
 	 //if(nCasterType != CLASS_TYPE_DRUID) {
-	 object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
-	 	SendMessageToPC(oScryer, "0. sScry Name = " + GetName(oScry));
-		while(oScry != OBJECT_INVALID) {
-	 	   if(FindSubString(GetTag(oScry), "_SCRY") != -1){
-			    string sPlcTag = GetTag(oScry);
-				SendMessageToPC(oScryer, "1. sScry Name = " + GetName(oScry));
+	 object oScryPlc = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+	 	SendMessageToPC(oScryer, "0. sScry Name = " + GetName(oScryPlc));
+		while(oScryPlc != OBJECT_INVALID) {
+	 	   if(FindSubString(GetTag(oScryPlc), "_SCRY") != -1){
+			    string sPlcTag = GetTag(oScryPlc);
+				SendMessageToPC(oScryer, "1. sScryPlc Name = " + GetName(oScryPlc));
 				SendMessageToPC(oScryer, "1. sPlcTag = " + sPlcTag);
-			    SetLocalObject(oArea, "oScry", oScry);
+			    SetLocalObject(oArea, "oScryPLC", oScryPlc);
 			   }
-		  oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
+		  oScryPlc = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
 	//}
 	
-	oScry = GetLocalObject(oArea, "oScry");
-	SendMessageToPC(oScryer, "1. sScry ResRef = " + GetResRef(oScry));
-	int nObjectType = GetObjectType(oScry);
-	SendMessageToPC(oScryer, "1. nObjectType = " + IntToString(nObjectType));
+	object oScry = oScryPlc;
+	 
+	oScryPlc = GetLocalObject(oArea, "oScryPLC");
+	SendMessageToPC(oScryer, "1. sScry ResRefPlc = " + GetResRef(oScryPlc));
+	int nObjectTypePlc = GetObjectType(oScryPlc);
+	SendMessageToPC(oScryer, "1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
 			
-	if((nCasterType == CLASS_TYPE_DRUID) && (GetObjectType(oScry) != OBJECT_TYPE_PLACEABLE)) {
+	object oScryTrg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+	if(nCasterType == CLASS_TYPE_DRUID)  {
 		location lTarget = GetLocation(oScryer);
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-		while(oScry != OBJECT_INVALID) {
-			string sTriggerTag = GetTag(oScry);
-			SendMessageToPC(oScryer, "2. sScry Name = " + GetName(oScry));
-			SendMessageToPC(oScryer, "2. sTriggerTag = " + sTriggerTag);
-			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				SetLocalObject(oArea, "oScry", oScry);
+		while(oScryTrg != OBJECT_INVALID) {
+			string sTriggerTagTrg = GetTag(oScryTrg);
+			SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
+			SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
+			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
+				SetLocalObject(oArea, "oScryTrg", oScryTrg);
 				}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			oScryTrg = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
+		 
+		 float fDistancePlc = GetDistanceBetween(oScryer, oScryPlc);
+		 float fDistanceTrg = GetDistanceBetween(oScryer, oScryTrg);
+		 SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
+		 SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
+		 	
+		 
 		}
-		
-	oScry = GetLocalObject(oArea, "oScry");
-	SendMessageToPC(oScryer, "2. sScry ResRef = " + GetResRef(oScry));
-	nObjectType = GetObjectType(oScry);
-	SendMessageToPC(oScryer, "2. nObjectType = " + IntToString(nObjectType));
+	
+			
+	SendMessageToPC(oScryer, "2. sScry ResRefTrg = " + GetResRef(oScryTrg));
+	int nObjectTypeTrg = GetObjectType(oScryTrg);
+	SendMessageToPC(oScryer, "2. nObjectTypeTrg = " + IntToString(nObjectTypeTrg));
+	
+	
+	
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
