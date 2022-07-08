@@ -1,7 +1,7 @@
 #include "acr_scry_i"
 #include "acr_vanity_i"
 #include "nwnx_objectattributes_include"
-
+#include "acr_tools_i"
 
 string XPObjectAttributesGetHairVariation(object Creature)
 
@@ -89,7 +89,7 @@ void main()
 					}
 					
 					sPickInventory = GetName(oPickInventory);
-					SendMessageToPC(oScryer, "You snip " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
+					SendMessageToPC(oScryer, "You snip " + GetArticle(sPickInventory) + " " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
 					oToken = CopyObject(oPickInventory, GetLocation(oScryer), oScryer, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);

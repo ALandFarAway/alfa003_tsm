@@ -56,7 +56,7 @@ void main()
 		nScryer = 1;
 		}
 	
-	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && (GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE)) {
+	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && ((GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oTarget) == OBJECT_TYPE_TRIGGER))) {
 		
 			if(nScryer == 1) {
 				AssignCommand(oTarget, ActionSpeakString("*A lifelike, animated image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));

@@ -515,6 +515,8 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	SendMessageToPC(oScryer, "1. sScry ResRefPlc = " + GetResRef(oScryPlc));
 	int nObjectTypePlc = GetObjectType(oScryPlc);
 	SendMessageToPC(oScryer, "1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
+	SetLocalObject(oArea, "oScryPLC", OBJECT_INVALID);
+			   
 			
 	object oScryTrg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 	if(nCasterType == CLASS_TYPE_DRUID)  {
@@ -531,7 +533,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		 
 		 float fDistanceTrg = GetDistanceBetween(oScryer, oScryTrg);
 		 SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
-		 if((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc))
+		 if(((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc)) ||( fDistancePlc = 0.0))
 		 	{oScry = oScryTrg;}
 		}
 	
