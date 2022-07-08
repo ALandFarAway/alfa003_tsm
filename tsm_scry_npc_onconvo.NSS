@@ -268,15 +268,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			}
 			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
+		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
+					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
 		//oScryer must speak the full name of the PC or Nickname of the allowable NPC he/she wishes to Scry	
 		//if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
+				SendMessageToPC(oScryer, "FirstPC Name = " + GetName(oScried));
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					string sScriedName = GetName(oScried);
+					SendMessageToPC(oScryer, "1. sScriedName = " + sScriedName);
 					string sScriedNickStored = GetLocalString(oScryer, sScriedName);
+					SendMessageToPC(oScryer, "1. sScriedNickStored = " + sScriedNickStored);
 										
 					//First, if the spoken name matches a stored NPC's nickname or full name, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
@@ -379,8 +384,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
-								SendMessageToPC(oScryer, "sPTargetName = " + sPTargetName);
-								SendMessageToPC(oScryer, "sPTargetNick = " + sPTargetNick);
+								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
+								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								int nScryer = 0;
 								if(sScryerName == sPScryerName) {
 									nScryer = 1;
