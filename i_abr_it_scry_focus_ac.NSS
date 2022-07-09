@@ -44,8 +44,8 @@ void main()
 			int nDexCheck = d20(1) + nDexRank;
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank;
-			SendMessageToPC(oScryer, "DexCheck = " +  IntToString(nDexCheck) + ". DexRank = " +  IntToString(nDexRank));
-			SendMessageToPC(oScryer, "SpotCheck = " +  IntToString(nSpotCheck) + ". SpotRank = " +  IntToString(nSpotRank));
+			//SendMessageToPC(oScryer, "DexCheck = " +  IntToString(nDexCheck) + ". DexRank = " +  IntToString(nDexRank));
+			//SendMessageToPC(oScryer, "SpotCheck = " +  IntToString(nSpotCheck) + ". SpotRank = " +  IntToString(nSpotRank));
 			if(nSpotCheck >= nDexCheck) {
 				SendMessageToPC(oScryer, "You  have been detected!");
 				SendMessageToPC(oTarget, "You feel observed.");
@@ -69,12 +69,7 @@ void main()
 				ACR_SetPersistentString(oImage, "sPTargetName", sTargetName);
 				ACR_SetPersistentString(oImage, "sPScryerName", sScryerName);
 				if(GetIsPC(oTarget) == FALSE) {
-					SendMessageToPC(oScryer, "IsPC == FALSE");
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
-					}
-				if(GetIsPC(oTarget) == TRUE) {
-					SendMessageToPC(oScryer, "IsPC == TRUE");
-					ACR_SetPersistentString(oImage, "sPTargetRes", "");
 					}
 				DestroyObject(oFocus);
 				}

@@ -99,8 +99,8 @@ void main()
 			int nDexCheck = d20(1) + nDexRank;
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank;
-			SendMessageToPC(oScryer, "DexCheck = " +  IntToString(nDexCheck) + ". DexRank = " +  IntToString(nDexRank));
-			SendMessageToPC(oScryer, "SpotCheck = " +  IntToString(nSpotCheck) + ". SpotRank = " +  IntToString(nSpotRank));
+			//SendMessageToPC(oScryer, "DexCheck = " +  IntToString(nDexCheck) + ". DexRank = " +  IntToString(nDexRank));
+			//SendMessageToPC(oScryer, "SpotCheck = " +  IntToString(nSpotCheck) + ". SpotRank = " +  IntToString(nSpotRank));
 			if(nSpotCheck >= nDexCheck) {
 				SendMessageToPC(oScryer, "You  have been detected!");
 				SendMessageToPC(oTarget, "You feel observed.");

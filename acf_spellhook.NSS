@@ -506,7 +506,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 				//SendMessageToPC(oScryer, "1. sPlcTag = " + sPlcTag);
 			    SetLocalObject(oArea, "oScryPlc", oScryPlc);
 			    fDistancePlc = GetDistanceBetween(oScryer, oScryPlc);
-				SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
+				//SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
 				}
 		  oScryPlc = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
