@@ -58,13 +58,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			object oDupe = GetLocalObject(oScryer, "oDupe");
 			object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 			effect eEffect = GetFirstEffect(oScryer);
-			 int nRep = 0;
-			 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+			int nRep = 0;
+			while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
 				 object oCreator = GetEffectCreator(eEffect);
 				 int nEffect = GetEffectInteger(eEffect, 0);
 				 int nType = GetEffectType(eEffect);
 				 SendMessageToPC(oScryer, "effect " + IntToString(nEffect) + " of type " + IntToString(nType) + " creator = " + GetTag(oCreator));
-			 	//RemoveEffect(oScryer, eEffect);
+			 	 if(oCreator == OBJECT_SELF) {
+				 	RemoveEffect(oScryer, eEffect);
+				   }
 				 eEffect = GetNextEffect(oScryer);
 				 nRep ++;
 				}
