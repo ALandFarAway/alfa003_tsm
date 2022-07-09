@@ -34,13 +34,13 @@ void main()
 
 SetLocalString(OBJECT_SELF, "MyTag", GetTag(OBJECT_SELF));		 
 
-if((GetTag(OBJECT_SELF) != "003_cr_slv_registrar") && (GetTag(OBJECT_SELF) != "003_cr_slv_librarian") && (GetTag(OBJECT_SELF) != "003_cr_slv_belad")&& (FindSubString(GetTag(OBJECT_SELF), "_Wand") == -1))
+//if((GetTag(OBJECT_SELF) != "003_cr_slv_registrar") && (GetTag(OBJECT_SELF) != "003_cr_slv_librarian") && (GetTag(OBJECT_SELF) != "003_cr_slv_belad")&& (FindSubString(GetTag(OBJECT_SELF), "_Wand") == -1))
 	
-	 {if(GetObjectByTag(GetTag(OBJECT_SELF), 1) != OBJECT_INVALID)
-	 	{DestroyObject(OBJECT_SELF);
-		}
+	// {if(GetObjectByTag(GetTag(OBJECT_SELF), 1) != OBJECT_INVALID)
+	 //	{DestroyObject(OBJECT_SELF);
+	//	}
 	 
-	} 
+//	} 
 	
  if((FindSubString(GetTag(OBJECT_SELF), "_Wand") != -1)|| (FindSubString(GetTag(OBJECT_SELF), "_NoWalk") != -1))
  	{ClearAllActions(TRUE);

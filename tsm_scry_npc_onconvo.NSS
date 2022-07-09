@@ -55,11 +55,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		    object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 			object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
-			object oDupe = GetLocalObject(oScryer, "oScrySelf");
+			object oDupe = GetLocalObject(oScryer, "oDupe");
 			object oScry = GetLocalObject(OBJECT_SELF, "oScry");
-			RemoveEffect(oScryer, eCutScene);
-			RemoveEffect(oScryer, eInvis);
-			RemoveEffect(oScryer, eEthereal);
+			effect eEffect = GetFirstEffect(oScryer);
+			 int nRep = 0;
+			 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+				 object oCreator = GetEffectCreator(eEffect);
+				 int nEffect = GetEffectInteger(eEffect, 0);
+				 int nType = GetEffectType(eEffect);
+				 SendMessageToPC(oScryer, "effect " + IntToString(nEffect) + " of type " + IntToString(nType) + " creator = " + GetTag(oCreator));
+			 	//RemoveEffect(oScryer, eEffect);
+				 eEffect = GetNextEffect(oScryer);
+				 nRep ++;
+				}
+			
 			
 			if(GetIsObjectValid(oDupe)) {AssignCommand(oScryer, ActionJumpToLocation(lHere));}		
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
@@ -1040,7 +1049,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		//else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
 		}
 	else {if((nMatch == 6041) && (GetLocalInt(oScry, "nScryActive") == 0))  {
-			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that nickname. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed under that name with their identity from an imbued scrying focus. Your spell is still active and you may speak a different name.");}	
+			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that nickname. This " + GetName(oScry) + " is not keyed under that name with their identity from an imbued scrying focus. Your spell is still active and you may speak a different name.");}	
 		}
 	}
 	
