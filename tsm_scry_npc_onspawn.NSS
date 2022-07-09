@@ -8,10 +8,10 @@
 //  Description
 //  This script sets spawn variables on NPCs used in the scrying system. 
 //  This should be in the On Spawn In Script slot of these creatures: 
-//	Invisible Scrying Speaker - Initializes scrying receiver at location of oScryer
-//	Invisible Scrying Namer - Listens for any pattern at location of scrying object
-//	Invisible Scrying Sender -  Initializes scrying sensor at location of oScried, checks for Detect effects
-//	Invisible Scryer's Presence - Listens for any pattern at location of scrying object and gets oScried
+//	Invisible Scrying Speaker - Spawned by Scry or Greater Scry spell. Initializes scrying receiver at location of oScryer
+//	Invisible Scrying Namer - Spawned by activating a scrying focus on a scrying object. Listens for any pattern at location of scrying object
+//	Invisible Scrying Sender -  Spawned on the target of a successful scrying spell. Initializes scrying sensor at location of oScried, checks for Detect effects
+//	Invisible Scryer's Presence - Spawned on the scryer of a successful scrying spell. Listens for any pattern at location of scrying object and gets oScried
 //	It is not updated in ACR updates.
 //
 //  Revision History

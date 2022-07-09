@@ -525,7 +525,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			//SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
+			SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
 			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);
@@ -595,13 +595,14 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 				
 			int nDC = 10 + nSpellLevel + nAbilityMod;
 						
-			//Create undetectable OOC Scrying Listener at location of Scrying Object to receive scrying information about future scrying target
+			//Create undetectable OOC Scrying Speaker at location of Scrying Object to receive scrying information about future scrying target
 			object oScrySpeak = GetLocalObject(oScry, "oScrySpeak");
 			if(oScrySpeak == OBJECT_INVALID) {
 				oScrySpeak = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_speak", lHere);
             	SetLocalObject(oScry, "oScrySpeak", oScrySpeak);
 				}
-			
+				
+			SendMessageToPC(oScryer, "oScrySpeak = " + GetName(oScrySpeak));
 			//Set all objects on each other
 			SetLocalObject(oScrySpeak, "oScry", oScry);
 			SetLocalObject(oScrySpeak, "oScryer", oScryer);
@@ -617,7 +618,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			
 			SetLocalObject(oArea, "oScry", OBJECT_INVALID);
 	
-			//Over to ScryListener's onspawn: tsm_scry_npc_onspawn
+			//Over to ScrySpeaker's onspawn: tsm_scry_npc_onspawn
 		}
 	}
 	

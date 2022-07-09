@@ -50,9 +50,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		//6040 will end an ongoing scrying session
 		if(nMatch == 6040) {
 		//End Spell
-			object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
+			object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+			location lHere = GetLocalLocation(oScryer, "ACR_SCRY_LOCATION");
+		    object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 			object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
+			object oDupe = GetLocalObject(oScryer, "oScrySelf");
+			RemoveEffect(oScryer, eCutScene);
+			RemoveEffect(oScryer, eInvis);
+			RemoveEffect(oScryer, eEthereal);
+			AssignCommand(oScryer, ActionJumpToLocation(lHere));		
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
@@ -85,6 +92,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 
 			DestroyObject(oScrySend);  
 			DestroyObject(oScrySelf);
+			DestroyObject(oDupe);
 			DestroyObject(OBJECT_SELF, 1.0);
 			return;
 		}
@@ -369,6 +377,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										SetLocalObject(oScrySelf, "oScryer", oScryer);
 										SetLocalObject(oScrySelf, "oScried", oScried);
 										SetLocalObject(oScrySend, "oScrySelf", oScrySelf);
+										SetLocalObject(oScryer, "oScrySelf", oScrySelf);
+										SetLocalObject(oScryer, "oDupe", oDupe);
 										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
 									    ChangeToStandardFaction(oScrySelf, STANDARD_FACTION_COMMONER);
