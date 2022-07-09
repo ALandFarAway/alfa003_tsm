@@ -1,8 +1,28 @@
+//
+//  System Name : Scrying
+//     Filename : tsm_scry_plc_onspellcastat
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
+//
+//  Description
+//  This script handles on use actions of placeables used in the scrying system. 
+//  It provides a spoken update by the scrying object to the scryer on the scrying target.
+//  This should be in the On Use Script slot of placeables in the _ALFA_Scrying Category: 
+//	Mirror
+//	Holy Water Font
+//	Natural Pool of Water
+//	It is not updated in ACR updates.
+//
+//  Revision History
+////////////////////////////////////////////////////////////////////////////////
+
+//	Wynna - 7/8/2022
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_placeable_i"
-#include "dmfi_inc_langexe" 
-#include "acr_quest_i"
-#include "x0_i0_position"
 #include "acr_scry_i"
 
 ////////////////////////////////////////////////////////////////////////////////

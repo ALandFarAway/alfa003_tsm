@@ -1,3 +1,29 @@
+//
+//  System Name : Scrying
+//     Filename : i_abr_scry_fc_imago_ac
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
+//
+//  Description
+//  This script handles the on activate actions for a scrying imago used in the scrying system. 
+//	The imago will be created in a caster's inventory upon a successful Concentration check when 
+//   using a previous image on a creature.
+//  Hold the imago in inventory when casting a scry spell to apply bonuses to the chances of a successful scry.
+//  This item enhances Knowledge of a target to "familiar" and Connection to "minor".
+//	Use the imago on a scrying object to imbue a scrying nickname into the object. Use that nickname 
+//   to call up a potential scrying target's identity in future.
+//   
+//	It is not updated in ACR updates.
+//
+//  Revision History
+////////////////////////////////////////////////////////////////////////////////
+
+//	Wynna - 7/8/2022
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
+
 #include "acr_scry_i"
 
 void main()

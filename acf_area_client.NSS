@@ -17,11 +17,14 @@
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
 
+//	Wynna - 7/8/2022 : Added check to get sensor scrying on N/PC and make it jump to them
+
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
 #include "acr_area_i"
+
+////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -51,28 +54,11 @@ void main() {
 
     // Custom code goes below this line.
 	object oEnterer = GetEnteringObject();
-	if (GetLocalInt(OBJECT_SELF, "ACR_IS_TRAVEL_AREA") == 1) {
-		// report collison status
-		if (GetIsPC(oEnterer)) {
-			// check collison status
-			if (GetCollision(oEnterer)) {
-				// PC has collision on, as expected.
-				WriteTimestampedLogEntry("Collision STILL ENABLED for PC: "+GetName(oEnterer)+" when entering Travel Map area: "+GetName(OBJECT_SELF)+" with leader: "+GetName(GetFactionLeader(oEnterer)));
-				//SetCollision(oEnterer, FALSE);
-			} 
+	
+	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
+	if(oScrySend != OBJECT_INVALID) {
+		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oEnterer)));
+		DelayCommand(5.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		}
-	} else if (GetIsPC(oEnterer)) {
-		// check collison status
-		if (GetCollision(oEnterer)) {
-			// PC has collision on, as expected.
-		} else {
-			if (GetIsObjectValid(oEnterer)) {
-				WriteTimestampedLogEntry("Collision still OFF for PC: "+GetName(oEnterer)+" when entering area: "+GetName(OBJECT_SELF)+" with leader: "+GetName(GetFactionLeader(oEnterer))+". Turning it back ON.");
-				SetCollision(oEnterer, TRUE);
-			} else {
-				WriteTimestampedLogEntry("Collision still OFF for INVALID PC: "+GetName(oEnterer)+" when entering area: "+GetName(OBJECT_SELF)+" with leader: "+GetName(GetFactionLeader(oEnterer))+". Could not reactivate safely.");
-			}
-		}
-	}
 
 }

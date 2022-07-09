@@ -1,25 +1,26 @@
-////////////////////////////////////////////////////////////////////////////////
 //
-//  System Name : ACR Configuration File
-//     Filename : acf_plc_onused.nss
-//    $Revision:: 183        $ current version of the file
-//        $Date:: 2006-12-21#$ date the file was created or modified
-//       Author : Ronan
-//
-//  Local Variable Prefix =
-//
-//  Dependencies external of nwscript:
+//  System Name : Scrying
+//     Filename : tsm_scry_plc_onspellcastat
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
 //
 //  Description
-//  This script calls the ACR's OnUsed code for placeables, and any
-//  custom code a server may need. It is not updated in ACR updates.
+//  This script handles on spellcastat actions of placeables used in the scrying system. 
+//  This should be in the On Spell Cast At Script slot of placeables in the _ALFA_Scrying Category: 
+//  It provides a scrying focus out of the scrying object to the scryer.
+//	Mirror - Arcane Mark or Summon Instrument generate a scrying shard in the caster's inventory.
+//	Holy Water Font - Create Water generates a scrying droplet in a cleric's inventory.
+//	Natural Pool of Water - Create Water generates a scrying droplet in a druid's inventory.
+//	It is not updated in ACR updates.
 //
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
 
+//	Wynna - 7/8/2022
+
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
 #include "acr_placeable_i"
 #include "acr_scry_i"

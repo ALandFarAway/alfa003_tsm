@@ -1,5 +1,27 @@
+//
+//  System Name : Scrying
+//     Filename : i_abr_scry_focus_ac
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
+//
+//  Description
+//  This script handles the on activate actions for a scrying focus used in the scrying system. 
+//	The focus will be created in a caster's inventory upon casting certain class-related spells on a scrying object.
+//  Use the focus on a creature (including yourself) for a Concentration check to generate the next level of focus, 
+//	 an image imbued with the identity of that creature.
+//   
+//	It is not updated in ACR updates.
+//
+//  Revision History
+////////////////////////////////////////////////////////////////////////////////
+
+//	Wynna - 7/8/2022
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
+
 #include "acr_scry_i"
-#include "acr_db_persist_i"
 
 void main()
 {

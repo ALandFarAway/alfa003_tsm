@@ -1,97 +1,31 @@
+//
+//  System Name : Scrying
+//     Filename : tsm_scry_npc_onconvo
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
+//
+//  Description
+//  This script handles scrying interactions by NPCs used in the scrying system. 
+//  This should be in the On Conversation slot of these creatures: 
+//	Invisible Scrying Speaker - Handles execution of the Scry spell upon hearing a listen pattern set in its  
+//	 onspawn that holds a PC name or nickname, or an NPC nickname
+//	Invisible Scrying Namer - Sets PC and NPC nicknames on a scrying object
+//	Invisible Scrying Sender - Follows target and sends all conversation it hears back to Speaker to speak out loud
+//	Invisible Scryer's Presence - Stays at scrying object to send all conversation there onward to oScryer 
+//	It is not updated in ACR updates.
+//
+//  Revision History
+////////////////////////////////////////////////////////////////////////////////
+
+//	Wynna - 7/8/2022
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
+
 #include "acr_creature_i"
-#include "x0_i0_position"
 #include "acr_scry_i"
 #include "acr_db_persist_i"
-
-////////////////////////////////////////////////////////////////////////////////
-// Constants ///////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-const float NUMBER_OF_COMPASS_DIRECTIONS = 16.0;
-const float HALF_COMPASS_ANGLE = 360.0/(NUMBER_OF_COMPASS_DIRECTIONS * 2.0);
-
-string GetCompassDirectionOfBearing(float fDegrees);
-string GetCompassDirectionOfAngle(float fAngle);
-
-////////////////////////////////////////////////////////////////////////////////
-// Function Definitions ////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
- 
-string GetCompassDirectionOfBearing(float fDegrees)
-{
-    /* Takes a bearing from degrees (0.0 -> 360.0)
-     * where 0.0 is North and 90.0 is West and
-     * returns its corresponding compass direction
-     */
-
-    // Handle cases when the caller is lazy
-    while (fDegrees < 0.0) {
-        fDegrees += 360.0;
-    }
-    while (fDegrees > 360.0) {
-        fDegrees -= 360.0;
-    }
-
-    // Do the mapping
-    if (fDegrees < HALF_COMPASS_ANGLE || fDegrees > HALF_COMPASS_ANGLE * 31) {
-        return "north";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 3) {
-        return "north-northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 5) {
-        return "northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 7) {
-        return "east-northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 9) {
-        return "east";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 11) {
-        return "east-southeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 13) {
-        return "southeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 15) {
-        return "south-southeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 17) {
-        return "south";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 19) {
-        return "south-southwest";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 21) {
-        return "southwest";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 23) {
-        return "west-southwest";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 25) {
-        return "west";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 27) {
-        return "west-northwest";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 29) {
-        return "northwest";
-    }
-    return "north-northwest";
-}
-
-
-string GetCompassDirectionOfAngle(float fAngle)
-{
-    /* Takes an angle from degrees (0.0 -> 360.0)
-     * where 0.0 is the positive X-axis and 90.0
-     * is the positive Y-axis and returns its
-     * corresponding compass direction
-     */
-    return GetCompassDirectionOfBearing(-fAngle + 90.0);
-}
-
 
 void main()
 {   ACR_CreatureOnConversation();
@@ -100,126 +34,8 @@ void main()
 	effect eEthereal = EffectEthereal();
 	    
 	
-//The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the scrying object as a nickname associated with a ResRef
-if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
-	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
-	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
-	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
-	//SendMessageToPC(oScryer, "Namer spawn sTargetRes = " + sTargetRes);
-	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
-	location lTarget = GetLocation(oTarget);
-	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
-	int nMatch = GetListenPatternNumber();
-	if(nMatch == 6031) {
-		string sMatch = GetMatchedSubstring(0);
-		SetLocalString(oTarget, sTargetRes, sMatch);
-		SetLocalString(oTarget, sMatch, sTargetRes);
-		SetLocalString(oScryer, sTargetName, sMatch);
-					
-		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
-		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
-		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
-		string sScryTargetD = GetLocalString(oTarget, "sScryTargetD");
-		string sScryTargetE = GetLocalString(oTarget, "sScryTargetE");
-		string sScryTargetF = GetLocalString(oTarget, "sScryTargetF");
-		string sScryTargetG = GetLocalString(oTarget, "sScryTargetG");
-		string sScryTargetH = GetLocalString(oTarget, "sScryTargetH");
-		string sScryTargetI = GetLocalString(oTarget, "sScryTargetI");
-		string sScryTargetJ = GetLocalString(oTarget, "sScryTargetJ");
-		
-		if(sScryTargetA == "") {
-			SetLocalString(oTarget, "sScryTargetA", sMatch);
-		}
-		else if(sScryTargetB == "") {
-			SetLocalString(oTarget, "sScryTargetB", sMatch);
-		}
-		else if(sScryTargetC == "") {
-			SetLocalString(oTarget, "sScryTargetC", sMatch);
-		}
-		else if(sScryTargetD == "") {
-			SetLocalString(oTarget, "sScryTargetD", sMatch);
-		}
-		else if(sScryTargetE == "") {
-			SetLocalString(oTarget, "sScryTargetE", sMatch);
-		}
-		else if(sScryTargetF == "") {
-			SetLocalString(oTarget, "sScryTargetF", sMatch);
-		}
-		else if(sScryTargetG == "") {
-			SetLocalString(oTarget, "sScryTargetG", sMatch);
-		}
-		else if(sScryTargetH == "") {
-			SetLocalString(oTarget, "sScryTargetH", sMatch);
-		}
-		else if(sScryTargetI == "") {
-			SetLocalString(oTarget, "sScryTargetI", sMatch);
-		}
-		else if(sScryTargetJ == "") {
-			SetLocalString(oTarget, "sScryTargetJ", sMatch);
-		}
-		
-		ACR_SetPersistentString(oFocus, "sPTargetNick", sMatch);
-		object oToken = GetFirstItemInInventory(oScryer);
-		while(oToken != OBJECT_INVALID) {
-			if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
-				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
-				if(sPTokenName == sTargetName) {
-					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
-					}
-				if((sPTokenName == "") && (ACR_GetPersistentString(oToken, "sPTargetNick") == sMatch)){
-					ACR_SetPersistentString(oToken, "sPTargetName", sMatch);
-					}
-				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "") && (sPTokenName == sMatch)){
-					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
-					}
-				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "Xavier") && (sPTokenName != "Xavier")){
-					ACR_SetPersistentString(oToken, "sPTargetNick", sPTokenName);
-					}
-					
-				}	
-			oToken = GetNextItemInInventory(oScryer);
-			}
-		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
-		DestroyObject(OBJECT_SELF, 5.0);
-		}	 				
-	}	
-
-	//A listener feeds any conversation to oScryer while oScryer is with oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
-		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-		int nMatch = GetListenPatternNumber();
-		if(nMatch == 6031) {
-			string sSpokenBy = GetName(GetLastSpeaker());
-			string sRelay = GetMatchedSubstring(0);
-			SendMessageToPC(oScryer, sSpokenBy + " says: " + sRelay);
-		}
-	}	 
-
-	//Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
-		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
-		ActionForceFollowObject(oScried, 0.5, 0); 
-		int nMatch = GetListenPatternNumber();
-		if(nMatch == 6031) {
-			string sSpokenBy = GetName(GetLastSpeaker());
-			SetFirstName(oScrySpeak, sSpokenBy);
-			string sRelay = GetMatchedSubstring(0);
-			if(GetLastSpeaker() != oScrySpeak)  {
-				DelayCommand(1.0, AssignCommand(oScrySpeak, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
-			}
-			//Scrying Sensor won't force follow across ATs, so here it checks to make sure oScried hasn't left the area and jumps to oScried if so
-			if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
-				ActionJumpToObject(oScried, TRUE);
-			}
-		}
-	}	 
-
 
 //Action queue for OOC Scrying Speaker that handles most Scrying interaction
-		
 if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
 		//Get existing local objects set by Spellhook
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
@@ -497,8 +313,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							 	SetLocalObject(oScry, "oScried", oScried);
 							 	SetLocalObject(OBJECT_SELF, "oScried", oScried);
 								SetLocalObject(oScryer, "oScried", oScried);
-							 	
-								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
+							 	//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
 								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
 								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
@@ -538,6 +353,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									SetLocalInt(oScrySend, "nCasterLevel", nCasterLevel);
 									DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oScried, 0.5f, 0)));
 									}
+									
 									
 								// Make the PC completely invisible
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
@@ -829,7 +645,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								ActionSpeakString( GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
 								SendMessageToPC(oScryer, GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
 								
-								string sFacing = GetCompassDirectionOfAngle(GetFacing(oScried));
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oScried));
 								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
 								//Determine what creatures and objects are near oScried	
@@ -1213,5 +1028,123 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that nickname. Either they are not an adventurer or this " + GetName(oScry) + " is not keyed under that name with their identity from an imbued scrying focus. Your spell is still active and you may speak a different name.");}	
 		}
 	}
-					 	   	 
+	
+	
+//The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the scrying object as a nickname associated with a ResRef
+if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
+	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
+	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
+	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
+	//SendMessageToPC(oScryer, "Namer spawn sTargetRes = " + sTargetRes);
+	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
+	location lTarget = GetLocation(oTarget);
+	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
+	int nMatch = GetListenPatternNumber();
+	if(nMatch == 6031) {
+		string sMatch = GetMatchedSubstring(0);
+		SetLocalString(oTarget, sTargetRes, sMatch);
+		SetLocalString(oTarget, sMatch, sTargetRes);
+		SetLocalString(oScryer, sTargetName, sMatch);
+					
+		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
+		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
+		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
+		string sScryTargetD = GetLocalString(oTarget, "sScryTargetD");
+		string sScryTargetE = GetLocalString(oTarget, "sScryTargetE");
+		string sScryTargetF = GetLocalString(oTarget, "sScryTargetF");
+		string sScryTargetG = GetLocalString(oTarget, "sScryTargetG");
+		string sScryTargetH = GetLocalString(oTarget, "sScryTargetH");
+		string sScryTargetI = GetLocalString(oTarget, "sScryTargetI");
+		string sScryTargetJ = GetLocalString(oTarget, "sScryTargetJ");
+		
+		if(sScryTargetA == "") {
+			SetLocalString(oTarget, "sScryTargetA", sMatch);
+		}
+		else if(sScryTargetB == "") {
+			SetLocalString(oTarget, "sScryTargetB", sMatch);
+		}
+		else if(sScryTargetC == "") {
+			SetLocalString(oTarget, "sScryTargetC", sMatch);
+		}
+		else if(sScryTargetD == "") {
+			SetLocalString(oTarget, "sScryTargetD", sMatch);
+		}
+		else if(sScryTargetE == "") {
+			SetLocalString(oTarget, "sScryTargetE", sMatch);
+		}
+		else if(sScryTargetF == "") {
+			SetLocalString(oTarget, "sScryTargetF", sMatch);
+		}
+		else if(sScryTargetG == "") {
+			SetLocalString(oTarget, "sScryTargetG", sMatch);
+		}
+		else if(sScryTargetH == "") {
+			SetLocalString(oTarget, "sScryTargetH", sMatch);
+		}
+		else if(sScryTargetI == "") {
+			SetLocalString(oTarget, "sScryTargetI", sMatch);
+		}
+		else if(sScryTargetJ == "") {
+			SetLocalString(oTarget, "sScryTargetJ", sMatch);
+		}
+		
+		ACR_SetPersistentString(oFocus, "sPTargetNick", sMatch);
+		object oToken = GetFirstItemInInventory(oScryer);
+		while(oToken != OBJECT_INVALID) {
+			if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
+				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
+				if(sPTokenName == sTargetName) {
+					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
+					}
+				if((sPTokenName == "") && (ACR_GetPersistentString(oToken, "sPTargetNick") == sMatch)){
+					ACR_SetPersistentString(oToken, "sPTargetName", sMatch);
+					}
+				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "") && (sPTokenName == sMatch)){
+					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
+					}
+				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "Xavier") && (sPTokenName != "Xavier")){
+					ACR_SetPersistentString(oToken, "sPTargetNick", sPTokenName);
+					}
+					
+				}	
+			oToken = GetNextItemInInventory(oScryer);
+			}
+		DelayCommand(2.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDivAOE, lTarget, 5.0));
+		DestroyObject(OBJECT_SELF, 5.0);
+		}	 				
+	}	
+
+	//Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
+		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
+		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
+		ActionForceFollowObject(oScried, 0.5, 0); 
+		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6031) {
+			string sSpokenBy = GetName(GetLastSpeaker());
+			SetFirstName(oScrySpeak, sSpokenBy);
+			string sRelay = GetMatchedSubstring(0);
+			if(GetLastSpeaker() != oScrySpeak)  {
+				DelayCommand(1.0, AssignCommand(oScrySpeak, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
+			}
+			//Scrying Sensor won't force follow across ATs, so here it checks to make sure oScried hasn't left the area and jumps to oScried if so
+			if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
+				ActionJumpToObject(oScried, TRUE);
+			}
+		}
+	}	 
+
+	//A listener feeds any conversation to oScryer while oScryer is with oScried
+	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
+		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+		int nMatch = GetListenPatternNumber();
+		if(nMatch == 6031) {
+			string sSpokenBy = GetName(GetLastSpeaker());
+			string sRelay = GetMatchedSubstring(0);
+			SendMessageToPC(oScryer, sSpokenBy + " says: " + sRelay);
+		}
+	}	 
+			 	   	 
 }

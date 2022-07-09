@@ -1,19 +1,29 @@
+//
+//  System Name : Scrying
+//     Filename : i_abr_scry_kit_ac
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
+//
+//  Description
+//  This script handles the on activate actions for a scrying kit used in the scrying system. 
+//	The kit should be made available in applicable stores for PCs to purchase
+//  Use the kit on yourself to generate a body part to give to others to provide a strong connection for scrying
+//  Use the kit on an item to generate a possession to give to others to provide an average connection for scrying
+//  Use the kit on another creature for a chance to steal a body part or possession
+//    to give to others to provide a strong or average connection for scrying. User must have sleight of hand ranks.
+//   
+//	It is not updated in ACR updates.
+//
+//  Revision History
+////////////////////////////////////////////////////////////////////////////////
+
+//	Wynna - 7/8/2022
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
+
 #include "acr_scry_i"
-#include "acr_vanity_i"
-#include "nwnx_objectattributes_include"
-#include "acr_tools_i"
-
-string XPObjectAttributesGetHairVariation(object Creature)
-
-{
-	string sHairVar = 	NWNXGetString(
-						"OBJECTATTRIBUTES",
-						"GetHairVariation",
-						"",
-						ObjectToInt( Creature ));
-	return sHairVar;	
-}
-
 
 void main()
 {
@@ -23,10 +33,6 @@ void main()
 	string sTarget = GetName(oTarget);
 	object oKit = GetItemActivated();
 	object oToken;
-	string sHairVar = XPObjectAttributesGetHairVariation(oScryer);
-	//SendMessageToPC(oScryer, "sHairVar = " + sHairVar);
-	string sNatHair = GetNaturalHairColor(oScryer);
-	//SendMessageToPC(oScryer, "sNatHair = " + sNatHair);
 	int nHairStyle = GetLocalInt(oScryer, "ACR_APP_TYPE");
 	//SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHairStyle));
 	//Bald Dwarf = 17, Facial Hair 0;
