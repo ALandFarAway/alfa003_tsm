@@ -28,7 +28,7 @@ void main()
     ACR_CreatureOnPerception();
 	object oPerceived = GetLastPerceived();
 	
-	if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
+	/*if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		//Check area information about oScried
@@ -44,5 +44,5 @@ void main()
 				DelayCommand(15.0, ActionForceFollowObject(oScried, 0.5f, 0));
 				}
 		//	}
-		}		
+		}*/		
 }

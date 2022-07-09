@@ -375,7 +375,7 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
-	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
+	effect eMark = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
 }
  

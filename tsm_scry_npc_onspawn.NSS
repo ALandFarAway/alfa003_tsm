@@ -134,7 +134,7 @@ void main()
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
 			 
-			 SetListenPattern(OBJECT_SELF, "**", 6031);
+			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			 SetListening(OBJECT_SELF, TRUE);
 		}
 	
@@ -142,7 +142,8 @@ void main()
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target
 			 //Detect Scrying or See Invisibility will reveal it IC
 			 //Silverymoon's mythal reveals all scrying sensors
-			 SetListenPattern(OBJECT_SELF, "**", 6031);
+			 SetListenPattern(OBJECT_SELF, "**End Scry**", 6040);
+			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			 SetListening(OBJECT_SELF, TRUE);
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			 ActionForceFollowObject(oScried, 0.5f, 0);

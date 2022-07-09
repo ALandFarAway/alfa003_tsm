@@ -25,7 +25,7 @@
 
 #include "acr_scry_i"
 
-const string HAIR_TEMPORARY_DATABASE_NAME = "hairDB";
+/*const string HAIR_TEMPORARY_DATABASE_NAME = "hairDB";
 const string HAIR_VARIABLE_NAME = "hairCreature";
 const string HAIR_ROADMAP = "Appearance_Hair";
 
@@ -36,7 +36,7 @@ int GetHairStyle(object oCreature) {
     DestroyCampaignDatabase(HAIR_TEMPORARY_DATABASE_NAME);
     return nHair;
 }
-
+*/
 void main()
 {
     object oScryer = GetItemActivator();
@@ -45,8 +45,8 @@ void main()
 	string sTarget = GetName(oTarget);
 	object oKit = GetItemActivated();
 	object oToken;
-	int nHair = GetHairStyle(oTarget);
-	SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHair));
+	//int nHair = GetHairStyle(oTarget);
+	//SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHair));
 	//Bald Dwarf = 17, Facial Hair 0;
 	//Bald Human = 17, Facial Hair 0;
 	if(oScryer == oTarget) {
@@ -158,8 +158,8 @@ void main()
 				SendMessageToPC(oScryer, "You have been detected!");
 				SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
 				if(GetIsPC(oTarget) == FALSE) {
-					AssignCommand(oTarget, ActionSpeakString("Thief!", TALKVOLUME_TALK));
-					if(GetStealthMode(oScryer) == STEALTH_MODE_DISABLED) {
+					//if(GetStealthMode(oScryer) == STEALTH_MODE_DISABLED) {
+					if(GetIsEnemy(oScryer, oTarget)) {
 						AssignCommand(oTarget, ActionAttack(oScryer));
 						}
 					}

@@ -61,16 +61,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			int nRep = 0;
 			while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
 				 object oCreator = GetEffectCreator(eEffect);
-				 int nEffect = GetEffectInteger(eEffect, 0);
-				 int nType = GetEffectType(eEffect);
-				 SendMessageToPC(oScryer, "effect " + IntToString(nEffect) + " of type " + IntToString(nType) + " creator = " + GetTag(oCreator));
-			 	 if(oCreator == OBJECT_SELF) {
+				 if(oCreator == OBJECT_SELF) {
 				 	RemoveEffect(oScryer, eEffect);
 				   }
 				 eEffect = GetNextEffect(oScryer);
 				 nRep ++;
 				}
-			
 			
 			if(GetIsObjectValid(oDupe)) {AssignCommand(oScryer, ActionJumpToLocation(lHere));}		
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
@@ -78,31 +74,27 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
 			 					
 			//Unset ALL local objects at the end of the spell
-			//Destroy Scrying Sensor and ScryListen
-			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScried", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
-			SetLocalObject(oScrySend, "oScried", OBJECT_INVALID);
-			SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
-			SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
-			SetLocalObject(oScrySend, "oScrySpeak", OBJECT_INVALID);
+			//Destroy Scrying Speaker, Sensor and Scryer Dupe and Presence
 			SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID);
-			SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
-			SetLocalObject(oScrySend, "oScryer", OBJECT_INVALID);
-			SetLocalObject(oScried, "oScry", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
-			SetLocalObject(oScrySend, "oScry", OBJECT_INVALID);
-			SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
 			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySelf", OBJECT_INVALID);
+			SetLocalObject(oScry, "oDupe", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySelf", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oDupe", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySelf", OBJECT_INVALID);
+			SetLocalObject(oScried, "oDupe", OBJECT_INVALID);
 			
 			DeleteLocalLocation(oScryer, "ACR_SCRY_LOCATION");
-			SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0);
 			SetLocalInt(oScry, "nScryActive", 0);
 								 
 			DestroyObject(oScrySend);  
@@ -1061,17 +1053,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
+	object oScrySpeak = GetLocalObject(oScryer, "oScrySpeak");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
 	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
-	if(nMatch == 6031) {
+	if(nMatch == 6041) {
 		string sMatch = GetMatchedSubstring(0);
 		SetLocalString(oTarget, sTargetRes, sMatch);
 		SetLocalString(oTarget, sMatch, sTargetRes);
 		SetLocalString(oScryer, sTargetName, sMatch);
-					
+		SetListenPattern(oScrySpeak, "**" + sMatch + "**", 6039);
+				 
+				 			
 		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
 		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
 		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
@@ -1117,7 +1112,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		ACR_SetPersistentString(oFocus, "sPTargetNick", sMatch);
 		object oToken = GetFirstItemInInventory(oScryer);
 		while(oToken != OBJECT_INVALID) {
-			if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
+			if((FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) && (GetTag(oToken) != "abr_it_scry_kit")) {
 				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
 				if(sPTokenName == sTargetName) {
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
@@ -1151,17 +1146,73 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 		ActionForceFollowObject(oScried, 0.5, 0); 
 		int nMatch = GetListenPatternNumber();
-		if(nMatch == 6031) {
+		string sRelay = GetMatchedSubstring(0);
+		if((nMatch == 6040) && (GetLastSpeaker() == oScryer)) {
+		//End Spell
+			location lHere = GetLocalLocation(oScryer, "ACR_SCRY_LOCATION");
+		    object oScrySend = OBJECT_SELF;
+			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
+			object oDupe = GetLocalObject(oScryer, "oDupe");
+			AssignCommand(oDupe, ActionSpeakString(sRelay, TALKVOLUME_TALK));
+			object oScry = GetLocalObject(OBJECT_SELF, "oScry");
+			effect eEffect = GetFirstEffect(oScryer);
+			int nRep = 0;
+			while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+				 object oCreator = GetEffectCreator(eEffect);
+				 if(oCreator == oScrySpeak) {
+				 	RemoveEffect(oScryer, eEffect);
+				   }
+				 eEffect = GetNextEffect(oScryer);
+				 nRep ++;
+				}
+			
+			if(GetIsObjectValid(oDupe)) {AssignCommand(oScryer, ActionJumpToLocation(lHere));}		
+			AssignCommand(oScry, ActionSpeakString("*The images in the " + GetName(oScry) + " fade.", TALKVOLUME_TALK));		
+			SendMessageToPC(oScryer, "The scry spell ends.");		
+			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + GetName(oScry) + " fade.");		
+			 					
+			//Unset ALL local objects at the end of the spell
+			//Destroy Scrying Sensor and ScryListen
+			SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySelf", OBJECT_INVALID);
+			SetLocalObject(oScry, "oDupe", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySelf", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oDupe", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScry", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScried, "oScrySelf", OBJECT_INVALID);
+			SetLocalObject(oScried, "oDupe", OBJECT_INVALID);
+			
+			DeleteLocalLocation(oScryer, "ACR_SCRY_LOCATION");
+			SetLocalInt(oScry, "nScryActive", 0);
+			
+			DestroyObject(oScrySpeak);  
+			DestroyObject(oScrySelf);
+			DestroyObject(oDupe);
+			DestroyObject(OBJECT_SELF, 1.0);
+			return;
+		}
+		
+		
+		else if(nMatch == 6041) {
 			string sSpokenBy = GetName(GetLastSpeaker());
 			SetFirstName(oScrySpeak, sSpokenBy);
-			string sRelay = GetMatchedSubstring(0);
 			if(GetLastSpeaker() != oScrySpeak)  {
 				DelayCommand(1.0, AssignCommand(oScrySpeak, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 			}
 			//Scrying Sensor won't force follow across ATs, so here it checks to make sure oScried hasn't left the area and jumps to oScried if so
-			if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
-				ActionJumpToObject(oScried, TRUE);
-			}
+			//if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
+			//	ActionJumpToObject(oScried, TRUE);
+		//	}
 		}
 	}	 
 
