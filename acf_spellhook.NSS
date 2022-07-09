@@ -472,7 +472,7 @@ if(GetSpellId() == 3068) {
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
 				SetFirstName(oFocus, "Scrying Droplet");
-				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oScry) + ".");
+				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
 			    SetItemIcon(oFocus, 1896);
 				return;
 				}
@@ -525,7 +525,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
+			//SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
 			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);
@@ -602,7 +602,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
             	SetLocalObject(oScry, "oScrySpeak", oScrySpeak);
 				}
 				
-			SendMessageToPC(oScryer, "oScrySpeak = " + GetName(oScrySpeak));
+			//SendMessageToPC(oScryer, "oScrySpeak = " + GetName(oScrySpeak));
 			//Set all objects on each other
 			SetLocalObject(oScrySpeak, "oScry", oScry);
 			SetLocalObject(oScrySpeak, "oScryer", oScryer);

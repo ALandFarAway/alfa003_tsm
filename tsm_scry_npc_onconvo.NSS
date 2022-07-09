@@ -56,10 +56,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
 			object oDupe = GetLocalObject(oScryer, "oScrySelf");
+			object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 			RemoveEffect(oScryer, eCutScene);
 			RemoveEffect(oScryer, eInvis);
 			RemoveEffect(oScryer, eEthereal);
-			AssignCommand(oScryer, ActionJumpToLocation(lHere));		
+			
+			if(GetIsObjectValid(oDupe)) {AssignCommand(oScryer, ActionJumpToLocation(lHere));}		
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
@@ -86,7 +88,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
 			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
-								
+			SetLocalObject(oScryer, "oDupe", OBJECT_INVALID);
+			
+			DeleteLocalLocation(oScryer, "ACR_SCRY_LOCATION");
 			SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0);
 			SetLocalInt(oScry, "nScryActive", 0);
 								 
@@ -321,7 +325,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							 	SetLocalObject(oScry, "oScried", oScried);
 							 	SetLocalObject(OBJECT_SELF, "oScried", oScried);
 								SetLocalObject(oScryer, "oScried", oScried);
-							 	//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
+							 	SetLocalObject(OBJECT_SELF, "oScryer", oScryer);
+								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
 								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
 								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
@@ -1046,7 +1051,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
-	//SendMessageToPC(oScryer, "Namer spawn sTargetRes = " + sTargetRes);
 	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
@@ -1106,15 +1110,19 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
 				if(sPTokenName == sTargetName) {
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
+					SendMessageToPC(oScryer, "1. sPTargetNick set to " + sMatch);
 					}
 				if((sPTokenName == "") && (ACR_GetPersistentString(oToken, "sPTargetNick") == sMatch)){
 					ACR_SetPersistentString(oToken, "sPTargetName", sMatch);
+					SendMessageToPC(oScryer, "sPTargetName set to " + sMatch);
 					}
 				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "") && (sPTokenName == sMatch)){
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
+					SendMessageToPC(oScryer, "2. sPTargetNick set to " + sMatch);
 					}
 				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "Xavier") && (sPTokenName != "Xavier")){
 					ACR_SetPersistentString(oToken, "sPTargetNick", sPTokenName);
+					SendMessageToPC(oScryer, "3. sPTargetNick set to " + sPTokenName);
 					}
 					
 				}	
