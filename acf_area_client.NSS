@@ -58,7 +58,7 @@ void main() {
 	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
 	object oScryer =  GetLocalObject(oEnterer, "oScryer");
 	if(oScrySend != OBJECT_INVALID) {
-	    SendMessageToPC(oScryer, "oSend should be jumping to " + GetName(oEnterer) + " now."); 
+	    SendMessageToPC(oEnterer, "oSend should be jumping to " + GetName(oEnterer) + " now."); 
 		
 		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oEnterer)));
 		DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));

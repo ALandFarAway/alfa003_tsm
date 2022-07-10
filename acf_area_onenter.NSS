@@ -55,7 +55,18 @@ void main() {
     // Custom code goes below this line.
 	string sTag = GetTag(OBJECT_SELF);
 	
+	object oEnterer = GetEnteringObject();
 	
+	//Scrying is active on this PC
+	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
+	object oScryer =  GetLocalObject(oEnterer, "oScryer");
+	if(oScrySend != OBJECT_INVALID) {
+	    SendMessageToPC(oEnterer, "oSend should be jumping to " + GetName(oEnterer) + " now."); 
+		
+		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oEnterer)));
+		DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
+		}
+
 	
 	//Exploration xp
 	if(FindSubString(sTag, "ext", 0) != -1) {
@@ -75,4 +86,6 @@ void main() {
 		SendMessageToPC(GetEnteringObject(), "Congratulations on exploring a new area!");
 		}
 	}
+	
+	
 }
