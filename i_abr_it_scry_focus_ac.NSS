@@ -22,9 +22,8 @@
 // Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_scry_i"
-#include "acr_db_persist_i"
 #include "x0_i0_stringlib"
-
+ 
 void main()
 {
     object oScryer = GetItemActivator();

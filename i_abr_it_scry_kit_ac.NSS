@@ -24,6 +24,7 @@
 // Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_scry_i"
+#include "x0_i0_stringlib"
 
 /*const string HAIR_TEMPORARY_DATABASE_NAME = "hairDB";
 const string HAIR_VARIABLE_NAME = "hairCreature";
@@ -159,6 +160,7 @@ void main()
 				SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
 				if(GetIsPC(oTarget) == FALSE) {
 					SetIsTemporaryEnemy(oScryer, oTarget, TRUE, 10.0);
+					AdjustReputation(oScryer, oTarget, -10);
 					int nEnmity = GetIsEnemy(oScryer, oTarget);
 					SendMessageToPC(oScryer, "Enmity = " + IntToString(nEnmity));
 					int nReputation = GetReputation(oScryer, oTarget);
@@ -186,7 +188,12 @@ void main()
 		DestroyObject(oTarget);
 		}
 		
-	ACR_SetPersistentString(oToken, "sPScryerName", sScryer);
-	ACR_SetPersistentString(oToken, "sPTargetName", sTarget);
-									
-}
+	int nPos = FindSubString(sScryer, "'", 0);
+	ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sScryer, nPos, 1));
+	int nPosTarget = FindSubString(sTarget, "'", 0);
+	ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sTarget, nPosTarget, 1));
+	SendMessageToPC(oScryer, "Kit: sTargetName = " + sTarget);
+	SendMessageToPC(oScryer, "Kit: sScryerName = " + sScryer);
+	SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
+	SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
+	}
