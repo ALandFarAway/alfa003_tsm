@@ -22,6 +22,7 @@
 // Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_scry_i"
+#include "acr_db_persist_i"
 
 void main()
 {
@@ -31,7 +32,6 @@ void main()
 	string sTargetName = GetName(oTarget);
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
-	string sPTargetRes = ACR_GetPersistentString(oFocus, "sPTargetRes");
 	int nDCRoll = 10+ d10(1);
 	//SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
@@ -58,7 +58,7 @@ void main()
 		return;
 		}
 		
-	if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sPTargetRes == "")) {
+	if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
 		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
 			DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
 			
@@ -88,8 +88,10 @@ void main()
 				}
 				SetFirstName(oImage, sFocusName + ": " + sTargetName);
 				SetDescription(oImage, "A scrying focus showing a still reflection of " + sTargetName + ". This token was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				ACR_SetPersistentString(oImage, "sPTargetName", sTargetName);
-				ACR_SetPersistentString(oImage, "sPScryerName", sScryerName);
+				ACR_SetPersistentString(oImage, "sPTargetName", ACR_SQLEncodeSpecialChars(sTargetName));
+				ACR_SetPersistentString(oImage, "sPScryerName", ACR_SQLEncodeSpecialChars(sScryerName));
+				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 					}

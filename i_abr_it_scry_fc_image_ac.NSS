@@ -129,8 +129,6 @@ void main()
 			int nDexCheck = d20(1) + nDexRank;
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank;
-			//SendMessageToPC(oScryer, "DexCheck = " +  IntToString(nDexCheck) + ". DexRank = " +  IntToString(nDexRank));
-			//SendMessageToPC(oScryer, "SpotCheck = " +  IntToString(nSpotCheck) + ". SpotRank = " +  IntToString(nSpotRank));
 			if(nSpotCheck >= nDexCheck) {
 				SendMessageToPC(oScryer, "You  have been detected!");
 				SendMessageToPC(oTarget, "You feel observed.");
@@ -151,9 +149,8 @@ void main()
 				}
 				SetFirstName(oImago, "Scrying Imago: " + sPTargetName);
 				SetDescription(oImago, "A Scrying" + sFocusType + " showing the imago of " + sPTargetName + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This Scrying " + sFocusType + " was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				ACR_SetPersistentString(oImago, "sPTargetName", sTargetName);
+				ACR_SetPersistentString(oImago, "sPTargetName", sPTargetName);
 				ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);
-				SendMessageToPC(oScryer, "Focus on Creature: sTargetName = " + sTargetName);
 				SendMessageToPC(oScryer, "Focus on Creature: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
