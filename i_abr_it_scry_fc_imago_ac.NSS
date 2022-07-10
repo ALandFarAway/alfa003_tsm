@@ -55,6 +55,7 @@ void main()
 	if(FindSubString(sFocusName, "Droplet", 0) != -1) {
 		sFocusType = "Droplet";
 	}
+	
 	string sPTargetRes = ACR_GetPersistentString(oFocus, "sPTargetRes");
 	string sPTargetName = ACR_GetPersistentString(oFocus, "sPTargetName");
 	string sPScryerName = ACR_GetPersistentString(oFocus, "sPScryerName");

@@ -153,6 +153,10 @@ void main()
 					//SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPosTarget, 1));
 					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
 				}	
+				else {
+					ACR_SetPersistentString(oImago, "sPTargetName", sTargetName);	
+					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+					}
 				
 				if(FindSubString(sScryerName, "'") != -1) {
 					int nPosScryer = FindSubString(sScryerName, "'", 0);
@@ -160,10 +164,16 @@ void main()
 					//SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPosScryer, 1));
 					//SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				}	
+				else {
+					ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);	
+					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+					}
+					
 				
-				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
-				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
-				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
+				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
+				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+				SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
 					}
