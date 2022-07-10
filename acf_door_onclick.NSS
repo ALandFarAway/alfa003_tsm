@@ -47,11 +47,4 @@
 
 void main() {
     ACR_DoorOnAreaTransitionClick();
-	object oPC = GetClickingObject();
-	object oATTarget = GetTransitionTarget(OBJECT_SELF);
-	
-	SetLocalObject(oPC, "oATTarget", oATTarget);
-	SendMessageToPC(oPC, "Door oATTarget = " + GetTag(oATTarget)); 
-	 	
-	
-}
+}		
