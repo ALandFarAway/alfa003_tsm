@@ -49,13 +49,6 @@ void main()
 		oTarget = GetLocalObject(oArea, "oScry");
 	}
 	string sTargetName = GetName(oTarget);
-	
-	string sPrep = ReplaceAllSubStrings(sTargetName, "'", "" );
-	SendMessageToPC(oScryer, "sPrep " + sPrep);
-	ACR_SetPersistentString(GetItemActivated(), "sPPrep", ReplaceAllSubStrings(sPrep, "'", "" ));
-	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
-	SendMessageToPC(oScryer, "sPPrep " + sPPrep);
-				
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
 	string sFocusType = "Shard";
