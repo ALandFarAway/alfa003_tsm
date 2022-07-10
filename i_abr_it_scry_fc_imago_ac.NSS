@@ -25,6 +25,7 @@
 // Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_scry_i"
+#include "x0_i0_stringlib"
 
 void main()
 {
@@ -50,6 +51,13 @@ void main()
 		oTarget = GetLocalObject(oArea, "oScry");
 	}
 	string sTargetName = GetName(oTarget);
+	
+	string sPrep = ReplaceAllSubStrings(sTargetName, "'", "" );
+	SendMessageToPC(oScryer, "sPrep " + sPrep);
+	ACR_SetPersistentString(GetItemActivated(), "sPPrep", ReplaceAllSubStrings(sPrep, "'", "" ));
+	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
+	SendMessageToPC(oScryer, "sPrep " + sPrep);
+				
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
 	string sFocusType = "Shard";

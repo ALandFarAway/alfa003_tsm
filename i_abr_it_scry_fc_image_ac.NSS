@@ -27,6 +27,7 @@
 // Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_scry_i"
+#include "x0_i0_stringlib"
 
 void main()
 {
@@ -54,6 +55,13 @@ void main()
 	
 			
 	string sTargetName = GetName(oTarget);
+	
+	string sPrep = ReplaceAllSubStrings(sTargetName, "'", "" );
+	SendMessageToPC(oScryer, "sPrep " + sPrep);
+	ACR_SetPersistentString(GetItemActivated(), "sPPrep", ReplaceAllSubStrings(sPrep, "'", "" ));
+	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
+	SendMessageToPC(oScryer, "sPrep " + sPrep);
+				
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
 	string sFocusType = "Shard";
@@ -64,8 +72,8 @@ void main()
 	string sPTargetName = ACR_GetPersistentString(oFocus, "sPTargetName");
 	string sPScryerName = ACR_GetPersistentString(oFocus, "sPScryerName");
 	string sTargetNick = GetLocalString(oTarget, sPTargetRes);
-	SendMessageToPC(oScryer, "Focus Definitions: sTargetName = " + sTargetName);
-	SendMessageToPC(oScryer, "Focus Definitions: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
+	//SendMessageToPC(oScryer, "Focus Definitions: sTargetName = " + sTargetName);
+	//SendMessageToPC(oScryer, "Focus Definitions: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
 				
 	int nDCRoll = 10+ d10(1);
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
@@ -149,9 +157,9 @@ void main()
 				}
 				SetFirstName(oImago, "Scrying Imago: " + sPTargetName);
 				SetDescription(oImago, "A Scrying" + sFocusType + " showing the imago of " + sPTargetName + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This Scrying " + sFocusType + " was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				ACR_SetPersistentString(oImago, "sPTargetName", sPTargetName);
-				ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);
-				SendMessageToPC(oScryer, "Focus on Creature: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+				//ACR_SetPersistentString(oImago, "sPTargetName", sPTargetName);
+				//ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);
+				//SendMessageToPC(oScryer, "Focus on Creature: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
 					}
