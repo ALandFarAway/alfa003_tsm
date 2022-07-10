@@ -158,6 +158,12 @@ void main()
 				SendMessageToPC(oScryer, "You have been detected!");
 				SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
 				if(GetIsPC(oTarget) == FALSE) {
+					SetIsTemporaryEnemy(oScryer, oTarget, TRUE, 10.0);
+					int nEnmity = GetIsEnemy(oScryer, oTarget);
+					SendMessageToPC(oScryer, "Enmity = " + IntToString(nEnmity));
+					int nReputation = GetReputation(oScryer, oTarget);
+					SendMessageToPC(oScryer, "nReputation = " + IntToString(nReputation));
+					
 					//if(GetStealthMode(oScryer) == STEALTH_MODE_DISABLED) {
 					if(GetIsEnemy(oScryer, oTarget)) {
 						AssignCommand(oTarget, ActionAttack(oScryer));

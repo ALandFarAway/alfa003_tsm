@@ -149,11 +149,15 @@ void main()
 				if(FindSubString(sTargetName, "'") != -1) {
 					int nPos = FindSubString(sTargetName, "'", 0);
 					ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPos, 1));
+					SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPos, 1));
+					SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
 				}	
 				
 				if(FindSubString(sScryerName, "'") != -1) {
 					int nPos = FindSubString(sScryerName, "'", 0);
 					ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPos, 1));
+					SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPos, 1));
+					SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				}	
 				
 				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
