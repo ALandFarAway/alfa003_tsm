@@ -70,6 +70,7 @@ void main() {
 		
 	if(oScrySend != OBJECT_INVALID) {
 	    SendMessageToPC(oEnterer, "client oSend should be jumping to " + GetName(oEnterer) + " at " + GetTag(oATTarget) + " now."); 
+		AssignCommand(oScrySend, ClearAllActions(TRUE));
 		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToLocation(lATTarget)));
 		DelayCommand(9.0, SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend)))); 
 		DelayCommand(10.0 , AssignCommand(oScrySend, ActionJumpToObject(oATTarget, FALSE)));
