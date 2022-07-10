@@ -62,16 +62,16 @@ void main() {
 	string sATTarget = GetLocalString(oEnterer, "sATTarget");
 		 oATTarget = GetWaypointByTag(sATTarget);
 		}
-		
+	location lATTarget = GetLocation(oATTarget);	
 	SendMessageToPC(oEnterer, "client oScryer = " + GetName(oScryer)); 
 	SendMessageToPC(oEnterer, "client oScrySend = " + GetTag(oScrySend)); 
 	SendMessageToPC(oEnterer, "client oATTarget = " + GetTag(oATTarget)); 
 		
 	if(oScrySend != OBJECT_INVALID) {
 	    SendMessageToPC(oEnterer, "client oSend should be jumping to " + GetName(oEnterer) + " at " + GetTag(oATTarget) + " now."); 
-		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oATTarget)));
+		AssignCommand(oScrySend, ActionJumpToLocation(lATTarget));
 		DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
-		SetLocalObject(oEnterer, "oATTarget", OBJECT_INVALID);
-		SetLocalString(oEnterer, "sATTarget", "");
+		DelayCommand(1.0, SetLocalObject(oEnterer, "oATTarget", OBJECT_INVALID));
+		DelayCommand(1.0, SetLocalString(oEnterer, "sATTarget", ""));
 		}
 }

@@ -329,6 +329,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							 	SetLocalObject(OBJECT_SELF, "oScried", oScried);
 								SetLocalObject(oScryer, "oScried", oScried);
 							 	SetLocalObject(OBJECT_SELF, "oScryer", oScryer);
+								SetLocalObject(oScried, "oScryer", oScryer);
 								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
 								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
