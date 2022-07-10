@@ -226,9 +226,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
 								int nPosScryer = FindSubString(sScryerName, "'", 0);
 								int nScryer = 0; 
 								if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPosScryer, 1))) {
@@ -1061,8 +1061,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 	object oScrySpeak = GetLocalObject(oScryer, "oScrySpeak");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
 	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
-	SendMessageToPC(oScryer, "Namer: sTargetName = " + sTargetName);
-	SendMessageToPC(oScryer, "Namer: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
+	//SendMessageToPC(oScryer, "Namer: sTargetName = " + sTargetName);
+	//SendMessageToPC(oScryer, "Namer: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
@@ -1123,21 +1123,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
 				if(sPTokenName == sTargetName) {
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
-					SendMessageToPC(oScryer, "1. sPTargetNick set to " + sMatch + " on " + GetName(oToken));
+					//SendMessageToPC(oScryer, "1. sPTargetNick set to " + sMatch + " on " + GetName(oToken));
 					}
 				if((sPTokenName == "") && (ACR_GetPersistentString(oToken, "sPTargetNick") == sMatch)){
 					ACR_SetPersistentString(oToken, "sPTargetName", sMatch);
-					SendMessageToPC(oScryer, "sPTargetName set to " + sMatch + " on " + GetName(oToken));
+					//SendMessageToPC(oScryer, "sPTargetName set to " + sMatch + " on " + GetName(oToken));
 					}
 				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "") && (sPTokenName == sMatch)){
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
-					SendMessageToPC(oScryer, "2. sPTargetNick set to " + sMatch + " on " + GetName(oToken));
+					//SendMessageToPC(oScryer, "2. sPTargetNick set to " + sMatch + " on " + GetName(oToken));
 					}
-				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "Bae") && (sPTokenName != "Bae")){
-					ACR_SetPersistentString(oToken, "sPTargetName", "Bae");
-					SendMessageToPC(oScryer, "3. sPTargetNick set to Bae on " + GetName(oToken));
-					}
-					
 				}	
 			oToken = GetNextItemInInventory(oScryer);
 			}

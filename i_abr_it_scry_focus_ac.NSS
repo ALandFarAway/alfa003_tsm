@@ -47,7 +47,7 @@ void main()
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
-	SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
+	//SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
 		
 	if(GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) {
 		SendMessageToPC(oScryer, "This " + sFocusName + " has not been imbued.");
@@ -68,7 +68,7 @@ void main()
 				if(GetIsPC(oTarget) == FALSE) {
 					AssignCommand(oTarget, ActionMoveAwayFromObject(oScryer, FALSE, 20.0));
 					SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
-					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " . You will have to try again another time.");
+					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time.");
 					return;
 					}
 				}
@@ -105,10 +105,10 @@ void main()
 					}
 					
 				
-				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
-				SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
-				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
-				SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
+				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				//SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
+				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 					}

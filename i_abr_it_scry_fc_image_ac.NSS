@@ -79,7 +79,7 @@ void main()
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
-	SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
+	//SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
 	int nPos = FindSubString(sScryerName, "'", 0);
 	int nScryer = 0;
 	if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPos, 1))) {
@@ -133,7 +133,7 @@ void main()
 				if(GetIsPC(oTarget) == FALSE) {
 					AssignCommand(oTarget, ActionMoveAwayFromObject(oScryer, FALSE, 20.0));
 					SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
-					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " . You will have to try again another time.");
+					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time.");
 					return;
 					}
 				}
@@ -170,10 +170,10 @@ void main()
 					}
 					
 				
-				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
-				SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
-				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
-				SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
+				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				//SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
+				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
 					}
