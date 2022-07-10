@@ -54,7 +54,6 @@ void main() {
 
     // Custom code goes below this line.
 	string sTag = GetTag(OBJECT_SELF);
-	
 	object oEnterer = GetEnteringObject();
 	
 	//Scrying is active on this PC
@@ -65,8 +64,9 @@ void main() {
 	string sATTarget = GetLocalString(oEnterer, "sATTarget");
 		 oATTarget = GetWaypointByTag(sATTarget);
 		}
+		
 	if(oScrySend != OBJECT_INVALID) {
-	    SendMessageToPC(oScryer, "oSend should be jumping to " + GetName(oEnterer) + " at " + GetName(oATTarget) + " now."); 
+	    SendMessageToPC(oScryer, "area onenter oSend should be jumping to " + GetName(oEnterer) + " at " + GetName(oATTarget) + " now."); 
 		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oATTarget)));
 		DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		SetLocalObject(oEnterer, "oATTarget", OBJECT_INVALID);

@@ -52,6 +52,6 @@ void main() {
 	
 	SetLocalObject(oPC, "oATTarget", oATTarget);
 	SendMessageToPC(oPC, "Door oATTarget = " + GetName(oATTarget)); 
-		
+	 	
 	
 }

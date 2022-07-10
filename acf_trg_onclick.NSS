@@ -54,5 +54,4 @@ void main()
    
 	SetLocalObject(oPC, "oATTarget", oATTarget);
 	SendMessageToPC(oPC, "Trigger oATTarget = " + GetName(oATTarget)); 
-	
 }

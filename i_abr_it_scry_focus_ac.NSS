@@ -24,6 +24,7 @@
 #include "acr_scry_i"
 #include "acr_db_persist_i"
 
+
 void main()
 {
     object oScryer = GetItemActivator();
@@ -33,11 +34,8 @@ void main()
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
 	int nDCRoll = 10+ d10(1);
-	//SendMessageToPC(oScryer, "nDCRoll = " + IntToString(nDCRoll));
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
-	//SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	fDCAbility = pow(fDCAbility, 2.0);
-	//SendMessageToPC(oScryer, "fDCAbility = " + FloatToString(fDCAbility));
 	int nDCAbility = 0; 
 	if(fDCAbility < 1.5)
 		{nDCAbility = 1;}
@@ -49,9 +47,7 @@ void main()
 		{nDCAbility = 4;}
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
-	//SendMessageToPC(oScryer, "nDCAbility = " + IntToString(nDCAbility));
 	int nDC = nDCRoll + nDCAbility;
-	//SendMessageToPC(oScryer, "nDC = " + IntToString(nDC));
 		
 	if(GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) {
 		SendMessageToPC(oScryer, "This " + sFocusName + " has not been imbued.");
@@ -66,8 +62,6 @@ void main()
 			int nDexCheck = d20(1) + nDexRank;
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank;
-			//SendMessageToPC(oScryer, "DexCheck = " +  IntToString(nDexCheck) + ". DexRank = " +  IntToString(nDexRank));
-			//SendMessageToPC(oScryer, "SpotCheck = " +  IntToString(nSpotCheck) + ". SpotRank = " +  IntToString(nSpotRank));
 			if(nSpotCheck >= nDexCheck) {
 				SendMessageToPC(oScryer, "You  have been detected!");
 				SendMessageToPC(oTarget, "You feel observed.");
@@ -88,8 +82,8 @@ void main()
 				}
 				SetFirstName(oImage, sFocusName + ": " + sTargetName);
 				SetDescription(oImage, "A scrying focus showing a still reflection of " + sTargetName + ". This token was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				ACR_SetPersistentString(oImage, "sPTargetName", ACR_SQLEncodeSpecialChars(sTargetName));
-				ACR_SetPersistentString(oImage, "sPScryerName", ACR_SQLEncodeSpecialChars(sScryerName));
+				ACR_SetPersistentString(oImage, "sPTargetName", sTargetName);
+				ACR_SetPersistentString(oImage, "sPScryerName", sScryerName);
 				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
 				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
 				if(GetIsPC(oTarget) == FALSE) {
