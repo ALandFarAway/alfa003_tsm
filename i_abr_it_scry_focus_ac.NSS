@@ -23,7 +23,7 @@
 
 #include "acr_scry_i"
 #include "acr_db_persist_i"
-
+#include "x0_i0_stringlib"
 
 void main()
 {
@@ -82,8 +82,8 @@ void main()
 				}
 				SetFirstName(oImage, sFocusName + ": " + sTargetName);
 				SetDescription(oImage, "A scrying focus showing a still reflection of " + sTargetName + ". This token was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				ACR_SetPersistentString(oImage, "sPTargetName", sTargetName);
-				ACR_SetPersistentString(oImage, "sPScryerName", sScryerName);
+				ACR_SetPersistentString(oImage, "sPTargetName", ReplaceAllSubStrings(sTargetName, "'", "" ));
+				ACR_SetPersistentString(oImage, "sPScryerName", ReplaceAllSubStrings(sScryerName, "'", "" ));
 				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
 				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
 				if(GetIsPC(oTarget) == FALSE) {
