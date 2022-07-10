@@ -39,7 +39,7 @@ void main()
 	string sPSplice = ACR_GetPersistentString(GetItemActivated(), "sPSplice"); 
 	SendMessageToPC(oScryer, "sPSplice " + sPSplice);
 	
-	string sPrep = ReplaceAllSubStrings(sTargetName, "'", "" );
+	string sPrep = ReplaceSubString(sTargetName, "'", "" );
 	SendMessageToPC(oScryer, "sPrep " + sPrep);
 	ACR_SetPersistentString(GetItemActivated(), "sPPrep", sPrep);
 	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
@@ -62,6 +62,7 @@ void main()
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
+	SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
 		
 	if(GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) {
 		SendMessageToPC(oScryer, "This " + sFocusName + " has not been imbued.");

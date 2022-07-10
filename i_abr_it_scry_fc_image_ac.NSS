@@ -97,7 +97,7 @@ void main()
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
-		
+	SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
 	int nScryer = 0;
 	if(sScryerName == sPScryerName) {
 		nScryer = 1;
