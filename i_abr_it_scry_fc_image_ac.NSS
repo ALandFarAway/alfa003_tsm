@@ -42,8 +42,6 @@ void main()
 		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
-			//SendMessageToPC(oScryer, "Image. oScry Name = " + GetName(oScry));
-			//SendMessageToPC(oScryer, "Image. sTriggerTag = " + sTriggerTag);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				SetLocalObject(oArea, "oScry", oScry);
 				}
@@ -79,8 +77,6 @@ void main()
 	string sPTargetName = ACR_GetPersistentString(oFocus, "sPTargetName");
 	string sPScryerName = ACR_GetPersistentString(oFocus, "sPScryerName");
 	string sTargetNick = GetLocalString(oTarget, sPTargetRes);
-	//SendMessageToPC(oScryer, "Focus Definitions: sTargetName = " + sTargetName);
-	//SendMessageToPC(oScryer, "Focus Definitions: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
 				
 	int nDCRoll = 10+ d10(1);
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
@@ -164,9 +160,19 @@ void main()
 				}
 				SetFirstName(oImago, "Scrying Imago: " + sPTargetName);
 				SetDescription(oImago, "A Scrying" + sFocusType + " showing the imago of " + sPTargetName + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This Scrying " + sFocusType + " was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				//ACR_SetPersistentString(oImago, "sPTargetName", sPTargetName);
-				//ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);
-				//SendMessageToPC(oScryer, "Focus on Creature: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+				if(FindSubString(sTargetName, "'") != -1) {
+					int nPos = FindSubString(sTargetName, "'", 0);
+					ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPos, 1));
+				}	
+				
+				if(FindSubString(sScryerName, "'") != -1) {
+					int nPos = FindSubString(sScryerName, "'", 0);
+					ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPos, 1));
+				}	
+				
+				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+				SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
 					}

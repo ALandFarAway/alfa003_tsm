@@ -31,20 +31,6 @@ void main()
 	string sScryerName = GetName(oScryer);
 	object oTarget = GetItemActivatedTarget();
 	string sTargetName = GetName(oTarget);
-	
-	int nSPos = FindSubString(sTargetName, "'", 0);
-	string sSplice = SpliceString(sTargetName, nSPos, 1 );
-	SendMessageToPC(oScryer, "sSplice " + sSplice);
-	ACR_SetPersistentString(GetItemActivated(), "sPSplice", sSplice);
-	string sPSplice = ACR_GetPersistentString(GetItemActivated(), "sPSplice"); 
-	SendMessageToPC(oScryer, "sPSplice " + sPSplice);
-	
-	string sPrep = ReplaceSubString(sTargetName, "'", "" );
-	SendMessageToPC(oScryer, "sPrep " + sPrep);
-	ACR_SetPersistentString(GetItemActivated(), "sPPrep", sPrep);
-	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
-	SendMessageToPC(oScryer, "sPPrep " + sPPrep);
-				
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
 	int nDCRoll = 10+ d10(1);
@@ -97,10 +83,19 @@ void main()
 				}
 				SetFirstName(oImage, sFocusName + ": " + sTargetName);
 				SetDescription(oImage, "A scrying focus showing a still reflection of " + sTargetName + ". This token was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				//ACR_SetPersistentString(oImage, "sPTargetName", ReplaceAllSubStrings(sTargetName, "'", "" ));
-				//ACR_SetPersistentString(oImage, "sPScryerName", ReplaceAllSubStrings(sScryerName, "'", "" ));
-				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
-				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+				if(FindSubString(sTargetName, "'") != -1) {
+					int nPos = FindSubString(sTargetName, "'", 0);
+					ACR_SetPersistentString(oImage, "sPTargetName", SpliceString(sTargetName, nPos, 1));
+				}	
+				
+				if(FindSubString(sScryerName, "'") != -1) {
+					int nPos = FindSubString(sScryerName, "'", 0);
+					ACR_SetPersistentString(oImage, "sPScryerName", SpliceString(sScryerName, nPos, 1));
+				}	
+				
+				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+				SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 					}
