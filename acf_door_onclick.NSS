@@ -51,7 +51,7 @@ void main() {
 	object oATTarget = GetTransitionTarget(OBJECT_SELF);
 	
 	SetLocalObject(oPC, "oATTarget", oATTarget);
-	SendMessageToPC(oPC, "Door oATTarget = " + GetName(oATTarget)); 
+	SendMessageToPC(oPC, "Door oATTarget = " + GetTag(oATTarget)); 
 	 	
 	
 }
