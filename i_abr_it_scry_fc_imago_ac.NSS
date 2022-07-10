@@ -76,8 +76,9 @@ void main()
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
 		
+	int nPos = FindSubString(sScryerName, "'", 0);
 	int nScryer = 0;
-	if(sScryerName == sPScryerName) {
+	if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPos, 1))) {
 		nScryer = 1;
 		}
 	

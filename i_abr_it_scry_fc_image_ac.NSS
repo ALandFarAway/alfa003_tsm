@@ -80,11 +80,12 @@ void main()
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
 	SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
+	int nPos = FindSubString(sScryerName, "'", 0);
 	int nScryer = 0;
-	if(sScryerName == sPScryerName) {
+	if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPos, 1))) {
 		nScryer = 1;
 		}
-	
+								
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && ((GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oTarget) == OBJECT_TYPE_TRIGGER))) {
 			if(nScryer == 1) {
 				AssignCommand(oTarget, ActionSpeakString("*A one-dimensional, still image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
@@ -147,16 +148,16 @@ void main()
 				SetFirstName(oImago, "Scrying Imago: " + sPTargetName);
 				SetDescription(oImago, "A Scrying" + sFocusType + " showing the imago of " + sPTargetName + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This Scrying " + sFocusType + " was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
 				if(FindSubString(sTargetName, "'") != -1) {
-					int nPos = FindSubString(sTargetName, "'", 0);
-					ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPos, 1));
-					SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPos, 1));
+					int nPosTarget = FindSubString(sTargetName, "'", 0);
+					ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPosTarget, 1));
+					SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPosTarget, 1));
 					SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
 				}	
 				
 				if(FindSubString(sScryerName, "'") != -1) {
-					int nPos = FindSubString(sScryerName, "'", 0);
-					ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPos, 1));
-					SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPos, 1));
+					int nPosScryer = FindSubString(sScryerName, "'", 0);
+					ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPosScryer, 1));
+					SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPosScryer, 1));
 					SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				}	
 				
