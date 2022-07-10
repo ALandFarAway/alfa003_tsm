@@ -41,10 +41,6 @@ void main() {
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 string sBless;
 	 
-	 SendMessageToPC(oCaster, "nCasterType = " + IntToString(nCasterType));
-	 SendMessageToPC(oCaster, "First Class = " + IntToString(GetClassByPosition(1, oCaster)));
-	 SendMessageToPC(oCaster, "Second Class = " + IntToString(GetClassByPosition(2, oCaster)));
-	 SendMessageToPC(oCaster, "Third Class = " + IntToString(GetClassByPosition(3, oCaster)));
 	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && (nCasterType == CLASS_TYPE_CLERIC)) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
@@ -62,12 +58,12 @@ void main() {
 	 else if((nLastSpell == 3066)  && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
 	    object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Shard");
-		SendMessageToPC(oCaster, "A shard shimmers into your hand, out of the " + GetName(oTarget) + " on which you draw your mark, leaving the glass unblemished.");
+		SendMessageToPC(oCaster, "A shard shimmers into your hand out of the " + GetName(oTarget) + " on which you draw your mark, leaving the glass unblemished.");
 	 }
 	 
 	 else if((nLastSpell == 3071) && ((sResRef == "abr_pl_so_mirror") || (sResRef == "tsm_plc_scry_mirror"))) {
 	    object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Shard");
-		SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oTarget) + ", leaving the glass unblemished.");
+		SendMessageToPC(oCaster, "A shard shaped like your instrument of choice shimmers into your hand out of the " + GetName(oTarget) + ", leaving the glass unblemished.");
 	 }	
 }

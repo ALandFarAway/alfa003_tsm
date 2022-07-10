@@ -194,7 +194,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
 							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
 								
-							if(nCL + nCLRoll <= 19) {
+							if(nCL + nCLRoll < 19) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel it warding off a divination attempt.");
 								SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
@@ -220,7 +220,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								
 						object oToken = GetFirstItemInInventory(oScryer);
 						while(oToken != OBJECT_INVALID) {
-							if(FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) {
+							if((FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) && (GetTag(oToken) != "abr_it_scry_kit")) {
 								string sTokenTag = GetTag(oToken);
 								string sScryerName = GetName(oScryer);
 								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
@@ -228,7 +228,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
 								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
 								int nScryer = 0;
 								if(sScryerName == sPScryerName) {
 									nScryer = 1;
@@ -338,7 +338,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							 		}
 								
 								SetLocalInt(oScry, "nScryActive", 1);
-								
+								effect eIcon = EffectEffectIcon(53);
+								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oScryer, fScryTimer);
+	
 								//Throw oScried a bone if their roll was within 5 of the DC
 								if (nWillSave + 5 > nDC) 
 								 	{SendMessageToPC(oScryer, "You have a feeling that " + GetName(oScried) + " might have sensed something.");
@@ -1126,9 +1128,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
 					SendMessageToPC(oScryer, "2. sPTargetNick set to " + sMatch);
 					}
-				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "Xavier") && (sPTokenName != "Xavier")){
-					ACR_SetPersistentString(oToken, "sPTargetNick", sPTokenName);
-					SendMessageToPC(oScryer, "3. sPTargetNick set to " + sPTokenName);
+				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "Bae") && (sPTokenName != "Bae")){
+					ACR_SetPersistentString(oToken, "sPTargetName", "Bae");
+					SendMessageToPC(oScryer, "3. sPTargetNick set to Bae");
 					}
 					
 				}	
@@ -1167,10 +1169,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalO
 				}
 			
 			if(GetIsObjectValid(oDupe)) {AssignCommand(oScryer, ActionJumpToLocation(lHere));}		
-			AssignCommand(oScry, ActionSpeakString("*The images in the " + GetName(oScry) + " fade.", TALKVOLUME_TALK));		
-			SendMessageToPC(oScryer, "The scry spell ends.");		
-			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + GetName(oScry) + " fade.");		
-			 					
+			if(GetArea(OBJECT_SELF) != GetArea(oScrySpeak)) {
+				AssignCommand(oScry, ActionSpeakString("*The images in the " + GetName(oScry) + " fade.", TALKVOLUME_TALK));		
+				SendMessageToPC(oScryer, "The scry spell ends.");		
+				SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + GetName(oScry) + " fade.");		
+			 	}				
 			//Unset ALL local objects at the end of the spell
 			//Destroy Scrying Sensor and ScryListen
 			SetLocalObject(oScry, "oScryer", OBJECT_INVALID);

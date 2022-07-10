@@ -583,8 +583,6 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			if(GetSpellId() == 3057) {
 				fScryTimer = nScryerLevel * 60.0 * 60.0;
 			}
-			effect eIcon = EffectEffectIcon(53);
-			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fScryTimer);
 			int nAbilityMod = GetAbilityModifier(ABILITY_INTELLIGENCE);
 			if(GetLastSpellCastClass()== CLASS_TYPE_BARD || CLASS_TYPE_SORCERER || CLASS_TYPE_PALADIN) {
 				nAbilityMod = GetAbilityModifier(ABILITY_CHARISMA);
