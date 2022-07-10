@@ -56,7 +56,7 @@ void main()
 	SendMessageToPC(oScryer, "sPrep " + sPrep);
 	ACR_SetPersistentString(GetItemActivated(), "sPPrep", ReplaceAllSubStrings(sPrep, "'", "" ));
 	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
-	SendMessageToPC(oScryer, "sPrep " + sPrep);
+	SendMessageToPC(oScryer, "sPPrep " + sPPrep);
 				
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
