@@ -64,14 +64,25 @@ void main() {
 		}
 	location lATTarget = GetLocation(oATTarget);	
 	SendMessageToPC(oEnterer, "client oScryer = " + GetName(oScryer)); 
-	SendMessageToPC(oEnterer, "client oScrySend = " + GetTag(oScrySend)); 
 	SendMessageToPC(oEnterer, "client oATTarget = " + GetTag(oATTarget)); 
+	SendMessageToPC(oEnterer, "client oScrySend = " + GetTag(oScrySend)); 
+	SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend))); 
 		
 	if(oScrySend != OBJECT_INVALID) {
 	    SendMessageToPC(oEnterer, "client oSend should be jumping to " + GetName(oEnterer) + " at " + GetTag(oATTarget) + " now."); 
-		AssignCommand(oScrySend, ActionJumpToLocation(lATTarget));
-		DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
-		DelayCommand(1.0, SetLocalObject(oEnterer, "oATTarget", OBJECT_INVALID));
-		DelayCommand(1.0, SetLocalString(oEnterer, "sATTarget", ""));
+		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToLocation(lATTarget)));
+		DelayCommand(9.0, SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend)))); 
+		DelayCommand(10.0 , AssignCommand(oScrySend, ActionJumpToObject(oATTarget, FALSE)));
+		DelayCommand(19.0, SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend)))); 
+		DelayCommand(20.0 , AssignCommand(oScrySend, ActionJumpToObject(oATTarget, TRUE)));
+		DelayCommand(29.0, SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend)))); 
+		DelayCommand(30.0 , AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oEnterer))));
+		DelayCommand(39.0, SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend)))); 
+		DelayCommand(40.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, FALSE)));
+		DelayCommand(49.0, SendMessageToPC(oEnterer, "client GetArea oScrySend = " + GetTag(GetArea(oScrySend)))); 
+		DelayCommand(50.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
+		//DelayCommand(3.0, SetLocalObject(oEnterer, "oATTarget", OBJECT_INVALID));
+		//DelayCommand(3.0, SetLocalString(oEnterer, "sATTarget", ""));
+		//DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		}
 }
