@@ -160,7 +160,7 @@ void main()
 				SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
 				if(GetIsPC(oTarget) == FALSE) {
 					SetIsTemporaryEnemy(oScryer, oTarget, TRUE, 10.0);
-					AdjustReputation(oScryer, oTarget, -10);
+					//AdjustReputation(oScryer, oTarget, -10);
 					int nEnmity = GetIsEnemy(oScryer, oTarget);
 					SendMessageToPC(oScryer, "Enmity = " + IntToString(nEnmity));
 					int nReputation = GetReputation(oScryer, oTarget);
