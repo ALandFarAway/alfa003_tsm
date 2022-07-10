@@ -150,20 +150,20 @@ void main()
 				if(FindSubString(sTargetName, "'") != -1) {
 					int nPosTarget = FindSubString(sTargetName, "'", 0);
 					ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPosTarget, 1));
-					SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPosTarget, 1));
-					SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+					//SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPosTarget, 1));
+					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
 				}	
 				
 				if(FindSubString(sScryerName, "'") != -1) {
 					int nPosScryer = FindSubString(sScryerName, "'", 0);
 					ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPosScryer, 1));
-					SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPosScryer, 1));
-					SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
+					//SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPosScryer, 1));
+					//SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				}	
 				
-				SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
-				SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
-				SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
+				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
+				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
 					}

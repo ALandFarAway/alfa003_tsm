@@ -73,7 +73,7 @@ void main()
 				}
 				
 			SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Sleight of Hand: *" + sSuccess + "*: " + IntToString(nSleightRoll) + " + " + IntToString(nSleightRank) + " = " + IntToString(nSleightCheck) + " vs DC" + IntToString(nPickDC) + "</color>");
-			
+			SendMessageToPC(oScryer, "nPickDC = " + IntToString(nPickDC));
 			if(nSleightCheck >= nPickDC + 5) {
 				oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 				SendMessageToPC(oScryer, "You snip a lock of hair from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the lock of hair.");

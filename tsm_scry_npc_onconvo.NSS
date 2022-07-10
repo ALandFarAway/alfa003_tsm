@@ -229,12 +229,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
-								int nPos = FindSubString(sScryerName, "'", 0);
+								int nPosScryer = FindSubString(sScryerName, "'", 0);
 								int nScryer = 0; 
-								if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPos, 1))) {
+								if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPosScryer, 1))) {
 									nScryer = 1;
 									}
-								if((sPTargetName == sScriedName) || (sPTargetNick == sMatch) || (FindSubString(sPTargetName, sScriedName) != -1)) {
+								int nPosMatch = FindSubString(sMatch, "'", 0);
+								if((sPTargetName == sScriedName) || (sPTargetNick == sMatch)  || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sPTargetNick == SpliceString(sMatch, nPosMatch, 1))) {
 									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
 										if(nConnection < 2) {nConnection = 2;}
