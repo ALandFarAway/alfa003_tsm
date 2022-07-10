@@ -32,9 +32,16 @@ void main()
 	object oTarget = GetItemActivatedTarget();
 	string sTargetName = GetName(oTarget);
 	
+	int nSPos = FindSubString(sTargetName, "'", 0);
+	string sSplice = SpliceString(sTargetName, nSPos, 1 );
+	SendMessageToPC(oScryer, "sSplice " + sSplice);
+	ACR_SetPersistentString(GetItemActivated(), "sPSplice", sSplice);
+	string sPSplice = ACR_GetPersistentString(GetItemActivated(), "sPSplice"); 
+	SendMessageToPC(oScryer, "sPSplice " + sPSplice);
+	
 	string sPrep = ReplaceAllSubStrings(sTargetName, "'", "" );
 	SendMessageToPC(oScryer, "sPrep " + sPrep);
-	ACR_SetPersistentString(GetItemActivated(), "sPPrep", ReplaceAllSubStrings(sPrep, "'", "" ));
+	ACR_SetPersistentString(GetItemActivated(), "sPPrep", sPrep);
 	string sPPrep = ACR_GetPersistentString(GetItemActivated(), "sPPrep"); 
 	SendMessageToPC(oScryer, "sPPrep " + sPPrep);
 				
