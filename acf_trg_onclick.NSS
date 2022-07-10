@@ -46,10 +46,13 @@ void main()
 {
     ACR_TriggerOnClick();
 
-	object oTarget = GetTransitionTarget(OBJECT_SELF);
-	if (oTarget != OBJECT_INVALID) {
-	    object oPC = GetClickingObject();
-		AssignCommand(oPC, ActionJumpToObject(oTarget, FALSE));
+	object oPC = GetClickingObject();
+	object oATTarget = GetTransitionTarget(OBJECT_SELF);
+	if (oATTarget != OBJECT_INVALID) {
+	    AssignCommand(oPC, ActionJumpToObject(oATTarget, FALSE));
 	}
-    // Custom code goes here.
+   
+	SetLocalObject(oPC, "oATTarget", oATTarget);
+	SendMessageToPC(oPC, "Trigger oATTarget = " + GetName(oATTarget)); 
+	
 }

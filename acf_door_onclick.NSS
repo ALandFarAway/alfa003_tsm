@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "acr_door_i"
+#include "acr_area_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -46,4 +47,11 @@
 
 void main() {
     ACR_DoorOnAreaTransitionClick();
+	object oPC = GetClickingObject();
+	object oATTarget = GetTransitionTarget(OBJECT_SELF);
+	
+	SetLocalObject(oPC, "oATTarget", oATTarget);
+	SendMessageToPC(oPC, "Door oATTarget = " + GetName(oATTarget)); 
+		
+	
 }

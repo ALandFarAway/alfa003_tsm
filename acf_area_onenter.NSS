@@ -60,11 +60,17 @@ void main() {
 	//Scrying is active on this PC
 	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
 	object oScryer =  GetLocalObject(oEnterer, "oScryer");
+	object oATTarget = GetLocalObject(oEnterer, "oATTarget");
+	if(oATTarget == OBJECT_INVALID) {
+	string sATTarget = GetLocalString(oEnterer, "sATTarget");
+		 oATTarget = GetWaypointByTag(sATTarget);
+		}
 	if(oScrySend != OBJECT_INVALID) {
-	    SendMessageToPC(oEnterer, "oSend should be jumping to " + GetName(oEnterer) + " now."); 
-		
-		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oEnterer)));
+	    SendMessageToPC(oScryer, "oSend should be jumping to " + GetName(oEnterer) + " at " + GetName(oATTarget) + " now."); 
+		AssignCommand(oScrySend, ActionJumpToLocation(GetLocation(oATTarget)));
 		DelayCommand(10.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
+		SetLocalObject(oEnterer, "oATTarget", OBJECT_INVALID);
+		SetLocalString(oEnterer, "sATTarget", "");
 		}
 
 	
