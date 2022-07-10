@@ -188,12 +188,17 @@ void main()
 		DestroyObject(oTarget);
 		}
 		
-	int nPos = FindSubString(sScryer, "'", 0);
-	ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sScryer, nPos, 1));
-	int nPosTarget = FindSubString(sTarget, "'", 0);
-	ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sTarget, nPosTarget, 1));
-	SendMessageToPC(oScryer, "Kit: sTargetName = " + sTarget);
-	SendMessageToPC(oScryer, "Kit: sScryerName = " + sScryer);
-	SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
-	SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
+	if(FindSubString(sScryer, "'") != -1) {
+		int nPos = FindSubString(sScryer, "'", 0);
+		ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sScryer, nPos, 1));
+		SendMessageToPC(oScryer, "Kit: sScryerName = " + sScryer);
+		SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
+		}
+		
+	if(FindSubString(sTarget, "'") != -1) {
+		int nPosTarget = FindSubString(sTarget, "'", 0);
+		ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sTarget, nPosTarget, 1));
+		SendMessageToPC(oScryer, "Kit: sTargetName = " + sTarget);
+		SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
+		}
 	}
