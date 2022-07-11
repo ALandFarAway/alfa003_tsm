@@ -385,13 +385,17 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								
 								 		// Dupe the PC to leave Dupe behind. Possessed NPC Dupes can't be destroyed, so don't do that?
 										object oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
-										if(GetIsPC(oScryer)) {
-											object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
-											SetLocalObject(oScryer, "oDupe", oDupe);
-											ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
-											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
-									    	DestroyObject(oDupe, 60.0);
+										object oDupe;
+										if(!GetIsDMPossessed(oScryer)) {
+											oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
 											}
+										else {
+											string sDupeRes = GetResRef(oScryer);
+											oDupe = CreateObject(OBJECT_TYPE_CREATURE, sDupeRes, GetLocation(oScryer));
+											}
+										SetLocalObject(oScryer, "oDupe", oDupe);
+										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
+										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
 										SetLocalObject(oScrySelf, "oScryer", oScryer);
 										SetLocalObject(oScrySelf, "oScried", oScried);
 										SetLocalObject(oScrySend, "oScrySelf", oScrySelf);
@@ -399,6 +403,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										ChangeToStandardFaction(oScrySelf, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScrySelf, fScryTimer);
 									    DestroyObject(oScrySelf, 60.0);
+										DestroyObject(oDupe, 60.0);
 										
 										
 										// Jump to the target

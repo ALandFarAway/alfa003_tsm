@@ -491,7 +491,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
 	 int nCasterType = GetLastSpellCastClass();
-	 //SendMessageToPC(oScryer, "nCasterType = " + IntToString(nCasterType));
+	 SendMessageToPC(oScryer, "nCasterType = " + IntToString(nCasterType));
 	 SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	 object oTarget = GetSpellTargetObject();
 	 //object oScry;
@@ -525,7 +525,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			//SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
+			SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
 			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);
@@ -547,7 +547,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	int nObjectTypeTrg = GetObjectType(oScryTrg);
 	//SendMessageToPC(oScryer, "2. nObjectTypeTrg = " + IntToString(nObjectTypeTrg));
 	
-	//SendMessageToPC(oScryer, "3. sScry ResRef = " + GetResRef(oScry));
+	SendMessageToPC(oScryer, "3. sScry ResRef = " + GetResRef(oScry));
 	int nObjectType = GetObjectType(oScry);
 	//SendMessageToPC(oScryer, "3. nObjectType = " + IntToString(nObjectType));
 	
