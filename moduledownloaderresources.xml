@@ -1220,7 +1220,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="61D0B54A9C4593422EBEF24804CA563851DBEC58" downloadHash="A7ACDD407CCEE6DD21C8F8F79221264E4F95B68A" name="003_quests_lab.trx" dlsize="122301" size="308709" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A8482893E6F88D0B2074146E5E9BF15E4E275108" downloadHash="302F12CA97768BDE4BA7F191E1FFCD486DCAB194" name="003_quests_lab.trx" dlsize="122717" size="308707" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

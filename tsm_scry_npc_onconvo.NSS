@@ -383,22 +383,22 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 60.0);
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 60.0);
 								
-								 // Dupe the PC to leave Dupe behind 
-									
-										object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
+								 		// Dupe the PC to leave Dupe behind. Possessed NPC Dupes can't be destroyed, so don't do that?
 										object oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
+										if(GetIsPC(oScryer)) {
+											object oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
+											SetLocalObject(oScryer, "oDupe", oDupe);
+											ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
+											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
+									    	DestroyObject(oDupe, 60.0);
+											}
 										SetLocalObject(oScrySelf, "oScryer", oScryer);
 										SetLocalObject(oScrySelf, "oScried", oScried);
 										SetLocalObject(oScrySend, "oScrySelf", oScrySelf);
 										SetLocalObject(oScryer, "oScrySelf", oScrySelf);
-										SetLocalObject(oScryer, "oDupe", oDupe);
-										ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
-										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, 60.0);
-									    ChangeToStandardFaction(oScrySelf, STANDARD_FACTION_COMMONER);
+										ChangeToStandardFaction(oScrySelf, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScrySelf, fScryTimer);
 									    DestroyObject(oScrySelf, 60.0);
-										DestroyObject(oDupe, 60.0);
-										DelayCommand(60.0, SendCreatureToLimbo(oDupe));
 										
 										
 										// Jump to the target
