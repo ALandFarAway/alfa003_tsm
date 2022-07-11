@@ -521,7 +521,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			   
 	float fDistanceTrg = 0.0;		
 	object oScryTrg = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-	if(nCasterType == CLASS_TYPE_DRUID)  {
+	if((nCasterType == CLASS_TYPE_DRUID) || (nCasterType == 255)) {
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
