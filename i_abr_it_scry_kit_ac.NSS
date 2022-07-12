@@ -58,13 +58,14 @@ void main()
 		}
 		
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
-		int nPickDC = 20;
+		int nPickPenalty = GetLocalInt(oTarget, GetName(oScryer) + "_PPen");
+		int nPickDC = 20 + nPickPenalty;
 		if(GetIsEnemy(oScryer, oTarget)) {
 			nPickDC = 30;
 		}
 		
 		int nSleightRank = GetSkillRank(SKILL_SLEIGHT_OF_HAND, oScryer, FALSE);
-			
+				
 		if(nSleightRank > 0) {
 			int nSleightRoll = d20(1);
 			int nSleightCheck = nSleightRoll + nSleightRank;
@@ -75,56 +76,6 @@ void main()
 				
 			SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Sleight of Hand: *" + sSuccess + "*: " + IntToString(nSleightRoll) + " + " + IntToString(nSleightRank) + " = " + IntToString(nSleightCheck) + " vs DC" + IntToString(nPickDC) + "</color>");
 			SendMessageToPC(oScryer, "nPickDC = " + IntToString(nPickDC));
-			if(nSleightCheck >= nPickDC + 5) {
-				oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
-				SendMessageToPC(oScryer, "You snip a lock of hair from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the lock of hair.");
-				SetFirstName(oToken, "Lock of " + GetName(oTarget) + "'s Hair");
-				SetStolenFlag(oToken, TRUE);
-				DelayCommand(1.0, SendMessageToPC(oTarget, "You catch a brief shimmer near your head out of the corner of your eye."));
-				}
-			else if(nSleightCheck >= nPickDC) {
-				DelayCommand(1.0, SendMessageToPC(oTarget, "A brief shimmer near your gear catches your eye."));
-				object oInventory = GetFirstItemInInventory(oTarget);
-				int nPickable = 0;
-				while (oInventory != OBJECT_INVALID) {
-				if(GetPickpocketableFlag(oInventory) == TRUE) {
-					nPickable++;
-					}
-				oInventory = GetNextItemInInventory(oTarget);
-				}
-				
-				if(nPickable > 0) {
-					int nPickRand = Random(nPickable);
-					int nPickCount = 0;
-					object oPickInventory = GetFirstItemInInventory(oTarget);
-					string sPickInventory = GetName(oPickInventory);
-					while (oPickInventory != OBJECT_INVALID) {
-					if(GetPickpocketableFlag(oPickInventory) == TRUE) {
-						nPickCount++;
-						if(nPickCount == nPickRand) {
-							break;
-							}
-						}
-					oPickInventory = GetNextItemInInventory(oTarget);
-					}
-					
-					sPickInventory = GetName(oPickInventory);
-					SendMessageToPC(oScryer, "You snip " + GetArticle(sPickInventory) + " " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
-					oToken = CopyItem(oPickInventory, oScryer, TRUE);
-					SetTag(oToken, "abr_it_scry_possess");
-					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
-					SetStolenFlag(oToken, TRUE);
-					DestroyObject(oPickInventory);
-					}
-					
-				else {
-					SendMessageToPC(oScryer, "You snip away a fragment of clothing from " + GetName(oTarget) + ".");
-					oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
-					SetFirstName(oToken, "Fragment of " + GetName(oTarget) + "'s Clothing.");
-					SetStolenFlag(oToken, TRUE);
-					}
-				}
-				 
 			int nSpotBonus = 0;
 			if(nSleightRoll == 1) 	{
 				nSpotBonus = 5;
@@ -159,21 +110,74 @@ void main()
 					sGender = "female";
 					}
 				SendMessageToPC(oScryer, "You have been detected!");
-				SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
+				string sGear = "your gear";
+				if(nSleightCheck >= nPickDC + 5) {sGear = "back of your head";}
+				SendMessageToPC(oTarget, "Out of the corner of your eye, you catch a brief shimmer near " + sGear + "."); 
+				if(nSpotCheck >= nSleightCheck + 5) {SendMessageToPC(oTarget, "You detect a " +sGender + " " + sRace + " trying to steal from you!");
+					SetLocalInt(oTarget, GetName(oScryer) + "_PPen", 10);
+					DelayCommand(900.0, SetLocalInt(oTarget, GetName(oScryer) + "_PPen", 10));
+					}
 				if(GetIsPC(oTarget) == FALSE) {
-					SetIsTemporaryEnemy(oScryer, oTarget, TRUE, 10.0);
-					//AdjustReputation(oScryer, oTarget, -10);
-					int nEnmity = GetIsEnemy(oScryer, oTarget);
-					SendMessageToPC(oScryer, "Enmity = " + IntToString(nEnmity));
-					int nReputation = GetReputation(oScryer, oTarget);
-					SendMessageToPC(oScryer, "nReputation = " + IntToString(nReputation));
-					
-					//if(GetStealthMode(oScryer) == STEALTH_MODE_DISABLED) {
-					if(GetIsEnemy(oScryer, oTarget)) {
+					if(GetStealthMode(oScryer) == STEALTH_MODE_DISABLED) {
+					//if(GetIsEnemy(oScryer, oTarget)) {
 						AssignCommand(oTarget, ActionAttack(oScryer));
 						}
 					}
 				}
+		
+			if(nSleightCheck >= nPickDC + 5) {
+				oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
+				SendMessageToPC(oScryer, "You snip a lock of hair from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the lock of hair.");
+				SetFirstName(oToken, "Lock of " + GetName(oTarget) + "'s Hair");
+				SetStolenFlag(oToken, TRUE);
+				//DelayCommand(1.0, SendMessageToPC(oTarget, "You catch a brief shimmer near your head out of the corner of your eye."));
+				}
+			else if(nSleightCheck >= nPickDC) {
+				//DelayCommand(1.0, SendMessageToPC(oTarget, "A brief shimmer near your gear catches your eye."));
+				object oInventory = GetFirstItemInInventory(oTarget);
+				int nPickable = 0;
+				while (oInventory != OBJECT_INVALID) {
+				if(GetPickpocketableFlag(oInventory) == TRUE) {
+					nPickable++;
+					}
+				oInventory = GetNextItemInInventory(oTarget);
+				}
+				
+				if(nPickable > 0) {
+					int nPickRand = Random(nPickable);
+					int nPickCount = 0;
+					object oPickInventory = GetFirstItemInInventory(oTarget);
+					string sPickInventory = GetName(oPickInventory);
+					while (oPickInventory != OBJECT_INVALID) {
+					if(GetPickpocketableFlag(oPickInventory) == TRUE) {
+						nPickCount++;
+						if(nPickCount == nPickRand) {
+							break;
+							}
+						}
+					oPickInventory = GetNextItemInInventory(oTarget);
+					}
+					
+					sPickInventory = GetName(oPickInventory);
+					SendMessageToPC(oScryer, "You snip " + GetArticle(sPickInventory) + " " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
+					//oToken = CopyItem(oPickInventory, oScryer, TRUE);
+					oToken = oPickInventory;
+					ActionTakeItem(oPickInventory, oTarget, FALSE);
+					SetTag(oToken, "abr_it_scry_possess");
+					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
+					SetStolenFlag(oToken, TRUE);
+					DestroyObject(oPickInventory);
+					}
+					
+				else {
+					SendMessageToPC(oScryer, "You snip away a fragment of clothing from " + GetName(oTarget) + ".");
+					oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
+					SetFirstName(oToken, "Fragment of " + GetName(oTarget) + "'s Clothing.");
+					SetStolenFlag(oToken, TRUE);
+					}
+				}
+				 
+		
 			}
 			
 		else {
@@ -184,14 +188,15 @@ void main()
 		}
 	
 	if(GetObjectType(oTarget) == OBJECT_TYPE_ITEM) {
-		oToken = CopyItem(oTarget, oScryer, TRUE);
-		SetTag(oToken, "abr_it_scry_possess");
+		//oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
+		oToken = oTarget;
+		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oTarget));
 		SetFirstName(oToken, GetName(oScryer) + "'s " + GetName(oTarget));
 		DestroyObject(oTarget);
 		}
 		
 	if(FindSubString(sScryer, "'") != -1) {
-		SendMessageToPC(oScryer, "Kit: sScryerName = " + sScryer);
+		//SendMessageToPC(oScryer, "Kit: sScryerName = " + sScryer);
 		int nPos = FindSubString(sScryer, "'", 0);
 		//SendMessageToPC(oScryer, "Kit: Spliced ScryerName = " + SpliceString(sScryer, nPos, 1));
 		ACR_SetPersistentString(oToken, "sPScryerName", SpliceString(sScryer, nPos, 1));
@@ -203,7 +208,7 @@ void main()
 		}
 		
 	if(FindSubString(sTarget, "'") != -1) {
-		SendMessageToPC(oScryer, "Kit: sTargetName = " + sTarget);
+		//SendMessageToPC(oScryer, "Kit: sTargetName = " + sTarget);
 		int nPosTarget = FindSubString(sTarget, "'", 0);
 		//SendMessageToPC(oScryer, "Kit: Spliced TargetName = " + SpliceString(sTarget, nPosTarget, 1));
 		ACR_SetPersistentString(oToken, "sPTargetName", SpliceString(sTarget, nPosTarget, 1));
