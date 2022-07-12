@@ -222,9 +222,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						while(oToken != OBJECT_INVALID) {
 							string sTokenTag = GetTag(oToken);
 							string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
-							SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 							int nPosMatch = FindSubString(sMatch, "'", 0);
-							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)))) && (sTokenTag != "abr_it_scry_kit")) {
+							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)))) && (sPTargetName != "") && (sTokenTag != "abr_it_scry_kit")) {
+								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
 								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								string sScryerName = GetName(oScryer);
