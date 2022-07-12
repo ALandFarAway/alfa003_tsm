@@ -193,6 +193,7 @@ void main()
 		SetTag(oToken, "abr_it_scry_possess");
 		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oTarget));
 		SetFirstName(oToken, GetName(oScryer) + "'s " + GetName(oTarget));
+		sTarget = GetName(GetItemPossessor(oTarget));
 		//DestroyObject(oTarget);
 		}
 		
