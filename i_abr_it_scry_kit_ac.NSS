@@ -162,7 +162,7 @@ void main()
 					SendMessageToPC(oScryer, "You snip " + GetArticle(sPickInventory) + " " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
 					//oToken = CopyItem(oPickInventory, oScryer, TRUE);
 					oToken = oPickInventory;
-					ActionTakeItem(oPickInventory, oTarget, FALSE);
+					AssignCommand(oScryer, ActionTakeItem(oPickInventory, oTarget, FALSE));
 					SetTag(oToken, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);
@@ -190,6 +190,7 @@ void main()
 	if(GetObjectType(oTarget) == OBJECT_TYPE_ITEM) {
 		//oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
 		oToken = oTarget;
+		SetTag(oToken, "abr_it_scry_possess");
 		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oTarget));
 		SetFirstName(oToken, GetName(oScryer) + "'s " + GetName(oTarget));
 		//DestroyObject(oTarget);
