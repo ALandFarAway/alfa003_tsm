@@ -471,6 +471,7 @@ if(GetSpellId() == 3068) {
 			sTriggerTag = GetTag(oScry);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
+				SetLocalInt(oScryer, "abr_scry_trig", 1);
 				SetFirstName(oFocus, "Scrying Droplet");
 				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
 			    SetItemIcon(oFocus, 1896);
@@ -480,10 +481,12 @@ if(GetSpellId() == 3068) {
 			}
 		}
 		
-	else if(FindSubString(GetTag(oScry), "_SCRY") == -1){
+	else if(GetLocalInt(oScryer, "abr_scry_trig") == 0){
 		CreateItemOnObject("abr_it_food_water", oScryer, 1);
 		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
-	 	}		
+	 	}	
+	else {SetLocalInt(oScryer, "abr_scry_trig", 0);}
+					
 }
 
 if((GetSpellId() == 3056) || (GetSpellId() == 3057))

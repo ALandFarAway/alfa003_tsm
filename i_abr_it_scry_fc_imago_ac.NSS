@@ -87,7 +87,7 @@ void main()
 		
 			if(nScryer == 1) {
 				AssignCommand(oTarget, ActionSpeakString("*A lifelike, animated image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
-				SendMessageToPC(oScryer, "You feel the match of your arcane signature resonate back from this Scrying " + sFocusType + ", as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
+				SendMessageToPC(oScryer, "You feel the match of your divine or arcane signature resonate back from this Scrying " + sFocusType + ", as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
 			}
 			if(nScryer == 0) {
 				AssignCommand(oTarget, ActionSpeakString("*A nearly translucent, roughly sketched image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
