@@ -166,7 +166,7 @@ void main()
 					SetTag(oToken, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);
-					DestroyObject(oPickInventory);
+					//DestroyObject(oPickInventory);
 					}
 					
 				else {
@@ -192,7 +192,7 @@ void main()
 		oToken = oTarget;
 		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oTarget));
 		SetFirstName(oToken, GetName(oScryer) + "'s " + GetName(oTarget));
-		DestroyObject(oTarget);
+		//DestroyObject(oTarget);
 		}
 		
 	if(FindSubString(sScryer, "'") != -1) {
