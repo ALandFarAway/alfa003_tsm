@@ -220,21 +220,21 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								
 						object oToken = GetFirstItemInInventory(oScryer);
 						while(oToken != OBJECT_INVALID) {
-							if((FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) && (GetTag(oToken) != "abr_it_scry_kit")) {
-								string sTokenTag = GetTag(oToken);
-								string sScryerName = GetName(oScryer);
-								string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
-								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
-								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
-								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
-								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
-								//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
+							string sTokenTag = GetTag(oToken);
+							string sScryerName = GetName(oScryer);
+							string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
+							string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
+							string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
+							SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
+							SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
+							//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
+							int nPosMatch = FindSubString(sMatch, "'", 0);
+							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetNick == sMatch)  || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sPTargetNick == SpliceString(sMatch, nPosMatch, 1)))) && (sTokenTag != "abr_it_scry_kit")) {
 								int nPosScryer = FindSubString(sScryerName, "'", 0);
 								int nScryer = 0; 
 								if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPosScryer, 1))) {
 									nScryer = 1;
 									}
-								int nPosMatch = FindSubString(sMatch, "'", 0);
 								if((sPTargetName == sScriedName) || (sPTargetNick == sMatch)  || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sPTargetNick == SpliceString(sMatch, nPosMatch, 1))) {
 									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
