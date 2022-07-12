@@ -480,12 +480,16 @@ if(GetSpellId() == 3068) {
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
+	else if((GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && ((nCasterType == CLASS_TYPE_DRUID) || (nCasterType == CLASS_TYPE_CLERIC)) && (FindSubString(GetTag(oTarget), "_SCRY_") != -1)) 
+		{SetLocalInt(oScryer, "abr_scry_trig", 1);}
 		
-	else if(GetLocalInt(oScryer, "abr_scry_trig") == 0){
+			
+	if(GetLocalInt(oScryer, "abr_scry_trig") == 0){
 		CreateItemOnObject("abr_it_food_water", oScryer, 1);
 		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
 	 	}	
-	else {SetLocalInt(oScryer, "abr_scry_trig", 0);}
+		
+	SetLocalInt(oScryer, "abr_scry_trig", 0);
 					
 }
 

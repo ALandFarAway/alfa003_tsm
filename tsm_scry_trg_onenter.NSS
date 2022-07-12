@@ -1,17 +1,14 @@
 //
 //  System Name : Scrying
-//     Filename : tsm_scry_plc_onspellcastat
+//     Filename : tsm_scry_trg_onenter
 //      Version : 0.1
 //         Date : 7/8/22
 //       Author : Wynna
 //
 //  Description
-//  This script handles on use actions of placeables used in the scrying system. 
+//  This script handles on enter actions of a trigger used in the scrying system. 
 //  It provides a spoken update by the scrying object to the scryer on the scrying target.
-//  This should be in the On Use Script slot of placeables in the _ALFA_Scrying Category: 
-//	Mirror
-//	Holy Water Font
-//	Natural Pool of Water
+//  This should be in the On Enter Script slot of the trigger around a terrain painted scrying pool: 
 //	It is not updated in ACR updates.
 //
 //  Revision History
@@ -21,8 +18,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
-
-#include "acr_placeable_i"
+#include "acr_trigger_i"
 #include "acr_scry_i"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,28 +110,25 @@ string GetCompassDirectionOfAngle(float fAngle)
     return GetCompassDirectionOfBearing(-fAngle + 90.0);
 }
 
-void main() {
- 	if (!GetIsObjectValid(OBJECT_SELF))
-		return;
-
-	ACR_PlaceableOnUsed();
-	//Get oUser and existing local objects
- 	object oUser = GetLastUsedBy();
+void main()
+{
+    ACR_TriggerOnEnter();
+	object oEnterer = GetEnteringObject();
 	object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 				
 	//Has Scry been successfully cast?
 	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == "")) {
-			SendMessageToPC(oUser, "The scrying object requires the casting of the Scry spell.");
+			SendMessageToPC(oEnterer, "The scrying object requires the casting of the Scry spell.");
 		}
 	//If so, was it cast by oUser?
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oUser != oScryer) && (!GetIsDM(oUser))&& (!GetIsDMPossessed(oUser))) {
-		SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oEnterer != oScryer) && (!GetIsDM(oEnterer))&& (!GetIsDMPossessed(oEnterer))) {
+		SendMessageToPC(oEnterer, "The scrying object is under the command of someone else.");
 		}
 		
 	//If Scry has been successfully cast, then oScried exists	
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (GetName(GetLocalObject(OBJECT_SELF, "oScried")) != "") && ((oUser == oScryer) || (GetIsDM(oUser)) || (GetIsDMPossessed(oUser)))) {
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (GetName(GetLocalObject(OBJECT_SELF, "oScried")) != "") && ((oEnterer == oScryer) || (GetIsDM(oEnterer)) || (GetIsDMPossessed(oEnterer)))) {
 	object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 	//Check area information about oScried
 	object oArea = GetArea(oScried);
@@ -414,5 +407,4 @@ void main() {
 			 
 		}	
 	
-		
 }
