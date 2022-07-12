@@ -142,7 +142,7 @@ void main()
 					}
 				oInventory = GetNextItemInInventory(oTarget);
 				}
-				
+				object oFallback = OBJECT_INVALID;
 				if(nPickable > 0) {
 					int nPickRand = Random(nPickable);
 					int nPickCount = 0;
@@ -150,6 +150,7 @@ void main()
 					string sPickInventory = GetName(oPickInventory);
 					while (oPickInventory != OBJECT_INVALID) {
 					if(GetPickpocketableFlag(oPickInventory) == TRUE) {
+						oFallback = oPickInventory;
 						nPickCount++;
 						if(nPickCount == nPickRand) {
 							break;
@@ -158,12 +159,14 @@ void main()
 					oPickInventory = GetNextItemInInventory(oTarget);
 					}
 					
+					if(oPickInventory == OBJECT_INVALID)
+						{oPickInventory = oFallback;}
 					sPickInventory = GetName(oPickInventory);
 					SendMessageToPC(oScryer, "You snip " + GetArticle(sPickInventory) + " " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
 					//oToken = CopyItem(oPickInventory, oScryer, TRUE);
 					oToken = oPickInventory;
 					AssignCommand(oScryer, ActionTakeItem(oPickInventory, oTarget, FALSE));
-					SetTag(oToken, "abr_it_scry_possess");
+					//SetTag(oToken, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);
 					//DestroyObject(oPickInventory);
