@@ -56,9 +56,9 @@ void main() {
 	
 	//Is Scrying active on this PC
 	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
-	object oScryer =  GetLocalObject(oEnterer, "oScryer");
+	object oScried =  GetLocalObject(oEnterer, "oScried");
 		
-	if(oScrySend != OBJECT_INVALID) {
+	if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
 	    AssignCommand(oScrySend, ClearAllActions(TRUE));
 		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
 		DelayCommand(3.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
