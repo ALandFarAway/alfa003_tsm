@@ -25,6 +25,7 @@
 
 #include "acr_scry_i"
 #include "x0_i0_stringlib"
+#include "acr_items_i"
 
 /*const string HAIR_TEMPORARY_DATABASE_NAME = "hairDB";
 const string HAIR_VARIABLE_NAME = "hairCreature";
@@ -109,7 +110,8 @@ void main()
 					
 					sPickInventory = GetName(oPickInventory);
 					SendMessageToPC(oScryer, "You snip " + GetArticle(sPickInventory) + " " + sPickInventory + " from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the " + sPickInventory + ".");
-					oToken = CopyObject(oPickInventory, GetLocation(oScryer), oScryer, "abr_it_scry_possess");
+					oToken = CopyItem(oPickInventory, oScryer, TRUE);
+					SetTag(oToken, "abr_it_scry_possess");
 					SetFirstName(oToken, GetName(oTarget) + "'s " + sPickInventory);
 					SetStolenFlag(oToken, TRUE);
 					DestroyObject(oPickInventory);
@@ -182,8 +184,8 @@ void main()
 		}
 	
 	if(GetObjectType(oTarget) == OBJECT_TYPE_ITEM) {
-		oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
-		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oTarget));
+		oToken = CopyItem(oTarget, oScryer, TRUE);
+		SetTag(oToken, "abr_it_scry_possess");
 		SetFirstName(oToken, GetName(oScryer) + "'s " + GetName(oTarget));
 		DestroyObject(oTarget);
 		}
