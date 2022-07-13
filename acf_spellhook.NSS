@@ -422,10 +422,10 @@ if(GetSpellId() == 3157) {
 	object oCaster = OBJECT_SELF;
 	object oTarget = GetSpellTargetObject();
 	float fDuration = 24 * 60.0 * 60.0;
-	effect eGlyph = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);
-	effect eAOE = EffectAreaOfEffect(100, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit");
+	//effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING, FALSE);
+	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
     ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oTarget), fDuration);
-	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oTarget), fDuration);
+	//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oTarget), fDuration);
 	effect eIcon = EffectEffectIcon(52);
 	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fDuration);
