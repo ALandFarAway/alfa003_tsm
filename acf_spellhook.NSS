@@ -21,6 +21,7 @@
 #include "acr_spellhook_i"
 #include "x0_i0_position"
 #include "acr_skills_i"
+#include "acr_traps_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -373,13 +374,14 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 	} 
 }
 
+//Arcane Mark
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	effect eMark = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
 }
  
-
+//Summon Instrument
 if(GetSpellId() == 3071) {
 	object oScryer = OBJECT_SELF;
 	location lTarget = GetLocation(oScryer);
@@ -396,6 +398,7 @@ if(GetSpellId() == 3071) {
 			}		
 }
 
+// NonDetection
 if(GetSpellId() == 3092) {
 	object oCaster = OBJECT_SELF;
 	object oTarget = GetSpellTargetObject();
@@ -407,13 +410,32 @@ if(GetSpellId() == 3092) {
 	if(oCaster != oTarget) {
 		nDC = 11 + nCL;
 		}
-	SetLocalInt(oTarget, "nTSM_sp_nonDetect", nDC);
+	SetLocalInt(oTarget, "abr_sp_nondetect", nDC);
 	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external prying.");
 	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
-	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "nTSM_sp_nonDetect", 0));
+	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "abr_sp_nondetect", 0));
 }
 
+// Mage's Private Sanctum
+if(GetSpellId() == 3157) {
+	object oCaster = OBJECT_SELF;
+	object oTarget = GetSpellTargetObject();
+	float fDuration = 24 * 60.0 * 60.0;
+	effect eGlyph = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);
+	effect eAOE = EffectAreaOfEffect(100, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit");
+    ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oTarget), fDuration);
+	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oTarget), fDuration);
+	effect eIcon = EffectEffectIcon(52);
+	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fDuration);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
+	SendMessageToPC(oTarget, "You feel protections cloaking your mind from external prying.");
+ 	SetLocalInt(oTarget, "abr_sp_sanctum", 1);
+	
+	}
+
+//Detect Scrying
 if(GetSpellId() == 3058) {
 	SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 1);
     float fDuration = 24 * 60.0 * 60.0;
@@ -457,6 +479,7 @@ if(GetSpellId() == 3058) {
 		}
 	}
 	 
+//Create Water
 if(GetSpellId() == 3068) {
 	object oScryer = OBJECT_SELF;
 	int nCasterType = GetLastSpellCastClass();
@@ -493,6 +516,7 @@ if(GetSpellId() == 3068) {
 					
 }
 
+//Scrying and Greater Scrying
 if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	{//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;

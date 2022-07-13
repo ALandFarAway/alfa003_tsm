@@ -1,0 +1,41 @@
+//
+//  System Name : Mage's Private Sanctum
+//     Filename : tsm_sanctum_onexit
+//      Version : 0.1
+//         Date : 7/8/22
+//       Author : Wynna
+//
+//  Description
+//  This script handles on exit actions for the area of effect Mage's Private Sanctum.
+//  It is not updated in ACR updates.
+//
+//  Revision History
+////////////////////////////////////////////////////////////////////////////////
+
+//	Wynna - 7/8/2022
+
+////////////////////////////////////////////////////////////////////////////////
+// Includes ////////////////////////////////////////////////////////////////////
+#include "acr_trigger_i"
+
+
+void main()
+{
+    ACR_TriggerOnExit();
+	object oExiter = GetExitingObject();
+	
+	effect eEffect = GetFirstEffect(oExiter);
+	
+	while (GetIsEffectValid(eEffect)) { 
+		SendMessageToPC(oExiter, "EffectType = " + IntToString(GetEffectType(eEffect)));
+		if(GetEffectType(eEffect) == EFFECT_TYPE_EFFECT_ICON) {
+			RemoveEffect(oExiter, eEffect);
+			}
+		eEffect = GetNextEffect(oExiter);
+		}
+			
+	SendMessageToPC(oExiter, "You feel the ending of protections that had been cloaking your mind.");
+ 	SetLocalInt(oExiter, "abr_sp_sanctum", 0);
+	
+	
+}

@@ -167,10 +167,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedName = " + sScriedName);
 					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedNickStored = " + sScriedNickStored);
 					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
-						{if(GetLocalInt(oScried, "nTSM_sp_nonDetect") != 0) {
+						{if(GetLocalInt(oScried, "abr_sp_nondetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
-							int nNDDC = GetLocalInt(oScried, "nNonDetection");
+							int nNDDC = GetLocalInt(oScried, "abr_sp_nondetect");
 							SendMessageToPC(oScryer, GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
 							SendMessageToAllDMs(GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
 							if(nCL + nCLRoll <  nNDDC) {
@@ -186,6 +186,17 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SendMessageToPC(oScryer, "For a moment there is no result to your spell. Then you have a sense of having bested a ward you didn't even know existed until it was broken, and you know you must still win a battle of wills with your now detectable target.");
 								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you...then pausing, and returning.");
 								}
+							}
+							
+						else if(GetLocalInt(oScried, "abr_sp_sanctum") != 0) {
+							SendMessageToAllDMs(GetName(oScried) + " has Mage's Private Sanctum active.");
+							SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
+							SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
+							SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+							SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
+							SetLocalInt(oScry, "nScryActive", 0);
+							DestroyObject(OBJECT_SELF, 2.0);
+							return;
 							}
 							
 						else if(GetTag(GetItemInSlot(INVENTORY_SLOT_NECK, oScried)) == "abr_it_ne_amu_noscry") {
