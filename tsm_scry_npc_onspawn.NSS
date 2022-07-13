@@ -153,7 +153,7 @@ void main()
 			
 			 object oDetector = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			 while (oDetector != OBJECT_INVALID) {
-				if(GetLocalInt(oDetector, "nTSM_sp_detectScry") == 1) {
+				if(GetLocalInt(oDetector, "abr_sp_detectScry") == 1) {
 					SendMessageToPC(oDetector, "You see a small glowing orb appear in the air above " + GetName(oScried));
 					
 					 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");

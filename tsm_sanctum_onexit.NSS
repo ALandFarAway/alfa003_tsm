@@ -27,7 +27,6 @@ void main()
 	effect eEffect = GetFirstEffect(oExiter);
 	
 	while (GetIsEffectValid(eEffect)) { 
-		//SendMessageToPC(oExiter, "EffectType = " + IntToString(GetEffectType(eEffect)));
 		if(GetEffectType(eEffect) == EFFECT_TYPE_EFFECT_ICON) {
 			RemoveEffect(oExiter, eEffect);
 			}

@@ -422,23 +422,20 @@ if(GetSpellId() == 3157) {
 	object oCaster = OBJECT_SELF;
 	float fDuration = 24 * 60.0 * 60.0;
 	effect eIcon = EffectEffectIcon(52);
-	//effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING, FALSE);
 	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
     ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
-	//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oCaster), fDuration);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oCaster, fDuration);
-	SendMessageToPC(oCaster, "You feel protections cloaking your mind from external prying.");
+	//SendMessageToPC(oCaster, "You feel protections cloaking your mind from external prying.");
  	SetLocalInt(oCaster, "abr_sp_sanctum", 1);
-	
 	}
 
 //Detect Scrying
 if(GetSpellId() == 3058) {
-	SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 1);
+	SetLocalInt(OBJECT_SELF, "abr_sp_detectScry", 1);
     float fDuration = 24 * 60.0 * 60.0;
 	effect eIcon = EffectEffectIcon(54);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fDuration);
-	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "nTSM_sp_detectScry", 0));
+	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "abr_sp_detectScry", 0));
     object oSensor = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	int nInc = 0;
 	while((oSensor != OBJECT_INVALID) && (nInc < 50)) {
