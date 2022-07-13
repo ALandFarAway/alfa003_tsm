@@ -21,7 +21,7 @@
 #include "acr_spellhook_i"
 #include "x0_i0_position"
 #include "acr_skills_i"
-#include "acr_traps_i"
+#include "x0_i0_spells"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -416,22 +416,23 @@ if(GetSpellId() == 3092) {
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
 	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "abr_sp_nondetect", 0));
 }
-
+		
 // Mage's Private Sanctum
 if(GetSpellId() == 3157) {
 	object oCaster = OBJECT_SELF;
-	object oTarget = GetSpellTargetObject();
 	float fDuration = 24 * 60.0 * 60.0;
-	//effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING, FALSE);
-	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
-    ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oTarget), fDuration);
-	//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oTarget), fDuration);
 	effect eIcon = EffectEffectIcon(52);
-	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oTarget, fDuration);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
-	SendMessageToPC(oTarget, "You feel protections cloaking your mind from external prying.");
- 	SetLocalInt(oTarget, "abr_sp_sanctum", 1);
+	effect eSanctuary = EffectSanctuary(50);
+	effect eLink = EffectLinkEffects(eIcon, eSanctuary);
+	effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING, FALSE);
+	//effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
+    //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
+	//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oTarget), fDuration);
+	spellsGenericAreaOfEffect(oCaster, GetLocation(oCaster),SHAPE_CUBE, 15.0, 3157, eGlyph, eLink, eGlyph, DURATION_TYPE_TEMPORARY, 30.0, SPELL_TARGET_ALLALLIES, FALSE, FALSE, 0, 0, 0, TRUE, OBJECT_TYPE_CREATURE, FALSE, FALSE, SAVING_THROW_NONE, SAVING_THROW_TYPE_ALL);   
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oCaster, fDuration);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oCaster, 5.0);
+	SendMessageToPC(oCaster, "You feel protections cloaking your mind from external prying.");
+ 	SetLocalInt(oCaster, "abr_sp_sanctum", 1);
 	
 	}
 
