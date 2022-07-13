@@ -422,13 +422,13 @@ if(GetSpellId() == 3157) {
 	object oCaster = OBJECT_SELF;
 	float fDuration = 24 * 60.0 * 60.0;
 	effect eIcon = EffectEffectIcon(52);
-	effect eSanctuary = EffectSanctuary(50);
+	effect eSanctuary = EffectVisualEffect(VFX_AOE_SYMBOL_SPELL, FALSE);
 	effect eLink = EffectLinkEffects(eIcon, eSanctuary);
 	effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING, FALSE);
-	//effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
-    //ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
-	//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oTarget), fDuration);
-	spellsGenericAreaOfEffect(oCaster, GetLocation(oCaster),SHAPE_CUBE, 15.0, 3157, eGlyph, eLink, eGlyph, DURATION_TYPE_TEMPORARY, 30.0, SPELL_TARGET_ALLALLIES, FALSE, FALSE, 0, 0, 0, TRUE, OBJECT_TYPE_CREATURE, FALSE, FALSE, SAVING_THROW_NONE, SAVING_THROW_TYPE_ALL);   
+	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
+    ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
+	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oCaster), fDuration);
+	//spellsGenericAreaOfEffect(oCaster, GetLocation(oCaster),SHAPE_CUBE, 15.0, 3157, eGlyph, eLink, eGlyph, DURATION_TYPE_TEMPORARY, 30.0, SPELL_TARGET_ALLALLIES, FALSE, FALSE, 0, 0, 0, TRUE, OBJECT_TYPE_CREATURE, FALSE, FALSE, SAVING_THROW_NONE, SAVING_THROW_TYPE_ALL);   
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oCaster, fDuration);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oCaster, 5.0);
 	SendMessageToPC(oCaster, "You feel protections cloaking your mind from external prying.");
