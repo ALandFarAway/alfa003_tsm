@@ -139,6 +139,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
 				 			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
 							string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
+							if((sMatch == "Silverwing") || (sMatch == "Dez")) {
+								sScriedName = "Silverwing";
+								sScriedNickStored = "Silverwing";
+								sScriedArea = "003_travelling_circus_xyz";
+								}
 							int nWillSaveBase = GetWillSavingThrow(oScried);
 							SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 							object oScriedArea = GetFirstArea();
@@ -324,7 +329,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							nWillSaveBase = GetWillSavingThrow(oScried);
 							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
-						if(GetTag(oScried) == "003_cr_dragon_silver_dez") {
+						if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 							nWillSave = 5;
 						}
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
