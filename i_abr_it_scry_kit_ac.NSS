@@ -172,6 +172,14 @@ void main()
 					//DestroyObject(oPickInventory);
 					}
 					
+				else if(GetRacialType(oTarget) == RACIAL_TYPE_DRAGON) {
+					SendMessageToPC(oScryer, "A loose scale molts off in your hand.");
+					oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
+					SetItemIcon(oToken, 2038);
+					SetFirstName(oToken, "Scale of " + GetName(oTarget));
+					SetStolenFlag(oToken, TRUE);
+					}
+				
 				else {
 					SendMessageToPC(oScryer, "You snip away a fragment of clothing from " + GetName(oTarget) + ".");
 					oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
