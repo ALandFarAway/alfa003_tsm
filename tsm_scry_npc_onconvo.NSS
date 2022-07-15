@@ -111,7 +111,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			}
 			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
-		//SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
+		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
 					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
@@ -322,7 +322,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
 						if(GetTag(oScried) == "003_cr_dragon_silver_dez") {
-							nWillSave == 5;
+							nWillSave = 5;
 						}
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
