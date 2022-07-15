@@ -53,9 +53,19 @@ void main()
 	//Bald Human = 17, Facial Hair 0;
 	if(oScryer == oTarget) {
 		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
+		
+		if(GetRacialType(oTarget) == RACIAL_TYPE_DRAGON) {
+					SendMessageToPC(oScryer, "A loose scale molts off in your hand.");
+					SetItemIcon(oToken, 2038);
+					SetFirstName(oToken, "Scale of " + GetName(oTarget));
+					}
+		else {
+			SetFirstName(oToken, GetName(oScryer) + "'s Body Part");
+			}
+		
+		SetStolenFlag(oToken, TRUE);
 		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oToken));
-		SetFirstName(oToken, GetName(oScryer) + "'s Body Part");
-		}
+	}
 		
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
 		int nPickPenalty = GetLocalInt(oTarget, GetName(oScryer) + "_PPen");
@@ -174,7 +184,7 @@ void main()
 					
 				else if(GetRacialType(oTarget) == RACIAL_TYPE_DRAGON) {
 					SendMessageToPC(oScryer, "A loose scale molts off in your hand.");
-					oToken = CreateItemOnObject("abr_it_scry_possess", oScryer, 1);
+					oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 					SetItemIcon(oToken, 2038);
 					SetFirstName(oToken, "Scale of " + GetName(oTarget));
 					SetStolenFlag(oToken, TRUE);
