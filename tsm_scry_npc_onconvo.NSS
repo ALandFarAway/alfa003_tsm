@@ -321,6 +321,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							nWillSaveBase = GetWillSavingThrow(oScried);
 							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
+						if(GetTag(oScried) == "003_cr_dragon_silver_dez") {
+							nWillSave == 5;
+						}
 						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
