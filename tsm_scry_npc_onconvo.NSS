@@ -111,6 +111,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			}
 			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
+		if((sMatch == "Silverwing") || (sMatch == "Dez")) {
+		sPTargetRes = "003_cr_dragon_silver_dez";
+		}
 		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
 					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
