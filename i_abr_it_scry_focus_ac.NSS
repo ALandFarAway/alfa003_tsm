@@ -53,8 +53,50 @@ void main()
 		SendMessageToPC(oScryer, "This " + sFocusName + " has not been imbued.");
 		return;
 		}
-		
-	if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
+	
+	if(oTarget==oScryer) {
+	SendMessageToPC(oScryer, "You imbue your own defining characteristics into the " + sFocusName + ". Your image shimmers into the " + sFocusName + " and remains fixed there, unmoving.");
+				object oImage = CreateItemOnObject("abr_it_scry_fc_image", oScryer, 1);
+				if(FindSubString(sFocusName, "Droplet", 0) != -1) {
+					SetItemIcon(oImage, 1897);
+				}
+				SetFirstName(oImage, sFocusName + ": " + sTargetName);
+				SetDescription(oImage, "A scrying focus showing a still reflection of " + sTargetName + ". This token was created by " + GetName(oScryer) + " and establishes firsthand knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
+				if(FindSubString(sTargetName, "'") != -1) {
+					int nPosTarget = FindSubString(sTargetName, "'", 0);
+					ACR_SetPersistentString(oImage, "sPTargetName", SpliceString(sTargetName, nPosTarget, 1));
+					//SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPosTarget, 1));
+					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+					}
+				else {
+					ACR_SetPersistentString(oImage, "sPTargetName", sTargetName);	
+					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+					}
+				
+				if(FindSubString(sScryerName, "'") != -1) {
+					int nPosScryer = FindSubString(sScryerName, "'", 0);
+					ACR_SetPersistentString(oImage, "sPScryerName", SpliceString(sScryerName, nPosScryer, 1));
+					//SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPosScryer, 1));
+					//SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
+					}
+				else {
+					ACR_SetPersistentString(oImage, "sPScryerName", sScryerName);	
+					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+					}
+					
+				
+				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
+				//SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
+				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
+				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
+				if(GetIsPC(oTarget) == FALSE) {
+					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
+					SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
+				}
+				DestroyObject(oFocus);
+				
+	}		
+	else if(GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) {
 		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
 			DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
 			
