@@ -114,7 +114,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 		sPTargetRes = "003_cr_dragon_silver_dez";
 		}
-		SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
+		//SendMessageToPC(oScryer, "sPTargetRes = " + sPTargetRes);
 					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
@@ -243,9 +243,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
 							int nPosMatch = FindSubString(sMatch, "'", 0);
 							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)))) && (sPTargetName != "") && (sTokenTag != "abr_it_scry_kit")) {
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
-								SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
+								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								string sScryerName = GetName(oScryer);
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
@@ -332,7 +332,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 							nWillSave = 5;
 						}
-						SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
+						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScryer, "You feel your spell fail.");
