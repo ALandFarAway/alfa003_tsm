@@ -37,6 +37,8 @@ void main()
 		oJumpTo = oDivineEnterWP;
 	}
 		
+	AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE));
+	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward")
         {AssignCommand(oPC, ActionMoveToObject(oAntipathy, TRUE, 1.0));
          SendMessageToPC(oPC, "You feel physically repelled from going further.  You are driven back.");
