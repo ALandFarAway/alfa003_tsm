@@ -32,12 +32,12 @@ void main()
 	}
 	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward_out") {
-		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin || 1))
+		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin >= 1))
 		oJumpTo = oDivineExitWP;
 	}
 	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward_in") {
-		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin || 1))
+		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin >= 1))
 		oJumpTo = oDivineEnterWP;
 	}
 	

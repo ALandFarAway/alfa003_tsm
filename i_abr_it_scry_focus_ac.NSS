@@ -89,7 +89,7 @@ void main()
 				//SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
 				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
 				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
-				if(GetIsPC(oTarget) == FALSE) {
+				if((GetIsPC(oTarget) == FALSE) || (GetIsDMPossessed(oTarget) == TRUE)) {
 					SendMessageToPC(oScryer, "Focus: sTargetRes = " + GetResRef(oTarget));
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 					SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
