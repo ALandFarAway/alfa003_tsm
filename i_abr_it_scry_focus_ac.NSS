@@ -90,6 +90,7 @@ void main()
 				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
 				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
+					SendMessageToPC(oScryer, "Focus: sTargetRes = " + GetResRef(oTarget));
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 					SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
 				}
@@ -153,7 +154,7 @@ void main()
 				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
 				if(GetIsPC(oTarget) == FALSE) {
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
-					SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
+					//SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
 				}
 				DestroyObject(oFocus);
 				}

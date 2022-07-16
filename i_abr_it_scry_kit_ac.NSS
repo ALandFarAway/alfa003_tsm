@@ -27,18 +27,6 @@
 #include "x0_i0_stringlib"
 #include "acr_items_i"
 
-/*const string HAIR_TEMPORARY_DATABASE_NAME = "hairDB";
-const string HAIR_VARIABLE_NAME = "hairCreature";
-const string HAIR_ROADMAP = "Appearance_Hair";
-
-int GetHairStyle(object oCreature) {
-    if (GetObjectType(oCreature)!=OBJECT_TYPE_CREATURE) return -1;
-    if (!StoreCampaignObject(HAIR_TEMPORARY_DATABASE_NAME,HAIR_VARIABLE_NAME,oCreature)) return -2;
-    int nHair = StringToInt(NWNXGetString("CRAFTER", "GetValue|"+HAIR_TEMPORARY_DATABASE_NAME, HAIR_ROADMAP, 0));
-    DestroyCampaignDatabase(HAIR_TEMPORARY_DATABASE_NAME);
-    return nHair;
-}
-*/
 void main()
 {
     object oScryer = GetItemActivator();
@@ -47,10 +35,7 @@ void main()
 	string sTarget = GetName(oTarget);
 	object oKit = GetItemActivated();
 	object oToken;
-	//int nHair = GetHairStyle(oTarget);
-	//SendMessageToPC(oScryer, "nHairStyle = " + IntToString(nHair));
-	//Bald Dwarf = 17, Facial Hair 0;
-	//Bald Human = 17, Facial Hair 0;
+	
 	if(oScryer == oTarget) {
 		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
 		
@@ -227,7 +212,7 @@ void main()
 		}
 	else {
 		ACR_SetPersistentString(oToken, "sPScryerName", sScryer);
-		//SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
+		SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
 		}
 		
 	if(FindSubString(sTarget, "'") != -1) {
@@ -239,7 +224,7 @@ void main()
 		}
 	else {
 		ACR_SetPersistentString(oToken, "sPTargetName", sTarget);
-		//SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
+		SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
 		}
 		
 		

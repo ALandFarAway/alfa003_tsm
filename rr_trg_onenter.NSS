@@ -22,6 +22,10 @@ void main()
 	object oDivineExitWP = GetWaypointByTag("rr_temple_out_WP");
 	object oJumpTo;
 	
+	SendMessageToPC(oPC, "nCleric = " + IntToString(nCleric));
+	SendMessageToPC(oPC, "nDruid = " + IntToString(nDruid));
+	SendMessageToPC(oPC, "nRanger = " + IntToString(nRanger));
+	SendMessageToPC(oPC, "nPaladin = " + IntToString(nPaladin));
 	if((GetTag(OBJECT_SELF) == "rr_temple_ward_out") || (GetTag(OBJECT_SELF) == "rr_temple_ward_in")) {
 		if((nCleric <= 0) && (nDruid <= 0) && (nRanger <= 0) && (nPaladin <= 0))
 		oJumpTo = oNonDivineWP;
@@ -36,7 +40,8 @@ void main()
 		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin || 1))
 		oJumpTo = oDivineEnterWP;
 	}
-		
+	
+	SendMessageToPC(oPC, "Name oJumpTo = " + GetName(oJumpTo));
 	AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE));
 	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward")
