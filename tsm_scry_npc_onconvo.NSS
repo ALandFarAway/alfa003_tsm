@@ -434,7 +434,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										if(GetIsDMPossessed(oScryer) == FALSE) {
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
 											}
-									    AssignCommand(oScryer, JumpToLocation(lThere));
+									    if((sMatch == "Silverwing") || (sMatch == "Dez")) {
+											object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
+											location lThere = GetLocation(oSilverwingWP);
+											
+										}
+										
+										AssignCommand(oScryer, JumpToLocation(lThere));
 										
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								        DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
