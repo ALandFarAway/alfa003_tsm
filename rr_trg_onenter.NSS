@@ -17,31 +17,28 @@ void main()
 	int nDruid = GetClassPosition(oPC, CLASS_TYPE_DRUID);
     int nRanger = GetClassPosition(oPC, CLASS_TYPE_RANGER);
     int nPaladin = GetClassPosition(oPC, CLASS_TYPE_PALADIN);
+    int nSpirit = GetClassPosition(oPC, CLASS_TYPE_SPIRIT_SHAMAN);
+    int nDC = GetClassPosition(oPC, CLASS_TYPE_DIVINECHAMPION);
     object oNonDivineWP = GetWaypointByTag("phalorm_earth_down_wp");
 	object oDivineEnterWP = GetWaypointByTag("rr_temple_in_WP");
 	object oDivineExitWP = GetWaypointByTag("rr_temple_out_WP");
 	object oJumpTo;
 	
-	SendMessageToPC(oPC, "nCleric = " + IntToString(nCleric));
-	SendMessageToPC(oPC, "nDruid = " + IntToString(nDruid));
-	SendMessageToPC(oPC, "nRanger = " + IntToString(nRanger));
-	SendMessageToPC(oPC, "nPaladin = " + IntToString(nPaladin));
 	if((GetTag(OBJECT_SELF) == "rr_temple_ward_out") || (GetTag(OBJECT_SELF) == "rr_temple_ward_in")) {
-		if((nCleric <= 0) && (nDruid <= 0) && (nRanger <= 0) && (nPaladin <= 0))
+		if((nCleric <= 0) && (nDruid <= 0) && (nRanger <= 0) && (nPaladin <= 0) && (nSpirit <= 0) && (nDC <= 0))
 		oJumpTo = oNonDivineWP;
 	}
 	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward_out") {
-		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin >= 1))
+		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin >= 1) || (nSpirit >= 1) || (nDC >= 1))
 		oJumpTo = oDivineExitWP;
 	}
 	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward_in") {
-		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin >= 1))
+		if((nCleric >= 1) || (nDruid >= 1) || (nRanger >= 1) || (nPaladin >= 1) || (nSpirit >= 1) || (nDC >= 1))
 		oJumpTo = oDivineEnterWP;
 	}
 	
-	SendMessageToPC(oPC, "Name oJumpTo = " + GetName(oJumpTo));
 	AssignCommand(oPC, ActionJumpToObject(oJumpTo, FALSE));
 	
 	if(GetTag(OBJECT_SELF) == "rr_temple_ward")
