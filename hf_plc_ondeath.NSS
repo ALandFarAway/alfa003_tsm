@@ -66,8 +66,14 @@ void main() {
     object oPCFive = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 5);
     object oNPCOne = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
     object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
-        
-    // Custom code goes here.
+    string sCreateCr = "";
+	    
+  	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		sCreateCr = "abr_cr_ou_efreet_lord";
+		CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(OBJECT_SELF), TRUE);
+			
+	}
+	
 	
 if(GetTag(OBJECT_SELF) == "giant_crystal_source")
 {object oForceDown = GetObjectByTag("giant_crystal_source_static", 0);

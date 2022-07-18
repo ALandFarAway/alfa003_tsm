@@ -16,7 +16,13 @@ void main()
 	ACR_PlaceableOnSpellCastAt();
     object oCaster = GetLastSpellCaster();
 	int nSpellId = GetLastSpell();
-	string sCreateCr = "abr_cr_pla_treant_undead";
+	string sCreateCr = "";
+	
+	
+	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		ActionCastSpellAtObject(SPELL_DISINTEGRATE, oAttacker, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	}
+	
 	object oStoneTree;
 	object oStoneTreeWP;
 	object oStoneTreeTwo;
@@ -53,6 +59,7 @@ void main()
 			
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oCaster, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTreeTwo);
+			sCreateCr = "abr_cr_pla_treant_undead";
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeTwoWP), TRUE);
 			}
 	}

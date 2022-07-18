@@ -12,6 +12,16 @@ void main()
 	ACR_PlaceableOnPhysicalAttacked();
 
 	object oAttacker = GetLastAttacker();
+	string sCreateCr = "";
+		
+	
+	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		ActionCastSpellAtObject(SPELL_DISINTEGRATE, oAttacker, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	}
+	
+	
+	
+	
 	object oStoneTree = GetObjectByTag("rauvin_ruin_treestone_one", 0);
 	object oStoneTreeWP = GetObjectByTag("undead_treant_one_wp", 0);
 	object oStoneTreeTwo = GetObjectByTag("rauvin_ruin_treestone_two", 0);
@@ -20,12 +30,11 @@ void main()
 	object oStoneTreeThreeWP;
 	object oStoneTreeFour;
 	object oStoneTreeFourWP;
-	string sCreateCr = "abr_cr_pla_treant_undead";
 	
 	//High Forest Destroying Corrupted Portal
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_green") {
 	 if(oStoneTree != OBJECT_INVALID) {
-			
+			sCreateCr = "abr_cr_pla_treant_undead";
 			ActionCastSpellAtObject(SPELL_STONEHOLD, oAttacker, METAMAGIC_NONE, TRUE, 8, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 			DestroyObject(oStoneTree);
 			CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oStoneTreeWP), TRUE);
