@@ -20,7 +20,7 @@ void main()
 	
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
-		ActionCastSpellAtObject(SPELL_DISINTEGRATE, oAttacker, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		ActionCastSpellAtObject(SPELL_DISINTEGRATE, oCaster, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	}
 	
 	object oStoneTree;
