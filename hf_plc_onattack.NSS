@@ -16,6 +16,9 @@ void main()
 		
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		ActionSpeakString("A green beam lances out at " + GetName(oAttacker) + ".", TALKVOLUME_TALK);
+		effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
+		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFireI, OBJECT_SELF);
 		ActionCastSpellAtObject(SPELL_DISINTEGRATE, oAttacker, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	}
 	

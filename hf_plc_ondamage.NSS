@@ -23,6 +23,61 @@ void main()
     object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
     
 	
+	
+	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		int nHP = GetCurrentHitPoints(OBJECT_SELF);
+		string sSpeak = "";
+	 	if((nHP < GetMaxHitPoints(OBJECT_SELF)/6) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 6)) {
+			sSpeak = "*Small flames lick out of each crack in the orb, bathing it in an almost transparent aura of fire.";
+			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
+			while(oPC != OBJECT_INVALID) {
+			if(GetIsSkillSuccessful(oPC, SKILL_LISTEN, 15, FALSE)) {
+				SendMessageToPC(oPC, "*A voice whispers from everywhere and nowhere, shifting around the confines of the room: 'Free. Free! FREE!'");
+				}
+			}
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 6);
+			}
+		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/5) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 5)) {
+			sSpeak = "*The orb pulses red again...then again. It continues pulsing, the red flaring up inside, the cracks in it glowing an ominous, fiery hue with each pulsation.";
+			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
+			while(oPC != OBJECT_INVALID) {
+			if(GetIsSkillSuccessful(oPC, SKILL_LISTEN, 15, FALSE)) {
+				SendMessageToPC(oPC, "*Amid the echoes in the room, you think you hear a murmer: 'Free me.'");
+				}
+			}
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 5);
+			}
+		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/4) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 4)) {
+			sSpeak = "*Multiple cracks suddenly spider out across the facets of the orb. The red light at its heart pulses once.";
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 4);
+			}
+		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/3) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 3)) {
+			sSpeak = "*A crack appears in the black orb.";
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 3);
+			}
+		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/2) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 2)) {
+			sSpeak = "*A chip shatters off the orb, sending glittering black dust into the air. The red lights within it shrink to a burning point source at its heart.";
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 2);
+			}
+		else if(GetLocalInt(OBJECT_SELF, "SpeakStage") < 1){
+			sSpeak = "*Red light swims across the black facets of the orb.";
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 1);
+			}	
+		
+		ActionSpeakString(sSpeak, TALKVOLUME_TALK);
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     if(GetTag(OBJECT_SELF) == "giant_crystal_source")
 		{ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oDamager, 3.0); 
 	     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eSpark, OBJECT_SELF, 3.0); 
