@@ -26,16 +26,19 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
 
 void main() {
 
+	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	ActivateLongTermBuffs(OBJECT_SELF);
+	object oEfreet = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	SetFirstName(oInvisoCaster, "Efreet of Set");
 		
 	AssignCommand(oInvisoCaster, ActionSpeakString("Free! FREE! FREEEEE!"));
 	AssignCommand(oInvisoCaster, ActionSpeakString("I am the curse of Horace-Re; I am the scourge of Scions. I am EFREET, sent to slay, not to serve!", TALKVOLUME_TALK));
-	AssignCommand(oInvisoCaster, DelayCommand(2.0, SetScale(OBJECT_SELF, 1.5, 1.5, 1.5)));
-	AssignCommand(oInvisoCaster, DelayCommand(4.0, SetScale(OBJECT_SELF, 2.0, 2.0, 2.0)));
+	AssignCommand(oInvisoCaster, DelayCommand(2.0, SetScale(oEfreet, 1.5, 1.5, 1.5)));
+	AssignCommand(oInvisoCaster, DelayCommand(4.0, SetScale(oEfreet, 2.0, 2.0, 2.0)));
 	AssignCommand(oInvisoCaster, DelayCommand(5.0, ActionSpeakString("Wait. No! Bound! *Howls, fire exploding outward from it in sudden rage.* Still bound by the wizard and his electrum child!", TALKVOLUME_TALK)));
-	AssignCommand(oInvisoCaster, DelayCommand(6.0, SetScale(OBJECT_SELF, 2.5, 2.5, 2.5)));
-	AssignCommand(oInvisoCaster, DelayCommand(8.0, SetScale(OBJECT_SELF, 3.0, 3.0, 3.0)));
+	AssignCommand(oInvisoCaster, DelayCommand(6.0, SetScale(oEfreet, 2.5, 2.5, 2.5)));
+	AssignCommand(oInvisoCaster, DelayCommand(8.0, SetScale(oEfreet, 3.0, 3.0, 3.0)));
 	AssignCommand(oInvisoCaster, DelayCommand(15.0, ActionSpeakString("Bound by trickery; bound by the violated power of the very Diadem I was sent to recover!", TALKVOLUME_TALK)));
 	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly!", TALKVOLUME_TALK)));
 	AssignCommand(oInvisoCaster, DelayCommand(26.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
