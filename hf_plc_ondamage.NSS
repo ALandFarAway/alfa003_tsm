@@ -25,6 +25,9 @@ void main()
 	
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
+		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFireI, OBJECT_SELF);
+		
 		int nHP = GetCurrentHitPoints(OBJECT_SELF);
 		string sSpeak = "";
 	 	if((nHP < GetMaxHitPoints(OBJECT_SELF)/6) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 6)) {
