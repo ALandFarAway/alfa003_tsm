@@ -1,4 +1,4 @@
-//OnUse for all Dean's Exam (deandragon) placeables 
+//OnUse for all High Forest placeables 
 //Wynna February 2009
 
 
@@ -17,13 +17,17 @@ void main()
     object oCaster = GetLastSpellCaster();
 	int nSpellId = GetLastSpell();
 	string sCreateCr = "";
+	effect eBeamGreen = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		SetFirstName(oInvisoCaster, "Black Orb");
 		ActionSpeakString("A green beam lances out at " + GetName(oCaster) + ".", TALKVOLUME_TALK);
 		effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
 		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFireI, OBJECT_SELF);
-		ActionCastSpellAtObject(SPELL_DISINTEGRATE, oCaster, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oCaster, 3.0);
+		AssignCommand(oInvisoCaster, ActionCastSpellAtObject(SPELL_DISINTEGRATE, oCaster, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	}
 	
 	object oStoneTree;

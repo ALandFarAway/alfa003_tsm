@@ -21,8 +21,7 @@ void main()
     effect eShake = EffectVisualEffect(VFX_FNF_SCREEN_SHAKE, FALSE);
     object oNPCOne = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
     object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
-    
-	
+    object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
@@ -39,6 +38,7 @@ void main()
 				}
 			}
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 6);
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/5) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 5)) {
 			sSpeak = "*The orb pulses red again...then again. It continues pulsing, the red flaring up inside, the cracks in it glowing an ominous, fiery hue with each pulsation.";
@@ -49,35 +49,29 @@ void main()
 				}
 			}
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 5);
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/4) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 4)) {
 			sSpeak = "*Multiple cracks suddenly spider out across the facets of the orb. The red light at its heart pulses once.";
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 4);
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/3) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 3)) {
 			sSpeak = "*A crack appears in the black orb.";
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 3);
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/2) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 2)) {
 			sSpeak = "*A chip shatters off the orb, sending glittering black dust into the air. The red lights within it shrink to a burning point source at its heart.";
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 2);
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if(GetLocalInt(OBJECT_SELF, "SpeakStage") < 1){
 			sSpeak = "*Red light swims across the black facets of the orb.";
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 1);
-			}	
-		
-		ActionSpeakString(sSpeak, TALKVOLUME_TALK);
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
+			}
+	}
 	
 	
 	

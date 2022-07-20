@@ -70,8 +70,10 @@ void main() {
 	    
   	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		sCreateCr = "abr_cr_ou_efreet_lord";
-		CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(OBJECT_SELF), TRUE);
-			
+		object oEfreet = CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(OBJECT_SELF), TRUE);
+		
+		
+		
 	}
 	
 	
