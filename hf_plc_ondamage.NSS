@@ -24,8 +24,6 @@ void main()
     object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
-		effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
-		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFireI, OBJECT_SELF);
 		
 		int nHP = GetCurrentHitPoints(OBJECT_SELF);
 		string sSpeak = "";
@@ -36,6 +34,7 @@ void main()
 			if(GetIsSkillSuccessful(oPC, SKILL_LISTEN, 15, FALSE)) {
 				SendMessageToPC(oPC, "*A voice whispers from everywhere and nowhere, shifting around the confines of the room: 'Free. Free! FREE!'");
 				}
+			oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			}
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 6);
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
@@ -47,6 +46,7 @@ void main()
 			if(GetIsSkillSuccessful(oPC, SKILL_LISTEN, 15, FALSE)) {
 				SendMessageToPC(oPC, "*Amid the echoes in the room, you think you hear a murmer: 'Free me.'");
 				}
+			oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			}
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 5);
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));

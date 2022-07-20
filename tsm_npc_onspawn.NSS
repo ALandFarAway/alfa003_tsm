@@ -20,7 +20,12 @@ void main()
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF);
-    	 }
+    	 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
+			effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
+		    ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFireI, oOrb);
+		
+			
+			}
 	
 	if(GetTag(OBJECT_SELF)== "003_cr_lath_cyrthol")
         { AssignCommand(OBJECT_SELF, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF));

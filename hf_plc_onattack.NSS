@@ -13,14 +13,12 @@ void main()
 
 	object oAttacker = GetLastAttacker();
 	string sCreateCr = "";
-	effect eBeamGreen = EffectBeam(VFX_BEAM_GREEN_DRAGON_ACID, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	effect eBeamGreen = EffectBeam(VFX_BEAM_ACID, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		SetFirstName(oInvisoCaster, "Black Orb");
-		ActionSpeakString("A green beam lances out at " + GetName(oAttacker) + ".", TALKVOLUME_TALK);
-		effect eFireI = EffectDamageImmunityIncrease(DAMAGE_TYPE_FIRE, 100);
-		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFireI, OBJECT_SELF);
+		//ActionSpeakString("A green beam lances out at " + GetName(oAttacker) + ".", TALKVOLUME_TALK);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oAttacker, 3.0);
 		AssignCommand(oInvisoCaster, ActionCastSpellAtObject(SPELL_DISINTEGRATE, oAttacker, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	}
