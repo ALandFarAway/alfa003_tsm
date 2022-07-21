@@ -85,27 +85,10 @@ void main()
 	int nUndead = GetRacialType(OBJECT_SELF);
 	
 	if(nUndead = RACIAL_TYPE_UNDEAD) {
-		int nCLWMem = GetHasSpell(SPELL_INFLICT_LIGHT_WOUNDS, OBJECT_SELF);
-		int nCMWMem = GetHasSpell(SPELL_INFLICT_MODERATE_WOUNDS, OBJECT_SELF);
-		int nCSWMem = GetHasSpell(SPELL_INFLICT_SERIOUS_WOUNDS, OBJECT_SELF);
-		int nCCWMem = GetHasSpell(SPELL_INFLICT_CRITICAL_WOUNDS, OBJECT_SELF);
-		if(nCCWMem > 0)
+		if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
 				{ActionCastSpellAtObject(SPELL_INFLICT_CRITICAL_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
-		else if(nCSWMem > 0)
-				{ActionCastSpellAtObject(SPELL_INFLICT_SERIOUS_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
-				 }
-		else if(nCMWMem > 0)
-				{ActionCastSpellAtObject(SPELL_INFLICT_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
-				 }
-		 else if(nCLWMem > 0)
-				{ActionCastSpellAtObject(SPELL_INFLICT_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
-				 }
-		 
 	return;
 	}
 	

@@ -26,6 +26,7 @@ void main() {
     object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
     string sCreateCr = "";
 	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
+	object oOrbGlow = GetObjectByTag("fx_okku_mound_rr", 0);
 	
   	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		sCreateCr = "abr_cr_ou_efreet_lord";

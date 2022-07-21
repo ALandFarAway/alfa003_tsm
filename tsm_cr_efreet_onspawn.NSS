@@ -32,7 +32,7 @@ void main() {
 	SetFirstName(oInvisoCaster, "Efreet of Set");
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 		
-	AssignCommand(oInvisoCaster, DelayCommand(5.0, ActionSpeakString("I am the curse of Horace-Re; I am the scourge of Scions. I am EFREET, sent to slay!", TALKVOLUME_TALK)));
+	AssignCommand(oInvisoCaster, DelayCommand(5.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
 	AssignCommand(oInvisoCaster, DelayCommand(6.0, SetScale(oEfreet, 1.25, 1.25, 1.25)));
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, SetScale(oEfreet, 1.5, 1.5, 1.5)));
 	AssignCommand(oInvisoCaster, DelayCommand(16.0, SetScale(oEfreet, 1.75, 1.75, 1.75)));
