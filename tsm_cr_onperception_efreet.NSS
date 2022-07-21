@@ -48,8 +48,8 @@ void main()
     // Custom code goes here.
 	object oPerceived = GetLastPerceived();
 	
-	if((GetTag(OBJECT_SELF) == "003_cr_slv_gyasisayen")&& (GetLastPerceptionSeen())) {
-		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetName(oPerceived), "efreet", 0) != -1)) 
+	if(GetTag(OBJECT_SELF) == "003_cr_slv_gyasisayen") {
+		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetTag(oPerceived), "efreet", 0) != -1)) 
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
 			 ActionSpeakString("I am the Scion! The Diadem has passed from my house to me, and hence to Electra!", TALKVOLUME_TALK);
@@ -57,8 +57,8 @@ void main()
 			 }
 	}
 	
-	if((GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord")&& (GetLastPerceptionSeen())) {
-		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetName(oPerceived), "sayen", 0) != -1)) 
+	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
+		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetTag(oPerceived), "sayen", 0) != -1)) 
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
 			 ActionSpeakString("Infidel! You and your electrum child violate the honor of House Sayen. You bound me within what you stole. You shall be separated, part from part!", TALKVOLUME_TALK);

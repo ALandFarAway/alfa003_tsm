@@ -1,6 +1,7 @@
 #include "silvy_univ_inc"
 #include "silvy_univ_func"
 #include "acr_quest_i"
+#include "x0_i0_position"
 
 
 
@@ -85,6 +86,9 @@ void main()
 			
 		//Toggle walk off/on for NPCs	
 		float fDistance = GetDistanceBetweenLocations(lStudent, GetLocation(oDM));
+		location lDM = GetLocation(oDM);
+		string sDM = LocationToString(lDM);
+		SendMessageToPC(oDM, "Location DM is standing is " + sDM);
 		SendMessageToPC(oDM, "Distance to " + GetName(oStudent) + " = " + FloatToString(fDistance));
 		SendMessageToPC(oDM, "Time-- " + IntToString(GetTimeHour()) + ":" + IntToString(GetTimeMinute()));
 		if((GetIsPC(oStudent) != TRUE) && (GetLocalInt(oStudent, "Walk_Off") == 0))

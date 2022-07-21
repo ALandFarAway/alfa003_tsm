@@ -25,10 +25,11 @@ void main() {
     object oNPCOne = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
     object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
     string sCreateCr = "";
-	    
+	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
+	
   	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		sCreateCr = "abr_cr_ou_efreet_lord";
-		object oEfreet = CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(OBJECT_SELF), TRUE);
+		object oEfreet = CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oOrbCreate), TRUE);
 	}
 	
 	

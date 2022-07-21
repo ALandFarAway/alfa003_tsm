@@ -25,7 +25,8 @@ void main()
     object oItem = GetModuleItemAcquired();
 	object oDisturber = GetLastDisturbed();
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);	
-		
+	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
+	 
 	
 if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
 	object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
@@ -55,7 +56,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, OBJECT_SELF, 16.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 16.0));
 			 
-	DelayCommand(10.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(OBJECT_SELF)));
+	DelayCommand(10.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
 		
 			 		  
 }
