@@ -27,9 +27,40 @@ void main()
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);	
 		
 	
-
+if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
+	object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
+	object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);
+	object oRelayblackC = GetObjectByTag("rauvin_crystal_relay_black_c", 0);
+	object oRelayblackD = GetObjectByTag("rauvin_crystal_relay_black_d", 0);
+	effect eBeamblackA = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackA, BODY_NODE_CHEST, FALSE);
+	effect eBeamblackB = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackB, BODY_NODE_CHEST, FALSE);
+	effect eBeamblackC = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackC, BODY_NODE_CHEST, FALSE);
+	effect eBeamblackD = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackD, BODY_NODE_CHEST, FALSE);
+	effect eBeamblackCenter = EffectBeam(VFX_BEAM_NECROMANCY, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	effect eWeb = EffectVisualEffect(VFX_AOE_WEB_OF_PURITY, FALSE);
+	effect ePurge = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
+	effect eBurst = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL, FALSE);
+	effect eKnockdown = EffectKnockdown();
+	effect eNegDamage = EffectDamage(d10()+20, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, FALSE);
+	
+	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
+	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 25.0));
+	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 25.0));
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 21.0));
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 21.0));
+			 
+	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, OBJECT_SELF, 16.0));
+	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, OBJECT_SELF, 16.0));
+	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, OBJECT_SELF, 16.0));
+	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 16.0));
+			 
+	DelayCommand(10.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(OBJECT_SELF)));
+		
+			 		  
+}
 		 
-if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))
+else if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))
 	{object oGlobeBlue = GetObjectByTag("phalorm_globe_blue", 0);
 	 object oGlobeGreen = GetObjectByTag("phalorm_globe_green", 0);
 	 object oGlobeGold = GetObjectByTag("phalorm_globe_gold", 0);

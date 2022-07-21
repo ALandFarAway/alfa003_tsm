@@ -1,5 +1,5 @@
-//OnDamage for all Silvy Uni placeables outside the classrooms
-//Wynna February 2008
+//OnDamage for all High Forest placeables 
+//Wynna February 2022
 
 
 #include "acr_placeable_i"
