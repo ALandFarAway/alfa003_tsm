@@ -86,7 +86,7 @@ void main()
 	object oPC = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_TRUE, OBJECT_SELF, Random(3));
 	
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
-		if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
+		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || (nCurrentHP < nMaxHP/3) || (nCurrentHP < nMaxHP/4) )
 				{ClearAllActions(TRUE);
 				 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
 				 ActionJumpToLocation(GetLocation(oPC));
@@ -98,7 +98,11 @@ void main()
 	
 	if(nUndead = RACIAL_TYPE_UNDEAD) {
 		if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
-				{ActionCastSpellAtObject(SPELL_INFLICT_CRITICAL_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				{int nHeal = d8(4) +10;
+				 effect eHeal = EffectHeal(nHeal);
+				 effect eHealVis = EffectVisualEffect(VFX_HIT_SPELL_INFLICT_4, FALSE);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eHealVis, OBJECT_SELF);
+				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
 				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 	return;

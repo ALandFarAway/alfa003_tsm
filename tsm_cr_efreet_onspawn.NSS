@@ -39,12 +39,13 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, SetScale(oEfreet, 2.0, 2.0, 2.0)));
 	AssignCommand(oInvisoCaster, DelayCommand(15.0, ActionSpeakString("Bound by trickery; bound by the wizard and his electrum child; bound by the violated power that compels me!", TALKVOLUME_TALK)));
 	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly!", TALKVOLUME_TALK)));
-	AssignCommand(oInvisoCaster, DelayCommand(26.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
-	AssignCommand(oInvisoCaster, DelayCommand(28.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
-	AssignCommand(oInvisoCaster, DelayCommand(30.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
-	AssignCommand(oInvisoCaster, DelayCommand(32.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
-	AssignCommand(oInvisoCaster, DelayCommand(34.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
-	AssignCommand(oInvisoCaster, DelayCommand(36.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
+	AssignCommand(oInvisoCaster, DelayCommand(26.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1)))));
+	AssignCommand(oInvisoCaster, DelayCommand(28.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 2)))));
+	AssignCommand(oInvisoCaster, DelayCommand(30.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 3)))));
+	AssignCommand(oInvisoCaster, DelayCommand(32.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 4)))));
+	AssignCommand(oInvisoCaster, DelayCommand(34.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 5)))));
+	AssignCommand(oInvisoCaster, DelayCommand(36.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 6)))));
+	AssignCommand(oInvisoCaster, DelayCommand(36.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 7)))));
 	
 	
 	 

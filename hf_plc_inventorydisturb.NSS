@@ -46,7 +46,6 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	effect eBurst = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL, FALSE);
 	effect eKnockdown = EffectKnockdown();
 	effect eNegDamage = EffectDamage(d10()+20, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, FALSE);
-	object oVassal = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_banite_vassal", GetLocation(OBJECT_SELF), TRUE);
 	effect eDmg = EffectDamage(10, DAMAGE_TYPE_MAGICAL, DAMAGE_POWER_NORMAL, TRUE);	
 	effect eDmgScarab = EffectDamage(d8(1), DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, TRUE);	
 	effect eDmgScarabNeg = EffectDamage(d8(1), DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, TRUE);	
@@ -70,6 +69,8 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 		}
 	oPC = GetNextPC(TRUE);
 	}
+	
+	object oVassal = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_banite_vassal", GetLocation(OBJECT_SELF), TRUE);
 	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 	DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* I come at your summons, Master!", TALKVOLUME_TALK)));
