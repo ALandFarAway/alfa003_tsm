@@ -38,31 +38,82 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	effect eBeamblackC = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackC, BODY_NODE_CHEST, FALSE);
 	effect eBeamblackD = EffectBeam(VFX_BEAM_NECROMANCY, oRelayblackD, BODY_NODE_CHEST, FALSE);
 	effect eBeamblackCenter = EffectBeam(VFX_BEAM_NECROMANCY, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
+	effect eBeamgreenCenter = EffectBeam(VFX_BEAM_ACID, OBJECT_SELF, BODY_NODE_CHEST, FALSE);
 	effect eWeb = EffectVisualEffect(VFX_AOE_WEB_OF_PURITY, FALSE);
 	effect ePurge = EffectVisualEffect(VFX_AOE_ETHEREAL_PURGE, FALSE);
 	effect eBurst = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL, FALSE);
 	effect eKnockdown = EffectKnockdown();
 	effect eNegDamage = EffectDamage(d10()+20, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, FALSE);
-	object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
+	object oVassal = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_banite_vassal", GetLocation(OBJECT_SELF), TRUE);
+	effect eDmg = EffectDamage(10, DAMAGE_TYPE_MAGICAL, DAMAGE_POWER_NORMAL, TRUE);	
+	effect eDmgScarab = EffectDamage(d8(1), DAMAGE_TYPE_PIERCING, DAMAGE_POWER_NORMAL, TRUE);	
+	effect eDmgScarabNeg = EffectDamage(d8(1), DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, TRUE);	
+	effect eIon = EffectVisualEffect(VFX_DUR_IOUNSTONE_GREEN, FALSE);
+	object oPC = GetFirstPC(TRUE);
+	object oJhessi;
+	object oNio;
+	object oSaerela;
+	while(oPC != OBJECT_INVALID) {
+		string sPCName = GetName(oPC);
+		if(FindSubString(sPCName, "Jhessi") != -1) {
+			oJhessi = oPC;
+		}
+		if(FindSubString(sPCName, "Nio") != -1) {
+			oNio = oPC;
+		}
+		if(FindSubString(sPCName, "Saerel") != -1) {
+			oSaerela = oPC;
+		}
+	oPC = GetNextPC(TRUE);
+	}
 	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
+	DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* I come at your summons, Master!", TALKVOLUME_TALK)));
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 25.0));
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 25.0));
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 21.0));
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 21.0));
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));	
+	
+	DelayCommand(6.0, SendMessageToPC(oJhessi, "You see Master Evenwood's face among the screaming vassals."));
+	DelayCommand(6.0, SendMessageToPC(oNio, "A scuttling at your neck warns you the moment before a cold pain pierces your throat. Your scarab broach has bitten you! It drops off, and scampers across the floor."));
+	object oScarab = GetItemPossessedBy(oNio, "03_it_amul_scarab_prot");
+	AssignCommand(oScarab, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmgScarab, oNio));
+	AssignCommand(oScarab, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmgScarabNeg, oNio));
+	DestroyObject(oScarab, 7.0);
+	DelayCommand(8.0, ActionCreateWynCreature("abr_cr_cn_scarab", GetLocation(oNio)));	
+	
+	DelayCommand(6.0, SendMessageToPC(oSaerela, "An emerald green beam shoots out from the crystal orb, playing across your brow."));
+	DelayCommand(7.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamgreenCenter, oSaerela, 10.0));
+	
 			 
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, OBJECT_SELF, 16.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, OBJECT_SELF, 16.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, OBJECT_SELF, 16.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 16.0));
 			 
-	DelayCommand(10.0, AssignCommand(oVassal, ActionJumpToObject(OBJECT_SELF, FALSE)));
-	DelayCommand(11.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* Save me, Jhessi Kross!", TALKVOLUME_TALK)));
-	DelayCommand(19.0, AssignCommand(oVassal, ActionSpeakString("*Tendrils of red ectoplasm are drawn into the black orb, shrieking faces vanishing into it one at a time.", TALKVOLUME_TALK)));
+	DelayCommand(10.0, AssignCommand(oVassal, ActionSpeakString("*Tendrils of red ectoplasm are drawn into the black orb, shrieking faces vanishing into it one at a time.", TALKVOLUME_TALK)));
+	DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(17.0, SendMessageToPC(oSaerela, "You sense a familiar echo passing through the emerald green beam. The echo is your own connection to the Drowned Tower you hallowed within the High Forest."));
 	DestroyObject(oVassal, 20.0);
+	
+	DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIon, OBJECT_SELF, 5.0));
+	
+	DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
 	DelayCommand(25.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
+	
 		
+	DelayCommand(25.0, SendMessageToPC(oSaerela, "Your connection to the Drowned Tower pulses in your mind as green light spins around the crystal globe, and vanishes at the same time."));
+	
+	DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(65.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(75.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(85.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(95.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(105.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
 			 		  
 }
 		 
