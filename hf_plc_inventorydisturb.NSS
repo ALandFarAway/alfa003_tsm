@@ -43,6 +43,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	effect eBurst = EffectVisualEffect(VFX_FNF_GAS_EXPLOSION_EVIL, FALSE);
 	effect eKnockdown = EffectKnockdown();
 	effect eNegDamage = EffectDamage(d10()+20, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, FALSE);
+	object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
 	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
@@ -56,7 +57,11 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, OBJECT_SELF, 16.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 16.0));
 			 
-	DelayCommand(10.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
+	DelayCommand(10.0, AssignCommand(oVassal, ActionJumpToObject(OBJECT_SElF, FALSE)));
+	DelayCommand(11.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* Save me, Jhessi Kross!", TALKVOLUME_TALK)));
+	DelayCommand(19.0, AssignCommand(oVassal, ActionSpeakString("*Tendrils of red ectoplasm are drawn into the black orb, shrieking faces vanishing into it one at a time.", TALKVOLUME_TALK)));
+	DestroyObject(oVassal, 20.0);
+	DelayCommand(25.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
 		
 			 		  
 }

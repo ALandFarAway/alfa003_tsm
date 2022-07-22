@@ -43,6 +43,8 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(28.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
 	AssignCommand(oInvisoCaster, DelayCommand(30.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
 	AssignCommand(oInvisoCaster, DelayCommand(32.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
+	AssignCommand(oInvisoCaster, DelayCommand(34.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
+	AssignCommand(oInvisoCaster, DelayCommand(36.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(OBJECT_SELF))));
 	
 	
 	 
