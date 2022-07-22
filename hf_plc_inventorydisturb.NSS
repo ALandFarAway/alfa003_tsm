@@ -57,7 +57,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, OBJECT_SELF, 16.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 16.0));
 			 
-	DelayCommand(10.0, AssignCommand(oVassal, ActionJumpToObject(OBJECT_SElF, FALSE)));
+	DelayCommand(10.0, AssignCommand(oVassal, ActionJumpToObject(OBJECT_SELF, FALSE)));
 	DelayCommand(11.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* Save me, Jhessi Kross!", TALKVOLUME_TALK)));
 	DelayCommand(19.0, AssignCommand(oVassal, ActionSpeakString("*Tendrils of red ectoplasm are drawn into the black orb, shrieking faces vanishing into it one at a time.", TALKVOLUME_TALK)));
 	DestroyObject(oVassal, 20.0);
