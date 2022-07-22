@@ -71,6 +71,12 @@ void main()
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 1);
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
+			
+		else {
+			sSpeak = "*The orb pulses red.";
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
+			
+		}
 	}
 	
 	

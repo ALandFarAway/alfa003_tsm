@@ -23,6 +23,11 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
     CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
 }
 
+void ActionCreateWynEffect(string sObject, location lLocObject)
+{
+    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sObject, lLocObject);
+}
+
 void main() {
 
 	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
@@ -32,13 +37,16 @@ void main() {
 	SetFirstName(oInvisoCaster, "Efreet of Set");
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 		
+	object oPortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "abr_afx_ajoc_demon_portal", GetLocation(oOrb));
 	AssignCommand(oInvisoCaster, DelayCommand(5.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
 	AssignCommand(oInvisoCaster, DelayCommand(6.0, SetScale(oEfreet, 1.25, 1.25, 1.25)));
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, SetScale(oEfreet, 1.5, 1.5, 1.5)));
 	AssignCommand(oInvisoCaster, DelayCommand(16.0, SetScale(oEfreet, 1.75, 1.75, 1.75)));
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, SetScale(oEfreet, 2.0, 2.0, 2.0)));
 	AssignCommand(oInvisoCaster, DelayCommand(15.0, ActionSpeakString("Bound by trickery; bound by the wizard and his electrum child; bound by the violated power that compels me!", TALKVOLUME_TALK)));
-	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly!", TALKVOLUME_TALK)));
+	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
+	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oOrb))));
+	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oOrb))));
 	AssignCommand(oInvisoCaster, DelayCommand(26.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1)))));
 	AssignCommand(oInvisoCaster, DelayCommand(28.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 2)))));
 	AssignCommand(oInvisoCaster, DelayCommand(30.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 3)))));
@@ -46,6 +54,9 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(34.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 5)))));
 	AssignCommand(oInvisoCaster, DelayCommand(36.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 6)))));
 	AssignCommand(oInvisoCaster, DelayCommand(36.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 7)))));
+	AssignCommand(oInvisoCaster, DelayCommand(38.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oOrb))));
+	AssignCommand(oInvisoCaster, DelayCommand(40.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oOrb))));
+	AssignCommand(oInvisoCaster, DelayCommand(42.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oOrb))));
 	
 	
 	 

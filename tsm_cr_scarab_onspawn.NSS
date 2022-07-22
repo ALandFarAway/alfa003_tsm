@@ -23,6 +23,11 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
     CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
 }
 
+void ActionCreateWynItem(string sCreature, object oObject)
+{
+   CreateItemOnObject(sCreature, oObject, 1, sCreature, TRUE);
+}
+
 void main() {
 
 	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
@@ -32,10 +37,13 @@ void main() {
 	effect eLight = EffectVisualEffect(VFX_DUR_GLOW_RED, FALSE);
 	
 		
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 900.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 10.0);
 	ActionForceMoveToObject(oOrb, TRUE, 0.5);
-	DelayCommand(5.0, ActionSpeakString("*Scuttles off of Nioniel and climbs into the crystal globe", TALKVOLUME_TALK));
-	DestroyObject(OBJECT_SELF, 10.0);
-	
+	DelayCommand(5.0, ActionSpeakString("*Scuttles off of Nioniel and away, then blinks out.", TALKVOLUME_TALK));
+	DelayCommand(10.0, ActionJumpToObject(oOrb, FALSE));
+	DelayCommand(15.0, ActionSpeakString("*Appears beneath the orb and climbs up the black crystal.", TALKVOLUME_TALK));
+	DelayCommand(25.0, ActionSpeakString("*Clambers into the crystal globe.", TALKVOLUME_TALK));
+	DelayCommand(26.0, ActionCreateWynItem("03_it_amul_scarab_prot", oOrb));
+	DestroyObject(OBJECT_SELF, 30.0);
 	 
 }
