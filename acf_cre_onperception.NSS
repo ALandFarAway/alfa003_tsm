@@ -48,14 +48,6 @@ void main()
     // Custom code goes here.
 	object oPerceived = GetLastPerceived();
 	
-	if((GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal")&& (GetLastPerceptionSeen())) {
-		if((FindSubString(GetName(oPerceived), "Ash", 0) != -1) || (FindSubString(GetName(oPerceived), "Jhess", 0) != -1) || (FindSubString(GetName(oPerceived), "Bell", 0) != -1))
-			{ClearAllActions(TRUE);
-			 ActionSpeakString(GetName(oPerceived), TALKVOLUME_TALK);
-			}
-	
-	}
-	
 	ExecuteScript("acf_cre_ud_onperception", OBJECT_SELF);
 		    
 }

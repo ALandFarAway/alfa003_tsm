@@ -26,7 +26,9 @@ void main()
 	object oDisturber = GetLastDisturbed();
 	effect eSmoke = EffectVisualEffect(VFX_DUR_SMOKE, FALSE);	
 	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
-	 
+	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
+	SetFirstName(oInvisoCaster, "Black Orb");
+	
 	
 if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
 	object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
@@ -74,7 +76,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 25.0));
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 21.0));
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 21.0));
-	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));	
+	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));	
 	
 	DelayCommand(6.0, SendMessageToPC(oJhessi, "You see Master Evenwood's face among the screaming vassals."));
 	DelayCommand(6.0, SendMessageToPC(oNio, "A scuttling at your neck warns you the moment before a cold pain pierces your throat. Your scarab broach has bitten you! It drops off, and scampers across the floor."));
@@ -94,26 +96,26 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 16.0));
 			 
 	DelayCommand(10.0, AssignCommand(oVassal, ActionSpeakString("*Tendrils of red ectoplasm are drawn into the black orb, shrieking faces vanishing into it one at a time.", TALKVOLUME_TALK)));
-	DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(15.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
 	DelayCommand(17.0, SendMessageToPC(oSaerela, "You sense a familiar echo passing through the emerald green beam. The echo is your own connection to the Drowned Tower you hallowed within the High Forest."));
 	DestroyObject(oVassal, 20.0);
 	
-	DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIon, OBJECT_SELF, 5.0));
+	DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIon, oInvisoCaster, 5.0));
 	
-	DelayCommand(25.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(25.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
 	DelayCommand(25.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
 	
 		
 	DelayCommand(25.0, SendMessageToPC(oSaerela, "Your connection to the Drowned Tower pulses in your mind as green light spins around the crystal globe, and vanishes at the same time."));
 	
-	DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(55.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(65.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(75.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(85.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(95.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
-	DelayCommand(105.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF));
+	DelayCommand(35.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(45.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(55.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(65.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(75.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(85.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(95.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
+	DelayCommand(105.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, OBJECT_SELF)));
 			 		  
 }
 		 
