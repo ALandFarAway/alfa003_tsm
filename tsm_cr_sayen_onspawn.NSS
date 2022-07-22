@@ -44,7 +44,7 @@ void main() {
 	DelayCommand(50.0, ActionSpeakString("Thou who were strong enough to destroy an age-weakened lich may serve beside me against what shall surely otherwise destroy us all.", TALKVOLUME_TALK));
 	DelayCommand(60.0, ActionSpeakString("Fight! Fight for your afterlife. For the curse of Horus-Re was to release me to the mercy of Set!", TALKVOLUME_TALK));
 	DelayCommand(70.0, ActionSpeakString("Come to me, those familiars released to my need, and be free upon condition of your aid!", TALKVOLUME_TALK));
-	DelayCommand(75.0, ActionCreateWynCreature("003_cr_un_banite_vassal", GetLocation(OBJECT_SELF));
+	DelayCommand(75.0, ActionCreateWynCreature("003_cr_un_banite_vassal", GetLocation(OBJECT_SELF)));
 	DelayCommand(80.0, ActionSpeakString("The Efreet of Set is released!", TALKVOLUME_TALK));
 	
 	

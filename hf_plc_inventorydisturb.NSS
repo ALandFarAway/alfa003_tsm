@@ -50,9 +50,9 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	effect eDmgScarabNeg = EffectDamage(d8(1), DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, TRUE);	
 	effect eIon = EffectVisualEffect(VFX_DUR_IOUNSTONE_GREEN, FALSE);
 	object oPC = GetFirstPC(TRUE);
-	object oJhessi;
-	object oNio;
-	object oSaerela;
+	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
+	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
+	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
 	while(oPC != OBJECT_INVALID) {
 		string sPCName = GetName(oPC);
 		if(FindSubString(sPCName, "Jhessi") != -1) {
