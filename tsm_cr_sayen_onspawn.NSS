@@ -37,8 +37,10 @@ void main() {
 	effect eFreeze = EffectCutsceneImmobilize();
 	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
+	effect eGhost = EffectVisualEffect(VFX_DUR_GHOST_TRANSPARENT, FALSE);
 	 
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 20.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, OBJECT_SELF, 25.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 30.0);
 	DestroyObject(oOrbGlow, 1.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 900.0);
