@@ -138,25 +138,55 @@ void main()
 	SendMessageToAllDMs("Damage firing. " + GetName(OBJECT_SELF) + " hp is " + IntToString(nCurrentHP));
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
-		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || (nCurrentHP < nMaxHP/3) || (nCurrentHP < nMaxHP/4) )
-				{SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
-				 ClearAllActions(TRUE);
-				 ActionJumpToLocation(GetLocation(oRelay));
-				 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
-				 DelayCommand(1.0, ActionCastSpellAtObject(SPELL_VAMPIRIC_TOUCH, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			 	 DelayCommand(10.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, GetLastDamager(OBJECT_SELF), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			 	 }
+		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || ((nCurrentHP < nMaxHP/3) && (Random(3) <= 1)) || ((nCurrentHP < nMaxHP/4)  && (Random(3) <= 1 )))
+				{int nDimD = GetHasSpell(3026, OBJECT_SELF);
+				 if (nDimD) {SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
+						 DecrementRemainingSpellUses(OBJECT_SELF, 3026);
+						 ClearAllActions(TRUE);
+						 ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+					 	 DelayCommand(2.0, ActionJumpToLocation(GetLocation(oRelay)));
+						 DelayCommand(3.0, ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK));
+						 DelayCommand(10.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, GetLastDamager(OBJECT_SELF), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+				 	 }
+				}
 	return;
 	}
 	
 	if(nUndead = RACIAL_TYPE_UNDEAD) {
 		if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
-				{int nHeal = d8(4) +10;
-				 effect eHeal = EffectHeal(nHeal);
+				{int nHealL = d8(1) +10;
+				 int nHealM = d8(2) +10;
+				 int nHealS = d8(3) +10;
+				 int nHealC = d8(4) +10;
+				 effect eHeal = EffectHeal(nHealL);
 				 effect eHealVis = EffectVisualEffect(VFX_HIT_SPELL_INFLICT_4, FALSE);
-				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eHealVis, OBJECT_SELF);
-				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				 int nILWMem = GetHasSpell(SPELL_INFLICT_LIGHT_WOUNDS, OBJECT_SELF);
+				 int nIMWMem = GetHasSpell(SPELL_INFLICT_MODERATE_WOUNDS, OBJECT_SELF);
+				 int nISWMem = GetHasSpell(SPELL_INFLICT_SERIOUS_WOUNDS, OBJECT_SELF);
+				 int nICWMem = GetHasSpell(SPELL_INFLICT_CRITICAL_WOUNDS, OBJECT_SELF);
+				 if (nICWMem) {
+				 	eHeal = EffectHeal(nHealC);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
+				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_CRITICAL_WOUNDS);
+					}	
+				 else if (nISWMem) {
+				 	eHeal = EffectHeal(nHealS);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
+				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_SERIOUS_WOUNDS);
+					}	
+				 else if (nIMWMem) {
+				 	eHeal = EffectHeal(nHealM);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
+				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_MODERATE_WOUNDS);
+					}	
+				 else if (nILWMem) {
+				 	eHeal = EffectHeal(nHealL);
+					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
+				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_LIGHT_WOUNDS);
+					}	
+				 
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, eHealVis, OBJECT_SELF);
+				ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 	return;
 	}
