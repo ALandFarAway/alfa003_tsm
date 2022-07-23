@@ -48,7 +48,7 @@ void main()
     // Custom code goes here.
 	object oCaster = GetLastSpellCaster();
 	object oItem = GetSpellCastItem();
-	SendMessageToAllDMs(GetName(oCaster) + " cast " + IntToString(GetSpellId()) + " at " + GetName(OBJECT_SELF) + " with " + GetTag(oItem)); 
+	//SendMessageToAllDMs(GetName(oCaster) + " cast " + IntToString(GetSpellId()) + " at " + GetName(OBJECT_SELF) + " with " + GetTag(oItem)); 
 	
 	if(GetLocalInt(OBJECT_SELF, "Fleeing") == 1) 
 		{ClearAllActions(TRUE);

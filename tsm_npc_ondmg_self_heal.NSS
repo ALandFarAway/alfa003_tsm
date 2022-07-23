@@ -139,7 +139,7 @@ void main()
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
 		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || (nCurrentHP < nMaxHP/3) || (nCurrentHP < nMaxHP/4) )
-				{SendMessageToAllDMs("Efreet damage firing");
+				{SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
 				 ClearAllActions(TRUE);
 				 ActionJumpToLocation(GetLocation(oRelay));
 				 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);

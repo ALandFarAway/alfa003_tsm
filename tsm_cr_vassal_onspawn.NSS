@@ -23,22 +23,14 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
     CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
 }
 
-void ActionCreateWynItem(string sCreature, object oObject)
-{
-   CreateItemOnObject(sCreature, oObject, 1, sCreature, TRUE);
-}
-
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
-	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
-	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
-	object oOrb = GetObjectByTag("phalorm_globe_black", 0);
-	effect eLight = EffectVisualEffect(VFX_DUR_GLOW_RED, FALSE);
-	
-		
-	ActionForceFollowObject(oSayen, 1.0, 0);
 	ActionSpeakString("Master Sayen.", TALKVOLUME_TALK);
+	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
+	ActionForceFollowObject(oSayen, 1.0, 0);
+	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	 
+		
 	 
 }

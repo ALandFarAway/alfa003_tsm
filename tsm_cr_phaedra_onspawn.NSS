@@ -31,13 +31,7 @@ void ActionCreateWynItem(string sCreature, object oObject)
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
-	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
-	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
-	object oOrb = GetObjectByTag("phalorm_globe_black", 0);
-	effect eLight = EffectVisualEffect(VFX_DUR_GLOW_RED, FALSE);
-	
-		
 	ActionSpeakString("Master Sayen. *Kneels, pale-faced, and is ignored.", TALKVOLUME_TALK);
+	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	 
 }
