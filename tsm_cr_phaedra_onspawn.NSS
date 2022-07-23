@@ -1,5 +1,5 @@
 //
-//     Filename : tsm_cr_scarab_onspawn
+//     Filename : tsm_cr_phaedra_onspawn
 //      Version : 0.1
 //         Date : 7/18/22
 //       Author : Wynna

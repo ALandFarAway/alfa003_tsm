@@ -26,9 +26,7 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
-	ActionSpeakString("Master Sayen.", TALKVOLUME_TALK);
-	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
-	ActionForceFollowObject(oSayen, 1.0, 0);
+	ActionSpeakString("Master Sayen. *Many voices speak in chorus", TALKVOLUME_TALK);
 	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	 
 		
