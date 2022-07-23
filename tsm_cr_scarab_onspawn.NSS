@@ -39,11 +39,10 @@ void main() {
 		
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 10.0);
 	ActionForceMoveToObject(oOrb, TRUE, 0.5);
-	DelayCommand(5.0, ActionSpeakString("*Scuttles off of Nioniel and away, then blinks out.", TALKVOLUME_TALK));
+	DelayCommand(5.0, ActionSpeakString("*Scuttles off of Nioniel, then blinks out.", TALKVOLUME_TALK));
 	DelayCommand(10.0, ActionJumpToObject(oOrb, FALSE));
 	DelayCommand(15.0, ActionSpeakString("*Appears beneath the orb and climbs up the black crystal.", TALKVOLUME_TALK));
-	DelayCommand(25.0, ActionSpeakString("*Clambers into the crystal globe.", TALKVOLUME_TALK));
-	DelayCommand(26.0, ActionCreateWynItem("03_it_amul_scarab_prot", oOrb));
-	DestroyObject(OBJECT_SELF, 30.0);
+	DelayCommand(16.0, ActionCreateWynItem("03_it_amul_scarab_prot", oOrb));
+	DestroyObject(OBJECT_SELF, 20.0);
 	 
 }
