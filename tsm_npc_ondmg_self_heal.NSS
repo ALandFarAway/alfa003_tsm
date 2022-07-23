@@ -85,7 +85,7 @@ void main()
 	int nUndead = GetRacialType(OBJECT_SELF);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
-	
+	object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
 	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
@@ -141,25 +141,84 @@ void main()
 		oRelay = oSayen;
 	}
 		
-	SendMessageToAllDMs("Damage firing. " + GetName(OBJECT_SELF) + " hp is " + IntToString(nCurrentHP));
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
 		 int nDimD = GetHasSpell(3026, OBJECT_SELF);
-				 if (nDimD) {SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
-						 ClearAllActions(TRUE);
-						 //ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-					 	 //DelayCommand(1.5, ClearAllActions(TRUE));
-						 ActionJumpToLocation(GetLocation(oRelay));
-						 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
-						 DecrementRemainingSpellUses(OBJECT_SELF, 3026);
-						 }
+				 if (nDimD > 0) {
+				 		SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
+						ClearAllActions(TRUE);
+						ActionJumpToLocation(GetLocation(oRelay));
+						ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
+						DecrementRemainingSpellUses(OBJECT_SELF, 3026);
+						}
 				
 	return;
 	}
 	
-	if(nUndead = RACIAL_TYPE_UNDEAD) {
+	
+	if(GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal") 
+				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 3);
+					ClearAllActions(TRUE);
+					ActionJumpToLocation(GetLocation(oJhessi));
+					ActionSpeakString("Jhessi. I will not fail you this time.", TALKVOLUME_TALK);
+					ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oJhessi, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
+					}
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 2);
+					ClearAllActions(TRUE);
+					ActionSpeakString("We. No...I...I am Randall Evenwood. I remember!", TALKVOLUME_TALK);
+					}
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 1);
+					ClearAllActions(TRUE);
+					ActionSpeakString("We will be free! *A dozen voices echo the word 'free'.", TALKVOLUME_TALK);
+					}
+		}			
+	
+	if(GetTag(OBJECT_SELF) == "003_cr_bane_bp_elthonds") 
+				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 3);
+					ClearAllActions(TRUE);
+					ActionSpeakString("I will not die alone. *Shrieks, and spins to raise her finger in Bertilak's direction.* Deserter! Die!", TALKVOLUME_TALK);
+					ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE);
+					AssignCommand(oVassal, ClearAllActions(TRUE));
+					AssignCommand(oVassal, ActionJumpToLocation(GetLocation(oBertilak)));
+					AssignCommand(oVassal, ActionSpeakString("Because she loves you.", TALKVOLUME_TALK));
+					AssignCommand(oVassal, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oBertilak, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)); 
+					ActionCastSpellAtObject(SPELL_INFLICT_CRITICAL_WOUNDS, oBertilak, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
+					} 
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 2);
+					ClearAllActions(TRUE);
+					ActionSpeakString("Master, at least send the vassal to my aid! Please!", TALKVOLUME_TALK);
+					}
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 1);
+					ClearAllActions(TRUE);
+					ActionSpeakString("My master! So many years I sought you!", TALKVOLUME_TALK);
+					}
+		}			
+	
+	if(GetTag(OBJECT_SELF) == "003_cr_slv_gyasisayen") {
 		if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
-				{int nHealL = d8(1) +10;
+				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 3);
+					ClearAllActions(TRUE);
+					ActionSpeakString("Most magics fail against it! It must be attacked with sword or bow!", TALKVOLUME_TALK);
+					}
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 2);
+					ClearAllActions(TRUE);
+					ActionSpeakString("The Efreet of Set is hardened against negative energy! I cannot damage it!", TALKVOLUME_TALK);
+					}
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP/2)) {
+					SetLocalInt(OBJECT_SELF, "Speech", 1);
+					ClearAllActions(TRUE);
+					ActionSpeakString("Flee! Flee if you must!", TALKVOLUME_TALK);
+					}
+				
+				 int nHealL = d8(1) +10;
 				 int nHealM = d8(2) +10;
 				 int nHealS = d8(3) +10;
 				 int nHealC = d8(4) +10;

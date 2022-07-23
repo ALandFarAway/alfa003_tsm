@@ -88,7 +88,6 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	}
 	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
-	//DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* I come at your summons, Master!", TALKVOLUME_TALK)));
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
@@ -159,7 +158,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(140.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(165.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(165.0, ActionCreateWynPlacedEffect("fx_gem_energy_blue", GetLocation(OBJECT_SELF)));
+	DelayCommand(165.0, ActionCreateWynPlacedEffect("abr_afx_demon_portal", GetLocation(OBJECT_SELF)));
 				 		  
 }
 		 
