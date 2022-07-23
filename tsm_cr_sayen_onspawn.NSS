@@ -25,8 +25,8 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
 
 void main() {
 
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	ActivateLongTermBuffs(OBJECT_SELF);
+	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	object oSayen = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);

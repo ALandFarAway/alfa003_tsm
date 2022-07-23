@@ -83,17 +83,67 @@ void main()
 	string sDomainLevel;
 	string sDomainClass;
 	int nUndead = GetRacialType(OBJECT_SELF);
-	object oPC = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_TRUE, OBJECT_SELF, Random(3));
-	
+	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
+	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
+	object oPC = GetFirstPC(TRUE);
+	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
+	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
+	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
+	object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
+	object oBellie = GetObjectByTag("003_pc_bellie_2", 0);
+	object oBae = GetObjectByTag("003_pc_baeithra_2", 0);
+	object oAsh = GetObjectByTag("003_pc_asheeleaf_2", 0);
+	while(oPC != OBJECT_INVALID) {
+		string sPCName = GetName(oPC);
+		if(FindSubString(sPCName, "Jhessi") != -1) {
+			oJhessi = oPC;
+		}
+		if(FindSubString(sPCName, "Nio") != -1) {
+			oNio = oPC;
+		}
+		if(FindSubString(sPCName, "Saerel") != -1) {
+			oSaerela = oPC;
+		}
+		if(FindSubString(sPCName, "Bert") != -1) {
+			oBertilak = oPC;
+		}
+		if(FindSubString(sPCName, "Bell") != -1) {
+			oBellie = oPC;
+		}
+		if(FindSubString(sPCName, "Bae") != -1) {
+			oBae = oPC;
+		}
+		if(FindSubString(sPCName, "Ash") != -1) {
+			oAsh = oPC;
+		}
+	oPC = GetNextPC(TRUE);
+	}
+
+	object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
+	object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);
+	object oRelayblackC = GetObjectByTag("rauvin_crystal_relay_black_c", 0);
+	object oRelayblackD = GetObjectByTag("rauvin_crystal_relay_black_d", 0);
+	object oRelay = oRelayblackA;
+	int nRand = Random(4);
+	if(nRand == 3) {
+		oRelay = oRelayblackD;
+	}
+	if(nRand == 2) {
+		oRelay = oRelayblackC;
+	}
+	if(nRand == 1) {
+		oRelay = oRelayblackB;
+	}
+		
 	SendMessageToAllDMs("Damage firing. " + GetName(OBJECT_SELF) + " hp is " + IntToString(nCurrentHP));
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
 		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || (nCurrentHP < nMaxHP/3) || (nCurrentHP < nMaxHP/4) )
 				{SendMessageToAllDMs("Efreet damage firing");
 				 ClearAllActions(TRUE);
-				 ActionJumpToLocation(GetLocation(oPC));
+				 ActionJumpToLocation(GetLocation(oRelay));
 				 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
-				 DelayCommand(1.0, ActionCastSpellAtObject(SPELL_VAMPIRIC_TOUCH, oPC, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+				 DelayCommand(1.0, ActionCastSpellAtObject(SPELL_VAMPIRIC_TOUCH, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	 DelayCommand(10.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, GetLastDamager(OBJECT_SELF), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	 }
 	return;
