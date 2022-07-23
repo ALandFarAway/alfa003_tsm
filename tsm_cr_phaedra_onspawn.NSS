@@ -23,11 +23,11 @@ void main() {
 
 	//ActivateLongTermBuffs(OBJECT_SELF);
 	ClearAllActions(TRUE);
+	DelayCommand(0.5, ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK));
 	AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELTALK, 1.0, 3.0));
-	ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK);
 	effect eFreeze = EffectCutsceneImmobilize();
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 25.0);
+	DelayCommand(1.0, ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF));
+	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 25.0));
 	
-	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	 
 }

@@ -85,6 +85,8 @@ void main()
 	int nUndead = GetRacialType(OBJECT_SELF);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
+	
+	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
@@ -134,21 +136,24 @@ void main()
 	if(nRand == 1) {
 		oRelay = oRelayblackB;
 	}
+	
+	if(oRelay == OBJECT_INVALID) {
+		oRelay = oSayen;
+	}
 		
 	SendMessageToAllDMs("Damage firing. " + GetName(OBJECT_SELF) + " hp is " + IntToString(nCurrentHP));
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
-		if(nCurrentHP < nMaxHP/2)
-				{int nDimD = GetHasSpell(3026, OBJECT_SELF);
+		 int nDimD = GetHasSpell(3026, OBJECT_SELF);
 				 if (nDimD) {SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
-						 DecrementRemainingSpellUses(OBJECT_SELF, 3026);
 						 ClearAllActions(TRUE);
-						 ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-					 	 DelayCommand(1.5, ClearAllActions(TRUE));
-						 DelayCommand(2.0, ActionJumpToLocation(GetLocation(oRelay)));
-						 DelayCommand(3.0, ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK));
+						 //ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+					 	 //DelayCommand(1.5, ClearAllActions(TRUE));
+						 ActionJumpToLocation(GetLocation(oRelay));
+						 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
+						 DecrementRemainingSpellUses(OBJECT_SELF, 3026);
 						 }
-				}
+				
 	return;
 	}
 	
