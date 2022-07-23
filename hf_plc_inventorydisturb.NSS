@@ -159,7 +159,8 @@ if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_
 	DelayCommand(140.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(165.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-			 		  
+	DelayCommand(165.0, ActionCreateWynPlacedEffect("fx_gem_energy_blue", GetLocation(OBJECT_SELF)));
+				 		  
 }
 		 
 else if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))

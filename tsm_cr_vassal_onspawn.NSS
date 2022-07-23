@@ -21,9 +21,11 @@
 
 void main() {
 
-	ActivateLongTermBuffs(OBJECT_SELF);
+	//ActivateLongTermBuffs(OBJECT_SELF);
 	ClearAllActions(TRUE);
 	ActionSpeakString("Master Sayen. *Many voices speak in chorus", TALKVOLUME_TALK);
+	effect eFreeze = EffectCutsceneImmobilize();
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 35.0);
 	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	 
 		
