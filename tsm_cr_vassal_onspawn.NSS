@@ -22,8 +22,9 @@
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
+	ClearAllActions(TRUE);
 	ActionSpeakString("Master Sayen. *Many voices speak in chorus", TALKVOLUME_TALK);
-	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	 
 		
 	 

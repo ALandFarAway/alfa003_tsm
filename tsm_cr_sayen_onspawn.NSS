@@ -38,6 +38,39 @@ void main() {
 	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
 	effect eGhost = EffectVisualEffect(VFX_DUR_GHOST_TRANSPARENT, FALSE);
+	object oPC = GetFirstPC(TRUE);
+	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
+	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
+	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
+	object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
+	object oBellie = GetObjectByTag("003_pc_bellie_2", 0);
+	object oBae = GetObjectByTag("003_pc_baeithra_2", 0);
+	object oAsh = GetObjectByTag("003_pc_asheeleaf_2", 0);
+	while(oPC != OBJECT_INVALID) {
+		string sPCName = GetName(oPC);
+		if(FindSubString(sPCName, "Jhessi") != -1) {
+			oJhessi = oPC;
+		}
+		if(FindSubString(sPCName, "Nio") != -1) {
+			oNio = oPC;
+		}
+		if(FindSubString(sPCName, "Saerel") != -1) {
+			oSaerela = oPC;
+		}
+		if(FindSubString(sPCName, "Bert") != -1) {
+			oBertilak = oPC;
+		}
+		if(FindSubString(sPCName, "Bell") != -1) {
+			oBellie = oPC;
+		}
+		if(FindSubString(sPCName, "Bae") != -1) {
+			oBae = oPC;
+		}
+		if(FindSubString(sPCName, "Ash") != -1) {
+			oAsh = oPC;
+		}
+	oPC = GetNextPC(TRUE);
+	}
 	 
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 20.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, OBJECT_SELF, 25.0);
@@ -69,8 +102,19 @@ void main() {
 	
 	DelayCommand(40.0, ActionSpeakString("Come to me, oh you familiars released to my need, and be free upon condition of your aid!", TALKVOLUME_TALK));
 	DelayCommand(45.0, ActionCreateWynCreature("003_cr_un_banite_vassal", GetLocation(OBJECT_SELF)));
+	
+	//Jhessi
+	DelayCommand(46.0, SendMessageToPC(oJhessi, "*You feel Master Evenwood's arcane presence and see his face among the screaming vassals."));
+	 
+	
 	DelayCommand(50.0, ActionSpeakString("Come to me, also, my acolyte, whom no other mundane nor magical imprisonment shall bar from me, for your soul became the Sphere's when you attempted the Ritual of Remaking.", TALKVOLUME_TALK));
+	
+
 	DelayCommand(55.0, ActionCreateWynCreature("003_cr_bane_bp_elthonds", GetLocation(OBJECT_SELF)));
+	
+	//Bert
+	DelayCommand(56.0, SendMessageToPC(oBertilak, "*You see Phaedra look up. When she finds you, she looks at you with murder in her eye."));
+
 	
 	DelayCommand(70.0, ActionSpeakString("Fight! Fight all of you! Fight for your afterlife. For the curse of Horus-Re was to release me to the mercy of Set!", TALKVOLUME_TALK));
 	

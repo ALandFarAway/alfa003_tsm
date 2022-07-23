@@ -22,7 +22,8 @@
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
+	ClearAllActions(TRUE);
 	ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK);
-	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	 
 }
