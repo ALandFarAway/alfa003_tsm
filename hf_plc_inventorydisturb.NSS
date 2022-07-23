@@ -57,6 +57,9 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
 	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
 	object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
+	object oBellie = GetObjectByTag("003_pc_bellie_2", 0);
+	object oBae = GetObjectByTag("003_pc_baeithra_2", 0);
+	object oAsh = GetObjectByTag("003_pc_asheeleaf_2", 0);
 	while(oPC != OBJECT_INVALID) {
 		string sPCName = GetName(oPC);
 		if(FindSubString(sPCName, "Jhessi") != -1) {
@@ -70,6 +73,15 @@ if((GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_
 		}
 		if(FindSubString(sPCName, "Bert") != -1) {
 			oBertilak = oPC;
+		}
+		if(FindSubString(sPCName, "Bell") != -1) {
+			oBellie = oPC;
+		}
+		if(FindSubString(sPCName, "Bae") != -1) {
+			oBae = oPC;
+		}
+		if(FindSubString(sPCName, "Ash") != -1) {
+			oAsh = oPC;
 		}
 	oPC = GetNextPC(TRUE);
 	}

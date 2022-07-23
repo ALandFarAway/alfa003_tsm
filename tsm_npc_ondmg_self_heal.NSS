@@ -85,11 +85,14 @@ void main()
 	int nUndead = GetRacialType(OBJECT_SELF);
 	object oPC = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_TRUE, OBJECT_SELF, Random(3));
 	
+	SendMessageToAllDMs("Damage firing. " + GetName(OBJECT_SELF) + " hp is " + IntToString(nCurrentHP));
+				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
 		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || (nCurrentHP < nMaxHP/3) || (nCurrentHP < nMaxHP/4) )
-				{ClearAllActions(TRUE);
-				 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
+				{SendMessageToAllDMs("Efreet damage firing");
+				 ClearAllActions(TRUE);
 				 ActionJumpToLocation(GetLocation(oPC));
+				 ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
 				 DelayCommand(1.0, ActionCastSpellAtObject(SPELL_VAMPIRIC_TOUCH, oPC, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	 DelayCommand(10.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, GetLastDamager(OBJECT_SELF), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 	 }
