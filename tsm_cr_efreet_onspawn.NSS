@@ -31,7 +31,8 @@ void ActionCreateWynEffect(string sObject, location lLocObject)
 void main() {
 
 	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
-	ActivateLongTermBuffs(OBJECT_SELF);
+	//ActivateLongTermBuffs(OBJECT_SELF);
+	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	object oEfreet = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	SetFirstName(oInvisoCaster, "Efreet of Set");
@@ -107,7 +108,6 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(38.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(40.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(42.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
-	DestroyObject(oPortal, 45.0);
 	
 	 
 }
