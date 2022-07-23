@@ -18,16 +18,12 @@
 
 #include "acr_spawn_i"
 
-void ActionCreateWynCreature(string sCreature, location lLocCreature)
-{
-    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
-}
 
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
 	ActionSpeakString("Master Sayen. *Many voices speak in chorus", TALKVOLUME_TALK);
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	 
 		
 	 

@@ -26,7 +26,7 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	object oSayen = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
@@ -34,14 +34,20 @@ void main() {
 	object oMoveTo = GetWaypointByTag("rr_sayen_move_wp");
 	object oOrbGlow = GetObjectByTag("fx_okku_mound_rr", 0);
 	effect eLight = EffectVisualEffect(VFX_DUR_LIGHT_RED_20, FALSE);
-	
+	effect eFreeze = EffectCutsceneImmobilize();
+	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
+	 
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 20.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 30.0);
 	DestroyObject(oOrbGlow, 1.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 900.0);
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_ENERGY_IMMUNITY_FIRE, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	DelayCommand(10.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.", TALKVOLUME_TALK));
-	DelayCommand(20.0, ActionSpeakString("I am Gyasi Sayen, Scion of House Sayen. My unlife was the lock upon the curse of Horus-Re. My destruction left open a doorway.", TALKVOLUME_TALK));
+	DelayCommand(10.0, ActionSpeakString("I am Gyasi Sayen, Scion of House Sayen. My unlife was the lock upon the curse of Horus-Re. My destruction left open a doorway.", TALKVOLUME_TALK));
+	DelayCommand(19.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eAppear, GetLocation(OBJECT_SELF)));
+	DelayCommand(20.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.", TALKVOLUME_TALK));
 	DelayCommand(30.0, ActionSpeakString("Thou who were strong enough to destroy an age-weakened lich may serve beside the same sinner with powers refreshed, against what shall surely otherwise destroy us all. NOW MOVE FROM BEFORE ME!", TALKVOLUME_TALK));
 	
 	DelayCommand(31.0, ActionCastSpellAtObject(SPELL_GUST_OF_WIND, oMoveTo, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));

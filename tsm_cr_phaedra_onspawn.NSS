@@ -18,20 +18,11 @@
 
 #include "acr_spawn_i"
 
-void ActionCreateWynCreature(string sCreature, location lLocCreature)
-{
-    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
-}
-
-void ActionCreateWynItem(string sCreature, object oObject)
-{
-   CreateItemOnObject(sCreature, oObject, 1, sCreature, TRUE);
-}
 
 void main() {
 
 	ActivateLongTermBuffs(OBJECT_SELF);
-	ActionSpeakString("Master Sayen. *Kneels, pale-faced, and is ignored.", TALKVOLUME_TALK);
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK);
+	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	 
 }

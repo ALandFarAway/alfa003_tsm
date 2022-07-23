@@ -71,7 +71,7 @@ void main() {
 	oPC = GetNextPC(TRUE);
 	}
 		
-	object oPortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "abr_afx_ajoc_demon_portal", GetLocation(oGlobe));
+	object oPortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "abr_afx_demon_portal", GetLocation(oGlobe));
 	AssignCommand(oInvisoCaster, DelayCommand(5.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
 	AssignCommand(oInvisoCaster, DelayCommand(6.0, SetScale(oEfreet, 1.25, 1.25, 1.25)));
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, SetScale(oEfreet, 1.5, 1.5, 1.5)));
@@ -91,7 +91,7 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(38.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(40.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(42.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
-	
+	DestroyObject(oPortal, 45.0);
 	
 	 
 }
