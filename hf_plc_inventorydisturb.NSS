@@ -86,11 +86,9 @@ if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_
 		}
 	oPC = GetNextPC(TRUE);
 	}
-	//Jhessi
-	object oVassal = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_banite_vassal", GetLocation(OBJECT_SELF), TRUE);
 	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
-	DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* I come at your summons, Master!", TALKVOLUME_TALK)));
+	//DelayCommand(1.0, AssignCommand(oVassal, ActionSpeakString("*Appears above the black orb, voices wailing in terror* I come at your summons, Master!", TALKVOLUME_TALK)));
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
@@ -99,8 +97,6 @@ if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 86.0));
 	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
 	
-	//Jhessi
-	DelayCommand(6.0, SendMessageToPC(oJhessi, "*You see Master Evenwood's face among the screaming vassals."));
 	
 	//Nio
 	DelayCommand(6.0, SendMessageToPC(oNio, "*A scrabbling at your neck warns you the moment before a cold pain pierces your throat. Your scarab broach has bitten you!"));
@@ -117,7 +113,6 @@ if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, OBJECT_SELF, 81.0));
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackD, OBJECT_SELF, 81.0));
 			 
-	DelayCommand(10.0, AssignCommand(oVassal, ActionSpeakString("*Tendrils of red ectoplasm are drawn into the black orb, shrieking faces vanishing into it one at a time.", TALKVOLUME_TALK)));
 	
 	//Sae
 	DelayCommand(16.0, SendMessageToPC(oSaerela, "*An emerald green beam shoots out from the crystal orb, playing across your brow."));
@@ -125,10 +120,6 @@ if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_
 	
 	DelayCommand(20.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
-	//Jhessi
-	DestroyObject(oVassal, 20.0);
-	DelayCommand(20.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
-	DelayCommand(20.0, SendMessageToPC(oJhessi, "*You feel it the moment Master Evenwood's screaming face vanishes into the orb. A connection you had to his existence, your atunement to his arcane signature winks out. He is the last vassal. And he is gone."));
 	
 	//Sae
 	DelayCommand(25.0, SendMessageToPC(oSaerela, "*You sense a familiar echo passing through the emerald green beam. The echo is your own connection to the Drowned Tower you hallowed within the High Forest."));
@@ -158,6 +149,8 @@ if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_
 	//Sayen create
 	DelayCommand(75.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	DelayCommand(75.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
+	
+	
 	
 	DelayCommand(80.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(95.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));

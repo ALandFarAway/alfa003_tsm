@@ -30,7 +30,7 @@ void ActionCreateWynEffect(string sObject, location lLocObject)
 
 void main() {
 
-	ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
+	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
 	ActivateLongTermBuffs(OBJECT_SELF);
 	object oEfreet = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
@@ -70,9 +70,6 @@ void main() {
 		}
 	oPC = GetNextPC(TRUE);
 	}
-	effect eImmune = EffectDamageImmunityIncrease(DAMAGE_TYPE_NEGATIVE, 100);	
-	object oPortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "abr_afx_demon_portal", GetLocation(OBJECT_SELF));
-	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eImmune, OBJECT_SELF);
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
