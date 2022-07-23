@@ -30,7 +30,7 @@ void main()
 	SetFirstName(oInvisoCaster, "Black Orb");
 	
 	
-if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && (GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
+if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsDMPossessed(oDisturber))) && (GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
 	SetLocalInt(OBJECT_SELF, "Fired", 1);
 	object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
 	object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);

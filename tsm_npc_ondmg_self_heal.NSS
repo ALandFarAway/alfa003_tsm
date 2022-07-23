@@ -138,16 +138,16 @@ void main()
 	SendMessageToAllDMs("Damage firing. " + GetName(OBJECT_SELF) + " hp is " + IntToString(nCurrentHP));
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
-		if(((nCurrentHP < nMaxHP/2) && (Random(4) <= 2)) || ((nCurrentHP < nMaxHP/3) && (Random(3) <= 1)) || ((nCurrentHP < nMaxHP/4)  && (Random(3) <= 1 )))
+		if(nCurrentHP < nMaxHP/2)
 				{int nDimD = GetHasSpell(3026, OBJECT_SELF);
 				 if (nDimD) {SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
 						 DecrementRemainingSpellUses(OBJECT_SELF, 3026);
 						 ClearAllActions(TRUE);
 						 ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-					 	 DelayCommand(2.0, ActionJumpToLocation(GetLocation(oRelay)));
+					 	 DelayCommand(1.5, ClearAllActions(TRUE));
+						 DelayCommand(2.0, ActionJumpToLocation(GetLocation(oRelay)));
 						 DelayCommand(3.0, ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK));
-						 DelayCommand(10.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, GetLastDamager(OBJECT_SELF), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-				 	 }
+						 }
 				}
 	return;
 	}

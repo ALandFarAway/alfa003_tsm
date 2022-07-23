@@ -23,7 +23,7 @@ void main() {
 
 	//ActivateLongTermBuffs(OBJECT_SELF);
 	ClearAllActions(TRUE);
-	PlayAnimation(ANIMATION_FIREFORGET_KNEELTALK, 1.0, 3.0);
+	AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELTALK, 1.0, 3.0));
 	ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK);
 	effect eFreeze = EffectCutsceneImmobilize();
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 25.0);
