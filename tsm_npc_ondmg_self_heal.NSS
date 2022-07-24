@@ -121,6 +121,7 @@ void main()
 	oPC = GetNextPC(TRUE);
 	}
 
+	
 	object oRelayblackA = GetObjectByTag("rauvin_crystal_relay_black_a", 0);
 	object oRelayblackB = GetObjectByTag("rauvin_crystal_relay_black_b", 0);
 	object oRelayblackC = GetObjectByTag("rauvin_crystal_relay_black_c", 0);
@@ -144,8 +145,8 @@ void main()
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
 		 int nDimD = GetHasSpell(3026, OBJECT_SELF);
-				 if (nDimD > 0) {
-				 		SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
+				 if ((nDimD > 0)  && (Random(2) < 1)){
+				 		//SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
 						ClearAllActions(TRUE);
 						ActionJumpToLocation(GetLocation(oRelay));
 						ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
@@ -157,8 +158,10 @@ void main()
 	
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal") 
-				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
-					SetLocalInt(OBJECT_SELF, "Speech", 3);
+				{if(((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) || (GetCurrentHitPoints(oJhessi) < GetMaxHitPoints(oJhessi)/4)){
+					if(GetLocalInt(OBJECT_SELF, "Speech") == 2) {
+						SetLocalInt(OBJECT_SELF, "Speech", 3);
+						}
 					ClearAllActions(TRUE);
 					ActionJumpToLocation(GetLocation(oJhessi));
 					ActionSpeakString("Jhessi. I will not fail you this time.", TALKVOLUME_TALK);
@@ -186,7 +189,7 @@ void main()
 					AssignCommand(oVassal, ActionJumpToLocation(GetLocation(oBertilak)));
 					AssignCommand(oVassal, ActionSpeakString("Because she loves you.", TALKVOLUME_TALK));
 					AssignCommand(oVassal, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oBertilak, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)); 
-					ActionCastSpellAtObject(SPELL_INFLICT_CRITICAL_WOUNDS, oBertilak, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
+					DelayCommand(1.0, ActionCastSpellAtObject(SPELL_INFLICT_CRITICAL_WOUNDS, oBertilak, METAMAGIC_MAXIMIZE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)); 
 					} 
 				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 2);
