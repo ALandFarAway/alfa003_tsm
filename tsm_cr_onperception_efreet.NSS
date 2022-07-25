@@ -52,9 +52,13 @@ void main()
 		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetTag(oPerceived), "efreet", 0) != -1)) 
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
-			 ActionSpeakString("I am the Scion! The Diadem has passed from my house to me, and hence to Electra!", TALKVOLUME_TALK);
+			 ActionSpeakString("I am the Scion! The Diadem has passed from my house to me, and hence to Electra! Be DISMISSED.", TALKVOLUME_TALK);
 			 ActionCastSpellAtObject(SPELL_DISMISSAL, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-			 DelayCommand(6.0,ActionCastSpellAtObject(SPELL_WALL_DISPEL_MAGIC, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			 DelayCommand(9.0, ClearAllActions(TRUE));
+			 DelayCommand(10.0, ActionSpeakString("*Screams in rage when his Dismissal fails.", TALKVOLUME_TALK));
+			 DelayCommand(15.0, ClearAllActions(TRUE));
+			 DelayCommand(15.0, ActionSpeakString("*Be thou protections against me DISPELLED!", TALKVOLUME_TALK));
+			 DelayCommand(16.0,ActionCastSpellAtObject(SPELL_WALL_DISPEL_MAGIC, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 	}
 	
@@ -63,8 +67,8 @@ void main()
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
 			 ActionCastSpellAtObject(SPELL_DISINTEGRATE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-			 ClearAllActions(TRUE);
-			 DelayCommand(10.0, ActionSpeakString("Infidel! You and your electrum child violate the honor of House Sayen. You bound me within what you stole. You shall be separated, part from part!", TALKVOLUME_TALK));
+			 DelayCommand(9.0, ClearAllActions(TRUE));
+			 DelayCommand(10.0, ActionSpeakString("Infidel! You and your electrum child violate the honor of House Sayen!", TALKVOLUME_TALK));
 			 DelayCommand(14.0,ActionCastSpellAtObject(SPELL_WALL_OF_FIRE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 DelayCommand(20.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 DelayCommand(30.0, ActionCastSpellAtObject(SPELL_FIREBALL, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));

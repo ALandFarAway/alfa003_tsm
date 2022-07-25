@@ -133,6 +133,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	//Nio
 	DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackCenter, oNio, 10.0));
 	DelayCommand(45.0, SendMessageToPC(oNio, "*A red beam from the orb strikes you in the throat. A stream of your blood is pulled into it."));
+	DelayCommand(45.0, ActionSpeakString("*A red beam from the orb strikes Nioniel in the throat.", TALKVOLUME_TALK));
 	AssignCommand(oOrb, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmgScarabNeg, oNio));
 	DelayCommand(55.0, SendMessageToPC(oNio, "*The red beam shuts off. You feel loss...of your blood, and in something else leaving the area, something that required your blood."));
 	
