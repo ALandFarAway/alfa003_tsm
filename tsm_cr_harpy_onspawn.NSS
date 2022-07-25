@@ -26,10 +26,10 @@ void main() {
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	
-	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oGlobe), FALSE, OBJECT_TYPE_PLACED_EFFECT);
+	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_PLACED_EFFECT);
 	while (oPortal != OBJECT_INVALID) {
 	SendMessageToAllDMs("oPlacedEffect = " + GetTag(oPortal));
-	oPortal = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oOrb), FALSE, OBJECT_TYPE_PLACED_EFFECT);
+	oPortal = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_PLACED_EFFECT);
 	}
 	ClearAllActions(TRUE);
 	DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 5.0);

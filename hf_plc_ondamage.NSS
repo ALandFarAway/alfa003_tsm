@@ -90,7 +90,7 @@ void main()
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 			
-		else {
+		else if(nHP > 10) { 
 			sSpeak = "*The orb pulses red.";
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			

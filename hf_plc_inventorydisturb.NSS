@@ -54,7 +54,8 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	effect eDmgScarabNeg = EffectDamage(d8(1)+6, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, TRUE);	
 	effect eIon = EffectVisualEffect(VFX_DUR_IOUNSTONE_GREEN, FALSE);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
-	effect eWindy = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
+	effect eWindy = EffectAreaOfEffect(AOE_PER_WALLBLADE, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
+	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
@@ -173,7 +174,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	//100HP Small flames
 	DelayCommand(140.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	//110HP 
-	DelayCommand(155.0, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(OBJECT_SELF)));
+	DelayCommand(145.0, AssignCommand(oInvisoCaster, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe))));
 	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
 	}
