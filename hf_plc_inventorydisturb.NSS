@@ -170,8 +170,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(165.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(165.0, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(OBJECT_SELF)));
-	DestroyObject(GetObjectByTag("fx_demon_portal", 0), 175.0);			 		  
-}
+	}
 		 
 else if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))
 	{object oGlobeBlue = GetObjectByTag("phalorm_globe_blue", 0);

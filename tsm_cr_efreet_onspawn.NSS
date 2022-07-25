@@ -75,6 +75,8 @@ void main() {
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	AssignCommand(oInvisoCaster, DelayCommand(1.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
+	DestroyObject(GetObjectByTag("fx_demon_portal", 0), 10.0);
+	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("*A circle of blazing light dilates open before each of you, becoming windows on a sandy expanse. A hot, gritty wind blows through.", TALKVOLUME_TALK)));
@@ -93,31 +95,31 @@ void main() {
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBertilak))));
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBertilak))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 15.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 15.0));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(12.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBae))));
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBae))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small",0), 17.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 17.0));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(14.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oNio))));
 	AssignCommand(oInvisoCaster, DelayCommand(15.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oNio))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small",0), 19.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 19.0));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(16.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oSaerela))));
 	AssignCommand(oInvisoCaster, DelayCommand(17.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oSaerela))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small",0), 21.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 21.0));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(18.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oAsh))));
 	AssignCommand(oInvisoCaster, DelayCommand(19.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oAsh))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small",0), 23.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 23.0));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oJhessi))));
 	AssignCommand(oInvisoCaster, DelayCommand(21.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oJhessi))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small",0), 25.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 25.0));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(22.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBellie))));
 	AssignCommand(oInvisoCaster, DelayCommand(23.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBellie))));
-	DestroyObject(GetObjectByTag("fx_portal_gen_small",0), 27.0);
+	AssignCommand(oInvisoCaster, DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 27.0));
 	
 	
 	

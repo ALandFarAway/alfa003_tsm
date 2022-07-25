@@ -1,11 +1,11 @@
 //
-//     Filename : tsm_cr_efreet_onspawn
+//     Filename : tsm_cr_sayen_onspawn
 //      Version : 0.1
 //         Date : 7/18/22
 //       Author : Wynna
 //
 //  Description
-//  This script creates an onspawn fire aura for an ephreet lord.
+//  This script handles onspawn functions for a high level necromancer.
 //	It is not updated in ACR updates.
 //
 //  Revision History
@@ -25,7 +25,6 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
 
 void main() {
 
-	//ActivateLongTermBuffs(OBJECT_SELF);
 	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	object oSayen = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
@@ -87,7 +86,7 @@ void main() {
 	DelayCommand(29.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eAppear, GetLocation(OBJECT_SELF)));
 	DelayCommand(30.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.* NOW MOVE FROM BEFORE ME!", TALKVOLUME_TALK));
 	
-	DelayCommand(31.0, ActionCastSpellAtObject(SPELL_GUST_OF_WIND, oMoveTo, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	DelayCommand(35.0, ActionCastSpellAtObject(SPELL_GUST_OF_WIND, oMoveTo, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	
 	
 	DelayCommand(32.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 1), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 

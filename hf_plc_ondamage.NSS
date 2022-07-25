@@ -22,12 +22,14 @@ void main()
     object oNPCOne = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
     object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
     object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
+	effect eDmg = EffectDamage(10, DAMAGE_TYPE_MAGICAL, DAMAGE_POWER_NORMAL, TRUE);	
+	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		
 		int nHP = GetCurrentHitPoints(OBJECT_SELF);
 		string sSpeak = "";
-	    if((nHP < GetMaxHitPoints(OBJECT_SELF)/7) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 7)) {
+	    if((nHP <= 10) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 7)) {
 			sSpeak = "*The orb explodes!";
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eExplosion, OBJECT_SELF, 3.0); 
 	     	object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
@@ -41,7 +43,8 @@ void main()
 			}
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 7);
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-			}
+			AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb));
+	}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/6) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 6)) {
 			sSpeak = "*Small flames lick out of each crack in the orb, bathing it in an almost transparent aura of fire.";
 			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
