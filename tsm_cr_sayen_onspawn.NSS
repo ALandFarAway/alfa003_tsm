@@ -87,6 +87,8 @@ void main() {
 	DelayCommand(30.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.* NOW MOVE FROM BEFORE ME!", TALKVOLUME_TALK));
 	
 	DelayCommand(35.0, ActionCastSpellAtObject(SPELL_GUST_OF_WIND, oMoveTo, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	DelayCommand(35.0, ActionJumpToObject(oMoveTo, FALSE));
+	DelayCommand(36.0, SetFacing(DIRECTION_EAST));
 	
 	
 	DelayCommand(32.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 1), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
@@ -96,10 +98,6 @@ void main() {
 	DelayCommand(36.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 5), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
 	DelayCommand(37.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 6), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
 	DelayCommand(38.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 7), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
-	
-	DelayCommand(38.0, ActionJumpToObject(oMoveTo, FALSE));
-	DelayCommand(40.0, SetFacing(DIRECTION_EAST));
-	 
 	
 	DelayCommand(40.0, ActionSpeakString("Come to me, oh you familiars released to my need, and be free upon condition of your aid!", TALKVOLUME_TALK));
 	DelayCommand(45.0, ActionCreateWynCreature("003_cr_un_banite_vassal", GetLocation(OBJECT_SELF)));
