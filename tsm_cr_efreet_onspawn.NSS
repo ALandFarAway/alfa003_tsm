@@ -77,6 +77,12 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(1.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
 	DestroyObject(GetObjectByTag("fx_demon_portal", 0), 10.0);
 	
+	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oGlobe), FALSE, OBJECT_TYPE_PLACED_EFFECT);
+	while (oPortal != OBJECT_INVALID) {
+	SendMessageToAllDMs("oPlacedEffect = " + GetTag(oPortal));
+	oPortal = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oOrb), FALSE, OBJECT_TYPE_PLACED_EFFECT);
+	}
+	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("*A circle of blazing light dilates open before each of you, becoming windows on a sandy expanse. A hot, gritty wind blows through.", TALKVOLUME_TALK)));

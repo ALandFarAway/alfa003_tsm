@@ -54,7 +54,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	effect eDmgScarabNeg = EffectDamage(d8(1)+6, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, TRUE);	
 	effect eIon = EffectVisualEffect(VFX_DUR_IOUNSTONE_GREEN, FALSE);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
-	effect eWindy = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
+	effect eWindy = EffectAreaOfEffect(AOE_PER_WALLWIND, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
 	
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
@@ -93,10 +93,10 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, oRelayblackA, 90.0));
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, oRelayblackB, 90.0));
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, oRelayblackC, 90.0));
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, oRelayblackD, 90.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWindy, GetLocation(oRelayblackA), 90.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWindy, GetLocation(oRelayblackB), 90.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWindy, GetLocation(oRelayblackC), 90.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWindy, GetLocation(oRelayblackD), 90.0));
 	
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
