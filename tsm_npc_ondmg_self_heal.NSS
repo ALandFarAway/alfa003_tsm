@@ -145,7 +145,7 @@ void main()
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
 		 int nDimD = GetHasSpell(3026, OBJECT_SELF);
-				 if ((nDimD > 0)  && (Random(2) < 1)){
+				 if ((nDimD > 0)  && (Random(4) < 1)){
 				 		//SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
 						ClearAllActions(TRUE);
 						ActionJumpToLocation(GetLocation(oRelay));

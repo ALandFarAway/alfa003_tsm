@@ -31,9 +31,6 @@ void main() {
   	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		sCreateCr = "abr_cr_ou_efreet_lord";
 		object oEfreet = CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oOrbCreate), TRUE);
-		effect eImmune = EffectDamageImmunityIncrease(DAMAGE_TYPE_NEGATIVE, 100);	
-		ApplyEffectToObject(DURATION_TYPE_PERMANENT, eImmune, oEfreet);
-		object oPortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "abr_afx_demon_portal", GetLocation(OBJECT_SELF));
 		
 		}
 	

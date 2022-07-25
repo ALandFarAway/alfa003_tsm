@@ -27,7 +27,22 @@ void main()
 		
 		int nHP = GetCurrentHitPoints(OBJECT_SELF);
 		string sSpeak = "";
-	 	if((nHP < GetMaxHitPoints(OBJECT_SELF)/6) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 6)) {
+	    if((nHP < GetMaxHitPoints(OBJECT_SELF)/7) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 7)) {
+			sSpeak = "*The orb explodes!";
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eExplosion, OBJECT_SELF, 3.0); 
+	     	object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
+			while(oPC != OBJECT_INVALID) {
+			if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_EVIL, OBJECT_SELF) == 0) {
+				ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPC); 
+	    	 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPC, 3.0); 
+		     
+			}
+			oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
+			}
+			SetLocalInt(OBJECT_SELF, "SpeakStage", 7);
+			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
+			}
+		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/6) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 6)) {
 			sSpeak = "*Small flames lick out of each crack in the orb, bathing it in an almost transparent aura of fire.";
 			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			while(oPC != OBJECT_INVALID) {
