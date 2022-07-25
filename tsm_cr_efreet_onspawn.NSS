@@ -76,13 +76,6 @@ void main() {
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	AssignCommand(oInvisoCaster, DelayCommand(1.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
 	
-	object oPortal = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oGlobe), FALSE, OBJECT_TYPE_PLACED_EFFECT);
-	while (oPortal != OBJECT_INVALID) {
-	SendMessageToAllDMs("oPlacedEffect = " + GetTag(oPortal));
-	oPortal = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oOrb), FALSE, OBJECT_TYPE_PLACED_EFFECT);
-	}
-	
-	DestroyObject(GetObjectByTag("fx_demon_portal", 0), 10.0);
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
 	

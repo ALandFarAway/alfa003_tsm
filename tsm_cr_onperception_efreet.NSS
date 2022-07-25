@@ -58,7 +58,7 @@ void main()
 			 DelayCommand(10.0, ActionSpeakString("*Screams in rage when his Dismissal fails.", TALKVOLUME_TALK));
 			 DelayCommand(15.0, ClearAllActions(TRUE));
 			 DelayCommand(15.0, ActionSpeakString("*Be thou protections against me DISPELLED!", TALKVOLUME_TALK));
-			 DelayCommand(16.0,ActionCastSpellAtObject(SPELL_WALL_DISPEL_MAGIC, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			 DelayCommand(16.0, ActionCastSpellAtObject(SPELL_WALL_DISPEL_MAGIC, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 }
 	}
 	
