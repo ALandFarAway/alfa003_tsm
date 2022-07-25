@@ -54,7 +54,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	effect eDmgScarabNeg = EffectDamage(d8(1)+6, DAMAGE_TYPE_NEGATIVE, DAMAGE_POWER_NORMAL, TRUE);	
 	effect eIon = EffectVisualEffect(VFX_DUR_IOUNSTONE_GREEN, FALSE);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
-	effect eWindy = EffectAreaOfEffect(AOE_PER_WALLWIND, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
+	effect eWindy = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
 	
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
@@ -102,8 +102,9 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 86.0));
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 86.0));
-	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
 	
+	//10HP
+	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
 	
 	//Nio
 	DelayCommand(6.0, SendMessageToPC(oNio, "*A scrabbling at your neck warns you the moment before a cold pain pierces your throat. Your scarab broach has bitten you!"));
@@ -126,7 +127,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(16.0, SendMessageToPC(oSaerela, "*An emerald green beam appears, playing across your brow."));
 	DelayCommand(17.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamgreenCenter, oSaerela, 10.0));
 	
-	
+	//20HP
 	DelayCommand(20.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
 	
@@ -136,7 +137,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	//Nio
 	DelayCommand(25.0, SendMessageToPC(oNio, "*Blood trickles at your throat. In each drop you feel the gathering of something powerful."));
 	
-	
+	//30HP  40HP
 	DelayCommand(35.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(50.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
@@ -150,7 +151,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	//Sae
 	DelayCommand(55.0, SendMessageToPC(oSaerela, "Your connection to the Drowned Tower thrums as if a taut wire stretched from you to it has been plucked. You *feel* a force travelling from this place to the Drowned Tower."));
 	
-	
+	//50HP 
 	DelayCommand(65.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
 	//Sae
@@ -161,15 +162,20 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(75.0, ActionCreateWynCreature("003_cr_slv_gyasisayen", GetLocation(oOrbCreate)));
 	
 	
-	
+	//60HP Glittering chip
 	DelayCommand(80.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	//70HP Crack
 	DelayCommand(95.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	//80 hp dmg Multiple crack
 	DelayCommand(110.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	//90HP Pulsing red
 	DelayCommand(125.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	//100HP Small flames
 	DelayCommand(140.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	//110HP 
+	DelayCommand(155.0, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(OBJECT_SELF)));
 	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(165.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(165.0, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(OBJECT_SELF)));
+	
 	}
 		 
 else if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInventoryDisturbType() == 0))
