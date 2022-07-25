@@ -218,7 +218,7 @@ void main()
 				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP/2)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 1);
 					ClearAllActions(TRUE);
-					ActionSpeakString("Flee! Flee if you must!", TALKVOLUME_TALK);
+					ActionSpeakString("Die! Die for me! I can bring you back afterward!", TALKVOLUME_TALK);
 					}
 				
 				 int nHealL = d8(1) +10;

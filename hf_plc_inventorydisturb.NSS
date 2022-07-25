@@ -18,6 +18,8 @@ void ActionCreateWynPlacedEffect(string sPlacedEffect, location lLocPlaceEffect)
 }
 
 #include "acr_placeable_i"
+#include "nw_i0_spells"
+#include "acr_spells_i" 
 
 void main()
 {
@@ -28,6 +30,7 @@ void main()
 	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	SetFirstName(oInvisoCaster, "Black Orb");
+	effect eWindy = EffectAreaOfEffect(AOE_PER_WALLWIND, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
 	
 	
 if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsDMPossessed(oDisturber))) && (GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
@@ -90,11 +93,13 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
-	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 86.0));
-	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 86.0));
-	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
+	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, oRelayblackC, 90.0));
+	
+	//DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
+	//DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
+	//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 86.0));
+	//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 86.0));
+	//DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
 	
 	
 	//Nio
@@ -104,7 +109,8 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	AssignCommand(oScarab, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmgScarabNeg, oNio));
 	DestroyObject(oScarab, 7.0);
 	DelayCommand(8.0, ActionCreateWynCreature("abr_cr_cn_scarab", GetLocation(oNio)));	
-	DelayCommand(15.0, SendMessageToPC(oNio, "*Pulsing in the punctures in your neck, you feel a draw to the black orb, and know the scarab is answering it."));
+	DelayCommand(10.0, SendMessageToPC(oNio, "*Pulsing in the punctures in your neck, you feel a draw to the black orb, and know the scarab is answering it."));
+	DelayCommand(18.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
 	
 	DelayCommand(9.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, OBJECT_SELF, 81.0));
@@ -114,8 +120,9 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 			 
 	
 	//Sae
-	DelayCommand(16.0, SendMessageToPC(oSaerela, "*An emerald green beam shoots out from the crystal orb, playing across your brow."));
+	DelayCommand(16.0, SendMessageToPC(oSaerela, "*An emerald green beam appears, playing across your brow."));
 	DelayCommand(17.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamgreenCenter, oSaerela, 10.0));
+	
 	
 	DelayCommand(20.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
@@ -132,8 +139,8 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	
 	//Nio
 	DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackCenter, oNio, 10.0));
-	DelayCommand(45.0, SendMessageToPC(oNio, "*A red beam from the orb strikes you in the throat. A stream of your blood is pulled into it."));
-	DelayCommand(45.0, ActionSpeakString("*A red beam from the orb strikes Nioniel in the throat.", TALKVOLUME_TALK));
+	DelayCommand(45.0, SendMessageToPC(oNio, "*A red beam strikes you in the throat. A stream of your blood is pulled into it."));
+	
 	AssignCommand(oOrb, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmgScarabNeg, oNio));
 	DelayCommand(55.0, SendMessageToPC(oNio, "*The red beam shuts off. You feel loss...of your blood, and in something else leaving the area, something that required your blood."));
 	

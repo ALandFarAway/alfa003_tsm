@@ -1,6 +1,6 @@
 //
-//  System Name : Mage's Private Sanctum
-//     Filename : tsm_sanctum_onexit
+//  System Name : AOE
+//     Filename : tsm_aoe_onexit
 //      Version : 0.1
 //         Date : 7/8/22
 //       Author : Wynna
@@ -22,5 +22,8 @@
 void main()
 {
     ACR_TriggerOnExit();
+		
+	object oExiter = GetExitingObject();	
+	SendMessageToPC(oExiter, "Exited");		
 	
 }

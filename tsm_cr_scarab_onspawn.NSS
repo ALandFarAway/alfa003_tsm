@@ -41,7 +41,7 @@ void main() {
 	ActionForceMoveToObject(oOrb, TRUE, 0.5);
 	DelayCommand(5.0, ActionSpeakString("*Scuttles off of Nioniel, then blinks out.", TALKVOLUME_TALK));
 	DelayCommand(6.0, ActionJumpToObject(oOrb, FALSE));
-	DelayCommand(10.0, ActionSpeakString("*Appears beneath the orb and climbs up the black crystal.", TALKVOLUME_TALK));
+	DelayCommand(10.0, ActionSpeakString("*Appears beneath the orb and climbs up the black crystal into the orb.", TALKVOLUME_TALK));
 	DelayCommand(11.0, ActionCreateWynItem("03_it_amul_scarab_prot", oOrb));
 	DestroyObject(OBJECT_SELF, 12.0);
 	 

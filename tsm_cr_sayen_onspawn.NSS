@@ -37,7 +37,8 @@ void main() {
 	effect eFreeze = EffectCutsceneImmobilize();
 	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
-	effect eGhost = EffectVisualEffect(VFX_DUR_GHOST_TRANSPARENT, FALSE);
+	effect eGhost = EffectVisualEffect(VFX_DUR_SPELL_ETHEREALNESS, FALSE);
+	effect eEthereal = EffectEthereal();
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
@@ -72,8 +73,9 @@ void main() {
 	oPC = GetNextPC(TRUE);
 	}
 	 
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 20.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 30.0);
 	//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, OBJECT_SELF, 25.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eEthereal, OBJECT_SELF, 90.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 30.0);
 	DestroyObject(oOrbGlow, 1.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 900.0);
@@ -81,9 +83,9 @@ void main() {
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_ENERGY_IMMUNITY_FIRE, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	DelayCommand(10.0, ActionSpeakString("*A voice echoes from around the room* I am Gyasi Sayen, Scion of House Sayen. My unlife was the lock upon the curse of Horus-Re. My destruction left open a doorway.", TALKVOLUME_TALK));
-	DelayCommand(19.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eAppear, GetLocation(OBJECT_SELF)));
-	DelayCommand(20.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.", TALKVOLUME_TALK));
-	DelayCommand(30.0, ActionSpeakString("Thou who were strong enough to destroy an age-weakened lich may serve beside the same sinner with powers refreshed, against what shall surely otherwise destroy us all. NOW MOVE FROM BEFORE ME!", TALKVOLUME_TALK));
+	DelayCommand(20.0, ActionSpeakString("Thou who were strong enough to destroy an age-weakened lich may serve beside the same sinner with powers refreshed, against what shall surely otherwise destroy us all.", TALKVOLUME_TALK));
+	DelayCommand(29.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eAppear, GetLocation(OBJECT_SELF)));
+	DelayCommand(30.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.* NOW MOVE FROM BEFORE ME!", TALKVOLUME_TALK));
 	
 	DelayCommand(31.0, ActionCastSpellAtObject(SPELL_GUST_OF_WIND, oMoveTo, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	
@@ -113,7 +115,7 @@ void main() {
 	DelayCommand(55.0, ActionCreateWynCreature("003_cr_bane_bp_elthonds", GetLocation(OBJECT_SELF)));
 	
 	//Bert
-	DelayCommand(56.0, SendMessageToPC(oBertilak, "*You see Phaedra look up. When she finds you, she looks at you with murder in her eye."));
+	DelayCommand(59.0, SendMessageToPC(oBertilak, "*You see Phaedra look up. When she finds you, she looks at you with murder in her eye."));
     DelayCommand(60.0, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	
 	
