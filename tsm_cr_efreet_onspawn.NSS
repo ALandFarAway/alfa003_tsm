@@ -23,9 +23,9 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
     CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
 }
 
-void ActionCreateWynEffect(string sObject, location lLocObject)
+void ActionCreateWynEffect(string sObject, location lLocObject, string sNewTag)
 {
-    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sObject, lLocObject);
+    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sObject, lLocObject, FALSE, sNewTag);
 }
 
 void main() {
@@ -91,27 +91,35 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, SetScale(oEfreet, 2.05, 2.05, 2.05)));
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionSpeakString("Bound by trickery; bound by the wizard and his electrum child; bound by the violated power that compels me!", TALKVOLUME_TALK)));
 	
-	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBertilak))));
+	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBertilak), "fx_portal_bert")));
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBertilak))));
+	DestroyObject(GetObjectByTag("fx_portal_bert", 0), 15.0);
 	
-	
-	AssignCommand(oInvisoCaster, DelayCommand(12.0, ActionCreateWynEffect("lcda_portal010", GetLocation(oBae))));
+	AssignCommand(oInvisoCaster, DelayCommand(12.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBae), "fx_portal_bae")));
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBae))));
+	DestroyObject(GetObjectByTag("fx_portal_bae",0), 17.0);
 	
-	AssignCommand(oInvisoCaster, DelayCommand(14.0, ActionCreateWynEffect("003_fx_portal_blue_lrg", GetLocation(oNio))));
+	AssignCommand(oInvisoCaster, DelayCommand(14.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oNio), "fx_portal_nio")));
 	AssignCommand(oInvisoCaster, DelayCommand(15.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oNio))));
+	DestroyObject(GetObjectByTag("fx_portal_nio",0), 19.0);
 	
-	AssignCommand(oInvisoCaster, DelayCommand(16.0, ActionCreateWynEffect("fx_portal_gen1", GetLocation(oSaerela))));
+	AssignCommand(oInvisoCaster, DelayCommand(16.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oSaerela), "fx_portal_sae")));
 	AssignCommand(oInvisoCaster, DelayCommand(17.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oSaerela))));
+	DestroyObject(GetObjectByTag("fx_portal_sae",0), 21.0);
 	
-	AssignCommand(oInvisoCaster, DelayCommand(18.0, ActionCreateWynEffect("fx_songportal_x", GetLocation(oBellie))));
-	AssignCommand(oInvisoCaster, DelayCommand(19.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBellie))));
+	AssignCommand(oInvisoCaster, DelayCommand(18.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oAsh), "fx_portal_ash")));
+	AssignCommand(oInvisoCaster, DelayCommand(19.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oAsh))));
+	DestroyObject(GetObjectByTag("fx_portal_ash",0), 23.0);
 	
-	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionCreateWynEffect("fx_songportal_y", GetLocation(oJhessi))));
+	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oJhessi), "fx_portal_jhessi")));
 	AssignCommand(oInvisoCaster, DelayCommand(21.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oJhessi))));
+	DestroyObject(GetObjectByTag("fx_portal_jhessi",0), 25.0);
 	
-	AssignCommand(oInvisoCaster, DelayCommand(22.0, ActionCreateWynEffect("abr_afx_shadow_portal_-xy", GetLocation(oAsh))));
-	AssignCommand(oInvisoCaster, DelayCommand(23.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oAsh))));
+	AssignCommand(oInvisoCaster, DelayCommand(22.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBellie), "fx_portal_bellie")));
+	AssignCommand(oInvisoCaster, DelayCommand(23.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBellie))));
+	DestroyObject(GetObjectByTag("fx_portal_bellie",0), 27.0);
+	
+	
 	
 	AssignCommand(oInvisoCaster, DelayCommand(24.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));

@@ -30,7 +30,7 @@ void main()
 	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	SetFirstName(oInvisoCaster, "Black Orb");
-	effect eWindy = EffectAreaOfEffect(AOE_PER_WALLWIND, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
+	effect eWindy = EffectAreaOfEffect(AOE_PER_WALLBLADE, "tsm_aoe_onenter", "tsm_aoe_onexit", "tsm_aoe_onhb", "aoe_windwall");
 	
 	
 if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsDMPossessed(oDisturber))) && (GetTag(OBJECT_SELF) == "phalorm_globe_black") && (GetItemPossessedBy(OBJECT_SELF, "003_it_phalorm_emerald")!= OBJECT_INVALID) && (GetInventoryDisturbType() == 0)) {
@@ -93,13 +93,13 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
-	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, oRelayblackC, 90.0));
+	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eWindy, OBJECT_SELF, 90.0));
 	
-	//DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
-	//DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
-	//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 86.0));
-	//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 86.0));
-	//DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
+	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
+	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackB, oRelayblackD, 86.0));
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackC, oRelayblackD, 86.0));
+	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
 	
 	
 	//Nio
@@ -166,7 +166,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(140.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	DelayCommand(165.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(165.0, ActionCreateWynPlacedEffect("abr_afx_demon_portal", GetLocation(OBJECT_SELF)));
+	DelayCommand(165.0, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(OBJECT_SELF)));
 				 		  
 }
 		 
