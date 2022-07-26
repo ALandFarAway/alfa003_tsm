@@ -98,10 +98,10 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eWeb, GetLocation(OBJECT_SELF), 5.0);
 	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, ePurge, GetLocation(OBJECT_SELF), 5.0));
 	
-	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallN), 90.0));
-	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallE), 90.0));
-	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallS), 90.0));
-	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallW), 90.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallN), 600.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallE), 600.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallS), 600.0));
+	DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eDispel, GetLocation(oWallW), 600.0));
 	
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackB, 90.0));
 	DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackA, oRelayblackC, 90.0));
@@ -177,11 +177,11 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	DelayCommand(130.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	//100HP Small flames
 	
-	DelayCommand(140.0, AssignCommand(oInvisoCaster, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe))));
+	//DelayCommand(140.0, AssignCommand(oInvisoCaster, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe))));
 	
 	DelayCommand(145.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	//110HP 
-	//DelayCommand(160.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	DelayCommand(160.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
 	}
 		 
