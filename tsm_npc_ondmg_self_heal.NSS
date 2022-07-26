@@ -145,7 +145,7 @@ void main()
 		
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
-		 		 if ((nCurrentHP < nMaxHP/2)  && (Random(4) < 1) && (GetLocalInt(OBJECT_SELF, "DimDoor") < 3)){
+		 		 if ((nCurrentHP < nMaxHP / 4 * 3)  && (Random(10) < 1) && (GetLocalInt(OBJECT_SELF, "DimDoor") < 3)){
 				 		SetLocalInt(OBJECT_SELF, "DimDoor", GetLocalInt(OBJECT_SELF, "DimDoor") +1);
 						ClearAllActions(TRUE);
 						ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
@@ -158,7 +158,7 @@ void main()
 	
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal") 
-				{if(((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) || (GetCurrentHitPoints(oJhessi) < GetMaxHitPoints(oJhessi)/3)){
+				{if(((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/3)) || (GetCurrentHitPoints(oJhessi) < GetMaxHitPoints(oJhessi)/3)){
 					SetLocalInt(OBJECT_SELF, "Speech", 3);
 					ClearAllActions(TRUE);
 					ActionJumpToLocation(GetLocation(oJhessi));
@@ -171,7 +171,7 @@ void main()
 					ActionSpeakString("We. No...I...I am Randall Evenwood. I remember!", TALKVOLUME_TALK);
 					ActionCastSpellAtObject(SPELL_LESSER_SPELL_BREACH, oPhaedra, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 					}
-				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP/2)) {
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 1);
 					ClearAllActions(TRUE);
 					ActionSpeakString("We will be free! *A dozen voices echo the word 'free'.", TALKVOLUME_TALK);
@@ -304,45 +304,45 @@ void main()
 	if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
 		{ if(nCLWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				 //ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oCLW != OBJECT_INVALID)
-		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+		  		{//ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF); 
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
 				 DestroyObject(oCLW, 0.0, TRUE);
 				 }
 		  else if(oCLWS != OBJECT_INVALID)
-		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
+		  		{//ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLW, OBJECT_SELF); 
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 2.0)));
 				 DestroyObject(oCLWS, 0.0, TRUE);
 				 }
 		  else if(nMCLWMem > 0)
-				{ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				{//ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 }
 		  else if(oMCLWS != OBJECT_INVALID)
-		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
+		  		{//ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
 				 ActionCastSpellAtObject(SPELL_MASS_CURE_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 2.0)));
 				 DestroyObject(oMCLWS, 0.0, TRUE);
 				 }
 		 else if(nCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				 //ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oCMW != OBJECT_INVALID)
-		  		{ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
+		  		{//ActionSpeakString("Drinks a potion", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCMW, OBJECT_SELF); 
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_DRINK, 1.0, 2.0)));
 				 DestroyObject(oCMW, 0.0, TRUE);
 				 }
 		  else if(oCMWS != OBJECT_INVALID)
-		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
+		  		{//ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCMW, OBJECT_SELF); 
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, eCLWFX, OBJECT_SELF); 
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 2.0)));
@@ -350,10 +350,10 @@ void main()
 				 }
 		  else if(nMCMWMem > 0)
 				{ActionCastSpellAtObject(SPELL_MASS_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
-				 ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				 //ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
 				 }
 		  else if(oMCMWS != OBJECT_INVALID)
-		  		{ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
+		  		{//ActionSpeakString("Uses a scroll", TALKVOLUME_TALK);
 				 ActionCastSpellAtObject(SPELL_MASS_CURE_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
 				 DelayCommand(1.0, AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 2.0)));
 				 DestroyObject(oMCMWS, 0.0, TRUE);

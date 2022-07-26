@@ -132,6 +132,5 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(26.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	
-	AssignCommand(oInvisoCaster, DelayCommand(30.0, ActionSpeakString("Bound by trickery; bound by the wizard and his electrum child; bound by the violated power that compels me!", TALKVOLUME_TALK)));
 	 
 }
