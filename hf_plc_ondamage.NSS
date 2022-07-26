@@ -31,7 +31,7 @@ void main()
 		string sSpeak = "";
 	    if((nHP <= 10) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 7)) {
 			AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb));
-			sSpeak = "*The orb explodes!";
+			sSpeak = "*The orb explodes.";
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eExplosion, OBJECT_SELF, 3.0); 
 	     	object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			while(oPC != OBJECT_INVALID) {
@@ -46,7 +46,7 @@ void main()
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/6) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 6)) {
-			sSpeak = "*Small flames lick out of each crack in the orb, bathing it in an almost transparent aura of fire.";
+			sSpeak = "*Small flames lick out of each crack in the orb, bathing it in an aura of fire.";
 			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			while(oPC != OBJECT_INVALID) {
 			if(GetIsSkillSuccessful(oPC, SKILL_LISTEN, 15, FALSE)) {
@@ -58,7 +58,7 @@ void main()
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/5) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 5)) {
-			sSpeak = "*The orb pulses red again...then again. It continues pulsing, the red flaring up inside, the cracks in it glowing an ominous, fiery hue with each pulsation.";
+			sSpeak = "*The orb pulses with fire again...then again. It continues pulsing, firelight flaring up inside, the cracks in it glowing.";
 			object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			while(oPC != OBJECT_INVALID) {
 			if(GetIsSkillSuccessful(oPC, SKILL_LISTEN, 15, FALSE)) {
@@ -70,7 +70,7 @@ void main()
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if((nHP < GetMaxHitPoints(OBJECT_SELF)/4) && (GetLocalInt(OBJECT_SELF, "SpeakStage") < 4)) {
-			sSpeak = "*Multiple cracks suddenly spider out across the facets of the orb. The red light at its heart pulses once.";
+			sSpeak = "*Multiple cracks suddenly spider out across the facets of the orb. The fire at its heart pulses once.";
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 4);
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
@@ -85,13 +85,13 @@ void main()
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 		else if(GetLocalInt(OBJECT_SELF, "SpeakStage") < 1){
-			sSpeak = "*Red light swims across the black facets of the orb.";
+			sSpeak = "*Fiery light swims across the black facets of the orb.";
 			SetLocalInt(OBJECT_SELF, "SpeakStage", 1);
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			}
 			
-		else if(nHP > 10) { 
-			sSpeak = "*The orb pulses red.";
+		else if(nHP > 60) { 
+			sSpeak = "*The orb pulses a fiery red.";
 			AssignCommand(oInvisoCaster, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
 			
 		}

@@ -87,6 +87,7 @@ void main()
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
 	object oSayen = GetObjectByTag("003_cr_slv_gyasisayen", 0);
+	object oPhaedra = GetObjectByTag("003_cr_bane_bp_elthonds", 0);
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
@@ -168,6 +169,7 @@ void main()
 					SetLocalInt(OBJECT_SELF, "Speech", 2);
 					ClearAllActions(TRUE);
 					ActionSpeakString("We. No...I...I am Randall Evenwood. I remember!", TALKVOLUME_TALK);
+					ActionCastSpellAtObject(SPELL_LESSER_SPELL_BREACH, oPhaedra, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 					}
 				else if((GetLocalInt(OBJECT_SELF, "Speech") == 0) && (nCurrentHP < nMaxHP/2)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 1);
