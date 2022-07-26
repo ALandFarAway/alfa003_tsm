@@ -5,7 +5,7 @@
 //       Author : Wynna
 //
 //  Description
-//  This script creates an onspawn fire aura for an ephreet lord.
+//  This script creates spawn effects for an ephreet lord.
 //	It is not updated in ACR updates.
 //
 //  Revision History
@@ -38,6 +38,8 @@ void main() {
 	SetFirstName(oInvisoCaster, "Efreet of Set");
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
+	effect eAOE = EffectAreaOfEffect(AOE_MOB_FIRE);
+    
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
@@ -71,6 +73,7 @@ void main() {
 		}
 	oPC = GetNextPC(TRUE);
 	}
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAOE, OBJECT_SELF, HoursToSeconds(100));
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
@@ -79,7 +82,6 @@ void main() {
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
 	
-	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("*A circle of blazing light dilates open before each of you, becoming windows on a sandy expanse. A hot, gritty wind blows through.", TALKVOLUME_TALK)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oGlobe))));
@@ -107,6 +109,8 @@ void main() {
 	
 	AssignCommand(oInvisoCaster, DelayCommand(18.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oAsh))));
 	AssignCommand(oInvisoCaster, DelayCommand(19.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oAsh))));
+	
+	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionSpeakString("*A circle of blazing light dilates open before each of you, becoming windows on a sandy expanse. A hot, gritty wind blows through.", TALKVOLUME_TALK)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oJhessi))));
 	AssignCommand(oInvisoCaster, DelayCommand(21.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oJhessi))));
