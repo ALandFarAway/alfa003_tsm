@@ -30,7 +30,7 @@ void main() {
 	DelayCommand(0.5, ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK));
 	effect eFreeze = EffectCutsceneImmobilize();
 	DelayCommand(1.0, ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF));
-	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 25.0));
+	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 15.0));
 	
 	 
 }

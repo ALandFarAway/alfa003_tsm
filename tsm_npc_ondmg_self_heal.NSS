@@ -159,10 +159,8 @@ void main()
 	
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_un_banite_vassal") 
-				{if(((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) || (GetCurrentHitPoints(oJhessi) < GetMaxHitPoints(oJhessi)/4)){
-					if(GetLocalInt(OBJECT_SELF, "Speech") == 2) {
-						SetLocalInt(OBJECT_SELF, "Speech", 3);
-						}
+				{if(((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) || (GetCurrentHitPoints(oJhessi) < GetMaxHitPoints(oJhessi)/3)){
+					SetLocalInt(OBJECT_SELF, "Speech", 3);
 					ClearAllActions(TRUE);
 					ActionJumpToLocation(GetLocation(oJhessi));
 					ActionSpeakString("Jhessi. I will not fail you this time.", TALKVOLUME_TALK);
