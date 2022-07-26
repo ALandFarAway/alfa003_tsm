@@ -38,7 +38,8 @@ void main() {
 	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
 	effect eGhost = EffectVisualEffect(VFX_DUR_SPELL_ETHEREALNESS, FALSE);
 	effect eEthereal = EffectEthereal();
-	object oPC = GetFirstPC(TRUE);
+	effect eAOE = EffectAreaOfEffect(AOE_MOB_FEAR);
+    object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
 	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
@@ -76,6 +77,7 @@ void main() {
 	//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, OBJECT_SELF, 90.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eEthereal, OBJECT_SELF, 90.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 30.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAOE, OBJECT_SELF, HoursToSeconds(100));
 	DestroyObject(oOrbGlow, 1.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, OBJECT_SELF, 900.0);
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
