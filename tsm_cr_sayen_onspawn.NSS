@@ -84,7 +84,7 @@ void main() {
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_ENERGY_IMMUNITY_FIRE, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	DelayCommand(10.0, ActionSpeakString("*A voice echoes from around the room* I am Gyasi Sayen, Scion of House Sayen. My unlife was the lock upon the curse of Horus-Re. My destruction left open a doorway.", TALKVOLUME_TALK));
-	DelayCommand(20.0, ActionSpeakString("Thou who were strong enough to destroy an age-weakened lich may serve beside the same sinner with powers refreshed, against what shall surely otherwise destroy us all.", TALKVOLUME_TALK));
+	DelayCommand(20.0, ActionSpeakString("Thou who wert strong enough to destroy an age-weakened lich may serve beside the same sinner with powers refreshed, against what shall surely otherwise destroy us all.", TALKVOLUME_TALK));
 	DelayCommand(29.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eAppear, GetLocation(OBJECT_SELF)));
 	DelayCommand(30.0, ActionSpeakString("*A figure shimmers out of the tallest black crystal and hovers.* NOW MOVE FROM BEFORE ME!", TALKVOLUME_TALK));
 	
@@ -101,14 +101,14 @@ void main() {
 	DelayCommand(37.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 6), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
 	DelayCommand(38.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 7), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
 	
-	DelayCommand(40.0, ActionSpeakString("Come to me, oh you familiars released to my need, and be free upon condition of your aid!", TALKVOLUME_TALK));
+	DelayCommand(40.0, ActionSpeakString("Come to me, oh thou familiars released to my need, and be free upon condition of your aid!", TALKVOLUME_TALK));
 	DelayCommand(45.0, ActionCreateWynCreature("003_cr_un_banite_vassal", GetLocation(OBJECT_SELF)));
 	
 	//Jhessi
 	DelayCommand(46.0, SendMessageToPC(oJhessi, "*You feel Master Evenwood's arcane presence and see his face among the screaming vassals."));
 	 
 	
-	DelayCommand(50.0, ActionSpeakString("Come to me, also, my acolyte, whom no other mundane nor magical imprisonment shall bar from me, for your soul became the Sphere's when you attempted the Ritual of Remaking.", TALKVOLUME_TALK));
+	DelayCommand(50.0, ActionSpeakString("Come to me, my acolyte, whom neither mundane nor magical imprisonment shall bar from me, for thou soul became the Sphere's whence attempted thou the Ritual of Remaking.", TALKVOLUME_TALK));
 	
 
 	DelayCommand(55.0, ActionCreateWynCreature("003_cr_bane_bp_elthonds", GetLocation(OBJECT_SELF)));

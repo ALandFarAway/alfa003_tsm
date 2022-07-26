@@ -148,8 +148,9 @@ void main()
 				 if ((nDimD > 0)  && (Random(4) < 1)){
 				 		//SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
 						ClearAllActions(TRUE);
+						ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 						ActionJumpToLocation(GetLocation(oRelay));
-						ActionSpeakString("Disappears and reappears in another location.", TALKVOLUME_TALK);
+						ActionSpeakString("Casts a spell and appears in another location.", TALKVOLUME_TALK);
 						DecrementRemainingSpellUses(OBJECT_SELF, 3026);
 						}
 				
@@ -208,7 +209,7 @@ void main()
 				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 3);
 					ClearAllActions(TRUE);
-					ActionSpeakString("Most magics fail against it! It must be attacked with sword or bow!", TALKVOLUME_TALK);
+					ActionSpeakString("It regenerates against injury!", TALKVOLUME_TALK);
 					}
 				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 2);

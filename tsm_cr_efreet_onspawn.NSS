@@ -93,7 +93,6 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(17.0, SetScale(oEfreet, 1.75, 1.75, 1.75)));
 	AssignCommand(oInvisoCaster, DelayCommand(18.0, SetScale(oEfreet, 1.9, 1.9, 1.9)));
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, SetScale(oEfreet, 2.05, 2.05, 2.05)));
-	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionSpeakString("Bound by trickery; bound by the wizard and his electrum child; bound by the violated power that compels me!", TALKVOLUME_TALK)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBertilak))));
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBertilak))));
@@ -124,5 +123,6 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(25.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	AssignCommand(oInvisoCaster, DelayCommand(26.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
 	
+	AssignCommand(oInvisoCaster, DelayCommand(30.0, ActionSpeakString("Bound by trickery; bound by the wizard and his electrum child; bound by the violated power that compels me!", TALKVOLUME_TALK)));
 	 
 }
