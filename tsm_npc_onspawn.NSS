@@ -13,6 +13,16 @@ void main()
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
     SetImmortal(OBJECT_SELF, TRUE);     
+	effect eFreeze = EffectCutsceneImmobilize();
+								 
+	if(GetTag(OBJECT_SELF)== "003_cr_voice_xyz")
+        { 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, OBJECT_SELF);
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectTrueSeeing(),OBJECT_SELF);
+    	 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze,OBJECT_SELF);
+    	 	}
 	
 	if(GetTag(OBJECT_SELF)== "003_cr_invis_caster")
         { 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);

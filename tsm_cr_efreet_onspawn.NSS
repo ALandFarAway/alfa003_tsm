@@ -35,8 +35,6 @@ void ActionCreateWynEffect(string sObject, location lLocObject)
 
 void main() {
 
-	//ExecuteScript("acf_cre_onspawnin", OBJECT_SELF);
-	//ActivateLongTermBuffs(OBJECT_SELF);
 	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	object oEfreet = OBJECT_SELF;
 	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
@@ -80,10 +78,10 @@ void main() {
 	oPC = GetNextPC(TRUE);
 	}
 	
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAOE, OBJECT_SELF, HoursToSeconds(100));
-	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+	AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAOE, OBJECT_SELF, HoursToSeconds(100)));
+	AssignCommand(oInvisoCaster, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	AssignCommand(oInvisoCaster, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	AssignCommand(oInvisoCaster, ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	AssignCommand(oInvisoCaster, DelayCommand(1.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));

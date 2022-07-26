@@ -179,7 +179,7 @@ void main()
 		}			
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_bane_bp_elthonds") 
-				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
+				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/4)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 3);
 					ClearAllActions(TRUE);
 					ActionSpeakString("I will not die alone. *Shrieks, and spins to raise her finger in Bertilak's direction.* Deserter! Die!", TALKVOLUME_TALK);
@@ -190,7 +190,7 @@ void main()
 					AssignCommand(oVassal, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oBertilak, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)); 
 					DelayCommand(1.0, ActionCastSpellAtObject(SPELL_INFLICT_CRITICAL_WOUNDS, oBertilak, METAMAGIC_MAXIMIZE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)); 
 					} 
-				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/3)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 2);
 					ClearAllActions(TRUE);
 					ActionSpeakString("Master, at least send the vassal to my aid! Please!", TALKVOLUME_TALK);
@@ -203,13 +203,12 @@ void main()
 		}			
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_gyasisayen") {
-		if(((nCurrentHP < nMaxHP/2) && (Random(4) == 1)) || ((nCurrentHP < nMaxHP/3) && (Random(3) == 1)) || ((nCurrentHP < nMaxHP/4) )) 
-				{if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/2)) {
+			if((GetLocalInt(OBJECT_SELF, "Speech") == 2) && (nCurrentHP < nMaxHP/4)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 3);
 					ClearAllActions(TRUE);
 					ActionSpeakString("It regenerates against injury!", TALKVOLUME_TALK);
 					}
-				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/2)) {
+				else if((GetLocalInt(OBJECT_SELF, "Speech") == 1) && (nCurrentHP < nMaxHP/3)) {
 					SetLocalInt(OBJECT_SELF, "Speech", 2);
 					ClearAllActions(TRUE);
 					ActionSpeakString("The Efreet of Set is hardened against negative energy! I cannot damage it!", TALKVOLUME_TALK);
@@ -230,31 +229,33 @@ void main()
 				 int nIMWMem = GetHasSpell(SPELL_INFLICT_MODERATE_WOUNDS, OBJECT_SELF);
 				 int nISWMem = GetHasSpell(SPELL_INFLICT_SERIOUS_WOUNDS, OBJECT_SELF);
 				 int nICWMem = GetHasSpell(SPELL_INFLICT_CRITICAL_WOUNDS, OBJECT_SELF);
-				 if (nICWMem) {
+				 if ((nICWMem) && (nCurrentHP < nMaxHP/4)) {
 				 	eHeal = EffectHeal(nHealC);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
 				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_CRITICAL_WOUNDS);
+					AssignCommand(oVassal, ActionJumpToObject(oSayen, TRUE));
+					AssignCommand(oVassal, ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF));
+				 	AssignCommand(oVassal, ActionSpeakString("We give you the life force of one of us, Master Sayen.", TALKVOLUME_TALK));
 					}	
-				 else if (nISWMem) {
+				 else if ((nISWMem) && (nCurrentHP < nMaxHP/3)){
 				 	eHeal = EffectHeal(nHealS);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
 				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_SERIOUS_WOUNDS);
 					}	
-				 else if (nIMWMem) {
+				 else if ((nIMWMem)&& (nCurrentHP < nMaxHP/2)) {
 				 	eHeal = EffectHeal(nHealM);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
 				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_MODERATE_WOUNDS);
 					}	
-				 else if (nILWMem) {
+				 else if ((nILWMem)&& (nCurrentHP < nMaxHP)) {
 				 	eHeal = EffectHeal(nHealL);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
 				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_LIGHT_WOUNDS);
 					}	
 				 
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, eHealVis, OBJECT_SELF);
-				ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
-				 }
-	return;
+				//ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);
+				return;
 	}
 	
 	if((nCleric > 0) && (nCleric >= nPaladin) && (nCleric >= nDruid) && (nCleric >= nRanger) && (nCleric >= nBard))

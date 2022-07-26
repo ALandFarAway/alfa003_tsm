@@ -38,7 +38,7 @@ void main() {
 	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
 	effect eGhost = EffectVisualEffect(VFX_DUR_SPELL_ETHEREALNESS, FALSE);
 	effect eEthereal = EffectEthereal();
-	effect eAOE = EffectAreaOfEffect(AOE_MOB_FEAR);
+	effect eAOE = EffectAreaOfEffect(AOE_MOB_UNNATURAL);
     object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
@@ -113,9 +113,7 @@ void main() {
 
 	DelayCommand(55.0, ActionCreateWynCreature("003_cr_bane_bp_elthonds", GetLocation(OBJECT_SELF)));
 	
-	//Bert
-	DelayCommand(59.0, SendMessageToPC(oBertilak, "*You see Phaedra look up. When she finds you, she looks at you with murder in her eye."));
-    DelayCommand(60.0, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	DelayCommand(60.0, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	
 	
 	DelayCommand(70.0, ActionSpeakString("Fight! Fight all of you! Fight for your afterlife. For the curse of Horus-Re was to release me to the mercy of Set!", TALKVOLUME_TALK));

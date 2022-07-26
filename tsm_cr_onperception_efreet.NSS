@@ -45,9 +45,10 @@ void main()
 {
     ACR_CreatureOnPerception();
 
-    // Custom code goes here.
-	object oPerceived = GetLastPerceived();
+    object oPerceived = GetLastPerceived();
 	object oPhaedra = GetObjectByTag("003_cr_bane_bp_elthonds", 0);
+	effect eFreeze = EffectCutsceneImmobilize();
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 8.0);
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_gyasisayen") {
 		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetTag(oPerceived), "efreet", 0) != -1)) 
@@ -65,9 +66,9 @@ void main()
 		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetTag(oPerceived), "sayen", 0) != -1)) 
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
-			 ActionCastSpellAtObject(SPELL_DISINTEGRATE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+			 DelayCommand(8.0, ActionSpeakString("Infidel! You and your electrum child violate the honor of House Sayen!", TALKVOLUME_TALK));
+			 DelayCommand(10.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 DelayCommand(13.0, ClearAllActions(TRUE));
-			 DelayCommand(13.0, ActionSpeakString("Infidel! You and your electrum child violate the honor of House Sayen!", TALKVOLUME_TALK));
 			 DelayCommand(14.0,ActionCastSpellAtObject(SPELL_WALL_OF_FIRE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			 DelayCommand(19.0, ClearAllActions(TRUE));
 			 DelayCommand(20.0, ActionCastSpellAtObject(SPELL_DISINTEGRATE, oPerceived, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
