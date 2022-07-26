@@ -174,14 +174,14 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	//80 hp dmg Multiple crack
 	DelayCommand(110.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	//90HP Pulsing red
-	DelayCommand(125.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	DelayCommand(130.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	//100HP Small flames
 	
-	DelayCommand(135.0, AssignCommand(oInvisoCaster, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe))));
+	DelayCommand(140.0, AssignCommand(oInvisoCaster, ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe))));
 	
-	DelayCommand(140.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	DelayCommand(145.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	//110HP 
-	DelayCommand(155.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
+	//DelayCommand(160.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
 	
 	}
 		 

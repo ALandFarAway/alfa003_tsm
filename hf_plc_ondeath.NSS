@@ -3,6 +3,10 @@
 
 #include "acr_placeable_i"
 
+void ActionCreateWynPlacedEffect(string sPlacedEffect, location lLocPlaceEffect)
+{
+    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sPlacedEffect, lLocPlaceEffect);
+}
 
 void main() {
     ACR_PlaceableOnDeath();
@@ -27,8 +31,10 @@ void main() {
     string sCreateCr = "";
 	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
 	object oOrbGlow = GetObjectByTag("fx_okku_mound_rr", 0);
+	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	
   	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
+		ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe));
 		sCreateCr = "abr_cr_ou_efreet_lord";
 		object oEfreet = CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oOrbCreate), TRUE);
 		
