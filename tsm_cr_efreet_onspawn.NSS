@@ -92,6 +92,7 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oPhaedra))));
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oGlobe))));
 	
+	
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, SetScale(oEfreet, 1.15, 1.15, 1.15)));
 	AssignCommand(oInvisoCaster, DelayCommand(14.0, SetScale(oEfreet, 1.3, 1.3, 1.3)));
 	AssignCommand(oInvisoCaster, DelayCommand(15.0, SetScale(oEfreet, 1.45, 1.45, 1.45)));
@@ -100,7 +101,7 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(18.0, SetScale(oEfreet, 1.9, 1.9, 1.9)));
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, SetScale(oEfreet, 2.05, 2.05, 2.05)));
 	
-	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionCreateWynPlaceable("rr_crystal_coll", GetLocation(oCollCreate))));
+	AssignCommand(oPhaedra, DelayCommand(17.0, ActionCastSpellAtObject(SPELL_LIGHTNING_BOLT, GetNearestObjectByTag("abr_cr_ou_genie_efreeti", oPhaedra, 1), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBertilak))));
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBertilak))));
@@ -126,6 +127,7 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(22.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBellie))));
 	AssignCommand(oInvisoCaster, DelayCommand(23.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBellie))));
 	
+	AssignCommand(oPhaedra, DelayCommand(30.0, ActionCastSpellAtObject(SPELL_FIREBALL, GetNearestObjectByTag("009_cr_mh_harpy4", oPhaedra, 1), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 	
 	
 	AssignCommand(oInvisoCaster, DelayCommand(24.0, ActionCreateWynCreature("abr_cr_ou_genie_djinni_h", GetLocation(oGlobe))));
