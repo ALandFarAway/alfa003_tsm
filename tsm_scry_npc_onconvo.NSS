@@ -289,6 +289,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 }
 								oToken = GetNextItemInInventory(oScryer);
 							}
+						if(((sMatch == "Silverwing") || (sMatch == "Dez")) && (FindSubString(GetName(oScryer), "Bae") != -1)) {
+								SendMessageToPC(oScryer, "You have a very strong connection to " + sScriedName + ".");
+								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: familiar.");
+								SendMessageToPC(oScryer, "The blood of your body prickles in your skin, called by a deep connection to Deszeldaryndun Silverwing... and is answered.");
+								SendMessageToPC(oScryer, "COME, BLOOD OF MY DESCENDANTS. COME, KIN. MY PAST AND FUTURE ARE BOUND IN YOUR OWN.");
+								SendMessageToPC(oScryer, "THE DRAGON THIEF'S MIRROR WAS EVER A GATEWAY FOR ELECTRA. I SENSE HER, AS I HAVE NOT IN 800 YEARS.");
+								SendMessageToPC(oScryer, "IT GIVES ME HOPE, THAT THIS DESPERATE GAMBIT WILL NOT BE IN VAIN.");
+								SendMessageToPC(oScryer, "COME TO ME. GUARD HER FUTURE!");
+								}
+						else {
 						
 							if(nBody == 1) {
 								SendMessageToPC(oScryer, "You are holding a body part that belonged to " + sScriedName + ".");
@@ -325,16 +335,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							else if(nKnowledge == 5) {
 								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: familiar.");
 								}
-						
-						if(((sMatch == "Silverwing") || (sMatch == "Dez")) && (FindSubString(GetName(oScryer), "Bae") != -1)) {
-								SendMessageToPC(oScryer, "You have a very strong connection to " + sScriedName + ".");
-								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: familiar.");
-								SendMessageToPC(oScryer, "The blood of your body prickles in your skin, called by a deep connection to Deszeldaryndun Silverwing... and is answered.");
-								SendMessageToPC(oScryer, "COME, BLOOD OF MY DESCENDANTS. COME, KIN. MY PAST AND FUTURE ARE BOUND IN YOUR OWN.");
-								SendMessageToPC(oScryer, "THE DRAGON THIEF'S MIRROR WAS EVER A GATEWAY FOR ELECTRA. I SENSE HER, AS I HAVE NOT IN 800 YEARS.");
-								SendMessageToPC(oScryer, "IT GIVES ME HOPE, THAT THIS DESPERATE GAMBIT WILL NOT BE IN VAIN.");
-								SendMessageToPC(oScryer, "COME TO ME. GUARD HER FUTURE!");
-								}			
+						}
+									
 											
 						int nDC = GetLocalInt(OBJECT_SELF, "nScryDC") + nKnowledge + nConnection;
 				 		int nCasterLevel = GetLocalInt(OBJECT_SELF, "nCasterLevel");
@@ -425,7 +427,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									}
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, fAway);
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, fAway);
-								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
+								 //ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
 										
 								 		// Dupe the PC to leave Dupe behind. Possessed NPC Dupes can't be destroyed, so don't do that?
 										object oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
@@ -493,6 +495,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								    	DelayCommand(59.5, AssignCommand(oViewer, ClearAllActions(TRUE)));
 										DelayCommand(60.0, AssignCommand(oViewer, JumpToLocation(lHere)));
 										}
+									oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
 									}
 									
 								//Find out information about oScried's area and area weather
