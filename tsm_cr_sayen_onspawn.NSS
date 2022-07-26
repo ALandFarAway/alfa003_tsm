@@ -101,10 +101,10 @@ void main() {
 	DelayCommand(37.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 6), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
 	DelayCommand(38.0, AssignCommand(GetNearestCreatureToLocation(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, GetLocation(oMoveTo), 7), ActionMoveAwayFromLocation(GetLocation(oMoveTo), TRUE, 10.0))); 
 	
-	object oPC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
-	while (oPC != OBJECT_INVALID) {
+	object oAfraid = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+	while (oAfraid != OBJECT_INVALID) {
 		
-	 	oPC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
+	 	oAfraid = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 	}
 	DelayCommand(40.0, ActionSpeakString("Come to me, oh thou familiars released to my need, and be free upon condition of your aid!", TALKVOLUME_TALK));
 	DelayCommand(45.0, ActionCreateWynCreature("003_cr_un_banite_vassal", GetLocation(OBJECT_SELF)));
