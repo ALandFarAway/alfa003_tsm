@@ -39,7 +39,7 @@ void main() {
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	effect eAOE = EffectAreaOfEffect(AOE_MOB_FIRE);
-    
+    object oCollCreate = GetWaypointByTag("rr_coll_create_wp");
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
@@ -78,7 +78,7 @@ void main() {
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	AssignCommand(oInvisoCaster, DelayCommand(1.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
-	
+	CreateObject(OBJECT_TYPE_PLACEABLE, "sgk_ch_box", GetLocation(oCollCreate));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
 	

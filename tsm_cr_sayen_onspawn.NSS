@@ -120,7 +120,6 @@ void main() {
 	
 	DelayCommand(70.0, ActionSpeakString("Fight! Fight all of you! Fight for your afterlife. For the curse of Horus-Re was to release me to the mercy of Set!", TALKVOLUME_TALK));
 	
-	DelayCommand(80.0, ActionSpeakString("The Efreet of Set is released!", TALKVOLUME_TALK));
 	
 	
 	 
