@@ -144,14 +144,12 @@ void main()
 		
 				 
 	if(GetTag(OBJECT_SELF) == "abr_cr_ou_efreet_lord") {
-		 int nDimD = GetHasSpell(3026, OBJECT_SELF);
-				 if ((nDimD > 0)  && (Random(4) < 1)){
-				 		//SendMessageToAllDMs("Efreet damage firing. Jumping to " + GetTag(oRelay));
+		 		 if ((nCurrentHP < nMaxHP/2)  && (Random(4) < 1) && (GetLocalInt(OBJECT_SELF, "DimDoor") < 3)){
+				 		SetLocalInt(OBJECT_SELF, "DimDoor", GetLocalInt(OBJECT_SELF, "DimDoor") +1);
 						ClearAllActions(TRUE);
 						ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
 						ActionJumpToLocation(GetLocation(oRelay));
 						ActionSpeakString("Casts a spell and appears in another location.", TALKVOLUME_TALK);
-						DecrementRemainingSpellUses(OBJECT_SELF, 3026);
 						}
 				
 	return;

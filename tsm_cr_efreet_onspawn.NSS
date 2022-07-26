@@ -23,6 +23,11 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
     CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
 }
 
+void ActionCreateWynPlaceable(string sPlaceable, location lLocPlaceable)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
+}
+
 void ActionCreateWynEffect(string sObject, location lLocObject)
 {
     CreateObject(OBJECT_TYPE_PLACED_EFFECT, sObject, lLocObject);
@@ -40,9 +45,10 @@ void main() {
 	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	effect eAOE = EffectAreaOfEffect(AOE_MOB_FIRE);
     object oCollCreate = GetWaypointByTag("rr_coll_create_wp");
+	object oPhaedra = GetObjectByTag("003_cr_bane_bp_elthonds", 0);
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
-	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
+	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);
 	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
 	object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
 	object oBellie = GetObjectByTag("003_pc_bellie_2", 0);
@@ -73,17 +79,17 @@ void main() {
 		}
 	oPC = GetNextPC(TRUE);
 	}
+	
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAOE, OBJECT_SELF, HoursToSeconds(100));
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	AssignCommand(oInvisoCaster, DelayCommand(1.0, ActionSpeakString("I am the curse of Horus-Re; I am the scourge of Scions. I am EFREET, whose freedom no longer shall be withheld!", TALKVOLUME_TALK)));
-	CreateObject(OBJECT_TYPE_PLACEABLE, "sgk_ch_box", GetLocation(oCollCreate));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionSpeakString("All shall suffer; all shall be separated, part from part! Let the harpies fly! Release the djinn!", TALKVOLUME_TALK)));
 	
 	
-	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oGlobe))));
+	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oPhaedra))));
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oGlobe))));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, SetScale(oEfreet, 1.15, 1.15, 1.15)));
@@ -94,8 +100,11 @@ void main() {
 	AssignCommand(oInvisoCaster, DelayCommand(18.0, SetScale(oEfreet, 1.9, 1.9, 1.9)));
 	AssignCommand(oInvisoCaster, DelayCommand(20.0, SetScale(oEfreet, 2.05, 2.05, 2.05)));
 	
+	AssignCommand(oInvisoCaster, DelayCommand(20.0, ActionCreateWynPlaceable("rr_crystal_coll", GetLocation(oCollCreate))));
+	
 	AssignCommand(oInvisoCaster, DelayCommand(10.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBertilak))));
 	AssignCommand(oInvisoCaster, DelayCommand(11.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBertilak))));
+	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("abr_cr_ou_genie_efreeti", GetLocation(oBertilak))));
 	
 	AssignCommand(oInvisoCaster, DelayCommand(12.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oBae))));
 	AssignCommand(oInvisoCaster, DelayCommand(13.0, ActionCreateWynCreature("009_cr_mh_harpy4", GetLocation(oBae))));

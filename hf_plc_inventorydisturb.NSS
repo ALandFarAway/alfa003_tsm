@@ -60,7 +60,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	object oWallE = GetWaypointByTag("aoe_wall_dispel_e");
 	object oWallS = GetWaypointByTag("aoe_wall_dispel_s");
 	object oWallW = GetWaypointByTag("aoe_wall_dispel_w");
-	effect ePulse = EffectVisualEffect(VFX_DUR_GLOW_RED, FALSE);
+	effect ePulse = EffectVisualEffect(VFX_IMP_FLAME_M, FALSE);
 	
 	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
@@ -111,7 +111,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	
 	//10HP
 	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));	
-	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(5.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	
 	//Nio
 	DelayCommand(6.0, SendMessageToPC(oNio, "*A scrabbling at your neck warns you the moment before a cold pain pierces your throat. Your scarab broach has bitten you!"));
@@ -136,7 +136,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	
 	//20HP
 	DelayCommand(20.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(20.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(20.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	
 	
 	//Sae
@@ -147,9 +147,9 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	
 	//30HP  40HP
 	DelayCommand(35.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(35.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(35.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	DelayCommand(50.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(50.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(50.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	
 	//Nio
 	DelayCommand(45.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblackCenter, oNio, 10.0));
@@ -163,7 +163,7 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	
 	//50HP 
 	DelayCommand(65.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(65.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(65.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	
 	//Sae
 	DelayCommand(75.0, SendMessageToPC(oSaerela, "The connection between yourself and the Drowned Tower is plucked once more. The same force is *leaving* there, but this time it is enhanced. It is immensely powerful. And it is coming this way."));
@@ -175,23 +175,23 @@ if(((GetLocalInt(OBJECT_SELF, "Fired") == 0) || (GetIsDM(oDisturber)) || (GetIsD
 	
 	//60HP Glittering chip
 	DelayCommand(80.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(80.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(80.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	//70HP Crack
 	DelayCommand(95.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(95.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(95.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	//80 hp dmg Multiple crack
 	DelayCommand(110.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(110.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(110.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	//90HP Pulsing red
 	DelayCommand(130.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(130.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(130.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	
 	//100HP Small flames
 	DelayCommand(145.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDmg, oOrb)));
-	DelayCommand(145.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(145.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	//110HP 
 	DelayCommand(160.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
-	DelayCommand(160.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePulse, oOrb, 2.0)));	
+	DelayCommand(160.0, AssignCommand(oInvisoCaster, ApplyEffectToObject(DURATION_TYPE_INSTANT, ePulse, oOrb)));	
 	
 	}
 		 
