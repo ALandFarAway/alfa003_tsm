@@ -289,7 +289,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 }
 								oToken = GetNextItemInInventory(oScryer);
 							}
-						if(((sMatch == "Silverwing") || (sMatch == "Dez")) && (FindSubString(GetName(oScryer), "Bae") != -1)) {
+						if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 								SendMessageToPC(oScryer, "You have a very strong connection to " + sScriedName + ".");
 								SendMessageToPC(oScryer, "Your knowledge of " + sScriedName + " is: familiar.");
 								SendMessageToPC(oScryer, "The blood of your body prickles in your skin, called by a deep connection to Deszeldaryndun Silverwing... and is answered.");
@@ -422,13 +422,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 effect eGhost = EffectCutsceneGhost();
 								 effect eFreeze = EffectCutsceneImmobilize();
 								 float fAway = 60.0;
-								 	if((FindSubString(GetName(oScryer), "Bae" ) != -1) && ((sMatch == "Silverwing") || (sMatch == "Dez"))) {
+								 	if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 										fAway = 1800.0;
 									}
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, fAway);
 								 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, fAway);
-								 //ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
-										
+								 		
 								 		// Dupe the PC to leave Dupe behind. Possessed NPC Dupes can't be destroyed, so don't do that?
 										object oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
 										object oDupe;
@@ -456,13 +455,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										if(GetIsDMPossessed(oScryer) == FALSE) {
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
 											}
+											
 									    if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 											object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
 											location lThere = GetLocation(oSilverwingWP);
 											DelayCommand(20.0, ActionCreateWynCreature("003_pc_baeithra_2", lThere));
-											
 											}
 										
+											
 										AssignCommand(oScryer, JumpToLocation(lThere));
 										
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
