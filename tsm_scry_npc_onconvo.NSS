@@ -52,6 +52,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 		//6030 thru 6039 are the names of up to ten NPCs stored on the scrying object
 		string sMatch = GetMatchedSubstring(1);
 		int nMatch = GetListenPatternNumber();
+		if((sMatch == "Silverwing") || (sMatch == "Dez")) {
+			fScryTimer = 1800.0;
+		}
 		//6040 will end an ongoing scrying session
 		if(nMatch == 6040) {
 		//End Spell
@@ -73,7 +76,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 				 nRep ++;
 				}
 			
-			if(GetIsObjectValid(oDupe)) {AssignCommand(oScryer, ActionJumpToLocation(lHere));}		
+			if(GetIsObjectValid(oDupe)) {
+				AssignCommand(oScryer, ActionJumpToLocation(lHere));
+				}		
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
@@ -374,6 +379,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SetLocalObject(oScried, "oScryer", oScryer);
 								SetLocalObject(oScried, "oScry", oScry);
 								SetLocalObject(oScried, "oScrySpeak", OBJECT_SELF);
+								location lHere = GetLocation(oScry);
+								SetLocalLocation(oScryer, "ACR_SCRY_LOCATION", lHere);
+								SetLocalLocation(oScry, "ACR_SCRY_LOCATION", lHere);
 								if((sMatch != "Silverwing") && (sMatch != "Dez")) {
 									//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
 									SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
@@ -398,14 +406,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								location lThere = GetLocation(oScried);
 								object oSilverwingWPB = GetWaypointByTag("dqspx_arena_WP_B");
 								location lThereB = GetLocation(oSilverwingWPB);
-								location lHere = GetLocation(oScryer);
 								if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 									object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
 									lThere = GetLocation(oSilverwingWP);
-									DelayCommand(20.0, ActionCreateWynCreature("003_pc_baeithra_2", lThereB));
 									}
-								SetLocalLocation(oScryer, "ACR_SCRY_LOCATION", lHere);
-								SetLocalLocation(oScry, "ACR_SCRY_LOCATION", lHere);
 								SetLocalLocation(oScry, "lThere", lThere);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
@@ -432,8 +436,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 effect eGhost = EffectCutsceneGhost();
 								 effect eFreeze = EffectCutsceneImmobilize();
 								 float fAway = 60.0;
+								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 										fAway = 600.0;
+										object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
+										DestroyObject(oPortal, 5.0); 
+										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
+										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
+										lThere = lThereB;
 										}
 								 else {
 										 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, fAway);
@@ -454,9 +464,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										 ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 										 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, fAway);
 										 DestroyObject(oDupe, fAway);
-										}	
+											
 										
-										object oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
+										oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
 										SetLocalObject(oScrySelf, "oScryer", oScryer);
 										SetLocalObject(oScrySelf, "oScried", oScried);
 										SetLocalObject(oScrySend, "oScrySelf", oScrySelf);
@@ -464,28 +474,28 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										ChangeToStandardFaction(oScrySelf, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScrySelf, fScryTimer);
 									    DestroyObject(oScrySelf, fAway);
-										
-										
-										// Jump to the target
-											
-										AssignCommand(oScryer, JumpToLocation(lThere));
-										
-								        if((sMatch != "Silverwing") && (sMatch != "Dez")) {
-										
 										// Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
-								        DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								    	DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								   		DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								    	DelayCommand(40.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								    	DelayCommand(50.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								    	}
-								     
-								    // Stop whatever it is we're doing
-							        DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
+									    DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+									    DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+									   	DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+									    DelayCommand(40.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+									    DelayCommand(50.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+									    }
+									
+									// Jump to the target
+									AssignCommand(oScryer, JumpToLocation(lThere));
+									
+									// Stop whatever it is we're doing
+							        int nValid = GetIsLocationValid(lHere); 
+									
+									DelayCommand(fAway-5.0, SendMessageToPC(oScryer, "lHere validity is : " + IntToString(nValid)));
+									
+									DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							
 							        // Return to the original scrying location
 							        DelayCommand(fAway, AssignCommand(oScryer, JumpToLocation(lHere)));
 								
+									ActionSpeakString("Every person within 10 feet can see the images in the mirror as clearly as if the viewer his or herself is there.", TALKVOLUME_TALK);
 									object oViewerA;
 									object oViewerB;
 									object oViewerC;
@@ -534,7 +544,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
-										AssignCommand(oViewer, JumpToLocation(lThere));
+										DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 										DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lHere)));
 									nViewer++;
 									oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
