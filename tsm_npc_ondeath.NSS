@@ -37,10 +37,6 @@ void main()
     ACR_CreatureOnDeath();
 
     
-		if(GetTag(OBJECT_SELF) == "003_pc_baeithra_2"){
-			ActionCreateWynCreature("003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
-			}
-	
 	//slv_deandragon_q Phoenix
 	
 	if(GetTag(OBJECT_SELF) == "abr_cr_mb_phoenix")

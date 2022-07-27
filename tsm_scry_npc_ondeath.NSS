@@ -76,7 +76,9 @@ void main()
 					 nRep ++;
 					}
 				
-			AssignCommand(oScryer, ActionJumpToLocation(lHere));			
+			if(GetArea(oScryer) != GetAreaFromLocation(lHere)) {
+				AssignCommand(oScryer, ActionJumpToLocation(lHere));			
+				}
 			nGoHome++;
 		} 	
 			
