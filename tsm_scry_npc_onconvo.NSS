@@ -443,6 +443,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										DestroyObject(oPortal, 5.0); 
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
+										int nValidTh = GetIsLocationValid(lThere); 
+									
+										SendMessageToAllDMs("lThere validity is : " + IntToString(nValidTh));
+										SendMessageToAllDMs("oScryer is : " + GetName(oScryer));
 										// Jump to the target
 										AssignCommand(oScryer, JumpToLocation(lThere));
 										}
@@ -484,12 +488,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									    }
 									
 									// Jump to the target
-									AssignCommand(oScryer, JumpToLocation(lThere));
+								//	AssignCommand(oScryer, JumpToLocation(lThere));
 									
 									// Stop whatever it is we're doing
 							        int nValid = GetIsLocationValid(lHere); 
 									
-									DelayCommand(fAway-5.0, SendMessageToPC(oScryer, "lHere validity is : " + IntToString(nValid)));
+									DelayCommand(fAway-5.0, SendMessageToAllDMs("lHere validity is : " + IntToString(nValid)));
 									
 									DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							
@@ -509,44 +513,47 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								    int nViewer = 1;
 									object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 									while(oViewer != OBJECT_INVALID) {
-									 	if(nViewer == 1) {
-											oViewerA = oViewer;
-											SetLocalObject(oScry, "oViewerA", oViewer);
-											}
-										if(nViewer == 2) {
-											oViewerB = oViewer;
-											SetLocalObject(oScry, "oViewerB", oViewer);
-											}
-										if(nViewer == 3) {
-											oViewerC = oViewer;
-											SetLocalObject(oScry, "oViewerC", oViewer);
-											}
-										if(nViewer == 4) {
-											oViewerD = oViewer;
-											SetLocalObject(oScry, "oViewerD", oViewer);
-											}
-										if(nViewer == 5) {
-											oViewerE = oViewer;
-											SetLocalObject(oScry, "oViewerE", oViewer);
-											}
-										if(nViewer == 6) {
-											oViewerF = oViewer;
-											SetLocalObject(oScry, "oViewerF", oViewer);
-											}
-										if(nViewer == 7) {
-											oViewerG = oViewer;
-											SetLocalObject(oScry, "oViewerG", oViewer);
-											}
-										if(nViewer == 8) {
-											oViewerH = oViewer;
-											SetLocalObject(oScry, "oViewerH", oViewer);
-											}
-										
-										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway);
-										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
-										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
-										DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
-										DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lHere)));
+									 	if(oViewer != oScryer) {
+											SendMessageToAllDMs("oViewer = " + GetName(oViewer));
+											if(nViewer == 1) {
+												oViewerA = oViewer;
+												SetLocalObject(oScry, "oViewerA", oViewer);
+												}
+											if(nViewer == 2) {
+												oViewerB = oViewer;
+												SetLocalObject(oScry, "oViewerB", oViewer);
+												}
+											if(nViewer == 3) {
+												oViewerC = oViewer;
+												SetLocalObject(oScry, "oViewerC", oViewer);
+												}
+											if(nViewer == 4) {
+												oViewerD = oViewer;
+												SetLocalObject(oScry, "oViewerD", oViewer);
+												}
+											if(nViewer == 5) {
+												oViewerE = oViewer;
+												SetLocalObject(oScry, "oViewerE", oViewer);
+												}
+											if(nViewer == 6) {
+												oViewerF = oViewer;
+												SetLocalObject(oScry, "oViewerF", oViewer);
+												}
+											if(nViewer == 7) {
+												oViewerG = oViewer;
+												SetLocalObject(oScry, "oViewerG", oViewer);
+												}
+											if(nViewer == 8) {
+												oViewerH = oViewer;
+												SetLocalObject(oScry, "oViewerH", oViewer);
+												}
+											
+											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway);
+											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
+											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
+											DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
+											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lHere)));
+										}
 									nViewer++;
 									oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
 									}
