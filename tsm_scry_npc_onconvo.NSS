@@ -406,8 +406,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								location lThere = GetLocation(oScried);
 								object oSilverwingWPB = GetWaypointByTag("dqspx_arena_WP_B");
 								location lThereB = GetLocation(oSilverwingWPB);
+								object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
 								if((sMatch == "Silverwing") || (sMatch == "Dez")) {
-									object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
 									lThere = GetLocation(oSilverwingWP);
 									}
 								SetLocalLocation(oScry, "lThere", lThere);
@@ -445,10 +445,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
 										int nValidTh = GetIsLocationValid(lThere); 
 									
-										SendMessageToAllDMs("lThere validity is : " + IntToString(nValidTh));
+										SendMessageToAllDMs("lThere is " + GetTag(oSilverwingWP) + " validity is : " + IntToString(nValidTh));
 										SendMessageToAllDMs("oScryer is : " + GetName(oScryer));
 										// Jump to the target
 										AssignCommand(oScryer, JumpToLocation(lThere));
+										
+										SendMessageToAllDMs("lHere area is : " + GetTag(GetAreaFromLocation(lHere)));
+									
 										}
 								 else {
 										 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, fAway);
@@ -513,7 +516,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								    int nViewer = 1;
 									object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 									while(oViewer != OBJECT_INVALID) {
-									 	if(oViewer != oScryer) {
+									 	if((oViewer != oScryer) && (oViewer != OBJECT_SELF)) {
 											SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 											if(nViewer == 1) {
 												oViewerA = oViewer;
