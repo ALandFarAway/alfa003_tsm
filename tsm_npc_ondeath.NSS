@@ -38,11 +38,7 @@ void main()
 
     
 		if(GetTag(OBJECT_SELF) == "003_pc_baeithra_2"){
-			effect eImplode = EffectVisualEffect(VFX_FNF_IMPLOSION, FALSE);
-		 	effect eStorm = EffectVisualEffect(VFX_FNF_STORM, FALSE);
-		 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(OBJECT_SELF),  5.0);
-		    ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eStorm, GetLocation(OBJECT_SELF),  10.0);
-		 	ActionCreateWynCreature("003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
+			ActionCreateWynCreature("003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
 			}
 	
 	//slv_deandragon_q Phoenix

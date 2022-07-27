@@ -459,13 +459,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											
 									    if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 											object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
+											object oSilverwingWPB = GetWaypointByTag("dqspx_arena_WP_B");
 											location lThere = GetLocation(oSilverwingWP);
+											location lThereB = GetLocation(oSilverwingWPB);
 											DelayCommand(20.0, ActionCreateWynCreature("003_pc_baeithra_2", lThere));
 											}
 										int nValid = GetIsLocationValid(lThere);
 										string sThere = GetName(GetAreaFromLocation(lThere));
-										SendMessageToPC(oScryer, "lThere = " + IntToString(nValid) + " in area: " + sThere);
-										AssignCommand(oScryer, JumpToLocation(lThere));
+										//SendMessageToPC(oScryer, "lThere = " + IntToString(nValid) + " in area: " + sThere);
+										AssignCommand(oScryer, JumpToLocation(lThereB));
 										
 								        // Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								        DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
@@ -484,11 +486,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							       
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 								while(oViewer != OBJECT_INVALID) {
-									//if(oViewer != oScryer) {
+									if(oViewer != oScryer) {
+										object oSilverwingWPB = GetWaypointByTag("dqspx_arena_WP_B");
+										location lThereB = GetLocation(oSilverwingWPB);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, 60.0);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, 60.0);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, 60.0);
-										AssignCommand(oViewer, JumpToLocation(lThere));
+										AssignCommand(oViewer, JumpToLocation(lThereB));
 										DelayCommand(10.0, AssignCommand(oViewer, ActionJumpToLocation(GetLocation(oScried))));
 								    	DelayCommand(20.0, AssignCommand(oViewer, ActionJumpToLocation(GetLocation(oScried))));
 								   		DelayCommand(30.0, AssignCommand(oViewer, ActionJumpToLocation(GetLocation(oScried))));
@@ -496,7 +500,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								    	DelayCommand(50.0, AssignCommand(oViewer, ActionJumpToLocation(GetLocation(oScried))));
 								    	DelayCommand(59.5, AssignCommand(oViewer, ClearAllActions(TRUE)));
 										DelayCommand(60.0, AssignCommand(oViewer, JumpToLocation(lHere)));
-									//	}
+										}
 									oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
 									}
 									
