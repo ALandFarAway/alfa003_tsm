@@ -456,7 +456,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										if(GetIsDMPossessed(oScryer) == FALSE) {
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, 60.0);
 											}
-											
+										location lThereB = lThere;	
 									    if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 											object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
 											object oSilverwingWPB = GetWaypointByTag("dqspx_arena_WP_B");
