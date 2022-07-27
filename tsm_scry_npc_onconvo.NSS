@@ -439,19 +439,23 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 										fAway = 600.0;
-										object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
-										DestroyObject(oPortal, 5.0); 
+										//object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
+										//DestroyObject(oPortal, 5.0); 
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
-										int nValidTh = GetIsLocationValid(lThere); 
+										int nValidTh = GetIsLocationValid(lThereB); 
 									
-										SendMessageToAllDMs("lThere is " + GetTag(oSilverwingWP) + " validity is : " + IntToString(nValidTh));
+										SendMessageToAllDMs("lThereB is " + GetTag(oSilverwingWPB) + " validity is : " + IntToString(nValidTh));
 										SendMessageToAllDMs("oScryer is : " + GetName(oScryer));
 										// Jump to the target
-										AssignCommand(oScryer, JumpToLocation(lThere));
+										AssignCommand(oScryer, JumpToLocation(lThereB));
 										
 										SendMessageToAllDMs("lHere area is : " + GetTag(GetAreaFromLocation(lHere)));
-									
+										DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
+							
+								        // Return to the original scrying location
+								        DelayCommand(fAway, AssignCommand(oScryer, ActionJumpToLocation(lHere)));
+								
 										}
 								 else {
 										 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, fAway);
@@ -496,12 +500,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									// Stop whatever it is we're doing
 							        int nValid = GetIsLocationValid(lHere); 
 									
-									DelayCommand(fAway-5.0, SendMessageToAllDMs("lHere validity is : " + IntToString(nValid)));
+									DelayCommand(fAway - 5.0, SendMessageToAllDMs("lHere validity is : " + IntToString(nValid)));
 									
-									DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
+									//DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							
 							        // Return to the original scrying location
-							        DelayCommand(fAway, AssignCommand(oScryer, JumpToLocation(lHere)));
+							        //DelayCommand(fAway, AssignCommand(oScryer, JumpToLocation(lHere)));
 								
 									ActionSpeakString("Every person within 10 feet can see the images in the mirror as clearly as if the viewer his or herself is there.", TALKVOLUME_TALK);
 									object oViewerA;
@@ -555,6 +559,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
 											DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
+											DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lHere)));
 										}
 									nViewer++;
