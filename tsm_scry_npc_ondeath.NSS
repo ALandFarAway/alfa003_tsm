@@ -31,9 +31,54 @@ void main()
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-		SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
+		location lHere = GetLocalLocation(oScry, "ACR_SCRY_LOCATION");
 		SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
 		AssignCommand(oScrySpeak, ActionSpeakString("You see " + GetName(GetLastKiller()) + " strike down the scrying sensor and the images in the " + GetName(oScry) + " vanish.", TALKVOLUME_TALK));
+		
+		int nGoHome = 0;
+		while(nGoHome < 8) {
+			if(nGoHome == 0) {
+				oScryer = GetLocalObject(oScry, "oViewerA");
+				}
+			if(nGoHome == 1) {
+				oScryer = GetLocalObject(oScry, "oViewerB");
+				}
+			if(nGoHome == 2) {
+				oScryer = GetLocalObject(oScry, "oViewerC");
+				}
+			if(nGoHome == 3) {
+				oScryer = GetLocalObject(oScry, "oViewerD");
+				}
+			if(nGoHome == 4) {
+				oScryer = GetLocalObject(oScry, "oViewerE");
+				}
+			if(nGoHome == 5) {
+				oScryer = GetLocalObject(oScry, "oViewerF");
+				}
+			if(nGoHome == 6) {
+				oScryer = GetLocalObject(oScry, "oViewerG");
+				}
+			if(nGoHome == 7) {
+				oScryer = GetLocalObject(oScry, "oViewerH");
+				}
+				
+			SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
+			
+			//Bring your people home
+			effect eEffect = GetFirstEffect(oScryer);
+				int nRep = 0;
+				while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+					 object oCreator = GetEffectCreator(eEffect);
+					 if(oCreator == oScrySpeak) {
+					 	RemoveEffect(oScryer, eEffect);
+					   }
+					 eEffect = GetNextEffect(oScryer);
+					 nRep ++;
+					}
+				
+			AssignCommand(oScryer, ActionJumpToLocation(lHere));			
+			nGoHome++;
+		} 	
 			
 		//Unset all local variables and destroy oScrySpeaker, too
 		SetLocalInt(oScry, "nScryActive", 0);
