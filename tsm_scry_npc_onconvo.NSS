@@ -439,13 +439,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 										fAway = 420.0;
-										//object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
-										//DestroyObject(oPortal, 5.0); 
+										object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
+										DestroyObject(oPortal, 5.0); 
 										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
 										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
 										int nValidTh = GetIsLocationValid(lThereB); 
 										// Jump to the target
-										AssignCommand(oScryer, JumpToLocation(lThereB));
+										DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThereB)));
 										
 										DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							 			DelayCommand(fAway, AssignCommand(oScryer, ActionJumpToLocation(lHere)));
@@ -515,6 +515,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									while(oViewer != OBJECT_INVALID) {
 									 	if((oViewer != oScryer) && (oViewer != OBJECT_SELF)) {
 											SendMessageToAllDMs("oViewer = " + GetName(oViewer));
+											location lViewer = GetLocation(oViewer);
 											if(nViewer == 1) {
 												oViewerA = oViewer;
 												SetLocalObject(oScry, "oViewerA", oViewer);
@@ -552,7 +553,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
 											DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
-											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lHere)));
+											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
 											DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 											}
 									nViewer++;
