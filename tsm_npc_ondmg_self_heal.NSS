@@ -148,7 +148,7 @@ void main()
 		 		 if ((nCurrentHP < nMaxHP / 4 * 3)  && (Random(10) < 1) && (GetLocalInt(OBJECT_SELF, "DimDoor") < 3)){
 				 		SetLocalInt(OBJECT_SELF, "DimDoor", GetLocalInt(OBJECT_SELF, "DimDoor") +1);
 						ClearAllActions(TRUE);
-						ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE); 
+						ActionCastSpellAtObject(3026, OBJECT_SELF, METAMAGIC_NONE, FALSE, 0, PROJECTILE_PATH_TYPE_DEFAULT, FALSE); 
 						ActionJumpToLocation(GetLocation(oRelay));
 						ActionSpeakString("Casts a spell and appears in another location.", TALKVOLUME_TALK);
 						}
@@ -232,26 +232,25 @@ void main()
 				 if ((nICWMem) && (nCurrentHP < nMaxHP/4)) {
 				 	eHeal = EffectHeal(nHealC);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
-				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_CRITICAL_WOUNDS);
-					AssignCommand(oVassal, ActionJumpToObject(oSayen, TRUE));
+				 	AssignCommand(oVassal, ActionJumpToObject(oSayen, TRUE));
 					AssignCommand(oVassal, ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF));
 				 	AssignCommand(oVassal, ActionSpeakString("We give you the life force of one of us, Master Sayen.", TALKVOLUME_TALK));
 					}	
 				 else if ((nISWMem) && (nCurrentHP < nMaxHP/3)){
 				 	eHeal = EffectHeal(nHealS);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
-				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_SERIOUS_WOUNDS);
-					}	
+				 	ActionCastSpellAtObject(SPELL_INFLICT_SERIOUS_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 	}	
 				 else if ((nIMWMem)&& (nCurrentHP < nMaxHP/2)) {
 				 	eHeal = EffectHeal(nHealM);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
-				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_MODERATE_WOUNDS);
-					}	
+				 	ActionCastSpellAtObject(SPELL_INFLICT_MODERATE_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 	}	
 				 else if ((nILWMem)&& (nCurrentHP < nMaxHP)) {
 				 	eHeal = EffectHeal(nHealL);
 					ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);
-				 	DecrementRemainingSpellUses(OBJECT_SELF, SPELL_INFLICT_LIGHT_WOUNDS);
-					}	
+				 	ActionCastSpellAtObject(SPELL_INFLICT_LIGHT_WOUNDS, OBJECT_SELF, METAMAGIC_ANY, FALSE, nDomainLevel,PROJECTILE_PATH_TYPE_DEFAULT, FALSE);
+				 		}	
 				 
 				ApplyEffectToObject(DURATION_TYPE_INSTANT, eHealVis, OBJECT_SELF);
 				//ActionSpeakString("Casts a spell.", TALKVOLUME_TALK);

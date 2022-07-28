@@ -32,6 +32,11 @@ void ActionCreateWynCreature(string sCreature, location lLocCreature)
     CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
 }
 
+void ActionCreateWynEffect(string sObject, location lLocObject)
+{
+    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sObject, lLocObject);
+}
+
 void main()
 {   ACR_CreatureOnConversation();
  	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
@@ -440,8 +445,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 										fAway = 420.0;
-										object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "fx_portal_gen_small", GetLocation(oScryer));
-										DestroyObject(oPortal, 5.0); 
+										DelayCommand(1.0, ActionCreateWynEffect("fx_portal_gen_small", GetLocation(oScryer)));
+										//DestroyObject(oPortal, 5.0); 
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
 										int nValidTh = GetIsLocationValid(lThereB); 
@@ -551,10 +556,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 												oViewerH = oViewer;
 												SetLocalObject(oScry, "oViewerH", oViewer);
 												}
-											
-											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway);
-											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
-											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
+											SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
+											DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
+											DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
+											DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
 											DelayCommand(10.0, FadeToBlack(oViewer, FADE_SPEED_MEDIUM, 5.0));
 								        	DelayCommand(20.0, FadeFromBlack(oViewer, FADE_SPEED_MEDIUM));
 								 			DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
@@ -811,7 +816,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								
 								//Speak oScried's area and weather description 
 								if ((sMatch == "Silverwing") || (sMatch== "Dez")) {
-								ActionSpeakString( "Silver is injured, chained down on arena sands stained with the blood of monsters attacking him. Bae'ithra vanishes from before the mirror...and reappears within it, beside Silverwing. Your horrified fascination freezes you as you watch....", TALKVOLUME_TALK);
+								ActionSpeakString( "Silverwing is injured, chained down on arena sands stained with the blood of monsters attacking him. Bae'ithra vanishes from before the mirror...and reappears within it, beside Silverwing. Your horrified fascination freezes you as you watch....", TALKVOLUME_TALK);
 								
 								}
 								else {

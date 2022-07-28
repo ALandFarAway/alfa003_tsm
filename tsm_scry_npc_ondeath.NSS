@@ -36,34 +36,37 @@ void main()
 		AssignCommand(oScrySpeak, ActionSpeakString("You see " + GetName(GetLastKiller()) + " strike down the scrying sensor and the images in the " + GetName(oScry) + " vanish.", TALKVOLUME_TALK));
 		
 		int nGoHome = 0;
-		while(nGoHome < 8) {
-			if(nGoHome == 0) {
+		while(nGoHome < 9) {
+			if(nGoHome == 1) {
 				oScryer = GetLocalObject(oScry, "oViewerA");
 				}
-			if(nGoHome == 1) {
+			if(nGoHome == 2) {
 				oScryer = GetLocalObject(oScry, "oViewerB");
 				}
-			if(nGoHome == 2) {
+			if(nGoHome == 3) {
 				oScryer = GetLocalObject(oScry, "oViewerC");
 				}
-			if(nGoHome == 3) {
+			if(nGoHome == 4) {
 				oScryer = GetLocalObject(oScry, "oViewerD");
 				}
-			if(nGoHome == 4) {
+			if(nGoHome == 5) {
 				oScryer = GetLocalObject(oScry, "oViewerE");
 				}
-			if(nGoHome == 5) {
+			if(nGoHome == 6) {
 				oScryer = GetLocalObject(oScry, "oViewerF");
 				}
-			if(nGoHome == 6) {
+			if(nGoHome == 7) {
 				oScryer = GetLocalObject(oScry, "oViewerG");
 				}
-			if(nGoHome == 7) {
+			if(nGoHome == 8) {
 				oScryer = GetLocalObject(oScry, "oViewerH");
 				}
 				
 			SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
-			
+			if(nGoHome > 0) {
+				location lHere = GetLocalLocation(oScryer, "lScryView");
+				}
+											
 			//Bring your people home
 			effect eEffect = GetFirstEffect(oScryer);
 				int nRep = 0;
