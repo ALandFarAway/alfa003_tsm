@@ -441,8 +441,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										fAway = 300.0;
 										//object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
 										//DestroyObject(oPortal, 5.0); 
-										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
-										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
+										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
+										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
 										int nValidTh = GetIsLocationValid(lThereB); 
 									
 										SendMessageToAllDMs("lThereB is " + GetTag(oSilverwingWPB) + " validity is : " + IntToString(nValidTh));
