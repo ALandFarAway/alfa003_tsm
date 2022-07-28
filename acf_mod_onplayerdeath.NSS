@@ -47,7 +47,10 @@ void main() {
     ACR_ModuleOnPlayerDeath();
 
     if(FindSubString(GetName(GetLastPlayerDied()), "Bae") != -1) {
-	SendMessageToPC(GetLastPlayerDied(), "I see you dying there.");
+	CreateObject(OBJECT_TYPE_CREATURE, "003_pc_baeithra_2", GetLocation(GetLastPlayerDied()));
 	}	
 	
+	if(GetIsPC(GetLastPlayerDied()))
+		{SendMessageToAllDMs("!!!ONDEATH FOR " + GetName(GetLastPlayerDied()) + " FIRING!!!");}
+
 }
