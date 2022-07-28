@@ -49,6 +49,11 @@ void main()
 	if(GetIsPC(OBJECT_SELF))
 		{SendMessageToAllDMs("!!!ONDEATH FOR " + GetName(OBJECT_SELF) + " FIRING!!!");}
 
+	
+	if(FindSubString(GetName(OBJECT_SELF), "Bae") != -1) {
+	SendMessageToPC(OBJECT_SELF, "I see you dying there.");
+	}	
+		
 if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
     object oMyTrigger = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg");
     object oMyCorpse = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Plc");
