@@ -438,7 +438,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 float fAway = 60.0;
 								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
-										fAway = 600.0;
+										fAway = 300.0;
 										//object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
 										//DestroyObject(oPortal, 5.0); 
 										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
