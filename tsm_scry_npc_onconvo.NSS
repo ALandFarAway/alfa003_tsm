@@ -452,7 +452,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										int nValidTh = GetIsLocationValid(lThereB); 
 										// Jump to the target
 										DelayCommand(10.0, AssignCommand(oScryer, JumpToLocation(lThereB)));
-										DelayCommand(10.0, FadeToBlack(oScryer, FADE_SPEED_MEDIUM, 5.0));
+										FadeToBlack(oScryer, FADE_SPEED_MEDIUM, 5.0);
 								        DelayCommand(20.0, FadeFromBlack(oScryer, FADE_SPEED_MEDIUM));
 								 
 										DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
@@ -508,7 +508,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							        // Return to the original scrying location
 							        //DelayCommand(fAway, AssignCommand(oScryer, JumpToLocation(lHere)));
 								
-									ActionSpeakString("Every person within 10 feet can see the images in the mirror as clearly as if the viewer his or herself is there.", TALKVOLUME_TALK);
+									ActionSpeakString("Every person within 10 feet can see the images in the mirror as clearly as if the viewer is there. Silverwing is injured, chained down on arena sands stained with the blood of monsters attacking him.", TALKVOLUME_TALK);
 									object oViewerA;
 									object oViewerB;
 									object oViewerC;
@@ -557,10 +557,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 												SetLocalObject(oScry, "oViewerH", oViewer);
 												}
 											SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
-											DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
-											DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
-											DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
-											DelayCommand(10.0, FadeToBlack(oViewer, FADE_SPEED_MEDIUM, 5.0));
+											DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
+											DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
+											DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
+											DelayCommand(5.0, FadeToBlack(oViewer, FADE_SPEED_MEDIUM, 5.0));
 								        	DelayCommand(20.0, FadeFromBlack(oViewer, FADE_SPEED_MEDIUM));
 								 			DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
@@ -816,7 +816,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								
 								//Speak oScried's area and weather description 
 								if ((sMatch == "Silverwing") || (sMatch== "Dez")) {
-								ActionSpeakString( "Silverwing is injured, chained down on arena sands stained with the blood of monsters attacking him. Bae'ithra vanishes from before the mirror...and reappears within it, beside Silverwing. Your horrified fascination freezes you as you watch....", TALKVOLUME_TALK);
+								ActionSpeakString( "A glowing rip in the fabric of empty space opens behind Bae'ithra. Bae'ithra vanishes from before the mirror...and reappears within it, beside Silverwing. Your horrified fascination freezes you as you watch....", TALKVOLUME_TALK);
 								
 								}
 								else {
