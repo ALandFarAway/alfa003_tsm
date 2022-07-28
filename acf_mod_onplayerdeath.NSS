@@ -46,8 +46,8 @@
 void main() {
     ACR_ModuleOnPlayerDeath();
 
-    if(FindSubString(GetName(OBJECT_SELF), "Bae") != -1) {
-	SendMessageToPC(OBJECT_SELF, "I see you dying there.");
+    if(FindSubString(GetName(GetLastPlayerDied()), "Bae") != -1) {
+	SendMessageToPC(GetLastPlayerDied(), "I see you dying there.");
 	}	
 	
 }
