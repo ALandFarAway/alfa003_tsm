@@ -438,7 +438,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 float fAway = 60.0;
 								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
-										fAway = 600.0;
+										fAway = 300.0;
 										//object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
 										//DestroyObject(oPortal, 5.0); 
 										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
@@ -450,12 +450,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										// Jump to the target
 										AssignCommand(oScryer, JumpToLocation(lThereB));
 										
-										SendMessageToAllDMs("lHere area is : " + GetTag(GetAreaFromLocation(lHere)));
 										DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
-							
-								        // Return to the original scrying location
-								        DelayCommand(fAway, AssignCommand(oScryer, ActionJumpToLocation(lHere)));
-								
+							 			DelayCommand(fAway, AssignCommand(oScryer, ActionJumpToLocation(lHere)));
+										SendMessageToAllDMs("lHere area is : " + GetTag(GetAreaFromLocation(lHere)));
+										
 										}
 								 else {
 										 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, fAway);
@@ -558,10 +556,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway);
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
-											DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 											DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lHere)));
-										}
+											DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
+											}
 									nViewer++;
 									oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
 									}
