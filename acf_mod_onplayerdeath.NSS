@@ -45,10 +45,20 @@
 
 void main() {
     ACR_ModuleOnPlayerDeath();
+	object oDied = GetLastPlayerDied();
 
-    if(FindSubString(GetName(GetLastPlayerDied()), "Bae") != -1) {
-	CreateObject(OBJECT_TYPE_CREATURE, "003_pc_baeithra_2", GetLocation(GetLastPlayerDied()));
-	}	
+	if(FindSubString(GetName(oDied), "Bae") != -1) {
+		object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
+		location lSafety = GetLocation(oSilverwingWP);
+		location lDeath = GetLocation(oDied);
+    	object oBae = CreateObject(OBJECT_TYPE_CREATURE, "003_pc_baeithra_2", lDeath);
+		SetImmortal(oBae, TRUE);
+		effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
+		effect eGhost = EffectCutsceneGhost();
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oDied, 1800.0);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oDied, 1800.0);
+		AssignCommand(oDied, ActionJumpToLocation(lSafety));
+		}	
 	
 	if(GetIsPC(GetLastPlayerDied()))
 		{SendMessageToAllDMs("!!!ONDEATH FOR " + GetName(GetLastPlayerDied()) + " FIRING!!!");}

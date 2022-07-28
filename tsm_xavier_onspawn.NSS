@@ -9,15 +9,10 @@ void main()
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_GOOD, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	
-	DelayCommand(5.0, ActionSpeakString("5 seconds", TALKVOLUME_TALK));
-	DelayCommand(10.0, ActionSpeakString("10 seconds", TALKVOLUME_TALK));
-	DelayCommand(15.0, ActionSpeakString("15 seconds", TALKVOLUME_TALK));
-	DelayCommand(20.0, ActionSpeakString("A surprise combatant! Amusing. Now die.", TALKVOLUME_TALK));
-	DelayCommand(22.0, ActionJumpToObject(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1)));
-	DelayCommand(25.0, ActionCastSpellAtObject(SPELL_MAGIC_MISSILE, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-	DelayCommand(25.0, ActionSpeakString("Well, if you won't die, then dance in my arena!", TALKVOLUME_TALK));
-	DelayCommand(30.0, ActionCastSpellAtObject(SPELL_TASHAS_HIDEOUS_LAUGHTER, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-	DelayCommand(30.0, ActionSpeakString("30 seconds", TALKVOLUME_TALK));
-	DelayCommand(60.0, ActionSpeakString("60 seconds", TALKVOLUME_TALK));
+	DelayCommand(25.0, ActionSpeakString("A surprise combatant? Amusing. Now die.", TALKVOLUME_TALK));
+	DelayCommand(27.0, ActionJumpToObject(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1)));
+	DelayCommand(30.0, ActionCastSpellAtObject(SPELL_MAGIC_MISSILE, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	DelayCommand(35.0, ActionSpeakString("Well, if you won't die, then enjoy the show!", TALKVOLUME_TALK));
+	DelayCommand(40.0, ActionCastSpellAtObject(SPELL_TASHAS_HIDEOUS_LAUGHTER, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	
    }

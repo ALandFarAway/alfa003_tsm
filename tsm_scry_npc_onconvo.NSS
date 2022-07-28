@@ -452,9 +452,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										int nValidTh = GetIsLocationValid(lThereB); 
 										// Jump to the target
 										DelayCommand(10.0, AssignCommand(oScryer, JumpToLocation(lThereB)));
-										FadeToBlack(oScryer, FADE_SPEED_MEDIUM, 5.0);
-								        DelayCommand(20.0, FadeFromBlack(oScryer, FADE_SPEED_MEDIUM));
-								 
+										DelayCommand(5.0, FadeToBlack(oScryer, FADE_SPEED_SLOW, 5.0));
+								        
 										DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							 			DelayCommand(fAway, AssignCommand(oScryer, ActionJumpToLocation(lHere)));
 										}
@@ -560,9 +559,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
 											DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
 											DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
-											DelayCommand(5.0, FadeToBlack(oViewer, FADE_SPEED_MEDIUM, 5.0));
-								        	DelayCommand(20.0, FadeFromBlack(oViewer, FADE_SPEED_MEDIUM));
-								 			DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
+											DelayCommand(5.0, FadeToBlack(oViewer, FADE_SPEED_SLOW, 5.0));
+								        	DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
 											DelayCommand(10.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 											}
