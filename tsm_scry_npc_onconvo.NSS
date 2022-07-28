@@ -435,18 +435,21 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								 effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 								 effect eGhost = EffectCutsceneGhost();
 								 effect eFreeze = EffectCutsceneImmobilize();
+								 
 								 float fAway = 60.0;
 								 object oScrySelf;
 								 if((sMatch == "Silverwing") || (sMatch == "Dez")) {
 										fAway = 420.0;
-										object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));
+										object oPortal = CreateObject(OBJECT_TYPE_PLACEABLE, "fx_portal_gen_small", GetLocation(oScryer));
 										DestroyObject(oPortal, 5.0); 
-										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
-										//DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
+										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oScryer, 1800.0));
+										DelayCommand(fAway - 1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oScryer, 1800.0));
 										int nValidTh = GetIsLocationValid(lThereB); 
 										// Jump to the target
-										DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThereB)));
-										
+										DelayCommand(10.0, AssignCommand(oScryer, JumpToLocation(lThereB)));
+										DelayCommand(10.0, FadeToBlack(oScryer, FADE_SPEED_MEDIUM, 5.0));
+								        DelayCommand(20.0, FadeFromBlack(oScryer, FADE_SPEED_MEDIUM));
+								 
 										DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 							 			DelayCommand(fAway, AssignCommand(oScryer, ActionJumpToLocation(lHere)));
 										}
@@ -552,9 +555,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway);
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway);
 											ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway);
-											DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
+											DelayCommand(10.0, FadeToBlack(oViewer, FADE_SPEED_MEDIUM, 5.0));
+								        	DelayCommand(20.0, FadeFromBlack(oViewer, FADE_SPEED_MEDIUM));
+								 			DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 											DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
-											DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
+											DelayCommand(10.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 											}
 									nViewer++;
 									oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
@@ -805,8 +810,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								}
 								
 								//Speak oScried's area and weather description 
+								if ((sMatch == "Silverwing") || (sMatch== "Dez")) {
+								ActionSpeakString( "Silver is injured, chained down on arena sands stained with the blood of monsters attacking him. Bae'ithra vanishes from before the mirror...and reappears within it, beside Silverwing. Your horrified fascination freezes you as you watch....", TALKVOLUME_TALK);
+								
+								}
+								else {
 								ActionSpeakString( GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
 								SendMessageToPC(oScryer, GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
+								}
 								
 								SetLocalLocation(OBJECT_SELF, "lScryStart", GetLocation(oScried));
 								location lStart = GetLocalLocation(OBJECT_SELF, "lScryStart");
