@@ -10,8 +10,8 @@ void main()
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_GOOD, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	
 	DelayCommand(25.0, ActionSpeakString("A surprise combatant? Amusing. Now die.", TALKVOLUME_TALK));
-	DelayCommand(30.0, ActionCastSpellAtObject(SPELL_MAGIC_MISSILE, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-	DelayCommand(35.0, ActionSpeakString("Well, if you won't die, then enjoy the show!", TALKVOLUME_TALK));
+	DelayCommand(30.0, ActionCastSpellAtObject(SPELL_FLAME_ARROW, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+	DelayCommand(35.0, ActionSpeakString("Well, if you won't die, then enjoy the show! *Casts at Bae'ithra", TALKVOLUME_TALK));
 	DelayCommand(40.0, ActionCastSpellAtObject(SPELL_TASHAS_HIDEOUS_LAUGHTER, GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), METAMAGIC_NONE, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	
    }

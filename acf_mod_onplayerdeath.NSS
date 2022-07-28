@@ -64,16 +64,7 @@ void main() {
 		DelayCommand(10.0, AssignCommand(oDied, ActionJumpToLocation(lSafety)));
 		AssignCommand(oBae, ClearAllActions(TRUE));
 		AssignCommand(oBae, ActionSpeakString("*Screams in sudden pain and staggers, clawing at his back", TALKVOLUME_TALK));
-		DelayCommand(10.0, AssignCommand(oBae, ClearAllActions(TRUE)));
-		DelayCommand(10.0, AssignCommand(oBae, ActionSpeakString("*Goes down, then pushes himself back up to his feet, fighting on", TALKVOLUME_TALK)));
 		DelayCommand(20.0, AssignCommand(oDied, ActionJumpToLocation(lSafety)));
-		DelayCommand(20.0, AssignCommand(oBae, ClearAllActions(TRUE)));
-		DelayCommand(20.0, AssignCommand(oBae, ActionSpeakString("*Goes to his knees, buckling backwards, arms outspread beneath the sky", TALKVOLUME_TALK)));
-		DelayCommand(20.0, AssignCommand(oBae, ActionSpeakString("I am ready, my kin! *Cries out", TALKVOLUME_TALK)));
-		DelayCommand(30.0, AssignCommand(oSilverwing, ActionSpeakString("*Now! Now I see hope for her salvation!", TALKVOLUME_TALK)));
-		DelayCommand(30.0, AssignCommand(oSilverwing, ActionCastSpellAtObject(SPELL_SUPERIOR_RESISTANCE, oBae, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-		effect ePoly = EffectPolymorph(POLYMORPH_TYPE_WYRMLING_WHITE, FALSE, FALSE);
-		DelayCommand(35.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ePoly, oBae, 1800.0));
 		}	
 	
 	if(GetIsPC(GetLastPlayerDied()))
