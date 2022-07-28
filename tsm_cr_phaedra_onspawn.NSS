@@ -30,12 +30,13 @@ void main() {
 	ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK);
 	
 	object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
-	while(oBertilak != OBJECT_INVALID) {
-		string sPCName = GetName(oBertilak);
+	object oPC = GetFirstPC(TRUE);
+	while(oPC != OBJECT_INVALID) {
+		string sPCName = GetName(oPC);
 		if(FindSubString(sPCName, "Bert") != -1) {
-			oBertilak = oBertilak;
+			oBertilak = oPC;
 			}
-		}
+		
 	oPC = GetNextPC(TRUE);
 	}
 	
