@@ -57,7 +57,7 @@ void main() {
 		effect eGhost = EffectCutsceneGhost();
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oDied, 1800.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oDied, 1800.0);
-		AssignCommand(oDied, ActionJumpToLocation(lSafety));
+		DelayCommand(10.0, AssignCommand(oDied, ActionJumpToLocation(lSafety)));
 		}	
 	
 	if(GetIsPC(GetLastPlayerDied()))
