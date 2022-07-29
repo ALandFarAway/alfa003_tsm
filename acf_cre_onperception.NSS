@@ -49,9 +49,9 @@ void main()
     // Custom code goes here.
 	object oPerceived = GetLastPerceived();
 	
-	if((GetIsDMPossessed(OBJECT_SELF)) && (GetIsPC(oPerceived) == FALSE)) 
-		{IgnoreTargetRulesEnqueueTarget(OBJECT_SELF, oPerceived);
-		}
+	//if((GetIsDMPossessed(OBJECT_SELF) == TRUE) && (GetIsPC(oPerceived) == FALSE)) 
+	//	{IgnoreTargetRulesEnqueueTarget(OBJECT_SELF, oPerceived);
+	//	}
 	
 	
 	ExecuteScript("acf_cre_ud_onperception", OBJECT_SELF);

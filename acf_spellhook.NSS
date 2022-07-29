@@ -149,8 +149,8 @@ void main()
 	//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
-	int nSHT = GetIsStandardHostileTarget(oTarget, oCaster);
-	SendMessageToAllDMs(GetName(oTarget) + "as StandardHostileTarget of " + GetName(oCaster) + " on spell " + IntToString(GetSpellId()) + " is " + IntToString(nSHT));	
+	//int nSHT = GetIsStandardHostileTarget(oTarget, oCaster);
+	//SendMessageToAllDMs(GetName(oTarget) + " as StandardHostileTarget of " + GetName(oCaster) + " on spell " + IntToString(GetSpellId()) + " is " + IntToString(nSHT));	
 	
 	//Stopping summons by non Banites in a Banite UnHallowed Area
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "rauvin_ruins") != -1) {
