@@ -47,25 +47,6 @@ void main() {
     ACR_ModuleOnPlayerDeath();
 	object oDied = GetLastPlayerDied();
 
-	if((FindSubString(GetName(oDied), "Bae") != -1) && (GetLocalInt(OBJECT_SELF, "BaeDeath") == 0)){
-		SetLocalInt(OBJECT_SELF, "BaeDeath", 1);
-		object oSilverwing = GetObjectByTag("003_cr_dragon_silver_dez", 0);
-		object oSilverwingWP = GetWaypointByTag("dqspx_arena_WP");
-		location lSafety = GetLocation(oSilverwingWP);
-		location lDeath = GetLocation(oDied);
-    	object oBae = CreateObject(OBJECT_TYPE_CREATURE, "003_pc_baeithra_2", lDeath);
-		SetImmortal(oBae, TRUE);
-		effect eVFX   = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
-		effect eGhost = EffectCutsceneGhost();
-		AssignCommand(oSilverwing, ClearAllActions(TRUE));
-		AssignCommand(oSilverwing, ActionSpeakString("*Whips around as Bae'ithra falls...and ROARS!", TALKVOLUME_TALK));
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oDied, 1800.0);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oDied, 1800.0);
-		DelayCommand(10.0, AssignCommand(oDied, ActionJumpToLocation(lSafety)));
-		AssignCommand(oBae, ClearAllActions(TRUE));
-		AssignCommand(oBae, ActionSpeakString("*Screams in sudden pain and staggers, clawing at his back", TALKVOLUME_TALK));
-		DelayCommand(20.0, AssignCommand(oDied, ActionJumpToLocation(lSafety)));
-		}	
 	
 	if(GetIsPC(GetLastPlayerDied()))
 		{SendMessageToAllDMs("!!!ONDEATH FOR " + GetName(GetLastPlayerDied()) + " FIRING!!!");}

@@ -27,7 +27,7 @@ void main() {
 	vector vSayen = GetPositionFromLocation(GetLocation(oSayen));
 	SetFacingPoint(vSayen, TRUE);
 	AssignCommand(OBJECT_SELF, ActionPlayAnimation(ANIMATION_FIREFORGET_KNEELTALK, 1.0, 3.0));
-	ActionSpeakString("Master Sayen. *Kneels, tears streaming from her good eye, pale-faced... and is ignored.", TALKVOLUME_TALK);
+	ActionSpeakString("Master.", TALKVOLUME_TALK);
 	
 	object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
 	object oPC = GetFirstPC(TRUE);
@@ -39,10 +39,5 @@ void main() {
 		
 	oPC = GetNextPC(TRUE);
 	}
-	
-	SendMessageToPC(oBertilak, "*You see Phaedra look up. When she finds you, she looks at you with murder in her eye.");
-    effect eFreeze = EffectCutsceneImmobilize();
-	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 15.0));
-	
-	 
+ 
 }

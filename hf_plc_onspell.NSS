@@ -23,7 +23,6 @@ void main()
 	
 	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
 		SetFirstName(oInvisoCaster, "Black Orb");
-		//ActionSpeakString("A green beam lances out at " + GetName(oCaster) + ".", TALKVOLUME_TALK);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oCaster, 3.0);
 		AssignCommand(oInvisoCaster, ActionCastSpellAtObject(SPELL_DISINTEGRATE, oCaster, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 	}

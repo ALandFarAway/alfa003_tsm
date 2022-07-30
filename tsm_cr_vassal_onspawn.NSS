@@ -21,12 +21,22 @@
 
 void main() {
 
-	//ActivateLongTermBuffs(OBJECT_SELF);
+	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
+	object oPC = GetFirstPC(TRUE);
+	while(oPC != OBJECT_INVALID) {
+		string sPCName = GetName(oPC);
+		if(FindSubString(sPCName, "Jhessi") != -1) {
+			oJhessi = oPC;
+			}
+		
+	oPC = GetNextPC(TRUE);
+	}
+ 
 	ClearAllActions(TRUE);
-	DelayCommand(0.5, ActionSpeakString("Master Sayen. *Many voices speak in chorus", TALKVOLUME_TALK));
-	effect eFreeze = EffectCutsceneImmobilize();
+	DelayCommand(0.5, ActionSpeakString("Mistress. Please free us...no, don't...freedom...banish...*weeping*...death...please...beg...serve...", TALKVOLUME_TALK));
+	ActionForceFollowObject(oJhessi, 0.5);
 	DelayCommand(1.0, ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF));
-	DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 25.0));
+	
 	 
 		
 	 
