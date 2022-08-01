@@ -46,9 +46,10 @@ void main()
 	
 
 //Action queue for OOC Scrying Speaker that handles most Scrying interaction
-if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
-	{object oDupe = GetLocalObject(GetLastSpeaker(), "oDupe");;
-	location lHere;
+if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oScryer")) && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
+	{object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
+	 object oDupe = GetLocalObject(GetLastSpeaker(), "oDupe");;
+	 location lHere;
 	 object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerA")){
 		lHere = GetLocalLocation(oScry, "lViewerA");
@@ -79,7 +80,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 	 int nRep = 0;
 	 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
 		object oCreator = GetEffectCreator(eEffect);
-		if(oCreator == OBJECT_SELF) {
+		if(oCreator == oScrySpeak) {
 			RemoveEffect(GetLastSpeaker(), eEffect);
 			}
 		eEffect = GetNextEffect(GetLastSpeaker());
@@ -513,49 +514,57 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									
 								int nViewer = 1;
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
-								while(oViewer != OBJECT_INVALID) {
-									if((oViewer != oScryer) && (oViewer != OBJECT_SELF)) {
+								while(nViewer < 10) {
+									if((oViewer != oScryer) && (oViewer != OBJECT_SELF) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
 										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
 										SetLocalLocation(oViewer, "lHere", lViewer);
 										if(nViewer == 1) {
 											oViewerA = oViewer;
 											SetLocalObject(oScry, "oViewerA", oViewer);
+											SetLocalObject(oScrySend, "oViewerA", oViewer);
 											SetLocalLocation(oScry, "lViewerA", lViewer);
 											}
 										if(nViewer == 2) {
 											oViewerB = oViewer;
 											SetLocalObject(oScry, "oViewerB", oViewer);
+											SetLocalObject(oScrySend, "oViewerB", oViewer);
 											SetLocalLocation(oScry, "lViewerB", lViewer);
 											}
 										if(nViewer == 3) {
 											oViewerC = oViewer;
 											SetLocalObject(oScry, "oViewerC", oViewer);
+											SetLocalObject(oScrySend, "oViewerC", oViewer);
 											SetLocalLocation(oScry, "lViewerC", lViewer);
 											}
 										if(nViewer == 4) {
 											oViewerD = oViewer;
 											SetLocalObject(oScry, "oViewerD", oViewer);
+											SetLocalObject(oScrySend, "oViewerD", oViewer);
 											SetLocalLocation(oScry, "lViewerD", lViewer);
 											}
 										if(nViewer == 5) {
 											oViewerE = oViewer;
 											SetLocalObject(oScry, "oViewerE", oViewer);
+											SetLocalObject(oScrySend, "oViewerE", oViewer);
 											SetLocalLocation(oScry, "lViewerE", lViewer);
 											}
 										if(nViewer == 6) {
 											oViewerF = oViewer;
 											SetLocalObject(oScry, "oViewerF", oViewer);
+											SetLocalObject(oScrySend, "oViewerF", oViewer);
 											SetLocalLocation(oScry, "lViewerF", lViewer);
 											}
 										if(nViewer == 7) {
 											oViewerG = oViewer;
 											SetLocalObject(oScry, "oViewerG", oViewer);
+											SetLocalObject(oScrySend, "oViewerG", oViewer);
 											SetLocalLocation(oScry, "lViewerG", lViewer);
 											}
 										if(nViewer == 8) {
 											oViewerH = oViewer;
 											SetLocalObject(oScry, "oViewerH", oViewer);
+											SetLocalObject(oScrySend, "oViewerH", oViewer);
 											SetLocalLocation(oScry, "lViewerH", lViewer);
 											}
 											
