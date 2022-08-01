@@ -1,25 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  System Name : ACR Configuration File
-//     Filename : acf_plc_onused.nss
-//    $Revision:: 183        $ current version of the file
-//        $Date:: 2006-12-21#$ date the file was created or modified
-//       Author : Ronan
+//  System Name : Portals
+//     Filename : tsm_portal_plc_onuse.nss
+//        $Date:: 2022-08-01 
+//       Author : Wynna
 //
-//  Local Variable Prefix =
+//  This script looks for a variable upon a portal object that identifies the portal
+//  key and destination, with options for keys that are items in the traveller's 
+//  inventory or worn, and multiple possible destinations. 
+//  It is not updated in ACR updates.
 //
-//  Dependencies external of nwscript:
-//
-//  Description
-//  This script calls the ACR's OnUsed code for placeables, and any
-//  custom code a server may need. It is not updated in ACR updates.
-//
-//  Revision History
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-// Includes ////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
 #include "acr_placeable_i"
 #include "dmfi_inc_langexe" 
@@ -27,16 +17,6 @@
 
 void main() {
  
-
-	//
-	// GetLastUsedBy must not be called if OBJECT_SELF has been deleted.  If we
-	// are called by a DelayCommand / ExecuteScript continuation then it is
-	// possible that the object has been deleted in the mean time.
-	//
-	// The test for OBJECT_SELF being invalid has to be done before calling the
-	// ACR hook.
-	//
-
 	if (!GetIsObjectValid(OBJECT_SELF))
 		return;
 
@@ -61,55 +41,77 @@ void main() {
 	string sMyTargetFive = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP5");
 	string sMyTargetSix = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP6");
 	object oMyWaypoint = GetWaypointByTag(sMyTarget);
-	
+	effect eVis = EffectVisualEffect(VFX_IMP_TORNADO);
+    effect eAoe = EffectVisualEffect(VFX_HIT_AOE_CONJURATION);
+    effect eCessate = EffectVisualEffect(VFX_DUR_CESSATE_NEUTRAL);
+    
 //	SendMessageToPC(oTraveller, "1. oMyWaypoint = " + GetName(oMyWaypoint));
 //	oMyWaypoint = GetObjectByTag(sMyTarget, 0);	 
 	//SendMessageToPC(oTraveller, "2. oMyWaypoint = " + GetName(oMyWaypoint));
+	if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
+		 oMyWaypoint = GetLocalObject(OBJECT_SELF, "sCurrent_WP");
+		 ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+    	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
+         DelayCommand(2.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));
+		 }
 	
-	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated") == 0)) {
+	else if(GetLocalInt(OBJECT_SELF, "Activated") == 0) {
 		object oMask = GetItemInSlot(INVENTORY_SLOT_HEAD, oTraveller);
+		object oKey = GetItemPossessedBy(oTraveller, sKeyTag);
 		
-		if((GetTag(oMask) == sKeyTag) || (GetTag(oMask) == sKeyTagTwo)  || (GetTag(oMask) == sKeyTagThree) || (GetTag(oMask) == sKeyTagFour) || (GetTag(oMask) == sKeyTagFive) || (GetTag(oMask) == sKeyTagSix)){
+		if((sKeyTag == "") || ((sKeyTag != "" ) && (oKey != OBJECT_INVALID))) {
+			SetLocalInt(OBJECT_SELF, "Activated", 1);
+		    oMyWaypoint = GetWaypointByTag(sMyTarget);
+			}
+		
+		//Custom coding for campaign Mask objects
+		else if((GetTag(oMask) == sKeyTag) || (GetTag(oMask) == sKeyTagTwo)  || (GetTag(oMask) == sKeyTagThree) || (GetTag(oMask) == sKeyTagFour) || (GetTag(oMask) == sKeyTagFive) || (GetTag(oMask) == sKeyTagSix)){
 		 //SendMessageToPC(oTraveller, "Activated");
-		 SetLocalInt(OBJECT_SELF, "Activated", 1);
+		 	SetLocalInt(OBJECT_SELF, "Activated", 1);
 		 
-		 if(GetTag(oMask) == sKeyTag)
-		 	{//SendMessageToPC(oTraveller, "1 " + sKeyTag + "..." + sMyTarget);
-		      oMyWaypoint = GetWaypointByTag(sMyTarget);}
-		 else if(GetTag(oMask) == sKeyTagTwo)
-		 	{//SendMessageToPC(oTraveller, "2 " + sKeyTagTwo + "..." + sMyTargetTwo);
-		      oMyWaypoint = GetWaypointByTag(sMyTargetTwo);
-			  //SendMessageToPC(oTraveller, "2b. oMyWaypoint = " + GetName(oMyWaypoint)); 
-			  }
-		 else if(GetTag(oMask) == sKeyTagThree)
-		 	{//SendMessageToPC(oTraveller, "3 " + sKeyTagThree + "..." + sMyTargetThree);
-		      oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
-		 else if(GetTag(oMask) == sKeyTagFour)
-		 	{//SendMessageToPC(oTraveller, "4 " + sKeyTagFour + "..." + sMyTargetFour);
-		      oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
-		 else if(GetTag(oMask) == sKeyTagFive)
-		 	{//SendMessageToPC(oTraveller, "5 " + sKeyTagFive + "..." + sMyTargetFive);
-		      oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
-		 else if(GetTag(oMask) == sKeyTagSix)
-		 	{//SendMessageToPC(oTraveller, "6 " + sKeyTagSix + "..." + sMyTargetSix);
-		      oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
-		
-		 //SendMessageToPC(oTraveller, "Waypoint = " + GetName(oMyWaypoint));
+			 if(GetTag(oMask) == sKeyTag)
+			 	{//SendMessageToPC(oTraveller, "1 " + sKeyTag + "..." + sMyTarget);
+			      oMyWaypoint = GetWaypointByTag(sMyTarget);}
+			 else if(GetTag(oMask) == sKeyTagTwo)
+			 	{//SendMessageToPC(oTraveller, "2 " + sKeyTagTwo + "..." + sMyTargetTwo);
+			      oMyWaypoint = GetWaypointByTag(sMyTargetTwo);
+				  //SendMessageToPC(oTraveller, "2b. oMyWaypoint = " + GetName(oMyWaypoint)); 
+				  }
+			 else if(GetTag(oMask) == sKeyTagThree)
+			 	{//SendMessageToPC(oTraveller, "3 " + sKeyTagThree + "..." + sMyTargetThree);
+			      oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
+			 else if(GetTag(oMask) == sKeyTagFour)
+			 	{//SendMessageToPC(oTraveller, "4 " + sKeyTagFour + "..." + sMyTargetFour);
+			      oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
+			 else if(GetTag(oMask) == sKeyTagFive)
+			 	{//SendMessageToPC(oTraveller, "5 " + sKeyTagFive + "..." + sMyTargetFive);
+			      oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
+			 else if(GetTag(oMask) == sKeyTagSix)
+			 	{//SendMessageToPC(oTraveller, "6 " + sKeyTagSix + "..." + sMyTargetSix);
+			      oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
+				}	
+		 
+		//SendMessageToPC(oTraveller, "Waypoint = " + GetName(oMyWaypoint));
 		 SetLocalObject(OBJECT_SELF, "sCurrent_WP", oMyWaypoint);
 		 object oFinalWaypoint = GetLocalObject(OBJECT_SELF, "sCurrent_WP");
 		 //SendMessageToPC(oTraveller, "FinalWaypoint = " + GetName(oFinalWaypoint));
-		 AssignCommand(oTraveller, ActionJumpToObject(oFinalWaypoint));
-		 DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
-		
-		}
+		 if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+	    	 DelayCommand(2.0, AssignCommand(oTraveller, ActionJumpToObject(oFinalWaypoint)));
+			 DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
+   		  	 DelayCommand(57.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCessate, OBJECT_SELF, 3.0));
+   		  }
+		  else { ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+	    	     SendMessageToPC(oTraveller, "Nothing happens.");
+				 if((d20(1) + GetAbilityModifier(ABILITY_WISDOM, oTraveller)) >= 10) {
+				 	SendMessageToPC(oTraveller, "You sense the potential power in this object");
+					}
+		  } 
 	}
 	
-	if(GetLocalInt(OBJECT_SELF, "Activated")==1)
-		{oMyWaypoint = GetLocalObject(OBJECT_SELF, "sCurrent_WP");
-		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
-		 }
 	
-
+	     
 	}	
 	
 		

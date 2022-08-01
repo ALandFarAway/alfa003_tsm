@@ -46,7 +46,54 @@ void main()
 	
 
 //Action queue for OOC Scrying Speaker that handles most Scrying interaction
-if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) {
+if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
+	{object oDupe;
+	location lHere;
+	 object oScry = GetLocalObject(OBJECT_SELF, "oScry");
+		if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerA")){
+		lHere = GetLocalLocation(oScry, "lViewerA");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerB")){
+		lHere = GetLocalLocation(oScry, "lViewerB");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerC")){
+		lHere = GetLocalLocation(oScry, "lViewerC");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerD")){
+		lHere = GetLocalLocation(oScry, "lViewerD");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerE")){
+		lHere = GetLocalLocation(oScry, "lViewerE");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerF")){
+		lHere = GetLocalLocation(oScry, "lViewerF");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerG")){
+		lHere = GetLocalLocation(oScry, "lViewerG");
+		}
+	if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerH")){
+		lHere = GetLocalLocation(oScry, "lViewerH");
+		}
+			
+	 effect eEffect = GetFirstEffect(GetLastSpeaker());
+	 int nRep = 0;
+	 while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+		object oCreator = GetEffectCreator(eEffect);
+		if(oCreator == OBJECT_SELF) {
+			RemoveEffect(GetLastSpeaker(), eEffect);
+			}
+		eEffect = GetNextEffect(GetLastSpeaker());
+		nRep ++;
+		}
+			
+		if(GetIsObjectValid(oDupe)) {
+			AssignCommand(GetLastSpeaker(), ActionJumpToLocation(lHere));
+			}		
+		SendMessageToPC(GetLastSpeaker(), "Speaking breaks your immersion.");		
+	}
+	
+if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) 
+	{
 		//Get existing local objects set by Spellhook
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		string sScryName = GetName(oScry);
@@ -473,34 +520,42 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										if(nViewer == 1) {
 											oViewerA = oViewer;
 											SetLocalObject(oScry, "oViewerA", oViewer);
+											SetLocalLocation(oScry, "lViewerA", lViewer);
 											}
 										if(nViewer == 2) {
 											oViewerB = oViewer;
 											SetLocalObject(oScry, "oViewerB", oViewer);
+											SetLocalLocation(oScry, "lViewerB", lViewer);
 											}
 										if(nViewer == 3) {
 											oViewerC = oViewer;
 											SetLocalObject(oScry, "oViewerC", oViewer);
+											SetLocalLocation(oScry, "lViewerC", lViewer);
 											}
 										if(nViewer == 4) {
 											oViewerD = oViewer;
 											SetLocalObject(oScry, "oViewerD", oViewer);
+											SetLocalLocation(oScry, "lViewerD", lViewer);
 											}
 										if(nViewer == 5) {
 											oViewerE = oViewer;
 											SetLocalObject(oScry, "oViewerE", oViewer);
+											SetLocalLocation(oScry, "lViewerE", lViewer);
 											}
 										if(nViewer == 6) {
 											oViewerF = oViewer;
 											SetLocalObject(oScry, "oViewerF", oViewer);
+											SetLocalLocation(oScry, "lViewerF", lViewer);
 											}
 										if(nViewer == 7) {
 											oViewerG = oViewer;
 											SetLocalObject(oScry, "oViewerG", oViewer);
+											SetLocalLocation(oScry, "lViewerG", lViewer);
 											}
 										if(nViewer == 8) {
 											oViewerH = oViewer;
 											SetLocalObject(oScry, "oViewerH", oViewer);
+											SetLocalLocation(oScry, "lViewerH", lViewer);
 											}
 										SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
@@ -517,7 +572,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
-								string sSubjectArea = "somewhere where you can see no identifying details of the surroundings.";	
+								string sSubjectArea = GetLocalString(oScried, "ACR_SCRY_AREA_DESC");
+								if(sSubjectArea == "") {
+									sSubjectArea = GetLocalString(oArea, "ACR_AREA_DESC");
+									}
+								else if(sSubjectArea == "") {
+									sSubjectArea = "somewhere where you can see no identifying details of the surroundings.";	
+									}
 								string sAreaTag = GetTag(oArea);
 								 
 								
@@ -1150,7 +1211,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 	
 	
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the scrying object as a nickname associated with a ResRef
-if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oTarget"))  && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
+if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalObject(OBJECT_SELF, "oScryer"))) {
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");

@@ -90,9 +90,9 @@ void main()
 				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
 				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImage, "sPScryerName"));
 				if((GetIsPC(oTarget) == FALSE) || (GetIsDMPossessed(oTarget) == TRUE)) {
-					SendMessageToPC(oScryer, "Focus: sTargetRes = " + GetResRef(oTarget));
+					//SendMessageToPC(oScryer, "Focus: sTargetRes = " + GetResRef(oTarget));
 					ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
-					SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
+					//SendMessageToPC(oScryer, "Focus: sPTargetRes = " + ACR_GetPersistentString(oImage, "sPTargetRes"));
 				}
 				DestroyObject(oFocus);
 				
@@ -106,13 +106,16 @@ void main()
 			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 			int nSpotCheck = d20(1) + nSpotRank;
 			if(nSpotCheck >= nDexCheck) {
-				SendMessageToPC(oScryer, "You  have been detected!");
-				SendMessageToPC(oTarget, "You feel observed.");
+				SendMessageToPC(oScryer, "You are clumsier than your target is perceptive.");
+				SendMessageToPC(oTarget, "You feel unsettled, under scrutiny.");
 				if(GetIsPC(oTarget) == FALSE) {
 					AssignCommand(oTarget, ActionMoveAwayFromObject(oScryer, FALSE, 20.0));
 					SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
-					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time.");
+					SendMessageToPC(oScryer, "Either self-conscious (if friendly) or suspicious (if foe), your target moves away before you can even start to concentrate, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time.");
 					return;
+					}
+				else {SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
+					 SendMessageToPC(oScryer, "You are unable to hold the reflection of your subject in the " + sFocusName + ", breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time." );
 					}
 				}
 			
