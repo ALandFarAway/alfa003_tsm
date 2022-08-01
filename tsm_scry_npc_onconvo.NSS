@@ -47,7 +47,7 @@ void main()
 
 //Action queue for OOC Scrying Speaker that handles most Scrying interaction
 if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
-	{object oDupe;
+	{object oDupe = GetLocalObject(GetLastSpeaker(), "oDupe");;
 	location lHere;
 	 object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerA")){
@@ -487,7 +487,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScrySelf, fScryTimer);
 								DestroyObject(oScrySelf, fAway);
 								// Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
-								DelayCommand(3.0, FadeToBlack(oScryer, FADE_SPEED_SLOWEST, 5.0));
+								DelayCommand(4.0, FadeToBlack(oScryer, FADE_SPEED_SLOWEST, 5.0));
 								DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
 								DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
 								DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
@@ -501,7 +501,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							    DelayCommand(fAway - 0.5, AssignCommand(oScryer, ClearAllActions(TRUE)));
 								DelayCommand(fAway, AssignCommand(oScryer, JumpToLocation(lHere)));
 								
-								ActionSpeakString("Every person within 10 feet can see the images in the mirror as clearly as if the viewer is there.", TALKVOLUME_TALK);
+								ActionSpeakString("Every person within 10 feet can see the images in the " + GetName(oScry) + " as clearly as if the viewer is there.", TALKVOLUME_TALK);
 								object oViewerA;
 								object oViewerB;
 								object oViewerC;
@@ -517,6 +517,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									if((oViewer != oScryer) && (oViewer != OBJECT_SELF)) {
 										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
+										SetLocalLocation(oViewer, "lHere", lViewer);
 										if(nViewer == 1) {
 											oViewerA = oViewer;
 											SetLocalObject(oScry, "oViewerA", oViewer);
@@ -557,14 +558,30 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											SetLocalObject(oScry, "oViewerH", oViewer);
 											SetLocalLocation(oScry, "lViewerH", lViewer);
 											}
+											
+											
+										object oDupeView;
+										if(!GetIsDMPossessed(oViewer)) {
+											oDupeView = CopyObject(oViewer, GetLocation(oViewer), OBJECT_INVALID, "003_cr_scry_dupe");
+											}
+										else {
+											string sDupeResView = GetResRef(oViewer);
+											oDupeView = CreateObject(OBJECT_TYPE_CREATURE, sDupeResView, GetLocation(oViewer));
+											}
+													
+										SetLocalObject(oViewer, "oDupe", oDupeView);
+										ChangeToStandardFaction(oDupeView, STANDARD_FACTION_COMMONER);
+										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupeView, fAway);
+										DestroyObject(oDupeView, fAway);
+									
 										SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
-										DelayCommand(5.0, FadeToBlack(oViewer, FADE_SPEED_SLOWEST, 5.0));
+										DelayCommand(4.0, FadeToBlack(oViewer, FADE_SPEED_SLOWEST, 5.0));
 										DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 										DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
-										DelayCommand(10.0, AssignCommand(oViewer, JumpToLocation(lThere)));
+										DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 									}
 								nViewer++;
 								oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
