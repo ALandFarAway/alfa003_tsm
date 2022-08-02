@@ -484,6 +484,7 @@ if(GetSpellId() == 3068) {
 	int nCasterType = GetLastSpellCastClass();
 	object oTarget = GetSpellTargetObject();
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
+	SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
 	object oScry;
 	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (nCasterType == CLASS_TYPE_DRUID)) {
 		location lTarget = GetLocation(oScryer);
