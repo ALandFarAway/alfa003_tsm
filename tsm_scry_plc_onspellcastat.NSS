@@ -43,14 +43,14 @@ void main() {
 	 
 	 SendMessageToAllDMs("plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
 	 SendMessageToAllDMs("plc oncastat: nLastSpell = " + IntToString(nLastSpell));
-	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && (nCasterType == CLASS_TYPE_CLERIC)) {
+	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
 	    SetItemIcon(oFocus, 1896);
 		}
 	 
-	 else if((nLastSpell == 3068) && (sResRef == "abr_pl_so_pool") && (nCasterType == CLASS_TYPE_DRUID)) {
+	 else if((nLastSpell == 3068) && (sResRef == "abr_pl_so_pool") && ((nCasterType == CLASS_TYPE_DRUID) || (nCasterType == CLASS_TYPE_INVALID))) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
 		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from " + GetName(oTarget) + ".");
