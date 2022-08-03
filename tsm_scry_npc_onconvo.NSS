@@ -294,20 +294,23 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						while(oToken != OBJECT_INVALID) {
 							string sTokenTag = GetTag(oToken);
 							string sPTargetName = ACR_GetPersistentString(oToken, "sPTargetName");
+							string sLTargetName = GetLocalString(oToken, "sTargetName");
 							int nPosMatch = FindSubString(sMatch, "'", 0);
-							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)))) && (sPTargetName != "") && (sTokenTag != "abr_it_scry_kit")) {
+							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sLTargetName == sScriedName) || (sLTargetName == SpliceString(sMatch, nPosMatch, 1)) )) && (sPTargetName != "") && (sTokenTag != "abr_it_scry_kit")) {
 								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
+								string sLTargetNick = GetLocalString(oToken, "sTargetNick");
 								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								string sScryerName = GetName(oScryer);
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
+								string sLScryerName = GetLocalString(oToken, "sScryerName");
 								//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
 								int nPosScryer = FindSubString(sScryerName, "'", 0);
 								int nScryer = 0; 
 								if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPosScryer, 1))) {
 									nScryer = 1;
 									}
-								if((sPTargetName == sScriedName) || (sPTargetNick == sMatch)  || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sPTargetNick == SpliceString(sMatch, nPosMatch, 1))) {
+								if((sPTargetName == sScriedName) || (sPTargetNick == sMatch) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sPTargetNick == SpliceString(sMatch, nPosMatch, 1))|| (sLTargetName == sScriedName) || (sLTargetNick == sMatch) || (sLTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sLTargetNick == SpliceString(sMatch, nPosMatch, 1))) {
 									if(FindSubString(sTokenTag, "imag", 0) != -1) {
 										nImage = 1;
 										if(nConnection < 2) {nConnection = 2;}
@@ -383,6 +386,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							nWillSaveBase = GetWillSavingThrow(oScried);
 							}
 						int nWillSave = nWillSaveRoll + nWillSaveBase;
+						if(oScryer == oScried) {
+							nWillSave = nDC-1;
+						}
 						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 						if(nWillSave >= nDC){
@@ -390,7 +396,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
 								SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
-								if(nWillSave >= nDC + 5){
+								if(nWillSave >= nDC + 10){
 									SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 									}
 								SetLocalInt(oScry, "nScryActive", 0);
