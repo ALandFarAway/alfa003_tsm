@@ -82,7 +82,7 @@ void main()
 	
 	int nDexRank = GetAbilityModifier(ABILITY_DEXTERITY, oScryer);
 	int nDexRoll = d20(1);
-	int nDexCheck = nDexCheck + nDexRank;
+	int nDexCheck = nDexRoll + nDexRank;
 	int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
 	int nSpotRoll = d20(1);
 	int nSpotCheck = nSpotRoll + nSpotRank;
@@ -163,7 +163,6 @@ void main()
 	
 	//PCs who got this far must make a concentration check vs. a DC based on a d20 + the averaged ability modifiers of the target squared to go to Familiar level			
 	if((oTarget==oScryer) || ((GetIsDMPossessed(oScryer)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE))  || ((GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)))  {
-		SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Dexterity: *" + sSuccess + "*: " + IntToString(nDexRoll) + " + " + IntToString(nDexRank) + " = " + IntToString(nDexCheck) + " vs DC" + IntToString(nSpotCheck) + "</color>");
 		if(oTarget==oScryer) {
 			SendMessageToPC(oScryer, "You imbue your own defining characteristics into the " + sFocusName + ". Your image shimmers into the " + sFocusName + " in a lifelike, 3D representation, occasionally blinking or changing expression.");
 			} 
