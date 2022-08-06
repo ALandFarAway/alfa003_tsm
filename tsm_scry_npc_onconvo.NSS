@@ -521,7 +521,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								int nViewer = 1;
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 								while(nViewer < 10) {
-									if((oViewer != oScryer) && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
+									if((oViewer != oScryer) && (oViewer != GetLocalObject(oScry, "oDupe")) && (GetTag(oViewer) != "003_cr_scry_dupe") && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
 										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
 										SetLocalLocation(oViewer, "lHere", lViewer);
@@ -585,6 +585,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											}
 													
 										SetLocalObject(oViewer, "oDupe", oDupeView);
+										SetLocalObject(oScry, "oDupe", oDupeView);
 										ChangeToStandardFaction(oDupeView, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupeView, fAway);
 										DestroyObject(oDupeView, fAway);
