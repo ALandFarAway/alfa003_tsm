@@ -520,7 +520,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									
 								int nViewer = 1;
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
-								while(nViewer < 10) {
+								while((nViewer < 10) && (oViewer != OBJECT_INVALID)) {
 									if((oViewer != oScryer) && (oViewer != GetLocalObject(oScry, "oDupe")) && (GetTag(oViewer) != "003_cr_scry_dupe") && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
 										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
@@ -573,7 +573,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											SetLocalObject(oScrySend, "oViewerH", oViewer);
 											SetLocalLocation(oScry, "lViewerH", lViewer);
 											}
-											
 											
 										object oDupeView;
 										if(!GetIsDMPossessed(oViewer)) {

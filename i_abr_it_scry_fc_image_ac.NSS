@@ -168,10 +168,10 @@ void main()
 			} 
 		else if(GetIsDMPossessed(oScryer)) {
 			SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Dexterity: *" + sSuccess + "*: " + IntToString(nDexRoll) + " + " + IntToString(nDexRank) + " = " + IntToString(nDexCheck) + " vs DC" + IntToString(nSpotCheck) + "</color>");
-			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + sTargetName + " and focus your perception of them into the " + sFocusName + ". The image of " + sTargetName + "within it animates, taking on depth and movement, occasionally blinking or changing expression.");
+			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + sTargetName + " and focus your perception of them into the " + sFocusName + ". The image of " + sTargetName + " within it animates, taking on depth and movement, occasionally blinking or changing expression.");
 			}
 		else {
-			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + sTargetName + " and focus your perception of them into the " + sFocusName + ". The image of " + sTargetName + "within it animates, taking on depth and movement, occasionally blinking or changing expression.");
+			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + sTargetName + " and focus your perception of them into the " + sFocusName + ". The image of " + sTargetName + " within it animates, taking on depth and movement, occasionally blinking or changing expression.");
 			}
 		object oImago = CreateItemOnObject("abr_it_scry_fc_imago", oScryer, 1);
 		
