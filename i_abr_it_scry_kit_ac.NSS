@@ -70,7 +70,7 @@ void main()
 				}
 				
 			SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Sleight of Hand: *" + sSuccess + "*: " + IntToString(nSleightRoll) + " + " + IntToString(nSleightRank) + " = " + IntToString(nSleightCheck) + " vs DC" + IntToString(nPickDC) + "</color>");
-			SendMessageToPC(oScryer, "nPickDC = " + IntToString(nPickDC));
+			//SendMessageToPC(oScryer, "nPickDC = " + IntToString(nPickDC));
 			int nSpotBonus = 0;
 			if(nSleightRoll == 1) 	{
 				nSpotBonus = 5;
@@ -212,7 +212,7 @@ void main()
 		}
 	else {
 		ACR_SetPersistentString(oToken, "sPScryerName", sScryer);
-		SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
+		//SendMessageToPC(oScryer, "Kit: sPScryerName = " + ACR_GetPersistentString(oToken, "sPScryerName"));
 		}
 		
 	if(FindSubString(sTarget, "'") != -1) {
@@ -224,7 +224,7 @@ void main()
 		}
 	else {
 		ACR_SetPersistentString(oToken, "sPTargetName", sTarget);
-		SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
+		//SendMessageToPC(oScryer, "Kit: sPTargetName = " + ACR_GetPersistentString(oToken, "sPTargetName"));
 		}
 		
 		

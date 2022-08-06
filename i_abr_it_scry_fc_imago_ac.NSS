@@ -83,20 +83,21 @@ void main()
 		nScryer = 1;
 		}
 	
+	//Imagos can be used on a scrying object placeable to transfer the knowledge stored on it							
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && ((GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oTarget) == OBJECT_TYPE_TRIGGER))) {
 		
 			if(nScryer == 1) {
 				AssignCommand(oTarget, ActionSpeakString("*A lifelike, animated image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
 				SendMessageToPC(oScryer, "You feel the match of your divine or arcane signature resonate back from this Scrying " + sFocusType + ", as its creator.  Future scrying of this subject will benefit from the familiarity imbued herewith.");	
-			}
+				}
 			if(nScryer == 0) {
 				AssignCommand(oTarget, ActionSpeakString("*A nearly translucent, roughly sketched image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
 				SendMessageToPC(oScryer, "The arcane signature of this Scrying " + sFocusType + " and its holder are not a match. Future scrying of this subject will be at secondhand knowledge only.");	
-			}
+				}
 			
 			if(sTargetNick != "") {
 				SendMessageToPC(oScryer, sPTargetName + "'s identity is already imbued into this " + sTargetName + " under the nickname " + sTargetNick);	
-			}
+				}
 			
 			else if(sTargetNick == "") {
 				//Create undetectable OOC Scrying Namer at location of Scrying Object to receive nickname for stored scrying target

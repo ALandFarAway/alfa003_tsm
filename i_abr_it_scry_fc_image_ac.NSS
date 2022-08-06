@@ -79,25 +79,37 @@ void main()
 	else if(fDCAbility < 5.5)
 		{nDCAbility = 5;}
 	int nDC = nDCRoll + nDCAbility;
-	//SendMessageToPC(oScryer, IntToString(nDCRoll) + " + " + IntToString(nDCAbility) + " = " + IntToString(nDC));	
+	
+	int nDexRank = GetAbilityModifier(ABILITY_DEXTERITY, oScryer);
+	int nDexRoll = d20(1);
+	int nDexCheck = nDexCheck + nDexRank;
+	int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
+	int nSpotRoll = d20(1);
+	int nSpotCheck = nSpotRoll + nSpotRank;
+	string sSuccess = "success";
+	if (nDexCheck < nSpotCheck) {
+		sSuccess = "failure";
+		}
+	
 	int nPos = FindSubString(sScryerName, "'", 0);
 	int nScryer = 0;
 	if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPos, 1))) {
 		nScryer = 1;
 		}
-								
+		
+	//Images can be used on a scrying object placeable to transfer the knowledge stored on it							
 	if((FindSubString(GetTag(oTarget), "_SCRY") != -1) && ((GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oTarget) == OBJECT_TYPE_TRIGGER))) {
 			if(nScryer == 1) {
 				AssignCommand(oTarget, ActionSpeakString("*A one-dimensional, still image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
 				SendMessageToPC(oScryer, "You feel the match of your divine or arcane signature resonate back from this Scrying " + sFocusType + ", as its creator.  Scrying of this subject while holding this Scrying " + sFocusType + " will benefit from the firsthand knowledge imbued herewith.");	
-			}
+				}
 			if(nScryer == 0) {
 				AssignCommand(oTarget, ActionSpeakString("*A nearly translucent, roughly sketched image of " + sPTargetName + " appears in the " + sTargetName, TALKVOLUME_TALK));
 				SendMessageToPC(oScryer, "The arcane signature of this Scrying " + sFocusType + " and its holder are not a match. Scrying of this subject while holding this Scrying " + sFocusType + " will be at secondhand knowledge only.");	
-			}
+				}
 			if(sTargetNick != "") {
 				SendMessageToPC(oScryer, sPTargetName + "'s identity is already imbued into this " + sTargetName + " under the nickname " + sTargetNick);	
-			}
+				}
 			
 			else if(sTargetNick == "") {
 				//Create undetectable OOC Scrying Namer at location of Scrying Object to receive nickname for stored scrying target
@@ -119,76 +131,79 @@ void main()
 		 SendMessageToPC(oScryer, "This image is of somebody other than the person you just attempted to commit to it. You cannot enhance your knowledge of somebody by focusing on somebody else.");
 		 return;
 		 }
-	else if((GetObjectType(oTarget) == OBJECT_TYPE_CREATURE) && (sTargetName == sPTargetName) && (sPTargetName != "")) {
-		if((GetLocalInt(oTarget, "Focus_" + sScryerName) == 0) || (GetIsDMPossessed(oScryer))) {
-			 DelayCommand(900.0, SetLocalInt(oTarget, "Focus_" + sScryerName, 0));
-			
-			int nDexRank = GetAbilityModifier(ABILITY_DEXTERITY, oScryer);
-			int nDexCheck = d20(1) + nDexRank;
-			int nSpotRank = GetSkillRank(SKILL_SPOT, oTarget, FALSE);
-			int nSpotCheck = d20(1) + nSpotRank;
+		 
+	if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 2) {
+		SendMessageToPC(oScryer, "You have recently tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focus them into the " + sFocusName + ". You will have to try again at a later time.");
+		return;
+		}
+	
+	if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 1) {
+		SendMessageToPC(oScryer, "You have recently memorized the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focused them into the Scrying " + sFocusType + ". You will have to try to improve on your understandings at a later time.");
+		return;
+		}
+		
+	//For PCs attempting to imbue a focus, first run a dex check vs. their target's spot
+	if((!GetIsDMPossessed(oScryer)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
+			SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Dexterity: *" + sSuccess + "*: " + IntToString(nDexRoll) + " + " + IntToString(nDexRank) + " = " + IntToString(nDexCheck) + " vs DC" + IntToString(nSpotCheck) + "</color>");
 			if(nSpotCheck >= nDexCheck) {
-				SendMessageToPC(oScryer, "You  have been detected!");
-				SendMessageToPC(oTarget, "You feel observed.");
+				SendMessageToPC(oScryer, "You are clumsier than your target is perceptive.");
+				SendMessageToPC(oTarget, "You feel unsettled, under scrutiny.");
 				if(GetIsPC(oTarget) == FALSE) {
 					AssignCommand(oTarget, ActionMoveAwayFromObject(oScryer, FALSE, 20.0));
 					SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
-					SendMessageToPC(oScryer, "Your target moves away, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time.");
+					SendMessageToPC(oScryer, "Either self-conscious (if friendly) or suspicious (if foe), your target moves away before you can even start to concentrate, breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time.");
+					return;
+					}
+				else {SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
+					SendMessageToPC(oScryer, "You are unable to hold the reflection of your subject in the " + sFocusName + ", breaking your focus on the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + ". You will have to try again another time." );
 					return;
 					}
 				}
-			
-			 if(GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) {
-				SetLocalInt(oTarget, "Focus_" + sScryerName, 1);
-			 	SendMessageToPC(oScryer, "Your familiarity with " + sPTargetName + " increases. You see the existing image of " + sTargetName + " in the Scrying " + sFocusType + " take on depth, dimension, and movement, blinking every now and then.");
-				object oImago = CreateItemOnObject("abr_it_scry_fc_imago", oScryer, 1);
-				if(FindSubString(sFocusName, "Droplet", 0) != -1) {
-					SetItemIcon(oImago, 1898);
-				}
-				SetFirstName(oImago, "Scrying Imago: " + sPTargetName);
-				SetDescription(oImago, "A Scrying" + sFocusType + " showing the imago of " + sPTargetName + " in realistic, living condition, chest rising and falling, every so often smiling or frowning. This Scrying " + sFocusType + " was enspelled by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
-				if(FindSubString(sTargetName, "'") != -1) {
-					int nPosTarget = FindSubString(sTargetName, "'", 0);
-					ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPosTarget, 1));
-					//SendMessageToPC(oScryer, "Setting: sTargetNameSpliced = " + SpliceString(sTargetName, nPosTarget, 1));
-					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
-				}	
-				else {
-					ACR_SetPersistentString(oImago, "sPTargetName", sTargetName);	
-					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
-					}
-				
-				if(FindSubString(sScryerName, "'") != -1) {
-					int nPosScryer = FindSubString(sScryerName, "'", 0);
-					ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPosScryer, 1));
-					//SendMessageToPC(oScryer, "Setting: sScryerNameSpliced = " + SpliceString(sScryerName, nPosScryer, 1));
-					//SendMessageToPC(oScryer, "Setting: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
-				}	
-				else {
-					ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);	
-					//SendMessageToPC(oScryer, "Setting: sPTargetName = " + ACR_GetPersistentString(oImage, "sPTargetName"));
-					}
-					
-				
-				//SendMessageToPC(oScryer, "Focus: sTargetName = " + sTargetName);
-				//SendMessageToPC(oScryer, "Focus: sScryerName = " + sScryerName);
-				//SendMessageToPC(oScryer, "Focus: sPTargetName = " + ACR_GetPersistentString(oImago, "sPTargetName"));
-				//SendMessageToPC(oScryer, "Focus: sPScryerName = " + ACR_GetPersistentString(oImago, "sPScryerName"));
-				if(GetIsPC(oTarget) == FALSE) {
-					ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
-					}
-				}
-		     else {
-			    SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
-				SendMessageToPC(oScryer, "You are unable to concentrate enough to improve your grasp of the defining details of " + sTargetName + " and focus them into the Scrying " + sFocusType + ". You will have to try again another time.");
-				}
-			DestroyObject(oFocus);
 			}
-		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 1) {
-			SendMessageToPC(oScryer, "You have recently memorized the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focused them into the Scrying " + sFocusType + ". You will have to try to improve on your understandings at a later time.");
+	
+	//PCs who got this far must make a concentration check vs. a DC based on a d20 + the averaged ability modifiers of the target squared to go to Familiar level			
+	if((oTarget==oScryer) || ((GetIsDMPossessed(oScryer)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE))  || ((GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)))  {
+		SendMessageToPC(oScryer,  "<color=cyan>" + GetName(oScryer) + ":</color> <color=lightblue>Dexterity: *" + sSuccess + "*: " + IntToString(nDexRoll) + " + " + IntToString(nDexRank) + " = " + IntToString(nDexCheck) + " vs DC" + IntToString(nSpotCheck) + "</color>");
+		if(oTarget==oScryer) {
+			SendMessageToPC(oScryer, "You imbue your own defining characteristics into the " + sFocusName + ". Your image shimmers into the " + sFocusName + " in a lifelike, 3D representation, occasionally blinking or changing expression.");
+			} 
+		else {
+			SendMessageToPC(oScryer, "You memorize the defining characteristics of " + sTargetName + " and focus your perception of them into the " + sFocusName + ". The image of " + sTargetName + " shimmers into the " + sFocusName + " and remains fixed there, unmoving.");
+			}
+		object oImago = CreateItemOnObject("abr_it_scry_fc_imago", oScryer, 1);
+		
+		if(FindSubString(sFocusName, "Droplet", 0) != -1) {
+			SetItemIcon(oImago, 1897);
+			}
+			
+		SetFirstName(oImago, sFocusName + ": " + sTargetName);
+		SetDescription(oImago, "A scrying focus showing a lifelike reflection of " + sTargetName + ". This token was created by " + GetName(oScryer) + " and establishes familiar knowledge of " + sTargetName + " for " + GetName(oScryer) + " or secondhand knowledge for anybody else who holds it.");
+		//Names with apostrophes have to be normalized to store in the p-database
+		if(FindSubString(sTargetName, "'") != -1) {
+			int nPosTarget = FindSubString(sTargetName, "'", 0);
+			ACR_SetPersistentString(oImago, "sPTargetName", SpliceString(sTargetName, nPosTarget, 1));
+			}
+		else {
+			ACR_SetPersistentString(oImago, "sPTargetName", sTargetName);	
+			}
+				
+		if(FindSubString(sScryerName, "'") != -1) {
+			int nPosScryer = FindSubString(sScryerName, "'", 0);
+			ACR_SetPersistentString(oImago, "sPScryerName", SpliceString(sScryerName, nPosScryer, 1));
+			}
+		else {
+			ACR_SetPersistentString(oImago, "sPScryerName", sScryerName);	
+			}
+					
+		if((GetIsPC(oTarget) == FALSE) || (GetIsDMPossessed(oTarget) == TRUE)) {
+			ACR_SetPersistentString(oImago, "sPTargetRes", GetResRef(oTarget));
+			}
+			
+		DestroyObject(oFocus);
 		}
-		else if(GetLocalInt(oTarget, "Focus_" + sScryerName) == 2) {
-			SendMessageToPC(oScryer, "You have recently tried and failed to memorize the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focus them into the Scrying " + sFocusType + ". You will have to try again at a later time.");
+		
+	else {
+		SetLocalInt(oTarget, "Focus_" + sScryerName, 2);
+		SendMessageToPC(oScryer, "You are unable to concentrate enough to memorize the constantly changing expressions, postures, gait, and other defining details of " + sTargetName + " and focus them into the " + sFocusName + ". You will have to try again another time.");
 		}
-	}
 }
