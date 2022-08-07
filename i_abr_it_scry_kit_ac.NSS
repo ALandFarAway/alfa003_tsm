@@ -51,6 +51,13 @@ void main()
 		SetStolenFlag(oToken, TRUE);
 		SendMessageToPC(oScryer, "A brief shimmer envelopes your hand and the " + GetName(oToken));
 	}
+	
+	else if(GetIsDMPossessed(oScryer)) {
+		oToken = CreateItemOnObject("abr_it_scry_body", oScryer, 1);
+		SendMessageToPC(oScryer, "You snip a lock of hair from " + GetName(oTarget) + ". A brief shimmer envelopes your hand and the lock of hair.");
+		SetFirstName(oToken, "Lock of " + GetName(oTarget) + "'s Hair");
+		SetStolenFlag(oToken, TRUE);
+	}
 		
 	else if((oScryer != oTarget) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)) {
 		int nPickPenalty = GetLocalInt(oTarget, GetName(oScryer) + "_PPen");

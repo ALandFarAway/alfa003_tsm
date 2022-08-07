@@ -72,6 +72,8 @@ void main()
 			}
 		location lRandom = GetRandomLocation(GetArea(OBJECT_SELF), OBJECT_SELF, 30.0); 
 		ActionForceMoveToLocation(lRandom, FALSE, 20.0);
+		DelayCommand(5.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
+		DelayCommand(10.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
 		/*if(Random(3) == 1) {
 			DelayCommand(IntToFloat(Random(20)), ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 			DelayCommand(IntToFloat(Random(10) + 10), ClearAllActions(FALSE));

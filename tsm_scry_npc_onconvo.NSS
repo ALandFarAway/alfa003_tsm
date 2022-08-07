@@ -1,4 +1,4 @@
-//
+////
 //  System Name : Scrying
 //     Filename : tsm_scry_npc_onconvo
 //      Version : 0.1
@@ -209,6 +209,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
 									while (oNPC != OBJECT_INVALID) {
 										if(sScriedName == GetName(oNPC)) {
+											 SendMessageToAllDMs("sScriedName = " + sScriedName);
 											 oScried = oNPC;
 											 break;
 											}
@@ -438,6 +439,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								//Detect Scrying or See Invisible will reveal it
 								location lThere = GetLocation(oScried);
 								SetLocalLocation(oScry, "lThere", lThere);
+								SendMessageToAllDMs("oScried's area = " + GetName(GetArea(oScried)));
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
 									if(GetName(oScryer)== "Xavier") {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
@@ -593,6 +595,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
+										SendMessageToAllDMs("oViewer jumping to " + GetName(GetAreaFromLocation(lThere)));
 										DelayCommand(4.0, FadeToBlack(oViewer, FADE_SPEED_SLOWEST, 5.0));
 										DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 										DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
