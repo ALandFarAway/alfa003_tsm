@@ -47,6 +47,11 @@ const float HALF_COMPASS_ANGLE = 360.0/(NUMBER_OF_COMPASS_DIRECTIONS * 2.0);
 string GetCompassDirectionOfBearing(float fDegrees);
 string GetCompassDirectionOfAngle(float fAngle);
 
+void ActionCreateWynCreature(string sCreature, location lLocCreature)
+{
+    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,12 +151,45 @@ void main()
 	string sArea = GetTag(GetArea(oCaster));
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
-	//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
+	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea + " at " + sTarget);
 	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
-	//int nSHT = GetIsStandardHostileTarget(oTarget, oCaster);
-	//SendMessageToAllDMs(GetName(oTarget) + " as StandardHostileTarget of " + GetName(oCaster) + " on spell " + IntToString(GetSpellId()) + " is " + IntToString(nSHT));	
-	
+	//Dismissal of Vassal
+	if(GetLastSpell() == 40) {
+		SendMessageToAllDMs("Dismissal");
+		if(GetTag(oTarget) == "003_cr_un_banite_vassal") {
+			AssignCommand(oTarget, ActionSpeakString("Hundreds of motes spring apart, each of them a tiny screaming face. Some vanish. Some swell into ethereal vengeance.", TALKVOLUME_TALK));
+			object oGhostField = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_afx_ror_fieldofghosts", GetLocation(oTarget));
+			CreateObject(OBJECT_TYPE_CREATURE, "003_cr_swift_ghostchild_f", GetLocation(oTarget));
+			CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_hum_m", GetLocation(oTarget));
+			CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_hum_f", GetLocation(oTarget));
+			CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_gob_f", GetLocation(oTarget));
+			CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_un_ghost_gob_m", GetLocation(oTarget));
+			
+			DelayCommand(1.0, ActionCreateWynCreature("003_cr_un_ghost_dwwiz", GetLocation(oTarget)));
+			DelayCommand(1.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTarget)));
+			DelayCommand(2.0, ActionCreateWynCreature("003_cr_un_ghost_helf_m", GetLocation(oTarget)));
+			DelayCommand(2.0, ActionCreateWynCreature("003_cr_un_ghost_half_f", GetLocation(oTarget)));
+			DelayCommand(3.0, ActionCreateWynCreature("003_cr_un_ghost_humwiz", GetLocation(oTarget)));
+			DelayCommand(3.0, ActionCreateWynCreature("003_cr_un_ghost_elfcl", GetLocation(oTarget)));
+			DelayCommand(4.0, ActionCreateWynCreature("003_cr_un_ghost_humfgt", GetLocation(oTarget)));
+			DelayCommand(4.0, ActionCreateWynCreature("003_cr_circus_master_tigersx", GetLocation(oTarget)));
+			DelayCommand(5.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl9", GetLocation(oTarget)));
+			DelayCommand(5.0, ActionCreateWynCreature("003_cr_un_ghost_gob_f", GetLocation(oTarget)));
+			DelayCommand(6.0, ActionCreateWynCreature("003_cr_un_harpy_ghost", GetLocation(oTarget)));
+			DelayCommand(6.0, ActionCreateWynCreature("abr_cr_un_minotaur_ghost", GetLocation(oTarget)));
+			DelayCommand(7.0, ActionCreateWynCreature("abr_cr_un_ghost_corrupt", GetLocation(oTarget)));
+			DelayCommand(7.0, ActionCreateWynCreature("c_st01_ghost_morrigan", GetLocation(oTarget)));
+			DelayCommand(8.0, ActionCreateWynCreature("003_cr_un_ghost_humcl", GetLocation(oTarget)));
+			DelayCommand(8.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(oTarget)));
+			DelayCommand(9.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(oTarget)));
+			DelayCommand(10.0, ActionCreateWynCreature("abr_cr_un_ghost_moan", GetLocation(oTarget)));
+			
+			DestroyObject(oGhostField, 10.0);
+			DestroyObject(oTarget, 10.0);
+			}
+		}
+		 
 	//Stopping summons by non Banites in a Banite UnHallowed Area
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "rauvin_ruins") != -1) {
 		if((nSpellId == SPELL_SUMMON_CREATURE_I) || (nSpellId == SPELL_SUMMON_CREATURE_II) || (nSpellId == SPELL_SUMMON_CREATURE_III) || (nSpellId == SPELL_SUMMON_CREATURE_IV) || (nSpellId == SPELL_SUMMON_CREATURE_V) || (nSpellId == SPELL_SUMMON_CREATURE_VI))
