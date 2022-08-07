@@ -197,6 +197,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
 				 			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
 							string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
+							SendMessageToAllDMs("sScriedArea for " + sScriedName + " = " + sScriedArea);
 							int nWillSaveBase = GetWillSavingThrow(oScried);
 							SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 							object oScriedArea = GetFirstArea();
