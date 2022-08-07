@@ -70,10 +70,9 @@ void main()
 			object oGhostSwoop = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_afx_ghost", GetLocation(OBJECT_SELF));
 			SetLocalObject(OBJECT_SELF, "oGhostSwoop", oGhostSwoop);
 			}
-		ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);
 		location lRandom = GetRandomLocation(GetArea(OBJECT_SELF), OBJECT_SELF, 30.0); 
 		ActionForceMoveToLocation(lRandom, FALSE, 20.0);
-		if(Random(3) == 1) {
+		/*if(Random(3) == 1) {
 			DelayCommand(IntToFloat(Random(20)), ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 			DelayCommand(IntToFloat(Random(10) + 10), ClearAllActions(FALSE));
 			object oAttack = GetFirstObjectInShape(SHAPE_SPHERE, 50.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
@@ -88,7 +87,7 @@ void main()
 					}
 				oAttack = GetNextObjectInShape(SHAPE_SPHERE, 50.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 				}
-			}
+			}*/
 		}
 		
 	//Hydra's extra attacks
