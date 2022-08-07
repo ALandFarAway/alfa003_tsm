@@ -128,10 +128,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			
 			if(GetIsObjectValid(oDupe)) {
 				AssignCommand(oScryer, ActionJumpToLocation(lHere));
-				}		
+				}
+						
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+			
 			int nGoHome = 0;
 			while(nGoHome < 9) {
 				if(nGoHome == 1) {
@@ -166,7 +168,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					oScryer = GetLocalObject(oScry, "oViewerH");
 					lHere = GetLocalLocation(oScry, "lViewerH");
 					}
-					
+				
+				SendMessageToAllDMs("End Scry oViewer = " + GetName(oScryer));
+												
 				//Bring your people home
 				effect eEffect = GetFirstEffect(oScryer);
 					int nRep = 0;
@@ -178,10 +182,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						 eEffect = GetNextEffect(oScryer);
 						 nRep ++;
 						}
-					
-				if(GetArea(oScryer) != GetAreaFromLocation(lHere)) {
-					AssignCommand(oScryer, ActionJumpToLocation(lHere));			
-					}
+			
+				if(GetIsObjectValid(oDupe)) {
+					AssignCommand(oScryer, ActionJumpToLocation(lHere));
+					DestroyObject(GetLocalObject(oScryer, "oDupe"), 3.0);
+					SetLocalObject(oScryer, "oDupe", OBJECT_INVALID);
+					}		
+				
 				nGoHome++;
 			} 	
 			 					
@@ -192,6 +199,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
 			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
 			SetLocalObject(oScry, "oScrySelf", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerA", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerB", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerC", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerD", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerE", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerF", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerG", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerH", OBJECT_INVALID);
 			SetLocalObject(oScry, "oDupe", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
@@ -208,11 +223,20 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			
 			DeleteLocalLocation(oScryer, "ACR_SCRY_LOCATION");
 			DeleteLocalLocation(oScry, "ACR_SCRY_LOCATION");
+			DeleteLocalLocation(oScry, "lViewerA");
+			DeleteLocalLocation(oScry, "lViewerB");
+			DeleteLocalLocation(oScry, "lViewerC");
+			DeleteLocalLocation(oScry, "lViewerD");
+			DeleteLocalLocation(oScry, "lViewerE");
+			DeleteLocalLocation(oScry, "lViewerF");
+			DeleteLocalLocation(oScry, "lViewerG");
+			DeleteLocalLocation(oScry, "lViewerH");
 			SetLocalInt(oScry, "nScryActive", 0);
 								 
 			DestroyObject(oScrySend);  
 			DestroyObject(oScrySelf);
 			DestroyObject(oDupe);
+			SetLocalObject(oScryer, "oDupe", OBJECT_INVALID);
 			DestroyObject(OBJECT_SELF, 1.0);
 			return;
 		}
@@ -538,6 +562,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SetLocalObject(oScryer, "oDupe", oDupe);
 								ChangeToStandardFaction(oDupe, STANDARD_FACTION_COMMONER);
 								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupe, fAway);
+								DelayCommand(fAway - 1.5, SetLocalObject(oScryer, "oDupe", OBJECT_INVALID));
 								DestroyObject(oDupe, fAway);
 											
 								oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
@@ -643,8 +668,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										SetLocalObject(oScry, "oDupe", oDupeView);
 										ChangeToStandardFaction(oDupeView, STANDARD_FACTION_COMMONER);
 										ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oDupeView, fAway);
+										DelayCommand(fAway - 1.5, SetLocalObject(oViewer, "oDupe", OBJECT_INVALID));
 										DestroyObject(oDupeView, fAway);
-									
+										
 										SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
 										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
@@ -1253,6 +1279,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								//Destroy Scrying Sensor and ScryListen
 								//Backup in tsm_scry_npc_onspawn in case this successful branch doesn't fire
 								DelayCommand(fScryTimer, SetLocalObject(oScry, "oScried", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerA", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerB", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerC", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerD", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerE", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerF", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerG", OBJECT_INVALID));
+								DelayCommand(fScryTimer, SetLocalObject(oScry, "oViewerH", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(OBJECT_SELF, "oScried", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(oScryer, "oScried", OBJECT_INVALID));
 								DelayCommand(fScryTimer, SetLocalObject(oScrySend, "oScried", OBJECT_INVALID));
@@ -1275,7 +1309,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								
 								DelayCommand(fScryTimer, SetLocalFloat(OBJECT_SELF, "fScryTimer", 0.0));
 								DelayCommand(fScryTimer, SetLocalInt(oScry, "nScryActive", 0));
-								 
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerA"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerB"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerC"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerD"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerE"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerF"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerG"));
+								DelayCommand(fScryTimer, DeleteLocalLocation(oScry, "lViewerH"));
+			 
 								DestroyObject(oScrySend, fScryTimer + 2.0);  
 								DestroyObject(oScrySelf, fScryTimer + 3.0);
 								DestroyObject(OBJECT_SELF, fScryTimer + 5.0);
@@ -1425,6 +1467,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
 			SetLocalObject(oScry, "oScrySelf", OBJECT_INVALID);
 			SetLocalObject(oScry, "oDupe", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerA", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerB", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerC", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerD", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerE", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerF", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerG", OBJECT_INVALID);
+			SetLocalObject(oScry, "oViewerH", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
 			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
@@ -1439,6 +1489,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 			SetLocalObject(oScried, "oDupe", OBJECT_INVALID);
 			
 			DeleteLocalLocation(oScryer, "ACR_SCRY_LOCATION");
+			DeleteLocalLocation(oScry, "lViewerA");
+			DeleteLocalLocation(oScry, "lViewerB");
+			DeleteLocalLocation(oScry, "lViewerC");
+			DeleteLocalLocation(oScry, "lViewerD");
+			DeleteLocalLocation(oScry, "lViewerE");
+			DeleteLocalLocation(oScry, "lViewerF");
+			DeleteLocalLocation(oScry, "lViewerG");
+			DeleteLocalLocation(oScry, "lViewerH");
 			SetLocalInt(oScry, "nScryActive", 0);
 			
 			DestroyObject(oScrySpeak);  
