@@ -47,7 +47,9 @@ void main()
 
     // Custom code goes here.
 	
-
+if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
+		DestroyObject(GetLocalObject(OBJECT_SELF, "oGhostSwoop"), 3.0);
+		}
 	
 if(GetLocalInt(OBJECT_SELF, "Proxy") == 1) {
     object oMyTrigger = GetLocalObject(OBJECT_SELF, "Undead_Proxy_Trg");

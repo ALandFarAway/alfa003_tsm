@@ -33,9 +33,8 @@ void main() {
 	}
  
 	ClearAllActions(TRUE);
-	DelayCommand(0.5, ActionSpeakString("Mistress. Please free us...no, don't...freedom...banish...*weeping*...death...please...beg...serve...", TALKVOLUME_TALK));
 	ActionForceFollowObject(oJhessi, 0.5);
-	DelayCommand(1.0, ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF));
+	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	
 	 
 		
