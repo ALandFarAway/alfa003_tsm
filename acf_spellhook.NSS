@@ -155,7 +155,7 @@ void main()
 	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
 	//Dismissal of Vassal
-	if(GetLastSpell() == 40) {
+	if(GetSpellId() == 40) {
 		SendMessageToAllDMs("Dismissal");
 		if(GetTag(oTarget) == "003_cr_un_banite_vassal") {
 			AssignCommand(oTarget, ActionSpeakString("Hundreds of motes spring apart, each of them a tiny screaming face. Some vanish. Some swell into ethereal vengeance.", TALKVOLUME_TALK));
