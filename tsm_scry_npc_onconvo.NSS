@@ -132,6 +132,58 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
 			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+			int nGoHome = 0;
+			while(nGoHome < 9) {
+				if(nGoHome == 1) {
+					oScryer = GetLocalObject(oScry, "oViewerA");
+					lHere = GetLocalLocation(oScry, "lViewerA");
+					}
+				if(nGoHome == 2) {
+					oScryer = GetLocalObject(oScry, "oViewerB");
+					lHere = GetLocalLocation(oScry, "lViewerB");
+					}
+				if(nGoHome == 3) {
+					oScryer = GetLocalObject(oScry, "oViewerC");
+					lHere = GetLocalLocation(oScry, "lViewerC");
+					}
+				if(nGoHome == 4) {
+					oScryer = GetLocalObject(oScry, "oViewerD");
+					lHere = GetLocalLocation(oScry, "lViewerD");
+					}
+				if(nGoHome == 5) {
+					oScryer = GetLocalObject(oScry, "oViewerE");
+					lHere = GetLocalLocation(oScry, "lViewerE");
+					}
+				if(nGoHome == 6) {
+					oScryer = GetLocalObject(oScry, "oViewerF");
+					lHere = GetLocalLocation(oScry, "lViewerF");
+					}
+				if(nGoHome == 7) {
+					oScryer = GetLocalObject(oScry, "oViewerG");
+					lHere = GetLocalLocation(oScry, "lViewerG");
+					}
+				if(nGoHome == 8) {
+					oScryer = GetLocalObject(oScry, "oViewerH");
+					lHere = GetLocalLocation(oScry, "lViewerH");
+					}
+					
+				//Bring your people home
+				effect eEffect = GetFirstEffect(oScryer);
+					int nRep = 0;
+					while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+						 object oCreator = GetEffectCreator(eEffect);
+						 if(oCreator == OBJECT_SELF) {
+						 	RemoveEffect(oScryer, eEffect);
+						   }
+						 eEffect = GetNextEffect(oScryer);
+						 nRep ++;
+						}
+					
+				if(GetArea(oScryer) != GetAreaFromLocation(lHere)) {
+					AssignCommand(oScryer, ActionJumpToLocation(lHere));			
+					}
+				nGoHome++;
+			} 	
 			 					
 			//Unset ALL local objects at the end of the spell
 			//Destroy Scrying Speaker, Sensor and Scryer Dupe and Presence
@@ -524,7 +576,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								int nViewer = 1;
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 								while((nViewer < 10) && (oViewer != OBJECT_INVALID)) {
-									if((oViewer != oScryer) && (oViewer != GetLocalObject(oScry, "oDupe")) && (GetTag(oViewer) != "003_cr_scry_dupe") && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
+									if((oViewer != oScryer) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerA"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerB"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerC"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerD"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerE"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerF"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerG"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerH"))) && (GetName(oViewer) != GetName(oScried)) && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
 										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
 										SetLocalLocation(oViewer, "lHere", lViewer);
@@ -578,14 +630,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											}
 											
 										object oDupeView;
-										if(!GetIsDMPossessed(oViewer)) {
-											oDupeView = CopyObject(oViewer, GetLocation(oViewer), OBJECT_INVALID, "003_cr_scry_dupe");
-											}
-										else {
-											string sDupeResView = GetResRef(oViewer);
-											oDupeView = CreateObject(OBJECT_TYPE_CREATURE, sDupeResView, GetLocation(oViewer));
-											}
-													
+										if(GetTag(oViewer) != GetTag(oScried)) {
+											if(!GetIsDMPossessed(oViewer)) {
+												oDupeView = CopyObject(oViewer, GetLocation(oViewer), OBJECT_INVALID, "003_cr_scry_dupe");
+												}
+											else {
+												string sDupeResView = GetResRef(oViewer);
+												oDupeView = CreateObject(OBJECT_TYPE_CREATURE, sDupeResView, GetLocation(oViewer));
+												}
+											}		
 										SetLocalObject(oViewer, "oDupe", oDupeView);
 										SetLocalObject(oScry, "oDupe", oDupeView);
 										ChangeToStandardFaction(oDupeView, STANDARD_FACTION_COMMONER);
