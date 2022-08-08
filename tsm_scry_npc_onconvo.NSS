@@ -418,6 +418,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							SendMessageToAllDMs("sScriedArea for " + sScriedName + " = " + sScriedArea);
 							int nWillSaveBase = GetWillSavingThrow(oScried);
 							SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
+							object oScriedSubArea;
+							string sScriedSubArea;
 							object oScriedArea = GetFirstArea();
 							while(oScriedArea != OBJECT_INVALID) {
 								if(GetTag(oScriedArea) == sScriedArea) {
@@ -430,6 +432,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										if(sScriedName == GetName(oNPC)) {
 											 SendMessageToAllDMs("sScriedName = " + sScriedName);
 											 oScried = oNPC;
+											 //oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_TRG", oScried, 1);
+											 //sScriedSubArea = GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC");
 											 break;
 											}
 										oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
@@ -829,7 +833,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
+								object oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_WP", oScried, 1);
+								float fSubArea = GetLocalFloat(oScriedSubArea, "ACR_SUBAREA_RADIUS");
 								string sSubjectArea = GetLocalString(oScried, "ACR_SCRY_AREA_DESC");
+								if((sSubjectArea == "") && (GetIsObjectValid(oScriedSubArea)) && (GetDistanceBetween(oScried, oScriedSubArea) <= fSubArea)) {
+									sSubjectArea = GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC");
+									}
 								if(sSubjectArea == "") {
 									sSubjectArea = GetLocalString(oArea, "ACR_AREA_DESC");
 									}
