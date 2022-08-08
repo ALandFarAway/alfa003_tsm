@@ -76,7 +76,7 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 						
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
-			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+			SendMessageToAllDMs("Send: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
 			
 			int nGoHome = 0;
 			while(nGoHome < 9) {
@@ -113,7 +113,7 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 					lHere = GetLocalLocation(oScry, "lViewerH");
 					}
 				
-				SendMessageToAllDMs("End Scry oViewer = " + GetName(oScryer));
+				SendMessageToAllDMs("Send:  End Scry oViewer = " + GetName(oScryer));
 												
 				//Bring your people home
 				effect eEffect = GetFirstEffect(oScryer);
@@ -177,7 +177,7 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 			DeleteLocalLocation(oScry, "lViewerH");
 			SetLocalInt(oScry, "nScryActive", 0);
 								 
-			DestroyObject(oScrySend);  
+			DestroyObject(oScrySpeak);  
 			DestroyObject(oScrySelf);
 			DestroyObject(oDupe);
 			SetLocalObject(oScryer, "oDupe", OBJECT_INVALID);
@@ -274,7 +274,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
-			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+			SendMessageToAllDMs("Speak: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
 			
 			int nGoHome = 0;
 			while(nGoHome < 9) {
@@ -311,7 +311,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					lHere = GetLocalLocation(oScry, "lViewerH");
 					}
 				
-				SendMessageToAllDMs("End Scry oViewer = " + GetName(oScryer));
+				SendMessageToAllDMs("Speak: End Scry oViewer = " + GetName(oScryer));
 												
 				//Bring your people home
 				effect eEffect = GetFirstEffect(oScryer);
@@ -717,11 +717,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								DestroyObject(oScrySelf, fAway);
 								// Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								DelayCommand(4.0, FadeToBlack(oScryer, FADE_SPEED_SLOWEST, 5.0));
-								DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								DelayCommand(40.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								DelayCommand(50.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								//DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								//DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								//DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								//DelayCommand(40.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
+								//DelayCommand(50.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
 									    
 								// Jump to the target
 								DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThere)));
