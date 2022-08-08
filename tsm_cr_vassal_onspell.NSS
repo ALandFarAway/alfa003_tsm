@@ -68,10 +68,11 @@ void main() {
 		DelayCommand(8.0, ActionCreateWynCreature("003_cr_un_ghost_humcl", GetLocation(OBJECT_SELF)));
 		DelayCommand(8.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(OBJECT_SELF)));
 		DelayCommand(9.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(OBJECT_SELF)));
+		DelayCommand(9.0, ActionCreateWynCreature("003_cr_un_spirit_evenwood", GetLocation(OBJECT_SELF)));
 		DelayCommand(10.0, ActionCreateWynCreature("abr_cr_un_ghost_moan", GetLocation(OBJECT_SELF)));
 		
 		DestroyObject(oGhostField, 10.0);
-		DestroyObject(OBJECT_SELF, 10.0);
+		DestroyObject(OBJECT_SELF, 11.0);
 		}
 	 
 		

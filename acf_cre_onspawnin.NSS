@@ -56,6 +56,25 @@ void main()
 		}
 		
 	//Temp. Remove after session
+	if(GetTag(OBJECT_SELF) == "003_cr_un_spirit_evenwood") {
+	
+		object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
+		object oPC = GetFirstPC(TRUE);
+		while(oPC != OBJECT_INVALID) {
+			string sPCName = GetName(oPC);
+			if(FindSubString(sPCName, "Jhessi") != -1) {
+				oJhessi = oPC;
+				}
+			
+		oPC = GetNextPC(TRUE);
+		}
+ 
+		DelayCommand(2.0, ActionSpeakString("*The vassal diminishes with every ghost it releases, until it dwindles to a single remaining figure.", TALKVOLUME_TALK));
+		DelayCommand(5.0, ActionForceMoveToObject(oJhessi, FALSE, 0.5, 20.0));
+		DelayCommand(7.0, ActionForceFollowObject(oJhessi, 0.5));
+		DelayCommand(8.0, ActionSpeakString("Jhessi. *Ghostly tears falling on ethereal cheeks.", TALKVOLUME_TALK));
+	}
+	
     if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
 		object oCount = GetFirstObjectInShape(SHAPE_SPHERE, 50.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 		int nCount = 0;
@@ -69,14 +88,18 @@ void main()
 		if(Random(3) == 1) {
 			object oGhostSwoop = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_afx_ghost", GetLocation(OBJECT_SELF));
 			SetLocalObject(OBJECT_SELF, "oGhostSwoop", oGhostSwoop);
+			DestroyObject(oGhostSwoop, 5.0);
 			}
+		
+		location lSpawned = GetLocation(OBJECT_SELF);
 		location lRandom = GetRandomLocation(GetArea(OBJECT_SELF), OBJECT_SELF, 30.0); 
-		ActionForceMoveToLocation(lRandom, FALSE, 20.0);
+		object oNearestGhost = GetNearestCreatureToLocation(CREATURE_TYPE_RACIAL_TYPE, RACIAL_TYPE_UNDEAD, lSpawned, 1);
+		DelayCommand(2.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
 		DelayCommand(5.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
-		DelayCommand(10.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
-		/*if(Random(3) == 1) {
-			DelayCommand(IntToFloat(Random(20)), ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
-			DelayCommand(IntToFloat(Random(10) + 10), ClearAllActions(FALSE));
+		DelayCommand(10.0, AssignCommand(oNearestGhost, ActionForceMoveToLocation(lRandom, FALSE, 20.0)));
+		DestroyObject(OBJECT_SELF, IntToFloat(Random(180)));
+		if(Random(3) == 1) {
+			DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 			object oAttack = GetFirstObjectInShape(SHAPE_SPHERE, 50.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 			int nAttack = 0;
 			while(oAttack != OBJECT_INVALID) {
@@ -89,7 +112,7 @@ void main()
 					}
 				oAttack = GetNextObjectInShape(SHAPE_SPHERE, 50.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE);
 				}
-			}*/
+			}
 		}
 		
 	//Hydra's extra attacks

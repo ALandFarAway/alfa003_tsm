@@ -43,7 +43,7 @@ void main()
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
 	    
-	
+//Actions for scrying sensor in response to substrings set on it at spawn
 if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalObject(OBJECT_SELF, "oScryer")))
 		{string sMatch = GetMatchedSubstring(1);
 		int nMatch = GetListenPatternNumber();
@@ -60,26 +60,14 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 			object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			object oScrySelf = GetLocalObject(OBJECT_SELF, "oScrySelf");
 			effect eEffect = GetFirstEffect(oScryer);
-			int nRep = 0;
-			while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
-				 object oCreator = GetEffectCreator(eEffect);
-				 if(oCreator == oScrySpeak) {
-				 	RemoveEffect(oScryer, eEffect);
-				   }
-				 eEffect = GetNextEffect(oScryer);
-				 nRep ++;
-				}
-			
-			if(GetIsObjectValid(oDupe)) {
-				AssignCommand(oScryer, ActionJumpToLocation(lHere));
-				}
-						
-			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
-			SendMessageToPC(oScryer, "The scry spell ends.");		
-			SendMessageToAllDMs("Send: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
-			
 			int nGoHome = 0;
 			while(nGoHome < 9) {
+			
+				if(nGoHome == 0) {			
+					AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
+					SendMessageToPC(oScryer, "The scry spell ends.");		
+					SendMessageToAllDMs("Send: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+					}
 				if(nGoHome == 1) {
 					oScryer = GetLocalObject(oScry, "oViewerA");
 					lHere = GetLocalLocation(oScry, "lViewerA");
@@ -187,9 +175,9 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 
 }
 	
-if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != GetLocalObject(OBJECT_SELF, "oScryer")) && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
+if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
 	{object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
-	 object oDupe = GetLocalObject(GetLastSpeaker(), "oDupe");;
+	 object oDupe = GetLocalObject(GetLastSpeaker(), "oDupe");
 	 location lHere;
 	 object oScry = GetLocalObject(OBJECT_SELF, "oScry");
 		if(GetLastSpeaker() == GetLocalObject(oScry, "oViewerA")){
@@ -230,7 +218,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && (GetLastSpeaker() != GetLocalOb
 			
 		if(GetIsObjectValid(oDupe)) {
 			AssignCommand(GetLastSpeaker(), ActionJumpToLocation(lHere));
-			}		
+			DestroyObject(GetLocalObject(GetLastSpeaker(), "oDupe"), 3.0);
+			SetLocalObject(GetLastSpeaker(), "oDupe", OBJECT_INVALID);
+			}
+					
 		SendMessageToPC(GetLastSpeaker(), "Speaking breaks your immersion.");		
 	}
 	
@@ -745,8 +736,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								object oViewerH;
 									
 								int nViewer = 1;
-								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
-								while((nViewer < 10) && (oViewer != OBJECT_INVALID)) {
+								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
+								while((nViewer < 15) && (oViewer != OBJECT_INVALID)) {
 									if((oViewer != oScryer) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerA"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerB"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerC"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerD"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerE"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerF"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerG"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerH"))) && (GetName(oViewer) != GetName(oScried)) && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
 										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
@@ -818,22 +809,25 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										DestroyObject(oDupeView, fAway);
 										
 										SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
-										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
-										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
-										DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
 										SendMessageToAllDMs("oViewer jumping to " + GetName(GetAreaFromLocation(lThere)));
 										DelayCommand(4.0, FadeToBlack(oViewer, FADE_SPEED_SLOWEST, 5.0));
+										DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
+										DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
+										DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGhost, oViewer, fAway));
+										DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oViewer, fAway));
 										DelayCommand(fAway - 1.0, AssignCommand(oViewer, ClearAllActions(TRUE)));
 										DelayCommand(fAway, AssignCommand(oViewer, JumpToLocation(lViewer)));
-										DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
-									}
+										}
+										
 								nViewer++;
-								oViewer = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
+								oViewer = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 
 								}
 									
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
 								object oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_WP", oScried, 1);
+								SendMessageToAllDMs("SubArea = " + GetName(oScriedSubArea));
+								SendMessageToAllDMs("SubArea description = " + GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC"));
 								float fSubArea = GetLocalFloat(oScriedSubArea, "ACR_SUBAREA_RADIUS");
 								string sSubjectArea = GetLocalString(oScried, "ACR_SCRY_AREA_DESC");
 								if((sSubjectArea == "") && (GetIsObjectValid(oScriedSubArea)) && (GetDistanceBetween(oScried, oScriedSubArea) <= fSubArea)) {
@@ -989,7 +983,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									else if(FindSubString(sAreaTag, "int_silvy_foch", 0) != -1)
 										{sSubjectArea = "inside a tall dim building, with the pennants of dramatic performances overhanging stage and walls, with a background of bardsong and the sound of clapping audiences.";}
 									else if(FindSubString(sAreaTag, "int_silvy_ladycol_grd", 0) != -1)
-										{sSubjectArea = "inside, with a huge library and wings off to dormitory towers.";}
+										{sSubjectArea = "inside, with a huge library and wings off to dormitory towers visible through an open door.";}
 									else if(FindSubString(sAreaTag, "int_silvy_ladycol_class", 0) != -1)
 										{sSubjectArea = "inside, with the doors to classrooms opening and closing for robed masters and students.";}
 									else if((FindSubString(sAreaTag, "int_silvy_ladycol", 0) != -1) || (FindSubString(sAreaTag, "int_silvy_palace", 0) != -1) || (FindSubString(sAreaTag, "derochelle", 0) != -1) )
