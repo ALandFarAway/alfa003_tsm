@@ -94,6 +94,8 @@ void main()
 		location lSpawned = GetLocation(OBJECT_SELF);
 		location lRandom = GetRandomLocation(GetArea(OBJECT_SELF), OBJECT_SELF, 30.0); 
 		object oNearestGhost = GetNearestCreatureToLocation(CREATURE_TYPE_RACIAL_TYPE, RACIAL_TYPE_UNDEAD, lSpawned, 1);
+		ActionForceMoveToLocation(lRandom, FALSE, 20.0);
+		AssignCommand(oNearestGhost, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
 		DelayCommand(2.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
 		DelayCommand(5.0, ActionForceMoveToLocation(lRandom, FALSE, 20.0));
 		DelayCommand(10.0, AssignCommand(oNearestGhost, ActionForceMoveToLocation(lRandom, FALSE, 20.0)));
