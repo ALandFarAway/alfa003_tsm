@@ -199,17 +199,15 @@ void main()
 		DelayCommand(38.0, ActionCreateWynCreature("c_st01_ghost_morrigan", GetLocation(OBJECT_SELF)));
 		DelayCommand(42.0, ActionCreateWynCreature("003_cr_un_ghost_humcl", GetLocation(OBJECT_SELF)));
 		DelayCommand(44.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(OBJECT_SELF)));
-		DelayCommand(48.0, ActionCreateWynCreature("003_cr_circus_magician_dead", GetLocation(OBJECT_SELF)));
+		DelayCommand(48.0, ActionCreateWynCreature("003_cr_circus_magic_ghost", GetLocation(OBJECT_SELF)));
 		DelayCommand(50.0, ActionCreateWynCreature("003_cr_un_spirit_evenwood", GetLocation(OBJECT_SELF)));
 		DelayCommand(52.0, ActionCreateWynCreature("abr_cr_un_ghost_moan", GetLocation(OBJECT_SELF)));
 		DelayCommand(50.0, ActionSpeakString("*Somewhere, somebody screams.", TALKVOLUME_TALK));
-		DelayCommand(60.0, ActionSpeakString("The door of the Headless Troll Inn bangs open, and Hilda Quintin runs out, shrieking about ghosts.", TALKVOLUME_TALK));
-		DelayCommand(70.0, ActionSpeakString("*Another scream rings out, this one from a different direction, drifting out a window from the tavern.", TALKVOLUME_TALK));
+		DelayCommand(60.0, ActionSpeakString("The door of the tavern bangs open, and a patron runs out...and is dragged back in by an ectoplasmic arm.", TALKVOLUME_TALK));
+		DelayCommand(70.0, ActionSpeakString("*Another scream rings out, this one from a different direction, drifting out a window from the inn.", TALKVOLUME_TALK));
 		DelayCommand(80.0, ActionSpeakString("*A shape drifts out of the statue of the mounted Elthondsson ancestor. Ghostly horns blow a call to arms.", TALKVOLUME_TALK));
 		
-			DelayCommand(60.0, ActionCreateWynCreature("003_cr_oh_quintin", GetLocation(GetWaypointByTag("Post_abr_cr_un_harpy_ghost"))));
 		object oTrollWP = GetWaypointByTag("ghost_troll_wp");
-		_DespawnArea(GetArea(oTrollWP));
 		DelayCommand(60.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
 		DelayCommand(61.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
 		DelayCommand(62.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
@@ -221,17 +219,17 @@ void main()
 		DelayCommand(62.0, ActionCreateWynCreature("003_cr_circus_magician_dead", GetLocation(oFlagonWP)));
 		
 		object oLathWP = GetWaypointByTag("ghost_lathander_wp");
-		DelayCommand(60.0, ActionCreateWynCreature("abr_cr_un_ghost_gob_m", GetLocation(oLathWP)));
-		DelayCommand(61.0, ActionCreateWynCreature("abr_cr_un_ghost_gob_m", GetLocation(oLathWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("abr_cr_un_ghost_gob_f", GetLocation(oLathWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("abr_cr_un_ghost_gob_f", GetLocation(oLathWP)));
-		
+		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_gob_f", GetLocation(oLathWP)));
+		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_gob_f", GetLocation(oLathWP)));
+		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_gob_m", GetLocation(oLathWP)));
+		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_gob_m", GetLocation(oLathWP)));
 		
 		object oKeepWP = GetWaypointByTag("ghost_keep_wp");
 		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(oKeepWP)));
 		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl", GetLocation(oKeepWP)));
 		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_humfgt", GetLocation(oKeepWP)));
 		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_humwiz", GetLocation(oKeepWP)));
+		
 		
 		object oKeepWPB = GetWaypointByTag("ghost_keep_wpB");
 		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(oKeepWPB)));

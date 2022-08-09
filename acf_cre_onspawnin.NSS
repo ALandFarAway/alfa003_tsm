@@ -83,16 +83,16 @@ void main()
 		DelayCommand(7.5, ClearAllActions(TRUE));
 		DelayCommand(8.0, ActionSpeakString("Jhessi. *Ghostly tears falling on ethereal cheeks.", TALKVOLUME_TALK));
 	 	
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_valbrace", GetLocation(oValbraceWP)));
+		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_spirir_valbrace", GetLocation(oValbraceWP)));
 		
-		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_aloisus", GetLocation(oAloisusWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_si", GetLocation(oSiWP)));
+		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_spirit_aloisus", GetLocation(oAloisusWP)));
+		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_spirit_si", GetLocation(oSiWP)));
 		
 		}
 	
 	//Temp. Remove after session.	
     if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
-		SendMessageToAllDMs(GetTag(OBJECT_SELF) + " onspawn");
+		//SendMessageToAllDMs(GetTag(OBJECT_SELF) + " onspawn");
 		effect eFreeze = EffectCutsceneImmobilize();
 		effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 5.0);
@@ -103,9 +103,9 @@ void main()
 		DelayCommand(2.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER));	
 		
 		if(GetTag(GetArea(OBJECT_SELF)) == "8e_ext_highforest_olostins_holds") {
-			DestroyObject(OBJECT_SELF, IntToFloat(Random(180)) + 60.0);
+			DestroyObject(OBJECT_SELF, IntToFloat(Random(180)) + 90.0);
 			}
-		DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
+		DelayCommand(IntToFloat(Random(180)) + 90.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 		
 	}
 		
