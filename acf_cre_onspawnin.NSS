@@ -83,7 +83,7 @@ void main()
 		DelayCommand(7.5, ClearAllActions(TRUE));
 		DelayCommand(8.0, ActionSpeakString("Jhessi. *Ghostly tears falling on ethereal cheeks.", TALKVOLUME_TALK));
 	 	
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_spirir_valbrace", GetLocation(oValbraceWP)));
+		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_spirit_valbrace", GetLocation(oValbraceWP)));
 		
 		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_spirit_aloisus", GetLocation(oAloisusWP)));
 		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_spirit_si", GetLocation(oSiWP)));
