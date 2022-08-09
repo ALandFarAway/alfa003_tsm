@@ -76,27 +76,31 @@ void main()
 		object oAloisusWP = GetWaypointByTag("aloisus_wp");
 		object oSiWP = GetWaypointByTag("si_wp");
 		object oValbraceWP = GetWaypointByTag("valbrace_wp");
+		object oValbrace = GetObjectByTag("statue_valbrace", 1);
 		
 		DelayCommand(5.0, ActionForceMoveToObject(oJhessi, FALSE, 0.5, 20.0));
 		DelayCommand(7.0, ActionForceFollowObject(oJhessi, 0.5));
 		DelayCommand(8.0, ActionSpeakString("Jhessi. *Ghostly tears falling on ethereal cheeks.", TALKVOLUME_TALK));
 	 	
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_aloisus", GetLocation(oAloisusWP)));
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_si", GetLocation(oSiWP)));
+		AssignCommand(oValbrace, DelayCommand(59.0, ActionSpeakString("*A shape separates from the statue of the mounted Elthondsson ancestor. Ghostly horns blow a call to arms.", TALKVOLUME_TALK)));
 		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_valbrace", GetLocation(oValbraceWP)));
+		
+		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_aloisus", GetLocation(oAloisusWP)));
+		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_si", GetLocation(oSiWP)));
 		
 		}
 	
 	//Temp. Remove after session.	
     if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
+		SendMessageToAllDMs(GetTag(OBJECT_SELF) + " onspawn");
 		effect eFreeze = EffectCutsceneImmobilize();
 		effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 		effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 2.0);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 2.0);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 5.0);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 5.0);
 	
 		ClearAllActions(TRUE);
-		ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);	
+		DelayCommand(2.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER));	
 		
 		DestroyObject(OBJECT_SELF, IntToFloat(Random(180)));
 		DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));

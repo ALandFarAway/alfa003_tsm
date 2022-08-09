@@ -44,6 +44,7 @@ void main() {
  
 	
 	if(GetLastSpell() == 40) {
+		object oValbrace = GetObjectByTag("statue_valbrace", 1);
 		ActionSpeakString("Hundreds of motes spring apart, each of them a tiny screaming face. Some vanish. Some swell into ghosts, drifting away in all directions.", TALKVOLUME_TALK);
 		object oGhostField = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_afx_ror_fieldofghosts", GetLocation(OBJECT_SELF));
 		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_swift_ghostchild_f", GetLocation(OBJECT_SELF));
@@ -60,12 +61,16 @@ void main() {
 		DelayCommand(10.0, SetScale(OBJECT_SELF, 0.7, 0.7, 0.7));
 		DelayCommand(12.0, ActionCreateWynCreature("003_cr_un_ghost_humwiz", GetLocation(OBJECT_SELF)));
 		DelayCommand(14.0, ActionCreateWynCreature("003_cr_un_ghost_elfcl", GetLocation(OBJECT_SELF)));
+		DelayCommand(15.0, ClearAllActions(TRUE));
+		DelayCommand(16.0, ActionSpeakString("*Master Evenwood's face swims around in the vassal, as if seeking a way out", TALKVOLUME_TALK));
 		DelayCommand(16.0, SetScale(OBJECT_SELF, 0.6, 0.6, 0.6));
 		DelayCommand(18.0, ActionCreateWynCreature("003_cr_un_ghost_humfgt", GetLocation(OBJECT_SELF)));
 		DelayCommand(20.0, ActionCreateWynCreature("003_cr_circus_master_tigersx", GetLocation(OBJECT_SELF)));
 		DelayCommand(22.0, SetScale(OBJECT_SELF, 0.5, 0.5, 0.5));
 		DelayCommand(24.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl9", GetLocation(OBJECT_SELF)));
 		DelayCommand(26.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(OBJECT_SELF)));
+		DelayCommand(27.0, ClearAllActions(TRUE));
+		DelayCommand(28.0, ActionSpeakString("*The side of the vassal stretches, as if a membrane bulges, as Master Evenwood stretches out a hand towards Jhessi", TALKVOLUME_TALK));
 		DelayCommand(28.0, SetScale(OBJECT_SELF, 0.4, 0.4, 0.4));
 		DelayCommand(30.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl", GetLocation(OBJECT_SELF)));
 		DelayCommand(32.0, ActionCreateWynCreature("abr_cr_un_minotaur_ghost", GetLocation(OBJECT_SELF)));
@@ -83,11 +88,11 @@ void main() {
 		
 		DestroyObject(oGhostField, 10.0);
 		DelayCommand(49.0, ClearAllActions(TRUE));
-		DelayCommand(50.0, ActionSpeakString("Somewhere, somebody screams.", TALKVOLUME_TALK));
+		AssignCommand(oValbrace, DelayCommand(50.0, ActionSpeakString("Somewhere, somebody screams.", TALKVOLUME_TALK)));
 		DelayCommand(54.0, ClearAllActions(TRUE));
-		DelayCommand(55.0, ActionSpeakString("Another scream rings out, this one from a different direction, drifting out a window from the tavern.", TALKVOLUME_TALK));
+		AssignCommand(oValbrace, DelayCommand(55.0, ActionSpeakString("Another scream rings out, this one from a different direction, drifting out a window from the tavern.", TALKVOLUME_TALK)));
 		DelayCommand(59.0, ClearAllActions(TRUE));
-		DelayCommand(60.0, ActionSpeakString("The door of the Headless Troll Inn bangs open, and Hilda Quintin runs out, shrieking about ghosts.", TALKVOLUME_TALK));
+		AssignCommand(oValbrace, DelayCommand(60.0, ActionSpeakString("The door of the Headless Troll Inn bangs open, and Hilda Quintin runs out, shrieking about ghosts.", TALKVOLUME_TALK)));
 		DelayCommand(60.0, ActionCreateWynCreature("003_cr_oh_quintin", GetLocation(GetWaypointByTag("Post_abr_cr_un_harpy_ghost"))));
 		object oTrollWP = GetWaypointByTag("ghost_troll_wp");
 		_DespawnArea(GetArea(oTrollWP));
