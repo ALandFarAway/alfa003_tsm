@@ -88,11 +88,10 @@ void main()
 		}
 	
     if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
-		
+	ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);	
 	DestroyObject(OBJECT_SELF, IntToFloat(Random(180)));
-	if(Random(3) == 1) {
-			DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
-		}
+	DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
+		
 	}
 		
 	//Hydra's extra attacks
