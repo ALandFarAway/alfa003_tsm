@@ -87,10 +87,19 @@ void main()
 		
 		}
 	
+	//Temp. Remove after session.	
     if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
-	ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);	
-	DestroyObject(OBJECT_SELF, IntToFloat(Random(180)));
-	DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
+		effect eFreeze = EffectCutsceneImmobilize();
+		effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+		effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 2.0);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 2.0);
+	
+		ClearAllActions(TRUE);
+		ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);	
+		
+		DestroyObject(OBJECT_SELF, IntToFloat(Random(180)));
+		DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 		
 	}
 		
