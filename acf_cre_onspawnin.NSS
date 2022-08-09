@@ -95,14 +95,14 @@ void main()
 		SendMessageToAllDMs(GetTag(OBJECT_SELF) + " onspawn");
 		effect eFreeze = EffectCutsceneImmobilize();
 		effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
-		effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 5.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 5.0);
 	
 		ClearAllActions(TRUE);
+		ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);
 		DelayCommand(2.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER));	
 		
-		DestroyObject(OBJECT_SELF, IntToFloat(Random(180)));
+		DestroyObject(OBJECT_SELF, IntToFloat(Random(180)) + 60.0);
 		DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 		
 	}
