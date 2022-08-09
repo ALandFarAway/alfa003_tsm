@@ -77,12 +77,12 @@ void main()
 		object oSiWP = GetWaypointByTag("si_wp");
 		object oValbraceWP = GetWaypointByTag("valbrace_wp");
 		object oValbrace = GetObjectByTag("statue_valbrace", 1);
-		
+		ClearAllActions(TRUE);
 		DelayCommand(5.0, ActionForceMoveToObject(oJhessi, FALSE, 0.5, 20.0));
 		DelayCommand(7.0, ActionForceFollowObject(oJhessi, 0.5));
+		DelayCommand(7.5, ClearAllActions(TRUE));
 		DelayCommand(8.0, ActionSpeakString("Jhessi. *Ghostly tears falling on ethereal cheeks.", TALKVOLUME_TALK));
 	 	
-		AssignCommand(oValbrace, DelayCommand(59.0, ActionSpeakString("*A shape separates from the statue of the mounted Elthondsson ancestor. Ghostly horns blow a call to arms.", TALKVOLUME_TALK)));
 		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_valbrace", GetLocation(oValbraceWP)));
 		
 		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_aloisus", GetLocation(oAloisusWP)));
