@@ -102,7 +102,9 @@ void main()
 		ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);
 		DelayCommand(2.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER));	
 		
-		DestroyObject(OBJECT_SELF, IntToFloat(Random(180)) + 60.0);
+		if(GetTag(GetArea(OBJECT_SELF)) == "8e_ext_highforest_olostins_holds") {
+			DestroyObject(OBJECT_SELF, IntToFloat(Random(180)) + 60.0);
+			}
 		DelayCommand(IntToFloat(Random(120)) + 60.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
 		
 	}

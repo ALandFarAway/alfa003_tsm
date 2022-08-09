@@ -177,10 +177,8 @@ void main()
 		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_hum_f", GetLocation(OBJECT_SELF));
 		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_gob_f", GetLocation(OBJECT_SELF));
 		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_gob_m", GetLocation(OBJECT_SELF));
-		SetScale(OBJECT_SELF, 0.9, 0.9, 0.9);
 		DelayCommand(1.0, ActionCreateWynCreature("003_cr_un_ghost_dwwiz", GetLocation(OBJECT_SELF)));
 		DelayCommand(2.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(OBJECT_SELF)));
-		DelayCommand(4.0, SetScale(OBJECT_SELF, 0.8, 0.8, 0.8));
 		DelayCommand(6.0, ActionCreateWynCreature("003_cr_un_ghost_helf_m", GetLocation(OBJECT_SELF)));
 		DelayCommand(8.0, ActionCreateWynCreature("003_cr_un_ghost_half_f", GetLocation(OBJECT_SELF)));
 		DelayCommand(10.0, SetScale(OBJECT_SELF, 0.7, 0.7, 0.7));
@@ -188,35 +186,28 @@ void main()
 		DelayCommand(12.0, ActionCreateWynCreature("003_cr_un_ghost_humwiz", GetLocation(OBJECT_SELF)));
 		DelayCommand(14.0, ActionCreateWynCreature("003_cr_un_ghost_elfcl", GetLocation(OBJECT_SELF)));
 		DelayCommand(15.0, ClearAllActions(TRUE));
-		DelayCommand(16.0, ActionSpeakString("*Master Evenwood's face swims around in the vassal, as if seeking a way out", TALKVOLUME_TALK));
-		DelayCommand(16.0, SetScale(OBJECT_SELF, 0.6, 0.6, 0.6));
+		DelayCommand(15.0, ActionSpeakString("*Master Evenwood's face swims around in the vassal, as if seeking a way out", TALKVOLUME_TALK));
 		DelayCommand(18.0, ActionCreateWynCreature("003_cr_un_ghost_humfgt", GetLocation(OBJECT_SELF)));
 		DelayCommand(20.0, ActionCreateWynCreature("003_cr_circus_ghost_tigersx", GetLocation(OBJECT_SELF)));
-		DelayCommand(22.0, SetScale(OBJECT_SELF, 0.5, 0.5, 0.5));
 		DelayCommand(24.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl9", GetLocation(OBJECT_SELF)));
 		DelayCommand(26.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(OBJECT_SELF)));
 		DelayCommand(27.0, ClearAllActions(TRUE));
-		DelayCommand(28.0, ActionSpeakString("*The side of the vassal stretches, as if a membrane bulges, as Master Evenwood stretches out a hand towards Jhessi", TALKVOLUME_TALK));
-		DelayCommand(28.0, SetScale(OBJECT_SELF, 0.4, 0.4, 0.4));
+		DelayCommand(30.0, ActionSpeakString("*The side of the vassal stretches, as if a membrane bulges, as Master Evenwood stretches out a hand towards Jhessi", TALKVOLUME_TALK));
 		DelayCommand(30.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl", GetLocation(OBJECT_SELF)));
 		DelayCommand(32.0, ActionCreateWynCreature("abr_cr_un_minotaur_ghost", GetLocation(OBJECT_SELF)));
-		DelayCommand(34.0, SetScale(OBJECT_SELF, 0.3, 0.3, 0.3));
 		DelayCommand(36.0, ActionCreateWynCreature("abr_cr_un_ghost_corrupt", GetLocation(OBJECT_SELF)));
 		DelayCommand(38.0, ActionCreateWynCreature("c_st01_ghost_morrigan", GetLocation(OBJECT_SELF)));
-		DelayCommand(40.0, ActionSpeakString("*Somewhere, somebody screams.", TALKVOLUME_TALK));
-		DelayCommand(40.0, SetScale(OBJECT_SELF, 0.2, 0.2, 0.2));
 		DelayCommand(42.0, ActionCreateWynCreature("003_cr_un_ghost_humcl", GetLocation(OBJECT_SELF)));
 		DelayCommand(44.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(OBJECT_SELF)));
-		DelayCommand(45.0, ActionSpeakString("*With each separation of a spirit, the vassal dwindles, until all that is left is a red spark and the figure of an old man, ghostly tears welling on his ethereal face.", TALKVOLUME_TALK));
-		DelayCommand(46.0, SetScale(OBJECT_SELF, 0.1, 0.1, 0.1));
 		DelayCommand(48.0, ActionCreateWynCreature("003_cr_circus_magician_dead", GetLocation(OBJECT_SELF)));
 		DelayCommand(50.0, ActionCreateWynCreature("003_cr_un_spirit_evenwood", GetLocation(OBJECT_SELF)));
-		DelayCommand(50.0, ActionSpeakString("*Another scream rings out, this one from a different direction, drifting out a window from the tavern.", TALKVOLUME_TALK));
 		DelayCommand(52.0, ActionCreateWynCreature("abr_cr_un_ghost_moan", GetLocation(OBJECT_SELF)));
-		DelayCommand(55.0, ActionSpeakString("*A shape drifts out of the statue of the mounted Elthondsson ancestor. Ghostly horns blow a call to arms.", TALKVOLUME_TALK));
-		
+		DelayCommand(50.0, ActionSpeakString("*Somewhere, somebody screams.", TALKVOLUME_TALK));
 		DelayCommand(60.0, ActionSpeakString("The door of the Headless Troll Inn bangs open, and Hilda Quintin runs out, shrieking about ghosts.", TALKVOLUME_TALK));
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_oh_quintin", GetLocation(GetWaypointByTag("Post_abr_cr_un_harpy_ghost"))));
+		DelayCommand(70.0, ActionSpeakString("*Another scream rings out, this one from a different direction, drifting out a window from the tavern.", TALKVOLUME_TALK));
+		DelayCommand(80.0, ActionSpeakString("*A shape drifts out of the statue of the mounted Elthondsson ancestor. Ghostly horns blow a call to arms.", TALKVOLUME_TALK));
+		
+			DelayCommand(60.0, ActionCreateWynCreature("003_cr_oh_quintin", GetLocation(GetWaypointByTag("Post_abr_cr_un_harpy_ghost"))));
 		object oTrollWP = GetWaypointByTag("ghost_troll_wp");
 		_DespawnArea(GetArea(oTrollWP));
 		DelayCommand(60.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
@@ -246,7 +237,6 @@ void main()
 		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(oKeepWPB)));
 		DelayCommand(61.0, ActionCreateWynCreature("abr_cr_un_ghost_corrupt", GetLocation(oKeepWPB)));
 		
-		DelayCommand(65.0, ActionSpeakString("*The courtyard is in chaos, people fleeing, the undead pursuing, while shouts and cries ring out from within the Troll, the Flagon, the Keep and the Temple.", TALKVOLUME_TALK));
 		}
 		}
 		 
