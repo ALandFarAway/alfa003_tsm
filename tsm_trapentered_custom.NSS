@@ -54,7 +54,7 @@ void main()
 			 if((nRunOnce == 0) && (oPLCDestroy != OBJECT_INVALID) && (nFlying == 0) && (nIncorporeal == 0)) {
 			 	 SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 				 AssignCommand(oPLCDestroy, ActionSpeakString(sSpeak, TALKVOLUME_TALK));
-				 SendMessageToAllDMs(GetName(oVictim) + " triggered " + GetName(OBJECT_SELF));
+				 SendMessageToAllDMs(GetName(oVictim) + " entered " + GetName(OBJECT_SELF));
 				 SendMessageToPC(oVictim, sMessage);
 				 ApplyEffectToObject(DURATION_TYPE_INSTANT, EffectVisualEffect(VFX_FNF_SCREEN_SHAKE), oVictim);
 	             AssignCommand(oVictim, ActionPlayAnimation(ANIMATION_LOOPING_DEAD_BACK, 1.0, 5.0));
