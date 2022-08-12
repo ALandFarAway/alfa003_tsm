@@ -1155,7 +1155,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A24FE684009F1EB92EC73F36935F335F1C2D58B4" downloadHash="9A6554A32D9D0F82D87AAE3893B8DAC2318A846B" name="5b_ext_frosthills_road.trx" dlsize="4197146" size="21467016" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="21CE953EF5DFE3519DEE85D0CA46B2ED9C8DC2A4" downloadHash="0330439842C1A5392D7AE8F958DE78F5EBBB845A" name="5b_ext_frosthills_road.trx" dlsize="4198680" size="21466123" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1585,7 +1585,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="D2BF2BADA81A53CCA0163A1ECCA1A023815D7DA1" downloadHash="AA188B7BFDBFFF9908E40E3569D5F898A4BE9C06" name="6e_ext_nether_slopes_new.trx" dlsize="3114022" size="17389785" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="68E64865390626AA8B954851AE207F776F02A19B" downloadHash="808294DB764F1148336C8BCE4B40AF5493992866" name="6e_ext_nether_slopes_new.trx" dlsize="3080812" size="17349271" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
