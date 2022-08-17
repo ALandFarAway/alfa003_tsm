@@ -135,13 +135,6 @@ void main() {
 
     object oEnterer = GetEnteringObject();
 	
-	if(FindSubString(GetName(oEnterer), "Jhessi") != -1) {
-		object oVassal = GetObjectByTag("003_cr_un_banite_vassal", 0);
-		if(oVassal == OBJECT_INVALID) {
-			oVassal = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_banite_vassal", GetLocation(oEnterer));
-			}
-		AssignCommand(oVassal, ActionJumpToObject(oEnterer, FALSE));
-		}
 	
 	//Is Scrying active on this PC
 	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
