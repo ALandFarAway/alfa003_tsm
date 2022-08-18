@@ -20,7 +20,7 @@ void main()
 //University Rod Change TSM Static Quest States
 	
 if(nStaticInc != 0)
-		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
+		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM)) || (FindSubString(GetName(oDM), "Wynna", 0) != -1)  || (FindSubString(GetName(oDM), "Perle", 0) != -1))
 			{int nQuestState= ACR_RetrieveQuestState(sStaticQuestTag, oPC);
 			 SendMessageToPC(oDM, sStaticQuestTag + " = " + IntToString(ACR_RetrieveQuestState(sStaticQuestTag, oPC)) + " for " + GetName(oPC));
 			 ACR_AddPersistentJournalQuestEntry(sStaticQuestTag, nQuestState +1, oPC, 0, 0, 0, 0);
