@@ -29,8 +29,8 @@ if(nStaticInc != 0)
 			 }
 		}
 			
-	else if(nStaticDec != 0)
-		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM))  || (FindSubString(GetName(oDM), "Wynna", 0) != -1))
+else if(nStaticDec != 0)
+		 {if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM))  || (FindSubString(GetName(oDM), "Wynna", 0) != -1)  || (FindSubString(GetName(oDM), "Perle", 0) != -1))
 			{int nQuestState= ACR_RetrieveQuestState(sStaticQuestTag,  oPC);
 			 int nNewState = nQuestState-1;
 			 SendMessageToPC(oDM, sStaticQuestTag + " = " + IntToString(ACR_RetrieveQuestState(sStaticQuestTag, oPC)) + " for " + GetName(oPC));
@@ -40,6 +40,9 @@ if(nStaticInc != 0)
 			 DelayCommand(3.0, SetLocalInt(oDM, "wand_static_dec", 0));
 			}
 		}
+else if((GetIsDM(oDM)) || (GetIsDMPossessed(oDM))  || (FindSubString(GetName(oDM), "Wynna", 0) != -1)  || (FindSubString(GetName(oDM), "Perle", 0) != -1))
+	 {SendMessageToPC(oDM, sStaticQuestTag + " = " + IntToString(ACR_RetrieveQuestState(sStaticQuestTag, oPC)) + " for " + GetName(oPC));		 
+	}
 	
 	
 		
