@@ -1760,7 +1760,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="Tlk" hash="811F9D7E082E14D5EAC4F026D1F8F81A12766DFA" downloadHash="C2DE4471A3B0863FF1D21B3FAD96FED246AB026F" name="alfa_acr02.tlk" dlsize="164380" size="1268732" critical="false" exclude="false" urlOverride="">
+  <resource type="Tlk" hash="365EC05E4DD03AE38351D31962897EEAA17874AF" downloadHash="8390DB3754682450BC68AB8C41CF5428DB7F4759" name="alfa_acr02.tlk" dlsize="165764" size="1273873" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
