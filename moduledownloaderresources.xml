@@ -1946,4 +1946,9 @@
       <string>0</string>
     </server-ref>
   </resource>
+  <resource type="DirectoryEntry" hash="4D11B7EB9AF1BB9888DC573F8B6FC841D9899A7F" downloadHash="34C5D84D54AF9C300C6AD69E828B69CE841544E7" name="8e_ext_highforest_cntrl.trx" dlsize="4884291" size="18681261" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
+    </server-ref>
+  </resource>
 </content>
