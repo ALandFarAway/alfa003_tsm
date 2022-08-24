@@ -1946,7 +1946,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4D11B7EB9AF1BB9888DC573F8B6FC841D9899A7F" downloadHash="34C5D84D54AF9C300C6AD69E828B69CE841544E7" name="8e_ext_highforest_cntrl.trx" dlsize="4884291" size="18681261" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3337F5228451DB4B971EBD1AE18D974532419378" downloadHash="D01AA042CC5B260D14791EAF1E0008068CC294F4" name="8e_ext_highforest_cntrl.trx" dlsize="4889724" size="18681260" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

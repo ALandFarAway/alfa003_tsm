@@ -31,9 +31,9 @@ void main()
 	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 	effect eInvis = EffectInvisibility(INVISIBILITY_TYPE_IMPROVED);
 	effect eEthereal = EffectEthereal();
-	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
-      
+    SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
+	  
  		if(GetTag(OBJECT_SELF)== "003_cr_scry_speak") {
 			 //Initialize OOC undetectable Scrying Listener that receives information from the Scrying Sensor	 
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
