@@ -1946,12 +1946,12 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7E50C5F0D9B7230DA39353D7678E04D0D54FF328" downloadHash="832D4055FE4432EFF1C7DD8F26DD2C35D461233F" name="8e_ext_highforest_cntrl.trx" dlsize="4994232" size="19062474" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1A453F59B0624BC0F3C06622C095DF8A28627B82" downloadHash="9E96CA836463F170BAD67FAAB2E91B79B3874C65" name="8e_ext_highforest_cntrl.trx" dlsize="4992339" size="19062690" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="AE848E08683BEC7303F2205B1E57CB5F76A9B2FF" downloadHash="6445176BDE523FF76ED616AC5B58FE0B36EB750C" name="8e_int_highforest_cntrl_fort.trx" dlsize="906692" size="928427" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6AC2DA7295344AD10DC0A55ED5004F1F1143F087" downloadHash="69E54743BD403365E68832067F468AB20EE7C910" name="8e_int_highforest_cntrl_fort.trx" dlsize="834565" size="1030425" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
