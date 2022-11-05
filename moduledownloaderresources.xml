@@ -1220,7 +1220,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A8482893E6F88D0B2074146E5E9BF15E4E275108" downloadHash="302F12CA97768BDE4BA7F191E1FFCD486DCAB194" name="003_quests_lab.trx" dlsize="122717" size="308707" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="81024141285EAC8B928C0D210313D665F67B4863" downloadHash="1861774DE1F14955BCC3AD8A13CEE2B7588612EC" name="003_quests_lab.trx" dlsize="125947" size="311926" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1951,7 +1951,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6303FEB8552E0D966ADF0D7A9ECCDC7190DC2432" downloadHash="2BB1D2837701E744A79B44FDC8577EFB7AE22AFA" name="8e_int_highforest_cntrl_fort.trx" dlsize="875124" size="1072971" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FA961846B3B74D6A2B5BBC3F9BAAB9EDB07EFB5E" downloadHash="E44A08C60187BBAC1E94BBEC27E2A5CBB2082B7C" name="8e_int_highforest_cntrl_fort.trx" dlsize="902161" size="1096471" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
