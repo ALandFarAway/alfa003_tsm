@@ -21,6 +21,7 @@ void main()
 		 string sIllusionMsg = GetLocalString(OBJECT_SELF, "circus_illusion_message");
 		 string sIllusionMsg2 = GetLocalString(OBJECT_SELF, "circus_illusion_message2");
 		 string sIllusionMsg3 = GetLocalString(OBJECT_SELF, "circus_illusion_message3");
+		 string sIllusionMsg4 = GetLocalString(OBJECT_SELF, "circus_illusion_message4");
 		 string sDestroy = GetLocalString(OBJECT_SELF, "circus_illusion_destroy");
 		 object oDestroy = GetNearestObjectByTag(sDestroy, OBJECT_SELF, 1);
 		 if(sDestroy == "")
@@ -44,6 +45,10 @@ void main()
 			 DelayCommand(6.0, SendMessageToPC(oPC, sIllusionMsg));
 			 DelayCommand(8.0, SendMessageToPC(oPC, sIllusionMsg2));
 			 DelayCommand(10.0, SendMessageToPC(oPC, sIllusionMsg3));
+			 if(GetLevelByClass(CLASS_TYPE_WIZARD,oPC)>0) {
+			 	DelayCommand(12.0, SendMessageToPC(oPC, sIllusionMsg4));
+			 
+			 	}
 			}
 		}	
 	
