@@ -1,11 +1,13 @@
 #include "acr_spawn_i"
 #include "acr_quest_i"
-#include "NW_I0_SPELLS"    
+#include "NW_I0_SPELLS"
+#include "ginc_item"
  
 void main()
 {
 	object oSensor = GetObjectByTag("003_cr_scry_send", 0);
-	
+	IdentifyEquippedItems();
+    IdentifyInventory();
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_DEATH_WARD, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
