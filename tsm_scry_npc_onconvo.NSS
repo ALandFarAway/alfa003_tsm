@@ -381,7 +381,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			}
 			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
-		SendMessageToAllDMs("sPTargetRes = " + sPTargetRes);
+		SendMessageToAllDMs("scrySpeak sPTargetRes = " + sPTargetRes);
 					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
@@ -430,6 +430,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
 										nNPC++;
 										}
+									SendMessageToAllDMs("No NPC was found in " + sScriedArea + " by the name " + sScriedName);
 									break;
 									}
 								oScriedArea = GetNextArea();
@@ -1498,6 +1499,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
 	SendMessageToAllDMs("Namer: sTargetName = " + sTargetName);
 	SendMessageToAllDMs( "Namer: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
+	SendMessageToAllDMs("Namer: sTargetRes = " + sTargetRes);
+	SendMessageToAllDMs( "Namer: sPTargetRes = " + ACR_GetPersistentString(oFocus, "sPTargetRes"));
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
@@ -1555,7 +1558,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 		object oToken = GetFirstItemInInventory(oScryer);
 		while(oToken != OBJECT_INVALID) {
 			if((FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) && (GetTag(oToken) != "abr_it_scry_kit")) {
+				string sPTokenRes = ACR_GetPersistentString(oToken, "sPTargetRes");
+				SendMessageToAllDMs("Namer onconvo sPTokenRes is" + sPTokenRes);
+				
 				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
+				
 				if(sPTokenName == sTargetName) {
 					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
 					SendMessageToAllDMs("1. sPTargetNick set to " + sMatch + " on " + GetName(oToken));

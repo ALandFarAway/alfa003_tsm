@@ -631,9 +631,9 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	oScryPlc = GetLocalObject(oArea, "oScryPlc");
 	object oScry = GetLocalObject(oArea, "oScryPlc");
 	SetLocalObject(oArea, "oScry", oScry);
-	//SendMessageToPC(oScryer, "1. sScry ResRefPlc = " + GetResRef(oScryPlc));
+	//SendMessageToAllDMs("1. sScry ResRefPlc = " + GetResRef(oScryPlc));
 	int nObjectTypePlc = GetObjectType(oScryPlc);
-	//SendMessageToPC(oScryer, "1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
+	//SendMessageToAllDMs("1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
 	SetLocalObject(oArea, "oScryPlc", OBJECT_INVALID);
 			   
 	float fDistanceTrg = 0.0;		
@@ -642,7 +642,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			SendMessageToPC(oScryer, "2. oScryTrg Name = " + GetName(oScryTrg));
+			SendMessageToAllDMs("2. oScryTrg Name = " + GetName(oScryTrg));
 			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);

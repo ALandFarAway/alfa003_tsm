@@ -135,7 +135,11 @@ void main()
 		if((GetIsPC(oTarget) == FALSE) || (GetIsDMPossessed(oTarget) == TRUE)) {
 			ACR_SetPersistentString(oImage, "sPTargetRes", GetResRef(oTarget));
 			}
-			
+		
+		if(GetIsPC(oTarget) == TRUE) {
+			ACR_SetPersistentString(oImage, "sPTargetRes", "");
+			}
+		
 		DestroyObject(oFocus);
 		}		
 	
