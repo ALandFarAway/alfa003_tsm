@@ -325,6 +325,9 @@ void main() {
 				{sSubjectArea = "inside a huge hollow tree, judging by the look of the curving walls.";}
 			else if(FindSubString(sAreaTag, "int_highforest_olostin", 0) != -1)
 				{sSubjectArea = "inside a richly-appointed but martial keep.";}
+			else if(FindSubString(sAreaTag, "8e_int_highforest_cntrl_fort", 0) != -1)
+				{sSubjectArea = "inside a dim ruin, walls crumbling.";}
+				
 			else if((FindSubString(sAreaTag, "_int_", 0) != -1) && (FindSubString(sAreaTag, "interior", 0) != -1)) 
 				{sSubjectArea = "inside, though nothing uniquely identifiable is visible.";}
 			else if(FindSubString(sAreaTag, "_ext_", 0) != -1)
