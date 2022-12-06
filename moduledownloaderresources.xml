@@ -1765,16 +1765,6 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="D9D1608E759A75A8EE2422B82E3C68C1D5F7811A" downloadHash="39382B0EF03853C0BDEDBC16716D56C1A61DA337" name="_testing grounds.trx" dlsize="323340" size="8508646" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
-  <resource type="DirectoryEntry" hash="B81EB14D0DD61CCE205F831DD02EEE48130DF2A2" downloadHash="BAE418B538610A60FE7037D8C33B1C2B8E4F958E" name="1o_graycloak_hills.trx" dlsize="3525882" size="19430658" critical="false" exclude="false" urlOverride="">
-    <server-ref>
-      <string>0</string>
-    </server-ref>
-  </resource>
   <resource type="Hak" hash="E6CF8F6322395F00A0F2C7B98E29DCE532823D8E" downloadHash="D25A67193CB8FFC882CEB2937E529562BF1D6D29" name="alfa2_2da.hak" dlsize="550566" size="35273769" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>1</string>
