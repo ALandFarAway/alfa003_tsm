@@ -660,7 +660,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="EEB942E023B7B0ADAFA49808356FAC364C962272" downloadHash="CB92A06C8A2B8A471553439F2A76883B7E4B7187" name="6e_int_khelb_caves_waterfall.trx" dlsize="318406" size="2041151" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="E386E7AE705D4722F308984D7BF197D5D9AFBCCA" downloadHash="9B4637D18BA527415E07681976782F4C776E0E47" name="6e_int_khelb_caves_waterfall.trx" dlsize="343128" size="2290925" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -725,7 +725,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="FB540AE0A342BBABEA99AB4E0E2DFC855D137FB1" downloadHash="8D1D6922B169FC6A9F2B1D3FE6146B4061AB89B2" name="6e_int_khelb_derochelle_manor.trx" dlsize="368015" size="729432" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D511ADBD1710D7A9FF47E19490FB8E25DEC86F53" downloadHash="67012D0183427798D8C2183B265E898842F31895" name="6e_int_khelb_derochelle_manor.trx" dlsize="382555" size="742726" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
