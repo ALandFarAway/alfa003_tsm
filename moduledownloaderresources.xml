@@ -1690,7 +1690,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="D8AF44CA4898D0B8878A0F764E6FC58BB8427392" downloadHash="75E55301B25949F234E6B07599079E47628C41C7" name="8e_ext_highforest_olostins_hold.trx" dlsize="4917225" size="24762894" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="CD8208A30D9D94AC17BDE37D67CEEB825ED620C6" downloadHash="65BAA50729D808759CBB0AECACF2F461F553C87C" name="8e_ext_highforest_olostins_hold.trx" dlsize="4896464" size="24749625" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1969,7 +1969,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CACC59B580122F1DAAF49DF37A83964C2BF59890" downloadHash="451032BA4D613AB4277AF21AADA4B6E05FDA867D" name="8e_int_highforest_oh_apple.trx" dlsize="9558" size="9632" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6611C8319E21952B9241919B91CFD466AB7B15AE" downloadHash="AFC3BF310B70F9569B89F3E7F3A9979B111E1230" name="8e_int_highforest_oh_apple.trx" dlsize="65702" size="65843" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
