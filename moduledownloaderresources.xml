@@ -490,7 +490,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="04C8B09827AC9D38419BAD60406A9B8DAB9FAEC0" downloadHash="773EC9C6ED4042742A4ACDA4150829DAAC60A1CB" name="6e_ext_khelb_silvypass_west.trx" dlsize="4188341" size="16646336" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1F33256114DC336528A8EA2FD8935FAAB24E97A5" downloadHash="C47D363CCAD136940DE855276761624FAE1348A1" name="6e_ext_khelb_silvypass_west.trx" dlsize="4200196" size="16663763" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1570,7 +1570,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8B2F1FAA16C4BD86C881E5604FA6C4BDC9BC6F13" downloadHash="2E03B5C2F607C199C28F0A649D8EC3BEB7157176" name="6e_int_khelb_town_int.trx" dlsize="245675" size="249533" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C22FDF0D550CEECA63ED88C6F83EB64C29C0F46B" downloadHash="87676C436C1764966CA5122F4287C3ADAA3A392B" name="6e_int_khelb_town_int.trx" dlsize="245558" size="249201" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
