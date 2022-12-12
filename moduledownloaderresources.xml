@@ -1570,7 +1570,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C22FDF0D550CEECA63ED88C6F83EB64C29C0F46B" downloadHash="87676C436C1764966CA5122F4287C3ADAA3A392B" name="6e_int_khelb_town_int.trx" dlsize="245558" size="249201" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="436A3442165BC0DFF5C660FEEA82B38D12AE9777" downloadHash="CAB8C1C3895BA43E076DC96CD481700E199A0ADC" name="6e_int_khelb_town_int.trx" dlsize="245557" size="249201" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
