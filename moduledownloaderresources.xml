@@ -490,7 +490,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1F33256114DC336528A8EA2FD8935FAAB24E97A5" downloadHash="C47D363CCAD136940DE855276761624FAE1348A1" name="6e_ext_khelb_silvypass_west.trx" dlsize="4200196" size="16663763" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D3E0B477F8895B00DE3A070DFAE821E164D44781" downloadHash="667257FCD77D356B69E7C085B67E9D3EC5B5D506" name="6e_ext_khelb_silvypass_west.trx" dlsize="4189227" size="16651813" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -660,7 +660,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E386E7AE705D4722F308984D7BF197D5D9AFBCCA" downloadHash="9B4637D18BA527415E07681976782F4C776E0E47" name="6e_int_khelb_caves_waterfall.trx" dlsize="343128" size="2290925" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="6275D67B0B113243D8CC664927971F2E3DBB4096" downloadHash="4D22FC9AAEFC0874D3AC78D7A524F80DD6AB3E90" name="6e_int_khelb_caves_waterfall.trx" dlsize="348055" size="2294364" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1570,7 +1570,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="436A3442165BC0DFF5C660FEEA82B38D12AE9777" downloadHash="CAB8C1C3895BA43E076DC96CD481700E199A0ADC" name="6e_int_khelb_town_int.trx" dlsize="245557" size="249201" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="9B5C1F8837385156E58A7104C2972B11A513FB75" downloadHash="A8A5E209776736B51F041C2CDB7395473C1E3D15" name="6e_int_khelb_town_int.trx" dlsize="245573" size="249202" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
