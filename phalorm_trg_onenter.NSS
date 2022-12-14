@@ -20,15 +20,26 @@ void main()
 	object oPC = GetEnteringObject();
     
 
-if(GetTag(OBJECT_SELF) == "phalorm_glacier_enter") {
-		object oThereWP = GetWaypointByTag("WP_phalorm_glacier_platform_exit");
-		object oHereWP = GetWaypointByTag("WP_phalorm_glacier_platform_enter");
-		object oGoThere = GetWaypointByTag("WP_phalorm_glacier_enter");
-		location lThere = GetLocation(oThereWP);
-		location lHere = GetLocation(oHereWP);
-		location lGoThere = GetLocation(oGoThere);
-		
-		if(((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) || (GetItemPossessedBy(oPC, "003_it_phalorm_sapphire")!= OBJECT_INVALID)) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+if((GetTag(OBJECT_SELF) == "phalorm_glacier_enter") || (GetTag(OBJECT_SELF) == "phalorm_rr_enter")) {
+		object oThereWP;
+		object oHereWP;
+		object oGoThere;
+		if(GetTag(OBJECT_SELF) == "phalorm_rr_enter") {
+			 oThereWP = GetWaypointByTag("WP_phalorm_rr_platform_exit");
+			 oHereWP = GetWaypointByTag("WP_phalorm_rr_platform_enter");
+			 oGoThere = GetWaypointByTag("WP_phalorm_rr_enter");
+			}
+		else {
+		     oThereWP = GetWaypointByTag("WP_phalorm_glacier_platform_exit");
+			 oHereWP = GetWaypointByTag("WP_phalorm_glacier_platform_enter");
+			 oGoThere = GetWaypointByTag("WP_phalorm_glacier_enter");
+			}
+			
+			location lThere = GetLocation(oThereWP);
+			location lHere = GetLocation(oHereWP);
+			location lGoThere = GetLocation(oGoThere);
+			
+		if(((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) || ((GetTag(OBJECT_SELF) == "phalorm_glacier_enter") && (GetItemPossessedBy(oPC, "003_it_phalorm_sapphire")!= OBJECT_INVALID))  || ((GetTag(OBJECT_SELF) == "phalorm_rr_enter") && (GetItemPossessedBy(oPC, "003_it_phalorm_emerald")!= OBJECT_INVALID))) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
@@ -44,10 +55,23 @@ if(GetTag(OBJECT_SELF) == "phalorm_glacier_enter") {
 			}
 	}
 		
-	if(GetTag(OBJECT_SELF) == "phalorm_glacier_exit") {
-		object oThereWP = GetWaypointByTag("WP_phalorm_glacier_platform_enter");
-		object oHereWP = GetWaypointByTag("WP_phalorm_glacier_platform_exit");
-		object oGoThere = GetWaypointByTag("WP_phalorm_glacier_exit");
+	if((GetTag(OBJECT_SELF) == "phalorm_glacier_exit") || (GetTag(OBJECT_SELF) == "phalorm_rr_exit")) {
+		object oThereWP;
+		object oHereWP;
+		object oGoThere;
+		
+		if(GetTag(OBJECT_SELF) == "phalorm_rr_exit") {
+		 oThereWP = GetWaypointByTag("WP_phalorm_rr_platform_enter");
+		 oHereWP = GetWaypointByTag("WP_phalorm_rr_platform_exit");
+		 oGoThere = GetWaypointByTag("WP_phalorm_rr_exit");
+		}
+		 
+		else {
+		 oThereWP = GetWaypointByTag("WP_phalorm_glacier_platform_enter");
+		 oHereWP = GetWaypointByTag("WP_phalorm_glacier_platform_exit");
+		 oGoThere = GetWaypointByTag("WP_phalorm_glacier_exit");
+		}
+		
 		location lThere = GetLocation(oThereWP);
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);

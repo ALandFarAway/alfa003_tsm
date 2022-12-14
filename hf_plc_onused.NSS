@@ -24,6 +24,19 @@ void main()
 	 
 	 
 	
+if(GetTag(OBJECT_SELF) == "hf_crate_down")
+	{object oExit = GetObjectByTag("hf_crate_down_wp");
+	 	 ActionSpeakString("Descends out of sight.", TALKVOLUME_TALK);
+		 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oExit)));
+	   	}
+	 
+if(GetTag(OBJECT_SELF) == "hf_crate_up")
+	{object oExit = GetObjectByTag("hf_crate_up_wp");
+	 	 ActionSpeakString("Ascends out of sight.", TALKVOLUME_TALK);
+		 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oExit)));
+	   	}
+	 
+	 
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_exit")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	 object oSwimExit = GetObjectByTag("hf_aq_plc_crack_enter_WP");
