@@ -76,7 +76,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_glacier_enter") || (GetTag(OBJECT_SELF) == "
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
 		
-	if((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID)  && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+	  if(((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) || ((GetTag(OBJECT_SELF) == "phalorm_glacier_exit") && (GetItemPossessedBy(oPC, "003_it_phalorm_sapphire")!= OBJECT_INVALID))  || ((GetTag(OBJECT_SELF) == "phalorm_rr_exit") && (GetItemPossessedBy(oPC, "003_it_phalorm_emerald")!= OBJECT_INVALID))) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
