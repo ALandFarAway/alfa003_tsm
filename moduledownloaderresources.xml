@@ -1670,7 +1670,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="62C77C9F152CB21AC88909110FA49CF66FFDA096" downloadHash="F660B5A7440FB58A2F68B5EC6BB62FF5715ED6EC" name="7e_int_rauvin_ruins.trx" dlsize="998225" size="1642619" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="08137501653A20B94833A55EC7C0408811BDBE8E" downloadHash="BF2124A4FB389865CD85DEFE546506BC93893AA1" name="7e_int_rauvin_ruins.trx" dlsize="992991" size="1637245" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1695,7 +1695,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B93CBAD21BBE64A185B18E14DDDBA97ED7B90553" downloadHash="212642708AE5766CBEA9F0163951E0D514BB9023" name="8e_int_highforest_nw_cave_aq.trx" dlsize="711050" size="6399853" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C177F3492BCF5AAB3E5BF95D2F2535F72B938C05" downloadHash="B335A3DCC6941AA078DE9950F46EFD10D9F810F4" name="8e_int_highforest_nw_cave_aq.trx" dlsize="693596" size="6400288" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
