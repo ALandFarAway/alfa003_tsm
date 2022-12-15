@@ -36,7 +36,17 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
 		
-		if((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+		if((GetItemPossessedBy(oPC, "003_it_he_sehancrystalcount")!= OBJECT_INVALID) && (FindSubString(GetName(oPC), "Saerela", 1) != -1) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+			SetLocalInt(OBJECT_SELF, "Activated", 1); 
+			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
+			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
+			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
+			ActionSpeakString("*Glows with a soft, silver light.", TALKVOLUME_TALK);
+			DelayCommand(1.0, SendMessageToPC(oPC, "A soft, silver light shimmers beneath your feet. You feel your heart drop as if rising suddenly and find yourself in another place."));
+			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
+			}
+			
+		else if((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
@@ -46,7 +56,6 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 			}
 		
 		if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
-			DelayCommand(1.0, SendMessageToPC(oPC, "You feel your heart drop as if rising suddenly and find yourself in another place."));
 			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			}
 		}
@@ -59,17 +68,28 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
 		
-		if(GetLocalInt(OBJECT_SELF, "Activated") != 1) {
+		if((GetItemPossessedBy(oPC, "003_it_he_sehancrystalcount")!= OBJECT_INVALID) && (FindSubString(GetName(oPC), "Saerela", 1) != -1) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
 			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
-			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
+			ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere);
 			}
-		else if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
+		
+		else if(GetLocalInt(OBJECT_SELF, "Activated") != 1) {
+			SetLocalInt(OBJECT_SELF, "Activated", 1); 
+			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
+			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
+			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
+			ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere);
+			}
+		
+			
+		if(GetLocalInt(OBJECT_SELF, "Activated") == 1) {
 			DelayCommand(1.0, SendMessageToPC(oPC, "You find yourself in another place."));
-			DelayCommand(5.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
+			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			}
 		}
 		

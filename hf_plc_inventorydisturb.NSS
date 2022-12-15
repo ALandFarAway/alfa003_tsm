@@ -294,9 +294,9 @@ else if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInvent
 	 effect eSummonRed = EffectVisualEffect(VFX_FNF_SUMMON_GATE, FALSE);
 	 effect eSummonGold = EffectVisualEffect(VFX_FNF_SUMMONDRAGON, FALSE);
 	 
-	 if((GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_diamond")!= OBJECT_INVALID) || (GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID)) {
-	 	if(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) {
-			DestroyObject(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_sapphire"), 1.0);
+	 if(GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
+	 	if(GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_sapphire")!= OBJECT_INVALID) {
+			DestroyObject(GetItemPossessedBy(oGlobeTeleBlue, "003_it_phalorm_sapphire"), 1.0);
 			CreateItemOnObject("003_it_phalorm_sapphire", oDisturber, 1);
 			}
 		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
@@ -310,9 +310,9 @@ else if((FindSubString(GetTag(OBJECT_SELF), "phalorm_globe")!= -1) && (GetInvent
 			 	 	 	 	 	 
 	 }
 	 
-	 if((GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_diamond")!= OBJECT_INVALID) || (GetItemPossessedBy(oGlobeGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID)) {
+	 if(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_diamond")!= OBJECT_INVALID) {
 	 	if(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_emerald")!= OBJECT_INVALID) {
-			DestroyObject(GetItemPossessedBy(oGlobeBlue, "003_it_phalorm_emerald"), 1.0);
+			DestroyObject(GetItemPossessedBy(oGlobeTeleGreen, "003_it_phalorm_emerald"), 1.0);
 			CreateItemOnObject("003_it_phalorm_emerald", oDisturber, 1);
 			}
 		object oPlatformBookOn = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", GetLocation(oWPPlatformBook));
