@@ -98,7 +98,7 @@ if((GetLocalInt(oPC, "ColdLoop") == 1) && (nRepCold < 100)  && (oPC != OBJECT_IN
 			SetLocalInt(oPC, "Survival", 0);
 			nRepCold++;
 			SetLocalInt(oPC, "nRepCold", nRepCold);
-			if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
+			/*if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
 				{SetLocalInt(oPC, "nRepCold", 0);
 				 SendMessageToPC(oPC, "The last of the bitter cold shakes itself from your bones.");
 				}
@@ -111,7 +111,8 @@ if((GetLocalInt(oPC, "ColdLoop") == 1) && (nRepCold < 100)  && (oPC != OBJECT_IN
 			else {
 				SetLocalInt(oPC, "nRepCold", 0);
 			  	SetLocalInt(oPC, "nRepCold", 0);
-				}		 
+				}
+				*/		 
 		}
 	}
 }
