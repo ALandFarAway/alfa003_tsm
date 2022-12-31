@@ -97,10 +97,10 @@ void main()
 	string sSpeakFail=GetLocalString(OBJECT_SELF, "SPEAKSTRING_FAIL");
 	string sSpeakSuccess=GetLocalString(OBJECT_SELF, "SPEAKSTRING_SUCCESS");
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
-	string sWPSuccessNear=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING_A");
-	string sWPSuccessFurther=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING_B");
-	string sWPFailNear=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING_A");
-	string sWPFailFurther=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING_B");
+	string sWPSuccessNear=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING_NEAR");
+	string sWPSuccessFurther=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING_FURTHER");
+	string sWPFailNear=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING_NEAR");
+	string sWPFailFurther=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING_FURTHER");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
 	object oWPSuccessNear = GetNearestObjectByTag(sWPSuccessNear);
 	object oWPSuccessFurther = GetNearestObjectByTag(sWPSuccessFurther);
