@@ -1035,7 +1035,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="6827DAECF027F57DAEBCD20A2514765ED4062C2A" downloadHash="E24D3C5DE87CB572ECD84C974D75EE7DAAB9EB9C" name="5g_int_felbarr_1_shrines.trx" dlsize="1250984" size="1308712" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0F8286103EFEA899B0644922696CEEAABF4803D3" downloadHash="075139C1B97C229E4A40918EE2E022B3F8D85B3A" name="5g_int_felbarr_1_shrines.trx" dlsize="1283549" size="1349013" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
