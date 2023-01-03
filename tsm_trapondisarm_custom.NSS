@@ -35,6 +35,15 @@ void main()
    
    SendMessageToPC(oDisarmer, sDisarmSucceed);
    SendMessageToAllDMs(GetName(oDisarmer) + " got " + sDisarmSucceed);
+   
+   //Symbol Traps
+		if(FindSubString(GetTag(OBJECT_SELF), "plc_symbol") != -1) {
+			object oMyTrigger = GetLocalObject(OBJECT_SELF, "MyTrigger");
+			DestroyObject(oMyTrigger);
+			DestroyObject(OBJECT_SELF, 1.0);
+		}
+		
+		
    if(GetTag(OBJECT_SELF) == "rr_plc_crypt_secret_door") {
   		 AssignCommand(oTrapPlc, ActionSpeakString("*Slides down out of the way, revealing a hallway beyond." , TALKVOLUME_TALK));
 		 AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));

@@ -56,8 +56,7 @@ void main()
 		sFocusType = "Droplet";
 	}
 	
-	if(FindSubString(GetName(oTarget), "Jhess", 0) != -1) 
-		{ACR_SetPersistentString(oFocus, "sPTargetRes", "");}
+	
 	if(GetIsPC(oTarget)) 
 		{ACR_SetPersistentString(oFocus, "sPTargetRes", "");}
 	string sPTargetRes = ACR_GetPersistentString(oFocus, "sPTargetRes");

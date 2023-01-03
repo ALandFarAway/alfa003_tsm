@@ -10,8 +10,12 @@
 //  Dependencies:
 //
 //  Description
-//  This script calls the ACR's OnEnter code for triggers, and any
-//  custom code a server may need. It is not updated in ACR updates.
+//  This script is a custom trap trigger. Draw a Symbol of Sleep/Fear/Persuasion/Etc trigger around a placeable 
+//	Sleep/Fear/Persuasion symbol placeable wherever you want it, and put a Sleep/Fear/Persuasion WP at the center. 
+//	Then delete the symbol. It will be respawned at the location of the WP if a PC crosses the trigger.
+//	Also draw a Sleep/Fear/Persuasion Detection trigger wherever a PC could be given a chance to detect the
+//	actual symbol. 
+
 //
 //  Revision History
 //  2007/01/20  Cipher  Inception
@@ -43,14 +47,19 @@ void main()
 	effect eSonicImplode = EffectVisualEffect(1009, FALSE);
 	effect eSoundBurst = EffectVisualEffect(VFX_FNF_SOUND_BURST, FALSE);
 	effect eDust = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION, FALSE);
-	
+	effect eKnockdown = EffectKnockdown();
+	effect eSleep = EffectSleep();
+	effect eVisSleep = EffectVisualEffect(VFX_IMP_SLEEP);
+	effect eFear = EffectFrightened();
+	effect eVisFear = EffectVisualEffect(VFX_IMP_HEAD_EVIL);
+
     	
 if((GetTag(OBJECT_SELF) == "trg_symbol_pers_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
 	{
 	object oGlyphWP = GetNearestObjectByTag("plc_symbol_pers_wp", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	
-	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
+	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 31, FALSE))
 		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design brushed onto the ground!");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_pers", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
@@ -90,22 +99,20 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject
 	object oPC = GetEnteringObject();
 	
 	
-	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
+	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 30, FALSE))
 		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design inscribed onto the ground!");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_sleep", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     SetLocalInt(OBJECT_SELF, "Fired", 1);
 		}
-
-	
 	}
 	
-	if((GetTag(OBJECT_SELF) == "trg_symbol_pers") && (GetIsPC(GetEnteringObject()))) {
-	object oGlyphWP = GetNearestObjectByTag("plc_symbol_pers_wp", OBJECT_SELF, 1);
+	if((GetTag(OBJECT_SELF) == "trg_symbol_sleep") && (GetIsPC(GetEnteringObject()))) {
+	object oGlyphWP = GetNearestObjectByTag("plc_symbol_sleep_wp", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_pers", GetLocation(oGlyphWP));
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_sleep", GetLocation(oGlyphWP));
 			 SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
 		     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
 		     DestroyObject(oGlyph, 6000.0);
@@ -117,16 +124,63 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject
 		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
 		 	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));
 			if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-				{SendMessageToPC(oPC, "You hear a soothing sound you can't identify. Somewhere between white noise and a lullaby. You shake it off, realizing you were seconds away from falling asleep." );
+				{SendMessageToPC(oPC, "You hear a soothing sound you can't identify. Somewhere between white noise and a lullaby. You shake it off, realizing you were an instant away from falling asleep." );
 				}
 			else 
-				{SendMessageToAllDMs(GetName(oPC) + " has been put to sleep by " + GetName(OBJECT_SELF));
+				{int nDurSleep = d6(3)*10*60/13;
+				 float fDurSleep = IntToFloat(nDurSleep);
+				 string sDurSleep = IntToString(nDurSleep);
+				 SendMessageToAllDMs(GetName(oPC) + " has been put to sleep by " + GetName(OBJECT_SELF) + " for " + sDurSleep);
 				  SendMessageToPC(oPC, "You hear a soothing sound you can't identify. Somewhere between white noise and a lullaby. Before you can work it out, you are asleep." );
-				 }
+				  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSleep, oPC, fDurSleep);
+				  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVisSleep, oPC, fDurSleep);
+				  
+				  }
 			}	 	
 	}
 	
-
+if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
+	{
+	object oGlyphWP = GetNearestObjectByTag("plc_symbol_fear_wp", OBJECT_SELF, 1);
+	object oPC = GetEnteringObject();
+	
+	
+	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 31, FALSE))
+		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design inscribed onto the ground!");
+		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_fear", GetLocation(oGlyphWP));
+		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
+	     SetLocalInt(OBJECT_SELF, "Fired", 1);
+		}
+	}
+	
+	if((GetTag(OBJECT_SELF) == "trg_symbol_fear") && (GetIsPC(GetEnteringObject()))) {
+	object oGlyphWP = GetNearestObjectByTag("plc_symbol_fear_wp", OBJECT_SELF, 1);
+	object oPC = GetEnteringObject();
+	
+		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
+	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_fear", GetLocation(oGlyphWP));
+			 SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
+		     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		     DestroyObject(oGlyph, 15*600.0);
+			 SetLocalInt(OBJECT_SELF, "Fired", 1);
+			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
+			 DelayCommand(15*600.0, SetLocalInt(OBJECT_SELF, "Ticking", 0));
+			 }
+				   	  	   
+		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
+		 	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));
+			if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
+				{SendMessageToPC(oPC, "Your skin crawls. A sudden bolt of terror jolts your mind. Your blood freezes...but you see nothing around to be afraid of and gradually you shake it off." );
+				}
+			else 
+				{SendMessageToAllDMs(GetName(oPC) + " has been frightened for 90 seconds by " + GetName(OBJECT_SELF));
+				  SendMessageToPC(oPC, "Your skin crawls. A sudden bolt of terror jolts your mind, and takes control of your limbs. You are under a fear effect!" );
+				  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFear, oPC, 90.0);
+				  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVisFear, oPC, 90.0);
+				  
+				  }
+			}	 	
+	}
 	
 	if((GetTag(OBJECT_SELF) == "trg_glyph_warding_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
 	{object oGlyphWP = GetNearestObjectByTag("plc_glyph_warding_wp", OBJECT_SELF, 1);

@@ -66,8 +66,11 @@ void main()
 		SendMessageToAllDMs(GetName(OBJECT_SELF) + " trap readiness is " + IntToString(GetLocalInt(OBJECT_SELF, "Trap_Readiness")));	
 		//Trap readiness: 0 = Set and ready to spring; 1 = Unsprung and on a thirty minute delay timer; 2 = Sprung and on thirty minute reset timer;
 		
-		
-		
+		//Symbol Traps
+		if(FindSubString(GetTag(OBJECT_SELF), "plc_symbol") != -1) {
+			DestroyObject(OBJECT_SELF, 15*600.0);
+		}
+
 		//Axe Traps
 		
 		if((GetTag(OBJECT_SELF)== "003_trap_custom_axe_on") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 2))
