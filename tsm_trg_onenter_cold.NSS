@@ -63,7 +63,7 @@ void main()
 
     // Custom code goes here.
 	object oPC = GetEnteringObject();
-	if(GetIsPC(oPC)) {
+	if((GetIsPC(oPC)) || GetIsDMPossessed(oPC)) {
 	//SendMessageToPC(oPC, "Cold");
 		SetLocalInt(oPC, "ColdLoop", 1);
 		ExecuteScript("tsm_trg_onloop_cold", oPC);

@@ -58,17 +58,45 @@ void main()
 	{if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer))) {
 			ChangeToStandardFaction (oEnterer, STANDARD_FACTION_HOSTILE);
 			}
+	 if((GetIsDMPossessed(oEnterer)) || (GetIsPC(oEnterer)) || (GetIsPossessedFamiliar(oEnterer))) {
+	 	object oNPC = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 	while (oNPC != OBJECT_INVALID) {
+			if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer)))
+			{ChangeToStandardFaction (oNPC, STANDARD_FACTION_HOSTILE);
+			}
+			oNPC = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 		}
 		}
+	  }
 
  if(GetTag(OBJECT_SELF) == "tsm_trg_faction_common")
 	{if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer))) {
 			ChangeToStandardFaction (oEnterer, STANDARD_FACTION_COMMONER);
 			}
+	if((GetIsDMPossessed(oEnterer)) || (GetIsPC(oEnterer)) || (GetIsPossessedFamiliar(oEnterer))) {
+	 	object oNPC = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 	while (oNPC != OBJECT_INVALID) {
+			if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer)))
+			{ChangeToStandardFaction (oNPC, STANDARD_FACTION_COMMONER);
+			}
+			oNPC = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 		}
+		}
 		}
  if(GetTag(OBJECT_SELF) == "tsm_trg_faction_defender")
 	{if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer))) {
 			ChangeToStandardFaction (oEnterer, STANDARD_FACTION_DEFENDER);
 			}
+			
+	 if((GetIsDMPossessed(oEnterer)) || (GetIsPC(oEnterer)) || (GetIsPossessedFamiliar(oEnterer))) {
+	 	object oNPC = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 	while (oNPC != OBJECT_INVALID) {
+			if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer)))
+			{ChangeToStandardFaction (oNPC, STANDARD_FACTION_DEFENDER);
+			}
+			oNPC = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 		}
+		}
 		}
 	   
 }

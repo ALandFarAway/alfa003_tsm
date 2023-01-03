@@ -94,20 +94,17 @@ if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_IN
 			SetLocalInt(oPC, "Survival", 0);
 			nRepHeat++;
 			SetLocalInt(oPC, "nRepHeat", nRepHeat);
-			if(GetTag(GetArea(oPC)) != "5g_ext_felbarr_trail")
-				{SetLocalInt(oPC, "nRepHeat", 0);
-				 SendMessageToPC(oPC, "The last of the burning heat fades.");
-				}
 			
 		
 		
-			if(GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail") {
+			/*if(GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail") {
 				DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onloop_heat", oPC));
 				}
 			else {
 				SetLocalInt(oPC, "nRepHeat", 0);
 			  	SetLocalInt(oPC, "nRepHeat", 0);
-				}		 
+				}
+				*/		 
 		}
 	}
 }

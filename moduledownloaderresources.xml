@@ -305,7 +305,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5CF72780136661F70147A4BDB1CB8A3EA8CEE426" downloadHash="2E6BE01BBBF0BCE74FEF355D64C092EF467F7D4C" name="6e_ext_nether_junction.trx" dlsize="2910609" size="15282366" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="7BBCC9B1D80CFEB975F5BCBB93921349072E8823" downloadHash="1E663C03C82CE0D33135AEAD3599E4B1BC1A45C6" name="6e_ext_nether_junction.trx" dlsize="2912261" size="15283117" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

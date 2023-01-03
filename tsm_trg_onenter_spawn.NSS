@@ -109,7 +109,7 @@ void main()
 			        }
 				}
 			
-		SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);			
+		SetLocalInt(OBJECT_SELF, "RUN_ONCE"  + GetName(oPC), 1);			
 		}		
 	}	
 }
