@@ -60,53 +60,9 @@ void main()
 		}
 		
 	//Temp. Remove after session
-	if(GetTag(OBJECT_SELF) == "003_cr_un_spirit_evenwood") {
-	
-		object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
-		object oPC = GetFirstPC(TRUE);
-		while(oPC != OBJECT_INVALID) {
-			string sPCName = GetName(oPC);
-			if(FindSubString(sPCName, "Jhessi") != -1) {
-				oJhessi = oPC;
-				}
-			
-		oPC = GetNextPC(TRUE);
-		}
- 		
-		object oAloisusWP = GetWaypointByTag("aloisus_wp");
-		object oSiWP = GetWaypointByTag("si_wp");
-		object oValbraceWP = GetWaypointByTag("valbrace_wp");
-		object oValbrace = GetObjectByTag("statue_valbrace", 1);
-		ClearAllActions(TRUE);
-		DelayCommand(5.0, ActionForceMoveToObject(oJhessi, FALSE, 0.5, 20.0));
-		DelayCommand(7.0, ActionForceFollowObject(oJhessi, 0.5));
-		DelayCommand(7.5, ClearAllActions(TRUE));
-		DelayCommand(8.0, ActionSpeakString("Jhessi. *Ghostly tears falling on ethereal cheeks.", TALKVOLUME_TALK));
-	 	
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_spirit_valbrace", GetLocation(oValbraceWP)));
-		
-		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_spirit_aloisus", GetLocation(oAloisusWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_spirit_si", GetLocation(oSiWP)));
-		
-		}
-	
-	//Temp. Remove after session.	
-    if(FindSubString(GetTag(OBJECT_SELF), "ghost") != -1) {
-		//SendMessageToAllDMs(GetTag(OBJECT_SELF) + " onspawn");
-		effect eFreeze = EffectCutsceneImmobilize();
-		effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 5.0);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, OBJECT_SELF, 5.0);
-	
-		ClearAllActions(TRUE);
-		ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER);
-		DelayCommand(2.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_COMMONER));	
-		
-		if(GetTag(GetArea(OBJECT_SELF)) == "8e_ext_highforest_olostins_holds") {
-			DestroyObject(OBJECT_SELF, IntToFloat(Random(180)) + 90.0);
-			}
-		DelayCommand(IntToFloat(Random(180)) + 90.0, ChangeToStandardFaction(OBJECT_SELF, STANDARD_FACTION_HOSTILE));
-		
+	if(GetTag(OBJECT_SELF) == "abr_cr_hu_orc_illus") {
+		//Subdual toggle
+		ACR_ToggleNLDMode(OBJECT_SELF);
 	}
 		
 	//Hydra's extra attacks

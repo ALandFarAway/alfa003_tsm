@@ -48,6 +48,13 @@ void main()
     // Custom code goes here.
 	object oAttacker = GetLastAttacker();
 	string sAttacker = GetName(oAttacker);
+	
+	//Temp. Remove after session
+	if(GetTag(OBJECT_SELF) == "abr_cr_hu_orc_illus") {
+		DestroyObject(OBJECT_SELF);
+	}
+	
+	
 	object oWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oAttacker);
 	string sWeapon = GetName(oWeapon);
 	if(oWeapon == OBJECT_INVALID) {
