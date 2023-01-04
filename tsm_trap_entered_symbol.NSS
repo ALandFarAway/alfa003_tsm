@@ -100,7 +100,7 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject
 	
 	
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 30, FALSE))
-		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design inscribed onto the ground!");
+		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design inscribed onto the ground.");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_sleep", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     SetLocalInt(OBJECT_SELF, "Fired", 1);
@@ -146,7 +146,7 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 	
 	
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 31, FALSE))
-		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design inscribed onto the ground!");
+		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design inscribed onto the ground.");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_fear", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     SetLocalInt(OBJECT_SELF, "Fired", 1);
@@ -174,7 +174,7 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 				}
 			else 
 				{SendMessageToAllDMs(GetName(oPC) + " has been frightened for 90 seconds by " + GetName(OBJECT_SELF));
-				  SendMessageToPC(oPC, "Your skin crawls. A sudden bolt of terror jolts your mind, and takes control of your limbs. You are under a fear effect!" );
+				  SendMessageToPC(oPC, "Your skin crawls. A sudden bolt of terror jolts your mind, and takes control of your limbs. You are frozen with fear!" );
 				  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFear, oPC, 90.0);
 				  ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVisFear, oPC, 90.0);
 				  
@@ -188,7 +188,7 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 	//SendMessageToPC(oPC, "Entered Detect");
 		
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
-		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design carved onto the ground!");
+		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design carved onto the ground.");
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_glyph_ward_flr", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));

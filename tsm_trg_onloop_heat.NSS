@@ -73,7 +73,7 @@ if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_IN
 	
 		if(GetHasSkill(SKILL_SURVIVAL, oPC))
 			{SetLocalInt(oPC, "Survival", 4);
-			 if(nRepHeat == 1) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the heat.");
+			 if(nRepHeat == 0) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the heat.");
 				}
 			}
 		if((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
@@ -94,7 +94,8 @@ if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_IN
 			SetLocalInt(oPC, "Survival", 0);
 			nRepHeat++;
 			SetLocalInt(oPC, "nRepHeat", nRepHeat);
-			
+			DelayCommand(fTimeLoop, ExecuteScript("tsm_trg_onloop_heat", oPC));
+				
 		
 		
 			/*if(GetTag(GetArea(oPC)) == "5g_ext_felbarr_trail") {
