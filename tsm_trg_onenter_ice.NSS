@@ -65,6 +65,7 @@ void main()
 	int nRace = GetRacialType(oPC);
 	if((GetTag(oPC) != "abr_cr_hu_marpenoth") && (nRace != RACIAL_TYPE_FEY) && (nRace != RACIAL_TYPE_DRAGON)) {
 	SetLocalInt(oPC, "IceWalking", 1);
+	SendMessageToPC(oPC, "Ice");
 	ExecuteScript("tsm_trg_onloop_ice", oPC);
 	}
 

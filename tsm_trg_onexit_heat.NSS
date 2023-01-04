@@ -64,5 +64,6 @@ void main()
 	object oPC = GetExitingObject();
 	SetLocalInt(oPC, "HeatLoop", 0);
 	SetLocalInt(oPC, "nRepHeat", 0);
+	SendMessageToPC(oPC, "Heat end.");
 	
 }

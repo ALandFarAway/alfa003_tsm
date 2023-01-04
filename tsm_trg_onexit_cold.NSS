@@ -64,5 +64,6 @@ void main()
 	object oPC = GetExitingObject();
 	SetLocalInt(oPC, "ColdLoop", 0);
 	SetLocalInt(oPC, "nRepCold", 0);
+	SendMessageToPC(oPC, "Cold end.");
 	
 }
