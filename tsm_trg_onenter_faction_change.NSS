@@ -59,10 +59,13 @@ void main()
 			ChangeToStandardFaction (oEnterer, STANDARD_FACTION_HOSTILE);
 			}
 	 if((GetIsDMPossessed(oEnterer)) || (GetIsPC(oEnterer)) || (GetIsPossessedFamiliar(oEnterer))) {
-	 	object oNPC = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
+	 	SendMessageToAllDMs(GetName(oEnterer) + " entered " + GetTag(OBJECT_SELF));
+		object oNPC = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
 	 	while (oNPC != OBJECT_INVALID) {
-			if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer)))
-			{ChangeToStandardFaction (oNPC, STANDARD_FACTION_HOSTILE);
+			SendMessageToAllDMs("oNPC = " + GetName(oNPC));
+		    if((!GetIsPC(oEnterer)) && (!GetIsPossessedFamiliar(oEnterer)) && (!GetIsOwnedByPlayer(oEnterer)))
+			{SendMessageToAllDMs("Setting " + GetName(oNPC) + " to hostile");
+		     ChangeToStandardFaction (oNPC, STANDARD_FACTION_HOSTILE);
 			}
 			oNPC = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oEnterer), TRUE, OBJECT_TYPE_CREATURE);
 	 		}
