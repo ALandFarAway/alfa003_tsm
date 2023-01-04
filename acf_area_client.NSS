@@ -135,26 +135,16 @@ void main() {
 
     object oEnterer = GetEnteringObject();
 	
-	
 	//Is Scrying active on this PC
 	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
 	object oScried =  GetLocalObject(oEnterer, "oScried");
 	object oScryer = GetLocalObject(oEnterer, "oScryer");
 	object oScry = GetLocalObject(oEnterer, "oScry");
 	object oScrySpeak = GetLocalObject(oEnterer, "oScrySpeak");
-		
-	if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
-	    AssignCommand(oScrySend, ClearAllActions(TRUE));
-		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
-		DelayCommand(3.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
-		
-		
-		//Check area information about oScried
-		object oArea = GetArea(oScried);
-		string sSubjectArea = GetName(oArea);
-		string sAreaTag = GetTag(oArea);
-	
-		if(FindSubString(sAreaTag, "caravan", 0) != -1) 
+	object oArea = GetArea(oEnterer);
+	string sSubjectArea = GetName(oArea);
+	string sAreaTag = GetTag(oArea);
+	if(FindSubString(sAreaTag, "caravan", 0) != -1) 
 				{sSubjectArea = "inside a caravan.";}
 			else if(FindSubString(sAreaTag, "ferry", 0) != -1)
 				{sSubjectArea = "on a ferry.";}
@@ -387,15 +377,55 @@ void main() {
 				sGenderAdj = "her";
 				}
 				
-			//Speak area and weather info  	
-			ActionSpeakString( "", TALKVOLUME_TALK);
-			ActionSpeakString( "********************", TALKVOLUME_TALK);
-			ActionSpeakString("The " + GetName(OBJECT_SELF) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
+	//Temp permascrying on Jhessi Kross outside of the mythal until her mirror doppleganger is destroyed
+	
+	if((FindSubString(GetName(oEnterer), "Jhessi") != -1) && (oScrySend == OBJECT_INVALID)) {
+		object oScryer = GetObjectByTag("003_cr_firegen_xavier", 0);
+		oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", GetLocation(oEnterer));
+		
+		SetLocalObject(oEnterer, "oScrySend", oScrySend);
+		SetLocalObject(oEnterer, "oScryer", oScryer);
+		SetLocalObject(oScryer, "oScrySend", oScrySend);
+		SetLocalObject(oScryer, "oScried", oEnterer);
+		SetLocalObject(oScrySend, "oScried", oEnterer);
+		SetLocalObject(oScrySend, "oScryer", oScryer);
 			
-			//Speak oScried's detailed object information 					 	
+		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE); 
+		while (oScry != OBJECT_INVALID) {
+		if(GetTag(oScry) == "ACR_SCRY_OBJECT") {
+		  SetLocalObject(oEnterer, "oScry", oScry);
+		  SetLocalObject(oScry, "oScried", oEnterer);
+		  SetLocalObject(oScryer, "oScry", oScry);
+		  SetLocalObject(oScry, "oScryer", oScryer);
+		  SetLocalObject(oScrySend, "oScry", oScry);
+		  SetLocalObject(oScry, "oScrySend", oScrySend);
+		  break;
+			}
+		oScry = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE); 
+		}
+								
+		SetFirstName(oScrySend, "Scrying Sensor");
+		SetLocalInt(oScrySend, "nCasterLevel", 11);
+		DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
+		}
+	
+	else if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
+	    AssignCommand(oScrySend, ClearAllActions(TRUE));
+		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
+		DelayCommand(3.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
+		
+			//Make Scry Speak speak area and weather info  	
+			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK));
+			
+			SendMessageToAllDMs(GetName(oScryer) + " is scrying " + GetName(oScried) + " in " + GetName(oScry));
+			SendMessageToAllDMs("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
+			
+			//Make Scry Speak speak oScried's detailed object information 					 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			if(oObject != OBJECT_INVALID) {
-				ActionSpeakString("The " + GetName(OBJECT_SELF) + " also shows that: ", TALKVOLUME_TALK); 
+				AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(OBJECT_SELF) + " also shows that: ", TALKVOLUME_TALK)); 
 				string sObjectName = GetName(oObject);
 				float fDistance = GetDistanceBetween(oScried, oObject);
 				int nInc = 1;
@@ -405,7 +435,8 @@ void main() {
 						sObjectName = GetName(oObject);
 						fDistance = GetDistanceBetween(oScried, oObject);
 						if((sObjectName != GetName(oScried)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
-							ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oScried, oObject)) + ".", TALKVOLUME_TALK);
+							AssignCommand(oScrySpeak, ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oScried, oObject)) + ".", TALKVOLUME_TALK));
+							SendMessageToAllDMs(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet to the " + GetCompassDirectionOfAngle(GetAngleBetweenObjects(oScried, oObject)) + ".");
 							}
 						nInc++;
 					}
@@ -420,10 +451,9 @@ void main() {
 			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
-			ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK);
-			
-			ActionSpeakString( "********************", TALKVOLUME_TALK);
-			ActionSpeakString( "", TALKVOLUME_TALK);
+			AssignCommand(oScrySpeak, ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
 			
 		}
 }
