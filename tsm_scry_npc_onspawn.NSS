@@ -170,7 +170,7 @@ void main()
 					 int nDetectorOpposed = nDetectorLevel + nDetectorRoll;
 					 if(nDetectorOpposed >= nCasterOpposed) {
 					  	SendMessageToPC(oDetector, "You feel your Detect Scrying spell best the defences of the person scrying you.");
-						SendMessageToPC(oDetector, "You get a visual image of the scryer: " + sScryerDesc);
+						SendMessageToPC(oDetector, "You get a visual image of the scryer: " + GetName(oScryer));
 						SendMessageToPC(oDetector, "You know that this person is located at the direction and distance of " + sScryerArea );
 						}
 					 else {SendMessageToPC(oDetector, "You feel your Detect Scrying spell try and fail to identify the person scrying you.");}

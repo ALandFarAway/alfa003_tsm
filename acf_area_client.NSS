@@ -389,7 +389,6 @@ void main() {
 		SetLocalObject(oScryer, "oScried", oEnterer);
 		SetLocalObject(oScrySend, "oScried", oEnterer);
 		SetLocalObject(oScrySend, "oScryer", oScryer);
-			
 		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScryer), TRUE, OBJECT_TYPE_PLACEABLE); 
 		while (oScry != OBJECT_INVALID) {
 		if(GetTag(oScry) == "ACR_SCRY_OBJECT") {
@@ -406,15 +405,27 @@ void main() {
 								
 		SetFirstName(oScrySend, "Scrying Sensor");
 		SetLocalInt(oScrySend, "nCasterLevel", 11);
+		if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
+			SendMessageToPC(oEnterer, "A. oScryer = " + GetName(oScryer));
+			SendMessageToPC(oEnterer, "A. oScried = " + GetName(oScried));
+			SendMessageToPC(oEnterer, "A. oScrySend = " + GetName(oScrySend));
+			SendMessageToPC(oEnterer, "A. oScry = " + GetName(oScry));
+			}	
 		DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		}
 	
 	else if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
-	    AssignCommand(oScrySend, ClearAllActions(TRUE));
+	    if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
+			SendMessageToPC(oEnterer, "B. oScryer = " + GetName(oScryer));
+			SendMessageToPC(oEnterer, "B. oScried = " + GetName(oScried));
+			SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(oScrySend));
+			SendMessageToPC(oEnterer, "B. oScry = " + GetName(oScry));
+			}	
+		AssignCommand(oScrySend, ClearAllActions(TRUE));
 		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
 		DelayCommand(3.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		
-			//Make Scry Speak speak area and weather info  	
+			//Make oScry Speak speak area and weather info  	
 			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK));
@@ -422,7 +433,7 @@ void main() {
 			SendMessageToAllDMs(GetName(oScryer) + " is scrying " + GetName(oScried) + " in " + GetName(oScry));
 			SendMessageToAllDMs("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
 			
-			//Make Scry Speak speak oScried's detailed object information 					 	
+			//Make oScry Speak speak oScried's detailed object information 					 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			if(oObject != OBJECT_INVALID) {
 				AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(OBJECT_SELF) + " also shows that: ", TALKVOLUME_TALK)); 
@@ -456,4 +467,12 @@ void main() {
 			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
 			
 		}
+		
+		if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
+			SendMessageToPC(oEnterer, "C. oScryer = " + GetName(oScryer));
+			SendMessageToPC(oEnterer, "C. oScried = " + GetName(oScried));
+			SendMessageToPC(oEnterer, "C. oScrySend = " + GetName(oScrySend));
+			SendMessageToPC(oEnterer, "C. oScry = " + GetName(oScry));
+			}	
+		
 }
