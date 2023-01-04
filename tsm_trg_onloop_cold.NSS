@@ -66,16 +66,16 @@ void main()
 	float fTimeLoop = 91.0;
 			
 if((GetLocalInt(oPC, "ColdLoop") == 1) && (nRepCold < 100)  && (oPC != OBJECT_INVALID)) {
-SendMessageToPC(oPC, "ColdLoop");
+//SendMessageToPC(oPC, "ColdLoop");
 	
 	if(GetIsPC(oPC))
-		{SendMessageToPC(oPC, "oPC");
+		{//SendMessageToPC(oPC, "oPC");
 		if(FindSubString(GetName(GetItemInSlot(INVENTORY_SLOT_CLOAK, oPC)), "Greatcloak") != -1)
 			{if(nRepCold == 0) {SendMessageToPC(oPC, "Your warm cloak will insulate you from some of the cold.");
 			 }
 			fTimeLoop = 300.0;
 			}
-		if(GetHasSkill(SKILL_SURVIVAL, oPC))
+		if(GetSkillRank(SKILL_SURVIVAL, oPC, FALSE)> 0)
 			{SetLocalInt(oPC, "Survival", 4);
 			 if(nRepCold == 0) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the cold.");
 				}
@@ -83,7 +83,7 @@ SendMessageToPC(oPC, "ColdLoop");
 		if((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
 			{int nSurvival = GetLocalInt(oPC, "Survival");
 			 int nDC = 15 + nRepCold - nSurvival;
-			 SendMessageToPC(oPC, "No spells, DC" + IntToString(nDC));
+			 //SendMessageToPC(oPC, "No spells, DC" + IntToString(nDC));
 			 if(nRepCold > 0) {
 			 if(!FortitudeSave(oPC, nDC, SAVING_THROW_TYPE_COLD, oPC))
 				{ACR_ApplyNLDDamageToCreature(oPC, d6());

@@ -63,7 +63,7 @@ void main()
     // Custom code goes here.
 	object oPC = GetEnteringObject();
 	if((GetIsPC(oPC))|| GetIsDMPossessed(oPC)) {
-	SendMessageToPC(oPC, "Heat");
+	//SendMessageToPC(oPC, "Heat");
 		SetLocalInt(oPC, "HeatLoop", 1);
 		ExecuteScript("tsm_trg_onloop_heat", oPC);
 	}

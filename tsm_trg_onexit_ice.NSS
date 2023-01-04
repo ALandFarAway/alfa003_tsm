@@ -65,6 +65,6 @@ void main()
 	SetLocalInt(oPC, "IceWalking", 0);
 	SetLocalInt(oPC, "nLoopIce", 0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, ExtraordinaryEffect(EffectMovementSpeedIncrease(99)), oPC, 3.0);
-	SendMessageToPC(oPC, "Ice end.");
+	//SendMessageToPC(oPC, "Ice end.");
 	     
 }

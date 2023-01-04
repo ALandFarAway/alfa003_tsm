@@ -71,7 +71,7 @@ if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_IN
 	if(GetIsPC(oPC))
 		{
 	
-		if(GetHasSkill(SKILL_SURVIVAL, oPC))
+		if(GetSkillRank(SKILL_SURVIVAL, oPC, FALSE)> 0)
 			{SetLocalInt(oPC, "Survival", 4);
 			 if(nRepHeat == 0) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the heat.");
 				}
