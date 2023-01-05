@@ -385,6 +385,7 @@ void main() {
 		
 		SetLocalObject(oEnterer, "oScrySend", oScrySend);
 		SetLocalObject(oEnterer, "oScryer", oScryer);
+		SetLocalObject(oEnterer, "oScried", oEnterer);
 		SetLocalObject(oScryer, "oScrySend", oScrySend);
 		SetLocalObject(oScryer, "oScried", oEnterer);
 		SetLocalObject(oScrySend, "oScried", oEnterer);
@@ -415,17 +416,11 @@ void main() {
 		}
 	
 	else if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
-	    if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
-			SendMessageToPC(oEnterer, "B. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
-			SendMessageToPC(oEnterer, "B. oScried = " + GetName(oEnterer));
-			SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
-			SendMessageToPC(oEnterer, "B. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
-			}	
-		AssignCommand(oScrySend, ClearAllActions(TRUE));
+	    AssignCommand(oScrySend, ClearAllActions(TRUE));
 		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
 		DelayCommand(3.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		
-			//Make oScry Speak speak area and weather info  	
+			//Make oScrySpeak speak area and weather info  	
 			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK));
@@ -433,7 +428,7 @@ void main() {
 			SendMessageToAllDMs(GetName(oScryer) + " is scrying " + GetName(oScried) + " in " + GetName(oScry));
 			SendMessageToAllDMs("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
 			
-			//Make oScry Speak speak oScried's detailed object information 					 	
+			//Make oScrySpeak speak oScried's detailed object information 					 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			if(oObject != OBJECT_INVALID) {
 				AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(OBJECT_SELF) + " also shows that: ", TALKVOLUME_TALK)); 
@@ -465,7 +460,15 @@ void main() {
 			AssignCommand(oScrySpeak, ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
-			
+			if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
+				SendMessageToPC(oEnterer, "B. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
+				SendMessageToPC(oEnterer, "B. oScried = " + GetName(oEnterer));
+				SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
+				SendMessageToPC(oEnterer, "B. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
+				SendMessageToPC(oEnterer, "B. The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
+				SendMessageToPC(oEnterer, "B. " + GetName(oScried) + " is " + sMoving);
+				}	
+		
 		}
 		
 	
