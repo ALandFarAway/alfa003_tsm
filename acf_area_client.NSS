@@ -406,20 +406,20 @@ void main() {
 		SetFirstName(oScrySend, "Scrying Sensor");
 		SetLocalInt(oScrySend, "nCasterLevel", 11);
 		if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
-			SendMessageToPC(oEnterer, "A. oScryer = " + GetName(oScryer));
-			SendMessageToPC(oEnterer, "A. oScried = " + GetName(oScried));
-			SendMessageToPC(oEnterer, "A. oScrySend = " + GetName(oScrySend));
-			SendMessageToPC(oEnterer, "A. oScry = " + GetName(oScry));
+			SendMessageToPC(oEnterer, "A. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
+			SendMessageToPC(oEnterer, "A. oScried = " + GetName(oEnterer));
+			SendMessageToPC(oEnterer, "A. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
+			SendMessageToPC(oEnterer, "A. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
 			}	
 		DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		}
 	
 	else if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
 	    if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
-			SendMessageToPC(oEnterer, "B. oScryer = " + GetName(oScryer));
-			SendMessageToPC(oEnterer, "B. oScried = " + GetName(oScried));
-			SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(oScrySend));
-			SendMessageToPC(oEnterer, "B. oScry = " + GetName(oScry));
+			SendMessageToPC(oEnterer, "B. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
+			SendMessageToPC(oEnterer, "B. oScried = " + GetName(oEnterer));
+			SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
+			SendMessageToPC(oEnterer, "B. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
 			}	
 		AssignCommand(oScrySend, ClearAllActions(TRUE));
 		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
@@ -468,11 +468,6 @@ void main() {
 			
 		}
 		
-		if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
-			SendMessageToPC(oEnterer, "C. oScryer = " + GetName(oScryer));
-			SendMessageToPC(oEnterer, "C. oScried = " + GetName(oScried));
-			SendMessageToPC(oEnterer, "C. oScrySend = " + GetName(oScrySend));
-			SendMessageToPC(oEnterer, "C. oScry = " + GetName(oScry));
-			}	
+	
 		
 }
