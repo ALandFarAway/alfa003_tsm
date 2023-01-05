@@ -377,11 +377,26 @@ void main() {
 				sGenderAdj = "her";
 				}
 				
-	//Temp permascrying on Jhessi Kross outside of the mythal until her mirror doppleganger is destroyed
-	
-	if((FindSubString(GetName(oEnterer), "Jhessi") != -1) && (oScrySend == OBJECT_INVALID)) {
+	//Temp permascrying on Jhessi Kross within/without the mythal until her mirror doppleganger is destroyed
+	int nRandomScry = Random(4);
+	if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
+		SendMessageToPC(oEnterer, "A. nRandomScry = " + IntToString(nRandomScry));
+	}
+	if((nRandomScry == 1) && (FindSubString(GetTag(GetArea(oEnterer)), "int_silvy") == -1) && (FindSubString(GetName(oEnterer), "Jhessi") != -1) && (oScrySend == OBJECT_INVALID)) {
+		object oScried = oEnterer;
 		object oScryer = GetObjectByTag("003_cr_firegen_xavier", 0);
+		int nDC = 17 + 10 + 5;
+		int nWillSaveRoll = d20(1);
+		int nWillSaveBase = GetWillSavingThrow(oScried);
+		int nWillSave = nWillSaveRoll + nWillSaveBase;
+		SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
+		if(nWillSaveRoll == 20){
+			SendMessageToAllDMs("However, " + GetName(oScried) + " rolled a Nat 20 against " + GetName(oScryer) + " and knows she is being watched."); 
+		    SendMessageToPC(oScried, "You have a sense of being watched.");
+			}
+			
 		oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", GetLocation(oEnterer));
+		int nCasterLevel = GetLocalInt(oScrySend, "nCasterLevel");
 		
 		SetLocalObject(oEnterer, "oScrySend", oScrySend);
 		SetLocalObject(oEnterer, "oScryer", oScryer);
@@ -406,6 +421,7 @@ void main() {
 								
 		SetFirstName(oScrySend, "Scrying Sensor");
 		SetLocalInt(oScrySend, "nCasterLevel", 11);
+	
 		if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
 			SendMessageToPC(oEnterer, "A. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
 			SendMessageToPC(oEnterer, "A. oScried = " + GetName(oEnterer));

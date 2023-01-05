@@ -159,6 +159,8 @@ void main()
 					SendMessageToPC(oDetector, "You see a small glowing orb appear in the air above " + GetName(oScried));
 					
 					 object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
+					 object oScry = GetLocalObject(oScryer, "oScry");
+		 			 object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 					 string sScryerDesc = GetDescription(oScryer);
 					 object oScryerArea = GetArea(oScryer);
 					 string sScryerArea = GetName(oScryerArea);
@@ -168,12 +170,15 @@ void main()
 					 int nDetectorLevel = GetCasterLevel(oDetector);
 					 int nDetectorRoll = d20(1);
 					 int nDetectorOpposed = nDetectorLevel + nDetectorRoll;
-					 if(nDetectorOpposed >= nCasterOpposed) {
+					 if((nDetectorOpposed >= nCasterOpposed) && (GetLocalString(OBJECT_SELF, "ID_Failed")!= GetName(oDetector))) {
 					  	SendMessageToPC(oDetector, "You feel your Detect Scrying spell best the defences of the person scrying you.");
 						SendMessageToPC(oDetector, "You get a visual image of the scryer: " + GetName(oScryer));
 						SendMessageToPC(oDetector, "You know that this person is located at the direction and distance of " + sScryerArea );
+						SendMessageToPC(oDetector, "A moment later, the scrying sensor vanishes.");
 						}
-					 else {SendMessageToPC(oDetector, "You feel your Detect Scrying spell try and fail to identify the person scrying you.");}
+					 else {SendMessageToPC(oDetector, "You feel your Detect Scrying spell try and fail to identify the person scrying you.");
+					 	SetLocalString(OBJECT_SELF, "ID_Failed", GetName(oDetector));
+					 }
 		 	
 					
 					effect eEffect = GetFirstEffect(OBJECT_SELF);
@@ -183,9 +188,25 @@ void main()
 						eEffect = GetNextEffect(OBJECT_SELF);
 						nRep ++;
 						}
+					SetLocalObject(oScry, "oScried", OBJECT_INVALID);
+					SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+					SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
+					SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
+					SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
+					SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
+					SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
+					SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
+					SetLocalObject(oScried, "oScrySpeak", OBJECT_INVALID);
+					SetLocalObject(oScried, "oScryer", OBJECT_INVALID);
+					SetLocalObject(oScried, "oScry", OBJECT_INVALID);
+					SetLocalObject(oScried, "oScrySend", OBJECT_INVALID);
+					SetLocalInt(oScry, "nScryActive", 0);
+					DestroyObject(oScrySpeak, 2.0);		
+					DestroyObject(OBJECT_SELF, 6.0);
 					}
 				oDetector = GetNextObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
-			}
+				}
+				
 		}
 		
 		if(GetTag(OBJECT_SELF)== "003_cr_scry_self") {

@@ -90,8 +90,6 @@ void main()
 		} 	
 			
 		//Unset all local variables and destroy oScrySpeaker, too
-		SetLocalInt(oScry, "nScryActive", 0);
-		
 		SetLocalObject(oScry, "oScried", OBJECT_INVALID);
 		SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
 		SetLocalObject(oScry, "oScryer", OBJECT_INVALID);

@@ -533,7 +533,9 @@ if(GetSpellId() == 3058) {
 	if(FindSubString(GetTag(oSensor), "scry_send") != -1)
 		{SendMessageToPC(OBJECT_SELF, "You see a small glowing orb floating in the air.");
 		 object oScryer = GetLocalObject(oSensor, "oScryer");
+		 object oScry = GetLocalObject(oScryer, "oScry");
 		 object oScrySelf = GetLocalObject(oSensor, "oScrySelf");
+		 object oScrySpeak = GetLocalObject(oSensor, "oScrySpeak");
 		 if(oScrySelf != OBJECT_INVALID)
 		 	{oScryer = oScrySelf;
 			 }
@@ -549,6 +551,22 @@ if(GetSpellId() == 3058) {
 		  	SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell best the defences of the caster of the scrying sensor.");
 			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer. They look like " + GetName(oScryer));
 			SendMessageToPC(OBJECT_SELF, "You know that this person is located at the direction and distance of " + sScryerArea );
+			SendMessageToPC(OBJECT_SELF, "A moment later, the scrying sensor vanishes.");
+			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
+			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
+			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScrySpeak", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID);
+			SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID);
+			SetLocalInt(oScry, "nScryActive", 0);
+			DestroyObject(oScrySpeak, 2.0);		
+			DestroyObject(oSensor, 6.0);
 			}
 		 else {SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell attempt to identify the person scrying you, but fail.");}
 		 effect eEffect = GetFirstEffect(oSensor);
