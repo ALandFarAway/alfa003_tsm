@@ -341,8 +341,10 @@ void main() {
 								
 			if(FindSubString(sAreaTag, "ext", 1) != -1)
 				{if(nWeatherSnow < 1) {
-					if(nWeatherRain == 0)  
-						{sWeatherRain = "The sun is shining. ";}
+					if((nWeatherRain == 0) && (GetIsDay()))
+						{sWeatherRain = "The sun is shining.";}
+					if((nWeatherRain == 0) && (GetIsNight()))
+						{sWeatherRain = "The night is clear.";}
 					if(nWeatherRain == 1)  
 						{sWeatherRain = "It is drizzling rain. ";}
 					if(nWeatherRain == 2)  
@@ -356,7 +358,8 @@ void main() {
 				}						
 				 
 				if(nWeatherSnow == 0)  
-					{sWeatherSnow = "The sky is clear. ";}
+					{//sWeatherSnow = "The sky is clear. ";
+					}
 				if(nWeatherSnow == 1)  
 					{sWeatherSnow = "A few flakes of snow are falling. ";}
 				if(nWeatherSnow == 2)  
@@ -390,7 +393,7 @@ void main() {
 		int nWillSaveBase = GetWillSavingThrow(oScried);
 		int nWillSave = nWillSaveRoll + nWillSaveBase;
 		SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
-		if(nWillSaveRoll == 20){
+		if((nWillSaveRoll == 20) || (nWillSave >= 22)) {
 			SendMessageToAllDMs("However, " + GetName(oScried) + " rolled a Nat 20 against " + GetName(oScryer) + " and knows she is being watched."); 
 		    SendMessageToPC(oScried, "You have a sense of being watched.");
 			}
@@ -427,6 +430,7 @@ void main() {
 			SendMessageToPC(oEnterer, "A. oScried = " + GetName(oEnterer));
 			SendMessageToPC(oEnterer, "A. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
 			SendMessageToPC(oEnterer, "A. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
+			SendMessageToPC(oEnterer, "A. nWillSave = " + IntToString(nWillSaveRoll) + " + " + IntToString(nWillSaveBase) + " = " + IntToString(nWillSaveRoll));
 			}	
 		DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		}
@@ -473,10 +477,14 @@ void main() {
 			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
-			AssignCommand(oScrySpeak, ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK));
+			//AssignCommand(oScrySpeak, ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
 			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
-			if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
+		
+			if((FindSubString(GetTag(GetArea(oEnterer)), "6d_int_silvy") != -1)  || (FindSubString(GetTag(GetArea(oEnterer)), "6d_ext_silv") != -1))
+				{SendMessageToPC(oEnterer, "You abruptly know that you are being scried.");}
+			
+				if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
 				SendMessageToPC(oEnterer, "B. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
 				SendMessageToPC(oEnterer, "B. oScried = " + GetName(oEnterer));
 				SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));

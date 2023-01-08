@@ -25,8 +25,8 @@ void main() {
 	
 	
 	ClearAllActions(TRUE);
-	DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 5.0);
-	DestroyObject(GetObjectByTag("fx_demon_portal", 0), 1.0);
+	//DestroyObject(GetObjectByTag("fx_portal_gen_small", 0), 5.0);
+	//DestroyObject(GetObjectByTag("fx_demon_portal", 0), 1.0);
 	   
 	
 	

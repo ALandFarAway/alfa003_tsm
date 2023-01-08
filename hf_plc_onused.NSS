@@ -90,7 +90,41 @@ if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_enter")
 	       SendMessageToPC(oUser, "Your attempts to force yourself through the crack are unsuccessful. Blood rises in tendrils from painful scrapes on your skin.");		 
 	       }
 	}
-	
+
+if(GetTag(OBJECT_SELF) == "hf_aq_plc_crack_green")
+	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+	 object oSwimExit = GetObjectByTag("hf_aq_plc_crack_exit_WP");
+	 object oWellSpawnWP = GetWaypointByTag("hf_aq_plc_well_exit_spawn");
+	 object oCrackSpawnWP = GetWaypointByTag("hf_aq_plc_crack_exit_spawn");
+	 if(WillSave(oUser, 15, SAVING_THROW_TYPE_CHAOS, OBJECT_SELF) == 1) {
+	     if(GetLocalObject(OBJECT_SELF, "oCrackExit") == OBJECT_INVALID) {
+		 	object oCrackExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_crack_exit", GetLocation(oCrackSpawnWP));
+		 	SetLocalObject(OBJECT_SELF, "oCrackExit", oCrackExit);
+			}
+	 	 AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
+	     SendMessageToPC(oUser, "The moment you reach into the emptiness of the crack in the wall you feel a shock go through your head, wiping all thoughts. Your mind *blinks* and then restarts, with the impression that it had stood firm against some potentiality.");		 
+	     if(GetLocalObject(OBJECT_SELF, "oWell") == OBJECT_INVALID) {
+		 	object oWellExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_well_exit", GetLocation(oWellSpawnWP));
+		 	SetLocalObject(OBJECT_SELF, "oWell", oWellExit);
+			}
+		 }
+	 else {
+	 	   AssignCommand(oUser, ActionJumpToLocation(GetLocation(oSwimExit)));
+	       ApplyEffectToObject(DURATION_TYPE_INSTANT,eSwimDmg, oUser);
+	       SendMessageToPC(oUser, "The moment you reach into the emptiness of the crack in the wall you feel a shock go through your head, wiping all thoughts. Your mind *blinks* and so does the environment around you. You are in another place as your mind starts up again.");		 
+	     if(GetLocalObject(OBJECT_SELF, "oCrackExit") == OBJECT_INVALID) {
+		 	object oCrackExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_crack_exit", GetLocation(oCrackSpawnWP));
+		 	SetLocalObject(OBJECT_SELF, "oCrackExit", oCrackExit);
+			}
+	 	 if(GetLocalObject(OBJECT_SELF, "oWell") == OBJECT_INVALID) {
+		 		object oWellExit = CreateObject(OBJECT_TYPE_PLACEABLE, "hf_aq_plc_well_exit", GetLocation(oWellSpawnWP));
+		 		SetLocalObject(OBJECT_SELF, "oWell", oWellExit);
+				}
+			
+		   }
+ 	}
+		
+		
 if(GetTag(OBJECT_SELF) == "hf_aq_plc_well_enter")
 	{effect eSwimDmg = EffectDamage(Random(4), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	 object oSwimExit = GetObjectByTag("hf_aq_plc_crack_swim3_WP");

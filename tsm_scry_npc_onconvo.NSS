@@ -1062,7 +1062,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										{sWeatherRain = "A storm rages. ";}
 										
 									if(nWeatherSnow == 0)  
-										{sWeatherSnow = "The sky is clear. ";}
+										{//sWeatherSnow = "The sky is clear. ";
+										}
 									if(nWeatherSnow == 1)  
 										{sWeatherSnow = "A few flakes of snow are falling. ";}
 									if(nWeatherSnow == 2)  

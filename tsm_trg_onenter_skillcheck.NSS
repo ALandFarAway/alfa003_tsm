@@ -45,6 +45,7 @@ void main()
 	string sSkill = "";
 	if(nSkill == 6) {sSkill = "Listen";}
 	if(nSkill == 14) {sSkill = "Search";}
+	if(nSkill == 17) {sSkill = "Spot";}
 	if(nSkill == 29) {sSkill = "Survival";}
 	if(nSkill == 30) {sSkill = "Balance";}
 	if(nSkill == 31) {sSkill = "Climb";}
