@@ -25,21 +25,24 @@ void main()
 	SetLocalObject(oStudent, "oWhistle", oWhistle);
 	SendMessageToAllDMs(sName + " just used the Whistle of Discord to summon harpies in area " + GetName(oArea));					 
     AssignCommand(oStudent, ActionSpeakString(sName + " blows a shrieking, discordant blast on the whistle. It sets teeth on edge and grates in your bones. Somewhere, in the back of your mind, you seem to hear a startled squawk, and then an inaudible blast of pure rage.", TALKVOLUME_TALK));	 
-	AssignCommand(oStudent, ActionSpeakString("*Audible laughter suddenly rolls in the air around all present* Ladies and gentlemen! Children of all ages! Welcome to the spectacle! *Changes to a confiding stage whisper* You really shouldn't believe everything you read. Now. ON WITH THE SHOW!", TALKVOLUME_TALK));	 
+	AssignCommand(oStudent, ActionSpeakString("*Audible laughter suddenly rolls in the air around all present* Ladies and gentlemen! Children of all ages! Welcome to the spectacle! *Changes to a confiding stage whisper* My new bobcat sends his regards. Now. ON WITH THE SHOW!", TALKVOLUME_TALK));	 
 	SendMessageToPC(oStudent, "The whistle you just blew seems to cut through your brain, echoing, jangling your nerves.");
-	DelayCommand(300.0, SendMessageToPC(oStudent, "A jangling in your nerves grows worse. You feel a sense of oncoming dread, and hear a distant clamor of many female voices, shrieking in the back of your mind."));	  
-	DelayCommand(599.0, SetLocalInt(oStudent, "HarpyMsg", 2);
-	DelayCommand(600.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
+	DelayCommand(90.0, SendMessageToPC(oStudent, "A jangling in your nerves grows worse. You feel a sense of oncoming dread, and hear a distant clamor of many female voices, shrieking in the back of your mind."));	  
 	
-	DelayCommand(749.0, SetLocalInt(oStudent, "HarpyMsg", 3);
-	DelayCommand(750.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
+	DelayCommand(399.0, SetLocalInt(oStudent, "HarpyMsg", 2));
+	DelayCommand(300.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
 	
-	DelayCommand(899.0, SetLocalInt(oStudent, "HarpyMsg", 3);
+	DelayCommand(549.0, SetLocalInt(oStudent, "HarpyMsg", 3));
+	DelayCommand(550.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
+	
+	DelayCommand(799.0, SetLocalInt(oStudent, "HarpyMsg", 3));
+	DelayCommand(800.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
+	
+	DelayCommand(899.0, SetLocalInt(oStudent, "HarpyMsg", 4));
 	DelayCommand(900.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
 	
-	DelayCommand(959.0, SetLocalInt(oStudent, "HarpyMsg", 4);
+	DelayCommand(959.0, SetLocalInt(oStudent, "HarpyMsg", 5));
 	DelayCommand(960.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
-	
 	
 	}				
 
