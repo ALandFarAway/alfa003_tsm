@@ -31,7 +31,7 @@ void main()
 	while(oStudent != OBJECT_INVALID) {
 		if((FindSubString(sPCName, "Jhess") != -1) || (FindSubString(sPCName, "Bert") != -1) || (FindSubString(sPCName, "Sae") != -1) || (FindSubString(sPCName, "Nio") != -1) ||(FindSubString(sPCName, "Bell") != -1)){
 			SendMessageToAllDMs(sPCName + " is getting harpy messages.");					 
-	        SendMessageToPC(oStudent, "The whistle that just blew seems to cut through your brain, echoing, jangling your nerves.");
+	        SendMessageToPC(oStudent, "Shrill whistling seems to cut through your brain, echoing, jangling your nerves.");
 			DelayCommand(90.0, SendMessageToPC(oStudent, "A jangling in your nerves grows worse. You feel a sense of oncoming dread, and hear a distant clamor of many female voices, shrieking in the back of your mind."));	  
 			
 			DelayCommand(399.0, SetLocalInt(oStudent, "HarpyMsg", 2));

@@ -52,7 +52,7 @@ void main()
 	if(GetLocalInt(oStudent, "HarpyMsg")==4) {
 		if(FindSubString(GetTag(oArea), "_ext_") != -1)  {
 			if(GetLocalInt(oStudent, "HarpySpot") == 1) {
-				SendMessageToPC(oStudent, "The oncoming flying creatures are close enough that you can count them, and see what you are about to face. Harpies. Four of them.");	  
+				SendMessageToPC(oStudent, "The oncoming flying creatures are close enough that you can count them, and see what you are about to face. Harpies.");	  
 				}
 			else if((GetLocalInt(oStudent, "HarpySpot") == 0) && (GetIsSkillSuccessful(OBJECT_SELF, SKILL_SPOT,10,TRUE))) {
 				SendMessageToPC(oStudent, "Movement in the sky draws your eyes to flying creatures. Winged women. Harpies!");	  
