@@ -76,14 +76,9 @@ void main()
 				SetLocalInt(oStudent, "HarpySpot", 1);
 			 	}
 			
-			DelayCommand(2.0, ActionCreateCreature("003_slv_dq_h_creature", GetLocation(GetNearestObject(OBJECT_TYPE_PLACEABLE, oStudent, 1))));
-			DelayCommand(4.0, ActionCreateCreature("003_slv_dq_h_creature", GetLocation(GetNearestObject(OBJECT_TYPE_WAYPOINT, oStudent, 1))));
 			DelayCommand(7.0, ActionCreateCreature("003_slv_dq_h_creature", GetLocation(GetNearestObject(OBJECT_TYPE_CREATURE, oStudent, 1))));
 			DelayCommand(10.0, ActionCreateCreature("003_slv_dq_h_creature", lStudent));
-	 		
-			
-			
-			DelayCommand(15.0, SetLocalInt(oStudent, "HarpyMsg", 6));
+	 		DelayCommand(15.0, SetLocalInt(oStudent, "HarpyMsg", 6));
 			}
 			
 		else if(FindSubString(GetTag(oArea), "_int_") != -1)  {
