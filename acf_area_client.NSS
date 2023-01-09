@@ -134,6 +134,12 @@ void main() {
     ACR_AreaOnClientEnter();
 
     object oEnterer = GetEnteringObject();
+	object oArea = GetArea(oEnterer);
+	
+	if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetLocalInt(oEnterer, "HarpyMsg") == 5)) {
+		DelayCommand(10.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));
+		SetLocalInt(oEnterer, "HarpyMsg", 6);
+	}
 	
 	//Is Scrying active on this PC
 	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
@@ -141,7 +147,6 @@ void main() {
 	object oScryer = GetLocalObject(oEnterer, "oScryer");
 	object oScry = GetLocalObject(oEnterer, "oScry");
 	object oScrySpeak = GetLocalObject(oEnterer, "oScrySpeak");
-	object oArea = GetArea(oEnterer);
 	string sSubjectArea = GetName(oArea);
 	string sAreaTag = GetTag(oArea);
 	if(FindSubString(sAreaTag, "caravan", 0) != -1) 
@@ -327,6 +332,8 @@ void main() {
 				{sSubjectArea = "inside a huge hollow tree, judging by the look of the curving walls.";}
 			else if(FindSubString(sAreaTag, "int_highforest_olostin", 0) != -1)
 				{sSubjectArea = "inside a richly-appointed but martial keep.";}
+			else if(FindSubString(sAreaTag, "oh_apple", 0) != -1)
+				{sSubjectArea = "inside a cosy cottage of wood and stained glass windows.";}
 			else if((FindSubString(sAreaTag, "_int_", 0) != -1) && (FindSubString(sAreaTag, "interior", 0) != -1)) 
 				{sSubjectArea = "inside, though nothing uniquely identifiable is visible.";}
 			else if(FindSubString(sAreaTag, "_ext_", 0) != -1)

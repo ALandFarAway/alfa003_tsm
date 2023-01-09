@@ -29,8 +29,9 @@ void main()
  	oPC = GetEnteringObject();
  }
 						 
- if(GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) == 0)
- 		{if(FindSubString(GetName(oPC), "Wynna") != -1) {
+ if(((GetLocalInt(OBJECT_SELF, "RUN_ONCE") == 1) && (GetLocalInt(OBJECT_SELF, "RAN_ONCE") == 0)) || ((GetLocalInt(OBJECT_SELF, "RUN_ONCE") == 0) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) == 0)))
+ 		{SetLocalInt(OBJECT_SELF, "RAN_ONCE", 1);
+		 if(FindSubString(GetName(oPC), "Wynna") != -1) {
 			 	SendMessageToPC(oPC, GetName(OBJECT_SELF) + " triggered.");
 				 }
 		 int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");

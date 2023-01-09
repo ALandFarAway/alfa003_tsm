@@ -1025,7 +1025,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										{sSubjectArea = "inside a richly-appointed but martial keep.";}
 								    else if(FindSubString(sAreaTag, "8e_int_highforest_cntrl_fort", 0) != -1)
 										{sSubjectArea = "inside a dim ruin, walls crumbling.";}
-									
+									else if(FindSubString(sAreaTag, "oh_apple", 0) != -1)
+										{sSubjectArea = "inside a cosy cottage of wood and stained glass windows.";}
+			
 											
 										
 									else if((FindSubString(sAreaTag, "_int_", 0) != -1) && (FindSubString(sAreaTag, "interior", 0) != -1)) 

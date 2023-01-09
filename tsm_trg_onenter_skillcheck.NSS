@@ -38,6 +38,8 @@ void main()
 	string sMessageFail=GetLocalString(OBJECT_SELF, "MESSAGE_FAIL_STRING");
 	int	nSkill = GetLocalInt(OBJECT_SELF, "2DA_SKILL_NUMBER");
 	int nSkillRoll = d20() + GetSkillRank(nSkill, oPC, FALSE);
+	string sPlcFlip = GetLocalString(OBJECT_SELF, "PLC_FLIP_USEABLE");
+	object oPlcFlip = GetNearestObjectByTag(sPlcFlip, OBJECT_SELF, 1);
 	string sMessage = sMessageFail;
 	string sSucceed = "FAILS";
 	if(nSkillRoll >= nSkillDC - 5) {sSucceed = "PARTIALLY succeeds"; sMessage= sMessagePartial;}
@@ -98,6 +100,17 @@ void main()
 	
 	//Search
 		if(nSkill == 14) {
+		
+			//To flip a plc to useable after a successful search check
+			
+			if(oPlcFlip != OBJECT_INVALID) {
+				if(nSkillRoll >= nSkillDC) {
+					sMessage= sMessageSuccess;
+					SetUseableFlag(oPlcFlip, 1);
+					}
+				}
+			
+		
 		
 			//For secret doors that are placeables hidden by another placeable
 			string sDoorPlc = GetLocalString(OBJECT_SELF, "DOOR_PLC_TAG");
