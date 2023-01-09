@@ -165,7 +165,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="5A045CF11A53B35876F488B8351BCFD874576B9A" downloadHash="C00040C9FA8E2FDD6AD806DCEE867579B2CAA9BB" name="003_travelling_circus.trx" dlsize="947139" size="6359211" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="67C07321C04F7487C6539086E08952E9E3E8B56A" downloadHash="BD479E08060932C9497FF337C1B3E19185DCF6D7" name="003_travelling_circus.trx" dlsize="950042" size="6363973" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -305,7 +305,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7BBCC9B1D80CFEB975F5BCBB93921349072E8823" downloadHash="1E663C03C82CE0D33135AEAD3599E4B1BC1A45C6" name="6e_ext_nether_junction.trx" dlsize="2912261" size="15283117" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="138A0043AD8E8411023CC2D4B11635A613C3BF28" downloadHash="2D3AC33E891DB2DC0103617F82E17B9CA9A76D19" name="6e_ext_nether_junction.trx" dlsize="2909447" size="15283116" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

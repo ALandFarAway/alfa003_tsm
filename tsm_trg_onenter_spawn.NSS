@@ -25,12 +25,15 @@ void main()
 
  // Custom code goes here.
  object oPC;
- if(GetIsPC(GetEnteringObject())) {
+ if((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))){
  	oPC = GetEnteringObject();
  }
 						 
  if(GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) == 0)
- 		{int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
+ 		{if(FindSubString(GetName(oPC), "Wynna") != -1) {
+			 	SendMessageToPC(oPC, GetName(OBJECT_SELF) + " triggered.");
+				 }
+		 int nPercentChance = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_CHANCE");
 		 if(Random(100)+1 < nPercentChance) 
 		 	{string sMessage=GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
 		 
@@ -61,7 +64,18 @@ void main()
 		     int nDurationTypeTwo = GetLocalInt(OBJECT_SELF, "ACR_SPAWN_VFX_DUR_TYPE_TWO");
 		     float fDurationLength = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH");
 			 float fDurationLengthTwo = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_VFX_LENGTH_TWO");
-		
+			 if(FindSubString(GetName(oPC), "Wynna") != -1) {
+			 	SendMessageToPC(oPC, "sMessage = " + sMessage);
+				SendMessageToPC(oPC, "sSpawn = " + sSpawn);
+				SendMessageToPC(oPC, "sSpawnWP = " + sSpawnWP);
+				SendMessageToPC(oPC, "nSpawnNumber = " + IntToString(nSpawnNumber));
+				SendMessageToPC(oPC, "nSpawnType = " + IntToString(nSpawnType));
+				
+				
+				 }
+		 
+			 
+			 
 			 SendMessageToPC(oPC, sMessage);
 			 SendMessageToAllDMs(GetName(oPC) + " got: " + sMessage);
 			 	
