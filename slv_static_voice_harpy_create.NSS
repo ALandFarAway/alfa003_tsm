@@ -44,7 +44,7 @@ void main()
 			 	}
 			}
 		else if(FindSubString(GetTag(oArea), "_int_") != -1)  {
-			SendMessageToPC(oStudent, "Anxiety rises. You feel confined, trapped inside. The echo of the whistle you blew seems to shriek again in your ears.");	  
+			SendMessageToPC(oStudent, "Anxiety rises. You feel confined, trapped inside. The echo of the whistle seems to shriek again in your ears.");	  
 			}
 		
 		}
@@ -81,7 +81,9 @@ void main()
 			DelayCommand(7.0, ActionCreateCreature("003_slv_dq_h_creature", GetLocation(GetNearestObject(OBJECT_TYPE_CREATURE, oStudent, 1))));
 			DelayCommand(10.0, ActionCreateCreature("003_slv_dq_h_creature", lStudent));
 	 		
-			SetLocalInt(oStudent, "HarpyMsg", 6);
+			
+			
+			DelayCommand(15.0, SetLocalInt(oStudent, "HarpyMsg", 6));
 			}
 			
 		else if(FindSubString(GetTag(oArea), "_int_") != -1)  {

@@ -137,8 +137,8 @@ void main() {
 	object oArea = GetArea(oEnterer);
 	
 	if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetLocalInt(oEnterer, "HarpyMsg") == 5)) {
-		DelayCommand(10.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));
-		SetLocalInt(oEnterer, "HarpyMsg", 6);
+		DelayCommand(20.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));
+		DelayCommand(30.0, SetLocalInt(oEnterer, "HarpyMsg", 6));
 	}
 	
 	//Is Scrying active on this PC

@@ -35,14 +35,12 @@ void main()
 	DelayCommand(549.0, SetLocalInt(oStudent, "HarpyMsg", 3));
 	DelayCommand(550.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
 	
-	DelayCommand(799.0, SetLocalInt(oStudent, "HarpyMsg", 3));
+	DelayCommand(799.0, SetLocalInt(oStudent, "HarpyMsg", 4));
 	DelayCommand(800.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
 	
-	DelayCommand(899.0, SetLocalInt(oStudent, "HarpyMsg", 4));
+	DelayCommand(899.0, SetLocalInt(oStudent, "HarpyMsg", 5));
 	DelayCommand(900.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
 	
-	DelayCommand(959.0, SetLocalInt(oStudent, "HarpyMsg", 5));
-	DelayCommand(960.0, ExecuteScript("slv_static_voice_harpy_create", oStudent));
 	
 	}				
 
