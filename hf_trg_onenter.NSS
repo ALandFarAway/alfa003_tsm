@@ -36,7 +36,7 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
 		
-		if((GetItemPossessedBy(oPC, "003_it_he_sehancrystalcount")!= OBJECT_INVALID) && (FindSubString(GetName(oPC), "Saerela", 1) != -1) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+		if(((GetTag(GetItemInSlot(INVENTORY_SLOT_LEFTRING, oPC)) == "003_it_he_sehancrystalcount") || (GetTag(GetItemInSlot(INVENTORY_SLOT_RIGHTRING, oPC)) == "003_it_he_sehancrystalcount")) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
@@ -68,7 +68,7 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
 		
-		if((GetItemPossessedBy(oPC, "003_it_he_sehancrystalcount")!= OBJECT_INVALID) && (FindSubString(GetName(oPC), "Saerela", 1) != -1) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+		if(((GetTag(GetItemInSlot(INVENTORY_SLOT_LEFTRING, oPC)) == "003_it_he_sehancrystalcount") || (GetTag(GetItemInSlot(INVENTORY_SLOT_RIGHTRING, oPC)) == "003_it_he_sehancrystalcount")) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			DelayCommand(3.0, AssignCommand(oPC, ActionJumpToLocation(lGoThere)));	 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
