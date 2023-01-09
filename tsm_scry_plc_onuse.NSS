@@ -124,9 +124,9 @@ void main() {
 	object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-				
+	int nSecret = GetLocalInt(OBJECT_SELF, "SCRY_SECRET");			
 	//Has Scry been successfully cast?
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == "")) {
+	if((nSecret == 0) && ((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == ""))) {
 			SendMessageToPC(oUser, "The scrying object requires the casting of the Scry spell.");
 		}
 	//If so, was it cast by oUser?
