@@ -286,7 +286,14 @@ void main()
 									if(nSlot == 13) {sSlot = "in the quiver of";}
 									nSlot++;
 									}
-								else {oItem = GetNextItemInInventory(oDetected); SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oDetected)); sSlot = "in the inventory of ";}
+								else {
+								oItem = GetNextItemInInventory(oDetected); 
+								if(oItem == OBJECT_INVALID) {nSlot++;}
+								else {SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
+									sSlot = "in the inventory of ";
+									}
+								}
+								
 								sSlot = sSlot + " " + GetName(oDetected);
 								
 								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
