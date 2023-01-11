@@ -154,88 +154,312 @@ void main()
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea + " at " + sTarget);
 	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
-	//Dismissal of Vassal
+	//Detect Magic
+	if(GetSpellId() == 1425) {
+		SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
+		
+		object oCaster = OBJECT_SELF;
+		int nMetaMagic = GetMetaMagicFeat();
+		float fDur = TurnsToSeconds( GetCasterLevel( oCaster ) );
+		if ( nMetaMagic == METAMAGIC_EXTEND ) {
+			fDur = fDur * 2;
+			} 
+		else if ( nMetaMagic == METAMAGIC_PERSISTENT ) {
+			fDur = HoursToSeconds( 24 );
+			}
+		
+		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
+		string sSchool = "";
+		int nAuraCount = 0;
+		while (GetIsObjectValid(oDetected)) {
+			nAuraCount++;
+			SendMessageToAllDMs(GetName(oDetected) + " detected");
+			if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)){
+				
+				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
+					int nRace = GetRacialType(oDetected);
+					string sRace = "";
+					if(nRace == 10) {sRace = "Construct"; sSchool = "Transmutation"; nAuraCount++;}
+					if(nRace == 16) {sRace = "Elemental"; sSchool = "Conjuration"; nAuraCount++;}
+					if(nRace == 17) {sRace = "Fey";  sSchool = "Enchantment"; nAuraCount++;}
+					if(nRace == 19) {sRace = "Magical Beast"; sSchool = "Innate"; nAuraCount++;}
+					if(nRace == 20) {sRace = "Outsider"; sSchool = "Conjuration"; nAuraCount++;}
+					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "Transmutation"; nAuraCount++;}
+					if(nRace == 24) {sRace = "Undead"; sSchool = "Necromancy"; nAuraCount++;}
+					SendMessageToAllDMs(GetName(oDetected) + " has a racial aura of " + sSchool);
+					}
+					
+				sSchool = "";
+				string sEffectSchool = "";
+				if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)){
+					if((GetTag(oDetected) == "ACR_SCRY_OBJECT") || (GetTag(oDetected) == "TSM_PLC_SCRY_MIRROR"))
+						{SendMessageToAllDMs("1. " + GetName(oDetected) + " has a Divination aura.");
+						}
+					}
+					
+				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
+					if(GetHasAnySpellEffect(oDetected)) {
+						int nEffect = GetEffectSpellId(GetFirstEffect(oDetected)); 
+						SendMessageToAllDMs("1. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
+						if(nEffect != -1) {
+							nAuraCount++;
+							sEffectSchool = Get2DAString("spells", "School", nEffect);
+							SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
+							SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
+							}
+						else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
+						
+						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
+							nAuraCount++;
+							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
+							SendMessageToAllDMs("2. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
+							if(nEffect != -1) {
+								sEffectSchool = Get2DAString("spells", "School", nEffect);
+								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
+								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
+								}
+							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
+							}
+							
+						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
+							nAuraCount++;
+							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
+							SendMessageToAllDMs("3. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
+							if(nEffect != -1) {
+								sEffectSchool = Get2DAString("spells", "School", nEffect);
+								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
+								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
+								}
+							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
+							}
+							
+						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
+							nAuraCount++;
+							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
+							SendMessageToAllDMs("4. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
+							if(nEffect != -1) {
+								sEffectSchool = Get2DAString("spells", "School", nEffect);
+								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
+								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
+								}
+							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
+							}
+							
+						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
+							nAuraCount++;
+							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
+							SendMessageToAllDMs("5. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
+							if(nEffect != -1) {
+								sEffectSchool = Get2DAString("spells", "School", nEffect);
+								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
+								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
+								}
+							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
+								}
+							}
+						}
+						
+						string sSlot = "";
+						if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
+							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " from " + GetName(oCaster);}
+							else {oItem = GetFirstItemInInventory(oDetected);}
+							int nSlot = 0;
+							int nFirst = 0;
+							while (GetIsObjectValid(oItem)) {
+								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
+								if(nFirst == 0) {nFirst = 1;}
+								else if (nSlot < 14) {
+									oItem = GetItemInSlot(nSlot, oDetected); 
+									if(nSlot == 0) {sSlot = "on the head of";}
+									if(nSlot == 1) {sSlot = "armoring the body of";}
+									if(nSlot == 2) {sSlot = "on the feet of";}
+									if(nSlot == 3) {sSlot = "on the arms of";}
+									if(nSlot == 4) {sSlot = "in the right hand of";}
+									if(nSlot == 5) {sSlot = "in the left hand of";}
+									if(nSlot == 6) {sSlot = "on the back of";}
+									if(nSlot == 7) {sSlot = "on a finger on the left hand of";}
+									if(nSlot == 8) {sSlot = "on a finger on the right hand of";}
+									if(nSlot == 9) {sSlot = "around the neck of";}
+									if(nSlot == 10) {sSlot = "around the waist of";}
+									if(nSlot == 11) {sSlot = "in the quiver of";}
+									if(nSlot == 12) {sSlot = "carried by";}
+									if(nSlot == 13) {sSlot = "in the quiver of";}
+									sSlot = sSlot + " " + GetName(oDetected);
+									nSlot++;
+									}
+								else {oItem = GetNextItemInInventory(oDetected); sSlot = "in the inventory of ";}
+								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot + " " + GetName(oDetected));	
+								itemproperty ipItem = GetFirstItemProperty(oItem);
+								if(GetIsItemPropertyValid(ipItem)) {
+									nAuraCount++;
+									int nBaseItem = GetBaseItemType(oItem);
+									string sBaseItem = "";
+									string sItemName = GetName(oItem);
+									string sItemDescription = GetDescription(oItem);
+									if(nBaseItem == 19) {sBaseItem = "n Amulet";}
+									if(nBaseItem == 16) {sBaseItem = "suit of Armor";}
+									if(nBaseItem == 20) {sBaseItem = "quiver of Arrows";}
+									if(nBaseItem == 3) {sBaseItem = "Bastard Sword";}
+									if(nBaseItem == 2) {sBaseItem = "Battle Axe";}
+									if(nBaseItem == 101) {sBaseItem = "Belt";}
+									if(nBaseItem == 25) {sBaseItem = "quiver of Bolts";}
+									if(nBaseItem == 74) {sBaseItem = "Book";}
+									if(nBaseItem == 26) {sBaseItem = "pair of Boots";}
+									if(nBaseItem == 78) {sBaseItem = "pair of Bracers";}
+									if(nBaseItem == 27) {sBaseItem = "pouch of Bullets";}
+									if(nBaseItem == 80) {sBaseItem = "Cloak";}
+									if(nBaseItem == 28) {sBaseItem = "Club";}
+									if(nBaseItem == 22) {sBaseItem = "Dagger";}
+									if(nBaseItem == 31) {sBaseItem = "set of Darts";}
+									if(nBaseItem == 33) {sBaseItem = "Double Axe";}
+									if(nBaseItem == 128) {sBaseItem = "Drum";}
+									if(nBaseItem == 108) {sBaseItem = "Dwarven War Axe";}
+									if(nBaseItem == 114) {sBaseItem = "Falchion";}
+									if(nBaseItem == 116) {sBaseItem = "Flail";}
+									if(nBaseItem == 129) {sBaseItem = "Flute";}
+									if(nBaseItem == 77) {sBaseItem = "Gem";}
+									if(nBaseItem == 36) {sBaseItem = "pair of Gloves";}
+									if(nBaseItem == 18) {sBaseItem = "Great Axe";}
+									if(nBaseItem == 120) {sBaseItem = "Great Club";}
+									if(nBaseItem == 13) {sBaseItem = "Great Sword";}
+									if(nBaseItem == 81) {sBaseItem = "Grenade";}
+									if(nBaseItem == 10) {sBaseItem = "Halberd";}
+									if(nBaseItem == 38) {sBaseItem = "Hand Axe";}
+									if(nBaseItem == 6) {sBaseItem = "Heavy Crossbow";}
+									if(nBaseItem == 35) {sBaseItem = "Heavy Flail";}
+									if(nBaseItem == 17) {sBaseItem = "Helmet or Hat";}
+									if(nBaseItem == 40) {sBaseItem = "Kama";}
+									if(nBaseItem == 41) {sBaseItem = "Katana";}
+									if(nBaseItem == 65) {sBaseItem = "Key";}
+									if(nBaseItem == 42) {sBaseItem = "Kukri";}
+									if(nBaseItem == 66) {sBaseItem = "Large Box";}
+									if(nBaseItem == 56) {sBaseItem = "Large Shield";}
+									if(nBaseItem == 7) {sBaseItem = "Light Crossbow";}
+									if(nBaseItem == 4) {sBaseItem = "Light Flail";}
+									if(nBaseItem == 37) {sBaseItem = "Light Hammer";}
+									if(nBaseItem == 9) {sBaseItem = "Light Mace";}
+									if(nBaseItem == 1) {sBaseItem = "Longsword";}
+									if(nBaseItem == 8) {sBaseItem = "Longbow";}
+									if(nBaseItem == 113) {sBaseItem = "Mace";}
+									if(nBaseItem == 44) {sBaseItem = "Magic Rod";}
+									if(nBaseItem == 45) {sBaseItem = "Magic Staff";}
+									if(nBaseItem == 46) {sBaseItem = "Magic Wand";}
+									if(nBaseItem == 34) {sBaseItem = "Large Item";}
+									if(nBaseItem == 29) {sBaseItem = "Medium Item";}
+									if(nBaseItem == 24) {sBaseItem = "Small Item";}
+									if(nBaseItem == 43) {sBaseItem = "Tall Item";}
+									if(nBaseItem == 79) {sBaseItem = "Thin Item";}
+									if(nBaseItem == 68) {sBaseItem = "Wide Item";}
+									if(nBaseItem == 47) {sBaseItem = "Morningstar";}
+									if(nBaseItem == 49) {sBaseItem = "Magic Potion";}
+									if(nBaseItem == 50) {sBaseItem = "Quarterstaff";}
+									if(nBaseItem == 51) {sBaseItem = "Rapier";}
+									if(nBaseItem == 52) {sBaseItem = "Ring";}
+									if(nBaseItem == 53) {sBaseItem = "Scimitar";}
+									if(nBaseItem == 54) {sBaseItem = "Magic Scroll";
+										if(FindSubString(sItemDescription, "Abjuration") != -1) {sSchool = "Abjuration";}
+										if(FindSubString(sItemDescription, "Conjuration") != -1) {sSchool = "Conjuration";}
+										if(FindSubString(sItemDescription, "Divination") != -1) {sSchool = "Divination";}
+										if(FindSubString(sItemDescription, "Enchantment") != -1) {sSchool = "Enchantment";}
+										if(FindSubString(sItemDescription, "Evocation") != -1) {sSchool = "Evocation";}
+										if(FindSubString(sItemDescription, "Illusion") != -1) {sSchool = "Illusion";}
+										if(FindSubString(sItemDescription, "Necromancy") != -1) {sSchool = "Necromancy";}
+										if(FindSubString(sItemDescription, "Transmutation") != -1) {sSchool = "Transmutation";}
+										}
+									if(nBaseItem == 55) {sBaseItem = "Scythe";}
+									if(nBaseItem == 11) {sBaseItem = "Short Bow";}
+									if(nBaseItem == 58) {sBaseItem = "Short Spear";}
+									if(nBaseItem == 0) {sBaseItem = "Shortsword";}
+									if(nBaseItem == 59) {sBaseItem = "set of Shuriken";}
+									if(nBaseItem == 60) {sBaseItem = "Sickle";}
+									if(nBaseItem == 61) {sBaseItem = "Sling";}
+									if(nBaseItem == 14) {sBaseItem = "Small Shield";}
+									if(nBaseItem == 119) {sBaseItem = "Spear";}
+									if(nBaseItem == 63) {sBaseItem = "set of Throwing Axes";}
+									if(nBaseItem == 57) {sBaseItem = "Tower Shield";}
+									if(nBaseItem == 5) {sBaseItem = "War Hammer";}
+									if(nBaseItem == 126) {sBaseItem = "War Mace";}
+									if(nBaseItem == 111) {sBaseItem = "Whip";}
+									
+									while (GetIsItemPropertyValid(ipItem)) {
+										int nItemProperty = GetItemPropertyType(ipItem);
+										string sItemProperty = "";
+										int nItemSubType = GetItemPropertySubType(ipItem);
+										string sItemSubType = IntToString(nItemSubType);
+										string sSpellIndex = "";
+										string sSchool = "";
+										if(nItemProperty == 0) {sItemProperty = "Ability Bonus"; sSchool = "Transmutation";}
+										if((nItemProperty >= 1) && (nItemProperty <=5)) {sItemProperty = "AC Bonus"; sSchool = "Abjuration";}
+										if((nItemProperty >= 56) && (nItemProperty <=59)) {sItemProperty = "Attack Bonus"; sSchool = "Evocation";}
+										if(nItemProperty == 12) {sItemProperty = "Bonus Feat"; sSchool = "Transmutation";}
+										if(nItemProperty == 66) {sItemProperty = "Bonus HP"; sSchool = "Transmutation";}
+										if(nItemProperty == 13) {sItemProperty = "Bonus Spell Slot"; sSchool = "Transmutation";}
+										if(nItemProperty == 15) {
+											sItemProperty = "Cast Spell";
+											 sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
+											 sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
+											}
+										if((nItemProperty >= 16) && (nItemProperty <=19)) {sItemProperty = "Damage Bonus"; sSchool = "Evocation";}
+										if(nItemProperty == 15) {sItemProperty = "Damage Resistance"; sSchool = "Abjuration";}
+										if(nItemProperty == 26) {sItemProperty = "Darkvision"; sSchool = "Transmutation";}
+										if((nItemProperty >= 6) && (nItemProperty <=9)) {sItemProperty = "Enhancement Bonus"; sSchool = "Evocation";}
+										if((nItemProperty >= 33) && (nItemProperty <=34)) {sItemProperty = "Extra Damage"; sSchool = "Evocation";}
+										if(nItemProperty == 75) {sItemProperty = "Freedom of Movement"; sSchool = "Transmutation";}
+										if(nItemProperty == 35) {sItemProperty = "Haste"; sSchool = "Transmutation";}
+										if(nItemProperty == 20) {sItemProperty = "Immunity Damage Type"; sSchool = "Abjuration";}
+										if(nItemProperty == 37) {sItemProperty = "Immunity Misc"; sSchool = "Abjuration";}
+										if((nItemProperty >= 53) && (nItemProperty <=54)) {sItemProperty = "Immunity Spell/s"; sSchool = "Abjuration";}
+										if(nItemProperty == 78) {sItemProperty = "Immunity Spell Level"; sSchool = "Abjuration";}
+										if(nItemProperty == 38) {sItemProperty = "Improved Evasion"; sSchool = "Transmutation";}
+										if(nItemProperty == 44) {sItemProperty = "Light"; sSchool = "Evocation";}
+										if(nItemProperty == 82) {sItemProperty = "On Hit Cast Spell";}
+										if(nItemProperty == 51) {sItemProperty = "Regeneration"; sSchool = "Transmutation";}
+										if((nItemProperty >= 40) && (nItemProperty <=41)) {sItemProperty = "Saving Throw Bonus"; sSchool = "Transmutation";}
+										if(nItemProperty == 52) {sItemProperty = "Skill Bonus"; sSchool = "Transmutation";}
+										if(nItemProperty == 39) {sItemProperty = "Spell Resistance"; sSchool = "Abjuration";}
+										if(nItemProperty == 71) {sItemProperty = "True Seeing"; sSchool = "Transmutation";}
+										SendMessageToAllDMs(GetName(oItem) + " has sItemProperty " + sItemProperty + " which is " + sSchool + ". The sItemSubType is " + sItemSubType  + " which is " + sSchool ); 
+										SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + " gives off an aura of " + sSchool + " " + sSlot );
+								
+										ipItem = GetNextItemProperty(oItem);
+										}
+								}
+							}
+						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {break;}
+						else if((nSlot >= 0) && (nFirst = 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
+						}
+						
+						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
+							if((FindSubString(GetTag(oDetected), "trg_glyph") != -1) || (FindSubString(GetTag(oDetected), "trg_symbol") != -1)) {
+								if(FindSubString(GetTag(oDetected), "trg_glyph") != -1) {sSchool = "Abjuration";}
+								if((GetTag(oDetected) == "trg_symbol_fear") || (GetTag(oDetected) == "trg_symbol_pers") || (GetTag(oDetected) == "trg_symbol_sleep") || (GetTag(oDetected) == "trg_symbol_stun")) {sSchool = "Enchantment";}
+								if((GetTag(oDetected) == "trg_symbol_weakness") || (GetTag(oDetected) == "trg_symbol_pain") || (GetTag(oDetected) == "trg_symbol_death")) {sSchool = "Necromancy";}
+								
+								
+							SendMessageToAllDMs("Trigger " + GetName(oDetected) + " gives off an aura of " + sSchool + ".");
+							}
+						}
+						
+						if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) {
+							if(FindSubString(GetTag(oDetected), "trap_spell") != -1) {
+								sSchool = "";
+								int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
+								sSchool = Get2DAString("spells", "School", nSpellID);
+								SendMessageToAllDMs("Trap " + GetName(oDetected) + " gives off an aura of " + sSchool + ".");
+								}
+							}
+						
+					}
+				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
+			
+			}	
+		SendMessageToAllDMs("Aura count is " + IntToString(nAuraCount));			
+		}
+					
+	
+	//Dismissal
 	if(GetSpellId() == 40) {
 		SendMessageToAllDMs("Dismissal");
-		if(GetTag(oTarget) == "003_cr_un_banite_vassal") {
-		object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
-		object oPC = GetFirstPC(TRUE);
-		while(oPC != OBJECT_INVALID) {
-			string sPCName = GetName(oPC);
-			if(FindSubString(sPCName, "Jhessi") != -1) {
-				oJhessi = oPC;
-				}
-			
-		oPC = GetNextPC(TRUE);
-		}
- 
-		object oValbrace = GetObjectByTag("statue_valbrace", 1);
-		ActionSpeakString("Hundreds of motes spring apart, each of them a tiny screaming face. Some vanish. Some swell into ghosts, drifting away in all directions.", TALKVOLUME_TALK);
-		object oGhostField = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_afx_ror_fieldofghosts", GetLocation(OBJECT_SELF));
-		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_swift_ghostchild_f", GetLocation(OBJECT_SELF));
-		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_hum_m", GetLocation(OBJECT_SELF));
-		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_hum_f", GetLocation(OBJECT_SELF));
-		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_gob_f", GetLocation(OBJECT_SELF));
-		CreateObject(OBJECT_TYPE_CREATURE, "003_cr_un_ghost_gob_m", GetLocation(OBJECT_SELF));
-		DelayCommand(1.0, ActionCreateWynCreature("003_cr_un_ghost_dwwiz", GetLocation(OBJECT_SELF)));
-		DelayCommand(2.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(OBJECT_SELF)));
-		DelayCommand(6.0, ActionCreateWynCreature("003_cr_un_ghost_helf_m", GetLocation(OBJECT_SELF)));
-		DelayCommand(8.0, ActionCreateWynCreature("003_cr_un_ghost_half_f", GetLocation(OBJECT_SELF)));
-		DelayCommand(10.0, SetScale(OBJECT_SELF, 0.7, 0.7, 0.7));
-		DestroyObject(oGhostField, 10.0);
-		DelayCommand(12.0, ActionCreateWynCreature("003_cr_un_ghost_humwiz", GetLocation(OBJECT_SELF)));
-		DelayCommand(14.0, ActionCreateWynCreature("003_cr_un_ghost_elfcl", GetLocation(OBJECT_SELF)));
-		DelayCommand(15.0, ClearAllActions(TRUE));
-		DelayCommand(15.0, ActionSpeakString("*Master Evenwood's face swims around in the vassal, as if seeking a way out", TALKVOLUME_TALK));
-		DelayCommand(18.0, ActionCreateWynCreature("003_cr_un_ghost_humfgt", GetLocation(OBJECT_SELF)));
-		DelayCommand(20.0, ActionCreateWynCreature("003_cr_circus_ghost_tigersx", GetLocation(OBJECT_SELF)));
-		DelayCommand(24.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl9", GetLocation(OBJECT_SELF)));
-		DelayCommand(26.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(OBJECT_SELF)));
-		DelayCommand(27.0, ClearAllActions(TRUE));
-		DelayCommand(30.0, ActionSpeakString("*The side of the vassal stretches, as if a membrane bulges, as Master Evenwood stretches out a hand towards Jhessi", TALKVOLUME_TALK));
-		DelayCommand(30.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl", GetLocation(OBJECT_SELF)));
-		DelayCommand(32.0, ActionCreateWynCreature("abr_cr_un_minotaur_ghost", GetLocation(OBJECT_SELF)));
-		DelayCommand(36.0, ActionCreateWynCreature("abr_cr_un_ghost_corrupt", GetLocation(OBJECT_SELF)));
-		DelayCommand(38.0, ActionCreateWynCreature("c_st01_ghost_morrigan", GetLocation(OBJECT_SELF)));
-		DelayCommand(42.0, ActionCreateWynCreature("003_cr_un_ghost_humcl", GetLocation(OBJECT_SELF)));
-		DelayCommand(44.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(OBJECT_SELF)));
-		DelayCommand(48.0, ActionCreateWynCreature("003_cr_circus_magic_ghost", GetLocation(OBJECT_SELF)));
-		DelayCommand(50.0, ActionCreateWynCreature("003_cr_un_spirit_evenwood", GetLocation(OBJECT_SELF)));
-		DelayCommand(52.0, ActionCreateWynCreature("abr_cr_un_ghost_moan", GetLocation(OBJECT_SELF)));
-		DelayCommand(50.0, ActionSpeakString("*Somewhere, somebody screams.", TALKVOLUME_TALK));
-		DelayCommand(60.0, ActionSpeakString("The door of the tavern bangs open, and a patron runs out...and is dragged back in by an ectoplasmic arm.", TALKVOLUME_TALK));
-		DelayCommand(70.0, ActionSpeakString("*Another scream rings out, this one from a different direction, drifting out a window from the inn.", TALKVOLUME_TALK));
-		DelayCommand(80.0, ActionSpeakString("*A shape drifts out of the statue of the mounted Elthondsson ancestor. Ghostly horns blow a call to arms.", TALKVOLUME_TALK));
-		
-		object oTrollWP = GetWaypointByTag("ghost_troll_wp");
-		DelayCommand(60.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
-		DelayCommand(61.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("abr_cr_un_harpy_ghost", GetLocation(oTrollWP)));
-		
-		object oFlagonWP = GetWaypointByTag("ghost_flagon_wp");
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(oFlagonWP)));
-		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_clown", GetLocation(oFlagonWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("abr_cr_un_minotaur_ghost", GetLocation(oFlagonWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_circus_magician_dead", GetLocation(oFlagonWP)));
-		
-		object oLathWP = GetWaypointByTag("ghost_lathander_wp");
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_gob_f", GetLocation(oLathWP)));
-		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_gob_f", GetLocation(oLathWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_gob_m", GetLocation(oLathWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_gob_m", GetLocation(oLathWP)));
-		
-		object oKeepWP = GetWaypointByTag("ghost_keep_wp");
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(oKeepWP)));
-		DelayCommand(61.0, ActionCreateWynCreature("003_cr_un_ghost_dwcl", GetLocation(oKeepWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_humfgt", GetLocation(oKeepWP)));
-		DelayCommand(62.0, ActionCreateWynCreature("003_cr_un_ghost_humwiz", GetLocation(oKeepWP)));
-		
-		
-		object oKeepWPB = GetWaypointByTag("ghost_keep_wpB");
-		DelayCommand(60.0, ActionCreateWynCreature("003_cr_un_ghost_elfwiz", GetLocation(oKeepWPB)));
-		DelayCommand(61.0, ActionCreateWynCreature("abr_cr_un_ghost_corrupt", GetLocation(oKeepWPB)));
-		
-		}
 		}
 		 
 	//Stopping summons by non Banites in a Banite UnHallowed Area
