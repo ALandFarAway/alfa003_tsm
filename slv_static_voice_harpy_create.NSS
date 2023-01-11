@@ -52,7 +52,7 @@ void main()
 	if(GetLocalInt(oStudent, "HarpyMsg")==4) {
 		if(FindSubString(GetTag(oArea), "_ext_") != -1)  {
 			if(GetLocalInt(oStudent, "HarpySpot") == 1) {
-				SendMessageToPC(oStudent, "The oncoming flying creatures are close enough that you can count them, and see what you are about to face. Harpies.");	  
+				SendMessageToPC(oStudent, "The oncoming flying creatures are close enough that you can see what you are about to face. Harpies.");	  
 				}
 			else if((GetLocalInt(oStudent, "HarpySpot") == 0) && (GetIsSkillSuccessful(OBJECT_SELF, SKILL_SPOT,10,TRUE))) {
 				SendMessageToPC(oStudent, "Movement in the sky draws your eyes to flying creatures. Winged women. Harpies!");	  
@@ -60,7 +60,7 @@ void main()
 			 	}
 			}
 		else if(FindSubString(GetTag(oArea), "_int_") != -1)  {
-			SendMessageToPC(oStudent, "A harsh shriek sounds outside, like a woman's scream of anger.");	  
+			SendMessageToPC(oStudent, "A harsh shriek sounds outside, a woman's scream of anger.");	  
 			}
 			
 			
@@ -69,13 +69,14 @@ void main()
 	if(GetLocalInt(oStudent, "HarpyMsg")==5) {
 		if(FindSubString(GetTag(oArea), "_ext_") != -1)  {
 			if(GetLocalInt(oStudent, "HarpySpot") == 1) {
-				SendMessageToPC(oStudent, "Harpies swoop upon you from all directions!");	  
+				SendMessageToPC(oStudent, "Harpies swoop upon you from multiple directions!");	  
 				}
 			else if(GetLocalInt(oStudent, "HarpySpot") == 0) {
 				SendMessageToPC(oStudent, "A tangle of greasy wings and shrieking voices sets upon you from the air.");	  
 				SetLocalInt(oStudent, "HarpySpot", 1);
 			 	}
 			
+			DelayCommand(2.0, ActionCreateCreature("003_cr_scry_send_xavier", lStudent));
 			DelayCommand(7.0, ActionCreateCreature("003_slv_dq_h_creature", GetLocation(GetNearestObject(OBJECT_TYPE_CREATURE, oStudent, 1))));
 			DelayCommand(10.0, ActionCreateCreature("003_slv_dq_h_creature", lStudent));
 	 		DelayCommand(15.0, SetLocalInt(oStudent, "HarpyMsg", 6));
