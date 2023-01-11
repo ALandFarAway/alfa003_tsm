@@ -288,7 +288,7 @@ void main()
 									nSlot++;
 									}
 								else {oItem = GetNextItemInInventory(oDetected); sSlot = "in the inventory of ";}
-								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot + " " + GetName(oDetected));	
+								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);	
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(GetIsItemPropertyValid(ipItem)) {
 									nAuraCount++;
@@ -398,10 +398,19 @@ void main()
 											sItemProperty = "Cast Spell";
 											 sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
 											 sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
-											}
+											 SendMessageToAllDMs("sSchool = " + sSchool);}
 										if((nItemProperty >= 16) && (nItemProperty <=19)) {sItemProperty = "Damage Bonus"; sSchool = "Evocation";}
-										if(nItemProperty == 15) {sItemProperty = "Damage Resistance"; sSchool = "Abjuration";}
+										if(nItemProperty == 90) {sItemProperty = "Damage Reduction"; sSchool = "Transmutation";}
+										if(nItemProperty == 23) {sItemProperty = "Damage Resistance"; sSchool = "Abjuration";}
+										if(nItemProperty == 24) {sItemProperty = "Damage Vulnerability"; sSchool = "Transmutation";}
 										if(nItemProperty == 26) {sItemProperty = "Darkvision"; sSchool = "Transmutation";}
+										if(nItemProperty == 27) {sItemProperty = "Decreased Ability"; sSchool = "Transmutation";}
+										if(nItemProperty == 28) {sItemProperty = "Decreased AC"; sSchool = "Transmutation";}
+										if(nItemProperty == 29) {sItemProperty = "Decreased Skill"; sSchool = "Transmutation";}
+										if(nItemProperty == 10) {sItemProperty = "Decreased Enhancement Modifier"; sSchool = "Transmutation";}
+										if(nItemProperty == 60) {sItemProperty = "Decreased Attack Modifier"; sSchool = "Transmutation";}
+										if(nItemProperty == 21) {sItemProperty = "Decreased Damage"; sSchool = "Transmutation";}
+										if(nItemProperty == 49) {sItemProperty = "Decreased Saving Throw"; sSchool = "Transmutation";}
 										if((nItemProperty >= 6) && (nItemProperty <=9)) {sItemProperty = "Enhancement Bonus"; sSchool = "Evocation";}
 										if((nItemProperty >= 33) && (nItemProperty <=34)) {sItemProperty = "Extra Damage"; sSchool = "Evocation";}
 										if(nItemProperty == 75) {sItemProperty = "Freedom of Movement"; sSchool = "Transmutation";}
@@ -418,9 +427,10 @@ void main()
 										if(nItemProperty == 52) {sItemProperty = "Skill Bonus"; sSchool = "Transmutation";}
 										if(nItemProperty == 39) {sItemProperty = "Spell Resistance"; sSchool = "Abjuration";}
 										if(nItemProperty == 71) {sItemProperty = "True Seeing"; sSchool = "Transmutation";}
-										SendMessageToAllDMs(GetName(oItem) + " has sItemProperty " + sItemProperty + " which is " + sSchool + ". The sItemSubType is " + sItemSubType  + " which is " + sSchool ); 
-										SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + " gives off an aura of " + sSchool + " " + sSlot );
-								
+										if(sItemProperty != "") {
+											SendMessageToAllDMs(GetName(oItem) + " has sItemProperty " + sItemProperty + " which is " + sSchool + ". The sItemSubType is " + sItemSubType  + " which is " + sSchool ); 
+											SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + " gives off an aura of " + sSchool + " " + sSlot );
+											}
 										ipItem = GetNextItemProperty(oItem);
 										}
 								}
