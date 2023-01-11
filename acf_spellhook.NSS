@@ -173,7 +173,7 @@ void main()
 		int nAuraCount = 0;
 		while (GetIsObjectValid(oDetected)) {
 			SendMessageToAllDMs(GetName(oDetected) + " detected");
-			if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)){
+			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 				
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					int nRace = GetRacialType(oDetected);
@@ -185,7 +185,7 @@ void main()
 					if(nRace == 20) {sRace = "Outsider"; sSchool = "Conjuration"; nAuraCount++;}
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "Transmutation"; nAuraCount++;}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "Necromancy"; nAuraCount++;}
-					SendMessageToAllDMs(GetName(oDetected) + " has a racial aura of " + sSchool);
+					if(sRace != ""){SendMessageToAllDMs(GetName(oDetected) + " has a racial aura of " + sSchool);}
 					}
 					
 				sSchool = "";
@@ -264,9 +264,10 @@ void main()
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nSlot = 0;
 							int nFirst = 0;
-							while ((GetIsObjectValid(oItem)) || (nSlot < 14)) {
+							while ((GetIsObjectValid(oItem)) || (nSlot < 15)) {
+								SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
-								if(nFirst == 0) {nFirst = 1;}
+								if(nFirst == 0) {nFirst = 1; sSlot = "in the inventory of ";}
 								else if (nSlot < 14) {
 									oItem = GetItemInSlot(nSlot, oDetected); 
 									if(nSlot == 0) {sSlot = "on the head of";}
@@ -285,9 +286,9 @@ void main()
 									if(nSlot == 13) {sSlot = "in the quiver of";}
 									nSlot++;
 									}
-								else {oItem = GetNextItemInInventory(oDetected); sSlot = "in the inventory of ";}
+								else {oItem = GetNextItemInInventory(oDetected); SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oDetected)); sSlot = "in the inventory of ";}
 								sSlot = sSlot + " " + GetName(oDetected);
-								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+								
 								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
 									SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 									}	
