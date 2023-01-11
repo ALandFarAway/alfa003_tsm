@@ -264,7 +264,7 @@ void main()
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "meters from " + GetName(oCaster);}
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
-							while ((GetIsObjectValid(oItem)) || (nSlot < 15)) {
+							while ((GetIsObjectValid(oItem)) && (nSlot < 15)) {
 								SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
 								if((nFirst == 0) && (GetObjectType(oDetected) != OBJECT_TYPE_ITEM)) {nFirst = 1; sSlot = "in the inventory of ";}
@@ -453,7 +453,7 @@ void main()
 								}
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
 							}
-						if((nSlot >= 0) && (nFirst = 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
+						//if((nSlot >= 0) && (nSlot < 14) && (nFirst == 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 						}
 						
 						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
