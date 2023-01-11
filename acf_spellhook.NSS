@@ -155,7 +155,7 @@ void main()
 	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
 	//Detect Magic
-	if(GetSpellId() == 1425) {
+	if(GetSpellId() == 3004) {
 		SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
 		
 		object oCaster = OBJECT_SELF;
