@@ -172,7 +172,6 @@ void main()
 		string sSchool = "";
 		int nAuraCount = 0;
 		while (GetIsObjectValid(oDetected)) {
-			nAuraCount++;
 			SendMessageToAllDMs(GetName(oDetected) + " detected");
 			if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)){
 				
@@ -261,17 +260,17 @@ void main()
 						
 						string sSlot = "";
 						if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " from " + GetName(oCaster);}
+							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "meters from " + GetName(oCaster);}
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nSlot = 0;
 							int nFirst = 0;
-							while (GetIsObjectValid(oItem)) {
+							while ((GetIsObjectValid(oItem)) || (nSlot < 14)) {
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
 								if(nFirst == 0) {nFirst = 1;}
 								else if (nSlot < 14) {
 									oItem = GetItemInSlot(nSlot, oDetected); 
 									if(nSlot == 0) {sSlot = "on the head of";}
-									if(nSlot == 1) {sSlot = "armoring the body of";}
+									if(nSlot == 1) {sSlot = "worn by";}
 									if(nSlot == 2) {sSlot = "on the feet of";}
 									if(nSlot == 3) {sSlot = "on the arms of";}
 									if(nSlot == 4) {sSlot = "in the right hand of";}
@@ -284,11 +283,14 @@ void main()
 									if(nSlot == 11) {sSlot = "in the quiver of";}
 									if(nSlot == 12) {sSlot = "carried by";}
 									if(nSlot == 13) {sSlot = "in the quiver of";}
-									sSlot = sSlot + " " + GetName(oDetected);
 									nSlot++;
 									}
 								else {oItem = GetNextItemInInventory(oDetected); sSlot = "in the inventory of ";}
-								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);	
+								sSlot = sSlot + " " + GetName(oDetected);
+								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
+									SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+									}	
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(GetIsItemPropertyValid(ipItem)) {
 									nAuraCount++;
@@ -396,9 +398,9 @@ void main()
 										if(nItemProperty == 13) {sItemProperty = "Bonus Spell Slot"; sSchool = "Transmutation";}
 										if(nItemProperty == 15) {
 											sItemProperty = "Cast Spell";
-											 sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
-											 sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
-											 SendMessageToAllDMs("sSchool = " + sSchool);}
+											sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
+											sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
+											SendMessageToAllDMs("sSchool = " + sSchool);}
 										if((nItemProperty >= 16) && (nItemProperty <=19)) {sItemProperty = "Damage Bonus"; sSchool = "Evocation";}
 										if(nItemProperty == 90) {sItemProperty = "Damage Reduction"; sSchool = "Transmutation";}
 										if(nItemProperty == 23) {sItemProperty = "Damage Resistance"; sSchool = "Abjuration";}
@@ -421,15 +423,28 @@ void main()
 										if(nItemProperty == 78) {sItemProperty = "Immunity Spell Level"; sSchool = "Abjuration";}
 										if(nItemProperty == 38) {sItemProperty = "Improved Evasion"; sSchool = "Transmutation";}
 										if(nItemProperty == 44) {sItemProperty = "Light"; sSchool = "Evocation";}
-										if(nItemProperty == 82) {sItemProperty = "On Hit Cast Spell";}
+										if(nItemProperty == 82) {
+											sItemProperty = "On Hit Cast Spell";
+											sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
+											sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
+											SendMessageToAllDMs("sSchool = " + sSchool);}
 										if(nItemProperty == 51) {sItemProperty = "Regeneration"; sSchool = "Transmutation";}
 										if((nItemProperty >= 40) && (nItemProperty <=41)) {sItemProperty = "Saving Throw Bonus"; sSchool = "Transmutation";}
 										if(nItemProperty == 52) {sItemProperty = "Skill Bonus"; sSchool = "Transmutation";}
 										if(nItemProperty == 39) {sItemProperty = "Spell Resistance"; sSchool = "Abjuration";}
 										if(nItemProperty == 71) {sItemProperty = "True Seeing"; sSchool = "Transmutation";}
+										if(sSchool == "A") {sSchool = "Abjuration";}
+										if(sSchool == "C") {sSchool = "Conjuration";}
+										if(sSchool == "D") {sSchool = "Divination";}
+										if(sSchool == "E") {sSchool = "Enchantment";}
+										if(sSchool == "I") {sSchool = "Illusion";}
+										if(sSchool == "N") {sSchool = "Necromancy";}
+										if(sSchool == "T") {sSchool = "Transmutation";}
+										if(sSchool == "V") {sSchool = "Evocation";}
+										if(sSchool == "G") {sSchool = "General";}
 										if(sItemProperty != "") {
 											SendMessageToAllDMs(GetName(oItem) + " has sItemProperty " + sItemProperty + " which is " + sSchool + ". The sItemSubType is " + sItemSubType  + " which is " + sSchool ); 
-											SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + " gives off an aura of " + sSchool + " " + sSlot );
+											SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot );
 											}
 										ipItem = GetNextItemProperty(oItem);
 										}
