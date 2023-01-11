@@ -265,7 +265,7 @@ void main()
 							int nSlot = 0;
 							int nFirst = 0;
 							while ((GetIsObjectValid(oItem)) || (nSlot < 15)) {
-								SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
+								//SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
 								if(nFirst == 0) {nFirst = 1; sSlot = "in the inventory of ";}
 								else if (nSlot < 14) {
@@ -297,7 +297,7 @@ void main()
 								sSlot = sSlot + " " + GetName(oDetected);
 								
 								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
-									SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+									//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 									}	
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(GetIsItemPropertyValid(ipItem)) {
@@ -366,16 +366,7 @@ void main()
 									if(nBaseItem == 51) {sBaseItem = "Rapier";}
 									if(nBaseItem == 52) {sBaseItem = "Ring";}
 									if(nBaseItem == 53) {sBaseItem = "Scimitar";}
-									if(nBaseItem == 54) {sBaseItem = "Magic Scroll";
-										if(FindSubString(sItemDescription, "Abjuration") != -1) {sSchool = "Abjuration";}
-										if(FindSubString(sItemDescription, "Conjuration") != -1) {sSchool = "Conjuration";}
-										if(FindSubString(sItemDescription, "Divination") != -1) {sSchool = "Divination";}
-										if(FindSubString(sItemDescription, "Enchantment") != -1) {sSchool = "Enchantment";}
-										if(FindSubString(sItemDescription, "Evocation") != -1) {sSchool = "Evocation";}
-										if(FindSubString(sItemDescription, "Illusion") != -1) {sSchool = "Illusion";}
-										if(FindSubString(sItemDescription, "Necromancy") != -1) {sSchool = "Necromancy";}
-										if(FindSubString(sItemDescription, "Transmutation") != -1) {sSchool = "Transmutation";}
-										}
+									if(nBaseItem == 54) {sBaseItem = "Scroll";}
 									if(nBaseItem == 55) {sBaseItem = "Scythe";}
 									if(nBaseItem == 11) {sBaseItem = "Short Bow";}
 									if(nBaseItem == 58) {sBaseItem = "Short Spear";}
@@ -408,7 +399,8 @@ void main()
 											sItemProperty = "Cast Spell";
 											sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
 											sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
-											SendMessageToAllDMs("sSchool = " + sSchool);}
+											//SendMessageToAllDMs("sSchool = " + sSchool);
+											}
 										if((nItemProperty >= 16) && (nItemProperty <=19)) {sItemProperty = "Damage Bonus"; sSchool = "Evocation";}
 										if(nItemProperty == 90) {sItemProperty = "Damage Reduction"; sSchool = "Transmutation";}
 										if(nItemProperty == 23) {sItemProperty = "Damage Resistance"; sSchool = "Abjuration";}
@@ -435,7 +427,8 @@ void main()
 											sItemProperty = "On Hit Cast Spell";
 											sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
 											sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
-											SendMessageToAllDMs("sSchool = " + sSchool);}
+											//SendMessageToAllDMs("sSchool = " + sSchool);
+											}
 										if(nItemProperty == 51) {sItemProperty = "Regeneration"; sSchool = "Transmutation";}
 										if((nItemProperty >= 40) && (nItemProperty <=41)) {sItemProperty = "Saving Throw Bonus"; sSchool = "Transmutation";}
 										if(nItemProperty == 52) {sItemProperty = "Skill Bonus"; sSchool = "Transmutation";}
@@ -450,15 +443,16 @@ void main()
 										if(sSchool == "T") {sSchool = "Transmutation";}
 										if(sSchool == "V") {sSchool = "Evocation";}
 										if(sSchool == "G") {sSchool = "General";}
+											
 										if(sItemProperty != "") {
-											SendMessageToAllDMs(GetName(oItem) + " has sItemProperty " + sItemProperty + " which is " + sSchool + ". The sItemSubType is " + sItemSubType  + " which is " + sSchool ); 
-											SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot );
-											}
-										ipItem = GetNextItemProperty(oItem);
+											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) {SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + ", gives off " + sItemSubType );}
+											else {SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot);}
+											ipItem = GetNextItemProperty(oItem);
 										}
+									}
 								}
 							}
-						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {break;}
+						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {return;}
 						else if((nSlot >= 0) && (nFirst = 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 						}
 						
