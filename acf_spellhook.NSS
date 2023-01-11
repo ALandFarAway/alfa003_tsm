@@ -258,16 +258,16 @@ void main()
 							}
 						}
 						
+						int nSlot = 0;
 						string sSlot = "";
 						if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "meters from " + GetName(oCaster);}
+							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "meters from " + GetName(oCaster);}
 							else {oItem = GetFirstItemInInventory(oDetected);}
-							int nSlot = 0;
 							int nFirst = 0;
 							while ((GetIsObjectValid(oItem)) || (nSlot < 15)) {
-								//SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
+								SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
-								if(nFirst == 0) {nFirst = 1; sSlot = "in the inventory of ";}
+								if((nFirst == 0) && (GetObjectType(oDetected) != OBJECT_TYPE_ITEM)) {nFirst = 1; sSlot = "in the inventory of ";}
 								else if (nSlot < 14) {
 									oItem = GetItemInSlot(nSlot, oDetected); 
 									if(nSlot == 0) {sSlot = "on the head of";}
@@ -286,18 +286,18 @@ void main()
 									if(nSlot == 13) {sSlot = "in the quiver of";}
 									nSlot++;
 									}
-								else {
-								oItem = GetNextItemInInventory(oDetected); 
-								if(oItem == OBJECT_INVALID) {nSlot++;}
-								else {SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
-									sSlot = "in the inventory of ";
+								else if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
+									oItem = GetNextItemInInventory(oDetected); 
+									if(oItem == OBJECT_INVALID) {nSlot++;}
+									else {SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
+										sSlot = "in the inventory of ";
+										}
 									}
-								}
 								
 								sSlot = sSlot + " " + GetName(oDetected);
-								
+								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
-									//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+									//
 									}	
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(GetIsItemPropertyValid(ipItem)) {
@@ -452,8 +452,8 @@ void main()
 									}
 								}
 							}
-						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {return;}
-						else if((nSlot >= 0) && (nFirst = 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
+						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
+						if((nSlot >= 0) && (nFirst = 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 						}
 						
 						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
