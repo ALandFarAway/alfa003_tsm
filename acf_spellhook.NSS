@@ -451,8 +451,8 @@ void main()
 										}
 									}
 								}
+							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
 							}
-						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
 						if((nSlot >= 0) && (nFirst = 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 						}
 						
