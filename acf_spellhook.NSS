@@ -172,7 +172,7 @@ void main()
 		string sSchool = "";
 		int nAuraCount = 0;
 		while (GetIsObjectValid(oDetected)) {
-			SendMessageToAllDMs(GetName(oDetected) + " detected");
+			SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
 			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 				
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
@@ -291,7 +291,7 @@ void main()
 									oItem = GetNextItemInInventory(oDetected); 
 									if(oItem == OBJECT_INVALID) {nSlot++;}
 									else {SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
-										sSlot = "in the inventory of ";
+										sSlot = "in the inventory of " + GetName(oDetected);
 										}
 									}
 								
@@ -304,9 +304,9 @@ void main()
 								if(GetIsItemPropertyValid(ipItem)) {
 									nAuraCount++;
 									int nBaseItem = GetBaseItemType(oItem);
-									string sBaseItem = "";
+									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
-									string sItemDescription = GetDescription(oItem);
+									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "n Amulet";}
 									if(nBaseItem == 16) {sBaseItem = "suit of Armor";}
 									if(nBaseItem == 20) {sBaseItem = "quiver of Arrows";}
@@ -378,6 +378,7 @@ void main()
 									if(nBaseItem == 14) {sBaseItem = "Small Shield";}
 									if(nBaseItem == 119) {sBaseItem = "Spear";}
 									if(nBaseItem == 63) {sBaseItem = "set of Throwing Axes";}
+									if(nBaseItem == 62) {sBaseItem = "set of Thieves Tools";}
 									if(nBaseItem == 57) {sBaseItem = "Tower Shield";}
 									if(nBaseItem == 5) {sBaseItem = "War Hammer";}
 									if(nBaseItem == 126) {sBaseItem = "War Mace";}
@@ -452,12 +453,12 @@ void main()
 										}
 									}
 								}
-							if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {oItem = GetItemInSlot(nSlot, oDetected);}	
+							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot < 14)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
 							}
 						}
 						
-						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
+						/*if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
 							if((FindSubString(GetTag(oDetected), "trg_glyph") != -1) || (FindSubString(GetTag(oDetected), "trg_symbol") != -1)) {
 								if(FindSubString(GetTag(oDetected), "trg_glyph") != -1) {sSchool = "Abjuration";}
 								if((GetTag(oDetected) == "trg_symbol_fear") || (GetTag(oDetected) == "trg_symbol_pers") || (GetTag(oDetected) == "trg_symbol_sleep") || (GetTag(oDetected) == "trg_symbol_stun")) {sSchool = "Enchantment";}
@@ -475,7 +476,7 @@ void main()
 								sSchool = Get2DAString("spells", "School", nSpellID);
 								SendMessageToAllDMs("Trap " + GetName(oDetected) + " gives off an aura of " + sSchool + ".");
 								}
-							}
+							}*/
 						
 					}
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
