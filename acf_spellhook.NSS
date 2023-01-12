@@ -284,6 +284,7 @@ void main()
 									if(nSlot == 11) {sSlot = "in the quiver of";}
 									if(nSlot == 12) {sSlot = "carried by";}
 									if(nSlot == 13) {sSlot = "in the quiver of";}
+									sSlot = sSlot + " " + GetName(oDetected);
 									nSlot++;
 									}
 								else if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
@@ -294,8 +295,8 @@ void main()
 										}
 									}
 								
-								sSlot = sSlot + " " + GetName(oDetected);
-								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+								
+								//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
 									//
 									}	
@@ -451,9 +452,9 @@ void main()
 										}
 									}
 								}
+							if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {oItem = GetItemInSlot(nSlot, oDetected);}	
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
 							}
-						//if((nSlot >= 0) && (nSlot < 15) && (nFirst == 1)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 						}
 						
 						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
