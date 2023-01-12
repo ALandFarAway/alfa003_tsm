@@ -140,23 +140,26 @@ void main()
 	// Custom code goes below this line.
 	
 	int nSpellId = GetSpellId();
+	string sSpellID = Get2DAString("spells", "Label", nSpellId);
     object oCaster = OBJECT_SELF;
     object oStudent = OBJECT_SELF;
     object oItem = GetSpellCastItem();
     object oTarget = GetSpellTargetObject();
+	location lTarget = GetSpellTargetLocation();
+	float fTargetDist = GetDistanceBetweenLocations(lTarget, GetLocation(oCaster));
 	string sTarget = GetName(oTarget);
-    location lTarget = GetSpellTargetLocation();
-	int nItemType = GetBaseItemType(oItem);
+	if(oTarget == OBJECT_INVALID) {sTarget = IntToString(FloatToInt(fTargetDist)) + "m away";}
+    int nItemType = GetBaseItemType(oItem);
 	effect eFailure = EffectSpellFailure(100);
 	string sArea = GetTag(GetArea(oCaster));
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
-	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea + " at " + sTarget);
+	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + sSpellID + " in " + sArea + " at " + sTarget);
 	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
 	
 	//Detect Magic
 	if(GetSpellId() == 3004) {
-		SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
+		//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
 		
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
@@ -190,9 +193,16 @@ void main()
 					
 				sSchool = "";
 				string sEffectSchool = "";
+				
 				if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)){
 					if((GetTag(oDetected) == "ACR_SCRY_OBJECT") || (GetTag(oDetected) == "TSM_PLC_SCRY_MIRROR"))
-						{SendMessageToAllDMs("1. " + GetName(oDetected) + " has a Divination aura.");
+						{SendMessageToAllDMs(GetName(oDetected) + " has a Divination aura.");
+						}
+					}
+					
+				if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)){
+					if((GetTag(oDetected) == "ALFA_PORTAL_PLC") || (GetTag(oDetected) == "alfa_portal_plc"))
+						{SendMessageToAllDMs(GetName(oDetected) + " has a Conjuration aura.");
 						}
 					}
 					
@@ -265,9 +275,9 @@ void main()
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
 							while (nSlot < 15) {
-								SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
+								//SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
-								if((nFirst == 0) && (GetObjectType(oDetected) != OBJECT_TYPE_ITEM)) {nFirst = 1; sSlot = "in the inventory of ";}
+								if((nFirst == 0) && (GetObjectType(oDetected) != OBJECT_TYPE_ITEM)) {nFirst = 1; sSlot = "in the inventory of " + GetName(oDetected);}
 								else if (nSlot < 14) {
 									oItem = GetItemInSlot(nSlot, oDetected); 
 									if(nSlot == 0) {sSlot = "on the head of";}
@@ -290,23 +300,21 @@ void main()
 								else if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
 									oItem = GetNextItemInInventory(oDetected); 
 									if(oItem == OBJECT_INVALID) {nSlot++;}
-									else {SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
+									else {//SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
 										sSlot = "in the inventory of " + GetName(oDetected);
 										}
 									}
 								
 								
 								//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
-								if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
-									//
-									}	
+							 
 								itemproperty ipItem = GetFirstItemProperty(oItem);
-								if(GetIsItemPropertyValid(ipItem)) {
+								if((GetIsItemPropertyValid(ipItem))  && (GetTag(oItem) != "03_it_food")){
 									nAuraCount++;
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
-									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
+									//SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "an amulet";}
 									if(nBaseItem == 16) {sBaseItem = "a suit of armor";}
 									if(nBaseItem == 20) {sBaseItem = "a quiver of arrows";}
@@ -447,6 +455,7 @@ void main()
 										if(sSchool == "G") {sSchool = "General";}
 											
 										if(sItemProperty != "") {
+											if(GetTag(oItem) == "abr_it_holysymbol") {sItemSubType = "a divine aura.";}
 											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) {SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off " + sItemSubType );}
 											else {SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot);}
 											}
