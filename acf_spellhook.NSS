@@ -24,7 +24,7 @@
 #include "x0_i0_spells"
 #include "acr_scry_i"
 #include "NW_I0_SPELLS"    
-
+#include "x2_inc_itemprop"
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -175,7 +175,7 @@ void main()
 		string sSchool = "";
 		int nAuraCount = 0;
 		while (GetIsObjectValid(oDetected)) {
-			SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
+			//SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
 			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 				
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
@@ -208,65 +208,36 @@ void main()
 					
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					if(GetHasAnySpellEffect(oDetected)) {
-						int nEffect = GetEffectSpellId(GetFirstEffect(oDetected)); 
-						SendMessageToAllDMs("1. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
-						if(nEffect != -1) {
-							nAuraCount++;
-							sEffectSchool = Get2DAString("spells", "School", nEffect);
-							SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
-							SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
-							}
-						else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
+						effect eEffect = GetFirstEffect(oDetected);
+						int nEffect = GetEffectSpellId(eEffect); 
+						while (GetIsEffectValid(eEffect)) {
 						
-						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
-							nAuraCount++;
-							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
-							SendMessageToAllDMs("2. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
+							string sEffect = Get2DAString("spells", "Label", nEffect);
+							SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
 							if(nEffect != -1) {
+								nAuraCount++;
 								sEffectSchool = Get2DAString("spells", "School", nEffect);
-								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
+								
+								if(sEffectSchool == "A") {sSchool = "Abjuration";}
+								if(sEffectSchool == "C") {sSchool = "Conjuration";}
+								if(sEffectSchool == "D") {sSchool = "Divination";}
+								if(sEffectSchool == "E") {sSchool = "Enchantment";}
+								if(sEffectSchool == "H") {sSchool = "service to a deity";}
+								if(sEffectSchool == "I") {sSchool = "Illusion";}
+								if(sEffectSchool == "N") {sSchool = "Necromancy";}
+								if(sEffectSchool == "T") {sSchool = "Transmutation";}
+								if(sEffectSchool == "V") {sSchool = "Evocation";}
+								if(sEffectSchool == "G") {sSchool = "Universal arcanity";}
+											
+								
+								//SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
 								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
 								}
 							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
-							}
-							
-						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
-							nAuraCount++;
-							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
-							SendMessageToAllDMs("3. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
-							if(nEffect != -1) {
-								sEffectSchool = Get2DAString("spells", "School", nEffect);
-								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
-								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
-								}
-							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
-							}
-							
-						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
-							nAuraCount++;
-							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
-							SendMessageToAllDMs("4. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
-							if(nEffect != -1) {
-								sEffectSchool = Get2DAString("spells", "School", nEffect);
-								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
-								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
-								}
-							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
-							}
-							
-						if(GetIsEffectValid(GetNextEffect(oDetected))) { 
-							nAuraCount++;
-							nEffect = GetEffectSpellId(GetNextEffect(oDetected)); 
-							SendMessageToAllDMs("5. " + GetName(oDetected) + " has effect " + IntToString(nEffect));
-							if(nEffect != -1) {
-								sEffectSchool = Get2DAString("spells", "School", nEffect);
-								SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
-								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
-								}
-							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
-								}
+							eEffect = GetNextEffect(oDetected);
 							}
 						}
+					}
 						
 						int nSlot = 0;
 						string sSlot = "";
@@ -305,11 +276,37 @@ void main()
 										}
 									}
 								
-								
+								if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {
+									int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
+									int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
+									itemproperty ipMaskConj = ItemPropertyCastSpell(nSpell, nNumberUses);
+									AddItemProperty(DURATION_TYPE_TEMPORARY, ipMaskConj, oItem, 10.0);
+									}
 								//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 							 
 								itemproperty ipItem = GetFirstItemProperty(oItem);
-								if((GetIsItemPropertyValid(ipItem))  && (GetTag(oItem) != "03_it_food")){
+								if((GetIsItemPropertyValid(ipItem))
+									&& (GetTag(oItem) != "omega_wand")
+									&& (GetTag(oItem) != "slv_wand")
+									&& (GetTag(oItem) != "tsm_builder_wand")
+									&& (GetTag(oItem) != "abr_it_mi_body")
+									&& (GetTag(oItem) != "dmfi_exe_tool")
+									&& (GetTag(oItem) != "03_it_food")
+									&& (GetTag(oItem) != "it_elderberry")
+									&& (GetTag(oItem) != "kemoportablechair")
+									&& (GetTag(oItem) != "abr_it_firstaid")
+									&& (FindSubString(GetTag(oItem), "_ooc_") != -1)
+									&& (FindSubString(GetTag(oItem), "abr_it_dm") != -1)
+									&& (FindSubString(GetTag(oItem), "acr_dm") != -1)
+									&& (FindSubString(GetTag(oItem), "acr_dc") != -1)
+									&& (FindSubString(GetTag(oItem), "acr_dc") != -1)
+									&& (FindSubString(GetTag(oItem), "abr_dm") != -1)
+									&& (FindSubString(GetTag(oItem), "abr_spawn") != -1)
+									&& (FindSubString(GetTag(oItem), "003_it_loot_token") != -1)
+									&& (FindSubString(GetTag(oItem), "dye_") != -1)
+									&& (FindSubString(GetTag(oItem), "it_cassi") != -1)
+									&& (FindSubString(GetTag(oItem), "it_nararoo") != -1)
+									) {
 									nAuraCount++;
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
@@ -444,20 +441,31 @@ void main()
 										if(nItemProperty == 52) {sItemProperty = "Skill Bonus"; sSchool = "Transmutation";}
 										if(nItemProperty == 39) {sItemProperty = "Spell Resistance"; sSchool = "Abjuration";}
 										if(nItemProperty == 71) {sItemProperty = "True Seeing"; sSchool = "Transmutation";}
-										if(sSchool == "A") {sSchool = "Abjuration";}
-										if(sSchool == "C") {sSchool = "Conjuration";}
-										if(sSchool == "D") {sSchool = "Divination";}
-										if(sSchool == "E") {sSchool = "Enchantment";}
-										if(sSchool == "I") {sSchool = "Illusion";}
-										if(sSchool == "N") {sSchool = "Necromancy";}
-										if(sSchool == "T") {sSchool = "Transmutation";}
-										if(sSchool == "V") {sSchool = "Evocation";}
-										if(sSchool == "G") {sSchool = "General";}
 											
 										if(sItemProperty != "") {
-											if(GetTag(oItem) == "abr_it_holysymbol") {sItemSubType = "a divine aura.";}
-											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) {SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off " + sItemSubType );}
-											else {SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot);}
+											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) 
+												{sSchool = "Arcanity too complex to unravel ";
+												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "H";}
+												if(FindSubString(GetTag(oItem), "abr_it_scry_") != -1) {sSchool = "D";}
+												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G";}
+												if(FindSubString(GetTag(oItem), "003_it_slv_telepor") != -1) {sSchool = "C";}
+												if(FindSubString(GetTag(oItem), "003_it_earring_msg") != -1) {sSchool = "T";}
+												if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {sSchool = "C";}
+												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N";}
+												}
+													
+											if(sSchool == "A") {sSchool = "Abjuration";}
+											if(sSchool == "C") {sSchool = "Conjuration";}
+											if(sSchool == "D") {sSchool = "Divination";}
+											if(sSchool == "E") {sSchool = "Enchantment";}
+											if(sSchool == "H") {sSchool = "service to a deity";}
+											if(sSchool == "I") {sSchool = "Illusion";}
+											if(sSchool == "N") {sSchool = "Necromancy";}
+											if(sSchool == "T") {sSchool = "Transmutation";}
+											if(sSchool == "V") {sSchool = "Evocation";}
+											if(sSchool == "G") {sSchool = "Universal arcanity";}
+											
+											SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot);
 											}
 										ipItem = GetNextItemProperty(oItem);
 										
