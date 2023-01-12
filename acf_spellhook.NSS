@@ -307,22 +307,22 @@ void main()
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
 									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
-									if(nBaseItem == 19) {sBaseItem = "an Amulet";}
-									if(nBaseItem == 16) {sBaseItem = "a suit of Armor";}
-									if(nBaseItem == 20) {sBaseItem = "a quiver of Arrows";}
-									if(nBaseItem == 3) {sBaseItem = "a Bastard Sword";}
-									if(nBaseItem == 2) {sBaseItem = "a Battle Axe";}
-									if(nBaseItem == 101) {sBaseItem = "a Belt";}
-									if(nBaseItem == 25) {sBaseItem = "a quiver of Bolts";}
-									if(nBaseItem == 74) {sBaseItem = "a Book";}
-									if(nBaseItem == 26) {sBaseItem = "a pair of Boots";}
-									if(nBaseItem == 78) {sBaseItem = "a pair of Bracers";}
-									if(nBaseItem == 27) {sBaseItem = "a pouch of Bullets";}
-									if(nBaseItem == 80) {sBaseItem = "a Cloak";}
-									if(nBaseItem == 28) {sBaseItem = "a Club";}
-									if(nBaseItem == 22) {sBaseItem = "a Dagger";}
-									if(nBaseItem == 31) {sBaseItem = "a set of Darts";}
-									if(nBaseItem == 33) {sBaseItem = "a Double Axe";}
+									if(nBaseItem == 19) {sBaseItem = "an amulet";}
+									if(nBaseItem == 16) {sBaseItem = "a suit of armor";}
+									if(nBaseItem == 20) {sBaseItem = "a quiver of arrows";}
+									if(nBaseItem == 3) {sBaseItem = "a bastard sword";}
+									if(nBaseItem == 2) {sBaseItem = "a battle axe";}
+									if(nBaseItem == 101) {sBaseItem = "a belt";}
+									if(nBaseItem == 25) {sBaseItem = "a quiver of bolts";}
+									if(nBaseItem == 74) {sBaseItem = "a book";}
+									if(nBaseItem == 26) {sBaseItem = "a pair of boots";}
+									if(nBaseItem == 78) {sBaseItem = "a pair of bracers";}
+									if(nBaseItem == 27) {sBaseItem = "a pouch of bullets";}
+									if(nBaseItem == 80) {sBaseItem = "a cloak";}
+									if(nBaseItem == 28) {sBaseItem = "a club";}
+									if(nBaseItem == 22) {sBaseItem = "a dagger";}
+									if(nBaseItem == 31) {sBaseItem = "a set of darts";}
+									if(nBaseItem == 33) {sBaseItem = "a double axe";}
 									if(nBaseItem == 128) {sBaseItem = "a Drum";}
 									if(nBaseItem == 108) {sBaseItem = "a Dwarven War Axe";}
 									if(nBaseItem == 114) {sBaseItem = "a Falchion";}
@@ -454,7 +454,7 @@ void main()
 										
 									}
 								}
-							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot < 14)) {oItem = GetItemInSlot(nSlot, oDetected);}	
+							//if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot < 14)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
 							}
 						}
