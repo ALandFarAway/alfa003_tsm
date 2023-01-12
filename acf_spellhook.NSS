@@ -159,7 +159,7 @@ void main()
 	
 	//Detect Magic
 	if(GetSpellId() == 3004) {
-		//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
+		SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
 		
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
@@ -175,7 +175,7 @@ void main()
 		string sSchool = "";
 		int nAuraCount = 0;
 		while (GetIsObjectValid(oDetected)) {
-			//SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
+			SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
 			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 				
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
@@ -231,7 +231,7 @@ void main()
 											
 								
 								//SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
-								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sEffectSchool);
+								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sSchool);
 								}
 							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
 							eEffect = GetNextEffect(oDetected);
@@ -246,7 +246,7 @@ void main()
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
 							while (nSlot < 15) {
-								//SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
+								SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
 								if((nFirst == 0) && (GetObjectType(oDetected) != OBJECT_TYPE_ITEM)) {nFirst = 1; sSlot = "in the inventory of " + GetName(oDetected);}
 								else if (nSlot < 14) {
@@ -271,7 +271,7 @@ void main()
 								else if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
 									oItem = GetNextItemInInventory(oDetected); 
 									if(oItem == OBJECT_INVALID) {nSlot++;}
-									else {//SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
+									else {SendMessageToAllDMs("GetNextItemInInventory = " +GetName(oItem)); 
 										sSlot = "in the inventory of " + GetName(oDetected);
 										}
 									}
@@ -282,7 +282,7 @@ void main()
 									itemproperty ipMaskConj = ItemPropertyCastSpell(nSpell, nNumberUses);
 									AddItemProperty(DURATION_TYPE_TEMPORARY, ipMaskConj, oItem, 10.0);
 									}
-								//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 							 
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if((GetIsItemPropertyValid(ipItem))
@@ -311,7 +311,7 @@ void main()
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
-									//SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
+									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "an amulet";}
 									if(nBaseItem == 16) {sBaseItem = "a suit of armor";}
 									if(nBaseItem == 20) {sBaseItem = "a quiver of arrows";}
