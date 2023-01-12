@@ -307,82 +307,82 @@ void main()
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
 									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
-									if(nBaseItem == 19) {sBaseItem = "n Amulet";}
-									if(nBaseItem == 16) {sBaseItem = "suit of Armor";}
-									if(nBaseItem == 20) {sBaseItem = "quiver of Arrows";}
-									if(nBaseItem == 3) {sBaseItem = "Bastard Sword";}
-									if(nBaseItem == 2) {sBaseItem = "Battle Axe";}
-									if(nBaseItem == 101) {sBaseItem = "Belt";}
-									if(nBaseItem == 25) {sBaseItem = "quiver of Bolts";}
-									if(nBaseItem == 74) {sBaseItem = "Book";}
-									if(nBaseItem == 26) {sBaseItem = "pair of Boots";}
-									if(nBaseItem == 78) {sBaseItem = "pair of Bracers";}
-									if(nBaseItem == 27) {sBaseItem = "pouch of Bullets";}
-									if(nBaseItem == 80) {sBaseItem = "Cloak";}
-									if(nBaseItem == 28) {sBaseItem = "Club";}
-									if(nBaseItem == 22) {sBaseItem = "Dagger";}
-									if(nBaseItem == 31) {sBaseItem = "set of Darts";}
-									if(nBaseItem == 33) {sBaseItem = "Double Axe";}
-									if(nBaseItem == 128) {sBaseItem = "Drum";}
-									if(nBaseItem == 108) {sBaseItem = "Dwarven War Axe";}
-									if(nBaseItem == 114) {sBaseItem = "Falchion";}
-									if(nBaseItem == 116) {sBaseItem = "Flail";}
-									if(nBaseItem == 129) {sBaseItem = "Flute";}
-									if(nBaseItem == 77) {sBaseItem = "Gem";}
-									if(nBaseItem == 36) {sBaseItem = "pair of Gloves";}
-									if(nBaseItem == 18) {sBaseItem = "Great Axe";}
-									if(nBaseItem == 120) {sBaseItem = "Great Club";}
-									if(nBaseItem == 13) {sBaseItem = "Great Sword";}
-									if(nBaseItem == 81) {sBaseItem = "Grenade";}
-									if(nBaseItem == 10) {sBaseItem = "Halberd";}
-									if(nBaseItem == 38) {sBaseItem = "Hand Axe";}
-									if(nBaseItem == 6) {sBaseItem = "Heavy Crossbow";}
-									if(nBaseItem == 35) {sBaseItem = "Heavy Flail";}
-									if(nBaseItem == 17) {sBaseItem = "Helmet or Hat";}
-									if(nBaseItem == 40) {sBaseItem = "Kama";}
-									if(nBaseItem == 41) {sBaseItem = "Katana";}
-									if(nBaseItem == 65) {sBaseItem = "Key";}
-									if(nBaseItem == 42) {sBaseItem = "Kukri";}
-									if(nBaseItem == 66) {sBaseItem = "Large Box";}
-									if(nBaseItem == 56) {sBaseItem = "Large Shield";}
-									if(nBaseItem == 7) {sBaseItem = "Light Crossbow";}
-									if(nBaseItem == 4) {sBaseItem = "Light Flail";}
-									if(nBaseItem == 37) {sBaseItem = "Light Hammer";}
-									if(nBaseItem == 9) {sBaseItem = "Light Mace";}
-									if(nBaseItem == 1) {sBaseItem = "Longsword";}
-									if(nBaseItem == 8) {sBaseItem = "Longbow";}
-									if(nBaseItem == 113) {sBaseItem = "Mace";}
-									if(nBaseItem == 44) {sBaseItem = "Magic Rod";}
-									if(nBaseItem == 45) {sBaseItem = "Magic Staff";}
-									if(nBaseItem == 46) {sBaseItem = "Magic Wand";}
-									if(nBaseItem == 34) {sBaseItem = "Large Item";}
-									if(nBaseItem == 29) {sBaseItem = "Medium Item";}
-									if(nBaseItem == 24) {sBaseItem = "Small Item";}
-									if(nBaseItem == 43) {sBaseItem = "Tall Item";}
-									if(nBaseItem == 79) {sBaseItem = "Thin Item";}
-									if(nBaseItem == 68) {sBaseItem = "Wide Item";}
-									if(nBaseItem == 47) {sBaseItem = "Morningstar";}
-									if(nBaseItem == 49) {sBaseItem = "Magic Potion";}
-									if(nBaseItem == 50) {sBaseItem = "Quarterstaff";}
-									if(nBaseItem == 51) {sBaseItem = "Rapier";}
-									if(nBaseItem == 52) {sBaseItem = "Ring";}
-									if(nBaseItem == 53) {sBaseItem = "Scimitar";}
-									if(nBaseItem == 54) {sBaseItem = "Scroll";}
-									if(nBaseItem == 55) {sBaseItem = "Scythe";}
-									if(nBaseItem == 11) {sBaseItem = "Short Bow";}
-									if(nBaseItem == 58) {sBaseItem = "Short Spear";}
-									if(nBaseItem == 0) {sBaseItem = "Shortsword";}
-									if(nBaseItem == 59) {sBaseItem = "set of Shuriken";}
-									if(nBaseItem == 60) {sBaseItem = "Sickle";}
-									if(nBaseItem == 61) {sBaseItem = "Sling";}
-									if(nBaseItem == 14) {sBaseItem = "Small Shield";}
-									if(nBaseItem == 119) {sBaseItem = "Spear";}
-									if(nBaseItem == 63) {sBaseItem = "set of Throwing Axes";}
-									if(nBaseItem == 62) {sBaseItem = "set of Thieves Tools";}
-									if(nBaseItem == 57) {sBaseItem = "Tower Shield";}
-									if(nBaseItem == 5) {sBaseItem = "War Hammer";}
-									if(nBaseItem == 126) {sBaseItem = "War Mace";}
-									if(nBaseItem == 111) {sBaseItem = "Whip";}
+									if(nBaseItem == 19) {sBaseItem = "an Amulet";}
+									if(nBaseItem == 16) {sBaseItem = "a suit of Armor";}
+									if(nBaseItem == 20) {sBaseItem = "a quiver of Arrows";}
+									if(nBaseItem == 3) {sBaseItem = "a Bastard Sword";}
+									if(nBaseItem == 2) {sBaseItem = "a Battle Axe";}
+									if(nBaseItem == 101) {sBaseItem = "a Belt";}
+									if(nBaseItem == 25) {sBaseItem = "a quiver of Bolts";}
+									if(nBaseItem == 74) {sBaseItem = "a Book";}
+									if(nBaseItem == 26) {sBaseItem = "a pair of Boots";}
+									if(nBaseItem == 78) {sBaseItem = "a pair of Bracers";}
+									if(nBaseItem == 27) {sBaseItem = "a pouch of Bullets";}
+									if(nBaseItem == 80) {sBaseItem = "a Cloak";}
+									if(nBaseItem == 28) {sBaseItem = "a Club";}
+									if(nBaseItem == 22) {sBaseItem = "a Dagger";}
+									if(nBaseItem == 31) {sBaseItem = "a set of Darts";}
+									if(nBaseItem == 33) {sBaseItem = "a Double Axe";}
+									if(nBaseItem == 128) {sBaseItem = "a Drum";}
+									if(nBaseItem == 108) {sBaseItem = "a Dwarven War Axe";}
+									if(nBaseItem == 114) {sBaseItem = "a Falchion";}
+									if(nBaseItem == 116) {sBaseItem = "a Flail";}
+									if(nBaseItem == 129) {sBaseItem = "a Flute";}
+									if(nBaseItem == 77) {sBaseItem = "a Gem";}
+									if(nBaseItem == 36) {sBaseItem = "a pair of Gloves";}
+									if(nBaseItem == 18) {sBaseItem = "a Great Axe";}
+									if(nBaseItem == 120) {sBaseItem = "a Great Club";}
+									if(nBaseItem == 13) {sBaseItem = "a Great Sword";}
+									if(nBaseItem == 81) {sBaseItem = "a Grenade";}
+									if(nBaseItem == 10) {sBaseItem = "a Halberd";}
+									if(nBaseItem == 38) {sBaseItem = "a Hand Axe";}
+									if(nBaseItem == 6) {sBaseItem = "a Heavy Crossbow";}
+									if(nBaseItem == 35) {sBaseItem = "a Heavy Flail";}
+									if(nBaseItem == 17) {sBaseItem = "a Helmet or Hat";}
+									if(nBaseItem == 40) {sBaseItem = "a Kama";}
+									if(nBaseItem == 41) {sBaseItem = "a Katana";}
+									if(nBaseItem == 65) {sBaseItem = "a Key";}
+									if(nBaseItem == 42) {sBaseItem = "a Kukri";}
+									if(nBaseItem == 66) {sBaseItem = "a Large Box";}
+									if(nBaseItem == 56) {sBaseItem = "a Large Shield";}
+									if(nBaseItem == 7) {sBaseItem = "a Light Crossbow";}
+									if(nBaseItem == 4) {sBaseItem = "a Light Flail";}
+									if(nBaseItem == 37) {sBaseItem = "a Light Hammer";}
+									if(nBaseItem == 9) {sBaseItem = "a Light Mace";}
+									if(nBaseItem == 1) {sBaseItem = "a Longsword";}
+									if(nBaseItem == 8) {sBaseItem = "a Longbow";}
+									if(nBaseItem == 113) {sBaseItem = "a Mace";}
+									if(nBaseItem == 44) {sBaseItem = "a Magic Rod";}
+									if(nBaseItem == 45) {sBaseItem = "a Magic Staff";}
+									if(nBaseItem == 46) {sBaseItem = "a Magic Wand";}
+									if(nBaseItem == 34) {sBaseItem = "a Large Item";}
+									if(nBaseItem == 29) {sBaseItem = "a Medium Item";}
+									if(nBaseItem == 24) {sBaseItem = "a Small Item";}
+									if(nBaseItem == 43) {sBaseItem = "a Tall Item";}
+									if(nBaseItem == 79) {sBaseItem = "a Thin Item";}
+									if(nBaseItem == 68) {sBaseItem = "a Wide Item";}
+									if(nBaseItem == 47) {sBaseItem = "a Morningstar";}
+									if(nBaseItem == 49) {sBaseItem = "a Magic Potion";}
+									if(nBaseItem == 50) {sBaseItem = "a Quarterstaff";}
+									if(nBaseItem == 51) {sBaseItem = "a Rapier";}
+									if(nBaseItem == 52) {sBaseItem = "a Ring";}
+									if(nBaseItem == 53) {sBaseItem = "a Scimitar";}
+									if(nBaseItem == 75) {sBaseItem = "a Scroll";}
+									if(nBaseItem == 55) {sBaseItem = "a Scythe";}
+									if(nBaseItem == 11) {sBaseItem = "a Short Bow";}
+									if(nBaseItem == 58) {sBaseItem = "a Short Spear";}
+									if(nBaseItem == 0) {sBaseItem = "a Shortsword";}
+									if(nBaseItem == 59) {sBaseItem = "a set of Shuriken";}
+									if(nBaseItem == 60) {sBaseItem = "a Sickle";}
+									if(nBaseItem == 61) {sBaseItem = "a Sling";}
+									if(nBaseItem == 14) {sBaseItem = "a Small Shield";}
+									if(nBaseItem == 119) {sBaseItem = "a Spear";}
+									if(nBaseItem == 63) {sBaseItem = "a set of Throwing Axes";}
+									if(nBaseItem == 62) {sBaseItem = "a set of Thieves Tools";}
+									if(nBaseItem == 57) {sBaseItem = "a Tower Shield";}
+									if(nBaseItem == 5) {sBaseItem = "a War Hammer";}
+									if(nBaseItem == 126) {sBaseItem = "a War Mace";}
+									if(nBaseItem == 111) {sBaseItem = "a Whip";}
 									
 									while (GetIsItemPropertyValid(ipItem)) {
 										int nItemProperty = GetItemPropertyType(ipItem);
@@ -447,10 +447,11 @@ void main()
 										if(sSchool == "G") {sSchool = "General";}
 											
 										if(sItemProperty != "") {
-											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) {SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + ", gives off " + sItemSubType );}
-											else {SendMessageToAllDMs(GetName(oItem) + ", a " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot);}
-											ipItem = GetNextItemProperty(oItem);
-										}
+											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) {SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off " + sItemSubType );}
+											else {SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem + ", gives off an aura of " + sSchool + " " + sSlot);}
+											}
+										ipItem = GetNextItemProperty(oItem);
+										
 									}
 								}
 							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot < 14)) {oItem = GetItemInSlot(nSlot, oDetected);}	
