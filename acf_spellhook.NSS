@@ -573,13 +573,14 @@ void main()
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
 											if(nAuraPower > 6) {sAuraStrength = "strong";}
 											if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " Line 576");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " --" + IntToString(nAuraPower)+ "-- Line 576");
 											nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " +IntToString(nAuraPowerHigh) + " Line 578");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(nAuraPowerHigh) + " Line 578");
 											if(nAuraPower > nAuraPowerHigh) {
 												SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 583");
 												
 											if(nAuraCount == 1) {
 												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -594,30 +595,33 @@ void main()
 												}
 											}
 											
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 597");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 598");
+											
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 600");
 											
 											//if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
-											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 598");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 603");
 											 /*if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = " + IntToString(nACRSpellSchool) + " Line 601");
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = " + IntToString(nACRSpellSchool) + " Line 606");
 											 	DelayCommand(18.0, SendMessageToAllDMs("GetNext ip: Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
 												int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 												int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 												itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
 												IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 607");
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 612");
 											 	SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 												}*/
 											//}
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 613");
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 616");
 											
 										ipItem = GetNextItemProperty(oItem);
-										
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 619");
 									}
 								}
 							//if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot < 14)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
+							SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 624");
 							}
 						}
 						
@@ -701,11 +705,13 @@ void main()
 							}
 					}
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
-			
+				SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 708");
+									
 			}
 		
-			SendMessageToAllDMs("Line 705 nStoreInt = " + IntToString(GetLocalInt(oCaster, "nStoreInt")));
-				
+			//SendMessageToAllDMs("Line 705 nStoreInt = " + IntToString(GetLocalInt(oCaster, "nStoreInt")));
+		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 713");
+											
 		if((nAuraCount > 0) && (nConcentration > 6)) {
 			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
 			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " counts " + IntToString(nAuraCount) + " auras."));
