@@ -724,7 +724,7 @@ void main()
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 724");
 				
-		if(nAuraPowerHigh > 0) {sAuraPowerHigh = "faint";}
+		if(nAuraPowerHigh >= 0) {sAuraPowerHigh = "faint";}
 		if(nAuraPowerHigh > 3) {sAuraPowerHigh = "moderate";}
 		if(nAuraPowerHigh > 6) {sAuraPowerHigh = "strong";}
 		if(nAuraPowerHigh > 9) {sAuraPowerHigh = "overwhelming";}
@@ -733,11 +733,11 @@ void main()
 		if((nAuraCount > 0) && (nConcentration > 6)) {
 			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
 			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " counts " + IntToString(nAuraCount) + " auras."));
-			DelayCommand(14.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + GetLocalString(oCaster, "sAuraPowerHigh")));
+			DelayCommand(14.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + sAuraPowerHigh));
 			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 				DelayCommand(12.0, SendMessageToPC(oCaster, "You concentrate for two rounds."));
 				DelayCommand(13.0, SendMessageToPC(oCaster, "You count " + IntToString(nAuraCount) + " auras."));
-				DelayCommand(14.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + GetLocalString(oCaster, "sAuraPowerHigh")));
+				DelayCommand(14.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + sAuraPowerHigh));
 				}
 			}
 		
