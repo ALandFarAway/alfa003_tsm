@@ -183,9 +183,11 @@ void main()
 			
 				
 		while (GetIsObjectValid(oDetected)) {
-			//SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
-		if((nAuraCount >= 1) && (GetLocalInt(oCaster, "nThreeRds") == 0) && (nConcentration > 13)) {
-				SetLocalInt(oCaster, "nThreeRds", 1);
+		SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
+		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " GetIsObjectValid oDetected Line 187");
+		if((nAuraCount >= 1) && (GetLocalInt(oDetectedFirst, "nThreeRds") == 0) && (nConcentration > 13)) {
+				SetLocalInt(oDetectedFirst, "nThreeRds", 1);
+				DelayCommand(17.0, SetLocalInt(oDetectedFirst, "nThreeRds", 0));
 				DelayCommand(17.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 				if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(11.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));}
 				}
@@ -400,7 +402,7 @@ void main()
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
-									//SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
+									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "An amulet";}
 									if(nBaseItem == 16) {sBaseItem = "A suit of armor";}
 									if(nBaseItem == 20) {sBaseItem = "A quiver of arrows";}
@@ -481,6 +483,7 @@ void main()
 									if(nBaseItem == 111) {sBaseItem = "A whip";}
 									
 									while (GetIsItemPropertyValid(ipItem)) {
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Top GetIsItemPropertyValid Line 485");
 										int nItemProperty = GetItemPropertyType(ipItem);
 										string sItemProperty = "";
 										int nItemSubType = GetItemPropertySubType(ipItem);
@@ -562,6 +565,7 @@ void main()
 											if(sSchool == "G") {sSchool = " of Universal arcanity";}
 											
 											nAuraCount++;
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 566");
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
 											if(nAuraPower > 6) {sAuraStrength = "strong";}
@@ -575,8 +579,7 @@ void main()
 												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
 												 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
 											 	}
-									 		
-											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
+									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 											if(nConcentration > 13) {
 												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
@@ -596,7 +599,8 @@ void main()
 												SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 												}
 											}
-										
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 600");
+											
 										ipItem = GetNextItemProperty(oItem);
 										
 									}
