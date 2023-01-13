@@ -401,13 +401,13 @@ void main()
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
-									SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
+									//SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "An amulet";}
 									if(nBaseItem == 16) {sBaseItem = "A suit of armor";}
 									if(nBaseItem == 20) {sBaseItem = "A quiver of arrows";}
 									if(nBaseItem == 3) {sBaseItem = "A bastard sword";}
 									if(nBaseItem == 2) {sBaseItem = "A battle axe";}
-									if(nBaseItem == 101) {sBaseItem = "A belt";}
+									if(nBaseItem == 21) {sBaseItem = "A belt";}
 									if(nBaseItem == 25) {sBaseItem = "A quiver of bolts";}
 									if(nBaseItem == 74) {sBaseItem = "A book";}
 									if(nBaseItem == 26) {sBaseItem = "A pair of boots";}
@@ -446,6 +446,7 @@ void main()
 									if(nBaseItem == 9) {sBaseItem = "A light mace";}
 									if(nBaseItem == 1) {sBaseItem = "A longsword";}
 									if(nBaseItem == 8) {sBaseItem = "A longbow";}
+									if(nBaseItem == 132) {sBaseItem = "A lute";}
 									if(nBaseItem == 113) {sBaseItem = "A mace";}
 									if(nBaseItem == 44) {sBaseItem = "A rod";}
 									if(nBaseItem == 45) {sBaseItem = "A staff";}
@@ -545,7 +546,7 @@ void main()
 												{sSchool = " of arcanity too complex to unravel ";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "H"; nAuraPower = 1;}
 												if(FindSubString(GetTag(oItem), "abr_it_scry_") != -1) {sSchool = "D"; nAuraPower = 4;}
-												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 4;}
+												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												if(FindSubString(GetTag(oItem), "003_it_slv_telepor") != -1) {sSchool = "C"; nAuraPower = 5;}
 												if(FindSubString(GetTag(oItem), "003_it_earring_msg") != -1) {sSchool = "T"; nAuraPower = 1;}
 												if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {sSchool = "C"; nAuraPower = 1;}
@@ -564,22 +565,22 @@ void main()
 											if(sSchool == "G") {sSchool = " of Universal arcanity";}
 											
 											nAuraCount++;
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 574");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 574");
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
 											if(nAuraPower > 6) {sAuraStrength = "strong";}
 											if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " --" + IntToString(nAuraPower)+ "-- Line 579");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " --" + IntToString(nAuraPower)+ "-- Line 579");
 											nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(nAuraPowerHigh) + " Line 582");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 583");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(nAuraPowerHigh) + " Line 582");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 583");
 											if(nAuraPower > nAuraPowerHigh) {
 												SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
 											sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 581");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 582");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 581");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 582");
 												
 											if(nAuraCount == 1) {
 												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -594,10 +595,10 @@ void main()
 												}
 											}
 											
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 597");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 598");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 597");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 598");
 											
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 600");
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 600");
 											
 											//if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
 											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 603");
@@ -613,18 +614,18 @@ void main()
 											 	SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 												}*/
 											//}
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 616");
+										//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 616");
 											
 										ipItem = GetNextItemProperty(oItem);
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 619");
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 620");
+										//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 619");
+										//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 620");
 											
 									}
 								}
 							//if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot < 14)) {oItem = GetItemInSlot(nSlot, oDetected);}	
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
-							SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 626");
-							SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 627");
+							//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 626");
+							//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 627");
 							}
 						}
 						
@@ -651,7 +652,7 @@ void main()
 								SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    }
 							 sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-							 SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 654");
+							 //SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 654");
 							 if(nAuraCount == 1) {
 								 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
 								 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
@@ -695,7 +696,7 @@ void main()
 									SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    	}
 								sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-								SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 698");
+								//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 698");
 														
 								if(nAuraCount == 1) {
 									 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -713,16 +714,16 @@ void main()
 							}
 					}
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
-				SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 716");
-				SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 717");
+				//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 716");
+				//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 717");
 																
 			}
 		
 		//SendMessageToAllDMs("Line 721 nStoreInt = " + IntToString(GetLocalInt(oCaster, "nStoreInt")));
-		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 722");
+		//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 722");
 		nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 724");
+		//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 724");
 				
 		if(nAuraPowerHigh >= 0) {sAuraPowerHigh = "faint";}
 		if(nAuraPowerHigh > 3) {sAuraPowerHigh = "moderate";}
