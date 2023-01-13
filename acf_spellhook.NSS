@@ -271,11 +271,12 @@ void main()
 				sSchool = "";
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					if(GetHasAnySpellEffect(oDetected)) {
+						int nHasEffects = 0;
 						effect eEffect = GetFirstEffect(oDetected);
 						while (GetIsEffectValid(eEffect)) {
 							int nEffect = GetEffectSpellId(eEffect); 
 							string sEffect = Get2DAString("spells", "Label", nEffect);
-							SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
+							//SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
 							sAuraPower = Get2DAString("spells", "Innate", nEffect);
 							nAuraPower = StringToInt(sAuraPower);
 							if(nAuraPower > 0) {sAuraStrength = "faint";}
@@ -293,32 +294,47 @@ void main()
 							
 							if((nEffect != -1) && (nEffectSchool == 0)) {
 								SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
+								if(nHasEffects == 0) {
+									DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>**********</color>"));
+									DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>" + GetName(oDetected) + "'s functioning spell effects:</color>"));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+										DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>**********</color>"));
+										DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>" + GetName(oDetected) + "'s functioning spell effects:</color>"));
+										}	
+									}
 								nAuraCount++;
 								if(nAuraCount == 1) {
 									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 									}
 								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
-									if(sEffectSchool == "A") {sSchool = " of Abjuration";}
-									if(sEffectSchool == "C") {sSchool = " of Conjuration";}
-									if(sEffectSchool == "D") {sSchool = " of Divination";}
-									if(sEffectSchool == "E") {sSchool = " of Enchantment";}
+									if(sEffectSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
+									if(sEffectSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
+									if(sEffectSchool == "D") {sSchool = " of <color=green>Divination </color>";}
+									if(sEffectSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>";}
 									if(sEffectSchool == "H") {sSchool = " of service to a deity";}
-									if(sEffectSchool == "I") {sSchool = " of Illusion";}
-									if(sEffectSchool == "N") {sSchool = " of Necromancy";}
-									if(sEffectSchool == "T") {sSchool = " of Transmutation";}
-									if(sEffectSchool == "V") {sSchool = " of Evocation";}
+									if(sEffectSchool == "I") {sSchool = " of <color=purple>Illusion </color>";}
+									if(sEffectSchool == "N") {sSchool = " of <color=white>Necromancy </color>";}
+									if(sEffectSchool == "T") {sSchool = " of <color=orange>Transmutation </color>";}
+									if(sEffectSchool == "V") {sSchool = " of <color=red>Evocation </color>";}
 									if(sEffectSchool == "G") {sSchool = " of Universal arcanity";}
 									}
 								if(nConcentration > 13) {
-									DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + " --" + sEffect ));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+									DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>" + GetName(oDetected) + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));}
 									}	
 								}
 							eEffect = GetNextEffect(oDetected);
 							}
+							if(nHasEffects == 0) {
+								DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>**********</color>"));
+								if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+									DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>**********</color>"));
+									}	
+								nHasEffects = 1;
+								}
+							}
 						}
-					}
 					
 					
 						sSchool = "";
@@ -328,6 +344,7 @@ void main()
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away ";}
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
+							int nHasItems = 0;
 							while (nSlot < 15) {
 								//SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
@@ -550,18 +567,18 @@ void main()
 												if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {sSchool = "C"; nAuraPower = 1;}
 												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
-													
-											if(sSchool == "A") {sSchool = " of Abjuration";}
-											if(sSchool == "C") {sSchool = " of Conjuration";}
-											if(sSchool == "D") {sSchool = " of Divination";}
-											if(sSchool == "E") {sSchool = " of Enchantment";}
-											if(sSchool == "H") {sSchool = " of service to a deity";}
-											if(sSchool == "I") {sSchool = " of Illusion";}
-											if(sSchool == "N") {sSchool = " of Necromancy";}
-											if(sSchool == "T") {sSchool = " of Transmutation";}
-											if(sSchool == "V") {sSchool = " of Evocation";}
-											if(sSchool == "G") {sSchool = " of Universal arcanity";}
 											
+											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
+											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
+											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>";}
+											if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>";}
+											if(sSchool == "H") {sSchool = " of service to a deity";}
+											if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>";}
+											if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>";}
+											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>";}
+											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>";}
+											if(sSchool == "G") {sSchool = " of Universal arcanity";}
+												
 											nAuraCount++;
 											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 574");
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
@@ -588,6 +605,14 @@ void main()
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 											if(nConcentration > 13) {
+												if(nHasItems == 0) {
+													DelayCommand(18.0, SendMessageToAllDMs("**********"));
+													DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + "'s items with auras:"));
+													if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+														DelayCommand(18.0, SendMessageToPC(oCaster, "**********"));
+														DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + "'s items with auras:"));
+														}	
+													}
 												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
 												}
@@ -625,7 +650,14 @@ void main()
 							//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 626");
 							//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 627");
 							}
-						}
+							if(nHasItems == 0) {
+								nHasItems = 1; 
+								DelayCommand(18.0, SendMessageToAllDMs("**********"));
+								if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+									DelayCommand(18.0, SendMessageToPC(oCaster, "**********"));
+									}	
+								}
+							}
 						
 						sSchool = "";
 						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
@@ -670,15 +702,15 @@ void main()
 							if(FindSubString(GetTag(oDetected), "trap_spell") != -1) {
 								int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
 								sSchool = Get2DAString("spells", "School", nSpellID);
-								if(sSchool == "A") {sSchool = " of Abjuration";}
-								if(sSchool == "C") {sSchool = " of Conjuration";}
-								if(sSchool == "D") {sSchool = " of Divination";}
-								if(sSchool == "E") {sSchool = " of Enchantment";}
+								if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
+								if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
+								if(sSchool == "D") {sSchool = " of <color=green>Divination </color>";}
+								if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>";}
 								if(sSchool == "H") {sSchool = " of service to a deity";}
-								if(sSchool == "I") {sSchool = " of Illusion";}
-								if(sSchool == "N") {sSchool = " of Necromancy";}
-								if(sSchool == "T") {sSchool = " of Transmutation";}
-								if(sSchool == "V") {sSchool = " of Evocation";}
+								if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>";}
+								if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>";}
+								if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>";}
+								if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>";}
 								if(sSchool == "G") {sSchool = " of Universal arcanity";}
 								nAuraCount++;
 								sAuraPower = Get2DAString("spells", "Innate", nSpellID);
