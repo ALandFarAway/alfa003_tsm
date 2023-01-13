@@ -172,6 +172,7 @@ void main()
 		int nConcentration = ACR_SkillCheck(SKILL_CONCENTRATION, oCaster, 0, TRUE, TRUE, 0);
 		SendMessageToAllDMs("nConcentration = " + IntToString(nConcentration));
 		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
+		object oDetectedFirst = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 		string sSchool = "";
 		int nAuraCount = 0;
 		int nAuraPowerHigh = 0;
@@ -185,7 +186,7 @@ void main()
 			//SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
 		if((nAuraCount >= 1) && (GetLocalInt(oCaster, "nThreeRds") == 0) && (nConcentration > 13)) {
 				SetLocalInt(oCaster, "nThreeRds", 1);
-				DelayCommand(11.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
+				DelayCommand(17.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 				if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(11.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));}
 				}
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
@@ -205,15 +206,15 @@ void main()
 						nAuraPower = FloatToInt(fAuraPower)/2;
 						sAuraStrength = "lingering";
 						if(nAuraPower > nAuraPowerHigh) {
-							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+							SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+							SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							}
 						SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
 						if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 						if(nConcentration > 13) {
-							DelayCommand(12.0, SendMessageToAllDMs(GetName(oDetected) + " has a lingering aura of " + sSchool));
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a lingering aura" + sSchool));}
+							DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a lingering aura of " + sSchool));
+							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a lingering aura" + sSchool));}
 							}
 						}
 					}
@@ -226,10 +227,10 @@ void main()
 						 nAuraPower = 4;
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of Divination";}
 						 sAuraStrength = "moderate";
-						 nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+						 nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
 						 if(nAuraPower > nAuraPowerHigh) {
-							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+							SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+							SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							}
 						if(nAuraCount == 1) {
 							 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -237,8 +238,8 @@ void main()
 						 	}
 							
 						 if(nConcentration > 13) {
-							DelayCommand(12.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-						 	if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+							DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
+						 	if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
 							}
 						}
 					}
@@ -250,10 +251,10 @@ void main()
 						 nAuraPower = 5;
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of Conjuration";}
 						 sAuraStrength = "moderate";
-						 nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+						 nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
 						 if(nAuraPower > nAuraPowerHigh) {
-							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+							SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+							SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							}
 						 if(nAuraCount == 1) {
 							 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -261,8 +262,8 @@ void main()
 						 	}
 						 
 						 if(nConcentration > 13) {
-							DelayCommand(12.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-						 	if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+							DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
+						 	if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
 							}
 						}
 					}
@@ -297,10 +298,10 @@ void main()
 							if(nAuraPower > 3) {sAuraStrength = "moderate";}
 							if(nAuraPower > 6) {sAuraStrength = "strong";}
 							if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-							nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+							nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
 							if(nAuraPower > nAuraPowerHigh) {
-								SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-								SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+								SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+								SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							    }
 						 
 							if((nEffect != -1) && (nEffectSchool == 0)) {
@@ -312,8 +313,8 @@ void main()
 						 		SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
 								
 								if(nConcentration > 13) {
-									DelayCommand(12.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+									DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
 									}
 								}
 							//else if (nEffect == -1) {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
@@ -360,9 +361,9 @@ void main()
 									}
 								
 								if(!GetIsItemPropertyValid(GetFirstItemProperty(oItem))) {
-									if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") != -1) {
+									if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 										int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-										DelayCommand(12.0, SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) +  " " + sSlot));
+										DelayCommand(18.0, SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) +  " " + sSlot));
 										int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 										int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 										itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
@@ -565,10 +566,10 @@ void main()
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
 											if(nAuraPower > 6) {sAuraStrength = "strong";}
 											if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-											nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+											nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
 											if(nAuraPower > nAuraPowerHigh) {
-												SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+												SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+												SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							    				}
 											if(nAuraCount == 1) {
 												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -578,16 +579,16 @@ void main()
 											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 											if(nConcentration > 13) {
-												DelayCommand(12.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
+												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
 												}
 											}
 											
 										
 											if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
-											 if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") != -1) {
+											 if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-												DelayCommand(12.0, SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
+												DelayCommand(18.0, SendMessageToAllDMs("GetNext ip: Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
 												int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 												int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 												itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
@@ -617,15 +618,15 @@ void main()
 								if((GetTag(oDetected) == "trg_symbol_insanity") || (GetTag(oDetected) == "trg_symbol_death")) {nAuraPower = 8;}
 								
 							 nAuraCount++;
-							 nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+							 nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
 							 if(nAuraPower > 0) {sAuraStrength = "faint";}
 							 if(nAuraPower > 3) {sAuraStrength = "moderate";}
 							 if(nAuraPower > 6) {sAuraStrength = "strong";}
 							 if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
 							
 							 if(nAuraPower > nAuraPowerHigh) {
-								SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-								SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+								SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+								SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							    }
 							 if(nAuraCount == 1) {
 								 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -635,8 +636,8 @@ void main()
 							 if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 								
 							 if(nConcentration > 13) {
-								DelayCommand(12.0, SendMessageToAllDMs("Trigger " + GetName(oDetected) + " gives off a " + sAuraStrength + " aura"));
-								 if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, GetName(oDetected) + " gives off a " + sAuraStrength + " aura" + sSchool));}
+								DelayCommand(18.0, SendMessageToAllDMs("Trigger " + GetName(oDetected) + " gives off a " + sAuraStrength + " aura"));
+								 if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " gives off a " + sAuraStrength + " aura" + sSchool));}
 								}
 							}
 						}
@@ -664,10 +665,10 @@ void main()
 								if(nAuraPower > 6) {sAuraStrength = "strong";}
 								if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
 							
-								nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+								nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
 								if(nAuraPower > nAuraPowerHigh) {
-									SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-									SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+									SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
+									SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							    	}
 								 if(nAuraCount == 1) {
 									 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -677,8 +678,8 @@ void main()
 								if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 								if(nConcentration > 13) {
-									DelayCommand(12.0, SendMessageToAllDMs("Trap " + GetName(oDetected) + " and trap origin " + GetName(GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1)) + " give off a " + sAuraStrength + " aura" + sSchool));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(12.0, SendMessageToPC(oCaster, GetName(GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1)) + " gives off a " + sAuraStrength + " aura" + sSchool));}
+									DelayCommand(18.0, SendMessageToAllDMs("Trap " + GetName(oDetected) + " and trap origin " + GetName(GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1)) + " give off a " + sAuraStrength + " aura" + sSchool));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1)) + " gives off a " + sAuraStrength + " aura" + sSchool));}
 									}
 								 }
 								 
@@ -689,20 +690,25 @@ void main()
 			}
 				
 		if((nAuraCount > 0) && (nConcentration > 6)) {
-			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
-			DelayCommand(7.0, SendMessageToAllDMs(GetName(oCaster) + " counts " + IntToString(nAuraCount) + " auras."));
-			DelayCommand(8.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + GetLocalString(oCaster, "sAuraPowerHigh")));
+			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
+			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " counts " + IntToString(nAuraCount) + " auras."));
+			DelayCommand(14.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + GetLocalString(oDetectedFirst, "sAuraPowerHigh")));
 			}
 		
 		if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 			if((nAuraCount > 0) && (nConcentration > 6)) {
-				DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for two rounds."));
-				DelayCommand(7.0, SendMessageToPC(oCaster, "You count " + IntToString(nAuraCount) + " auras."));
-				DelayCommand(8.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + GetLocalString(oCaster, "sAuraPowerHigh")));
+				DelayCommand(12.0, SendMessageToPC(oCaster, "You concentrate for two rounds."));
+				DelayCommand(13.0, SendMessageToPC(oCaster, "You count " + IntToString(nAuraCount) + " auras."));
+				DelayCommand(14.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + GetLocalString(oDetectedFirst, "sAuraPowerHigh")));
 				}
 			}
-		SetLocalInt(oCaster, "nAuraPowerHigh", 0);
-		SetLocalString(oCaster, "sAuraPowerHigh", "");
+		
+		if(nAuraCount == 0) {
+			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " detects 0 auras."));
+			if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You detect 0 auras."));}
+			}	
+		SetLocalInt(oDetectedFirst, "nAuraPowerHigh", 0);
+		SetLocalString(oDetectedFirst, "sAuraPowerHigh", "");
 									
 		}
 					
