@@ -179,15 +179,16 @@ void main()
 		string sAuraSchoolHigh = "";
 		string sAuraPower = "";
 		string sAuraStrength = "";
-		
-		if((GetIsObjectValid(oDetected)) && (nConcentration > 13)) {
-			DelayCommand(11.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
-			if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(11.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));}
-			}
+			
+				
 		while (GetIsObjectValid(oDetected)) {
 			//SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
-			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
-				
+		if((nAuraCount >= 1) && (GetLocalInt(oCaster, "nThreeRds") == 0) && (nConcentration > 13)) {
+				SetLocalInt(oCaster, "nThreeRds", 1);
+				DelayCommand(11.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
+				if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(11.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));}
+				}
+		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					int nRace = GetRacialType(oDetected);
 					string sRace = "";
@@ -274,7 +275,7 @@ void main()
 						while (GetIsEffectValid(eEffect)) {
 						
 							string sEffect = Get2DAString("spells", "Label", nEffect);
-							//SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
+							SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
 							string sEffectSchool = Get2DAString("spells", "School", nEffect);
 							sAuraPower = Get2DAString("spells", "Innate", nEffect);
 							nAuraPower = StringToInt(sAuraPower);
@@ -358,12 +359,18 @@ void main()
 										}
 									}
 								
-								if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {
-									int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
-									int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
-									itemproperty ipMaskConj = ItemPropertyCastSpell(nSpell, nNumberUses);
-									AddItemProperty(DURATION_TYPE_TEMPORARY, ipMaskConj, oItem, 10.0);
+								if(!GetIsItemPropertyValid(GetFirstItemProperty(oItem))) {
+									if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") != -1) {
+										int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
+										DelayCommand(12.0, SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) +  " " + sSlot));
+										int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
+										int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
+										itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
+										IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
+										SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
+										}
 									}
+											
 								//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 							 
 								itemproperty ipItem = GetFirstItemProperty(oItem);
@@ -421,9 +428,9 @@ void main()
 									if(nBaseItem == 13) {sBaseItem = "A great sword";}
 									if(nBaseItem == 81) {sBaseItem = "A grenade";}
 									if(nBaseItem == 10) {sBaseItem = "A halberd";}
-									if(nBaseItem == 38) {sBaseItem = "A hand Axe";}
-									if(nBaseItem == 6) {sBaseItem = "A heavy Crossbow";}
-									if(nBaseItem == 35) {sBaseItem = "A heavy Flail";}
+									if(nBaseItem == 38) {sBaseItem = "A hand axe";}
+									if(nBaseItem == 6) {sBaseItem = "A heavy crossbow";}
+									if(nBaseItem == 35) {sBaseItem = "A heavy flail";}
 									if(nBaseItem == 17) {sBaseItem = "A helmet or other headgear";}
 									if(nBaseItem == 40) {sBaseItem = "A kama";}
 									if(nBaseItem == 41) {sBaseItem = "A katana";}
@@ -444,6 +451,7 @@ void main()
 									if(nBaseItem == 34) {sBaseItem = "A large item";}
 									if(nBaseItem == 29) {sBaseItem = "A medium item";}
 									if(nBaseItem == 24) {sBaseItem = "A small item";}
+									if(nBaseItem == 103) {sBaseItem = "A small item";}
 									if(nBaseItem == 43) {sBaseItem = "A tall item";}
 									if(nBaseItem == 79) {sBaseItem = "A thin item";}
 									if(nBaseItem == 68) {sBaseItem = "A wide item";}
@@ -495,15 +503,15 @@ void main()
 											}
 										if((nItemProperty >= 16) && (nItemProperty <=19)) {sItemProperty = "Damage Bonus"; sSchool = "V"; nAuraPower = nItemCost;}
 										if(nItemProperty == 90) {sItemProperty = "Damage Reduction"; sSchool = "T"; nAuraPower = nItemCost;}
-										if(nItemProperty == 23) {sItemProperty = "Damage Resistance"; sSchool = "An"; nAuraPower = nItemCost;}
+										if(nItemProperty == 23) {sItemProperty = "Damage Resistance"; sSchool = "A"; nAuraPower = nItemCost;}
 										if(nItemProperty == 24) {sItemProperty = "Damage Vulnerability"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 26) {sItemProperty = "Darkvision"; sSchool = "T"; nAuraPower = 2;}
-										if(nItemProperty == 27) {sItemProperty = "Decreased Ability"; sSchool = "Tn"; nAuraPower = nItemCost;}
+										if(nItemProperty == 27) {sItemProperty = "Decreased Ability"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 28) {sItemProperty = "Decreased AC"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 29) {sItemProperty = "Decreased Skill"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 10) {sItemProperty = "Decreased Enhancement Modifier"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 60) {sItemProperty = "Decreased Attack Modifier"; sSchool = "T"; nAuraPower = nItemCost;}
-										if(nItemProperty == 21) {sItemProperty = "Decreased Damage"; sSchool = "Tn"; nAuraPower = nItemCost;}
+										if(nItemProperty == 21) {sItemProperty = "Decreased Damage"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 49) {sItemProperty = "Decreased Saving Throw"; sSchool = "T"; nAuraPower = nItemCost;}
 										if((nItemProperty >= 6) && (nItemProperty <=9)) {sItemProperty = "Enhancement Bonus"; sSchool = "V"; nAuraPower = nItemCost;}
 										if((nItemProperty >= 33) && (nItemProperty <=34)) {sItemProperty = "Extra Damage"; sSchool = "V"; nAuraPower = nItemCost;}
@@ -537,7 +545,7 @@ void main()
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 4;}
 												if(FindSubString(GetTag(oItem), "003_it_slv_telepor") != -1) {sSchool = "C"; nAuraPower = 5;}
 												if(FindSubString(GetTag(oItem), "003_it_earring_msg") != -1) {sSchool = "T"; nAuraPower = 1;}
-												if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {sSchool = "C";nAuraPower = 1;}
+												if(FindSubString(GetTag(oItem), "003_it_mask_circus") != -1) {sSchool = "C"; nAuraPower = 1;}
 												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
 													
@@ -575,6 +583,19 @@ void main()
 												}
 											}
 											
+										
+											if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
+											 if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") != -1) {
+												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
+												DelayCommand(12.0, SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
+												int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
+												int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
+												itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
+												IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
+												SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
+												}
+											}
+										
 										ipItem = GetNextItemProperty(oItem);
 										
 									}
@@ -667,14 +688,14 @@ void main()
 			
 			}
 				
-		if((GetIsObjectValid(oDetected)) && (nConcentration > 6)) {
+		if((nAuraCount > 0) && (nConcentration > 6)) {
 			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
 			DelayCommand(7.0, SendMessageToAllDMs(GetName(oCaster) + " counts " + IntToString(nAuraCount) + " auras."));
 			DelayCommand(8.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + GetLocalString(oCaster, "sAuraPowerHigh")));
 			}
 		
 		if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-			if((GetIsObjectValid(oDetected)) && (nConcentration > 6)) {
+			if((nAuraCount > 0) && (nConcentration > 6)) {
 				DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for two rounds."));
 				DelayCommand(7.0, SendMessageToPC(oCaster, "You count " + IntToString(nAuraCount) + " auras."));
 				DelayCommand(8.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + GetLocalString(oCaster, "sAuraPowerHigh")));
