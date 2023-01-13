@@ -173,6 +173,9 @@ void main()
 		SendMessageToAllDMs("nConcentration = " + IntToString(nConcentration));
 		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 		object oDetectedFirst = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
+		SendMessageToAllDMs("Line 176 Name oDetectedFirst = " + GetName(oDetectedFirst));
+		SetLocalInt(oDetectedFirst, "nStoreInt", 1);
+		SendMessageToAllDMs("Line 178 nStoreInt = " + IntToString(GetLocalInt(oDetectedFirst, "nStoreInt")));
 		string sSchool = "";
 		int nAuraCount = 0;
 		int nAuraPowerHigh = 0;
@@ -589,23 +592,23 @@ void main()
 												}
 											}
 											
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 592");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 595");
 											
 											if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 595");
-											 if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 598");
+											 /*if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = " + IntToString(nACRSpellSchool) + " Line 598");
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = " + IntToString(nACRSpellSchool) + " Line 601");
 											 	DelayCommand(18.0, SendMessageToAllDMs("GetNext ip: Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
 												int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 												int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 												itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
 												IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 604");
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 607");
 											 	SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
-												}
+												}*/
 											}
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 608");
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 611");
 											
 										ipItem = GetNextItemProperty(oItem);
 										
@@ -698,6 +701,8 @@ void main()
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 			
 			}
+		
+			SendMessageToAllDMs("Line 705 nStoreInt = " + IntToString(GetLocalInt(oDetectedFirst, "nStoreInt")));
 				
 		if((nAuraCount > 0) && (nConcentration > 6)) {
 			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
