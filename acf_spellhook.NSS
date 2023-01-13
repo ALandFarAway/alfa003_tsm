@@ -483,7 +483,7 @@ void main()
 									if(nBaseItem == 111) {sBaseItem = "A whip";}
 									
 									while (GetIsItemPropertyValid(ipItem)) {
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Top GetIsItemPropertyValid Line 485");
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Top GetIsItemPropertyValid Line 486");
 										int nItemProperty = GetItemPropertyType(ipItem);
 										string sItemProperty = "";
 										int nItemSubType = GetItemPropertySubType(ipItem);
@@ -565,12 +565,14 @@ void main()
 											if(sSchool == "G") {sSchool = " of Universal arcanity";}
 											
 											nAuraCount++;
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 566");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 568");
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
 											if(nAuraPower > 6) {sAuraStrength = "strong";}
 											if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " Line 573");
 											nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " +IntToString(nAuraPowerHigh) + " Line 575");
 											if(nAuraPower > nAuraPowerHigh) {
 												SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
 												SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
@@ -587,19 +589,23 @@ void main()
 												}
 											}
 											
-										
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 592");
+											
 											if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 595");
 											 if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-												DelayCommand(18.0, SendMessageToAllDMs("GetNext ip: Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = " + IntToString(nACRSpellSchool) + " Line 598");
+											 	DelayCommand(18.0, SendMessageToAllDMs("GetNext ip: Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot));
 												int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 												int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 												itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
 												IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-												SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 604");
+											 	SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 												}
 											}
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 600");
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 608");
 											
 										ipItem = GetNextItemProperty(oItem);
 										
