@@ -578,8 +578,8 @@ void main()
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
 											sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 588");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 589");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 581");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 582");
 												
 											if(nAuraCount == 1) {
 												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
@@ -609,11 +609,11 @@ void main()
 												int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 												itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
 												IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 611");
+												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 612");
 											 	SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 												}*/
 											//}
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 615");
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 616");
 											
 										ipItem = GetNextItemProperty(oItem);
 										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 619");
@@ -718,7 +718,7 @@ void main()
 																
 			}
 		
-			//SendMessageToAllDMs("Line 721 nStoreInt = " + IntToString(GetLocalInt(oCaster, "nStoreInt")));
+		//SendMessageToAllDMs("Line 721 nStoreInt = " + IntToString(GetLocalInt(oCaster, "nStoreInt")));
 		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 722");
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 724");
@@ -731,8 +731,8 @@ void main()
 				DelayCommand(12.0, SendMessageToPC(oCaster, "You concentrate for two rounds."));
 				DelayCommand(13.0, SendMessageToPC(oCaster, "You count " + IntToString(nAuraCount) + " auras."));
 				DelayCommand(14.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + GetLocalString(oCaster, "sAuraPowerHigh")));
+				}
 			}
-		}
 		
 		if((nAuraCount > 0) && (nConcentration > 13)) {
 			DelayCommand(17.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
