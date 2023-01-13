@@ -294,14 +294,7 @@ void main()
 							
 							if((nEffect != -1) && (nEffectSchool == 0)) {
 								SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
-								if(nHasEffects == 0) {
-									DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>**********</color>"));
-									DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>" + GetName(oDetected) + "'s functioning spell effects:</color>"));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-										DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>**********</color>"));
-										DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>" + GetName(oDetected) + "'s functioning spell effects:</color>"));
-										}	
-									}
+								
 								nAuraCount++;
 								if(nAuraCount == 1) {
 									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
@@ -320,16 +313,16 @@ void main()
 									if(sEffectSchool == "G") {sSchool = " of Universal arcanity";}
 									}
 								if(nConcentration > 13) {
-									DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>" + GetName(oDetected) + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));}
+									DelayCommand(18.0, SendMessageToAllDMs("<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));}
 									}	
 								}
 							eEffect = GetNextEffect(oDetected);
 							}
 							if(nHasEffects == 0) {
-								DelayCommand(18.0, SendMessageToAllDMs("<color=lightgray>**********</color>"));
+								DelayCommand(18.0, SendMessageToAllDMs("<color=gray>**********</color>"));
 								if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-									DelayCommand(18.0, SendMessageToPC(oCaster, "<color=lightgray>**********</color>"));
+									DelayCommand(18.0, SendMessageToPC(oCaster, "<color=gray>**********</color>"));
 									}	
 								nHasEffects = 1;
 								}
@@ -605,14 +598,7 @@ void main()
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 											if(nConcentration > 13) {
-												if(nHasItems == 0) {
-													DelayCommand(18.0, SendMessageToAllDMs("**********"));
-													DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + "'s items with auras:"));
-													if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-														DelayCommand(18.0, SendMessageToPC(oCaster, "**********"));
-														DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + "'s items with auras:"));
-														}	
-													}
+											
 												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
 												}
@@ -774,7 +760,11 @@ void main()
 		
 		if((nAuraCount > 0) && (nConcentration > 13)) {
 			DelayCommand(17.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
-			if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(17.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));}
+			DelayCommand(17.0, SendMessageToAllDMs("**********"));
+			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+				DelayCommand(17.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));
+				DelayCommand(17.0, SendMessageToPC(oCaster, "**********"));
+				}
 			}
 		
 		if(nAuraCount == 0) {
