@@ -568,22 +568,24 @@ void main()
 											if(sSchool == "G") {sSchool = " of Universal arcanity";}
 											
 											nAuraCount++;
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 568");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 571");
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
 											if(nAuraPower > 6) {sAuraStrength = "strong";}
 											if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " Line 573");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sStrength = " +sAuraStrength + " Line 576");
 											nAuraPowerHigh = GetLocalInt(oDetectedFirst, "nAuraPowerHigh");
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " +IntToString(nAuraPowerHigh) + " Line 575");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " +IntToString(nAuraPowerHigh) + " Line 578");
 											if(nAuraPower > nAuraPowerHigh) {
 												SetLocalInt(oDetectedFirst, "nAuraPowerHigh", nAuraPower);
 												SetLocalString(oDetectedFirst, "sAuraPowerHigh", sAuraStrength);
 							    				}
+												
 											if(nAuraCount == 1) {
 												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
 												 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
 											 	}
+												
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 											if(nConcentration > 13) {
@@ -592,10 +594,10 @@ void main()
 												}
 											}
 											
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 595");
+											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetIsItemPropertyValid Line 597");
 											
-											if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
-											SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 598");
+											//if(!GetIsItemPropertyValid(GetNextItemProperty(oItem))) {
+											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " After GetIsItemPropertyValid Line 598");
 											 /*if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = " + IntToString(nACRSpellSchool) + " Line 601");
@@ -607,8 +609,8 @@ void main()
 												SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " ACR_SPELLSCHOOL = -1 Line 607");
 											 	SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 												}*/
-											}
-										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 611");
+											//}
+										SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Before GetNextItemProperty Line 613");
 											
 										ipItem = GetNextItemProperty(oItem);
 										
