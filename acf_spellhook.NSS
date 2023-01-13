@@ -185,7 +185,7 @@ void main()
 		string sAuraStrength = "";
 			
 		while (GetIsObjectValid(oDetected)) {
-		SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
+		//SendMessageToAllDMs(GetName(oDetected) + " " + GetTag(oDetected) + " detected");
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					int nRace = GetRacialType(oDetected);
@@ -207,8 +207,8 @@ void main()
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
+						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 						if(nConcentration > 13) {
 							DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a lingering aura of " + sSchool));
@@ -232,9 +232,9 @@ void main()
 							}
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						if(nAuraCount == 1) {
-							 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-							 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
-						 	}
+							DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+							}
 							
 						 if(nConcentration > 13) {
 							DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
@@ -257,10 +257,10 @@ void main()
 							}
 						 sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						 if(nAuraCount == 1) {
-							 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-							 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
-						 	}
-						 
+							DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+							}
+						
 						 if(nConcentration > 13) {
 							DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
 						 	if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
@@ -272,28 +272,12 @@ void main()
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					if(GetHasAnySpellEffect(oDetected)) {
 						effect eEffect = GetFirstEffect(oDetected);
-						int nEffect = GetEffectSpellId(eEffect); 
 						while (GetIsEffectValid(eEffect)) {
-						
+							int nEffect = GetEffectSpellId(eEffect); 
 							string sEffect = Get2DAString("spells", "Label", nEffect);
 							SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
-							string sEffectSchool = Get2DAString("spells", "School", nEffect);
 							sAuraPower = Get2DAString("spells", "Innate", nEffect);
 							nAuraPower = StringToInt(sAuraPower);
-							if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
-								if(sEffectSchool == "A") {sSchool = " of Abjuration";}
-								if(sEffectSchool == "C") {sSchool = " of Conjuration";}
-								if(sEffectSchool == "D") {sSchool = " of Divination";}
-								if(sEffectSchool == "E") {sSchool = " of Enchantment";}
-								if(sEffectSchool == "H") {sSchool = " of service to a deity";}
-								if(sEffectSchool == "I") {sSchool = " of Illusion";}
-								if(sEffectSchool == "N") {sSchool = " of Necromancy";}
-								if(sEffectSchool == "T") {sSchool = " of Transmutation";}
-								if(sEffectSchool == "V") {sSchool = " of Evocation";}
-								if(sEffectSchool == "G") {sSchool = " of Universal arcanity";}
-								}
-								
-							int nEffectSchool = GetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool);
 							if(nAuraPower > 0) {sAuraStrength = "faint";}
 							if(nAuraPower > 3) {sAuraStrength = "moderate";}
 							if(nAuraPower > 6) {sAuraStrength = "strong";}
@@ -302,27 +286,41 @@ void main()
 							if(nAuraPower > nAuraPowerHigh) {
 								SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 								SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-							    }
-						    sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						
+								   }
+							sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
+							string sEffectSchool = Get2DAString("spells", "School", nEffect);
+							int nEffectSchool = GetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool);
+							
 							if((nEffect != -1) && (nEffectSchool == 0)) {
+								SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
 								nAuraCount++;
 								if(nAuraCount == 1) {
-									 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-									 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
-								 	}
-						 		SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
-								
-								if(nConcentration > 13) {
-									DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 									}
+								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
+									if(sEffectSchool == "A") {sSchool = " of Abjuration";}
+									if(sEffectSchool == "C") {sSchool = " of Conjuration";}
+									if(sEffectSchool == "D") {sSchool = " of Divination";}
+									if(sEffectSchool == "E") {sSchool = " of Enchantment";}
+									if(sEffectSchool == "H") {sSchool = " of service to a deity";}
+									if(sEffectSchool == "I") {sSchool = " of Illusion";}
+									if(sEffectSchool == "N") {sSchool = " of Necromancy";}
+									if(sEffectSchool == "T") {sSchool = " of Transmutation";}
+									if(sEffectSchool == "V") {sSchool = " of Evocation";}
+									if(sEffectSchool == "G") {sSchool = " of Universal arcanity";}
+									}
+								if(nConcentration > 13) {
+									DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + " --" + sEffect ));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+									}	
 								}
-							//else if (nEffect == -1) {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
 							eEffect = GetNextEffect(oDetected);
 							}
 						}
 					}
+					
+					
 						sSchool = "";
 						int nSlot = 0;
 						string sSlot = "";
@@ -583,10 +581,10 @@ void main()
 											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 582");
 												
 											if(nAuraCount == 1) {
-												 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-												 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
-											 	}
-												
+												DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+												}
+							
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 											if(nConcentration > 13) {
@@ -654,10 +652,10 @@ void main()
 							 sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 							 //SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 654");
 							 if(nAuraCount == 1) {
-								 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-								 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
-							 	}
-							
+								DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+								if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+								}
+						
 							 if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 								
 							 if(nConcentration > 13) {
@@ -699,10 +697,10 @@ void main()
 								//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 698");
 														
 								if(nAuraCount == 1) {
-									 SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range.");
-									 if(FindSubString(GetName(oCaster), "Wynna") != -1) {SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range.");}
-								 	}
-									
+									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+									}
+							
 								if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 							
 								if(nConcentration > 13) {
