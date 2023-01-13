@@ -720,9 +720,16 @@ void main()
 		
 		//SendMessageToAllDMs("Line 721 nStoreInt = " + IntToString(GetLocalInt(oCaster, "nStoreInt")));
 		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 722");
+		nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 		SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 724");
-																													
+				
+		if(nAuraPowerHigh > 0) {sAuraPowerHigh = "faint";}
+		if(nAuraPowerHigh > 3) {sAuraPowerHigh = "moderate";}
+		if(nAuraPowerHigh > 6) {sAuraPowerHigh = "strong";}
+		if(nAuraPowerHigh > 9) {sAuraPowerHigh = "overwhelming";}
+							
+																											
 		if((nAuraCount > 0) && (nConcentration > 6)) {
 			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
 			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " counts " + IntToString(nAuraCount) + " auras."));
