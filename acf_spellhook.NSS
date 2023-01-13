@@ -155,9 +155,12 @@ void main()
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + sSpellID + " in " + sArea + " at " + sTarget);
-	 
+	//SendMessageToPC(OBJECT_SELF, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " in " + sArea);
+	
 	//Detect Magic
 	if(GetSpellId() == 3004) {
+		//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting Detect Magic in " + sArea + " at " + sTarget);
+		
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
 		float fDur = TurnsToSeconds( GetCasterLevel( oCaster ) );
@@ -211,10 +214,10 @@ void main()
 						
 							string sEffect = Get2DAString("spells", "Label", nEffect);
 							SendMessageToAllDMs(GetName(oDetected) + " has effect " + sEffect);
-							sEffectSchool = Get2DAString("spells", "School", nEffect);
-							int nSpellEffectSchool = GetLocalInt(oDetected, "sSpellEffectSchool_" + sEffectSchool); 
-							if((nEffect != -1) && (nSpellEffectSchool == 0)) {
+							if(nEffect != -1) {
 								nAuraCount++;
+								sEffectSchool = Get2DAString("spells", "School", nEffect);
+								
 								if(sEffectSchool == "A") {sSchool = "Abjuration";}
 								if(sEffectSchool == "C") {sSchool = "Conjuration";}
 								if(sEffectSchool == "D") {sSchool = "Divination";}
@@ -225,14 +228,12 @@ void main()
 								if(sEffectSchool == "T") {sSchool = "Transmutation";}
 								if(sEffectSchool == "V") {sSchool = "Evocation";}
 								if(sEffectSchool == "G") {sSchool = "Universal arcanity";}
-								
 											
-								SetLocalInt(oDetected, "sSpellEffectSchool_" + sEffectSchool, nEffect);
+								
 								//SendMessageToAllDMs(IntToString(nEffect) + " is " + sEffectSchool);
 								SendMessageToAllDMs(GetName(oDetected) + " has an aura of " + sSchool);
 								}
 							else {SendMessageToAllDMs(IntToString(nEffect) + " is not from a spell");}
-							
 							eEffect = GetNextEffect(oDetected);
 							}
 						}
@@ -281,7 +282,7 @@ void main()
 									itemproperty ipMaskConj = ItemPropertyCastSpell(nSpell, nNumberUses);
 									AddItemProperty(DURATION_TYPE_TEMPORARY, ipMaskConj, oItem, 10.0);
 									}
-								//SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
+								SendMessageToAllDMs(GetName(oItem) + " is " + sSlot);
 							 
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if((GetIsItemPropertyValid(ipItem))
@@ -327,66 +328,66 @@ void main()
 									if(nBaseItem == 22) {sBaseItem = "a dagger";}
 									if(nBaseItem == 31) {sBaseItem = "a set of darts";}
 									if(nBaseItem == 33) {sBaseItem = "a double axe";}
-									if(nBaseItem == 128) {sBaseItem = "a drum";}
-									if(nBaseItem == 108) {sBaseItem = "a dwarven war axe";}
-									if(nBaseItem == 114) {sBaseItem = "a falchion";}
-									if(nBaseItem == 116) {sBaseItem = "a flail";}
-									if(nBaseItem == 129) {sBaseItem = "a flute";}
-									if(nBaseItem == 77) {sBaseItem = "a gem";}
-									if(nBaseItem == 36) {sBaseItem = "a pair of gloves";}
-									if(nBaseItem == 18) {sBaseItem = "a great axe";}
-									if(nBaseItem == 120) {sBaseItem = "a great club";}
-									if(nBaseItem == 13) {sBaseItem = "a great sword";}
-									if(nBaseItem == 81) {sBaseItem = "a grenade";}
-									if(nBaseItem == 10) {sBaseItem = "a halberd";}
-									if(nBaseItem == 38) {sBaseItem = "a hand axe";}
-									if(nBaseItem == 6) {sBaseItem = "a heavy crossbow";}
-									if(nBaseItem == 35) {sBaseItem = "a heavy flail";}
-									if(nBaseItem == 17) {sBaseItem = "a helmet or other headgear";}
-									if(nBaseItem == 40) {sBaseItem = "a kama";}
-									if(nBaseItem == 41) {sBaseItem = "a katana";}
-									if(nBaseItem == 65) {sBaseItem = "a key";}
-									if(nBaseItem == 42) {sBaseItem = "a kukri";}
-									if(nBaseItem == 66) {sBaseItem = "a large box";}
-									if(nBaseItem == 56) {sBaseItem = "a large shield";}
-									if(nBaseItem == 7) {sBaseItem = "a light crossbow";}
-									if(nBaseItem == 4) {sBaseItem = "a light flail";}
-									if(nBaseItem == 37) {sBaseItem = "a light hammer";}
-									if(nBaseItem == 9) {sBaseItem = "a light mace";}
-									if(nBaseItem == 1) {sBaseItem = "a longsword";}
-									if(nBaseItem == 8) {sBaseItem = "a longbow";}
-									if(nBaseItem == 113) {sBaseItem = "a mace";}
-									if(nBaseItem == 44) {sBaseItem = "a magic rod";}
-									if(nBaseItem == 45) {sBaseItem = "a magic staff";}
-									if(nBaseItem == 46) {sBaseItem = "a magic wand";}
-									if(nBaseItem == 34) {sBaseItem = "a large item";}
-									if(nBaseItem == 29) {sBaseItem = "a medium item";}
-									if(nBaseItem == 24) {sBaseItem = "a small item";}
-									if(nBaseItem == 43) {sBaseItem = "a tall item";}
-									if(nBaseItem == 79) {sBaseItem = "a thin item";}
-									if(nBaseItem == 68) {sBaseItem = "a wide item";}
-									if(nBaseItem == 47) {sBaseItem = "a morningstar";}
-									if(nBaseItem == 49) {sBaseItem = "a magic potion";}
-									if(nBaseItem == 50) {sBaseItem = "a quarterstaff";}
-									if(nBaseItem == 51) {sBaseItem = "a rapier";}
-									if(nBaseItem == 52) {sBaseItem = "a ring";}
-									if(nBaseItem == 53) {sBaseItem = "a scimitar";}
-									if(nBaseItem == 75) {sBaseItem = "a scroll";}
-									if(nBaseItem == 55) {sBaseItem = "a scythe";}
-									if(nBaseItem == 11) {sBaseItem = "a short bow";}
-									if(nBaseItem == 58) {sBaseItem = "a short spear";}
-									if(nBaseItem == 0) {sBaseItem = "a shortsword";}
-									if(nBaseItem == 59) {sBaseItem = "a set of shuriken";}
-									if(nBaseItem == 60) {sBaseItem = "a sickle";}
-									if(nBaseItem == 61) {sBaseItem = "a sling";}
-									if(nBaseItem == 14) {sBaseItem = "a small shield";}
-									if(nBaseItem == 119) {sBaseItem = "a spear";}
-									if(nBaseItem == 63) {sBaseItem = "a set of throwing axes";}
-									if(nBaseItem == 62) {sBaseItem = "a set of thieves tools";}
-									if(nBaseItem == 57) {sBaseItem = "a tower shield";}
-									if(nBaseItem == 5) {sBaseItem = "a war hammer";}
-									if(nBaseItem == 126) {sBaseItem = "a war mace";}
-									if(nBaseItem == 111) {sBaseItem = "a whip";}
+									if(nBaseItem == 128) {sBaseItem = "a Drum";}
+									if(nBaseItem == 108) {sBaseItem = "a Dwarven War Axe";}
+									if(nBaseItem == 114) {sBaseItem = "a Falchion";}
+									if(nBaseItem == 116) {sBaseItem = "a Flail";}
+									if(nBaseItem == 129) {sBaseItem = "a Flute";}
+									if(nBaseItem == 77) {sBaseItem = "a Gem";}
+									if(nBaseItem == 36) {sBaseItem = "a pair of Gloves";}
+									if(nBaseItem == 18) {sBaseItem = "a Great Axe";}
+									if(nBaseItem == 120) {sBaseItem = "a Great Club";}
+									if(nBaseItem == 13) {sBaseItem = "a Great Sword";}
+									if(nBaseItem == 81) {sBaseItem = "a Grenade";}
+									if(nBaseItem == 10) {sBaseItem = "a Halberd";}
+									if(nBaseItem == 38) {sBaseItem = "a Hand Axe";}
+									if(nBaseItem == 6) {sBaseItem = "a Heavy Crossbow";}
+									if(nBaseItem == 35) {sBaseItem = "a Heavy Flail";}
+									if(nBaseItem == 17) {sBaseItem = "a Helmet or Hat";}
+									if(nBaseItem == 40) {sBaseItem = "a Kama";}
+									if(nBaseItem == 41) {sBaseItem = "a Katana";}
+									if(nBaseItem == 65) {sBaseItem = "a Key";}
+									if(nBaseItem == 42) {sBaseItem = "a Kukri";}
+									if(nBaseItem == 66) {sBaseItem = "a Large Box";}
+									if(nBaseItem == 56) {sBaseItem = "a Large Shield";}
+									if(nBaseItem == 7) {sBaseItem = "a Light Crossbow";}
+									if(nBaseItem == 4) {sBaseItem = "a Light Flail";}
+									if(nBaseItem == 37) {sBaseItem = "a Light Hammer";}
+									if(nBaseItem == 9) {sBaseItem = "a Light Mace";}
+									if(nBaseItem == 1) {sBaseItem = "a Longsword";}
+									if(nBaseItem == 8) {sBaseItem = "a Longbow";}
+									if(nBaseItem == 113) {sBaseItem = "a Mace";}
+									if(nBaseItem == 44) {sBaseItem = "a Magic Rod";}
+									if(nBaseItem == 45) {sBaseItem = "a Magic Staff";}
+									if(nBaseItem == 46) {sBaseItem = "a Magic Wand";}
+									if(nBaseItem == 34) {sBaseItem = "a Large Item";}
+									if(nBaseItem == 29) {sBaseItem = "a Medium Item";}
+									if(nBaseItem == 24) {sBaseItem = "a Small Item";}
+									if(nBaseItem == 43) {sBaseItem = "a Tall Item";}
+									if(nBaseItem == 79) {sBaseItem = "a Thin Item";}
+									if(nBaseItem == 68) {sBaseItem = "a Wide Item";}
+									if(nBaseItem == 47) {sBaseItem = "a Morningstar";}
+									if(nBaseItem == 49) {sBaseItem = "a Magic Potion";}
+									if(nBaseItem == 50) {sBaseItem = "a Quarterstaff";}
+									if(nBaseItem == 51) {sBaseItem = "a Rapier";}
+									if(nBaseItem == 52) {sBaseItem = "a Ring";}
+									if(nBaseItem == 53) {sBaseItem = "a Scimitar";}
+									if(nBaseItem == 75) {sBaseItem = "a Scroll";}
+									if(nBaseItem == 55) {sBaseItem = "a Scythe";}
+									if(nBaseItem == 11) {sBaseItem = "a Short Bow";}
+									if(nBaseItem == 58) {sBaseItem = "a Short Spear";}
+									if(nBaseItem == 0) {sBaseItem = "a Shortsword";}
+									if(nBaseItem == 59) {sBaseItem = "a set of Shuriken";}
+									if(nBaseItem == 60) {sBaseItem = "a Sickle";}
+									if(nBaseItem == 61) {sBaseItem = "a Sling";}
+									if(nBaseItem == 14) {sBaseItem = "a Small Shield";}
+									if(nBaseItem == 119) {sBaseItem = "a Spear";}
+									if(nBaseItem == 63) {sBaseItem = "a set of Throwing Axes";}
+									if(nBaseItem == 62) {sBaseItem = "a set of Thieves Tools";}
+									if(nBaseItem == 57) {sBaseItem = "a Tower Shield";}
+									if(nBaseItem == 5) {sBaseItem = "a War Hammer";}
+									if(nBaseItem == 126) {sBaseItem = "a War Mace";}
+									if(nBaseItem == 111) {sBaseItem = "a Whip";}
 									
 									while (GetIsItemPropertyValid(ipItem)) {
 										int nItemProperty = GetItemPropertyType(ipItem);
@@ -443,7 +444,7 @@ void main()
 											
 										if(sItemProperty != "") {
 											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) 
-												{sSchool = "arcanity too complex to unravel";
+												{sSchool = "Arcanity too complex to unravel ";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "H";}
 												if(FindSubString(GetTag(oItem), "abr_it_scry_") != -1) {sSchool = "D";}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G";}
