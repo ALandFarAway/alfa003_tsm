@@ -496,6 +496,17 @@ void main()
 									if(nSpot == -5) {sSpot = " larger than average";}
 									if(nSpot == 5) {sSpot = " smaller than average";}
 									if(nSpot == 10) {sSpot = " very small";}
+									
+									int Gen = 0;
+									int nAbj = 0;
+									int nCon = 0;
+									int nDiv = 0;
+									int nEnc = 0;
+									int nEvo = 0;
+									int nIll = 0;
+									int nNec = 0;
+									int nTra = 0;
+									
 									while (GetIsItemPropertyValid(ipItem)) {
 										//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Top GetIsItemPropertyValid Line 486");
 										int nItemProperty = GetItemPropertyType(ipItem);
@@ -567,6 +578,7 @@ void main()
 												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
 											
+												
 											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
 											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
 											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>";}
@@ -603,7 +615,10 @@ void main()
 							
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 											
-											if((!GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10 + nSpot, FALSE)) && (FindSubString(sSlot, "inventory") != -1)) {sBaseItem = "something" + sSpot;}
+											if(FindSubString(sSlot, "inventory") != -1){
+												SendMessageToAllDMs("inventory");
+												if(!GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10 + nSpot, FALSE)) {sBaseItem = "Something" + sSpot; SendMessageToAllDMs("inventory"); SendMessageToAllDMs("sBaseItem = " + sBaseItem);}
+												}
 												
 											if(nConcentration > 13) {
 												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
