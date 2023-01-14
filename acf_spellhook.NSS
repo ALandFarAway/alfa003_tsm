@@ -410,6 +410,7 @@ void main()
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
 									int nSpot = 0;
+									string sSpot = "";
 									//SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "An amulet"; nSpot = 10;}
 									if(nBaseItem == 16) {sBaseItem = "A suit of armor"; nSpot = -5;}
@@ -491,6 +492,10 @@ void main()
 									if(nBaseItem == 126) {sBaseItem = "A war mace"; nSpot = -5;}
 									if(nBaseItem == 111) {sBaseItem = "A whip"; nSpot = 5;}
 									
+									if(nSpot == -10) {sSpot = " very large";}
+									if(nSpot == -5) {sSpot = " larger than average";}
+									if(nSpot == 5) {sSpot = " smaller than average";}
+									if(nSpot == 10) {sSpot = " very small";}
 									while (GetIsItemPropertyValid(ipItem)) {
 										//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Top GetIsItemPropertyValid Line 486");
 										int nItemProperty = GetItemPropertyType(ipItem);
@@ -598,7 +603,7 @@ void main()
 							
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 											
-											if((!GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10 + nSpot, FALSE)) && (FindSubString(sSlot, "inventory") != -1)) {sBaseItem = "something";}
+											if((!GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10 + nSpot, FALSE)) && (FindSubString(sSlot, "inventory") != -1)) {sBaseItem = "something" + sSpot;}
 												
 											if(nConcentration > 13) {
 												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
