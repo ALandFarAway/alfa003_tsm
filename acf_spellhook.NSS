@@ -271,6 +271,9 @@ void main()
 				sSchool = "";
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					if(GetHasAnySpellEffect(oDetected)) {
+						if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
+							SetFirstName(oDetected, "Invisible Presence");
+							}  
 						int nHasEffects = 0;
 						effect eEffect = GetFirstEffect(oDetected);
 						while (GetIsEffectValid(eEffect)) {
@@ -338,6 +341,17 @@ void main()
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
 							int nHasItems = 0;
+							int nGen = 0;
+							int nAbj = 0;
+							int nCon = 0;
+							int nDiv = 0;
+							int nEnc = 0;
+							int nEvo = 0;
+							int nHoly = 0;
+							int nIll = 0;
+							int nNec = 0;
+							int nTra = 0;
+							int nSomething = 0;
 							while (nSlot < 15) {
 								//SendMessageToAllDMs("nSlot = " + IntToString(nSlot));
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
@@ -414,11 +428,11 @@ void main()
 									//SendMessageToAllDMs(sItemName + " is base item " + sBaseItem);
 									if(nBaseItem == 19) {sBaseItem = "An amulet"; nSpot = 10;}
 									if(nBaseItem == 16) {sBaseItem = "A suit of armor"; nSpot = -5;}
-									if(nBaseItem == 20) {sBaseItem = "A quiver of arrows"; nSpot = 0;}
+									if(nBaseItem == 20) {sBaseItem = "Arrows"; nSpot = 0;}
 									if(nBaseItem == 3) {sBaseItem = "A bastard sword"; nSpot = -5;}
 									if(nBaseItem == 2) {sBaseItem = "A battle axe"; nSpot = -10;}
 									if(nBaseItem == 21) {sBaseItem = "A belt"; nSpot = 10;}
-									if(nBaseItem == 25) {sBaseItem = "A quiver of bolts"; nSpot = 0;}
+									if(nBaseItem == 25) {sBaseItem = "Bolts"; nSpot = 0;}
 									if(nBaseItem == 74) {sBaseItem = "A book"; nSpot = 5;}
 									if(nBaseItem == 26) {sBaseItem = "A pair of boots"; nSpot = 5;;}
 									if(nBaseItem == 78) {sBaseItem = "A pair of bracers"; nSpot = 10;}
@@ -496,17 +510,11 @@ void main()
 									if(nSpot == -5) {sSpot = " larger than average";}
 									if(nSpot == 5) {sSpot = " smaller than average";}
 									if(nSpot == 10) {sSpot = " very small";}
+									if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
+										sSlot = ""; sSpot = "";}
 									
-									int Gen = 0;
-									int nAbj = 0;
-									int nCon = 0;
-									int nDiv = 0;
-									int nEnc = 0;
-									int nEvo = 0;
-									int nIll = 0;
-									int nNec = 0;
-									int nTra = 0;
-									
+									if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = "Something" + sSpot; nSomething++;}
+										
 									while (GetIsItemPropertyValid(ipItem)) {
 										//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Top GetIsItemPropertyValid Line 486");
 										int nItemProperty = GetItemPropertyType(ipItem);
@@ -565,7 +573,8 @@ void main()
 										if(nItemProperty == 52) {sItemProperty = "Skill Bonus"; sSchool = "T"; nAuraPower = nItemCost;}
 										if(nItemProperty == 39) {sItemProperty = "Spell Resistance"; sSchool = "A"; nAuraPower = 5;}
 										if(nItemProperty == 71) {sItemProperty = "True Seeing"; sSchool = "T"; nAuraPower = 5;}
-											
+										
+												
 										if(sItemProperty != "") {
 											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) 
 												{sSchool = " of arcanity too complex to unravel ";
@@ -579,16 +588,17 @@ void main()
 												}
 											
 												
-											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
-											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
-											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>";}
-											if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>";}
-											if(sSchool == "H") {sSchool = " of service to a deity";}
-											if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>";}
-											if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>";}
-											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>";}
-											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>";}
-											if(sSchool == "G") {sSchool = " of Universal arcanity";}
+											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nAbj++;}}
+											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nCon++;}}
+											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nDiv++;}}
+											if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nEnc++;}}
+											if(sSchool == "H") {sSchool = " of service to a deity"; if(FindSubString(sBaseItem, "Something") == -1) {nHoly++;}}
+											if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nIll++;}}
+											if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nNec++;}}
+											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nTra++;}}
+											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nEvo++;}}
+											if(sSchool == "G") {sSchool = " of Universal arcanity"; if(FindSubString(sBaseItem, "Something") == -1) {nGen++;}}
+											
 												
 											nAuraCount++;
 											//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " Inside GetIsItemPropertyValid Line 574");
@@ -615,13 +625,7 @@ void main()
 							
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 											
-											if(FindSubString(sSlot, "inventory") != -1){
-												SendMessageToAllDMs("inventory");
-												int nSpotDC = 10 + nSpot;
-												SendMessageToAllDMs("nSpotDc = " + IntToString(nSpotDC));
-												if(GetIsSkillSuccessful(oCaster, SKILL_SPOT, nSpotDC, FALSE) == FALSE) {sBaseItem = "Something" + sSpot; SendMessageToAllDMs("sBaseItem = " + sBaseItem);}
-												}
-												
+											
 											if(nConcentration > 13) {
 												DelayCommand(18.0, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
@@ -660,14 +664,62 @@ void main()
 							//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " nAuraPowerHigh = " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")) + " Line 626");
 							//SendMessageToAllDMs("AuraCount = " + IntToString(nAuraCount) + " sAuraPowerHigh = " + sAuraPowerHigh + " Line 627");
 							}
-							if(nHasItems == 0) {
-								nHasItems = 1; 
-								DelayCommand(18.0, SendMessageToAllDMs("**********"));
-								if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-									DelayCommand(18.0, SendMessageToPC(oCaster, "**********"));
-									}	
+							
+						if(nConcentration > 13) {
+							string sAbj;
+							string sCon;
+							string sDiv;
+							string sEnc;
+							string sEvo;
+							string sIll;
+							string sNec;
+							string sTra;
+							string sGen;
+							string sHoly;
+							string sSomething;	
+							if(nAbj < 5) {sAbj = IntToString(nAbj);} else if(nAbj < 8) {sAbj = "around half a dozen";} else if(nAbj < 13) {sAbj = "close to ten";}  else if(nAbj > 12) {sAbj = "more than a dozen";}
+							if(nCon < 5) {sCon = IntToString(nCon);} else if(nCon < 8) {sCon = "around half a dozen";} else if(nCon < 13) {sCon = "close to ten";}  else if(nCon > 12) {sCon = "more than a dozen";}
+							if(nDiv < 5) {sDiv = IntToString(nDiv);} else if(nDiv < 8) {sDiv = "around half a dozen";} else if(nDiv < 13) {sDiv = "close to ten";}  else if(nDiv > 12) {sDiv = "more than a dozen";}
+							if(nEnc < 5) {sEnc = IntToString(nEnc);} else if(nEnc < 8) {sEnc = "around half a dozen";} else if(nEnc < 13) {sEnc = "close to ten";}  else if(nEnc > 12) {sEnc = "more than a dozen";}
+							if(nEvo < 5) {sEvo = IntToString(nEvo);} else if(nEvo < 8) {sEvo = "around half a dozen";} else if(nEvo < 13) {sEvo = "close to ten";}  else if(nEvo > 12) {sEvo = "more than a dozen";}
+							if(nIll < 5) {sIll = IntToString(nIll);} else if(nIll < 8) {sIll = "around half a dozen";} else if(nIll < 13) {sIll = "close to ten";}  else if(nIll > 12) {sIll = "more than a dozen";}
+							if(nNec < 5) {sNec = IntToString(nNec);} else if(nNec < 8) {sNec = "around half a dozen";} else if(nNec < 13) {sNec = "close to ten";}  else if(nNec > 12) {sNec = "more than a dozen";}
+							if(nTra < 5) {sTra = IntToString(nTra);} else if(nTra < 8) {sTra = "around half a dozen";} else if(nTra < 13) {sTra = "close to ten";}  else if(nTra > 12) {sTra = "more than a dozen";}
+							if(nGen < 5) {sGen = IntToString(nGen);} else if(nGen < 8) {sGen = "around half a dozen";} else if(nGen < 13) {sGen = "close to ten";}  else if(nGen > 12) {sGen = "more than a dozen";}
+							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
+							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
+							
+							DelayCommand(17.0, SendMessageToAllDMs(GetName(oDetected) + "'s inventory glows with:"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=tan>" + sCon + " Conjuration</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=green>" + sDiv + " Divination</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=magenta>" + sEnc + " Enchantment</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=red>" + sEvo + " Evocation</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=purple>" + sIll + " Illusion</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=white>" + sNec + " Necromancy</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs("<color=orange>" + sTra + " Transmutation</color> auras"));
+							DelayCommand(17.0, SendMessageToAllDMs(sGen + " Universal auras"));
+							DelayCommand(17.0, SendMessageToAllDMs(sHoly + " Holy auras"));
+							DelayCommand(17.0, SendMessageToAllDMs(sSomething + " auras you can't classify"));
+							DelayCommand(17.0, SendMessageToAllDMs("**********"));
+							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+								DelayCommand(17.0, SendMessageToPC(oCaster, GetName(oDetected) + "'s inventory projects:"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=green>" + sDiv + " Divination</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=magenta>" + sEnc + " Enchantment</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=red>" + sEvo + " Evocation</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=purple>" + sIll + " Illusion</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=white>" + sNec + " Necromancy</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "<color=orange>" + sTra + " Transmutation</color> auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, sGen + " Universal auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, sHoly + " Holy auras"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));
+								DelayCommand(17.0, SendMessageToPC(oCaster, "**********"));
 								}
 							}
+		
+						}
 						
 						sSchool = "";
 						if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
@@ -783,11 +835,11 @@ void main()
 			}
 		
 		if((nAuraCount > 0) && (nConcentration > 13)) {
-			DelayCommand(17.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
-			DelayCommand(17.0, SendMessageToAllDMs("**********"));
+			DelayCommand(16.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
+			DelayCommand(16.0, SendMessageToAllDMs("**********"));
 			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-				DelayCommand(17.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));
-				DelayCommand(17.0, SendMessageToPC(oCaster, "**********"));
+				DelayCommand(16.0, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));
+				DelayCommand(16.0, SendMessageToPC(oCaster, "**********"));
 				}
 			}
 		
