@@ -617,7 +617,9 @@ void main()
 											
 											if(FindSubString(sSlot, "inventory") != -1){
 												SendMessageToAllDMs("inventory");
-												if(!GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10 + nSpot, FALSE)) {sBaseItem = "Something" + sSpot; SendMessageToAllDMs("inventory"); SendMessageToAllDMs("sBaseItem = " + sBaseItem);}
+												int nSpotDC = 10 + nSpot;
+												SendMessageToAllDMs("nSpotDc = " + IntToString(nSpotDC));
+												if(GetIsSkillSuccessful(oCaster, SKILL_SPOT, nSpotDC, FALSE) == FALSE) {sBaseItem = "Something" + sSpot; SendMessageToAllDMs("sBaseItem = " + sBaseItem);}
 												}
 												
 											if(nConcentration > 13) {
