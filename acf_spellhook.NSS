@@ -283,7 +283,6 @@ void main()
 							SendMessageToAllDMs("oShapeObj = " + GetName(oShapeObj) + " is a " + IntToString(GetObjectType(oShapeObj)));
 							oShapeObj = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oDetected), FALSE, OBJECT_TYPE_ALL); 
 						}
-						
 						int nSpellID = GetAreaOfEffectSpellId(oTrapAOE);
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
@@ -318,9 +317,14 @@ void main()
 						
 						if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 						object oOrigin = GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1);
+						float fDistance = GetDistanceBetween(oDetected, oOrigin);
+						int nDistance = FloatToInt(fDistance);
+						string sDistance = IntToString(nDistance);
+						float fAngle = GetAngleBetweenObjects(oDetected, oOrigin);
+						string sAngle = GetCompassDirectionOfAngle(fAngle);
 						if((nConcentration > 13) && (oOrigin != OBJECT_INVALID)) {
-							DelayCommand(21.0, SendMessageToAllDMs("Trap " + GetName(oDetected) + " and trap origin " + GetName(oOrigin) + " give off a " + sAuraStrength + " aura" + sSchool));
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " gives off a " + sAuraStrength + " aura" + sSchool));}
+							DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + "Trap " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off a " + sAuraStrength + " aura" + sSchool));
+							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off a " + sAuraStrength + " aura" + sSchool));}
 							}
 						}
 					}
