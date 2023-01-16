@@ -273,7 +273,7 @@ void main()
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 					SendMessageToAllDMs("WP oDetected = " + GetName(oDetected) + " " + GetTag(oDetected) + " " + GetResRef(oDetected));
 						
-					if(FindSubString(GetResRef(oDetected), "trap_spell") != -1)  {
+					if(FindSubString(GetName(oDetected), "Trap: Spell") != -1)  {
 						object oTrapAOE = GetNearestObject(OBJECT_TYPE_AREA_OF_EFFECT, oDetected, 1);
 						object oNearTrap = GetNearestTrapToObject(oDetected, FALSE);
 						SendMessageToAllDMs("oMyTrapAOE = " + GetName(oTrapAOE));
@@ -284,7 +284,7 @@ void main()
 							oShapeObj = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oDetected), FALSE, OBJECT_TYPE_ALL); 
 						}
 						
-						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
+						int nSpellID = GetAreaOfEffectSpellId(oTrapAOE);
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
 						if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
