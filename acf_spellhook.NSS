@@ -276,10 +276,11 @@ void main()
 					if((FindSubString(GetName(oDetected), "Trap: Spell") != -1) || (FindSubString(GetTag(oDetected), "trap_spell_")) != -1)  {
 						object oTrapAOE = GetNearestObject(OBJECT_TYPE_AREA_OF_EFFECT, oDetected, 1);
 						SendMessageToAllDMs("oMyTrapAOE = " + GetTag(oTrapAOE));
-						object oAEOCreator = GetAreaOfEffectCreator(OBJECT_SELF);
-						SendMessageToAllDMs("AOE Creator: Object Type = " + IntToString(GetObjectType(oAEOCreator)) + GetName(oAEOCreator) + " " + GetTag(oAEOCreator) + " " + GetResRef(oAEOCreator));
+						object oAEOCreator = GetAreaOfEffectCreator(oTrapAOE);
+						SendMessageToAllDMs("AOE Creator: Object Type = " + IntToString(GetObjectType(oAEOCreator)) + ", Name = " + GetName(oAEOCreator) + ", Tag = " + GetTag(oAEOCreator) + ", ResRef = " + GetResRef(oAEOCreator));
 					
-						int nSpellID = GetAreaOfEffectSpellId(oTrapAOE);
+						//int nSpellID = GetAreaOfEffectSpellId(oTrapAOE);
+						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL");
 						SendMessageToAllDMs("nSpellID = " + IntToString(nSpellID));
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						SendMessageToAllDMs("sSchool = " + sSchool);
