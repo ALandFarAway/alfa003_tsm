@@ -278,7 +278,7 @@ void main()
 								//DelayCommand(20.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));
 								}	
 							}	
-							effect eEffect = GetFirstEffect(oDetected);
+						effect eEffect = GetFirstEffect(oDetected);
 						while (GetIsEffectValid(eEffect)) {
 							int nEffect = GetEffectSpellId(eEffect); 
 							string sEffect = Get2DAString("spells", "Label", nEffect);
@@ -318,10 +318,11 @@ void main()
 									if(sEffectSchool == "V") {sSchool = " of <color=red>Evocation </color>";}
 									if(sEffectSchool == "G") {sSchool = " of Universal arcanity";}
 									}
+									
 								if(nConcentration > 13) {
-									DelayCommand(20.0, SendMessageToAllDMs("<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
+									DelayCommand(20.5, SendMessageToAllDMs("<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
 									if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-										DelayCommand(20.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
+										DelayCommand(20.5, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
 										}
 									}	
 								}
@@ -587,17 +588,19 @@ void main()
 												}
 											
 											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = "Something" + sSpot; nSomething++;}
-										    	
-											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nAbj++;}}
-											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nCon++;}}
-											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nDiv++;}}
-											if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nEnc++;}}
-											if(sSchool == "H") {sSchool = " of service to a deity"; if(FindSubString(sBaseItem, "Something") == -1) {nHoly++;}}
-											if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nIll++;}}
-											if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nNec++;}}
-											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nTra++;}}
-											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>"; if(FindSubString(sBaseItem, "Something") == -1) {nEvo++;}}
-											if(sSchool == "G") {sSchool = " of Universal arcanity"; if(FindSubString(sBaseItem, "Something") == -1) {nGen++;}}
+										    
+											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
+												
+											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
+											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
+											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>"; nDiv++;}
+											if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
+											if(sSchool == "H") {sSchool = " of service to a deity"; nHoly++;}
+											if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
+											if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
+											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
+											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
+											if(sSchool == "G") {sSchool = " of Universal arcanity"; nGen++;}
 											
 											
 											nAuraCount++;
@@ -617,8 +620,7 @@ void main()
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 												}
 							
-									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
-											
+									 		
 											float fDelay = 22.0 + IntToFloat(nSlot/10);
 											if(nSlot > 13) {fDelay = 36.0;}
 											if(nConcentration > 13) {
@@ -658,9 +660,9 @@ void main()
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
 							string sCarried = "";
 							//if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {sCarried = "carried but not worn";}
-							DelayCommand(24.0, SendMessageToAllDMs(" "));
+							DelayCommand(23.8, SendMessageToAllDMs(" "));
 							if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
-								DelayCommand(24.0, SendMessageToAllDMs("INVENTORY SUMMARY:"));
+								DelayCommand(23.9, SendMessageToAllDMs("INVENTORY SUMMARY:"));
 								//DelayCommand(23.0, SendMessageToAllDMs("Items " + sCarried + " in " + GetName(oDetected) + "'s inventory glow with:"));
 							}
 							if(nAbj>0) {DelayCommand(24.0, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
@@ -678,9 +680,9 @@ void main()
 							if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(35.0, SendMessageToAllDMs("INVENTORY DETAIL:"));}
 								
 							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-								DelayCommand(24.0, SendMessageToPC(oCaster, " "));
+								DelayCommand(23.8, SendMessageToPC(oCaster, " "));
 								if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
-									DelayCommand(24.0, SendMessageToPC(oCaster, "INVENTORY SUMMARY:"));
+									DelayCommand(23.9, SendMessageToPC(oCaster, "INVENTORY SUMMARY:"));
 									//DelayCommand(23.0, SendMessageToPC(oCaster, "Items carried but not worn in " + GetName(oDetected) + "'s inventory glow with:"));
 									}
 								if(nAbj>0) {DelayCommand(24.0, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
