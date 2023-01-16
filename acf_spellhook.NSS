@@ -268,25 +268,27 @@ void main()
 						if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
 							SetFirstName(oDetected, "Invisible Presence");
 							}  
-						DelayCommand(20.0, SendMessageToAllDMs("**********"));
-						DelayCommand(20.0, SendMessageToAllDMs("FUNCTIONING SPELLS"));
-						DelayCommand(20.0, SendMessageToAllDMs("<color=gray>Spell auras on the person of " + GetName(oDetected) + ":</color>"));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-							DelayCommand(20.0, SendMessageToPC(oCaster, "**********"));
-							DelayCommand(20.0, SendMessageToPC(oCaster, "FUNCTIONING SPELLS"));
-							DelayCommand(20.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));
+						if(nConcentration > 13) {
+							DelayCommand(20.0, SendMessageToAllDMs("**********"));
+							DelayCommand(20.1, SendMessageToAllDMs("FUNCTIONING SPELLS"));
+							//DelayCommand(20.0, SendMessageToAllDMs("<color=gray>Spell auras on the person of " + GetName(oDetected) + ":</color>"));
+							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+								DelayCommand(20.0, SendMessageToPC(oCaster, "**********"));
+								DelayCommand(20.1, SendMessageToPC(oCaster, "FUNCTIONING SPELLS"));
+								//DelayCommand(20.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));
+								}	
 							}	
-								
-						effect eEffect = GetFirstEffect(oDetected);
+							effect eEffect = GetFirstEffect(oDetected);
 						while (GetIsEffectValid(eEffect)) {
 							int nEffect = GetEffectSpellId(eEffect); 
 							string sEffect = Get2DAString("spells", "Label", nEffect);
 							sAuraPower = Get2DAString("spells", "Innate", nEffect);
 							nAuraPower = StringToInt(sAuraPower);
-							if(nAuraPower > 0) {sAuraStrength = "faint";}
-							if(nAuraPower > 3) {sAuraStrength = "moderate";}
-							if(nAuraPower > 6) {sAuraStrength = "strong";}
-							if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+							sAuraStrength = "an";
+							if(nAuraPower > 0) {sAuraStrength = "a faint";}
+							if(nAuraPower > 3) {sAuraStrength = "a moderate";}
+							if(nAuraPower > 6) {sAuraStrength = "a strong";}
+							if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 							nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 							if(nAuraPower > nAuraPowerHigh) {
 								SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
@@ -317,9 +319,9 @@ void main()
 									if(sEffectSchool == "G") {sSchool = " of Universal arcanity";}
 									}
 								if(nConcentration > 13) {
-									DelayCommand(20.0, SendMessageToAllDMs("<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
+									DelayCommand(20.0, SendMessageToAllDMs("<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
 									if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-										DelayCommand(20.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has a " + sAuraStrength + " aura</color>" + sSchool));
+										DelayCommand(20.0, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
 										}
 									}	
 								}
@@ -354,15 +356,17 @@ void main()
 									oItem = GetItemInSlot(nSlot, oDetected); 
 									if(nSlot == 0) {
 										sSlot = "on the head of";
-										DelayCommand(21.0, SendMessageToAllDMs("**********"));
-										DelayCommand(21.0, SendMessageToAllDMs("EQUIPPED AND INVENTORY"));
-										DelayCommand(21.0, SendMessageToAllDMs("Items equipped by " + GetName(oDetected) + " glow with:"));
-										if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-											DelayCommand(21.0, SendMessageToPC(oCaster, "**********"));
-											DelayCommand(21.0, SendMessageToPC(oCaster, "EQUIPPED AND INVENTORY"));
-											DelayCommand(21.0, SendMessageToPC(oCaster, "Items worn or equipped by " + GetName(oDetected) + " glow with:"));
+										if(nConcentration > 13) {
+											DelayCommand(21.0, SendMessageToAllDMs("**********"));
+											DelayCommand(21.1, SendMessageToAllDMs("EQUIPPED"));
+											//DelayCommand(21.0, SendMessageToAllDMs("Items equipped by " + GetName(oDetected) + " glow with:"));
+											if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+												DelayCommand(21.0, SendMessageToPC(oCaster, "**********"));
+												DelayCommand(21.1, SendMessageToPC(oCaster, "EQUIPPED"));
+												//DelayCommand(21.0, SendMessageToPC(oCaster, "Items worn or equipped by " + GetName(oDetected) + " glow with:"));
+												}
 											}
-									}
+										}
 									if(nSlot == 1) {sSlot = "worn by";}
 									if(nSlot == 2) {sSlot = "on the feet of";}
 									if(nSlot == 3) {sSlot = "on the arms of";}
@@ -615,7 +619,7 @@ void main()
 							
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 											
-											float fDelay = 25.0 + IntToFloat(nSlot/10);
+											float fDelay = 30.0 + IntToFloat(nSlot/10);
 											if(nConcentration > 13) {
 												DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
@@ -654,9 +658,9 @@ void main()
 							string sCarried = "";
 							if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {sCarried = "carried but not worn";}
 							DelayCommand(23.0, SendMessageToAllDMs(""));
-							if(GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) {
+							if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
 								DelayCommand(23.0, SendMessageToAllDMs("INVENTORY SUMMARY:"));
-								DelayCommand(23.0, SendMessageToAllDMs("Items " + sCarried + " in " + GetName(oDetected) + "'s inventory glow with:"));
+								//DelayCommand(23.0, SendMessageToAllDMs("Items " + sCarried + " in " + GetName(oDetected) + "'s inventory glow with:"));
 							}
 							if(nAbj>0) {DelayCommand(23.0, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
 							if(nCon>0) {DelayCommand(23.1, SendMessageToAllDMs("<color=tan>" + sCon + " Conjuration</color> auras"));}
@@ -670,13 +674,13 @@ void main()
 							if(nHoly>0) {DelayCommand(23.9, SendMessageToAllDMs(sHoly + " Holy auras"));}
 							if(nSomething>0) {DelayCommand(24.0, SendMessageToAllDMs(sSomething + " auras you can't classify"));}
 							DelayCommand(24.1, SendMessageToAllDMs(""));
-							if(GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) {DelayCommand(24.2, SendMessageToAllDMs("INVENTORY DETAIL:"));}
+							if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(24.2, SendMessageToAllDMs("INVENTORY DETAIL:"));}
 								
 							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 								DelayCommand(23.0, SendMessageToPC(oCaster, ""));
-								if(GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) {
+								if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
 									DelayCommand(23.0, SendMessageToPC(oCaster, "INVENTORY SUMMARY:"));
-									DelayCommand(23.0, SendMessageToPC(oCaster, "Items carried but not worn in " + GetName(oDetected) + "'s inventory glow with:"));
+									//DelayCommand(23.0, SendMessageToPC(oCaster, "Items carried but not worn in " + GetName(oDetected) + "'s inventory glow with:"));
 									}
 								if(nAbj>0) {DelayCommand(23.0, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
 								if(nCon>0) {DelayCommand(23.1, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));}
@@ -690,7 +694,7 @@ void main()
 								if(nHoly>0) {DelayCommand(23.9, SendMessageToPC(oCaster, sHoly + " Holy auras"));}
 								if(nSomething>0) {DelayCommand(24.0, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));}
 								DelayCommand(24.1, SendMessageToPC(oCaster, ""));
-								if(GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) {DelayCommand(24.2, SendMessageToPC(oCaster, "INVENTORY DETAIL:"));}
+								if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(24.2, SendMessageToPC(oCaster, "INVENTORY DETAIL:"));}
 								}
 							}
 						}
