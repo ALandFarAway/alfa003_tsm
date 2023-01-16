@@ -181,7 +181,7 @@ void main()
 		string sAuraStrength = "";
 			
 		while (GetIsObjectValid(oDetected)) {
-		SendMessageToAllDMs("Top oDetected = " + GetName(oDetected) + " " + GetTag(oDetected) + " " + GetResRef(oDetected));
+		SendMessageToAllDMs("Top oDetected: Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)){
 				if((GetTag(oDetected) == "ACR_SCRY_OBJECT") || (GetTag(oDetected) == "TSM_PLC_SCRY_MIRROR")){
@@ -784,8 +784,8 @@ void main()
 						sSchool = "";
 						
 					}
-				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 				}
+				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 			}
 		nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
