@@ -619,7 +619,8 @@ void main()
 							
 									 		if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 											
-											float fDelay = 30.0 + IntToFloat(nSlot/10);
+											float fDelay = 22.0 + IntToFloat(nSlot/10);
+											if(nSlot > 13) {fDelay = 36.0;}
 											if(nConcentration > 13) {
 												DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
@@ -656,45 +657,45 @@ void main()
 							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
 							string sCarried = "";
-							if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {sCarried = "carried but not worn";}
-							DelayCommand(23.0, SendMessageToAllDMs(""));
-							if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
-								DelayCommand(23.0, SendMessageToAllDMs("INVENTORY SUMMARY:"));
+							//if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {sCarried = "carried but not worn";}
+							DelayCommand(24.0, SendMessageToAllDMs(" "));
+							if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
+								DelayCommand(24.0, SendMessageToAllDMs("INVENTORY SUMMARY:"));
 								//DelayCommand(23.0, SendMessageToAllDMs("Items " + sCarried + " in " + GetName(oDetected) + "'s inventory glow with:"));
 							}
-							if(nAbj>0) {DelayCommand(23.0, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
-							if(nCon>0) {DelayCommand(23.1, SendMessageToAllDMs("<color=tan>" + sCon + " Conjuration</color> auras"));}
-							if(nDiv>0) {DelayCommand(23.2, SendMessageToAllDMs("<color=green>" + sDiv + " Divination</color> auras"));}
-							if(nEnc>0) {DelayCommand(23.3, SendMessageToAllDMs("<color=magenta>" + sEnc + " Enchantment</color> auras"));}
-							if(nEvo>0) {DelayCommand(23.4, SendMessageToAllDMs("<color=red>" + sEvo + " Evocation</color> auras"));}
-							if(nIll>0) {DelayCommand(23.5, SendMessageToAllDMs("<color=purple>" + sIll + " Illusion</color> auras"));}
-							if(nNec>0) {DelayCommand(23.6, SendMessageToAllDMs("<color=white>" + sNec + " Necromancy</color> auras"));}
-							if(nTra>0) {DelayCommand(23.7, SendMessageToAllDMs("<color=orange>" + sTra + " Transmutation</color> auras"));}
-							if(nGen>0) {DelayCommand(23.8, SendMessageToAllDMs(sGen + " Universal auras"));}
-							if(nHoly>0) {DelayCommand(23.9, SendMessageToAllDMs(sHoly + " Holy auras"));}
-							if(nSomething>0) {DelayCommand(24.0, SendMessageToAllDMs(sSomething + " auras you can't classify"));}
-							DelayCommand(24.1, SendMessageToAllDMs(""));
-							if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(24.2, SendMessageToAllDMs("INVENTORY DETAIL:"));}
+							if(nAbj>0) {DelayCommand(24.0, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
+							if(nCon>0) {DelayCommand(24.1, SendMessageToAllDMs("<color=tan>" + sCon + " Conjuration</color> auras"));}
+							if(nDiv>0) {DelayCommand(24.2, SendMessageToAllDMs("<color=green>" + sDiv + " Divination</color> auras"));}
+							if(nEnc>0) {DelayCommand(24.3, SendMessageToAllDMs("<color=magenta>" + sEnc + " Enchantment</color> auras"));}
+							if(nEvo>0) {DelayCommand(24.4, SendMessageToAllDMs("<color=red>" + sEvo + " Evocation</color> auras"));}
+							if(nIll>0) {DelayCommand(24.5, SendMessageToAllDMs("<color=purple>" + sIll + " Illusion</color> auras"));}
+							if(nNec>0) {DelayCommand(24.6, SendMessageToAllDMs("<color=white>" + sNec + " Necromancy</color> auras"));}
+							if(nTra>0) {DelayCommand(24.7, SendMessageToAllDMs("<color=orange>" + sTra + " Transmutation</color> auras"));}
+							if(nGen>0) {DelayCommand(24.8, SendMessageToAllDMs(sGen + " Universal auras"));}
+							if(nHoly>0) {DelayCommand(24.9, SendMessageToAllDMs(sHoly + " Holy auras"));}
+							if(nSomething>0) {DelayCommand(25.0, SendMessageToAllDMs(sSomething + " auras you can't classify"));}
+							DelayCommand(25.1, SendMessageToAllDMs(" "));
+							if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(35.0, SendMessageToAllDMs("INVENTORY DETAIL:"));}
 								
 							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-								DelayCommand(23.0, SendMessageToPC(oCaster, ""));
-								if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
-									DelayCommand(23.0, SendMessageToPC(oCaster, "INVENTORY SUMMARY:"));
+								DelayCommand(24.0, SendMessageToPC(oCaster, " "));
+								if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
+									DelayCommand(24.0, SendMessageToPC(oCaster, "INVENTORY SUMMARY:"));
 									//DelayCommand(23.0, SendMessageToPC(oCaster, "Items carried but not worn in " + GetName(oDetected) + "'s inventory glow with:"));
 									}
-								if(nAbj>0) {DelayCommand(23.0, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
-								if(nCon>0) {DelayCommand(23.1, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));}
-								if(nDiv>0) {DelayCommand(23.2, SendMessageToPC(oCaster, "<color=green>" + sDiv + " Divination</color> auras"));}
-								if(nEnc>0) {DelayCommand(23.3, SendMessageToPC(oCaster, "<color=magenta>" + sEnc + " Enchantment</color> auras"));}
-								if(nEvo>0) {DelayCommand(23.4, SendMessageToPC(oCaster, "<color=red>" + sEvo + " Evocation</color> auras"));}
-								if(nIll>0) {DelayCommand(23.5, SendMessageToPC(oCaster, "<color=purple>" + sIll + " Illusion</color> auras"));}
-								if(nNec>0) {DelayCommand(23.6, SendMessageToPC(oCaster, "<color=white>" + sNec + " Necromancy</color> auras"));}
-								if(nTra>0) {DelayCommand(23.7, SendMessageToPC(oCaster, "<color=orange>" + sTra + " Transmutation</color> auras"));}
-								if(nGen>0) {DelayCommand(23.8, SendMessageToPC(oCaster, sGen + " Universal auras"));}
-								if(nHoly>0) {DelayCommand(23.9, SendMessageToPC(oCaster, sHoly + " Holy auras"));}
-								if(nSomething>0) {DelayCommand(24.0, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));}
-								DelayCommand(24.1, SendMessageToPC(oCaster, ""));
-								if((GetObjectType(oDetected) == !OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(24.2, SendMessageToPC(oCaster, "INVENTORY DETAIL:"));}
+								if(nAbj>0) {DelayCommand(24.0, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
+								if(nCon>0) {DelayCommand(24.1, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));}
+								if(nDiv>0) {DelayCommand(24.2, SendMessageToPC(oCaster, "<color=green>" + sDiv + " Divination</color> auras"));}
+								if(nEnc>0) {DelayCommand(24.3, SendMessageToPC(oCaster, "<color=magenta>" + sEnc + " Enchantment</color> auras"));}
+								if(nEvo>0) {DelayCommand(24.4, SendMessageToPC(oCaster, "<color=red>" + sEvo + " Evocation</color> auras"));}
+								if(nIll>0) {DelayCommand(24.5, SendMessageToPC(oCaster, "<color=purple>" + sIll + " Illusion</color> auras"));}
+								if(nNec>0) {DelayCommand(24.6, SendMessageToPC(oCaster, "<color=white>" + sNec + " Necromancy</color> auras"));}
+								if(nTra>0) {DelayCommand(24.7, SendMessageToPC(oCaster, "<color=orange>" + sTra + " Transmutation</color> auras"));}
+								if(nGen>0) {DelayCommand(24.8, SendMessageToPC(oCaster, sGen + " Universal auras"));}
+								if(nHoly>0) {DelayCommand(24.9, SendMessageToPC(oCaster, sHoly + " Holy auras"));}
+								if(nSomething>0) {DelayCommand(25.0, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));}
+								DelayCommand(25.1, SendMessageToPC(oCaster, " "));
+								if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(35.0, SendMessageToPC(oCaster, "INVENTORY DETAIL:"));}
 								}
 							}
 						}
