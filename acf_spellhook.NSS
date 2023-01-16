@@ -181,7 +181,7 @@ void main()
 		string sAuraStrength = "";
 			
 		while (GetIsObjectValid(oDetected)) {
-		SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+		//SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)){
 				if((GetTag(oDetected) == "ACR_SCRY_OBJECT") || (GetTag(oDetected) == "TSM_PLC_SCRY_MIRROR")){
@@ -273,18 +273,16 @@ void main()
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 					SendMessageToAllDMs("WP oDetected = " + GetName(oDetected) + " " + GetTag(oDetected) + " " + GetResRef(oDetected));
 						
-					if(FindSubString(GetName(oDetected), "Trap: Spell") != -1)  {
+					if((FindSubString(GetName(oDetected), "Trap: Spell") != -1) || (FindSubString(GetTag(oDetected), "trap_spell_")) != -1)  {
 						object oTrapAOE = GetNearestObject(OBJECT_TYPE_AREA_OF_EFFECT, oDetected, 1);
-						object oNearTrap = GetNearestTrapToObject(oDetected, FALSE);
-						SendMessageToAllDMs("oMyTrapAOE = " + GetName(oTrapAOE));
-						SendMessageToAllDMs("oNearestTrap = " + GetName(oNearTrap));
-						object oShapeObj = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oDetected), FALSE, OBJECT_TYPE_ALL);  
-						while (oShapeObj != OBJECT_INVALID) {
-							SendMessageToAllDMs("oShapeObj = " + GetName(oShapeObj) + " is a " + IntToString(GetObjectType(oShapeObj)));
-							oShapeObj = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oDetected), FALSE, OBJECT_TYPE_ALL); 
-						}
+						SendMessageToAllDMs("oMyTrapAOE = " + GetTag(oTrapAOE));
+						object oAEOCreator = GetAreaOfEffectCreator(OBJECT_SELF);
+						SendMessageToAllDMs("AOE Creator: Object Type = " + IntToString(GetObjectType(oAEOCreator)) + GetName(oAEOCreator) + " " + GetTag(oAEOCreator) + " " + GetResRef(oAEOCreator));
+					
 						int nSpellID = GetAreaOfEffectSpellId(oTrapAOE);
+						SendMessageToAllDMs("nSpellID = " + IntToString(nSpellID));
 						sSchool = Get2DAString("spells", "School", nSpellID);
+						SendMessageToAllDMs("sSchool = " + sSchool);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
 						if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
 						if(sSchool == "D") {sSchool = " of <color=green>Divination </color>";}
@@ -297,11 +295,13 @@ void main()
 						if(sSchool == "G") {sSchool = " of Universal arcanity";}
 						nAuraCount++;
 						sAuraPower = Get2DAString("spells", "Innate", nSpellID);
+						SendMessageToAllDMs("sAuraPower = " + sAuraPower);
 						nAuraPower = StringToInt(sAuraPower);
 						if(nAuraPower > 0) {sAuraStrength = "faint";}
 						if(nAuraPower > 3) {sAuraStrength = "moderate";}
 						if(nAuraPower > 6) {sAuraStrength = "strong";}
 						if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+						SendMessageToAllDMs("sAuraStrength = " + sAuraStrength);
 							
 						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 						if(nAuraPower > nAuraPowerHigh) {
