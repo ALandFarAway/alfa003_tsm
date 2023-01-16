@@ -200,8 +200,8 @@ void main()
 						}
 							
 					 if(nConcentration > 13) {
-						DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(20.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
+						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(20.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
 						}
 					}
 				
@@ -224,8 +224,8 @@ void main()
 						}
 						
 					if(nConcentration > 13) {
-						DelayCommand(18.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-						 if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(18.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(20.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
+						 if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(20.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
 						}
 					}
 				sSchool = "";
@@ -262,15 +262,25 @@ void main()
 					if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) && (GetLocalInt(oDetected, "Fired") != 1));{sSymbolName = "Something";}
 					
 					if((nConcentration > 13) && (GetLocalInt(oDetected, "Fired") != 1)) {
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + GetName(oDetected) + ", " + sSymbolName + ", gives off a " + sAuraStrength + " aura" + sSchool));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " gives off a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(20.0, SendMessageToAllDMs("Glyph or Symbol " + GetName(oDetected) + ", " + sSymbolName + ", gives off a " + sAuraStrength + " aura" + sSchool));
+						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(20.0, SendMessageToPC(oCaster, sSymbolName + " gives off a " + sAuraStrength + " aura" + sSchool));}
 						}
 					}
 				}		
 				sSchool = "";
 				
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
-					if(FindSubString(GetTag(oDetected), "trap_spell") != -1)  {
+					if(FindSubString(GetResRef(oDetected), "trap_spell") != -1)  {
+						object oTrapAOE = GetNearestObject(OBJECT_TYPE_AREA_OF_EFFECT, oDetected, 1);
+						object oNearTrap = GetNearestTrapToObject(oDetected, FALSE);
+						SendMessageToAllDMs("oMyTrapAOE = " + GetName(oTrapAOE));
+						SendMessageToAllDMs("oNearestTrap = " + GetName(oNearTrap));
+						object oShapeObj = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oDetected), FALSE, OBJECT_TYPE_ALL);  
+						while (oShapeObj != OBJECT_INVALID) {
+							SendMessageToAllDMs("oShapeObj = " + GetName(oShapeObj) + " is a " + IntToString(GetObjectType(oShapeObj)));
+							oShapeObj = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oDetected), FALSE, OBJECT_TYPE_ALL); 
+						}
+						
 						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
@@ -724,7 +734,7 @@ void main()
 							if(nGen < 5) {sGen = IntToString(nGen);} else if(nGen < 8) {sGen = "around half a dozen";} else if(nGen < 13) {sGen = "close to ten";}  else if(nGen > 12) {sGen = "more than a dozen";}
 							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
-							if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
+							if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 								DelayCommand(24.0, SendMessageToAllDMs(" "));
 								DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY:"));
 								if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
@@ -743,11 +753,9 @@ void main()
 								DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL"));
 								DelayCommand(35.0, SendMessageToAllDMs(" "));
 								DelayCommand(35.1, SendMessageToAllDMs("CARRIED DETAIL:"));
-								}
-								
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-								if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
-									DelayCommand(24.0, SendMessageToPC(oCaster, " "));
+								 
+								if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+								    DelayCommand(24.0, SendMessageToPC(oCaster, " "));
 									DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY:"));
 									if(nAbj>0) {DelayCommand(24.2, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
 									if(nCon>0) {DelayCommand(24.3, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));}
