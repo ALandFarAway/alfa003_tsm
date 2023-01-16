@@ -350,19 +350,19 @@ void main()
 							int nSomething = 0;
 							while (nSlot < 15) {
 								if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
-								if((nFirst == 0) && (GetObjectType(oDetected) != OBJECT_TYPE_ITEM)) {nFirst = 1; sSlot = "in the inventory of " + GetName(oDetected);}
+								if((nFirst == 0) && (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {nFirst = 1; sSlot = "in the inventory of " + GetName(oDetected);}
 								else if (nSlot < 14) {
 									oItem = GetItemInSlot(nSlot, oDetected); 
 									if(nSlot == 0) {
 										sSlot = "on the head of";
-										if(nConcentration > 13) {
+										/*if(nConcentration > 13) {
 											DelayCommand(29.0, SendMessageToAllDMs("**********"));
 											DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL"));
 											if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 												DelayCommand(29.0, SendMessageToPC(oCaster, "**********"));
 												DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL"));
 												}
-											}
+											}*/
 										}
 									if(nSlot == 1) {sSlot = "worn by";}
 									if(nSlot == 2) {sSlot = "on the feet of";}
@@ -584,7 +584,8 @@ void main()
 												}
 											
 											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = "Something" + sSpot; nSomething++;}
-										    
+										    if(GetIdentified(oItem) == FALSE) {sBaseItem = "Something" + sSpot; nSomething++;}
+											
 											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 												
 											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
@@ -597,7 +598,6 @@ void main()
 											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
 											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
 											if(sSchool == "G") {sSchool = " of Universal arcanity"; nGen++;}
-											
 											
 											nAuraCount++;
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
@@ -653,45 +653,48 @@ void main()
 							if(nGen < 5) {sGen = IntToString(nGen);} else if(nGen < 8) {sGen = "around half a dozen";} else if(nGen < 13) {sGen = "close to ten";}  else if(nGen > 12) {sGen = "more than a dozen";}
 							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
-							string sCarried = "";
-							DelayCommand(24.0, SendMessageToAllDMs(" "));
 							if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
+								DelayCommand(24.0, SendMessageToAllDMs(" "));
 								DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY:"));
+								if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
+								if(nCon>0) {DelayCommand(24.3, SendMessageToAllDMs("<color=tan>" + sCon + " Conjuration</color> auras"));}
+								if(nDiv>0) {DelayCommand(24.4, SendMessageToAllDMs("<color=green>" + sDiv + " Divination</color> auras"));}
+								if(nEnc>0) {DelayCommand(24.5, SendMessageToAllDMs("<color=magenta>" + sEnc + " Enchantment</color> auras"));}
+								if(nEvo>0) {DelayCommand(24.6, SendMessageToAllDMs("<color=red>" + sEvo + " Evocation</color> auras"));}
+								if(nIll>0) {DelayCommand(24.7, SendMessageToAllDMs("<color=purple>" + sIll + " Illusion</color> auras"));}
+								if(nNec>0) {DelayCommand(24.8, SendMessageToAllDMs("<color=white>" + sNec + " Necromancy</color> auras"));}
+								if(nTra>0) {DelayCommand(24.9, SendMessageToAllDMs("<color=orange>" + sTra + " Transmutation</color> auras"));}
+								if(nGen>0) {DelayCommand(25.0, SendMessageToAllDMs(sGen + " Universal auras"));}
+								if(nHoly>0) {DelayCommand(25.1, SendMessageToAllDMs(sHoly + " Holy auras"));}
+								if(nSomething>0) {DelayCommand(25.2, SendMessageToAllDMs(sSomething + " auras you can't classify"));}
+								DelayCommand(25.3, SendMessageToAllDMs(" "));
+								DelayCommand(29.0, SendMessageToAllDMs("**********"));
+								DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL"));
+								DelayCommand(35.0, SendMessageToAllDMs(" "));
+								DelayCommand(35.1, SendMessageToAllDMs("CARRIED DETAIL:"));
 								}
-							if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
-							if(nCon>0) {DelayCommand(24.3, SendMessageToAllDMs("<color=tan>" + sCon + " Conjuration</color> auras"));}
-							if(nDiv>0) {DelayCommand(24.4, SendMessageToAllDMs("<color=green>" + sDiv + " Divination</color> auras"));}
-							if(nEnc>0) {DelayCommand(24.5, SendMessageToAllDMs("<color=magenta>" + sEnc + " Enchantment</color> auras"));}
-							if(nEvo>0) {DelayCommand(24.6, SendMessageToAllDMs("<color=red>" + sEvo + " Evocation</color> auras"));}
-							if(nIll>0) {DelayCommand(24.7, SendMessageToAllDMs("<color=purple>" + sIll + " Illusion</color> auras"));}
-							if(nNec>0) {DelayCommand(24.8, SendMessageToAllDMs("<color=white>" + sNec + " Necromancy</color> auras"));}
-							if(nTra>0) {DelayCommand(24.9, SendMessageToAllDMs("<color=orange>" + sTra + " Transmutation</color> auras"));}
-							if(nGen>0) {DelayCommand(25.0, SendMessageToAllDMs(sGen + " Universal auras"));}
-							if(nHoly>0) {DelayCommand(25.1, SendMessageToAllDMs(sHoly + " Holy auras"));}
-							if(nSomething>0) {DelayCommand(25.2, SendMessageToAllDMs(sSomething + " auras you can't classify"));}
-							DelayCommand(25.3, SendMessageToAllDMs(" "));
-							DelayCommand(35.0, SendMessageToAllDMs(" "));
-							if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {DelayCommand(35.1, SendMessageToAllDMs("CARRIED DETAIL:"));}
 								
 							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-								DelayCommand(24.0, SendMessageToPC(oCaster, " "));
 								if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
+									DelayCommand(24.0, SendMessageToPC(oCaster, " "));
 									DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY:"));
+									if(nAbj>0) {DelayCommand(24.2, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
+									if(nCon>0) {DelayCommand(24.3, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));}
+									if(nDiv>0) {DelayCommand(24.4, SendMessageToPC(oCaster, "<color=green>" + sDiv + " Divination</color> auras"));}
+									if(nEnc>0) {DelayCommand(24.5, SendMessageToPC(oCaster, "<color=magenta>" + sEnc + " Enchantment</color> auras"));}
+									if(nEvo>0) {DelayCommand(24.6, SendMessageToPC(oCaster, "<color=red>" + sEvo + " Evocation</color> auras"));}
+									if(nIll>0) {DelayCommand(24.7, SendMessageToPC(oCaster, "<color=purple>" + sIll + " Illusion</color> auras"));}
+									if(nNec>0) {DelayCommand(24.8, SendMessageToPC(oCaster, "<color=white>" + sNec + " Necromancy</color> auras"));}
+									if(nTra>0) {DelayCommand(24.9, SendMessageToPC(oCaster, "<color=orange>" + sTra + " Transmutation</color> auras"));}
+									if(nGen>0) {DelayCommand(25.0, SendMessageToPC(oCaster, sGen + " Universal auras"));}
+									if(nHoly>0) {DelayCommand(25.1, SendMessageToPC(oCaster, sHoly + " Holy auras"));}
+									if(nSomething>0) {DelayCommand(25.2, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));}
+								 	DelayCommand(25.3, SendMessageToPC(oCaster, " "));
+									DelayCommand(29.0, SendMessageToPC(oCaster, "**********"));
+									DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL"));
+									DelayCommand(35.0, SendMessageToPC(oCaster, " "));
+									DelayCommand(35.1, SendMessageToPC(oCaster, "CARRIED DETAIL:"));
 									}
-								if(nAbj>0) {DelayCommand(24.2, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
-								if(nCon>0) {DelayCommand(24.3, SendMessageToPC(oCaster, "<color=tan>" + sCon + " Conjuration</color> auras"));}
-								if(nDiv>0) {DelayCommand(24.4, SendMessageToPC(oCaster, "<color=green>" + sDiv + " Divination</color> auras"));}
-								if(nEnc>0) {DelayCommand(24.5, SendMessageToPC(oCaster, "<color=magenta>" + sEnc + " Enchantment</color> auras"));}
-								if(nEvo>0) {DelayCommand(24.6, SendMessageToPC(oCaster, "<color=red>" + sEvo + " Evocation</color> auras"));}
-								if(nIll>0) {DelayCommand(24.7, SendMessageToPC(oCaster, "<color=purple>" + sIll + " Illusion</color> auras"));}
-								if(nNec>0) {DelayCommand(24.8, SendMessageToPC(oCaster, "<color=white>" + sNec + " Necromancy</color> auras"));}
-								if(nTra>0) {DelayCommand(24.9, SendMessageToPC(oCaster, "<color=orange>" + sTra + " Transmutation</color> auras"));}
-								if(nGen>0) {DelayCommand(25.0, SendMessageToPC(oCaster, sGen + " Universal auras"));}
-								if(nHoly>0) {DelayCommand(25.1, SendMessageToPC(oCaster, sHoly + " Holy auras"));}
-								if(nSomething>0) {DelayCommand(25.2, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));}
-								DelayCommand(25.3, SendMessageToPC(oCaster, " "));
-								DelayCommand(35.0, SendMessageToPC(oCaster, " "));
-								if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {DelayCommand(35.1, SendMessageToPC(oCaster, "CARRIED DETAIL:"));}
 								}
 							}
 						}
