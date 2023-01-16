@@ -356,11 +356,11 @@ void main()
 									if(nSlot == 0) {
 										sSlot = "on the head of";
 										if(nConcentration > 13) {
-											DelayCommand(30.0, SendMessageToAllDMs("**********"));
-											DelayCommand(30.1, SendMessageToAllDMs("EQUIPPED DETAIL"));
+											DelayCommand(29.0, SendMessageToAllDMs("**********"));
+											DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL"));
 											if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-												DelayCommand(30.0, SendMessageToPC(oCaster, "**********"));
-												DelayCommand(30.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL"));
+												DelayCommand(29.0, SendMessageToPC(oCaster, "**********"));
+												DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL"));
 												}
 											}
 										}
@@ -616,9 +616,8 @@ void main()
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 												}
 							
-									 		
-											float fDelay = 30.0 + IntToFloat(nSlot/10);
-											if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0;}
+									 		float fDelay = 30.0 + IntToFloat(nSlot/10);
+											if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + nAuraCount;}
 											if(nConcentration > 13) {
 												DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
@@ -656,7 +655,7 @@ void main()
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
 							string sCarried = "";
 							DelayCommand(24.0, SendMessageToAllDMs(" "));
-							if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
+							if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
 								DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY:"));
 								}
 							if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs("<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
@@ -671,11 +670,12 @@ void main()
 							if(nHoly>0) {DelayCommand(25.1, SendMessageToAllDMs(sHoly + " Holy auras"));}
 							if(nSomething>0) {DelayCommand(25.2, SendMessageToAllDMs(sSomething + " auras you can't classify"));}
 							DelayCommand(25.3, SendMessageToAllDMs(" "));
-							if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(35.0, SendMessageToAllDMs("CARRIED DETAIL:"));}
+							DelayCommand(35.0, SendMessageToAllDMs(" "));
+							if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {DelayCommand(35.1, SendMessageToAllDMs("CARRIED DETAIL:"));}
 								
 							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 								DelayCommand(24.0, SendMessageToPC(oCaster, " "));
-								if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {
+								if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {
 									DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY:"));
 									}
 								if(nAbj>0) {DelayCommand(24.2, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
@@ -690,7 +690,8 @@ void main()
 								if(nHoly>0) {DelayCommand(25.1, SendMessageToPC(oCaster, sHoly + " Holy auras"));}
 								if(nSomething>0) {DelayCommand(25.2, SendMessageToPC(oCaster, sSomething + " auras you can't classify"));}
 								DelayCommand(25.3, SendMessageToPC(oCaster, " "));
-								if((GetObjectType(oDetected) != OBJECT_TYPE_ITEM) && (nConcentration > 13)) {DelayCommand(35.0, SendMessageToPC(oCaster, "CARRIED DETAIL:"));}
+								DelayCommand(35.0, SendMessageToPC(oCaster, " "));
+								if(GetObjectType(oDetected) != OBJECT_TYPE_ITEM) {DelayCommand(35.1, SendMessageToPC(oCaster, "CARRIED DETAIL:"));}
 								}
 							}
 						}
