@@ -234,12 +234,12 @@ void main()
 				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1)) {
 					SendMessageToAllDMs("Symbol oDetected = " + GetName(oDetected) + " " + GetTag(oDetected) + " " + GetResRef(oDetected));
 					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration";}
-					if((GetTag(oDetected) == "_symbol_fear") || (GetTag(oDetected) == "_symbol_pers") || (GetTag(oDetected) == "_symbol_sleep") || (GetTag(oDetected) == "_symbol_stun")) {sSchool = " of <color=magenta>Enchantment</color>";}
-					if((GetTag(oDetected) == "_symbol_weakness") || (GetTag(oDetected) == "_symbol_pain") || (GetTag(oDetected) == "_symbol_death")) {sSchool = " of <color=white>Necromancy</color>";}
-					if((GetTag(oDetected) == "_symbol_pain") || (GetTag(oDetected) == "_symbol_sleep")) {nAuraPower = 5;}
-					if((GetTag(oDetected) == "_symbol_pers") || (GetTag(oDetected) == "_symbol_fear")) {nAuraPower = 6;}
-					if((GetTag(oDetected) == "_symbol_stun") || (GetTag(oDetected) == "_symbol_weakness")) {nAuraPower = 7;}
-					if((GetTag(oDetected) == "_symbol_insanity") || (GetTag(oDetected) == "_symbol_death")) {nAuraPower = 8;}
+					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
+					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
+					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}
+					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_fear") != -1)) {nAuraPower = 6;}
+					if((FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1)) {nAuraPower = 7;}
+					if((FindSubString(GetTag(oDetected), "_symbol_insanity") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {nAuraPower = 8;}
 					SendMessageToAllDMs("sSchool = " + sSchool);
 									
 					nAuraCount++;
