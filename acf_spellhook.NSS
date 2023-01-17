@@ -280,7 +280,7 @@ void main()
 						SendMessageToAllDMs("AOE Creator: Object Type = " + IntToString(GetObjectType(oAEOCreator)) + ", Name = " + GetName(oAEOCreator) + ", Tag = " + GetTag(oAEOCreator) + ", ResRef = " + GetResRef(oAEOCreator));
 					
 						//int nSpellID = GetAreaOfEffectSpellId(oTrapAOE);
-						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL");
+						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
 						SendMessageToAllDMs("nSpellID = " + IntToString(nSpellID));
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						SendMessageToAllDMs("sSchool = " + sSchool);
@@ -298,6 +298,7 @@ void main()
 						sAuraPower = Get2DAString("spells", "Innate", nSpellID);
 						SendMessageToAllDMs("sAuraPower = " + sAuraPower);
 						nAuraPower = StringToInt(sAuraPower);
+						sAuraStrength = "detectable";
 						if(nAuraPower > 0) {sAuraStrength = "faint";}
 						if(nAuraPower > 3) {sAuraStrength = "moderate";}
 						if(nAuraPower > 6) {sAuraStrength = "strong";}
@@ -324,7 +325,7 @@ void main()
 						float fAngle = GetAngleBetweenObjects(oDetected, oOrigin);
 						string sAngle = GetCompassDirectionOfAngle(fAngle);
 						if((nConcentration > 13) && (oOrigin != OBJECT_INVALID)) {
-							DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + "Trap " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off a " + sAuraStrength + " aura" + sSchool));
+							DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off a " + sAuraStrength + " aura" + sSchool));
 							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off a " + sAuraStrength + " aura" + sSchool));}
 							}
 						}
