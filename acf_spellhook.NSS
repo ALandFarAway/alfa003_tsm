@@ -810,12 +810,12 @@ void main()
 			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
 			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " senses " + sAuraCount + " --" + IntToString(nAuraCount) + "-- aura"+ sS ));
 			DelayCommand(14.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + sAuraPowerHigh));
-			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+			
 				DelayCommand(11.0, SendMessageToPC(oCaster, "**********"));
 				DelayCommand(12.0, SendMessageToPC(oCaster, "You concentrate for two rounds."));
 				DelayCommand(13.0, SendMessageToPC(oCaster, "You sense " + sAuraCount + " aura" +sS));
 				DelayCommand(14.0, SendMessageToPC(oCaster, "The most powerful aura you detect is " + sAuraPowerHigh));
-				}
+				
 			}
 		
 		if((nAuraCount > 0) && (nConcentration > 13)) {
