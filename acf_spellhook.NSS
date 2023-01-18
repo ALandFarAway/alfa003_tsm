@@ -74,52 +74,29 @@ string GetCompassDirectionOfBearing(float fDegrees)
 	string sDegrees = IntToString(nDegrees);
 	SendMessageToAllDMs("sDegrees = " + sDegrees);
     // Do the mapping
-    if (fDegrees < HALF_COMPASS_ANGLE || fDegrees > HALF_COMPASS_ANGLE * 31) {
-        return "south";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 3) {
-        return "east-northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 5) {
+    if (fDegrees < HALF_COMPASS_ANGLE * 5) {
         return "northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 7) {
-        return "north-northeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 9) {
         return "east";
     }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 11) {
-        return "east-southeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 13) {
-        return "northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 15) {
-        return "south-southeast";
+   else if (fDegrees < HALF_COMPASS_ANGLE * 13) {
+        return "southeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 17) {
         return "north";
     }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 19) {
-        return "north-northwest";
-    }
     else if (fDegrees < HALF_COMPASS_ANGLE * 21) {
-        return "southwest";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 23) {
-        return "west-southwest";
+        return "northwest";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 25) {
         return "west";
     }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 27) {
-        return "west-northwest";
-    }
     else if (fDegrees < HALF_COMPASS_ANGLE * 29) {
-        return "northwest";
+        return "southwest";
     }
-    return "south-southwest";
+   
+    return "south";
 }
 
 
@@ -449,8 +426,11 @@ void main()
 						sSchool = "";
 						int nSlot = 0;
 						string sSlot = "";
+						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+						string sAngle = GetCompassDirectionOfAngle(fAngle);
+						
 						if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away ";}
+							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away to the " + sAngle;}
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
 							int nHasItems = 0;
