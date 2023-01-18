@@ -176,7 +176,7 @@ void main()
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 					if(nAuraCount == 1) {
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
 						
 					string sName = GetName(oDetected);
@@ -189,7 +189,7 @@ void main()
 							
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				
@@ -208,7 +208,7 @@ void main()
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 					if(nAuraCount == 1) {
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
 					string sName = GetName(oDetected);
 					if(GetUseableFlag(oDetected) != 1) {sName = "";}
@@ -220,7 +220,7 @@ void main()
 					
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				sSchool = "";
@@ -252,7 +252,7 @@ void main()
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 					if(nAuraCount == 1) {
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
 						
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
@@ -267,7 +267,7 @@ void main()
 						
 					if((nConcentration > 13) && (GetLocalInt(oDetected, "Fired") != 1)) {
 						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura" + sSchool));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				}		
@@ -308,7 +308,7 @@ void main()
 														
 						if(nAuraCount == 1) {
 							DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+							DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 							}
 						
 						if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
@@ -320,7 +320,7 @@ void main()
 						string sAngle = GetCompassDirectionOfAngle(fAngle);
 						if((nConcentration > 13) && (oOrigin != OBJECT_INVALID)) {
 							DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off a " + sAuraStrength + " aura" + sSchool));
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off a " + sAuraStrength + " aura" + sSchool));}
+							DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off a " + sAuraStrength + " aura" + sSchool));
 							}
 						}
 					}
@@ -350,7 +350,7 @@ void main()
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 						if(nConcentration > 13) {
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " has a lingering aura of " + sSchool));
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.1, SendMessageToPC(oCaster, GetName(oDetected) + " has a lingering aura" + sSchool));}
+							DelayCommand(21.1, SendMessageToPC(oCaster, GetName(oDetected) + " has a lingering aura" + sSchool));
 							}
 						}
 					
@@ -363,11 +363,9 @@ void main()
 						if(nConcentration > 13) {
 							DelayCommand(21.0, SendMessageToAllDMs("**********"));
 							DelayCommand(21.1, SendMessageToAllDMs("FUNCTIONING SPELLS"));
-							if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 								DelayCommand(21.0, SendMessageToPC(oCaster, "**********"));
 								DelayCommand(21.1, SendMessageToPC(oCaster, "FUNCTIONING SPELLS"));
-								}	
-							}	
+						}	
 						effect eEffect = GetFirstEffect(oDetected);
 						int nEffectSchool = 0;
 							
@@ -396,7 +394,7 @@ void main()
 								nAuraCount++;
 								if(nAuraCount == 1) {
 									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+									DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 									}
 								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
 									if(sEffectSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
@@ -702,7 +700,7 @@ void main()
 												
 											if(nAuraCount == 1) {
 												DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+												DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 												}
 							
 									 		float fDelay = 24.0;
@@ -764,7 +762,7 @@ void main()
 								DelayCommand(35.0, SendMessageToAllDMs(" "));
 								DelayCommand(35.1, SendMessageToAllDMs("CARRIED DETAIL:"));
 								 
-								if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+								
 								    DelayCommand(24.0, SendMessageToPC(oCaster, " "));
 									DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY:"));
 									if(nAbj>0) {DelayCommand(24.2, SendMessageToPC(oCaster, "<color=lightblue>" + sAbj + " Abjuration</color> auras"));}
@@ -783,7 +781,7 @@ void main()
 									DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL"));
 									DelayCommand(35.0, SendMessageToPC(oCaster, " "));
 									DelayCommand(35.1, SendMessageToPC(oCaster, "CARRIED DETAIL:"));
-									}
+									
 								}
 							}
 						
@@ -823,20 +821,20 @@ void main()
 		if((nAuraCount > 0) && (nConcentration > 13)) {
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
-			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+			 
 				DelayCommand(19.0, SendMessageToPC(oCaster, "**********"));
 				DelayCommand(19.1, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));
 				DelayCommand(38.0, SendMessageToPC(oCaster, "**********"));
 				DelayCommand(38.1, SendMessageToPC(oCaster, "That is all you learn."));
-				}
+				
 			}
 		else if (nAuraCount > 0){
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + "'s concentration breaks."));
-			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
+			
 				DelayCommand(19.0, SendMessageToPC(oCaster, "**********"));
 				DelayCommand(19.1, SendMessageToPC(oCaster, "Your concentration breaks."));
-				}
+				
 			}
 		
 		if(nAuraCount == 0) {
