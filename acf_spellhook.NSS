@@ -70,19 +70,21 @@ string GetCompassDirectionOfBearing(float fDegrees)
     while (fDegrees > 360.0) {
         fDegrees -= 360.0;
     }
-
+	int nDegrees = FloatToInt(fDegrees);
+	string sDegrees = IntToString(nDegrees);
+	SendMessageToAllDMs("sDegrees = " + sDegrees);
     // Do the mapping
     if (fDegrees < HALF_COMPASS_ANGLE || fDegrees > HALF_COMPASS_ANGLE * 31) {
-        return "north";
+        return "south";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 3) {
-        return "north-northeast";
+        return "east-northeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 5) {
         return "northeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 7) {
-        return "east-northeast";
+        return "north-northeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 9) {
         return "east";
@@ -91,16 +93,16 @@ string GetCompassDirectionOfBearing(float fDegrees)
         return "east-southeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 13) {
-        return "southeast";
+        return "northeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 15) {
         return "south-southeast";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 17) {
-        return "south";
+        return "north";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 19) {
-        return "south-southwest";
+        return "north-northwest";
     }
     else if (fDegrees < HALF_COMPASS_ANGLE * 21) {
         return "southwest";
@@ -117,7 +119,7 @@ string GetCompassDirectionOfBearing(float fDegrees)
     else if (fDegrees < HALF_COMPASS_ANGLE * 29) {
         return "northwest";
     }
-    return "north-northwest";
+    return "south-southwest";
 }
 
 
@@ -199,10 +201,18 @@ void main()
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 						}
+						
+					string sName = GetName(oDetected);
+					if(GetUseableFlag(oDetected) != 1) {sName = "";}
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
 							
-					 if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));}
 						}
 					}
 				
@@ -223,17 +233,24 @@ void main()
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 						}
-						
+					string sName = GetName(oDetected);
+					if(GetUseableFlag(oDetected) != 1) {sName = "";}
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
+					
 					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));
-						 if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " aura" + sSchool));}
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));}
 						}
 					}
 				sSchool = "";
 				
 				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1)) {
 					SendMessageToAllDMs("Symbol oDetected = " + GetName(oDetected) + " " + GetTag(oDetected) + " " + GetResRef(oDetected));
-					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration";}
+					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}
@@ -489,7 +506,7 @@ void main()
 								//	}
 											
 								itemproperty ipItem = GetFirstItemProperty(oItem);
-								if((GetIsItemPropertyValid(ipItem))
+								if(((GetIsItemPropertyValid(ipItem))
 									&& (GetTag(oItem) != "omega_wand")
 									&& (GetTag(oItem) != "slv_wand")
 									&& (GetTag(oItem) != "tsm_builder_wand")
@@ -509,7 +526,11 @@ void main()
 									&& (FindSubString(GetTag(oItem), "003_it_loot_token") == -1)
 									&& (FindSubString(GetTag(oItem), "dye_") == -1)
 									&& (FindSubString(GetTag(oItem), "it_cassi") == -1)
-									&& (FindSubString(GetTag(oItem), "it_nararoo") == -1)) 	{
+									&& (FindSubString(GetTag(oItem), "it_nararoo") == -1)
+									) || 
+									
+									(FindSubString(GetTag(oItem), "_mask_circus") != -1))
+										{
 									
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
@@ -810,7 +831,7 @@ void main()
 		if((nAuraCount > 0) && (nConcentration > 6)) {
 			DelayCommand(11.0, SendMessageToAllDMs("**********"));
 			DelayCommand(12.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for two rounds."));
-			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " senses " + sAuraCount + " --" + IntToString(nAuraCount) + "-- auras."));
+			DelayCommand(13.0, SendMessageToAllDMs(GetName(oCaster) + " senses " + sAuraCount + " --" + IntToString(nAuraCount) + "-- aura"+ sS ));
 			DelayCommand(14.0, SendMessageToAllDMs("The most powerful aura " + GetName(oCaster) + " detects is " + sAuraPowerHigh));
 			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
 				DelayCommand(11.0, SendMessageToPC(oCaster, "**********"));
@@ -830,7 +851,7 @@ void main()
 				DelayCommand(38.1, SendMessageToPC(oCaster, "That is all you learn."));
 				}
 			}
-		else {
+		else if (nAuraCount > 0){
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + "'s concentration breaks."));
 			if(FindSubString(GetName(oCaster), "Wynna") != -1) {
