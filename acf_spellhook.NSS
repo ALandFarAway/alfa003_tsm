@@ -470,7 +470,7 @@ void main()
 									else {sSlot = "in the inventory of " + GetName(oDetected);}
 									}
 								
-								//if(!GetIsItemPropertyValid(GetFirstItemProperty(oItem))) {
+								if(!GetIsItemPropertyValid(GetFirstItemProperty(oItem))) {
 									if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 										int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 										SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) +  " " + sSlot);
@@ -480,7 +480,7 @@ void main()
 										//IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
 										SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 										}
-								//	}
+									}
 								
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(((GetIsItemPropertyValid(ipItem))
@@ -536,7 +536,7 @@ void main()
 									if(nBaseItem == 116) {sBaseItem = "A flail"; nSpot = 0;}
 									if(nBaseItem == 129) {sBaseItem = "A flute"; nSpot = 5;}
 									if(nBaseItem == 77) {sBaseItem = "A gem"; nSpot = 10;}
-									if(nBaseItem == 36) {sBaseItem = "A pair of gloves";}
+									if(nBaseItem == 36) {sBaseItem = "A pair of gloves"; nSpot = 0;}
 									if(nBaseItem == 18) {sBaseItem = "A great axe"; nSpot = -10;}
 									if(nBaseItem == 120) {sBaseItem = "A great club"; nSpot = -10;}
 									if(nBaseItem == 13) {sBaseItem = "A great sword"; nSpot = -10;}
@@ -671,8 +671,9 @@ void main()
 												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
 											
-											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = sSpot; nSomething++;}
-										    if(GetIdentified(oDetected) == FALSE) {sBaseItem = sSpot; nSomething++;}
+											SendMessageToAllDMs("sBaseItem = " + sBaseItem + "sSlot = " + sSlot); 
+											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, TRUE) == FALSE)) {sBaseItem = sSpot; nSomething++;}
+										    if(GetIdentified(oItem) == FALSE) {sBaseItem = sSpot; nSomething++;}
 											
 											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 												
@@ -706,7 +707,7 @@ void main()
 							
 									 		float fDelay = 24.0;
 											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 30.0 + IntToFloat(nSlot/10);}
-											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
+											if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(nConcentration > 13) {
 												DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 												DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
