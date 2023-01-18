@@ -74,29 +74,29 @@ string GetCompassDirectionOfBearing(float fDegrees)
 	string sDegrees = IntToString(nDegrees);
 	SendMessageToAllDMs("sDegrees = " + sDegrees);
     // Do the mapping
-    if (fDegrees < HALF_COMPASS_ANGLE * 5) {
-        return "southeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 9) {
-        return "east";
-    }
-   else if (fDegrees < HALF_COMPASS_ANGLE * 13) {
-        return "northeast";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 17) {
-        return "north";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 21) {
-        return "northwest";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 25) {
-        return "west";
-    }
-    else if (fDegrees < HALF_COMPASS_ANGLE * 29) {
+    if ((fDegrees > 22.5) && (fDegrees < 67.5)) {
         return "southwest";
     }
+    else if ((fDegrees > 67.5) && (fDegrees < 112.5)) {
+        return "west";
+    }
+   else if ((fDegrees > 112.5) && (fDegrees < 157.5)) {
+        return "northwest";
+    }
+    else if ((fDegrees > 157.5) && (fDegrees < 202.5)) {
+        return "north";
+    }
+    else if ((fDegrees > 202.5) && (fDegrees < 247.5)) {
+        return "northeast";
+    }
+    else if ((fDegrees > 247.5) && (fDegrees < 292.5)) {
+        return "east";
+    }
+    else if ((fDegrees > 292.5) && (fDegrees < 337.5)) {
+        return "southeast";
+    }
    
-    return "south";
+    else return "south";
 }
 
 
