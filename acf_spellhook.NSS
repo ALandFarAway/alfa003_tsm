@@ -72,7 +72,7 @@ string GetCompassDirectionOfBearing(float fDegrees)
     }
 	int nDegrees = FloatToInt(fDegrees);
 	string sDegrees = IntToString(nDegrees);
-	SendMessageToAllDMs("sDegrees = " + sDegrees);
+	//SendMessageToAllDMs("sDegrees = " + sDegrees);
     // Do the mapping
     if ((fDegrees > 22.5) && (fDegrees < 67.5)) {
         return "southwest";
@@ -180,7 +180,7 @@ void main()
 						}
 						
 					string sName = GetName(oDetected);
-					if(GetUseableFlag(oDetected) != 1) {sName = "";}
+					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
 					float fDistance = GetDistanceBetween(oDetected, oCaster);
 					int nDistance = FloatToInt(fDistance);
 					string sDistance = IntToString(nDistance);
@@ -189,7 +189,7 @@ void main()
 							
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				
@@ -211,7 +211,7 @@ void main()
 						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
 					string sName = GetName(oDetected);
-					if(GetUseableFlag(oDetected) != 1) {sName = "";}
+					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
 					float fDistance = GetDistanceBetween(oDetected, oCaster);
 					int nDistance = FloatToInt(fDistance);
 					string sDistance = IntToString(nDistance);
@@ -220,7 +220,7 @@ void main()
 					
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				sSchool = "";
@@ -427,7 +427,7 @@ void main()
 						string sAngle = GetCompassDirectionOfAngle(fAngle);
 						
 						if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away to the " + sAngle;}
+							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
 							else {oItem = GetFirstItemInInventory(oDetected);}
 							int nFirst = 0;
 							int nHasItems = 0;
@@ -481,7 +481,7 @@ void main()
 										SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 										}
 								//	}
-											
+								
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(((GetIsItemPropertyValid(ipItem))
 									&& (GetTag(oItem) != "omega_wand")
@@ -508,7 +508,7 @@ void main()
 									
 									(FindSubString(GetTag(oItem), "_mask_circus") != -1))
 										{
-									
+												
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
@@ -594,10 +594,11 @@ void main()
 									if(nBaseItem == 126) {sBaseItem = "A war mace"; nSpot = -5;}
 									if(nBaseItem == 111) {sBaseItem = "A whip"; nSpot = 5;}
 									
-									if(nSpot == -10) {sSpot = "A very large item";}
-									if(nSpot == -5) {sSpot = "A larger than average item";}
-									if(nSpot == 5) {sSpot = "A smaller than average item";}
-									if(nSpot == 10) {sSpot = "A very small item";}
+									if(nSpot == -10) {sSpot = sBaseItem;}
+									if(nSpot == -5) {sSpot = "A medium sized item";}
+									if(nSpot == 5) {sSpot = "A small item";}
+									if(nSpot == 10) {sSpot = "A tiny item";}
+																	
 									if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
 										sBaseItem = ""; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away "; sSpot = "";
 										}
@@ -670,8 +671,8 @@ void main()
 												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
 											
-											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = "Something" + sSpot; nSomething++;}
-										    if(GetIdentified(oItem) == FALSE) {sBaseItem = "Something" + sSpot; nSomething++;}
+											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = sSpot; nSomething++;}
+										    if(GetIdentified(oDetected) == FALSE) {sBaseItem = sSpot; nSomething++;}
 											
 											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 												
