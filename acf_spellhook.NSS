@@ -413,9 +413,8 @@ void main()
 									
 								if(nConcentration > 13) {
 									DelayCommand(20.5, SendMessageToAllDMs("<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
-									if(FindSubString(GetName(oCaster), "Wynna") != -1) {
-										DelayCommand(20.5, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
-										}
+									DelayCommand(20.5, SendMessageToPC(oCaster, "<color=gray>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
+									
 									}	
 								}
 							eEffect = GetNextEffect(oDetected);
@@ -711,7 +710,7 @@ void main()
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(nConcentration > 13) {
 												DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-												if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));}
+												DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 												}
 											}
 											
