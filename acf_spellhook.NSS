@@ -72,8 +72,7 @@ string GetCompassDirectionOfBearing(float fDegrees)
     }
 	int nDegrees = FloatToInt(fDegrees);
 	string sDegrees = IntToString(nDegrees);
-	//SendMessageToAllDMs("sDegrees = " + sDegrees);
-    // Do the mapping
+	 // Do the mapping
     if ((fDegrees > 22.5) && (fDegrees < 67.5)) {
         return "southwest";
     }
@@ -276,8 +275,6 @@ void main()
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 						
 					if((FindSubString(GetName(oDetected), "Trap: Spell") != -1) || (FindSubString(GetTag(oDetected), "trap_spell_")) != -1)  {
-						//object oTrapAOE = GetNearestObject(OBJECT_TYPE_AREA_OF_EFFECT, oDetected, 1);
-						//SendMessageToAllDMs("oMyTrapAOE = " + GetTag(oTrapAOE));
 						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
@@ -470,7 +467,7 @@ void main()
 									else {sSlot = "in the inventory of " + GetName(oDetected);}
 									}
 								
-								if(!GetIsItemPropertyValid(GetFirstItemProperty(oItem))) {
+								if(FindSubString(GetTag(oItem), "_mask_circus") != -1) {SendMessageToAllDMs("Mask = " + GetTag(oItem));}
 									if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 										int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 										SendMessageToAllDMs("Adding Cast Unique Spell School " + Get2DAString("spellschools", "Label", nACRSpellSchool) +  " to " + GetName(oItem) +  " " + sSlot);
@@ -480,8 +477,8 @@ void main()
 										//IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
 										SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 										}
-									}
-								
+									
+																	
 								itemproperty ipItem = GetFirstItemProperty(oItem);
 								if(((GetIsItemPropertyValid(ipItem))
 									&& (GetTag(oItem) != "omega_wand")
@@ -520,9 +517,10 @@ void main()
 									if(nBaseItem == 3) {sBaseItem = "A bastard sword"; nSpot = -5;}
 									if(nBaseItem == 2) {sBaseItem = "A battle axe"; nSpot = -10;}
 									if(nBaseItem == 21) {sBaseItem = "A belt"; nSpot = 10;}
+									if(nBaseItem == 101) {sBaseItem = "A bottle"; nSpot = 0;}
 									if(nBaseItem == 25) {sBaseItem = "Bolts"; nSpot = 0;}
 									if(nBaseItem == 74) {sBaseItem = "A book"; nSpot = 5;}
-									if(nBaseItem == 26) {sBaseItem = "A pair of boots"; nSpot = 5;;}
+									if(nBaseItem == 26) {sBaseItem = "A pair of boots"; nSpot = 5;}
 									if(nBaseItem == 78) {sBaseItem = "A pair of bracers"; nSpot = 10;}
 									if(nBaseItem == 27) {sBaseItem = "A pouch of bullets"; nSpot = 10;}
 									if(nBaseItem == 80) {sBaseItem = "A cloak"; nSpot = 5;}
@@ -588,7 +586,9 @@ void main()
 									if(nBaseItem == 14) {sBaseItem = "A small shield"; nSpot = -5;}
 									if(nBaseItem == 119) {sBaseItem = "A spear"; nSpot = -10;}
 									if(nBaseItem == 63) {sBaseItem = "A set of throwing axes"; nSpot = 5;}
-									if(nBaseItem == 62) {sBaseItem = "A set of thieves tools";}
+									if(nBaseItem == 62) {sBaseItem = "A set of thieves tools"; nSpot = 5;}
+									if(nBaseItem == 200) {sBaseItem = "A small item"; nSpot = 0;}
+									if(nBaseItem == 72) {sBaseItem = "A small item"; nSpot = 0;}
 									if(nBaseItem == 57) {sBaseItem = "A tower shield"; nSpot = -10;}
 									if(nBaseItem == 5) {sBaseItem = "A war hammer"; nSpot = -5;}
 									if(nBaseItem == 126) {sBaseItem = "A war mace"; nSpot = -5;}
@@ -671,7 +671,7 @@ void main()
 												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
 											
-											SendMessageToAllDMs("sBaseItem = " + sBaseItem + "sSlot = " + sSlot); 
+											SendMessageToAllDMs("sBaseItem = " + sBaseItem + "; sSlot = " + sSlot); 
 											if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, TRUE) == FALSE)) {sBaseItem = sSpot; nSomething++;}
 										    if(GetIdentified(oItem) == FALSE) {sBaseItem = sSpot; nSomething++;}
 											
