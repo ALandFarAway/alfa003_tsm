@@ -20,7 +20,7 @@ void main()
 	object oPC = GetEnteringObject();
     
 
-if((GetTag(OBJECT_SELF) == "phalorm_glacier_enter") || (GetTag(OBJECT_SELF) == "phalorm_rr_enter")) {
+if((GetTag(OBJECT_SELF) == "phlm_glacier_teleport_enter") || (GetTag(OBJECT_SELF) == "phlm_rr_teleport_enter")) {
 		object oThereWP;
 		object oHereWP;
 		object oGoThere;
@@ -55,7 +55,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_glacier_enter") || (GetTag(OBJECT_SELF) == "
 			}
 	}
 		
-	if((GetTag(OBJECT_SELF) == "phalorm_glacier_exit") || (GetTag(OBJECT_SELF) == "phalorm_rr_exit")) {
+	if((GetTag(OBJECT_SELF) == "phlm_glacier_teleport_exit") || (GetTag(OBJECT_SELF) == "phlm_rr_teleport_exit")) {
 		object oThereWP;
 		object oHereWP;
 		object oGoThere;

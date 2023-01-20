@@ -28,7 +28,7 @@ if((GetTag(OBJECT_SELF) == "phalorm_light_green_up_trg") && (GetIsPC(oPC)) && (G
 		 DestroyObject(oLight, 3.0);
 		}
 
-if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
+if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_enter") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
 		object oHereWP = GetWaypointByTag("WP_phalorm_archive_platform_enter");
 		object oGoThere = GetWaypointByTag("WP_phalorm_archive_enter");
@@ -60,7 +60,7 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 			}
 		}
 		
-	if(GetTag(OBJECT_SELF) == "phalorm_archive_exit") {
+	if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_exit") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_enter");
 		object oHereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
 		object oGoThere = GetWaypointByTag("WP_phalorm_archive_exit");
@@ -93,7 +93,7 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 			}
 		}
 		
-	if(GetTag(OBJECT_SELF) == "phalorm_vault_enter") {
+	if(GetTag(OBJECT_SELF) == "phlm_vault_teleport_enter") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_vault_platform_exit");
 		object oHereWP = GetWaypointByTag("WP_phalorm_vault_platform_enter");
 		object oGoThere = GetWaypointByTag("WP_phalorm_vault_enter");
@@ -101,7 +101,17 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 		location lHere = GetLocation(oHereWP);
 		location lGoThere = GetLocation(oGoThere);
 		
-		if((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+		if(((GetTag(GetItemInSlot(INVENTORY_SLOT_LEFTRING, oPC)) == "003_it_he_sehancrystalcount") || (GetTag(GetItemInSlot(INVENTORY_SLOT_RIGHTRING, oPC)) == "003_it_he_sehancrystalcount")) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+			SetLocalInt(OBJECT_SELF, "Activated", 1); 
+			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
+			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
+			object oPlatformThere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lThere);
+			ActionSpeakString("*Glows with a soft, silver light.", TALKVOLUME_TALK);
+			DelayCommand(1.0, SendMessageToPC(oPC, "A soft, silver light shimmers beneath your feet. You feel your heart rise as if your body is falling and find yourself in another place."));
+			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
+			}
+			
+		else if((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);
@@ -116,7 +126,7 @@ if(GetTag(OBJECT_SELF) == "phalorm_archive_enter") {
 			}
 		}
 		
-	if(GetTag(OBJECT_SELF) == "phalorm_vault_exit") {
+	if(GetTag(OBJECT_SELF) == "phlm_vault_teleport_exit") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_vault_platform_enter");
 		object oHereWP = GetWaypointByTag("WP_phalorm_vault_platform_exit");
 		object oGoThere = GetWaypointByTag("WP_phalorm_vault_exit");
