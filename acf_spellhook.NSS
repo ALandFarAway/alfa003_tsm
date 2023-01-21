@@ -385,8 +385,8 @@ void main()
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
 						
 					if((nConcentration > 13) && (GetLocalInt(oDetected, "Fired") != 1)) {
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
 				
@@ -434,7 +434,7 @@ void main()
 				
 				//sSchool = "";
 				
-				if(GetTag(oDetected) == "MH_"){
+				if(FindSubString(GetTag(oDetected), "MH_") != -1) {
 					nAuraCount++;
 					nAuraPower = 3;
 					sAuraStrength = "faint";
@@ -495,10 +495,10 @@ void main()
 						if((FindSubString(GetTag(oDetected), "trans") != -1) || (FindSubString(GetTag(oDetected), "Trans") != -1)) {sSchool = " of <color=orange>Transmutation</color>";}
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 							 
-						if(FindSubString(GetTag(oDetected), "3_trig_") != -1) {nAuraPower = 7; sAuraStrength = "strong";}
-						if(FindSubString(GetTag(oDetected), "2_trig_") != -1) {nAuraPower = 5; sAuraStrength = "moderate";}
-						if(FindSubString(GetTag(oDetected), "1_trig_") != -1) {nAuraPower = 3; sAuraStrength = "faint";}
-						string sName = GetName(oDetected);
+						if(FindSubString(GetTag(oDetected), "3") != -1) {nAuraPower = 7; sAuraStrength = "strong";}
+						if(FindSubString(GetTag(oDetected), "2") != -1) {nAuraPower = 5; sAuraStrength = "moderate";}
+						if(FindSubString(GetTag(oDetected), "1") != -1) {nAuraPower = 3; sAuraStrength = "faint";}
+						string sName = "Something";
 						if(FindSubString(GetTag(oDetected), "_door_") != -1) {sName = "A door";}
 						float fDistance = GetDistanceBetween(oDetected, oCaster);
 						int nDistance = FloatToInt(fDistance);
@@ -1048,13 +1048,15 @@ void main()
 						
 					}
 				}
-				if(nAuraCount == 1) {
-					DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-					DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-					}
 						
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 			}
+			
+		if(nAuraCount == 1) {
+			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+			DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
+			}
+				
 		nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 				
@@ -1085,7 +1087,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 38.0;}
+			if(nItemCounted == 1) {fDelay = 40.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
@@ -1095,6 +1097,8 @@ void main()
 			DelayCommand(19.1, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));
 			DelayCommand(fDelay, SendMessageToPC(oCaster, "**********"));
 			DelayCommand(fDelay + 0.1, SendMessageToPC(oCaster, "That is all you learn."));
+			
+			SetLocalInt(oCaster, "nItemCount", 0);
 			}
 		else if (nAuraCount > 0){
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
