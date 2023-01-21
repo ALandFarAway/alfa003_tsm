@@ -463,16 +463,18 @@ void main()
 					sSchool = "";
 				
 							
-					if((GetTag(oDetected) == "ation") || (GetTag(oDetected) == "Enchantment") || (GetTag(oDetected) == "Illusion") || (GetTag(oDetected) == "Necromancy")){
+					if((FindSubString(GetTag(oDetected), "ation") != -1) || (FindSubString(GetTag(oDetected), "enchantment") != -1) || (FindSubString(GetTag(oDetected), "illusion") != -1) || (FindSubString(GetTag(oDetected), "necromancy") !=-1)){
 						nAuraCount++;
-						if(FindSubString(GetTag(oDetected), "Abj") != -1) {sSchool = " of <color=lightblue>Abjuration</color>";}
-						if(FindSubString(GetTag(oDetected), "Conj") != -1) {sSchool = " of <color=tan>Conjuration</color>";}
-					 	if(FindSubString(GetTag(oDetected), "Divi") != -1) {sSchool = " of <color=green>Divination</color>";}
-						if(FindSubString(GetTag(oDetected), "Ench") != -1) {sSchool = " of <color=magenta>Enchantment</color>";}
-						if(FindSubString(GetTag(oDetected), "Evoc") != -1) {sSchool = " of <color=red>Evocation</color>";}
-						if(FindSubString(GetTag(oDetected), "Illus") != -1) {sSchool = " of <color=purple>Illusion</color>";}
-						if(FindSubString(GetTag(oDetected), "Necro") != -1) {sSchool = " of <color=white>Necromancy</color>";}
-						if(FindSubString(GetTag(oDetected), "Trans") != -1) {sSchool = " of <color=orange>Transmutation</color>";}
+						nAuraPower = 3; 
+						sAuraStrength = "faint";
+						if((FindSubString(GetTag(oDetected), "abj") != -1) {sSchool = " of <color=lightblue>Abjuration</color>";}
+						if((FindSubString(GetTag(oDetected), "conj") != -1) {sSchool = " of <color=tan>Conjuration</color>";}
+					 	if((FindSubString(GetTag(oDetected), "divi") != -1) {sSchool = " of <color=green>Divination</color>";}
+						if(FindSubString(GetTag(oDetected), "ench") != -1) {sSchool = " of <color=magenta>Enchantment</color>";}
+						if(FindSubString(GetTag(oDetected), "evoc") != -1) {sSchool = " of <color=red>Evocation</color>";}
+						if(FindSubString(GetTag(oDetected), "illus") != -1) {sSchool = " of <color=purple>Illusion</color>";}
+						if(FindSubString(GetTag(oDetected), "necro") != -1) {sSchool = " of <color=white>Necromancy</color>";}
+						if(FindSubString(GetTag(oDetected), "trans") != -1) {sSchool = " of <color=orange>Transmutation</color>";}
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 							 
 						if(FindSubString(GetTag(oDetected), "3_trig_") != -1) {nAuraPower = 7; sAuraStrength = "strong";}
