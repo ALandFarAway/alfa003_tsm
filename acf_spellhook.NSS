@@ -168,7 +168,100 @@ void main()
 		while (GetIsObjectValid(oDetected)) {
 		//SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT))){
-			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
+			if(GetTag(oDetected) == "_SCRY_"){
+					nAuraCount++;
+					nAuraPower = 4;
+					sAuraStrength = "moderate";
+					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=green>Divination</color>";}
+					string sName = GetName(oDetected);
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
+							
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						}
+					}
+				
+				sSchool = "";
+				
+				if((GetTag(oDetected) == "ALFA_PORTAL_PLC") || (FindSubString(GetTag(oDetected), "_portal_") != -1)  || (FindSubString(GetTag(oDetected), "_teleport_") != -1)){
+				    nAuraCount++;
+					nAuraPower = 5;
+					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
+					sAuraStrength = "moderate";
+					string sName = GetName(oDetected);
+					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
+					
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						}
+					}
+				sSchool = "";
+				
+				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1)) {
+					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
+					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
+					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
+					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}
+					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_fear") != -1)) {nAuraPower = 6;}
+					if((FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1)) {nAuraPower = 7;}
+					if((FindSubString(GetTag(oDetected), "_symbol_insanity") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {nAuraPower = 8;}
+									
+					nAuraCount++;
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower > 0) {sAuraStrength = "faint";}
+					if(nAuraPower > 3) {sAuraStrength = "moderate";}
+					if(nAuraPower > 6) {sAuraStrength = "strong";}
+					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+					
+					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
+					string sSymbolName = GetName(oDetected);			
+					if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) && (GetLocalInt(oDetected, "Fired") != 1));{sSymbolName = "Something";}
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
+						
+					if((nConcentration > 13) && (GetLocalInt(oDetected, "Fired") != 1)) {
+						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
+						}
+					}
+					
+			sSchool = "";
+						
+			if(((FindSubString(GetName(oDetected), "Forcefield") != -1) && ((FindSubString(GetName(oDetected), "Walkmesh") == -1)))  || (FindSubString(GetTag(oDetected), "forcefield") != -1)){
+				 	nAuraCount++;
+					nAuraPower = 5;
+					sAuraStrength = "moderate";
+					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=red>Evocation</color>";}
+					string sName = GetName(oDetected);
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
+							
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						}
+					}
+				
+				sSchool = "";
+				
+				if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
 				SendMessageToAllDMs("Placed Effect oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 				nAuraCount++;
 				string sName = GetName(oDetected);
@@ -241,10 +334,10 @@ void main()
 						}
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						
-					/*if(nAuraCount == 1) {
+					if(nAuraCount == 1) {
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-						}*/
+						}
 						
 					float fDistance = GetDistanceBetween(oDetected, oCaster);
 					int nDistance = FloatToInt(fDistance);
@@ -260,26 +353,7 @@ void main()
 				sSchool = "";
 			}
 		
-			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)){
-				if(((FindSubString(GetName(oDetected), "Forcefield") != -1) && ((FindSubString(GetName(oDetected), "Walkmesh") == -1)))  || (FindSubString(GetTag(oDetected), "forcefield") != -1)){
-				 	nAuraCount++;
-					nAuraPower = 5;
-					sAuraStrength = "moderate";
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=red>Evocation</color>";}
-					string sName = GetName(oDetected);
-					float fDistance = GetDistanceBetween(oDetected, oCaster);
-					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
-							
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						}
-					}
-				
-				sSchool = "";
+			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {
 				
 				if((FindSubString(GetTag(oDetected),"phalorm_crystal") != -1) || (FindSubString(GetTag(oDetected),"phalorm_globe") != -1) || (FindSubString(GetTag(oDetected),"crystal_discord") != -1)){
 					nAuraCount++;
@@ -318,80 +392,7 @@ void main()
 				
 				sSchool = "";
 				
-				
-				if(GetTag(oDetected) == "_SCRY_"){
-					nAuraCount++;
-					nAuraPower = 4;
-					sAuraStrength = "moderate";
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=green>Divination</color>";}
-					string sName = GetName(oDetected);
-					float fDistance = GetDistanceBetween(oDetected, oCaster);
-					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
-							
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						}
-					}
-				
-				sSchool = "";
-				
-				if((GetTag(oDetected) == "ALFA_PORTAL_PLC") || (FindSubString(GetTag(oDetected), "_portal_") != -1)  || (FindSubString(GetTag(oDetected), "_teleport_") != -1)){
-				   nAuraCount++;
-					nAuraPower = 5;
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
-					sAuraStrength = "moderate";
-					string sName = GetName(oDetected);
-					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
-					float fDistance = GetDistanceBetween(oDetected, oCaster);
-					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
-					
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						}
-					}
-				sSchool = "";
-				
-				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1)) {
-					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
-					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
-					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
-					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}
-					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_fear") != -1)) {nAuraPower = 6;}
-					if((FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1)) {nAuraPower = 7;}
-					if((FindSubString(GetTag(oDetected), "_symbol_insanity") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {nAuraPower = 8;}
-									
-					nAuraCount++;
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > 0) {sAuraStrength = "faint";}
-					if(nAuraPower > 3) {sAuraStrength = "moderate";}
-					if(nAuraPower > 6) {sAuraStrength = "strong";}
-					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-					
-					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
-					string sSymbolName = GetName(oDetected);			
-					if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) && (GetLocalInt(oDetected, "Fired") != 1));{sSymbolName = "Something";}
-					float fDistance = GetDistanceBetween(oDetected, oCaster);
-					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
-						
-					if((nConcentration > 13) && (GetLocalInt(oDetected, "Fired") != 1)) {
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
-						}
-					}
-				
-				if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {	
-					if((GetTag(oDetected)== "slv_300_quill") || (GetTag(oDetected)== "slv_300_desk") || (GetTag(oDetected)== "slv_sundial")) {
+				if((GetTag(oDetected)== "slv_300_quill") || (GetTag(oDetected)== "slv_300_desk") || (GetTag(oDetected)== "slv_sundial")) {
 					   nAuraCount++;
 						nAuraPower = 3;
 						sAuraStrength = "faint";
@@ -409,6 +410,19 @@ void main()
 							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 							}
 						}
+						
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+						}
+					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
+						
+					if(nAuraCount == 1) {
+						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
+						}
+						
 					}
 					
 					sSchool = "";
@@ -432,7 +446,7 @@ void main()
 						}
 					}
 				
-				//sSchool = "";
+				sSchool = "";
 				
 				if(FindSubString(GetTag(oDetected), "MH_") != -1) {
 					nAuraCount++;
@@ -458,7 +472,7 @@ void main()
 						}
 					}
 				
-				//sSchool = "";
+				sSchool = "";
 				
 				if((GetTag(oDetected) == "dean_secret") || (FindSubString(GetTag(oDetected), "vala_secret")!= -1)) {
 						nAuraCount++;
@@ -512,18 +526,22 @@ void main()
 							}
 						}
 					SendMessageToAllDMs("Trigger oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+						}
+					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
+						
+					if(nAuraCount == 1) {
+						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
+						}
+						
 					}
 				
-				//sSchool = "";
-						
-				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-				if(nAuraPower > nAuraPowerHigh) {
-					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-				sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-				}		
 				sSchool = "";
+						
 				
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 						
@@ -556,10 +574,10 @@ void main()
 						    }
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 														
-						/*if(nAuraCount == 1) {
+						if(nAuraCount == 1) {
 							DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 							DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-							}*/
+							}
 						
 						if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 						object oOrigin = GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1);
@@ -595,8 +613,8 @@ void main()
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						//DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-						//if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 						if(nConcentration > 13) {
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " has a lingering aura of " + sSchool));
@@ -642,10 +660,10 @@ void main()
 								SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
 								
 								nAuraCount++;
-								/*if(nAuraCount == 1) {
+								if(nAuraCount == 1) {
 									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 									DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-									}*/
+									}
 								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
 									if(sEffectSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
 									if(sEffectSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
@@ -956,10 +974,10 @@ void main()
 							    				}
 											sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 												
-											/*if(nAuraCount == 1) {
+											if(nAuraCount == 1) {
 												DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 												DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-												}*/
+												}
 							
 									 		float fDelay = 24.0;
 											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 30.0 + IntToFloat(nSlot/10);}
@@ -1052,10 +1070,10 @@ void main()
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 			}
 			
-		if(nAuraCount == 1) {
+		/*if(nAuraCount == 1) {
 			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 			DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-			}
+			}*/
 				
 		nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
@@ -1087,7 +1105,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 40.0;}
+			if(nItemCounted == 1) {fDelay = 42.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
