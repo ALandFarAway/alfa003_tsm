@@ -1220,7 +1220,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="81024141285EAC8B928C0D210313D665F67B4863" downloadHash="1861774DE1F14955BCC3AD8A13CEE2B7588612EC" name="003_quests_lab.trx" dlsize="125947" size="311926" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="47246B6DA75315248670E74CC88C1656A627B889" downloadHash="04B3A4FF4D3B83E9F5018E25BD8AABB9768F40DF" name="003_quests_lab.trx" dlsize="125903" size="312205" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1695,7 +1695,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A02B834B274ED81C146FC54076CC473E8A896CFC" downloadHash="170167C8D29C8B29A0C7DB938A80FA05132F4ACF" name="8e_int_highforest_nw_cave_aq.trx" dlsize="692612" size="6400331" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A0DA9D785D07961B8A69214DA6238B637AB41D49" downloadHash="803216BC2377B706A079563F62826CFF0A66AF9B" name="8e_int_highforest_nw_cave_aq.trx" dlsize="731968" size="6391228" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

@@ -111,7 +111,7 @@ if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_enter") {
 			DelayCommand(2.0, ActionCreateWynPlacedEffect("fx_spirit_trap_barrier02", lHere));
 			}
 			
-		else if((GetItemPossessedBy(oPC, "003_it_phalorm_diamond")!= OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1)) {
+		else if (GetLocalInt(OBJECT_SELF, "Activated") != 1) {
 			SetLocalInt(OBJECT_SELF, "Activated", 1); 
 			object oThereBeam = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "fx_spirit_trap_barrier02", lThere);
 			object oPlatformHere = CreateObject(OBJECT_TYPE_PLACEABLE,"phalorm_platform_active", lHere);

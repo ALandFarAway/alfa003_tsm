@@ -694,7 +694,7 @@ if(GetTag(OBJECT_SELF) == "deandragon_z_swim")
 	
 
 //deandragon_z_portal
-if(GetTag(OBJECT_SELF) == "deandragon_z_portal")
+if(GetTag(OBJECT_SELF) == "alfa_portal_slv_teleport")
 	{if((ACR_RetrieveQuestState("slv_deandragon_z", GetEnteringObject()) == 1) || (ACR_RetrieveQuestState("slv_deandragon_z", GetEnteringObject()) == 2))
 		{JumpPartyToArea(GetEnteringObject(), GetWaypointByTag("slv_deandragon_z_portal"));
 		 }
