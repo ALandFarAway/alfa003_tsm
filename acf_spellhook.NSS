@@ -610,7 +610,7 @@ void main()
 						if(sSchool == "C") {sSchool = " of <color=tan>Conjuration</color>";}
 						if(sSchool == "D") {sSchool = " of <color=green>Divination</color>";}
 						if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment</color>";}
-						if(sSchool == "H") {sSchool = " of <color=white>service to a deity</color>";}
+						if(sSchool == "H") {sSchool = " of <color=white>Holy</color>";}
 						if(sSchool == "I") {sSchool = " of <color=purple>Illusion</color>";}
 						if(sSchool == "N") {sSchool = " of <color=white>Necromancy</color>";}
 						if(sSchool == "T") {sSchool = " of <color=orange>Transmutation</color>";}
@@ -731,7 +731,7 @@ void main()
 									if(sEffectSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
 									if(sEffectSchool == "D") {sSchool = " of <color=green>Divination </color>";}
 									if(sEffectSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>";}
-									if(sEffectSchool == "H") {sSchool = " of <color=white>service to a deity </color>";}
+									if(sEffectSchool == "H") {sSchool = " of <color=white>Holiness </color>";}
 									if(sEffectSchool == "I") {sSchool = " of <color=purple>Illusion </color>";}
 									if(sEffectSchool == "N") {sSchool = " of <color=white>Necromancy </color>";}
 									if(sEffectSchool == "T") {sSchool = " of <color=orange>Transmutation </color>";}
@@ -1010,7 +1010,7 @@ void main()
 											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
 											if(sSchool == "D") {sSchool = " of <color=green>Divination </color>"; nDiv++;}
 											if(sSchool == "E") {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
-											if(sSchool == "H") {sSchool = " of <color=white>service to a deity </color>"; nHoly++;}
+											if(sSchool == "H") {sSchool = " of <color=white>Holiness </color>"; nHoly++;}
 											if(sSchool == "I") {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
 											if(sSchool == "N") {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
 											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
@@ -1083,8 +1083,8 @@ void main()
 								if(nIll>0) {DelayCommand(24.7, SendMessageToAllDMs(GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
 								if(nNec>0) {DelayCommand(24.8, SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
 								if(nTra>0) {DelayCommand(24.9, SendMessageToAllDMs(GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-								if(nGen>0) {DelayCommand(25.0, SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal auras</color>"));}
-								if(nHoly>0) {DelayCommand(25.1, SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy auras</color>"));}
+								if(nGen>0) {DelayCommand(25.0, SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+								if(nHoly>0) {DelayCommand(25.1, SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 								if(nSomething>0) {DelayCommand(25.2, SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								DelayCommand(25.3, SendMessageToAllDMs(" "));
 								DelayCommand(25.4, SendMessageToAllDMs("**********"));
@@ -1103,8 +1103,8 @@ void main()
 									if(nIll>0) {DelayCommand(24.7, SendMessageToPC(oCaster, GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
 									if(nNec>0) {DelayCommand(24.8, SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
 									if(nTra>0) {DelayCommand(24.9, SendMessageToPC(oCaster, GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-									if(nGen>0) {DelayCommand(25.0, SendMessageToPC(oCaster, GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal auras"));}
-									if(nHoly>0) {DelayCommand(25.1, SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sHoly + " Holy auras"));}
+									if(nGen>0) {DelayCommand(25.0, SendMessageToPC(oCaster, GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+									if(nHoly>0) {DelayCommand(25.1, SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 									if(nSomething>0) {DelayCommand(25.2, SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								 	DelayCommand(25.3, SendMessageToPC(oCaster, " "));
 									DelayCommand(25.4, SendMessageToPC(oCaster, "**********"));
