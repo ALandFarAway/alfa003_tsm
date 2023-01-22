@@ -170,7 +170,7 @@ void main()
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT))){
 			
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
-				SendMessageToAllDMs("Placed Effect oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				//SendMessageToAllDMs("Placed Effect oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 				string sName = GetName(oDetected);
 				if((FindSubString(GetTag(oDetected), "_containment") != -1) || (FindSubString(GetTag(oDetected), "_encase") != -1)  || (FindSubString(GetTag(oDetected), "_barrier") != -1) || (FindSubString(GetTag(oDetected), "_trap") != -1) || (FindSubString(GetTag(oDetected), "_imprison") != -1)){
 						 nAuraCount++;
@@ -200,7 +200,7 @@ void main()
 						 sName = "A gem spinning around somebody's head";
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=orange>Transmutation</color>";}
 					}	 
-				if(FindSubString(GetTag(oDetected), "_elemental_") != -1){
+				if(FindSubString(GetTag(oDetected), "_elemental") != -1){
 						 nAuraCount++;
 						 nAuraPower = 5;
 						 sAuraStrength = "moderate";
@@ -619,11 +619,11 @@ void main()
 						nAuraCount++;
 						sAuraPower = Get2DAString("spells", "Innate", nSpellID);
 						nAuraPower = StringToInt(sAuraPower);
-						sAuraStrength = "detectable";
-						if(nAuraPower > 0) {sAuraStrength = "faint";}
-						if(nAuraPower > 3) {sAuraStrength = "moderate";}
-						if(nAuraPower > 6) {sAuraStrength = "strong";}
-						if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+						sAuraStrength = "an indeterminately powerful";
+						if(nAuraPower > 0) {sAuraStrength = "a faint";}
+						if(nAuraPower > 3) {sAuraStrength = "a moderate";}
+						if(nAuraPower > 6) {sAuraStrength = "a strong";}
+						if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 							
 						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 						if(nAuraPower > nAuraPowerHigh) {
@@ -645,8 +645,8 @@ void main()
 						float fAngle = GetAngleBetweenObjects(oDetected, oOrigin);
 						string sAngle = GetCompassDirectionOfAngle(fAngle);
 						if((nConcentration > 13) && (oOrigin != OBJECT_INVALID)) {
-							DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off a " + sAuraStrength + " aura" + sSchool));
-							DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off a " + sAuraStrength + " aura" + sSchool));
+							DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off " + sAuraStrength + " aura" + sSchool));
+							DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off " + sAuraStrength + " aura" + sSchool));
 							}
 						}
 					}
@@ -665,15 +665,18 @@ void main()
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "<color=orange>Transmutation</color>";}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "<color=white>Necromancy</color>";}
 					if(FindSubString(GetTag(oDetected), "003_scry_sen") != -1) {sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";} 
+					SendMessageToAllDMs("sRace = " + sRace);
 					if(sRace != ""){
 						nAuraCount++;
 						float fAuraPower = GetChallengeRating(oDetected);
 						nAuraPower = FloatToInt(fAuraPower)/2;
-						if(nAuraPower > 0) {sAuraStrength = "a faint";}
+						SendMessageToAllDMs("nAuraPower = " + IntToString(nAuraPower));
+					    if(nAuraPower > 0) {sAuraStrength = "a faint";}
 						if(nAuraPower > 3) {sAuraStrength = "a moderate";}
 						if(nAuraPower > 6) {sAuraStrength = "a strong";}
 						if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
-						if(nAuraPower > nAuraPowerHigh) {
+						SendMessageToAllDMs("sAuraStrength = " + sAuraStrength);
+					    if(nAuraPower > nAuraPowerHigh) {
 							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
@@ -759,7 +762,7 @@ void main()
 					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
 						
-					if(((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) && (GetHasInventory(oDetected))) || ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
+					if(((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) && (GetHasInventory(oDetected))) || ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetHasInventory(oDetected)) && (GetIsDM(oDetected) == FALSE)) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 						SetLocalInt(oCaster, "nItemCount", 1);
 						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
 						else {oItem = GetFirstItemInInventory(oDetected);}
@@ -803,10 +806,9 @@ void main()
 								else {sSlot = "in the inventory of " + GetName(oDetected);}
 								}
 								
-							if((FindSubString(GetTag(oItem), "_mask_circus") != -1) || (FindSubString(GetTag(oItem), "_it_phalorm_") != -1) 
-								|| (GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0)) {
+							if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 									int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-									if((FindSubString(GetTag(oItem), "_mask_circus") != -1) || (FindSubString(GetTag(oItem), "_it_phalorm_") != -1)) {nACRSpellSchool = 2;}
+									//if((FindSubString(GetTag(oItem), "_mask_circus") != -1) || (FindSubString(GetTag(oItem), "_it_phalorm_") != -1)) {nACRSpellSchool = 2;}
 									int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 									int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 									itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
@@ -1080,7 +1082,7 @@ void main()
 							if(nGen < 5) {sGen = IntToString(nGen);} else if(nGen < 8) {sGen = "around half a dozen";} else if(nGen < 13) {sGen = "close to ten";}  else if(nGen > 12) {sGen = "more than a dozen";}
 							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
-							if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
+							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetHasInventory(oDetected))) {
 								DelayCommand(24.0, SendMessageToAllDMs(" "));
 								DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
 								if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>:" + sAbj + " Abjuration</color> auras"));}
@@ -1157,7 +1159,7 @@ void main()
 		if((nAuraCount > 0) && (nConcentration > 13)) {
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
-			SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
+			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
 			if(nItemCounted == 1) {fDelay = 42.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
