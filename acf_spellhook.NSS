@@ -287,7 +287,7 @@ void main()
 						}
 					}*/
 				
-				if(GetTag(oDetected) == "alfa_portal_plc"){
+				if(FindSubString(GetTag(oDetected), "alfa_portal")!= -1) {
 				    nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
