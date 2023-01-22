@@ -197,7 +197,10 @@ void main()
 						 nAuraCount++;
 						 nAuraPower = 5;
 						 sAuraStrength = "moderate";
-						 sName = "A gem spinning around somebody's head";
+						 object oOwner = GetNearestCreature(CREATURE_TYPE_PERCEPTION, PERCEPTION_SEEN, oDetected, 1);
+						 string sOwner = GetName(oOwner) + "'s head";
+						 if(GetDistanceBetween(oDetected, oOwner) > 2.0) {sOwner = "something";}
+						 sName = "A gem spinning around " + sOwner;
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=orange>Transmutation</color>";}
 					}	 
 				if(FindSubString(GetTag(oDetected), "_elemental") != -1){
@@ -655,6 +658,7 @@ void main()
 				nAuraPower = 0;
 							
 				if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) {
+					string sName = GetName(oDetected);
 					int nRace = GetRacialType(oDetected);
 					string sRace = "";
 					if(nRace == 10) {sRace = "Construct"; sSchool = "<color=orange>Transmutation</color>";}
@@ -664,7 +668,10 @@ void main()
 					if(nRace == 20) {sRace = "Outsider"; sSchool = "<color=tan>Conjuration</color>";}
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "<color=orange>Transmutation</color>";}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "<color=white>Necromancy</color>";}
-					if(FindSubString(GetTag(oDetected), "003_scry_sen") != -1) {sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";} 
+					if(FindSubString(GetTag(oDetected), "003_cr_scry_sen") != -1) {sName = "Something"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";} 
+					if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
+							sName = "Invisible Presence";
+							}  
 					SendMessageToAllDMs("sRace = " + sRace);
 					if(sRace != ""){
 						nAuraCount++;
@@ -686,17 +693,14 @@ void main()
 						
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 						if(nConcentration > 13) {
-							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " has a " + sAuraStrength + " lingering aura of " + sSchool));
-							DelayCommand(21.1, SendMessageToPC(oCaster, GetName(oDetected) + " has a " + sAuraStrength + " lingering aura" + sSchool));
+							DelayCommand(21.0, SendMessageToAllDMs(sName + " has a " + sAuraStrength + " lingering aura of " + sSchool));
+							DelayCommand(21.1, SendMessageToPC(oCaster, sName + " has a " + sAuraStrength + " lingering aura" + sSchool));
 							}
 						}
 					
 					sSchool = "";
 					
 					if(GetHasAnySpellEffect(oDetected)) {
-						if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
-							SetFirstName(oDetected, "Invisible Presence");
-							}  
 						if(nConcentration > 13) {
 							DelayCommand(20.0, SendMessageToAllDMs("**********"));
 							DelayCommand(20.1, SendMessageToAllDMs("FUNCTIONING SPELLS: " + GetName(oDetected)));
@@ -817,7 +821,9 @@ void main()
 									}
 																		
 							itemproperty ipItem = GetFirstItemProperty(oItem);
-							if(((GetIsItemPropertyValid(ipItem))
+							if(((GetBaseItemType(oItem) < 69) || (GetBaseItemType(oItem) > 73))
+							
+							&& ((GetIsItemPropertyValid(ipItem))
 								&& (GetTag(oItem) != "omega_wand")
 								&& (GetTag(oItem) != "slv_wand")
 								&& (GetTag(oItem) != "tsm_builder_wand")
@@ -1057,7 +1063,7 @@ void main()
 								}
 								
 							if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {nSlot++;}
-							}
+							 }
 							
 						if(nConcentration > 13) {
 							string sAbj;
