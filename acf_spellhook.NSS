@@ -249,7 +249,7 @@ void main()
 				sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						
 				if(nAuraCount == 1) {
-					DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+					DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 					DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 					}
 						
@@ -418,7 +418,7 @@ void main()
 				sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						
 				if(nAuraCount == 1) {
-					DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+					DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 					DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 					}
 				}
@@ -611,7 +611,7 @@ void main()
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						
 					if(nAuraCount == 1) {
-						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
 					}
@@ -650,7 +650,7 @@ void main()
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 														
 						if(nAuraCount == 1) {
-							DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+							DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 							DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 							}
 						
@@ -690,8 +690,8 @@ void main()
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-						if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));}
+						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 						if(nConcentration > 13) {
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " has a lingering aura of " + sSchool));
@@ -738,7 +738,7 @@ void main()
 								
 								nAuraCount++;
 								if(nAuraCount == 1) {
-									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+									DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 									DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 									}
 								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
@@ -1046,7 +1046,7 @@ void main()
 											sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 												
 											if(nAuraCount == 1) {
-												DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+												DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 												DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 												}
 							
@@ -1189,7 +1189,7 @@ void main()
 		
 		if(nAuraCount == 0) {
 			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " detects 0 auras."));
-			if(FindSubString(GetName(oCaster), "Wynna") != -1) {DelayCommand(6.0, SendMessageToPC(oCaster, "You detect 0 auras."));}
+			DelayCommand(6.0, SendMessageToPC(oCaster, "You detect 0 auras."));
 			}	
 			
 		SetLocalInt(oCaster, "nAuraPowerHigh", 0);
