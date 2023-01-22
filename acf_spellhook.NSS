@@ -167,7 +167,7 @@ void main()
 			
 		while (GetIsObjectValid(oDetected)) {
 		//SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
-		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT))){
+		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT)  || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR))){
 			
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
 				//SendMessageToAllDMs("Placed Effect oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
@@ -190,7 +190,7 @@ void main()
 						 nAuraCount++;
 						 nAuraPower = 5;
 						 sAuraStrength = "moderate";
-						 object oOwner = GetNearestCreature(CREATURE_TYPE_PERCEPTION, PERCEPTION_SEEN, oDetected, 1);
+						 object oOwner = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_TRUE, oDetected, 1);
 						 string sOwner = GetName(oOwner) + "'s head";
 						 if(GetDistanceBetween(oDetected, oOwner) > 2.0) {sOwner = "something";}
 						 sName = "A gem spinning around " + sOwner;
@@ -263,10 +263,10 @@ void main()
 					if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
 					if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool == 5) {sSchool = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool == 6) {sSchool = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool == 7) {sSchool = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool == 8) {sSchool = " of <color=red>Evocation </color>";}
+					if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
+					if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
+					if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
+					if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
 					if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 					SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 					
@@ -321,6 +321,8 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
+				sSchool = "";
+				nAuraPower = 0;
 				
 				if((FindSubString(GetTag(oDetected), "_glyph_ward") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) {
 					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
@@ -351,6 +353,8 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
+				sSchool = "";
+				nAuraPower = 0;
 						
 				if((FindSubString(GetName(oDetected), "Forcefield") != -1) || (FindSubString(GetTag(oDetected), "forcefield") != -1)){
 				 	nAuraCount++;
@@ -369,6 +373,8 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
+				sSchool = "";
+				nAuraPower = 0;
 				
 				if((FindSubString(GetTag(oDetected),"phalorm_crystal") != -1) || (FindSubString(GetTag(oDetected),"phalorm_globe") != -1) || (FindSubString(GetTag(oDetected),"crystal_discord") != -1)){
 					nAuraCount++;
@@ -434,10 +440,10 @@ void main()
 					if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
 					if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool == 5) {sSchool = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool == 6) {sSchool = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool == 7) {sSchool = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool == 8) {sSchool = " of <color=red>Evocation </color>";}
+					if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
+					if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
+					if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
+					if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
 					if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 					SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 					
@@ -642,10 +648,10 @@ void main()
 						if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 						if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
 						if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-						if(nACRSpellSchool == 5) {sSchool = " of <color=purple>Illusion </color>";}
-						if(nACRSpellSchool == 6) {sSchool = " of <color=white>Necromancy </color>";}
-						if(nACRSpellSchool == 7) {sSchool = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool == 8) {sSchool = " of <color=red>Evocation </color>";}
+						if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
+						if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
+						if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
+						if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
 						if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 						SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 						
@@ -665,19 +671,7 @@ void main()
 							}
 					
 				
-				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-				if(nAuraPower > nAuraPowerHigh) {
-					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-					}
-				sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						
-				if((nAuraCount == 1)  && (nAuraPower > 0)){
-					DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-					DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-					}
-				
-					//SendMessageToAllDMs("Trigger oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				//SendMessageToAllDMs("Trigger oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 					if(nAuraPower > nAuraPowerHigh) {
 						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
@@ -685,7 +679,7 @@ void main()
 						}
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						
-					if((nAuraCount == 1)  && (nAuraPower > 0)){
+					if(nAuraCount == 1){
 						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
@@ -755,10 +749,10 @@ void main()
 							if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 							if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
 							if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-							if(nACRSpellSchool == 5) {sSchool = " of <color=purple>Illusion </color>";}
-							if(nACRSpellSchool == 6) {sSchool = " of <color=white>Necromancy </color>";}
-							if(nACRSpellSchool == 7) {sSchool = " of <color=orange>Transmutation </color>";}
-							if(nACRSpellSchool == 8) {sSchool = " of <color=red>Evocation </color>";}
+							if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
+							if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
+							if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
+							if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
 							if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 							SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 							
@@ -903,7 +897,7 @@ void main()
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
 						
 					if(((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) && (GetHasInventory(oDetected))) || ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetHasInventory(oDetected)) && (GetIsDM(oDetected) == FALSE)) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-						SetLocalInt(oCaster, "nItemCount", 1);
+						if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {SetLocalInt(oCaster, "nItemCount", 1);}
 						if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
 						else {oItem = GetFirstItemInInventory(oDetected);}
 						int nFirst = 0;
@@ -959,11 +953,11 @@ void main()
 									if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
 									if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>"; nDiv++;}
 									if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
-									if(nACRSpellSchool == 5) {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
-									if(nACRSpellSchool == 6) {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
-									if(nACRSpellSchool == 7) {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
-									if(nACRSpellSchool == 8) {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
-									if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>"; nHoly++;}
+									if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
+									if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
+									if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
+									if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
+									if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 									SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 									}
 																		
@@ -1236,7 +1230,7 @@ void main()
 							if(nGen < 5) {sGen = IntToString(nGen);} else if(nGen < 8) {sGen = "around half a dozen";} else if(nGen < 13) {sGen = "close to ten";}  else if(nGen > 12) {sGen = "more than a dozen";}
 							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
-							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetHasInventory(oDetected))) {
+							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetFirstItemInInventory(oDetected) != OBJECT_INVALID)) {
 								DelayCommand(24.0, SendMessageToAllDMs(" "));
 								DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
 								if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>:" + sAbj + " Abjuration</color> auras"));}
