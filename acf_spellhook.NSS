@@ -263,11 +263,10 @@ void main()
 					DelayCommand(21.0, SendMessageToAllDMs( sName + " --" + GetTag(oDetected) +  "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					}
-					
-				sSchool = "";
-				nAuraPower = 0;
-			}
-		
+			}		
+			sSchool = "";
+			nAuraPower = 0;
+			
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {
 				
 				if(FindSubString(GetTag(oDetected), "_SCRY_") != -1) {
@@ -653,6 +652,7 @@ void main()
 					}
 					
 				sSchool = "";
+				nAuraPower = 0;
 							
 				if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {
 					int nRace = GetRacialType(oDetected);
