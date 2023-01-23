@@ -457,7 +457,7 @@ void main()
 					int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
 					string sACRSubSchool2 = GetLocalString(oDetected, "ACR_SUBSCHOOL2");
 					int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-					int nACRSpellSchool3 = GetLocalInt(oDetected, "1. ACR_SPELLSCHOOL3");
+					int nACRSpellSchool3 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL3");
 					SendMessageToAllDMs("nACRSpellSchool3 = " + IntToString(nACRSpellSchool3));
 					string sACRSubSchool3 = GetLocalString(oDetected, "ACR_SUBSCHOOL3");
 					int nAuraPower3 = GetLocalInt(oDetected, "ACR_SPELLPOWER3");
@@ -517,6 +517,16 @@ void main()
 					if(nAuraPower > nAuraPowerHigh) {
 						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+						}
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower2 > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+						}
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower3 > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower3);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
 						}
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 					
@@ -657,6 +667,11 @@ void main()
 						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 						}
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower2 > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+						}
 					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 						
 					if(nAuraCount == 1){
@@ -781,6 +796,11 @@ void main()
 							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
+						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+						if(nAuraPower2 > nAuraPowerHigh) {
+							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+							}
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 								
 						if(nAuraCount == 1){
@@ -821,7 +841,8 @@ void main()
 						if(nAuraPower > 6) {sAuraStrength = "a strong";}
 						if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 						SendMessageToAllDMs("sAuraStrength = " + sAuraStrength);
-					    if(nAuraPower > nAuraPowerHigh) {
+					    nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+						if(nAuraPower > nAuraPowerHigh) {
 							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
@@ -1207,7 +1228,7 @@ void main()
 												}
 							
 									 		float fDelay = 24.0;
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 33.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
+											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 40.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												if(nConcentration > 13) {
@@ -1270,8 +1291,8 @@ void main()
 									DelayCommand(25.4, SendMessageToAllDMs("**********"));
 									DelayCommand(30.1, SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									}
-								DelayCommand(35.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-								DelayCommand(35.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+								DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+								DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								 
 									if(GetLocalInt(oCaster, "nSummary") == 0) {
 										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
@@ -1292,10 +1313,10 @@ void main()
 										SetLocalInt(oCaster, "nSummary",1);
 										DelayCommand(25.3, SendMessageToPC(oCaster, " "));
 										DelayCommand(25.4, SendMessageToPC(oCaster, "**********"));
-										DelayCommand(30.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(36.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										}
-									DelayCommand(36.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-									DelayCommand(36.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+									DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+									DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								}
 							}
 						
@@ -1339,7 +1360,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 50.0;}
+			if(nItemCounted == 1) {fDelay = 60.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
