@@ -986,7 +986,7 @@ void main()
 						int nSomething = 0;
 						while (nSlot < 15) {
 							if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {nSlot = 14;}		
-							if((nFirst == 0) && (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {nFirst = 1; sSlot = "in the inventory of " + GetName(oDetected);}
+							if((nFirst == 0) && (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {nCreatureCount++;nFirst = 1; sSlot = "in the inventory of " + GetName(oDetected);}
 							else if (nSlot < 14) {
 								oItem = GetItemInSlot(nSlot, oDetected); 
 								if(nSlot == 0) {sSlot = "on the head of";}
@@ -1266,7 +1266,7 @@ void main()
 												}
 							
 									 		float fDelay = 24.0;
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 42.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												if(nConcentration > 13) {
@@ -1324,6 +1324,7 @@ void main()
 								if(nGen>0) {DelayCommand(9.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
 								if(nHoly>0) {DelayCommand(9.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 								if(nSomething>0) {DelayCommand(6.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
+								
 								float nDetDelay = IntToFloat(nCreatureCount * 9);
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
 									DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
