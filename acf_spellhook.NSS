@@ -177,7 +177,7 @@ void main()
 		int nCreatureCount = 0;
 																
 		while (GetIsObjectValid(oDetected)) {
-		//SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+		SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT)  || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR))){
 			
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
@@ -558,8 +558,10 @@ void main()
 				nAuraPower2 = 0;
 					
 			if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
+				SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 				if(FindSubString(GetTag(oDetected), "_portal_") != -1){
-				    nAuraCount++;
+				    SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+					nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					sAuraStrength = "moderate";
@@ -647,21 +649,22 @@ void main()
 						
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 							
-							string sName = "Something";
-							float fDistance = GetDistanceBetween(oDetected, oCaster);
-							int nDistance = FloatToInt(fDistance);
-							string sDistance = IntToString(nDistance);
-							float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-							string sAngle = GetCompassDirectionOfAngle(fAngle);
-								
-							if(nConcentration > 13) {
-								DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-								DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-								}
 							}
-					
+							
+					string sName = "Something";
+					float fDistance = GetDistanceBetween(oDetected, oCaster);
+					int nDistance = FloatToInt(fDistance);
+					string sDistance = IntToString(nDistance);
+					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					string sAngle = GetCompassDirectionOfAngle(fAngle);
+								
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+						}
+							
 				
-				//SendMessageToAllDMs("Trigger oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+					SendMessageToAllDMs("After oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 					if(nAuraPower > nAuraPowerHigh) {
 						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
@@ -1228,7 +1231,7 @@ void main()
 												}
 							
 									 		float fDelay = 24.0;
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 40.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
+											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 48.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												if(nConcentration > 13) {
@@ -1287,9 +1290,9 @@ void main()
 								if(nHoly>0) {DelayCommand(25.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 								if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
-									DelayCommand(25.3, SendMessageToAllDMs(" "));
-									DelayCommand(25.4, SendMessageToAllDMs("**********"));
-									DelayCommand(30.1, SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(25.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(25.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
+									DelayCommand(36.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									}
 								DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
 								DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
@@ -1311,9 +1314,9 @@ void main()
 									if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								 	if(GetLocalInt(oCaster, "nSummary") == 0) {
 										SetLocalInt(oCaster, "nSummary",1);
-										DelayCommand(25.3, SendMessageToPC(oCaster, " "));
-										DelayCommand(25.4, SendMessageToPC(oCaster, "**********"));
-										DelayCommand(36.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(25.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(25.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
+										DelayCommand(36.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										}
 									DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
 									DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
@@ -1360,7 +1363,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 60.0;}
+			if(nItemCounted == 1) {fDelay = 66.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
