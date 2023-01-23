@@ -1325,7 +1325,7 @@ void main()
 								if(nHoly>0) {DelayCommand(25.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 								if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								
-								float nDetDelay = IntToFloat(nCreatureCount * 9);
+								float nDetDelay = 25.0 + IntToFloat(nCreatureCount * 9);
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
 									DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
 									DelayCommand(nDetDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
