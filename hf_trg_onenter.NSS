@@ -19,16 +19,8 @@ void main()
 	ACR_TriggerOnEnter();
 	object oPC = GetEnteringObject();
     
-if((GetTag(OBJECT_SELF) == "phalorm_light_green_up_trg") && (GetIsPC(oPC)) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE") == 0))
-		{SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
-		 object oOrb = GetObjectByTag("phalorm_orb_green_up", 1); 
-		 object oLight = GetObjectByTag("fx_phalorm_light_green_up", 1); 
-		 AssignCommand(oOrb, ActionSpeakString("Drops suddenly into the pit and descends, its light quickly fading.", TALKVOLUME_TALK));	
-		 DestroyObject(oOrb, 2.0);
-		 DestroyObject(oLight, 3.0);
-		}
 
-if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_enter") {
+if(GetTag(OBJECT_SELF) == "alfa_portal_phlm_arch_in") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
 		object oHereWP = GetWaypointByTag("WP_phalorm_archive_platform_enter");
 		object oGoThere = GetWaypointByTag("WP_phalorm_archive_enter");
@@ -60,7 +52,7 @@ if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_enter") {
 			}
 		}
 		
-	if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_exit") {
+	if(GetTag(OBJECT_SELF) == "alfa_portal_phlm_arch_out") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_archive_platform_enter");
 		object oHereWP = GetWaypointByTag("WP_phalorm_archive_platform_exit");
 		object oGoThere = GetWaypointByTag("WP_phalorm_archive_exit");
@@ -93,7 +85,7 @@ if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_enter") {
 			}
 		}
 		
-	if(GetTag(OBJECT_SELF) == "phlm_vault_teleport_enter") {
+	if(GetTag(OBJECT_SELF) == "alfa_portal_phlm_vault_in") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_vault_platform_exit");
 		object oHereWP = GetWaypointByTag("WP_phalorm_vault_platform_enter");
 		object oGoThere = GetWaypointByTag("WP_phalorm_vault_enter");
@@ -126,7 +118,7 @@ if(GetTag(OBJECT_SELF) == "phlm_arch_teleport_enter") {
 			}
 		}
 		
-	if(GetTag(OBJECT_SELF) == "phlm_vault_teleport_exit") {
+	if(GetTag(OBJECT_SELF) == "alfa_portal_phlm_vault_out") {
 		object oThereWP = GetWaypointByTag("WP_phalorm_vault_platform_enter");
 		object oHereWP = GetWaypointByTag("WP_phalorm_vault_platform_exit");
 		object oGoThere = GetWaypointByTag("WP_phalorm_vault_exit");
