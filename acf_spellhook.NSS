@@ -177,7 +177,7 @@ void main()
 		int nCreatureCount = 0;
 																
 		while (GetIsObjectValid(oDetected)) {
-		SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+		//SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT)  || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR))){
 			
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
@@ -558,13 +558,31 @@ void main()
 				nAuraPower2 = 0;
 					
 			if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
-				SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				//SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 				if(FindSubString(GetTag(oDetected), "_portal_") != -1){
-				    SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				    //SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 					nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					sAuraStrength = "moderate";
+					
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+						}
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower2 > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+						}
+					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
+						
+					if(nAuraCount == 1){
+						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
+						}
+						
 					string sName = "Something";
 					float fDistance = GetDistanceBetween(oDetected, oCaster);
 					int nDistance = FloatToInt(fDistance);
@@ -593,6 +611,23 @@ void main()
 					if(nAuraPower > 3) {sAuraStrength = "moderate";}
 					if(nAuraPower > 6) {sAuraStrength = "strong";}
 					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+					
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+						}
+					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					if(nAuraPower2 > nAuraPowerHigh) {
+						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+						}
+					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
+						
+					if(nAuraCount == 1){
+						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
+						}
 					
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 					string sSymbolName = GetName(oDetected);			
@@ -648,39 +683,39 @@ void main()
 						SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
 						
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
-							
+						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+						if(nAuraPower > nAuraPowerHigh) {
+							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
+						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+						if(nAuraPower2 > nAuraPowerHigh) {
+							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+							}
+						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 							
-					string sName = "Something";
-					float fDistance = GetDistanceBetween(oDetected, oCaster);
-					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
-								
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+						if(nAuraCount == 1){
+							DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+							DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
+							}	
+						string sName = "Something";
+						float fDistance = GetDistanceBetween(oDetected, oCaster);
+						int nDistance = FloatToInt(fDistance);
+						string sDistance = IntToString(nDistance);
+						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+						string sAngle = GetCompassDirectionOfAngle(fAngle);
+									
+						if(nConcentration > 13) {
+							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+							}
 						}
+							
 							
 				
-					SendMessageToAllDMs("After oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower2 > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
-						}
-					sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						
-					if(nAuraCount == 1){
-						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-						}
+					//SendMessageToAllDMs("After oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + " " + sSchool + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+					
 					}
 				
 				sSchool = "";
@@ -1278,48 +1313,48 @@ void main()
 									DelayCommand(24.0, SendMessageToAllDMs(" "));
 									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: "));
 									}
-								if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
-								if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=tan>:" + sCon + " Conjuration</color> auras"));}
-								if(nDiv>0) {DelayCommand(24.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
-								if(nEnc>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
-								if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
-								if(nIll>0) {DelayCommand(24.7 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
-								if(nNec>0) {DelayCommand(24.8 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
-								if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-								if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
-								if(nHoly>0) {DelayCommand(25.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
-								if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
+								if(nAbj>0) {DelayCommand(20.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
+								if(nCon>0) {DelayCommand(20.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=tan>:" + sCon + " Conjuration</color> auras"));}
+								if(nDiv>0) {DelayCommand(20.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
+								if(nEnc>0) {DelayCommand(20.5 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+								if(nEvo>0) {DelayCommand(20.6 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
+								if(nIll>0) {DelayCommand(20.7 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
+								if(nNec>0) {DelayCommand(20.8 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
+								if(nTra>0) {DelayCommand(20.9 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
+								if(nGen>0) {DelayCommand(21.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+								if(nHoly>0) {DelayCommand(21.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
+								if(nSomething>0) {DelayCommand(21.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
-									DelayCommand(25.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-									DelayCommand(25.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
-									DelayCommand(36.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(39.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(39.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
+									DelayCommand(40.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									}
-								DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-								DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+								DelayCommand(52.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+								DelayCommand(52.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								 
 									if(GetLocalInt(oCaster, "nSummary") == 0) {
 										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
 										DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: "));
 										}
-									if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
-									if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
-									if(nDiv>0) {DelayCommand(24.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
-									if(nEnc>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
-									if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
-									if(nIll>0) {DelayCommand(24.7 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
-									if(nNec>0) {DelayCommand(24.8 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
-									if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-									if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
-									if(nHoly>0) {DelayCommand(25.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
-									if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
+									if(nAbj>0) {DelayCommand(20.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
+									if(nCon>0) {DelayCommand(20.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
+									if(nDiv>0) {DelayCommand(20.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
+									if(nEnc>0) {DelayCommand(20.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+									if(nEvo>0) {DelayCommand(20.6 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
+									if(nIll>0) {DelayCommand(20.7 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
+									if(nNec>0) {DelayCommand(20.8 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
+									if(nTra>0) {DelayCommand(20.9 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
+									if(nGen>0) {DelayCommand(21.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+									if(nHoly>0) {DelayCommand(21.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
+									if(nSomething>0) {DelayCommand(21.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								 	if(GetLocalInt(oCaster, "nSummary") == 0) {
 										SetLocalInt(oCaster, "nSummary",1);
-										DelayCommand(25.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-										DelayCommand(25.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
-										DelayCommand(36.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(39.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(39.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
+										DelayCommand(40.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										}
-									DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-									DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+									DelayCommand(52.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+									DelayCommand(52.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								}
 							}
 						
@@ -1363,7 +1398,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 66.0;}
+			if(nItemCounted == 1) {fDelay = 70.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
