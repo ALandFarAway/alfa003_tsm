@@ -457,7 +457,8 @@ void main()
 					int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
 					string sACRSubSchool2 = GetLocalString(oDetected, "ACR_SUBSCHOOL2");
 					int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-					int nACRSpellSchool3 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL3");
+					int nACRSpellSchool3 = GetLocalInt(oDetected, "1. ACR_SPELLSCHOOL3");
+					SendMessageToAllDMs("nACRSpellSchool3 = " + IntToString(nACRSpellSchool3));
 					string sACRSubSchool3 = GetLocalString(oDetected, "ACR_SUBSCHOOL3");
 					int nAuraPower3 = GetLocalInt(oDetected, "ACR_SPELLPOWER3");
 					if(nAuraPower > 0) {sAuraStrength = "a faint";}
@@ -502,6 +503,7 @@ void main()
 					if(nACRSpellSchool3 == 8) {sSchool3 = " of <color=orange>Transmutation </color>";}
 					if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=#FFFF00>Universal arcanity</color>";}
 					//if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=white>Holiness </color>";}
+					SendMessageToAllDMs("2. nACRSpellSchool3 = " + IntToString(nACRSpellSchool3) + ": " + sAuraStrength3 + " - " + sSchool3);
 					
 					if(sACRSubSchool != "") {sSchool = sSchool + "(" + sACRSubSchool + ")";}
 					if(sSchool2 != "") {sSchool2 = " and " + sAuraStrength2 + " aura " + sSchool2;}
@@ -545,33 +547,13 @@ void main()
 				nAuraPower = 0;
 				nAuraPower2 = 0;
 					
-				if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
-					
-				/*if(FindSubString(GetTag(oDetected), "_SCRY_") != -1){
-					nAuraCount++;
-					nAuraPower = 4;
-					sAuraStrength = "moderate";
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=green>Divination</color>";}
-					string sName = GetName(oDetected);
-					float fDistance = GetDistanceBetween(oDetected, oCaster);
-					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
-							
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						}
-					}*/
-				
+			if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
 				if(FindSubString(GetTag(oDetected), "_portal_") != -1){
 				    nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					sAuraStrength = "moderate";
-					string sName = GetName(oDetected);
-					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
+					string sName = "Something";
 					float fDistance = GetDistanceBetween(oDetected, oCaster);
 					int nDistance = FloatToInt(fDistance);
 					string sDistance = IntToString(nDistance);
@@ -1225,7 +1207,7 @@ void main()
 												}
 							
 									 		float fDelay = 24.0;
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 32.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
+											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 33.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												if(nConcentration > 13) {
@@ -1270,7 +1252,7 @@ void main()
 							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetLocalInt(oCaster, "nItemCount") > 0)) {
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
 									DelayCommand(24.0, SendMessageToAllDMs(" "));
-									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
+									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: "));
 									}
 								if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
 								if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=tan>:" + sCon + " Conjuration</color> auras"));}
@@ -1286,14 +1268,14 @@ void main()
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
 									DelayCommand(25.3, SendMessageToAllDMs(" "));
 									DelayCommand(25.4, SendMessageToAllDMs("**********"));
-									DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL: " + GetName(oDetected)));
+									DelayCommand(30.1, SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									}
 								DelayCommand(35.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
 								DelayCommand(35.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								 
 									if(GetLocalInt(oCaster, "nSummary") == 0) {
 										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
-										DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
+										DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: "));
 										}
 									if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
 									if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
@@ -1310,10 +1292,10 @@ void main()
 										SetLocalInt(oCaster, "nSummary",1);
 										DelayCommand(25.3, SendMessageToPC(oCaster, " "));
 										DelayCommand(25.4, SendMessageToPC(oCaster, "**********"));
-										DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: " + GetName(oDetected)));
+										DelayCommand(30.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										}
-									DelayCommand(35.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-									DelayCommand(35.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+									DelayCommand(36.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+									DelayCommand(36.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								}
 							}
 						
@@ -1357,7 +1339,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 46.0;}
+			if(nItemCounted == 1) {fDelay = 50.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
