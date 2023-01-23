@@ -1266,7 +1266,7 @@ void main()
 												}
 							
 									 		float fDelay = 24.0;
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 42.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
+											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 42.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												if(nConcentration > 13) {
@@ -1324,13 +1324,14 @@ void main()
 								if(nGen>0) {DelayCommand(9.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
 								if(nHoly>0) {DelayCommand(9.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 								if(nSomething>0) {DelayCommand(6.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
+								float nDetDelay = IntToFloat(nCreatureCount * 9);
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
-									DelayCommand(24.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-									DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
-									DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
-									DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(nDetDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
+									DelayCommand(nDetDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(50.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
 									}
-								DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+								DelayCommand(50.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								 
 									if(GetLocalInt(oCaster, "nSummary") == 0) {
 										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
@@ -1348,12 +1349,12 @@ void main()
 									if(nSomething>0) {DelayCommand(9.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								 	if(GetLocalInt(oCaster, "nSummary") == 0) {
 										SetLocalInt(oCaster, "nSummary",1);
-										DelayCommand(24.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-										DelayCommand(24.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
-										DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
-										DelayCommand(50.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(nDetDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
+										DelayCommand(nDetDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(50.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
 										}
-									DelayCommand(50.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+									DelayCommand(50.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								}
 							}
 						
@@ -1397,17 +1398,17 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 78.0;}
+			if(nItemCounted == 1) {fDelay = 70.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
-			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
-			DelayCommand(fDelay + 0.1, SendMessageToAllDMs("That is all you learn."));
+			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs("**********"));
+			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2)+ 0.1, SendMessageToAllDMs("That is all you learn."));
 				
 			DelayCommand(19.0, SendMessageToPC(oCaster, "**********"));
 			DelayCommand(19.1, SendMessageToPC(oCaster, "You concentrate for three rounds and learn:"));
 			
-			DelayCommand(fDelay, SendMessageToPC(oCaster, "**********"));
-			DelayCommand(fDelay + 0.1, SendMessageToPC(oCaster, "That is all you learn."));
+			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "**********"));
+			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2) + 0.1, SendMessageToPC(oCaster, "That is all you learn."));
 			
 			SetLocalInt(oCaster, "nItemCount", 0);
 			}
