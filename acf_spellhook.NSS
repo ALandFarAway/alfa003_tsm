@@ -173,7 +173,9 @@ void main()
 		string sAuraStrength2 = "";
 		string sAuraStrength3 = "";
 		int nItemCounted = 0;
-			
+		SetLocalInt(oCaster, "nSummary", 0); 
+		int nCreatureCount = 0;
+																
 		while (GetIsObjectValid(oDetected)) {
 		//SendMessageToAllDMs("Top oDetected: Object Type = " + IntToString(GetObjectType(oDetected)) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT)  || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR))){
@@ -279,7 +281,6 @@ void main()
 					if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
 					if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
 					if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
-					if(nACRSpellSchool == 0) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 					if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
 					if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
@@ -288,8 +289,8 @@ void main()
 					if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
 					if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
-					if(nACRSpellSchool2 == 0) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+					if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+					//if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 					if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
 					if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
@@ -298,7 +299,8 @@ void main()
 					if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
 					if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
+					if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+					//if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
 					
 					if(sSchool2 != "") {sSchool2 = " and a " + sAuraStrength2 + " aura " + sSchool2;}
 					SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
@@ -470,7 +472,6 @@ void main()
 					if(nAuraPower3 > 3) {sAuraStrength3 = "a moderate";}
 					if(nAuraPower3 > 6) {sAuraStrength3 = "a strong";}
 					if(nAuraPower3 > 9) {sAuraStrength3 = "an overwhelming";}
-					if(nACRSpellSchool == 0) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 					if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
 					if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
@@ -479,8 +480,8 @@ void main()
 					if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
 					if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
-					if(nACRSpellSchool2 == 0) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+					if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+					//if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 					if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
 					if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
@@ -490,7 +491,7 @@ void main()
 					if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
 					if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
-					if(nACRSpellSchool3 == 0) {sSchool3 = " of <color=#FFFF00>Universal arcanity</color>";}
+					//if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
 					if(nACRSpellSchool3 == 1) {sSchool3 = " of <color=lightblue>Abjuration </color>";}
 					if(nACRSpellSchool3 == 2) {sSchool3 = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool3 == 3) {sSchool3 = " of <color=green>Divination </color>";}
@@ -499,7 +500,8 @@ void main()
 					if(nACRSpellSchool3 == 6) {sSchool3 = " of <color=purple>Illusion </color>";}
 					if(nACRSpellSchool3 == 7) {sSchool3 = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool3 == 8) {sSchool3 = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=white>Holiness </color>";}
+					if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=#FFFF00>Universal arcanity</color>";}
+					//if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=white>Holiness </color>";}
 					
 					if(sACRSubSchool != "") {sSchool = sSchool + "(" + sACRSubSchool + ")";}
 					if(sSchool2 != "") {sSchool2 = " and " + sAuraStrength2 + " aura " + sSchool2;}
@@ -627,7 +629,6 @@ void main()
 						if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
 						if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
 						if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
-						if(nACRSpellSchool == 0) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 						if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
 						if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 						if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
@@ -636,8 +637,8 @@ void main()
 						if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
 						if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
 						if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
-						if(nACRSpellSchool2 == 0) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+						if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+						//if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 						if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
 						if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
 						if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
@@ -646,7 +647,8 @@ void main()
 						if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
 						if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
 						if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
+						if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+						//if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
 						
 						if(sSchool2 != "") {sSchool2 = " and a " + sAuraStrength2 + " aura " + sSchool2;}
 						SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
@@ -754,7 +756,6 @@ void main()
 						if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
 						if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
 						if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
-						if(nACRSpellSchool == 0) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 						if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
 						if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
 						if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
@@ -763,8 +764,8 @@ void main()
 						if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
 						if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
 						if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
-						if(nACRSpellSchool2 == 0) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+						if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+						//if(nACRSpellSchool == 9) {sSchool = " of <color=white>Holiness </color>";}
 						if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
 						if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
 						if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
@@ -773,7 +774,8 @@ void main()
 						if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
 						if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
 						if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
+						if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
+						//if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
 						
 						if(sSchool2 != "") {sSchool2 = " and a " + sAuraStrength2 + " aura " + sSchool2;}
 						SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
@@ -826,7 +828,7 @@ void main()
 					if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
 							sName = "Invisible Presence";
 							}  
-					SendMessageToAllDMs("sRace = " + sRace);
+					//SendMessageToAllDMs("sRace = " + sRace);
 					if(sRace != ""){
 						nAuraCount++;
 						float fAuraPower = GetChallengeRating(oDetected);
@@ -979,7 +981,7 @@ void main()
 									int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 									itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
 									IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-									if(nACRSpellSchool == 0) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
+									if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
 									if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
 									if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
 									if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>"; nDiv++;}
@@ -1024,7 +1026,8 @@ void main()
 									int nSpot = 0;
 									string sSpot = "";
 									if(nBaseItem == 19) {sBaseItem = "An amulet"; nSpot = 10;}
-									if(nBaseItem == 16) {sBaseItem = "A suit of armor"; nSpot = -5;}
+									if(nBaseItem == 16) {sBaseItem = "Armor"; nSpot = -5;}
+									if((nBaseItem == 16) && (FindSubString(GetName(oItem), "Robe") != -1)) {sBaseItem = "A robe"; nSpot = 5;}
 									if(nBaseItem == 20) {sBaseItem = "Arrows"; nSpot = 0;}
 									if(nBaseItem == 3) {sBaseItem = "A bastard sword"; nSpot = -5;}
 									if(nBaseItem == 2) {sBaseItem = "A battle axe"; nSpot = -10;}
@@ -1057,6 +1060,7 @@ void main()
 									if(nBaseItem == 35) {sBaseItem = "A heavy flail"; nSpot = -5;}
 									if(nBaseItem == 17) {sBaseItem = "A helmet or other headgear"; nSpot = 5;}
 									if((nBaseItem == 17) && (FindSubString(GetName(oItem), "Mask") != -1)) {sBaseItem = "A mask"; nSpot = 5;}
+									if((nBaseItem == 17) && (FindSubString(GetName(oItem), "Headband") != -1)) {sBaseItem = "A headband"; nSpot = 5;}
 									if(nBaseItem == 40) {sBaseItem = "A kama"; nSpot = 0;}
 									if(nBaseItem == 41) {sBaseItem = "A katana"; nSpot = 0;}
 									if(nBaseItem == 65) {sBaseItem = "A key"; nSpot = 10;}
@@ -1221,7 +1225,7 @@ void main()
 												}
 							
 									 		float fDelay = 24.0;
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 30.0 + IntToFloat(nSlot/10);}
+											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {nCreatureCount++;fDelay = 30.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount);}
 											//if((nSlot > 13) ||((nSlot == 0) && (oItem == GetFirstItemInInventory(oDetected)))) {fDelay = 36.0 + IntToFloat(nAuraCount/10);}
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												if(nConcentration > 13) {
@@ -1251,6 +1255,7 @@ void main()
 							string sGen;
 							string sHoly;
 							string sSomething;	
+									
 							if(nAbj < 5) {sAbj = IntToString(nAbj);} else if(nAbj < 8) {sAbj = "around half a dozen";} else if(nAbj < 13) {sAbj = "close to ten";}  else if(nAbj > 12) {sAbj = "more than a dozen";}
 							if(nCon < 5) {sCon = IntToString(nCon);} else if(nCon < 8) {sCon = "around half a dozen";} else if(nCon < 13) {sCon = "close to ten";}  else if(nCon > 12) {sCon = "more than a dozen";}
 							if(nDiv < 5) {sDiv = IntToString(nDiv);} else if(nDiv < 8) {sDiv = "around half a dozen";} else if(nDiv < 13) {sDiv = "close to ten";}  else if(nDiv > 12) {sDiv = "more than a dozen";}
@@ -1263,42 +1268,50 @@ void main()
 							if(nHoly < 5) {sHoly = IntToString(nHoly);} else if(nHoly < 8) {sHoly = "around half a dozen";} else if(nHoly < 13) {sHoly = "close to ten";}  else if(nHoly > 12) {sHoly = "more than a dozen";}
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
 							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetLocalInt(oCaster, "nItemCount") > 0)) {
-								DelayCommand(24.0, SendMessageToAllDMs(" "));
-								DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
-								if(nAbj>0) {DelayCommand(24.2, SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>:" + sAbj + " Abjuration</color> auras"));}
-								if(nCon>0) {DelayCommand(24.3, SendMessageToAllDMs(GetName(oDetected) + "<color=tan>:" + sCon + " Conjuration</color> auras"));}
-								if(nDiv>0) {DelayCommand(24.4, SendMessageToAllDMs(GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
-								if(nEnc>0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
-								if(nEvo>0) {DelayCommand(24.6, SendMessageToAllDMs(GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
-								if(nIll>0) {DelayCommand(24.7, SendMessageToAllDMs(GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
-								if(nNec>0) {DelayCommand(24.8, SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
-								if(nTra>0) {DelayCommand(24.9, SendMessageToAllDMs(GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-								if(nGen>0) {DelayCommand(25.0, SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
-								if(nHoly>0) {DelayCommand(25.1, SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
-								if(nSomething>0) {DelayCommand(25.2, SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
-								DelayCommand(25.3, SendMessageToAllDMs(" "));
-								DelayCommand(25.4, SendMessageToAllDMs("**********"));
-								DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL: " + GetName(oDetected)));
+								if(GetLocalInt(oCaster, "nSummary") == 0) {
+									SetLocalInt(oCaster, "nSummary",1);
+									DelayCommand(24.0, SendMessageToAllDMs(" "));
+									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
+									}
+								if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
+								if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=tan>:" + sCon + " Conjuration</color> auras"));}
+								if(nDiv>0) {DelayCommand(24.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
+								if(nEnc>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+								if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
+								if(nIll>0) {DelayCommand(24.7 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
+								if(nNec>0) {DelayCommand(24.8 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
+								if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
+								if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+								if(nHoly>0) {DelayCommand(25.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
+								if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
+								if(GetLocalInt(oCaster, "nSummary") == 0) {
+									DelayCommand(25.3, SendMessageToAllDMs(" "));
+									DelayCommand(25.4, SendMessageToAllDMs("**********"));
+									DelayCommand(29.1, SendMessageToAllDMs("EQUIPPED DETAIL: " + GetName(oDetected)));
+									}
 								DelayCommand(35.0, SendMessageToAllDMs(" "));
 								DelayCommand(35.1, SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								 
-								
-								    DelayCommand(24.0, SendMessageToPC(oCaster, " "));
-									DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
-									if(nAbj>0) {DelayCommand(24.2, SendMessageToPC(oCaster, GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
-									if(nCon>0) {DelayCommand(24.3, SendMessageToPC(oCaster, GetName(oDetected) + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
-									if(nDiv>0) {DelayCommand(24.4, SendMessageToPC(oCaster, GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
-									if(nEnc>0) {DelayCommand(24.5, SendMessageToPC(oCaster, GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
-									if(nEvo>0) {DelayCommand(24.6, SendMessageToPC(oCaster, GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
-									if(nIll>0) {DelayCommand(24.7, SendMessageToPC(oCaster, GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
-									if(nNec>0) {DelayCommand(24.8, SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
-									if(nTra>0) {DelayCommand(24.9, SendMessageToPC(oCaster, GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-									if(nGen>0) {DelayCommand(25.0, SendMessageToPC(oCaster, GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
-									if(nHoly>0) {DelayCommand(25.1, SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
-									if(nSomething>0) {DelayCommand(25.2, SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
-								 	DelayCommand(25.3, SendMessageToPC(oCaster, " "));
-									DelayCommand(25.4, SendMessageToPC(oCaster, "**********"));
-									DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: " + GetName(oDetected)));
+									if(GetLocalInt(oCaster, "nSummary") == 0) {
+										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
+										DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: " + GetName(oDetected)));
+										}
+									if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
+									if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
+									if(nDiv>0) {DelayCommand(24.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=green>: " + sDiv + " Divination</color> auras"));}
+									if(nEnc>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+									if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=red>: " + sEvo + " Evocation</color> auras"));}
+									if(nIll>0) {DelayCommand(24.7 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=purple>: " + sIll + " Illusion</color> auras"));}
+									if(nNec>0) {DelayCommand(24.8 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sNec + " Necromancy</color> auras"));}
+									if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
+									if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+									if(nHoly>0) {DelayCommand(25.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
+									if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
+								 	if(GetLocalInt(oCaster, "nSummary") == 0) {
+										DelayCommand(25.3, SendMessageToPC(oCaster, " "));
+										DelayCommand(25.4, SendMessageToPC(oCaster, "**********"));
+										DelayCommand(29.1, SendMessageToPC(oCaster, "EQUIPPED DETAIL: " + GetName(oDetected)));
+										}
 									DelayCommand(35.0, SendMessageToPC(oCaster, " "));
 									DelayCommand(35.1, SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								}
