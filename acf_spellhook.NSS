@@ -1325,11 +1325,11 @@ void main()
 								if(nHoly>0) {DelayCommand(21.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + "<color=white>: " + sHoly + " Holy</color> auras"));}
 								if(nSomething>0) {DelayCommand(21.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								if(GetLocalInt(oCaster, "nSummary") == 0) {
-									DelayCommand(39.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-									DelayCommand(39.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
-									DelayCommand(40.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(36.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(36.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
+									DelayCommand(37.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(52.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
 									}
-								DelayCommand(52.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
 								DelayCommand(52.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								 
 									if(GetLocalInt(oCaster, "nSummary") == 0) {
@@ -1349,11 +1349,11 @@ void main()
 									if(nSomething>0) {DelayCommand(21.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, GetName(oDetected) + ": " + sSomething + " auras you can't classify"));}
 								 	if(GetLocalInt(oCaster, "nSummary") == 0) {
 										SetLocalInt(oCaster, "nSummary",1);
-										DelayCommand(39.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-										DelayCommand(39.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
-										DelayCommand(40.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(36.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(36.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
+										DelayCommand(37.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(52.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
 										}
-									DelayCommand(52.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
 									DelayCommand(52.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "The rest of the auras on " + GetName(oDetected) + " are in inventory."));
 								}
 							}
@@ -1398,7 +1398,7 @@ void main()
 			float fDelay = 24.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
-			if(nItemCounted == 1) {fDelay = 70.0;}
+			if(nItemCounted == 1) {fDelay = 72.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay, SendMessageToAllDMs("**********"));
