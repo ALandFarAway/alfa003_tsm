@@ -864,8 +864,9 @@ void main()
 					if(nRace == 20) {sRace = "Outsider"; sSchool = "<color=tan>Conjuration</color>";}
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "<color=orange>Transmutation</color>";}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "<color=white>Necromancy</color>";}
-					if(FindSubString(GetTag(oDetected), "003_cr_scry_sen") != -1) {sName = "Something"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";} 
-					if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
+					if(FindSubString(GetTag(oDetected), "003_cr_scry_sen") != -1) {sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";} 
+					
+					if((GetHasSpellEffect(INVISIBILITY_TYPE_IMPROVED, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
 							sName = "Invisible Presence";
 							}  
 					//SendMessageToAllDMs("sRace = " + sRace);
@@ -873,19 +874,19 @@ void main()
 						nAuraCount++;
 						float fAuraPower = GetChallengeRating(oDetected);
 						nAuraPower = FloatToInt(fAuraPower)/2;
-						SendMessageToAllDMs("nAuraPower = " + IntToString(nAuraPower));
+						//SendMessageToAllDMs("nAuraPower = " + IntToString(nAuraPower));
 					    if(nAuraPower > 0) {sAuraStrength = "a faint";}
 						if(nAuraPower > 3) {sAuraStrength = "a moderate";}
 						if(nAuraPower > 6) {sAuraStrength = "a strong";}
 						if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
-						SendMessageToAllDMs("sAuraStrength = " + sAuraStrength);
+						//SendMessageToAllDMs("sAuraStrength = " + sAuraStrength);
 					    nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 						if(nAuraPower > nAuraPowerHigh) {
 							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							}
 						sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
-						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+						DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
@@ -902,10 +903,10 @@ void main()
 				
 					if(GetHasAnySpellEffect(oDetected)) {
 						if(nConcentration > 13) {
-							DelayCommand(20.0, SendMessageToAllDMs("**********"));
-							DelayCommand(20.1, SendMessageToAllDMs("FUNCTIONING SPELLS: " + GetName(oDetected)));
-								DelayCommand(20.0, SendMessageToPC(oCaster, "**********"));
-								DelayCommand(20.1, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + GetName(oDetected)));
+							DelayCommand(21.5, SendMessageToAllDMs("**********"));
+							DelayCommand(21.6, SendMessageToAllDMs("FUNCTIONING SPELLS: " + GetName(oDetected)));
+								DelayCommand(21.5, SendMessageToPC(oCaster, "**********"));
+								DelayCommand(21.6, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + GetName(oDetected)));
 						}	
 						effect eEffect = GetFirstEffect(oDetected);
 						int nEffectSchool = 0;
@@ -951,8 +952,8 @@ void main()
 									}
 									
 								if(nConcentration > 13) {
-									DelayCommand(20.5, SendMessageToAllDMs("<color=#71716F>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
-									DelayCommand(20.5, SendMessageToPC(oCaster, "<color=#666666>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
+									DelayCommand(22.5, SendMessageToAllDMs("<color=#71716F>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
+									DelayCommand(22.5, SendMessageToPC(oCaster, "<color=#666666>" + GetName(oDetected) + " has " + sAuraStrength + " aura</color>" + sSchool));
 									}	
 								}
 							eEffect = GetNextEffect(oDetected);
@@ -1396,7 +1397,7 @@ void main()
 			}
 		
 		if((nAuraCount > 0) && (nConcentration > 13)) {
-			float fDelay = 24.0;
+			float fDelay = 26.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			//SendMessageToAllDMs("nItemCounted = " + IntToString(nItemCounted));
 			if(nItemCounted == 1) {fDelay = 60.0;}
