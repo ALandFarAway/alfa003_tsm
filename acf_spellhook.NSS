@@ -558,9 +558,9 @@ void main()
 				nAuraPower2 = 0;
 					
 			if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
-				//SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 				if(FindSubString(GetTag(oDetected), "_portal_") != -1){
-				    //SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				    SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 					nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
@@ -868,6 +868,7 @@ void main()
 						effect eEffect = GetFirstEffect(oDetected);
 						int nRep = 0;
 						while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
+							 SendMessageToAllDMs("eEffect = " + IntToString(GetEffectType(eEffect)));
 							 if(GetEffectType(eEffect) == INVISIBILITY_TYPE_IMPROVED) {sName = "Something";}
 							 eEffect = GetNextEffect(oDetected);
 							 nRep ++;
