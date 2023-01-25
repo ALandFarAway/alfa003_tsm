@@ -558,9 +558,9 @@ void main()
 				nAuraPower2 = 0;
 					
 			if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
-				SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				//SendMessageToAllDMs("Trigger oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 				if(FindSubString(GetTag(oDetected), "_portal_") != -1){
-				    SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+				    //SendMessageToAllDMs("Portal oDetected: " + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
 					nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
@@ -723,10 +723,12 @@ void main()
 				nAuraPower2 = 0;
 							
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
-						
+					SendMessageToAllDMs("WP oDetected: " + ", Trap Spell ID = " + IntToString(GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID")) + ", Name = " + GetName(oDetected) + ", Tag = " + GetTag(oDetected) + ", ResRef = " + GetResRef(oDetected));
+					
 					if(((GetTag(oDetected) == "ACR_SPAWN_WP") && (GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID") > 0))  || (FindSubString(GetTag(oDetected), "trap_spell_") != -1))  {
 						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
 						sSchool = Get2DAString("spells", "School", nSpellID);
+						SendMessageToAllDMs("Trap oDetected: " + ", Trap Spell ID = " + IntToString(nSpellID) + ", School = " + sSchool);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration</color>";}
 						if(sSchool == "C") {sSchool = " of <color=tan>Conjuration</color>";}
 						if(sSchool == "D") {sSchool = " of <color=green>Divination</color>";}
