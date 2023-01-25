@@ -596,7 +596,7 @@ void main()
 						}
 					}
 				
-				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1)) {
+				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
 					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_insanity") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
@@ -630,15 +630,14 @@ void main()
 						}
 					
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
-					string sSymbolName = GetName(oDetected);			
-					if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) && (GetLocalInt(oDetected, "Fired") != 1));{sSymbolName = "Something";}
+					string sSymbolName = "Something";
 					float fDistance = GetDistanceBetween(oDetected, oCaster);
 					int nDistance = FloatToInt(fDistance);
 					string sDistance = IntToString(nDistance);
 					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
 						
-					if((nConcentration > 13) && (GetLocalInt(oDetected, "Fired") != 1)) {
+					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
@@ -725,7 +724,7 @@ void main()
 							
 				if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 						
-					if((FindSubString(GetResRef(oDetected), "trap_spell") != -1) || (FindSubString(GetTag(oDetected), "trap_spell_")) != -1)  {
+					if(((GetTag(oDetected) == "ACR_SPAWN_WP") && (GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID") > 0))  || (FindSubString(GetTag(oDetected), "trap_spell_") != -1))  {
 						int nSpellID = GetLocalInt(oDetected, "ACR_TRAP_SPELL_ID");
 						sSchool = Get2DAString("spells", "School", nSpellID);
 						if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration</color>";}
