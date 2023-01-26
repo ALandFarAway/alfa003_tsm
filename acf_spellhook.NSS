@@ -1002,7 +1002,6 @@ void main()
 						effect eEffect = GetFirstEffect(oDetected);
 						int nRep = 0;
 						while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
-							 SendMessageToAllDMs("eEffect = " + IntToString(GetEffectType(eEffect)));
 							 if(GetEffectType(eEffect) == 56) {sName = "Something";}
 							 eEffect = GetNextEffect(oDetected);
 							 nRep ++;
@@ -1180,6 +1179,7 @@ void main()
 							
 							//First, check the item for SpellSchool variables. 	
 							//If found, assign a temporary item property that gives it a ticket into the item property loop below. 
+							SetLocalInt(oItem, "ACR_SPELLADDED", 0);
 							if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 								int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 								int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
@@ -1198,7 +1198,7 @@ void main()
 								if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
 								if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
 								if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
-								//SetLocalInt(oItem, "ACR_SPELLADDED", -1);
+								SetLocalInt(oItem, "ACR_SPELLADDED", 1);
 								}
 																		
 							itemproperty ipItem = GetFirstItemProperty(oItem);
@@ -1225,14 +1225,13 @@ void main()
 								&& (FindSubString(GetTag(oItem), "dye_") == -1)
 								&& (FindSubString(GetTag(oItem), "it_cassi") == -1)
 								&& (FindSubString(GetTag(oItem), "it_nararoo") == -1)
-								)) //|| (GetLocalInt(oItem, "ACR_SPELLADDED") == -1)) 
-								{
+								)) {
 									//Estalish base item, a base item string, and a spot modifier based on size to go with it			
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
 									int nSpot = 0;
-									string sSpot = "";
+									//string sSpot = "";
 									if(nBaseItem == 19) {sBaseItem = "An amulet"; nSpot = 10;}
 									if(nBaseItem == 16) {sBaseItem = "Armor"; nSpot = -5;}
 									if((nBaseItem == 16) && (FindSubString(GetName(oItem), "Robe") != -1)) {sBaseItem = "A robe"; nSpot = 5;}
@@ -1319,25 +1318,20 @@ void main()
 									if(nBaseItem == 126) {sBaseItem = "A war mace"; nSpot = -5;}
 									if(nBaseItem == 111) {sBaseItem = "A whip"; nSpot = 5;}
 									
-									//if(nSpot == -10) {sSpot = sBaseItem;}
-									//if(nSpot == -5) {sSpot = "A medium sized item";}
-									//if(nSpot == 5) {sSpot = "A small item";}
-									//if(nSpot == 10) {sSpot = "A tiny item";}
-																	
 									//If the owner is invisible, so is the item.
 									if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
-										sBaseItem = ""; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away "; sSpot = "";
+										sBaseItem = ""; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away "; //sSpot = "";
 										}
 									
 									//Start looping through item properties on each item
 									while (GetIsItemPropertyValid(ipItem)) {
 										int nItemProperty = GetItemPropertyType(ipItem);
-										string sItemProperty = "";
 										int nItemSubType = GetItemPropertySubType(ipItem);
 										string sItemSubType = IntToString(nItemSubType);
 										int nItemCost = GetItemPropertyCostTableValue(ipItem);
+										string sItemProperty = "";
 										string sSpellIndex = "";
-										string sSchool = "";
+										//string sSchool = "";
 										/*  SRD under Magic Items and Detect Magic
 										    Armor and protection items = Abjuration
 											Weapons or offensive items = Evocation
@@ -1349,7 +1343,8 @@ void main()
 										if(nItemProperty == 12) {sItemProperty = "Bonus Feat"; sSchool = "T"; nAuraPower = 2;}
 										if(nItemProperty == 66) {sItemProperty = "Bonus HP"; sSchool = "T"; nAuraPower = 2;}
 										if(nItemProperty == 13) {sItemProperty = "Bonus Spell Slot"; sSchool = "T"; nAuraPower = nItemCost;}
-										if(nItemProperty == 15) {
+										//We don't want to override values already set on items currently checking Cast Spell: Unique added by SpellSchool variables
+										if((nItemProperty == 15) && (GetLocalInt(oItem, "ACR_SPELLADDED") == 0)){
 											sItemProperty = "Cast Spell";
 											sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
 											sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
@@ -1394,21 +1389,21 @@ void main()
 										if(sItemProperty != "") {
 											nAuraCount++;
 											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {SetLocalInt(oCaster, "nItemCount", 1);}
-											//If the item property is one of the Cast Spell: Unique Powers, 
+											//SpellSchool Variables have already set properties for Spellschool loop on items
+											//Otherwise if the item property is one of the Cast Spell: Unique Powers, 
 											//assume that the event script contains something more complicated than casting a simple spell.
 											//Even if it doesn't, we can't know what it is, except in certain specific cases called out here. 
-											if((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335")) 
+											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 0) && ((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335"))) 
 												{sSchool = " of arcanity too complex to unravel ";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
+											//Reset this so non SpellSchool added Cast Uniques register correctly in next ip loops	
+											if(GetLocalInt(oItem, "ACR_SPELLADDED") == 1) {SetLocalInt(oItem, "ACR_SPELLADDED", 0); } 
 												
-											//if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = sSpot; nSomething++;}
-										    //If it's unidentified or in a closed container, no soup for you.
-											if(GetIdentified(oItem) == FALSE) {sBaseItem = sSpot; nSomething++;}
+											//If it's unidentified or in a closed container, no soup for you.
+											if(GetIdentified(oItem) == FALSE) {nSomething++; }//sBaseItem = sSpot; 
 											if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)&& (GetIsOpen(oDetected) == FALSE)) {sBaseItem = "Something"; nSomething++;}
-											//If caster fails Spellcraft, no school for you, either.
-											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 												
 											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
 											if(sSchool == "C") {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
@@ -1419,6 +1414,9 @@ void main()
 											if(sSchool == "T") {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
 											if(sSchool == "V") {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
 											if(sSchool == "G") {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
+											
+											//If caster fails Spellcraft, no school for you, either.
+											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 											
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
@@ -1452,7 +1450,7 @@ void main()
 												}
 											
 											}
-											
+										string sSchool = "";
 										ipItem = GetNextItemProperty(oItem);
 									}
 								}
