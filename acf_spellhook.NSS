@@ -1226,7 +1226,7 @@ void main()
 								&& (FindSubString(GetTag(oItem), "it_cassi") == -1)
 								&& (FindSubString(GetTag(oItem), "it_nararoo") == -1)
 								)) {
-									//Estalish base item, a base item string, and a spot modifier based on size to go with it			
+									//Establish base item, a base item string, and a spot modifier based on size to go with it			
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
@@ -1344,12 +1344,14 @@ void main()
 										if(nItemProperty == 66) {sItemProperty = "Bonus HP"; sSchool = "T"; nAuraPower = 2;}
 										if(nItemProperty == 13) {sItemProperty = "Bonus Spell Slot"; sSchool = "T"; nAuraPower = nItemCost;}
 										//We don't want to override values already set on items currently checking Cast Spell: Unique added by SpellSchool variables
-										if((nItemProperty == 15) && (GetLocalInt(oItem, "ACR_SPELLADDED") == 0)){
+										if(nItemProperty == 15){
 											sItemProperty = "Cast Spell";
-											sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
-											sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
-											sAuraPower = Get2DAString("spells", "Innate", StringToInt(sSpellIndex));
-											nAuraPower = StringToInt(sAuraPower);
+											if(GetLocalInt(oItem, "ACR_SPELLADDED") == 0) {
+												sSpellIndex = Get2DAString("iprp_spells", "SpellIndex", nItemSubType); 
+												sSchool = Get2DAString("spells", "School", StringToInt(sSpellIndex));
+												sAuraPower = Get2DAString("spells", "Innate", StringToInt(sSpellIndex));
+												nAuraPower = StringToInt(sAuraPower);
+												}
 											}
 										if((nItemProperty >= 16) && (nItemProperty <=19)) {sItemProperty = "Damage Bonus"; sSchool = "V"; nAuraPower = nItemCost;}
 										if(nItemProperty == 90) {sItemProperty = "Damage Reduction"; sSchool = "T"; nAuraPower = nItemCost;}
@@ -1393,6 +1395,7 @@ void main()
 											//Otherwise if the item property is one of the Cast Spell: Unique Powers, 
 											//assume that the event script contains something more complicated than casting a simple spell.
 											//Even if it doesn't, we can't know what it is, except in certain specific cases called out here. 
+											SendMessageToAllDMs("ACR_SPELLADDED =" + IntToString(GetLocalInt(oItem, "ACR_SPELLADDED")));
 											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 0) && ((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335"))) 
 												{sSchool = " of arcanity too complex to unravel ";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
