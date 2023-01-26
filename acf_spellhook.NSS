@@ -646,7 +646,7 @@ void main()
 						}
 					}
 				
-				//Zero out all variables, both needed by other object types and used only for placeables with SPELLSCHOOL variables.
+				//Placeables done. Zero out all variables.
 				sSchool = "";
 				sSchool2 = "";
 				sSchool3 = ""; 
@@ -697,7 +697,7 @@ void main()
 						}
 					}
 				
-				//Another specific placeable use case are glyph and symbol traps before they've fired.
+				//Another specific trigger use case are glyph and symbol traps before they've fired.
 				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
 				/*
 				Glyph of Warding = Faint Abjuration
@@ -757,7 +757,8 @@ void main()
 						}
 					}
 				
-				//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto any placeable to have it report school and power to caster. 
+				//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto any trigger 
+				//to have it report school and power to caster. 
 				if(GetLocalInt(oDetected, "ACR_SPELLSCHOOL") > 0) {
 					nAuraCount++;
 					int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
@@ -831,7 +832,7 @@ void main()
 					}
 				}
 				
-				//Zero out variables needed by other object types
+				//Triggers done. Zero out variables needed by other object types
 				sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
@@ -976,7 +977,7 @@ void main()
 						}
 					}
 				
-				//Zero out variables needed by other object types
+				//Waypoint checks finished. Zero out variables needed by other object types
 				sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
@@ -1002,7 +1003,7 @@ void main()
 						int nRep = 0;
 						while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 
 							 SendMessageToAllDMs("eEffect = " + IntToString(GetEffectType(eEffect)));
-							 if(GetEffectType(eEffect) == INVISIBILITY_TYPE_IMPROVED) {sName = "Something";}
+							 if(GetEffectType(eEffect) == 56) {sName = "Something";}
 							 eEffect = GetNextEffect(oDetected);
 							 nRep ++;
 							}
@@ -1116,18 +1117,20 @@ void main()
 						}
 					}
 				
-					//Zero out variables needed for this creature's items, which are about to be determined.
-					sSchool = "";
-					sSchool2 = "";
-					nAuraPower = 0;
-					nAuraPower2 = 0;
-					
-					//Zero out all inventory slots because we're about to do items, either loose or in inventory
-					int nSlot = 0;
-					string sSlot = "";
-					
-					//Placeables and creatures can have items, and items can also be found outside of inventories. We have to deal with all of that.
-					if(((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) && (GetHasInventory(oDetected))) || ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
+				//Creature race and effects done.
+				//Zero out variables needed for this creature's items, which are about to be determined.
+				sSchool = "";
+				sSchool2 = "";
+				nAuraPower = 0;
+				nAuraPower2 = 0;
+				
+				//Begin items, in creature or placeable inventory, or loose.	
+				//Set inventory slots
+				int nSlot = 0;
+				string sSlot = "";
+				
+				//Placeables and creatures can have items, and items can also be found outside of inventories. We have to deal with all of that.
+				if(((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) && (GetHasInventory(oDetected))) || ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
 					//We're going to check every slot in a creature, and every inventory slot in a creature or placeable.
@@ -1178,25 +1181,25 @@ void main()
 							//First, check the item for SpellSchool variables. 	
 							//If found, assign a temporary item property that gives it a ticket into the item property loop below. 
 							if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
-									int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-									int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
-									int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
-									int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-									int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
-									int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
-									itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
-									IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-									if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
-									if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
-									if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>"; nDiv++;}
-									if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
-									if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
-									if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
-									if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
-									if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
-									if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
-									SetLocalInt(oItem, "ACR_SPELLADDED", -1);
-									}
+								int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
+								int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
+								int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
+								int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
+								int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
+								int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
+								itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
+								IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
+								if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
+								if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
+								if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>"; nDiv++;}
+								if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
+								if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
+								if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
+								if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
+								if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
+								if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
+								//SetLocalInt(oItem, "ACR_SPELLADDED", -1);
+								}
 																		
 							itemproperty ipItem = GetFirstItemProperty(oItem);
 							//Exclude creature items
@@ -1223,9 +1226,9 @@ void main()
 								&& (FindSubString(GetTag(oItem), "dye_") == -1)
 								&& (FindSubString(GetTag(oItem), "it_cassi") == -1)
 								&& (FindSubString(GetTag(oItem), "it_nararoo") == -1)
-								) || (GetLocalInt(oItem, "ACR_SPELLADDED") == -1)) 
+								)) //|| (GetLocalInt(oItem, "ACR_SPELLADDED") == -1)) 
 								{
-									//Estalish base item, a string, and a spot modifier based on size to go with it			
+									//Estalish base item, a base item string, and a spot modifier based on size to go with it			
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
@@ -1317,10 +1320,10 @@ void main()
 									if(nBaseItem == 126) {sBaseItem = "A war mace"; nSpot = -5;}
 									if(nBaseItem == 111) {sBaseItem = "A whip"; nSpot = 5;}
 									
-									if(nSpot == -10) {sSpot = sBaseItem;}
-									if(nSpot == -5) {sSpot = "A medium sized item";}
-									if(nSpot == 5) {sSpot = "A small item";}
-									if(nSpot == 10) {sSpot = "A tiny item";}
+									//if(nSpot == -10) {sSpot = sBaseItem;}
+									//if(nSpot == -5) {sSpot = "A medium sized item";}
+									//if(nSpot == 5) {sSpot = "A small item";}
+									//if(nSpot == 10) {sSpot = "A tiny item";}
 																	
 									//If the owner is invisible, so is the item.
 									if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {
@@ -1399,9 +1402,6 @@ void main()
 												{sSchool = " of arcanity too complex to unravel ";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
-												if(FindSubString(GetTag(oItem), "it_slv_telepor") != -1) {sSchool = "C"; nAuraPower = 5;}
-												if(FindSubString(GetTag(oItem), "_earring_msg") != -1) {sSchool = "T"; nAuraPower = 1;}
-												if(FindSubString(GetTag(oItem), "003_it_diadem") != -1) {sSchool = "N"; nAuraPower = 7;}
 												}
 												
 											//if((FindSubString(sSlot, "inventory") != -1) && (GetIsSkillSuccessful(oCaster, SKILL_SPOT, 10+nSpot, FALSE) == FALSE)) {sBaseItem = sSpot; nSomething++;}
@@ -1617,10 +1617,6 @@ void main()
 		}
 				
 	
-	//Dismissal
-	if(GetSpellId() == 40) {
-		SendMessageToAllDMs("Dismissal");
-		}
 		 
 	//Stopping summons by non Banites in a Banite UnHallowed Area
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "rauvin_ruins") != -1) {
