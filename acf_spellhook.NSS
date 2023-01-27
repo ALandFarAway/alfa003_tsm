@@ -1097,6 +1097,8 @@ void main()
 								if(nAuraPower > 3) {sEffectStrength = "a moderate";}
 								if(nAuraPower > 6) {sEffectStrength = "a strong";}
 								if(nAuraPower > 9) {sEffectStrength = "an overwhelming";}
+								
+								SendMessageToAllDMs(GetName(oDetected) + "has " + sEffectStrength + " aura of " +sEffectSchool + " --" +sEffect);
 								//Store highest aura, total and by school
 								nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 								if(nAuraPower > nAuraPowerHigh) {
