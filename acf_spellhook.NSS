@@ -1100,7 +1100,7 @@ void main()
 								if(nAuraPower > 6) {sEffectStrength = "a strong";}
 								if(nAuraPower > 9) {sEffectStrength = "an overwhelming";}
 									
-								SendMessageToAllDMs(GetName(oDetected) + " has " + sEffectStrength + " aura of " +sEffectSchool + " -- " +sEffect);
+								//SendMessageToAllDMs(GetName(oDetected) + " has " + sEffectStrength + " aura of " +sEffectSchool + " -- " +sEffect);
 								//Store highest aura, total and by school
 								nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 								if(nAuraPower > nAuraPowerHigh) {
@@ -1111,9 +1111,10 @@ void main()
 								if(nAuraPower > nEffectSchoolHigh) {
 									SetLocalInt(oDetected, "nEffectSchoolHigh_" + sEffectSchool, nAuraPower);
 									SetLocalString(oDetected, "sEffectStrength_" + sEffectSchool, sEffectStrength);
-									SetLocalString(oDetected, "sEffectSpell_" + sEffectSchool, sEffect);
 									}
 									
+								SetLocalString(oDetected, "sEffectSpell_" + sEffectSchool, GetLocalString(oDetected, "sEffectSpell_" + sEffectSchool) + ", " + sEffect);
+										
 								//If this is the first aura found, has the Round 1 message been sent yet? If not, send it. 	
 								if(nAuraCount == 1) {
 									DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
