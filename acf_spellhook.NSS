@@ -1082,7 +1082,8 @@ void main()
 						
 						if(GetEffectType(eEffect) == 56) {nEffectCount++; nAuraCount++; SetLocalInt(oDetected, "nInvis", 1);}
 						int nInvis = GetLocalInt(oDetected, "nInvis");
-						if(nInvis == 1) {sName = "Something "  + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+						string sColor = "<color=#FFFF00>";
+						if(nInvis == 1) {sColor = "<color=#666666>";sName = "Something "  + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
 							 
 						
 						int nEffect = GetEffectSpellId(eEffect); 
@@ -1143,8 +1144,8 @@ void main()
 								
 								//Queue up report to caster if Round 3 achieved
 								if(nConcentration > 13) {
-									DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + "<color=#71716F> --" + sName + "--  has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
-									DelayCommand(22.5, SendMessageToPC(oCaster, "<color=#666666>" + sName + " has " + sAuraStrength + " aura</color>" + sSchool));
+									DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + "<color=#71716F> --" + sName + "--</color>  has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + " --" + sEffect ));
+									if(nEffectSchool == 0) {DelayCommand(22.5, SendMessageToPC(oCaster, sColor + sName + " </color>has " + sAuraStrength + " aura" + sSchool));}
 									}	
 								}
 							}
@@ -1480,8 +1481,8 @@ void main()
 											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 											//Only report equipped items for Creatures.
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-												//Queue up report to caster if Round 3 achieved
-												if(nConcentration > 13) {
+												//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
+												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
 													DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 													DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 													}
@@ -1548,7 +1549,7 @@ void main()
 									}
 								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(50.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
 								 
-									if(GetLocalInt(oCaster, "nSummary") == 0) {
+									if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
 										DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: "));
 										}
@@ -1561,7 +1562,7 @@ void main()
 									if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
 									if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
 									if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + ": " + sSomething + " auras you can't classify"));}
-								 	if(GetLocalInt(oCaster, "nSummary") == 0) {
+								 	if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 										SetLocalInt(oCaster, "nSummary",1);
 										DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
 										DelayCommand(nDetDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
