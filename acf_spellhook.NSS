@@ -1055,34 +1055,19 @@ void main()
 					nAuraPower = 0;
 					nAuraPower2 = 0;
 				
-					//Does this creature have any spell effects active?
-					if(GetHasAnySpellEffect(oDetected)) {
-						effect eEffectID = GetFirstEffect(oDetected);
-						//If so, check to see if that effect is Invisibility
-						while (GetIsEffectValid(eEffectID))  { 
-							 if(GetEffectType(eEffectID) == 56) {sName = "Something"; SetLocalInt(oDetected, "nInvis", 1);}
-							 SendMessageToAllDMs("effectID = " + IntToString(GetEffectType(eEffectID)));
-							 int nInvis = GetLocalInt(oDetected, "nInvis");
-							 eEffectID = GetNextEffect(oDetected);
-							 }
+				//Does this creature have any spell effects active?
+				//	if(GetHasAnySpellEffect(oDetected)) {
 						
-						
-						int nInvis = GetLocalInt(oDetected, "nInvis");
-						string sName = GetName(oDetected);
-						if(nInvis == 1) {sName = "Something";}
-						
-						//Queue up headers for report to caster if Round 3 achieved.
-						if(nConcentration > 13) {
-							DelayCommand(21.5, SendMessageToAllDMs("**********"));
-							DelayCommand(21.6, SendMessageToAllDMs("FUNCTIONING SPELLS: " + sName));
-								DelayCommand(21.5, SendMessageToPC(oCaster, "**********"));
-								DelayCommand(21.6, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + sName));
-							}
 						//Start looping through effects and cross-referencing their spell, school, and power from the 2da by the Effect Spell ID
 						effect eEffect = GetFirstEffect(oDetected);
 						int nEffectSchool = 0;
+						int nEffectCount = 0;
 						while (GetIsEffectValid(eEffect)) {
 						SendMessageToAllDMs("effect = " + IntToString(GetEffectType(eEffect)));
+						
+						if(GetEffectType(eEffect) == 56) {nEffectCount++; nAuraCount++; sName = "Something"; SetLocalInt(oDetected, "nInvis", 1);}
+						int nInvis = GetLocalInt(oDetected, "nInvis");
+							 
 						
 							int nEffect = GetEffectSpellId(eEffect); 
 							string sEffect = Get2DAString("spells", "Label", nEffect);
@@ -1100,11 +1085,13 @@ void main()
 							
 							string sEffectSchool = Get2DAString("spells", "School", nEffect);
 							nEffectSchool = GetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool);
-							if((nEffect != -1) && (nEffectSchool == 0)) {
-							
-								//If this is a valid spell aura, start counting auras in total as well as auras by school on this creature
-								SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
+							if(nEffect != -1) //&& (nEffectSchool == 0)) 
+							{
+								//If this is a valid spell aura, start counting auras and effects in total as well as auras by school on this creature
 								nAuraCount++;
+								nEffectCount++;
+								SetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool, nEffect);
+								
 								
 								//If this is the first aura found, has the Round 1 message been sent yet? If not, send it. 	
 								if(nAuraCount == 1) {
@@ -1126,6 +1113,14 @@ void main()
 									if(sEffectSchool == "G") {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 									}
 									
+								//Queue up headers for report to caster if first effect and Round 3 achieved.
+								if((nConcentration > 13) && (nEffectCount == 1)) {
+									DelayCommand(21.5, SendMessageToAllDMs("**********"));
+									DelayCommand(21.6, SendMessageToAllDMs("FUNCTIONING SPELLS: " + sName));
+										DelayCommand(21.5, SendMessageToPC(oCaster, "**********"));
+										DelayCommand(21.6, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + sName));
+									}
+								
 								//Queue up report to caster if Round 3 achieved
 								if(nConcentration > 13) {
 									DelayCommand(22.5, SendMessageToAllDMs("<color=#71716F>" + GetName(oDetected) + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura</color>" + sSchool + " --" + sEffect ));
@@ -1134,7 +1129,7 @@ void main()
 								}
 							eEffect = GetNextEffect(oDetected);
 							}
-						}
+						//}
 					}
 				
 				//Creature race and effects done.
