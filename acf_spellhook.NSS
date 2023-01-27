@@ -262,19 +262,13 @@ void main()
 					//Does the caster learn the school?
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 						
-						string sName = GetName(oDetected);
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
-						//Queue up report to caster if Round 3 achieved
-						if(nConcentration > 13) {
-							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-							}
+					string sName = GetName(oDetected);
+						
+					//Queue up report to caster if Round 3 achieved
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
+						}
 				
 				//Is this the highest power aura encountered thus far? If so, store it.	
 				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
@@ -374,15 +368,7 @@ void main()
 					DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 					DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 					}
-				
-					/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
-						
+					
 				//Queue up report to caster if Round 3 achieved
 				if((nConcentration > 13) && (nAuraPower > 0)) {
 					DelayCommand(21.0, SendMessageToAllDMs( sName + " --" + GetTag(oDetected) +  "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
@@ -423,15 +409,7 @@ void main()
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 						DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 						}
-						
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
-						
+					
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
@@ -491,13 +469,6 @@ void main()
 						}
 					
 					string sSymbolName = GetName(oDetected);			
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
 							
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
@@ -535,13 +506,6 @@ void main()
 						}
 					
 					string sName = GetName(oDetected);
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
 								
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
@@ -644,14 +608,7 @@ void main()
 						}
 					
 					string sName = GetName(oDetected);
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
-								
+							
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
@@ -697,13 +654,6 @@ void main()
 						}
 						
 					string sName = "Something";
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
 						
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
@@ -758,14 +708,7 @@ void main()
 						}
 					
 					string sSymbolName = "Something";
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
-							
+						
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
@@ -833,13 +776,6 @@ void main()
 						}	
 					
 					string sName = "Something";
-						/*Set name, direction, distance variables
-						float fDistance = GetDistanceBetween(oDetected, oCaster);
-						int nDistance = FloatToInt(fDistance);
-						string sDistance = IntToString(nDistance);
-						float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-						string sAngle = GetCompassDirectionOfAngle(fAngle);
-						*/
 										
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
@@ -978,14 +914,7 @@ void main()
 							}
 						
 						string sName = GetName(oDetected);
-							/*Set name, direction, distance variables
-							float fDistance = GetDistanceBetween(oDetected, oCaster);
-							int nDistance = FloatToInt(fDistance);
-							string sDistance = IntToString(nDistance);
-							float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-							string sAngle = GetCompassDirectionOfAngle(fAngle);
-							*/
-									
+								
 						//Queue up report to caster if Round 3 achieved
 						if(nConcentration > 13) {
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool +sSchool2));
@@ -1082,7 +1011,15 @@ void main()
 					int nEffectSchoolHigh = 0;
 					while (GetIsEffectValid(eEffect)) {
 						//SendMessageToAllDMs("effect = " + IntToString(GetEffectType(eEffect)));
-						//if(GetEffectType(eEffect) == 56) {nEffectCount++; nAuraCount++; sEffectStrength = "a moderate"; SetLocalInt(oDetected, "nInvis", 1);}
+						//Invisibility is sometimes not a spell effect but should always be one, so force it.
+						if(GetEffectType(eEffect) == 56) {
+							nEffectCount++; 
+							nAuraCount++; 
+							SetLocalString(oDetected, "sEffectStrength_I", "a moderate"); 
+							SetLocalInt(oDetected, "nEffectSchoolHigh_I", 4); 
+							SetLocalString(oDetected, "sEffectSpell_I" , GetLocalString(oDetected, "sEffectSpell_I") + ", Invisibility" );
+							SetLocalInt(oDetected, "nInvis", 1);
+							}
 						nEffect = GetEffectSpellId(eEffect); 
 						//If this is a valid spell aura, increment auras and effects in total as well as auras by school on this creature
 						if(nEffect != -1) {
@@ -1113,6 +1050,7 @@ void main()
 									SetLocalString(oDetected, "sEffectStrength_" + sEffectSchool, sEffectStrength);
 									}
 									
+								//Keep track of all active spells by school for DM information, just because we can	
 								SetLocalString(oDetected, "sEffectSpell_" + sEffectSchool, GetLocalString(oDetected, "sEffectSpell_" + sEffectSchool) + ", " + sEffect);
 										
 								//If this is the first aura found, has the Round 1 message been sent yet? If not, send it. 	
@@ -1385,7 +1323,7 @@ void main()
 										int nItemCost = GetItemPropertyCostTableValue(ipItem);
 										string sItemProperty = "";
 										string sSpellIndex = "";
-										//string sSchool = "";
+										
 										/*  SRD under Magic Items and Detect Magic
 										    Armor and protection items = Abjuration
 											Weapons or offensive items = Evocation
