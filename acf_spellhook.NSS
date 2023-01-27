@@ -1069,7 +1069,6 @@ void main()
 					nAuraPower = 0;
 					nAuraPower2 = 0;
 				
-				//Does this creature have any spell effects active?
 						//Start looping through effects and cross-referencing their spell, school, and power from the 2da by the Effect Spell ID
 						effect eEffect = GetFirstEffect(oDetected);
 						int nEffect = 0; 
