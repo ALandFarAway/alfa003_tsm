@@ -177,7 +177,10 @@ void main()
 		
 		//nConcentration determines how many rounds of information a PC Caster gets. 
 		int nConcentration = ACR_SkillCheck(SKILL_CONCENTRATION, oCaster, 0, TRUE, TRUE, 0);
-		SendMessageToAllDMs("nConcentration = " + IntToString(nConcentration));
+		string sRounds = " 1 round.";
+		if(nConcentration > 6) {sRounds = " 2 rounds.";} 
+		if(nConcentration > 13) {sRounds = " 3 rounds.";} 
+		SendMessageToAllDMs(GetName(oCaster) + "'s Concentration = " + IntToString(nConcentration) + " earns" + sRounds);
 		if(nConcentration - GetSkillRank(SKILL_CONCENTRATION, oCaster, FALSE)<= 1) {
 			nConcentration = 1;
 			DelayCommand(3.0, SendMessageToAllDMs(GetName(oCaster) + " cannot concentrate at all and learns nothing."));
@@ -1054,7 +1057,16 @@ void main()
 				
 					//Does this creature have any spell effects active?
 					if(GetHasAnySpellEffect(oDetected)) {
+						effect eEffectID = GetFirstEffect(oDetected);
 						//If so, check to see if that effect is Invisibility
+						while (GetIsEffectValid(eEffectID))  { 
+							 if(GetEffectType(eEffectID) == 56) {sName = "Something"; SetLocalInt(oDetected, "nInvis", 1);}
+							 SendMessageToAllDMs("effectID = " + IntToString(GetEffectType(eEffectID)));
+							 int nInvis = GetLocalInt(oDetected, "nInvis");
+							 eEffectID = GetNextEffect(oDetected);
+							 }
+						
+						
 						int nInvis = GetLocalInt(oDetected, "nInvis");
 						string sName = GetName(oDetected);
 						if(nInvis == 1) {sName = "Something";}
@@ -1070,6 +1082,8 @@ void main()
 						effect eEffect = GetFirstEffect(oDetected);
 						int nEffectSchool = 0;
 						while (GetIsEffectValid(eEffect)) {
+						SendMessageToAllDMs("effect = " + IntToString(GetEffectType(eEffect)));
+						
 							int nEffect = GetEffectSpellId(eEffect); 
 							string sEffect = Get2DAString("spells", "Label", nEffect);
 							sAuraPower = Get2DAString("spells", "Innate", nEffect);
