@@ -1077,13 +1077,11 @@ void main()
 						int nEffectSchool = 0;
 						int nEffectCount = 0;
 						int nEffectSpell = 0;
+						int nEffectSchoolHigh = 0;
 						while (GetIsEffectValid(eEffect)) {
 						SendMessageToAllDMs("effect = " + IntToString(GetEffectType(eEffect)));
 						
 						if(GetEffectType(eEffect) == 56) {nEffectCount++; nAuraCount++; SetLocalInt(oDetected, "nInvis", 1);}
-						int nInvis = GetLocalInt(oDetected, "nInvis");
-						string sColor = "<color=#FFFF00>";
-						if(nInvis == 1) {sColor = "<color=#666666>";sName = "Something "  + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
 							 
 						
 						int nEffect = GetEffectSpellId(eEffect); 
@@ -1104,7 +1102,13 @@ void main()
 							
 							string sEffectSchool = Get2DAString("spells", "School", nEffect);
 							nEffectSchool = GetLocalInt(oDetected, "sEffectSchool_" + sEffectSchool);
-							if(nEffect != -1) //&& (nEffectSchool == 0)) 
+							nEffectSchoolHigh = GetLocalInt(oDetected, "nEffectSchoolHigh_" + sEffectSchool);
+							if(nAuraPower > nAuraPowerHigh) {
+								SetLocalInt(oDetected, "nEffectSchoolHigh_" + sEffectSchool, nAuraPower);
+								nEffectSchoolHigh = GetLocalInt(oDetected, "nEffectSchoolHigh_" + sEffectSchool);
+								}
+							
+							if(nEffect != -1) 
 							{
 								//If this is a valid spell aura, increment auras and effects in total as well as auras by school on this creature
 								//Also zero them out in ten seconds, so that they report fresh to next DM cast on oDetected.
@@ -1120,8 +1124,12 @@ void main()
 									DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 									}
 									
+								eEffect = GetNextEffect(oDetected);
+								}	
+							}	
+						}
 								//Does the caster learn the school?	
-								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
+								/*if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){
 									if(sEffectSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>";}
 									if(sEffectSchool == "C") {sSchool = " of <color=tan>Conjuration </color>";}
 									if(sEffectSchool == "D") {sSchool = " of <color=green>Divination </color>";}
@@ -1133,7 +1141,7 @@ void main()
 									if(sEffectSchool == "V") {sSchool = " of <color=red>Evocation </color>";}
 									if(sEffectSchool == "G") {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 									}
-									
+									*/
 								//Queue up headers for report to caster if first effect and Round 3 achieved.
 								if((nConcentration > 13) && (nEffectCount == 1)) {
 									DelayCommand(21.5, SendMessageToAllDMs("**********"));
@@ -1141,17 +1149,17 @@ void main()
 										DelayCommand(21.5, SendMessageToPC(oCaster, "**********"));
 										DelayCommand(21.6, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + sName));
 									}
-								
+									
+							int nInvis = GetLocalInt(oDetected, "nInvis");
+							string sColor = "<color=#666666>";
+							if(nInvis == 1) {sColor = "<color=#FFFF00>";sName = "Something "  + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+						
 								//Queue up report to caster if Round 3 achieved
 								if(nConcentration > 13) {
-									DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + "<color=#71716F> --" + sName + "--</color>  has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + " --" + sEffect ));
+									DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + "<color=#71716F> --" + sName + "--</color>  has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + " --"/* + sEffect */));
 									if(nEffectSchool == 0) {DelayCommand(22.5, SendMessageToPC(oCaster, sColor + sName + " </color>has " + sAuraStrength + " aura" + sSchool));}
 									}	
-								}
-							}
-							eEffect = GetNextEffect(oDetected);
-						}
-						//}
+							//}
 					}
 				
 				//Creature race and effects done.
@@ -1618,7 +1626,8 @@ void main()
 		if((nAuraCount > 0) && (nConcentration > 13)) {
 			float fDelay = 26.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
-			if(nItemCounted == 1) {fDelay = 60.0;}
+			int nInvis = GetLocalInt(oDetected, "nInvis");
+			if((nItemCounted == 1)&& (nInvis== 0)) {fDelay = 60.0;}
 			DelayCommand(19.0, SendMessageToAllDMs("**********"));
 			DelayCommand(19.1, SendMessageToAllDMs(GetName(oCaster) + " concentrates for three rounds and learns:"));
 			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs("**********"));
