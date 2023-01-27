@@ -1032,7 +1032,7 @@ void main()
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of " + sSchool;}
 					
 					//Sometimes creatures are invisible, in which case we don't want their name being bandied about willy-nilly.
-					if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {sName = "Something"; SetLocalInt(oDetected, "nInvis", 1);}  
+					if((GetHasSpellEffect(SPELL_INVISIBILITY, oDetected)) || (GetHasSpellEffect(SPELL_INVISIBILITY_SPHERE, oDetected)) || (GetHasSpellEffect(SPELL_GREATER_INVISIBILITY, oDetected))  || (GetHasSpellEffect(SPELL_MASS_INVISIBILITY, oDetected))) {sName = "Something"; SetLocalInt(oDetected, "nInvis", 1);int nInvis = GetLocalInt(oDetected, "nInvis");}  
 					
 					//If the critter is innately magical, let's define its power as one half its CR, to fit within the base 10 scale.
 					if(sRace != ""){
@@ -1118,7 +1118,7 @@ void main()
 									}
 									
 								//Queue up headers for report to caster if first effect and Round 3 achieved.
-								if((nConcentration > 13) && (nEffectCount == 1)) {
+								if((nConcentration > 13) && (nEffectCount == 1) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 									DelayCommand(21.5, SendMessageToAllDMs("**********"));
 									DelayCommand(21.6, SendMessageToAllDMs("FUNCTIONING SPELLS: " + GetName(oDetected) + " --" + sName ));
 										DelayCommand(21.5, SendMessageToPC(oCaster, "**********"));
@@ -1134,7 +1134,7 @@ void main()
 						
 								//Queue up report to caster if Round 3 achieved
 								if(nConcentration > 13) {
-									if(GetLocalInt(oDetected, "nEffectSchoolHigh_A") > 0) {DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_A") + " --" + IntToString(nAuraPower) + "--</color> aura of <color=lightblue>Abjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_A")));}
+									if(GetLocalInt(oDetected, "nEffectSchoolHigh_A") > 0) {DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_A") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=lightblue>Abjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_A")));}
 									if(GetLocalInt(oDetected, "nEffectSchoolHigh_C") > 0) {DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_C") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=tan>Conjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_C")));}
 									if(GetLocalInt(oDetected, "nEffectSchoolHigh_D") > 0) {DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_D") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=green>Divination </color> --" + GetLocalString(oDetected, "sEffectSpell_D")));}
 									if(GetLocalInt(oDetected, "nEffectSchoolHigh_E") > 0) {DelayCommand(22.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_E") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=magenta>Enchantment </color> --" + GetLocalString(oDetected, "sEffectSpell_E")));}
@@ -1538,7 +1538,7 @@ void main()
 									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: "));
 									}
 								if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
-								if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=tan>:" + sCon + " Conjuration</color> auras"));}
+								if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=tan>: " + sCon + " Conjuration</color> auras"));}
 								if(nDiv>0) {DelayCommand(24.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=green>: " + sDiv + " Divination</color> auras"));}
 								if(nEnc>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=magenta>: " + sEnc + " Enchantment</color> auras"));}
 								if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=red>: " + sEvo + " Evocation</color> auras"));}
