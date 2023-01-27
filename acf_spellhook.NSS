@@ -1087,7 +1087,7 @@ void main()
 						//If this is a valid spell aura, increment auras and effects in total as well as auras by school on this creature
 						if(nEffect != -1) {
 							sEffect = Get2DAString("spells", "Label", nEffect);
-							//Weed out spell duplicates
+							//Weed out spell duplicates because effects report multiple times without this
 							if(GetLocalString(oDetected, "sEffect_" + sEffect) != sEffect) {
 								SetLocalString(oDetected, "sEffect_" + sEffect, sEffect);
 								nAuraCount++;
@@ -1121,10 +1121,10 @@ void main()
 									}
 								//Queue up headers for report to caster if first effect and Round 3 achieved.
 								if((nConcentration > 13) && (nEffectCount == 1) && (GetLocalInt(oDetected, "nInvis")== 0)) {
-									DelayCommand(21.5, SendMessageToAllDMs("**********"));
-									DelayCommand(21.6, SendMessageToAllDMs("FUNCTIONING SPELLS: " + GetName(oDetected) + " --" + sName ));
-									DelayCommand(21.5, SendMessageToPC(oCaster, "**********"));
-									DelayCommand(21.6, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + sName));
+									DelayCommand(23.5, SendMessageToAllDMs("**********"));
+									DelayCommand(23.6, SendMessageToAllDMs("FUNCTIONING SPELLS: " + GetName(oDetected) + " --" + sName ));
+									DelayCommand(23.5, SendMessageToPC(oCaster, "**********"));
+									DelayCommand(23.6, SendMessageToPC(oCaster, "FUNCTIONING SPELLS: " + sName));
 									}
 								}
 							}
@@ -1137,27 +1137,27 @@ void main()
 						
 						//Queue up report to caster if Round 3 achieved
 						if(nConcentration > 13) {
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_A") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_A") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=lightblue>Abjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_A")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_C") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_C") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=tan>Conjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_C")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_D") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_D") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=green>Divination </color> --" + GetLocalString(oDetected, "sEffectSpell_D")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_E") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_E") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=magenta>Enchantment </color> --" + GetLocalString(oDetected, "sEffectSpell_E")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_V") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_V") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=red>Evocation </color> --" + GetLocalString(oDetected, "sEffectSpell_V")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_I") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_I") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=purple>Illusion </color> --" + GetLocalString(oDetected, "sEffectSpell_I")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_N") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_N") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=white>Necromancy </color> --" + GetLocalString(oDetected, "sEffectSpell_N")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_T") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_T") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=orange>Transmutation </color> --" + GetLocalString(oDetected, "sEffectSpell_T")));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_G") > 0) {DelayCommand(24.5, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_G") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=yellow>Universal arcanity </color> --" + GetLocalString(oDetected, "sEffectSpell_G")));}
+							float fSummaryDelay = 24.5;
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_A") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_A") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=lightblue>Abjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_A")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_C") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_C") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=tan>Conjuration </color> --" + GetLocalString(oDetected, "sEffectSpell_C")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_D") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_D") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=green>Divination </color> --" + GetLocalString(oDetected, "sEffectSpell_D")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_E") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_E") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=magenta>Enchantment </color> --" + GetLocalString(oDetected, "sEffectSpell_E")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_V") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_V") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=red>Evocation </color> --" + GetLocalString(oDetected, "sEffectSpell_V")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_I") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_I") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=purple>Illusion </color> --" + GetLocalString(oDetected, "sEffectSpell_I")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_N") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_N") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=white>Necromancy </color> --" + GetLocalString(oDetected, "sEffectSpell_N")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_T") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_T") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=orange>Transmutation </color> --" + GetLocalString(oDetected, "sEffectSpell_T")));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_G") > 0) {DelayCommand(fSummaryDelay, SendMessageToAllDMs(GetName(oDetected) + sColor + " --" + sName + "-- has " + GetLocalString(oDetected, "sEffectStrength_G") + " --" + IntToString(nAuraPower) + "</color>-- aura of <color=yellow>Universal arcanity </color> --" + GetLocalString(oDetected, "sEffectSpell_G")));}
 								
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_A") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_A")  + "</color> aura of <color=lightblue>Abjuration </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_C") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_C")  + "</color> aura of <color=tan>Conjuration </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_D") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_D")  + "</color> aura of <color=green>Divination </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_E") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_E")  + "</color> aura of <color=magenta>Enchantment </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_V") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_V")  + "</color> aura of <color=red>Evocation </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_I") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_I")  + "</color> aura of <color=purple>Illusion </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_N") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_N")  + "</color> aura of <color=white>Necromancy </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_T") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_T")  + "</color> aura of <color=orange>Transmutation </color>"));}
-							if(GetLocalInt(oDetected, "nEffectSchoolHigh_G") > 0) {DelayCommand(24.5, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_G")  + "</color> aura of <color=yellow>Universal arcanity </color>"));}
-									
-								}	
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_A") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_A")  + "</color> aura of <color=lightblue>Abjuration </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_C") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_C")  + "</color> aura of <color=tan>Conjuration </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_D") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_D")  + "</color> aura of <color=green>Divination </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_E") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_E")  + "</color> aura of <color=magenta>Enchantment </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_V") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_V")  + "</color> aura of <color=red>Evocation </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_I") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_I")  + "</color> aura of <color=purple>Illusion </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_N") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_N")  + "</color> aura of <color=white>Necromancy </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_T") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_T")  + "</color> aura of <color=orange>Transmutation </color>"));}
+							if(GetLocalInt(oDetected, "nEffectSchoolHigh_G") > 0) {DelayCommand(fSummaryDelay, SendMessageToPC(oCaster, sColor + sName + " has " + GetLocalString(oDetected, "sEffectStrength_G")  + "</color> aura of <color=yellow>Universal arcanity </color>"));}
+							}	
 					}
 				
 				//Zero out effect specific variables.
@@ -1542,48 +1542,49 @@ void main()
 							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetLocalInt(oCaster, "nItemCount") > 0)) {
 								string sName = GetName(oDetected);
 								if(GetLocalInt(oDetected, "nInvis")== 1) {sName = "Something " + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+								float fSumDelay = 26.0;
 								if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)){
-									DelayCommand(24.0, SendMessageToAllDMs(" "));
-									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: "));
+									DelayCommand(fSumDelay, SendMessageToAllDMs(" "));
+									DelayCommand(fSumDelay + 0.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: "));
 									}
-								if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
-								if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=tan>: " + sCon + " Conjuration</color> auras"));}
-								if(nDiv>0) {DelayCommand(24.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=green>: " + sDiv + " Divination</color> auras"));}
-								if(nEnc>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=magenta>: " + sEnc + " Enchantment</color> auras"));}
-								if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=red>: " + sEvo + " Evocation</color> auras"));}
-								if(nIll>0) {DelayCommand(24.7 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=purple>: " + sIll + " Illusion</color> auras"));}
-								if(nNec>0) {DelayCommand(24.8 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=white>: " + sNec + " Necromancy</color> auras"));}
-								if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=orange>: " + sTra + " Transmutation</color> auras"));}
-								if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=#FFFF00>: " + sGen + " Universal</color> auras"));}
-								if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- : " + sSomething + " auras you can't classify"));}
 								
-								float nDetDelay = 25.0 + IntToFloat(nCreatureCount * 9);
+								if(nAbj>0) {DelayCommand(fSumDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
+								if(nCon>0) {DelayCommand(fSumDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=tan>: " + sCon + " Conjuration</color> auras"));}
+								if(nDiv>0) {DelayCommand(fSumDelay + 0.4 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=green>: " + sDiv + " Divination</color> auras"));}
+								if(nEnc>0) {DelayCommand(fSumDelay + 0.5 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+								if(nEvo>0) {DelayCommand(fSumDelay + 0.6 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=red>: " + sEvo + " Evocation</color> auras"));}
+								if(nIll>0) {DelayCommand(fSumDelay + 0.7 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=purple>: " + sIll + " Illusion</color> auras"));}
+								if(nNec>0) {DelayCommand(fSumDelay + 0.8 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=white>: " + sNec + " Necromancy</color> auras"));}
+								if(nTra>0) {DelayCommand(fSumDelay + 0.9 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=orange>: " + sTra + " Transmutation</color> auras"));}
+								if(nGen>0) {DelayCommand(fSumDelay + 1.0 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- <color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+								if(nSomething>0) {DelayCommand(fSumDelay + 1.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- : " + sSomething + " auras you can't classify"));}
+								
 								if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)){
-									DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-									DelayCommand(nDetDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
-									DelayCommand(nDetDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(fSumDelay + 2.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(fSumDelay + 2.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
+									DelayCommand(fSumDelay + 2.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									DelayCommand(50.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
 									}
 								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(50.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
 								 
 									if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
-										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
-										DelayCommand(24.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: "));
+										DelayCommand(fSumDelay, SendMessageToPC(oCaster, " "));
+										DelayCommand(fSumDelay + 0.1, SendMessageToPC(oCaster, "EQUIPPED AND CARRIED SUMMARY: "));
 										}
-									if(nAbj>0) {DelayCommand(24.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
-									if(nCon>0) {DelayCommand(24.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
-									if(nDiv>0) {DelayCommand(24.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
-									if(nEvo>0) {DelayCommand(24.6 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=red>: " + sEvo + " Evocation</color> auras"));}
-									if(nIll>0) {DelayCommand(24.7 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=purple>: " + sIll + " Illusion</color> auras"));}
-									if(nNec>0) {DelayCommand(24.8 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=white>: " + sNec + " Necromancy</color> auras"));}
-									if(nTra>0) {DelayCommand(24.9 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
-									if(nGen>0) {DelayCommand(25.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
-									if(nSomething>0) {DelayCommand(25.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + ": " + sSomething + " auras you can't classify"));}
+									if(nAbj>0) {DelayCommand(fSumDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
+									if(nCon>0) {DelayCommand(fSumDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
+									if(nDiv>0) {DelayCommand(fSumDelay + 0.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+									if(nEvo>0) {DelayCommand(fSumDelay + 0.6 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=red>: " + sEvo + " Evocation</color> auras"));}
+									if(nIll>0) {DelayCommand(fSumDelay + 0.7 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=purple>: " + sIll + " Illusion</color> auras"));}
+									if(nNec>0) {DelayCommand(fSumDelay + 0.8 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=white>: " + sNec + " Necromancy</color> auras"));}
+									if(nTra>0) {DelayCommand(fSumDelay + 0.9 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=orange>: " + sTra + " Transmutation</color> auras"));}
+									if(nGen>0) {DelayCommand(fSumDelay + 1.0 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=#FFFF00>: " + sGen + " Universal</color> auras"));}
+									if(nSomething>0) {DelayCommand(fSumDelay + 1.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + ": " + sSomething + " auras you can't classify"));}
 								 	if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 										SetLocalInt(oCaster, "nSummary",1);
-										DelayCommand(nDetDelay + 0.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-										DelayCommand(nDetDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
-										DelayCommand(nDetDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(fSumDelay + 2.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(fSumDelay + 2.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
+										DelayCommand(fSumDelay + 2.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										DelayCommand(50.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
 										}
 									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(50.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
