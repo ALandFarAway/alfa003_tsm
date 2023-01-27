@@ -1071,8 +1071,8 @@ void main()
 							 
 						
 						int nEffect = GetEffectSpellId(eEffect); 
-						if(nEffect != -1) {SetLocalInt(oDetected, "spellEffect" + IntToString(nEffect), nEffect);}
 						if(GetLocalInt(oDetected, "spellEffect" + IntToString(nEffect)) != nEffect) {	
+							if(nEffect != -1) {SetLocalInt(oDetected, "spellEffect" + IntToString(nEffect), nEffect);}
 							string sEffect = Get2DAString("spells", "Label", nEffect);
 							sAuraPower = Get2DAString("spells", "Innate", nEffect);
 							nAuraPower = StringToInt(sAuraPower);
@@ -1338,7 +1338,7 @@ void main()
 									
 									//If the owner is invisible, so is the item.
 									if(GetLocalInt(oDetected, "nInvis")== 1) {
-										sBaseItem = "Something"; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters away ";
+										sBaseItem = "Something"; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;
 										}
 									
 									//Start looping through item properties on each item
@@ -1506,8 +1506,8 @@ void main()
 							//If it's a Creature, send the Equipped and Carried Summary and the Equipped Detail Header
 							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetLocalInt(oCaster, "nItemCount") > 0)) {
 								string sName = GetName(oDetected);
-								if(GetLocalInt(oDetected, "nInvis")== 1) {sName = "Something";}
-								if(GetLocalInt(oCaster, "nSummary") == 0) {
+								if(GetLocalInt(oDetected, "nInvis")== 1) {sName = "Something" + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+								if(GetLocalInt(oCaster, "nSummary") == 0){
 									DelayCommand(24.0, SendMessageToAllDMs(" "));
 									DelayCommand(24.1, SendMessageToAllDMs("EQUIPPED AND CARRIED SUMMARY: "));
 									}
@@ -1529,7 +1529,7 @@ void main()
 									DelayCommand(nDetDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									DelayCommand(50.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
 									}
-								DelayCommand(50.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + GetName(oDetected) + " are in inventory."));
+								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(50.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
 								 
 									if(GetLocalInt(oCaster, "nSummary") == 0) {
 										DelayCommand(24.0, SendMessageToPC(oCaster, " "));
@@ -1551,7 +1551,7 @@ void main()
 										DelayCommand(nDetDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										DelayCommand(50.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
 										}
-									if(GetLocalInt(oDetected, "nInvis")== 1) {DelayCommand(50.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
+									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(50.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
 								}
 							}
 						
