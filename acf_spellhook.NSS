@@ -286,13 +286,7 @@ void main()
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 						}	 
 				
-				//Individual cases of Placed Effect done, now check to see if any of them rate as the highest power object looked at thus far, and store it, if so.	
-				/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-				if(nAuraPower > nAuraPowerHigh) {
-					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-					}
-				*/
+			
 				//Flag Round 1 Message 	
 				SetLocalInt(oCaster, "nMessage1", 1);
 					
@@ -310,11 +304,10 @@ void main()
 				
 				
 			//Doors, Placeables, Triggers and Waypoints can carry variables that identify them as magical. 
-			//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto the object to have it report School and Power to caster.
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto any placeable to have it report school and power to caster. 
 				//A third pair of variables reports with a different message structure, but can be used to represent "stored power" inside the other two schools, if you desire.
-				//There are also subschools defined here. They are optional, to allow Evocation (Sonic) to be discriminated from Evocation (Cold) for instance.
+				//There are also subschools defined here. They are optional, to allow (for instance) Evocation (Sonic) to be discriminated from Evocation (Cold) for instance.
 				if(GetLocalInt(oDetected, "ACR_SPELLSCHOOL") > 0) {
 					nAuraCount++;
 					int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
@@ -397,6 +390,7 @@ void main()
 				
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
+					if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sName = "Something";}
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 							}
@@ -427,13 +421,6 @@ void main()
 					//If they are useable, their name will report as their name.
 					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
 					
-					//Is this the highest power aura encountered thus far? If so, store it.	
-					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					*/
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
@@ -479,13 +466,6 @@ void main()
 					if(nAuraPower > 6) {sAuraStrength = "strong";}
 					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
 									
-					//Is this the highest power aura encountered thus far? If so, store it.	
-					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					*/
 					//Does the caster learn the school?
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 					
@@ -515,13 +495,6 @@ void main()
 					//Does the caster learn the school?
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=red>Evocation</color>";}
 					
-					//Is this the highest power aura encountered thus far? If so, store it.	
-					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					*/
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
@@ -531,111 +504,11 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
-					
-				//Zero out variables needed by other placeables
-				sSchool = "";
-				sSchool2 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;
-				
-				//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto any placeable to have it report school and power to caster. 
-				//A third pair of variables reports with a different message structure, but can be used to represent "stored power" inside the other two schools, if you desire.
-				//There are also subschools defined here. They are optional, to allow Evocation (Sonic) to be discriminated from Evocation (Cold) for instance.
-				/*if(GetLocalInt(oDetected, "ACR_SPELLSCHOOL") > 0) {
-					nAuraCount++;
-					int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
-					string sACRSubSchool = GetLocalString(oDetected, "ACR_SUBSCHOOL");
-					int nAuraPower = GetLocalInt(oDetected, "ACR_SPELLPOWER");
-					int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
-					string sACRSubSchool2 = GetLocalString(oDetected, "ACR_SUBSCHOOL2");
-					int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-					int nACRSpellSchool3 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL3");
-					string sACRSubSchool3 = GetLocalString(oDetected, "ACR_SUBSCHOOL3");
-					int nAuraPower3 = GetLocalInt(oDetected, "ACR_SPELLPOWER3");
-					if(nAuraPower > 0) {sAuraStrength = "a faint";}
-					if(nAuraPower > 3) {sAuraStrength = "a moderate";}
-					if(nAuraPower > 6) {sAuraStrength = "a strong";}
-					if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
-					if(nAuraPower2 > 0) {sAuraStrength2 = "a faint";}
-					if(nAuraPower2 > 3) {sAuraStrength2 = "a moderate";}
-					if(nAuraPower2 > 6) {sAuraStrength2 = "a strong";}
-					if(nAuraPower2 > 9) {sAuraStrength2 = "an overwhelming";}
-					if(nAuraPower3 > 0) {sAuraStrength3 = "a faint";}
-					if(nAuraPower3 > 3) {sAuraStrength3 = "a moderate";}
-					if(nAuraPower3 > 6) {sAuraStrength3 = "a strong";}
-					if(nAuraPower3 > 9) {sAuraStrength3 = "an overwhelming";}
-					if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
-					if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
-					if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
-					if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
-					if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
-					if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
-					if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
-					if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
-					if(nACRSpellSchool2 == 4) {sSchool2 = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool2 == 5) {sSchool2 = " of <color=red>Evocation </color>";}
-					if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
-					if(nACRSpellSchool3 == 1) {sSchool3 = " of <color=lightblue>Abjuration </color>";}
-					if(nACRSpellSchool3 == 2) {sSchool3 = " of <color=tan>Conjuration </color>";}
-					if(nACRSpellSchool3 == 3) {sSchool3 = " of <color=green>Divination </color>";}
-					if(nACRSpellSchool3 == 4) {sSchool3 = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool3 == 5) {sSchool3 = " of <color=red>Evocation </color>";}
-					if(nACRSpellSchool3 == 6) {sSchool3 = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool3 == 7) {sSchool3 = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool3 == 8) {sSchool3 = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=#FFFF00>Universal arcanity</color>";}
-					
-					if(sACRSubSchool != "") {sSchool = sSchool + "(" + sACRSubSchool + ")";}
-					if(sSchool2 != "") {sSchool2 = " and " + sAuraStrength2 + " aura " + sSchool2;}
-					if(sACRSubSchool2 != "") {sSchool2 = sSchool2 + "(" + sACRSubSchool2 + ")";}
-					if(sSchool3 != "") {sSchool3 = "inside that outer layer. Both surround " +sAuraStrength3 + " amount " + sSchool3;}
-					if(sACRSubSchool3 != "") {sSchool3 = sSchool3 + "(" + sACRSubSchool3 + ")";}
-					
-					//Does the caster learn the school?
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
-					
-					//Are any of the three pairs of variables the highest power aura encountered thus far? If so, store it.	
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower2 > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
-						}
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower3 > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower3);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
-						}
-					
-					//Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
-				
-					//Queue up report to caster if Round 3 achieved
-					if(nConcentration > 13) {
-							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
-							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
-							}
-						}*/
-					}
+				}
 				
 				//Placeables done. Zero out all variables.
 				sSchool = "";
 				sSchool2 = "";
-				//sSchool3 = ""; 
-				//sACRSubSchool = "";
-				//sACRSubSchool2 = "";
-				//sACRSubSchool3 = "";
 				nAuraPower = 0;
 				nAuraPower2 = 0;
 			
@@ -693,22 +566,14 @@ void main()
 					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_fear") != -1)) {nAuraPower = 6;}
 					if((FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1)) {nAuraPower = 7;}
 					if((FindSubString(GetTag(oDetected), "_symbol_insanity") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {nAuraPower = 8;}
-					//if(nAuraPower > 0) {sAuraStrength = "faint";}
-					//if(nAuraPower > 3) {sAuraStrength = "moderate";}
-					//if(nAuraPower > 6) {sAuraStrength = "strong";}
-					//if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+					if(nAuraPower > 0) {sAuraStrength = "faint";}
+					if(nAuraPower > 3) {sAuraStrength = "moderate";}
+					if(nAuraPower > 6) {sAuraStrength = "strong";}
+					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
 					
 					//Does the caster learn the school?
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 									
-					//Is this the highest power aura encountered thus far? If so, store it.	
-					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					*/	
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
@@ -720,70 +585,6 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
-				
-				//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto any trigger 
-				//to have it report school and power to caster. 
-				/*if(GetLocalInt(oDetected, "ACR_SPELLSCHOOL") > 0) {
-					nAuraCount++;
-					int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
-					int nAuraPower = GetLocalInt(oDetected, "ACR_SPELLPOWER");
-					int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
-					int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-					if(nAuraPower > 0) {sAuraStrength = "faint";}
-					if(nAuraPower > 3) {sAuraStrength = "moderate";}
-					if(nAuraPower > 6) {sAuraStrength = "strong";}
-					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-					if(nAuraPower2 > 0) {sAuraStrength2 = "faint";}
-					if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
-					if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
-					if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
-					if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
-					if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
-					if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
-					if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
-					if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
-					if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
-					if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
-					if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
-					if(nACRSpellSchool2 == 4) {sSchool2 = " of <color=magenta>Enchantment </color>";}
-					if(nACRSpellSchool2 == 5) {sSchool2 = " of <color=red>Evocation </color>";}
-					if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
-					if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
-					if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
-						
-					if(sSchool2 != "") {sSchool2 = " and a " + sAuraStrength2 + " aura " + sSchool2;}
-					//SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
-						
-					//Does the caster learn the name?
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
-					
-					//Are either pair the highest power aura encountered thus far? If so, store it.	
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower2 > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
-						}
-							
-					//Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
-				
-										
-					//Queue up report to caster if Round 3 achieved
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-						}
-					}*/
 				}
 				
 				//Triggers done. Zero out variables needed by other object types
@@ -814,22 +615,15 @@ void main()
 					//Pull the spell level from the spells 2DA.
 					sAuraPower = Get2DAString("spells", "Innate", nSpellID);
 					nAuraPower = StringToInt(sAuraPower);
-					//sAuraStrength = "an indeterminately powerful";
-					//if(nAuraPower > 0) {sAuraStrength = "a faint";}
-					//if(nAuraPower > 3) {sAuraStrength = "a moderate";}
-					//if(nAuraPower > 6) {sAuraStrength = "a strong";}
-					//if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
+					sAuraStrength = "an indeterminately powerful";
+					if(nAuraPower > 0) {sAuraStrength = "a faint";}
+					if(nAuraPower > 3) {sAuraStrength = "a moderate";}
+					if(nAuraPower > 6) {sAuraStrength = "a strong";}
+					if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 					
 					//Does the caster learn the school?		
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 					
-					//Is this the highest power aura encountered thus far? If so, store it.	
-					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-					   }
-					*/   
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 													
@@ -853,69 +647,7 @@ void main()
 					sSchool2 = "";
 					nAuraPower = 0;
 					nAuraPower2 = 0;
-						
-					/*if(GetLocalInt(oDetected, "ACR_SPELLSCHOOL") > 0) {
-						nAuraCount++;
-						int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
-						int nAuraPower = GetLocalInt(oDetected, "ACR_SPELLPOWER");
-						int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
-						int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-						if(nAuraPower > 0) {sAuraStrength = "faint";}
-						if(nAuraPower > 3) {sAuraStrength = "moderate";}
-						if(nAuraPower > 6) {sAuraStrength = "strong";}
-						if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-						if(nAuraPower2 > 0) {sAuraStrength2 = "faint";}
-						if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
-						if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
-						if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
-						if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>";}
-						if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>";}
-						if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>";}
-						if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>";}
-						if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>";}
-						if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>";}
-						if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>";}
-						if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
-						if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration </color>";}
-						if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration </color>";}
-						if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination </color>";}
-						if(nACRSpellSchool2 == 4) {sSchool2 = " of <color=magenta>Enchantment </color>";}
-						if(nACRSpellSchool2 == 5) {sSchool2 = " of <color=red>Evocation </color>";}
-						if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
-						if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
-						if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-						if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity</color>";}
-							
-						if(sSchool2 != "") {sSchool2 = " and a " + sAuraStrength2 + " aura " + sSchool2;}
-						//SetLocalInt(oItem, "ACR_SPELLSCHOOL", -1);
-						
-						//Does the caster learn the school?
-						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
-						
-						//Is this the highest power aura encountered thus far? If so, store it.	
-						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-						if(nAuraPower > nAuraPowerHigh) {
-							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-							}
-						nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-						if(nAuraPower2 > nAuraPowerHigh) {
-							SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
-							SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
-							}
-						
-						//Flag Round 1 Message 	
-						SetLocalInt(oCaster, "nMessage1", 1);
-				
-						//Queue up report to caster if Round 3 achieved
-						if(nConcentration > 13) {
-							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool +sSchool2));
-							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool + sSchool2));
-							}
-								
-						}*/
-					}
+				}
 				
 				//Waypoint checks finished. Zero out variables needed by other object types
 				sSchool = "";
@@ -1163,8 +895,6 @@ void main()
 							if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
 								int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 								int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
-								//int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
-								//int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
 								int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 								int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 								itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
@@ -1296,11 +1026,6 @@ void main()
 									if(nBaseItem == 126) {sBaseItem = "A war mace";}
 									if(nBaseItem == 111) {sBaseItem = "A whip";}
 									
-									//If the owner is invisible, so is the item.
-									//if(GetLocalInt(oDetected, "nInvis")== 1) {
-									//	sBaseItem = "Something"; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;
-									//	}
-									
 									//Start looping through item properties on each item
 									while (GetIsItemPropertyValid(ipItem)) {
 										int nItemProperty = GetItemPropertyType(ipItem);
@@ -1411,11 +1136,6 @@ void main()
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
 												
-											//If this is the first aura found, has the Round 1 message been sent yet? If not, send it. 	
-											if(nAuraCount == 1) {
-												DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
-												DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
-												}
 											//If the caster gets a Round 3, most objects report at 24 seconds into the report.
 											float fDelay = 22.0;
 											//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
@@ -1543,7 +1263,7 @@ void main()
 			
 		//Any one of the valid aura situations above could have flagged the release of the first round message
 		if(GetLocalInt(oCaster, "nMessage1") == 1) {
-			DelayCommand(6.0, SendMessageToAllDMs(GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
+			DelayCommand(6.0, SendMessageToAllDMs(GetTag(oDetected) + " " + GetName(oCaster) + " concentrates for one round and learns that there is magic within range."));
 			DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 			SetLocalInt(oCaster, "nMessage1", 2);
 			}
