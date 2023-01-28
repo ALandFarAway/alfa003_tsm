@@ -790,7 +790,7 @@ void main()
 								
 						int nInvis = GetLocalInt(oDetected, "nInvis");
 						string sColor = "<color=#666666>";
-						if(nInvis == 1) {sColor = "<color=#FFFF00>";sName = "Something "  + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+						if(nInvis == 1) {sColor = "<color=#FFFF00>";sName = "Something "  + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "m to the " + sAngle;}
 						
 						//Queue up report to caster if Round 3 achieved
 						if(nConcentration > 13) {
@@ -846,7 +846,7 @@ void main()
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
 					//We're going to check every slot in a creature, and every inventory slot in a creature or placeable.
 					//If oDetected is a loose item, on the other hand, we don't need slots or inventory, so set the upcoming loop to its last iteration.
-					if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+					if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "m to the " + sAngle;}
 						else {oItem = GetFirstItemInInventory(oDetected);}
 						//Zero out the schools of magic ints.
 						int nFirst = 0;
@@ -1188,7 +1188,7 @@ void main()
 							if(nSomething < 5) {sSomething = IntToString(nSomething);} else if(nSomething < 8) {sSomething = "around half a dozen";} else if(nSomething < 13) {sSomething = "close to ten";}  else if(nSomething > 12) {sSomething = "more than a dozen";}
 							//If it's a Creature, send the Equipped and Carried Summary and the Equipped Detail Header
 							if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetLocalInt(oCaster, "nItemCount") > 0)) {
-								if(GetLocalInt(oDetected, "nInvis")== 1) {sName = "Something " + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + " meters to the " + sAngle;}
+								if(GetLocalInt(oDetected, "nInvis")== 1) {sName = "Something " + IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "m to the " + sAngle;}
 								float fSumDelay = 26.0;
 								if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)){
 									DelayCommand(fSumDelay, SendMessageToAllDMs(" "));
@@ -1220,7 +1220,8 @@ void main()
 										}
 									if(nAbj>0) {DelayCommand(fSumDelay + 0.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=lightblue>: " + sAbj + " Abjuration</color> auras"));}
 									if(nCon>0) {DelayCommand(fSumDelay + 0.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=tan>: " + sCon + " Conjuration</color> auras"));}
-									if(nDiv>0) {DelayCommand(fSumDelay + 0.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
+									if(nDiv>0) {DelayCommand(fSumDelay + 0.4 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=green>: " + sDiv + " Divination</color> auras"));}
+									if(nEnc>0) {DelayCommand(fSumDelay + 0.5 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=magenta>: " + sEnc + " Enchantment</color> auras"));}
 									if(nEvo>0) {DelayCommand(fSumDelay + 0.6 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=red>: " + sEvo + " Evocation</color> auras"));}
 									if(nIll>0) {DelayCommand(fSumDelay + 0.7 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=purple>: " + sIll + " Illusion</color> auras"));}
 									if(nNec>0) {DelayCommand(fSumDelay + 0.8 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + "<color=white>: " + sNec + " Necromancy</color> auras"));}
@@ -1313,10 +1314,10 @@ void main()
 			
 			/*
 			This is where info learned in Round 3 because of Concentration > 13 will show in chat box
-			Function Spells Header: starts Line 1023
-			FS Detail: starts Line 1040
-			E&C Summary: starts Line 1422
-			E Detail: starts Line 1404
+			Function Spells Header: starts Line 779
+			FS Detail: starts Line 795
+			E&C Summary: starts Line 1189
+			E Detail: starts Line 1146
 			*/
 			
 			//The last thing sent, after Round 3 equipped details finish. 
