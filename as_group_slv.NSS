@@ -86,23 +86,24 @@ if((GetSubString(GetName(OBJECT_SELF), 3, 18) == "_Dorm_1_Armoire_WP") || (GetSu
 if((FindSubString(GetName(OBJECT_SELF), "_Dorm_1s_Armoire_WP") != -1) || (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_2s_Armoire_WP")|| (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_3_low_Armoire_WP"))
 	{   SendMessageToAllDMs(GetName(OBJECT_SELF) + " spawning");
 	    object oMyDoorTrig=GetNearestObjectByTag("slv_dorm", OBJECT_SELF, 1);
-      	object oMyArmoire = ACR_SpawnObject("slv_armoire0", OBJECT_TYPE_PLACEABLE);
+      	SendMessageToAllDMs(" DoorTrig: " + GetName(oMyDoorTrig) + " found");
+	    object oMyArmoire = ACR_SpawnObject("slv_armoire0", OBJECT_TYPE_PLACEABLE);
         SetLocalString(oMyArmoire, "ACR_PSO_NAME", GetName(oMyDoorTrig) + "_Armoire");
 		SetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Armoire", oMyArmoire);
-		object oMyBench = ACR_SpawnObjectAtLocation("003_low_bench", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Bench_WP")));
-        object oMyBookshelf = ACR_SpawnObjectAtLocation("slv_bookshelf0", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Bookshelf_WP")));
+		object oMyBench = ACR_SpawnObjectAtLocation("003_low_bench", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Bench_WP", 0)));
+        object oMyBookshelf = ACR_SpawnObjectAtLocation("slv_bookshelf0", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Bookshelf_WP", 0)));
     	SetLocalString(oMyBookshelf, "ACR_PSO_NAME", GetName(oMyDoorTrig) + "_Bookshelf");
-		object oMyChair = ACR_SpawnObjectAtLocation("003_low_chair", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Chair_WP")));
-        object oMyChair2 = ACR_SpawnObjectAtLocation("003_chair", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Chair2_WP")));
-        object oMyChest = ACR_SpawnObjectAtLocation("slv_chest0", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Chest_WP")));
+		object oMyChair = ACR_SpawnObjectAtLocation("003_low_chair", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Chair_WP", 0)));
+        object oMyChair2 = ACR_SpawnObjectAtLocation("003_chair", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Chair2_WP", 0)));
+        object oMyChest = ACR_SpawnObjectAtLocation("slv_chest0", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Chest_WP", 0)));
    		SetLocalString(oMyChest, "ACR_PSO_NAME", GetName(oMyDoorTrig) + "_Chest");
-		object oMyCurtainPull = ACR_SpawnObjectAtLocation("slv_curtainpull0", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_CurtainPull_WP")));
-   		object oMyDesk = ACR_SpawnObjectAtLocation("slv_desk2", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Desk_WP")));
+		object oMyCurtainPull = ACR_SpawnObjectAtLocation("slv_curtainpull0", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_CurtainPull_WP", 0)));
+   		object oMyDesk = ACR_SpawnObjectAtLocation("slv_desk2", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Desk_WP", 0)));
         SetLocalString(oMyDesk, "ACR_PSO_NAME", GetName(oMyDoorTrig) + "_Desk");
-		object oMyFirestarter = ACR_SpawnObjectAtLocation("slv_firestarter0", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Firestarter_WP")));
-        object oMyStool = ACR_SpawnObjectAtLocation("003_low_stool", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Stool_WP")));
-      	object oMySofa = ACR_SpawnObjectAtLocation("003_low_sitbox", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Sofa_WP")));
-      	object oMySofa2 = ACR_SpawnObjectAtLocation("003_low_sitbox", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Sofa2_WP")));
+		object oMyFirestarter = ACR_SpawnObjectAtLocation("slv_firestarter0", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Firestarter_WP", 0)));
+        object oMyStool = ACR_SpawnObjectAtLocation("003_low_stool", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Stool_WP", 0)));
+      	object oMySofa = ACR_SpawnObjectAtLocation("003_low_sitbox", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Sofa_WP", 0)));
+      	object oMySofa2 = ACR_SpawnObjectAtLocation("003_low_sitbox", OBJECT_TYPE_PLACEABLE, GetLocation(GetObjectByTag(GetName(oMyDoorTrig) + "_Sofa2_WP", 0)));
       	}	
 
 if(GetSubString(GetName(OBJECT_SELF), 3, 22) == "_Dorm_3_low_Armoire_WP")
