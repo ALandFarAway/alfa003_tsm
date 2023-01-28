@@ -83,9 +83,7 @@ if((GetSubString(GetName(OBJECT_SELF), 3, 18) == "_Dorm_1_Armoire_WP") || (GetSu
       	object oMySofa2 = ACR_SpawnObjectAtLocation("003_mid_sitbox", OBJECT_TYPE_PLACEABLE, GetLocation(GetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Sofa2_WP")));
       	}
 
-if((GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_1s_Armoire_WP") || (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_2s_Armoire_WP")|| (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_3_low_Armoire_WP"))
-
-
+if((FindSubString(GetName(OBJECT_SELF), "_Dorm_1s_Armoire_WP") != -1) || (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_2s_Armoire_WP")|| (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_3_low_Armoire_WP"))
 
 	   {object oMyDoorTrig=GetNearestObjectByTag("slv_dorm", OBJECT_SELF, 1);
       	object oMyArmoire = ACR_SpawnObject("slv_armoire0", OBJECT_TYPE_PLACEABLE);
