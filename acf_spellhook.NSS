@@ -176,18 +176,17 @@ void main()
 			}
 		
 		//nConcentration determines how many rounds of information a PC Caster gets. 
-		int nConcentration = ACR_SkillCheck(SKILL_CONCENTRATION, oCaster, 0, TRUE, TRUE, 0);
+		int nConcentration = ACR_SkillCheck(SKILL_CONCENTRATION, oCaster, 0, TRUE, FALSE, 0);
 		string sRounds = " 1 round.";
-		if(nConcentration == 1) {sRounds = "0 rounds.";}
 		if(nConcentration > 6) {sRounds = " 2 rounds.";} 
 		if(nConcentration > 13) {sRounds = " 3 rounds.";} 
-		SendMessageToAllDMs(GetName(oCaster) + "'s Concentration = " + IntToString(nConcentration) + " earns" + sRounds);
 		if(nConcentration - GetSkillRank(SKILL_CONCENTRATION, oCaster, FALSE)<= 1) {
 			nConcentration = 1;
 			DelayCommand(3.0, SendMessageToAllDMs(GetName(oCaster) + " cannot concentrate at all and learns nothing."));
 			DelayCommand(3.0, SendMessageToPC(oCaster, "You cannot concentrate at all and learn nothing."));
 			return;		
 			}
+		SendMessageToAllDMs(GetName(oCaster) + "'s Concentration = " + IntToString(nConcentration) + " earns" + sRounds);
 		
 		//Declare the variables	
 		int nAuraCount = 0;

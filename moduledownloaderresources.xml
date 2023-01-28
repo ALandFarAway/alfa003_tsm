@@ -165,7 +165,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="67C07321C04F7487C6539086E08952E9E3E8B56A" downloadHash="BD479E08060932C9497FF337C1B3E19185DCF6D7" name="003_travelling_circus.trx" dlsize="950042" size="6363973" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D5AD48A495018BD5607E9C9BE178254D214AA081" downloadHash="ECEAA9339F08736D8CF3901BB054D6330489237B" name="003_travelling_circus.trx" dlsize="942925" size="6359951" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -520,7 +520,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0E7537A2C2AA918407BDC03A023EF8B665D190E1" downloadHash="F154223BC090FB8C4C4C9A7AB1BCF633DB4C18D1" name="6d_int_silvy_ladycol_grd_lvl.trx" dlsize="1063131" size="1248549" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A701E76B48B277BA57089602E06B8E85C8482776" downloadHash="D349CC2DAA75F7D22FB48CAD75FF7D116F97F40C" name="6d_int_silvy_ladycol_grd_lvl.trx" dlsize="945449" size="1136478" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1690,7 +1690,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="CD8208A30D9D94AC17BDE37D67CEEB825ED620C6" downloadHash="65BAA50729D808759CBB0AECACF2F461F553C87C" name="8e_ext_highforest_olostins_hold.trx" dlsize="4896464" size="24749625" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1B40788C4751861D5E7CB299B1BB0F823412FE66" downloadHash="E378682781EB45360850870E112A67AA13E73512" name="8e_ext_highforest_olostins_hold.trx" dlsize="4901574" size="24749506" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

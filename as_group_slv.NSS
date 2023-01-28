@@ -84,9 +84,9 @@ if((GetSubString(GetName(OBJECT_SELF), 3, 18) == "_Dorm_1_Armoire_WP") || (GetSu
       	}
 
 if((FindSubString(GetName(OBJECT_SELF), "_Dorm_1s_Armoire_WP") != -1) || (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_2s_Armoire_WP")|| (GetSubString(GetName(OBJECT_SELF), 3, 19) == "_Dorm_3_low_Armoire_WP"))
-	{   SendMessageToAllDMs(GetName(OBJECT_SELF) + " spawning");
+	{   //SendMessageToAllDMs(GetName(OBJECT_SELF) + " spawning");
 	    object oMyDoorTrig=GetNearestObjectByTag("slv_dorm", OBJECT_SELF, 1);
-      	SendMessageToAllDMs(" DoorTrig: " + GetName(oMyDoorTrig) + " found");
+      	//SendMessageToAllDMs(" DoorTrig: " + GetName(oMyDoorTrig) + " found");
 	    object oMyArmoire = ACR_SpawnObject("slv_armoire0", OBJECT_TYPE_PLACEABLE);
         SetLocalString(oMyArmoire, "ACR_PSO_NAME", GetName(oMyDoorTrig) + "_Armoire");
 		SetLocalObject(oMyDoorTrig, GetName(oMyDoorTrig) + "_Armoire", oMyArmoire);

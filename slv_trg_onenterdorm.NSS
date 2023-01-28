@@ -98,9 +98,9 @@ if(GetTag(OBJECT_SELF) == "slv_dorm")
 		 	}
 		while (GetIsObjectValid(oWaypoint))
 			{SetLocalObject(oMyDoorTrig, GetName(oWaypoint), oWaypoint);
-			 SendMessageToAllDMs("SetLocalObject: " + GetName(oWaypoint));
+			 //SendMessageToAllDMs("SetLocalObject: " + GetName(oWaypoint));
 	    	 if(GetName(oWaypoint) == GetName(oMyDoorTrig) + "_Armoire_WP")
-				{SendMessageToAllDMs(GetName(OBJECT_SELF) + " found Armoire WP");
+				{//SendMessageToAllDMs(GetName(OBJECT_SELF) + " found Armoire WP");
 	    		 object oMasterSpawn = oWaypoint;
 				 SetLocalObject(oMyDoorTrig, "MasterSpawn", oMasterSpawn);
 				 SetLocalObject(oMasterSpawn, "MyTrig", oMyDoorTrig);
