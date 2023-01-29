@@ -216,17 +216,7 @@ void main()
 			string sDistance = IntToString(nDistance);
 			float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
 			string sAngle = GetCompassDirectionOfAngle(fAngle);
-			/*Major SpellSchool Variables
-			int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
-			string sACRSubSchool = GetLocalString(oDetected, "ACR_SUBSCHOOL");
-			int nAuraPower = GetLocalInt(oDetected, "ACR_SPELLPOWER");
-			int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
-			string sACRSubSchool2 = GetLocalString(oDetected, "ACR_SUBSCHOOL2");
-			int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
-			int nACRSpellSchool3 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL3");
-			string sACRSubSchool3 = GetLocalString(oDetected, "ACR_SUBSCHOOL3");
-			int nAuraPower3 = GetLocalInt(oDetected, "ACR_SPELLPOWER3");
-			*/
+			
 			//Let's get Placed Effects out of the way. They can't have variables and have so few properties
 			//to hook onto that we have to call out school and power by individual tag.
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
@@ -300,12 +290,6 @@ void main()
 					DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					}
 			}
-			//Placed Effect check finished. Zero out variables needed by other object types.
-			//sSchool = "";
-			//sSchool2 = "";
-			//nAuraPower = 0;
-			//nAuraPower2 = 0;
-				
 				
 			//Doors, Placeables, Triggers and Waypoints can carry variables that identify them as magical. 
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
@@ -428,17 +412,11 @@ void main()
 				
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				
-				//Zero out variables needed by other placeables.	
-				/*sSchool = "";
-				sSchool2 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;
-				*/
 				//Another specific use case are the placeables spawned by glyph and symbol traps after they've fired, and the triggers that fire them.
 				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
 				/*
@@ -477,123 +455,31 @@ void main()
 					string sSymbolName = GetName(oDetected);	
 					if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sSymbolName = "Something";}		
 					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
 				}	
-				//Zero out variables needed by other placeables.	
-				/*sSchool = "";
-				sSchool2 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;*/
 						
-				//Walls of Force tagged or named with "Forcefield" will register automatically as Moderate Evocation
-				if((FindSubString(GetName(oDetected), "Forcefield") != -1) || (FindSubString(GetTag(oDetected), "forcefield") != -1)){
-				 	nAuraCount++;
-					nAuraPower = 5;
-					sAuraStrength = "moderate";
+			//Walls of Force tagged or named with "Forcefield" will register automatically as Moderate Evocation
+			if((FindSubString(GetName(oDetected), "Forcefield") != -1) || (FindSubString(GetTag(oDetected), "forcefield") != -1)){
+				nAuraCount++;
+				nAuraPower = 5;
+				sAuraStrength = "moderate";
 					
-					//Does the caster learn the school?
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=red>Evocation</color>";}
+				//Does the caster learn the school?
+				if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=red>Evocation</color>";}
 					
-					//Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
+				//Flag Round 1 Message 	
+				SetLocalInt(oCaster, "nMessage1", 1);
 				
-					//Queue up report to caster if Round 3 achieved
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						}
+				//Queue up report to caster if Round 3 achieved
+				if(nConcentration > 13) {
+					DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+					DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					}
-				//}
-				
-				//Placeables done. Zero out all variables.
-				/*sSchool = "";
-				sSchool2 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;*/
+				}
 			
-			//Triggers are almost as complicated as placeables. They also have portal and glyph and symbol callouts.
-		//	if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
-				/*sName = "Something";
-				//Let's deal with portal triggers that use the word "_portal" anywhere in their tag.
-				//If they are tagged as per the line above, DM is automatic for them and they will register as Moderate Conjuration.
-				 if(FindSubString(GetTag(oDetected), "_portal_") != -1){
-				    nAuraCount++;
-					nAuraPower = 5;
-					sAuraStrength = "moderate";
-					//Does the caster learn the school?
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
-					
-					//Are either of the pairs of variables the highest power aura encountered thus far? If so, store it.	
-					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					if(nAuraPower > nAuraPowerHigh) {
-						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
-						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
-						}
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-					*/	
-					/*Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
-					
-						
-					//Queue up report to caster if Round 3 achieved
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
-						}
-					}*/
-				
-				//Another specific trigger use case are glyph and symbol traps before they've fired.
-				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
-				/*
-				Glyph of Warding = Faint Abjuration
-				Symbol of Pain = Moderate Necromancy
-				Symbol of Sleep = Moderate Enchantment
-				Symbol of Fear = Moderate Necromancy
-				Symbol of Persuasion = Moderate Enchantment
-				Symbol of Weakness = Strong Necromancy
-				Symbol of Stunning = Strong Enchantment
-				Symbol of Death = Strong Necromancy
-				Symbol of Insanity = Strong Enchantment
-				
-				
-				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
-					nAuraCount++;
-					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
-					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_insanity") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
-					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
-					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}
-					if((FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_fear") != -1)) {nAuraPower = 6;}
-					if((FindSubString(GetTag(oDetected), "_symbol_stun") != -1) || (FindSubString(GetTag(oDetected), "_symbol_weakness") != -1)) {nAuraPower = 7;}
-					if((FindSubString(GetTag(oDetected), "_symbol_insanity") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {nAuraPower = 8;}
-					if(nAuraPower > 0) {sAuraStrength = "faint";}
-					if(nAuraPower > 3) {sAuraStrength = "moderate";}
-					if(nAuraPower > 6) {sAuraStrength = "strong";}
-					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-					
-					//Does the caster learn the school?
-					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
-									
-					//Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
-				
-					//Queue up report to caster if Round 3 achieved
-					if(nConcentration > 13) {
-						string sSymbolName = "Something";
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
-						}
-					}
-				*/
-				
-				//Triggers done. Zero out variables needed by other object types
-				/*sSchool = "";
-				sSchool2 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;*/
-				
 			//Specific Waypoint use cases include traps 		
 			if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 				//Traps, if placed, already have the ACR_TRAP_SPELL_ID on them. If spawned, they do not.
@@ -642,20 +528,7 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off " + sAuraStrength + " aura" + sSchool));
 						}
 					}
-					
-					//Zero out variables needed by other waypoints.	
-					/*sSchool = "";
-					sSchool2 = "";
-					nAuraPower = 0;
-					nAuraPower2 = 0;*/
 				}
-				
-				//Waypoint checks finished. Zero out variables needed by other object types
-				/*sSchool = "";
-				sSchool2 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;
-				*/			
 				
 				//Creatures are the most complicated use case. Creatures can have innate magic, and effects, and inventory.
 				if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) {
@@ -837,19 +710,20 @@ void main()
 				nAuraPower2 = 0;
 				*/
 				//Begin items, in creature or placeable inventory, or loose.	
-				//Set inventory slots
-				int nSlot = 0;
-				string sSlot = "";
+				//Declare item variables
+				object oItem;
+				int nSlot;
+				string sSlot;
 				
 				//Placeables and creatures can have items, and items can also be found outside of inventories. We have to deal with all of that.
 				if(((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) && (GetHasInventory(oDetected))) || ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-					float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
-					string sAngle = GetCompassDirectionOfAngle(fAngle);
+					//float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
+					//string sAngle = GetCompassDirectionOfAngle(fAngle);
 					//We're going to check every slot in a creature, and every inventory slot in a creature or placeable.
 					//If oDetected is a loose item, on the other hand, we don't need slots or inventory, so set the upcoming loop to its last iteration.
 					if(GetObjectType(oDetected) == OBJECT_TYPE_ITEM) {oItem = oDetected; nSlot = 14; sSlot = IntToString(FloatToInt(GetDistanceBetween(oCaster, oDetected))) + "m to the " + sAngle;}
 						else {oItem = GetFirstItemInInventory(oDetected);}
-						//Zero out the schools of magic ints.
+						//Zero out the schools of magic counts before item loops.
 						int nFirst = 0;
 						int nGen = 0;
 						int nAbj = 0;
