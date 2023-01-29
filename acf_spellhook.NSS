@@ -188,15 +188,17 @@ void main()
 			}
 		SendMessageToAllDMs(GetName(oCaster) + "'s Concentration = " + IntToString(nConcentration) + " earns" + sRounds);
 		
-		//Declare the variables	
-		int nAuraCount = 0;
-		int nCreatureCount = 0;
-		int nItemCounted = 0;
-		int nAuraPower = 0;
-		int nAuraPower2 = 0;
-		int nAuraPower3 = 0;
-		int nAuraPowerHigh = 0;
+		//Declare the loop variables	
+		int nAuraCount;
+		int nCreatureCount;
+		int nItemCounted;
+		//Begin looping through all objects in the spellcone
+		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
+		while (GetIsObjectValid(oDetected)) {
+		//Zero out variables common to all objects, for each valid oDetected loop iteration.
 		string sAuraPower = "";
+		int nAuraPower = 0;
+		int nAuraPowerHigh = 0;
 		string sAuraPowerHigh = "";
 		string sAuraStrength = "";
 		string sAuraStrength2 = "";
@@ -204,15 +206,9 @@ void main()
 		string sSchool = "";
 		string sSchool2 = "";
 		string sSchool3 = "";
-		string sACRSubSchool = "";
-		string sACRSubSchool2 = "";
-		string sACRSubSchool3 = "";
-				
-		//Begin looping through all objects in the spellcone
-		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
-		while (GetIsObjectValid(oDetected)) {
 		//Let's only look at Creatures, Doors, Items, Placeables, Placed Effects, Waypoints 
-		if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)|| (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)  || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
+			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)|| (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)  || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
+			
 			//Distance and direction per detected object
 			string sName = GetName(oDetected);
 			float fDistance = GetDistanceBetween(oDetected, oCaster);
@@ -220,7 +216,17 @@ void main()
 			string sDistance = IntToString(nDistance);
 			float fAngle = GetAngleBetweenObjects(oDetected, oCaster);
 			string sAngle = GetCompassDirectionOfAngle(fAngle);
-			
+			/*Major SpellSchool Variables
+			int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
+			string sACRSubSchool = GetLocalString(oDetected, "ACR_SUBSCHOOL");
+			int nAuraPower = GetLocalInt(oDetected, "ACR_SPELLPOWER");
+			int nACRSpellSchool2 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL2");
+			string sACRSubSchool2 = GetLocalString(oDetected, "ACR_SUBSCHOOL2");
+			int nAuraPower2 = GetLocalInt(oDetected, "ACR_SPELLPOWER2");
+			int nACRSpellSchool3 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL3");
+			string sACRSubSchool3 = GetLocalString(oDetected, "ACR_SUBSCHOOL3");
+			int nAuraPower3 = GetLocalInt(oDetected, "ACR_SPELLPOWER3");
+			*/
 			//Let's get Placed Effects out of the way. They can't have variables and have so few properties
 			//to hook onto that we have to call out school and power by individual tag.
 			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) {
@@ -285,7 +291,6 @@ void main()
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 						}	 
 				
-			
 				//Flag Round 1 Message 	
 				SetLocalInt(oCaster, "nMessage1", 1);
 					
@@ -296,17 +301,17 @@ void main()
 					}
 			}
 			//Placed Effect check finished. Zero out variables needed by other object types.
-			sSchool = "";
-			sSchool2 = "";
-			nAuraPower = 0;
-			nAuraPower2 = 0;
+			//sSchool = "";
+			//sSchool2 = "";
+			//nAuraPower = 0;
+			//nAuraPower2 = 0;
 				
 				
 			//Doors, Placeables, Triggers and Waypoints can carry variables that identify them as magical. 
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)|| (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Place up to two pairs of ACR_SPELLSCHOOL and ACR_SPELLPOWER integers onto any placeable to have it report school and power to caster. 
 				//A third pair of variables reports with a different message structure, but can be used to represent "stored power" inside the other two schools, if you desire.
-				//There are also subschools defined here. They are optional, to allow (for instance) Evocation (Sonic) to be discriminated from Evocation (Cold) for instance.
+				//There are also subschools defined here. They are optional, to allow (for instance) Evocation (Sonic) to be discriminated from Evocation (Cold).
 				if(GetLocalInt(oDetected, "ACR_SPELLSCHOOL") > 0) {
 					nAuraCount++;
 					int nACRSpellSchool = GetLocalInt(oDetected, "ACR_SPELLSCHOOL");
@@ -318,6 +323,7 @@ void main()
 					int nACRSpellSchool3 = GetLocalInt(oDetected, "ACR_SPELLSCHOOL3");
 					string sACRSubSchool3 = GetLocalString(oDetected, "ACR_SUBSCHOOL3");
 					int nAuraPower3 = GetLocalInt(oDetected, "ACR_SPELLPOWER3");
+					
 					if(nAuraPower > 0) {sAuraStrength = "a faint";}
 					if(nAuraPower > 3) {sAuraStrength = "a moderate";}
 					if(nAuraPower > 6) {sAuraStrength = "a strong";}
@@ -357,7 +363,6 @@ void main()
 					if(nACRSpellSchool3 == 7) {sSchool3 = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool3 == 8) {sSchool3 = " of <color=orange>Transmutation </color>";}
 					if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=#FFFF00>Universal arcanity</color>";}
-					
 					if(sACRSubSchool != "") {sSchool = sSchool + "(" + sACRSubSchool + ")";}
 					if(sSchool2 != "") {sSchool2 = " and " + sAuraStrength2 + " aura " + sSchool2;}
 					if(sACRSubSchool2 != "") {sSchool2 = sSchool2 + "(" + sACRSubSchool2 + ")";}
@@ -393,31 +398,29 @@ void main()
 							DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 							}
-						}
+						
+					//SpellSchools done. Zero out all variables because these variables can also be needed by any of the specific use cases below
+					sSchool = "";
+					sSchool2 = "";
+					sSchool3 = ""; 
+					sACRSubSchool = "";
+					sACRSubSchool2 = "";
+					sACRSubSchool3 = "";
+					nAuraPower = 0;
+					nAuraPower2 = 0;
 					}
-				
-				//SpellSchools done. Zero out all variables.
-				sSchool = "";
-				sSchool2 = "";
-				sSchool3 = ""; 
-				sACRSubSchool = "";
-				sACRSubSchool2 = "";
-				sACRSubSchool3 = "";
-				nAuraPower = 0;
-				nAuraPower2 = 0;
-				
+				}
 		
-			//Placeables with standardized tags, like portals, forcefields and glyph and symbol traps 
-			if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {
-				//Let's deal with portal placeables that use the prefix "alfa_portal" followed by anything else. 
-				//If they are tagged correctly as per the line above, DM is automatic for them and they will register as Moderate Conjuration.
-				 if(FindSubString(GetTag(oDetected), "alfa_portal")!= -1) {
+			//Multi-type objects with standardized tags, like portals, and glyph and symbol traps 
+			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
+				//If they are tagged as per the line below, DM is automatic for them and they will register as Moderate Conjuration.
+				 if(FindSubString(GetTag(oDetected), "_portal")!= -1) {
 				    nAuraCount++;
 					nAuraPower = 5;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					sAuraStrength = "moderate";
-					//If they haven't been discovered and so are unuseable currently, their name will report as "Something." 
-					//If they are useable, their name will report as their name.
+					//Triggers, or placeables that haven't been discovered and so are unuseable currently, will report as "Something." 
+					//If they are a useable placeable, their name will report as their name.
 					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
 					
 					//Flag Round 1 Message 	
@@ -431,12 +434,12 @@ void main()
 					}
 				
 				//Zero out variables needed by other placeables.	
-				sSchool = "";
+				/*sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
 				nAuraPower2 = 0;
-				
-				//Another specific placeable use case are the placeables spawned by glyph and symbol traps after they've fired.
+				*/
+				//Another specific use case are the placeables spawned by glyph and symbol traps after they've fired, and the triggers that fire them.
 				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
 				/*
 				Glyph of Warding = Faint Abjuration
@@ -450,9 +453,8 @@ void main()
 				Symbol of Insanity = Strong Enchantment
 				*/
 				
-				 if((FindSubString(GetTag(oDetected), "_glyph_ward") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) {
+				 if(((FindSubString(GetTag(oDetected), "_glyph_ward") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					nAuraCount++;
-					
 					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
@@ -472,18 +474,19 @@ void main()
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
 					//Queue up report to caster if Round 3 achieved
-					string sSymbolName = GetName(oDetected);			
+					string sSymbolName = GetName(oDetected);	
+					if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sSymbolName = "Something";}		
 					if(nConcentration > 13) {
 						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
-					
+				}	
 				//Zero out variables needed by other placeables.	
-				sSchool = "";
+				/*sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
-				nAuraPower2 = 0;
+				nAuraPower2 = 0;*/
 						
 				//Walls of Force tagged or named with "Forcefield" will register automatically as Moderate Evocation
 				if((FindSubString(GetName(oDetected), "Forcefield") != -1) || (FindSubString(GetTag(oDetected), "forcefield") != -1)){
@@ -503,17 +506,17 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
-				}
+				//}
 				
 				//Placeables done. Zero out all variables.
-				sSchool = "";
+				/*sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
-				nAuraPower2 = 0;
+				nAuraPower2 = 0;*/
 			
 			//Triggers are almost as complicated as placeables. They also have portal and glyph and symbol callouts.
-			if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
-				sName = "Something";
+		//	if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {
+				/*sName = "Something";
 				//Let's deal with portal triggers that use the word "_portal" anywhere in their tag.
 				//If they are tagged as per the line above, DM is automatic for them and they will register as Moderate Conjuration.
 				 if(FindSubString(GetTag(oDetected), "_portal_") != -1){
@@ -531,7 +534,7 @@ void main()
 						}
 					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 					*/	
-					//Flag Round 1 Message 	
+					/*Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 					
 						
@@ -540,7 +543,7 @@ void main()
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 						}
-					}
+					}*/
 				
 				//Another specific trigger use case are glyph and symbol traps before they've fired.
 				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
@@ -554,7 +557,7 @@ void main()
 				Symbol of Stunning = Strong Enchantment
 				Symbol of Death = Strong Necromancy
 				Symbol of Insanity = Strong Enchantment
-				*/
+				
 				
 				if(((FindSubString(GetTag(oDetected), "_glyph_warding") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					nAuraCount++;
@@ -576,7 +579,6 @@ void main()
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
-						
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
 						string sSymbolName = "Something";
@@ -584,15 +586,15 @@ void main()
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
-				}
+				*/
 				
 				//Triggers done. Zero out variables needed by other object types
-				sSchool = "";
+				/*sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
-				nAuraPower2 = 0;
+				nAuraPower2 = 0;*/
 				
-			//Waypoints include traps, and any waypoint you want to report a magic aura	to the caster.		
+			//Specific Waypoint use cases include traps 		
 			if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 				//Traps, if placed, already have the ACR_TRAP_SPELL_ID on them. If spawned, they do not.
 				//To have a spawning trap report to the caster, put the ACR_TRAP_SPELL_ID spell integer onto the spawnpoint itself.
@@ -642,18 +644,18 @@ void main()
 					}
 					
 					//Zero out variables needed by other waypoints.	
-					sSchool = "";
+					/*sSchool = "";
 					sSchool2 = "";
 					nAuraPower = 0;
-					nAuraPower2 = 0;
+					nAuraPower2 = 0;*/
 				}
 				
 				//Waypoint checks finished. Zero out variables needed by other object types
-				sSchool = "";
+				/*sSchool = "";
 				sSchool2 = "";
 				nAuraPower = 0;
 				nAuraPower2 = 0;
-							
+				*/			
 				
 				//Creatures are the most complicated use case. Creatures can have innate magic, and effects, and inventory.
 				if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) {
@@ -714,11 +716,11 @@ void main()
 						}
 					
 					//Zero out variables for further checks on this creature	
-					sSchool = "";
+					/*sSchool = "";
 					sSchool2 = "";
 					nAuraPower = 0;
 					nAuraPower2 = 0;
-				
+				*/
 					//Start looping through effects and cross-referencing their spell, school, and power from the 2da by the Effect Spell ID
 					effect eEffect = GetFirstEffect(oDetected);
 					int nEffect = 0; 
@@ -830,10 +832,10 @@ void main()
 				//Creature race and effects done.
 				//Zero out variables needed for this creature's items, which are about to be determined.
 				sSchool = "";
-				sSchool2 = "";
 				nAuraPower = 0;
+				/*sSchool2 = "";
 				nAuraPower2 = 0;
-				
+				*/
 				//Begin items, in creature or placeable inventory, or loose.	
 				//Set inventory slots
 				int nSlot = 0;
@@ -1240,9 +1242,9 @@ void main()
 						
 						//Zero out the variables needed by the next item in inventory of this object, or the next object detected in the spellcone
 						sSchool = "";
-						sSchool2 = "";
 						nAuraPower = 0;
-						nAuraPower2 = 0;
+						//sSchool2 = "";
+						//nAuraPower2 = 0;
 				
 					}
 				}
@@ -1270,8 +1272,8 @@ void main()
 												
 		//We've had Round 1 reported by whichever of the objects had the first magic aura detected.
 		//Now see what we've got stored as the strongest aura for Round 2
-		nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
-		sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
+		int nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+		string sAuraPowerHigh = GetLocalString(oCaster, "sAuraPowerHigh");
 				
 		if(nAuraPowerHigh >= 0) {sAuraPowerHigh = "faint";}
 		if(nAuraPowerHigh > 3) {sAuraPowerHigh = "moderate";}
