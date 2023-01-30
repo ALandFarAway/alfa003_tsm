@@ -205,7 +205,7 @@ void main()
 						 if(FindSubString(GetTag(oDetected), "_tra") != -1) {sSchool = " of <color=orange>Transmutation</color>";}
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 						 }	 
-				if((FindSubString(GetTag(oDetected), "_arcane_lamp_") != -1) ||(FindSubString(GetTag(oDetected), "gem_energy") != -1) ){
+				if((FindSubString(GetTag(oDetected), "_arcane_lamp_") != -1) ||(FindSubString(GetTag(oDetected), "gem_energy") != -1) ||(FindSubString(GetTag(oDetected), "_psychic_") != -1)|| (FindSubString(GetTag(oDetected), "_sparkle") != -1)){
 						 nAuraCount++;
 						 nAuraPower = 1;
 						 sAuraStrength = "faint";
@@ -691,26 +691,20 @@ void main()
 							
 							//First, check the item for SpellSchool variables. 	
 							//If found, assign a temporary item property that gives it a ticket into the item property loop below. 
-							SetLocalInt(oItem, "ACR_SPELLADDED", 0);
-							if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
-								int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-								int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
+							//SetLocalInt(oItem, "ACR_SPELLADDED", 0);
+							//SetLocalInt(oItem, "ACR_SPELLADDED2", 0);
+							//SetLocalInt(oItem, "ACR_SPELLADDED3", 0);
+							if((GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0)|| (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) || (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0)) { 
+								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED", 1);}
+								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED2", 1);}
+								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED3", 1);}
 								int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 								int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 								itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
-								IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-								if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
-								if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
-								if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>"; nDiv++;}
-								if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
-								if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
-								if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
-								if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
-								if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
-								if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
+								IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_KEEP_EXISTING, FALSE, FALSE);
 								SetLocalInt(oItem, "ACR_SPELLADDED", 1);
 								}
-																		
+																						
 							itemproperty ipItem = GetFirstItemProperty(oItem);
 							//Exclude creature items
 							if(((GetBaseItemType(oItem) < 69) || (GetBaseItemType(oItem) > 73))
@@ -911,8 +905,97 @@ void main()
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
-											//Reset this so non SpellSchool added Cast Uniques register correctly in next ip loops	
-											if(GetLocalInt(oItem, "ACR_SPELLADDED") == 1) {SetLocalInt(oItem, "ACR_SPELLADDED", 0); } 
+											//SpellSchool variables for the Cast Unique property added before the loop	
+											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 1) &&  (sItemSubType == "335")) {
+												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
+												int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
+												string sACRSubSchool = GetLocalString(oItem, "ACR_SUBSCHOOL");
+												if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration " + sACRSubSchool + "</color>"; nAbj++;}
+												if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration " + sACRSubSchool + "</color>"; nCon++;}
+												if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination " + sACRSubSchool + "</color>"; nDiv++;}
+												if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment " + sACRSubSchool + "</color>"; nEnc++;}
+												if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation " + sACRSubSchool + "</color>"; nEvo++;}
+												if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion " + sACRSubSchool + "</color>"; nIll++;}
+												if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy " + sACRSubSchool + "</color>"; nNec++;}
+												if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation " + sACRSubSchool + "</color>"; nTra++;}
+												if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool + "</color>"; nGen++;}
+												int nACRSpellSchool2 = GetLocalInt(oItem, "ACR_SPELLSCHOOL2");
+												int nAuraPower2 = GetLocalInt(oItem, "ACR_SPELLPOWER2");
+												string sACRSubSchool2 = GetLocalString(oItem, "ACR_SUBSCHOOL2");
+												if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration " + sACRSubSchool2 + "</color>"; nAbj++;}
+												if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration " + sACRSubSchool2 + "</color>"; nCon++;}
+												if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination " + sACRSubSchool2 + "</color>"; nDiv++;}
+												if(nACRSpellSchool2 == 4) {sSchool2 = " of <color=magenta>Enchantment " + sACRSubSchool2 + "</color>"; nEnc++;}
+												if(nACRSpellSchool2 == 5) {sSchool2 = " of <color=red>Evocation " + sACRSubSchool2 + "</color>"; nEvo++;}
+												if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion " + sACRSubSchool2 + "</color>"; nIll++;}
+												if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy " + sACRSubSchool2 + "</color>"; nNec++;}
+												if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation " + sACRSubSchool2 + "</color>"; nTra++;}
+												if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool2 + "</color>"; nGen++;}
+												int nACRSpellSchool3 = GetLocalInt(oItem, "ACR_SPELLSCHOOL3");
+												int nAuraPower3 = GetLocalInt(oItem, "ACR_SPELLPOWER3");
+												string sACRSubSchool3 = GetLocalString(oItem, "ACR_SUBSCHOOL3");
+												if(nACRSpellSchool3 == 1) {sSchool3 = " of <color=lightblue>Abjuration " + sACRSubSchool3 + "</color>"; nAbj++;}
+												if(nACRSpellSchool3 == 2) {sSchool3 = " of <color=tan>Conjuration " + sACRSubSchool3 + "</color>"; nCon++;}
+												if(nACRSpellSchool3 == 3) {sSchool3 = " of <color=green>Divination " + sACRSubSchool3 + "</color>"; nDiv++;}
+												if(nACRSpellSchool3 == 4) {sSchool3 = " of <color=magenta>Enchantment " + sACRSubSchool3 + "</color>"; nEnc++;}
+												if(nACRSpellSchool3 == 5) {sSchool3 = " of <color=red>Evocation " + sACRSubSchool3 + "</color>"; nEvo++;}
+												if(nACRSpellSchool3 == 6) {sSchool3 = " of <color=purple>Illusion " + sACRSubSchool3 + "</color>"; nIll++;}
+												if(nACRSpellSchool3 == 7) {sSchool3 = " of <color=white>Necromancy " + sACRSubSchool3 + "</color>"; nNec++;}
+												if(nACRSpellSchool3 == 8) {sSchool3 = " of <color=orange>Transmutation " + sACRSubSchool3 + "</color>"; nTra++;}
+												if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool3 + "</color>"; nGen++;}
+												
+												if(nAuraPower > 0) {sAuraStrength = "faint";}
+												if(nAuraPower > 3) {sAuraStrength = "moderate";}
+												if(nAuraPower > 6) {sAuraStrength = "strong";}
+												if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+												if(nAuraPower2 > 0) {sAuraStrength2 = "faint";}
+												if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
+												if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
+												if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
+												if(nAuraPower3 > 0) {sAuraStrength3 = "faint";}
+												if(nAuraPower3 > 3) {sAuraStrength3 = "moderate";}
+												if(nAuraPower3 > 6) {sAuraStrength3 = "strong";}
+												if(nAuraPower3 > 9) {sAuraStrength3 = "overwhelming";}
+												
+												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												if(nAuraPower > nAuraPowerHigh) {
+													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+								    				}
+												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												if(nAuraPower2 > nAuraPowerHigh) {
+													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+								    				}
+												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												if(nAuraPower3 > nAuraPowerHigh) {
+													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower3);
+													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
+								    				}	
+												
+												//Extra SpellSchool reports for items with more than one set of SpellSchool variables.
+												//If the caster gets a Round 3, most objects report at 24 seconds into the report.
+												float fDelay = 22.1;
+												//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
+										 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
+												if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+												//Only report equipped items for Creatures.
+												if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
+													//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
+													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
+														if(nACRSpellSchool2 > 0) {
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
+															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength2 + " aura" + sSchool2));
+															}
+														if(nACRSpellSchool3 > 0) {
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
+															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength3 + " aura" + sSchool3));
+															}
+														}
+													}
+													
+												SetLocalInt(oItem, "ACR_SPELLADDED", 0); 
+												} 
 											
 											//If it's in a closed container, no soup for you.
 											if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)&& (GetIsOpen(oDetected) == FALSE)) {sBaseItem = "Something"; nSomething++;}
@@ -928,7 +1011,7 @@ void main()
 											if(sSchool == "G") {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
 											
 											//If caster fails Spellcraft, no school for you, either.
-											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
+											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";sSchool2 = "";sSchool3 = "";}
 											
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}
@@ -1146,6 +1229,7 @@ void main()
 		SetLocalInt(oCaster, "nAuraPowerHigh", 0);
 		SetLocalString(oCaster, "sAuraPowerHigh", "");
 		SetLocalInt(oCaster, "nSummary", 0);
+		
 		
 				
 		
