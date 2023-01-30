@@ -257,13 +257,13 @@ void main()
 						 sAuraStrength = "faint";
 						 sName = "An arcane symbol";
 						 if(FindSubString(GetTag(oDetected), "_abj") != -1) {sSchool = " of <color=lightblue>Abjuration</color>";}
-						 if(FindSubString(GetTag(oDetected), "_conj") != -1) {sSchool = " of <color=tan>Conjuration</color>";}
-						 if(FindSubString(GetTag(oDetected), "_divi") != -1) {sSchool = " of <color=green>Divination</color>";}
-						 if(FindSubString(GetTag(oDetected), "_ench") != -1) {sSchool = " of <color=magenta>Enchantment</color>";}
-						 if(FindSubString(GetTag(oDetected), "_evoc") != -1) {sSchool = " of <color=red>Evocation</color>";}
-						 if(FindSubString(GetTag(oDetected), "_illus") != -1) {sSchool = " of <color=purple>Illusion</color>";}
-						 if(FindSubString(GetTag(oDetected), "_necro") != -1) {sSchool = " of <color=white>Necromancy</color>";}
-						 if(FindSubString(GetTag(oDetected), "_trans") != -1) {sSchool = " of <color=orange>Transmutation</color>";}
+						 if(FindSubString(GetTag(oDetected), "_con") != -1) {sSchool = " of <color=tan>Conjuration</color>";}
+						 if(FindSubString(GetTag(oDetected), "_div") != -1) {sSchool = " of <color=green>Divination</color>";}
+						 if(FindSubString(GetTag(oDetected), "_enc") != -1) {sSchool = " of <color=magenta>Enchantment</color>";}
+						 if(FindSubString(GetTag(oDetected), "_evo") != -1) {sSchool = " of <color=red>Evocation</color>";}
+						 if(FindSubString(GetTag(oDetected), "_ill") != -1) {sSchool = " of <color=purple>Illusion</color>";}
+						 if(FindSubString(GetTag(oDetected), "_nec") != -1) {sSchool = " of <color=white>Necromancy</color>";}
+						 if(FindSubString(GetTag(oDetected), "_tra") != -1) {sSchool = " of <color=orange>Transmutation</color>";}
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 						 }	 
 				if((FindSubString(GetTag(oDetected), "_arcane_lamp_") != -1) ||(FindSubString(GetTag(oDetected), "gem_energy") != -1) ||(FindSubString(GetTag(oDetected), "_psychic_") != -1)|| (FindSubString(GetTag(oDetected), "_sparkle") != -1)){
@@ -275,8 +275,8 @@ void main()
 						}	 
 				if(GetTag(oDetected) == "abr_afx_gem_energy_blue"){
 						 nAuraCount++;
-						 nAuraPower = 4;
-						 sAuraStrength = "moderate";
+						 nAuraPower = 7;
+						 sAuraStrength = "strong";
 						 sName = "A teleport field";
 						 if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 						}	 
@@ -286,7 +286,7 @@ void main()
 					
 				//Queue up report to caster if Round 3 achieved
 				if((nConcentration > 13) && (nAuraPower > 0)) {
-					DelayCommand(21.0, SendMessageToAllDMs( sName + " --" + GetTag(oDetected) +  "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+					DelayCommand(21.0, SendMessageToAllDMs( sName + " --" + GetTag(oDetected) +  "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 					DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					}
 			}
@@ -337,7 +337,7 @@ void main()
 					if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion </color>";}
 					if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy </color>";}
 					if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation </color>";}
-					if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=white>Holiness </color>";}
+					if(nACRSpellSchool2 == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 					if(nACRSpellSchool3 == 1) {sSchool3 = " of <color=lightblue>Abjuration </color>";}
 					if(nACRSpellSchool3 == 2) {sSchool3 = " of <color=tan>Conjuration </color>";}
 					if(nACRSpellSchool3 == 3) {sSchool3 = " of <color=green>Divination </color>";}
@@ -379,7 +379,7 @@ void main()
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
 					//if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sName = "Something";}
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + sSchool2 + sSchool3));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 						}
 						
@@ -400,12 +400,9 @@ void main()
 				//If they are tagged as per the line below, DM is automatic for them and they will register as Moderate Conjuration.
 				 if(FindSubString(GetTag(oDetected), "_portal")!= -1) {
 				    nAuraCount++;
-					nAuraPower = 5;
+					nAuraPower = 7;
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
-					sAuraStrength = "moderate";
-					//Triggers, or placeables that haven't been discovered and so are unuseable currently, will report as "Something." 
-					//If they are a useable placeable, their name will report as their name.
-					if(GetUseableFlag(oDetected) != 1) {sName = "Something";}
+					sAuraStrength = "strong";
 					
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
@@ -516,16 +513,23 @@ void main()
 													
 					//Check for trap origin and distance and direction from Origin to trap
 					object oOrigin = GetNearestObjectByTag("TRAP_ORIGIN", oDetected, 1);
-					float fDistance = GetDistanceBetween(oDetected, oOrigin);
+					float fDistance = GetDistanceBetween(oCaster, oOrigin);
 					int nDistance = FloatToInt(fDistance);
-					string sDistance = IntToString(nDistance);
-					float fAngle = GetAngleBetweenObjects(oDetected, oOrigin);
+					float fAngle = GetAngleBetweenObjects(oCaster, oOrigin);
 					string sAngle = GetCompassDirectionOfAngle(fAngle);
+					string sDistance = ", " + IntToString(nDistance) + "m " + sAngle + ",";
+					float fSeparate = GetDistanceBetween(oDetected, oOrigin);
+					int nSeparate = FloatToInt(fSeparate);
+					string sSeparate = IntToString(nSeparate);
+					float fAngleSeparate = GetAngleBetweenObjects(oDetected, oOrigin);
+					string sAngleSeparate = GetCompassDirectionOfAngle(fAngleSeparate);
+					string sSeparated = " and a circle centered on a spot" + sSeparate + "m " + sAngleSeparate + " of " + GetName(oOrigin);
+					if(nDistance = 0) {sSeparated = "";}
 					
 					//If there is a valid Origin placeable and the caster earned a Round 3, queue up the report.
 					if((nConcentration > 13) && (oOrigin != OBJECT_INVALID)) {
-						DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + "-- and " + GetName(oDetected) + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " give off " + sAuraStrength + " aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + " and a circle centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oOrigin) + " gives off " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs("Trap origin --" + GetName(oOrigin) + sSeparated + " gives off " + sAuraStrength + " --" + IntToString(nAuraPower) + "--  aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, GetName(oOrigin) + sDistance + sSeparated + " gives off " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				}
@@ -748,26 +752,20 @@ void main()
 							
 							//First, check the item for SpellSchool variables. 	
 							//If found, assign a temporary item property that gives it a ticket into the item property loop below. 
-							SetLocalInt(oItem, "ACR_SPELLADDED", 0);
-							if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {
-								int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
-								int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
+							//SetLocalInt(oItem, "ACR_SPELLADDED", 0);
+							//SetLocalInt(oItem, "ACR_SPELLADDED2", 0);
+							//SetLocalInt(oItem, "ACR_SPELLADDED3", 0);
+							if((GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0)|| (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) || (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0)) { 
+								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED", 1);}
+								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED2", 1);}
+								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED3", 1);}
 								int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 								int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 								itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
-								IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING, FALSE, FALSE);
-								if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
-								if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration </color>"; nCon++;}
-								if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination </color>"; nDiv++;}
-								if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment </color>"; nEnc++;}
-								if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation </color>"; nEvo++;}
-								if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion </color>"; nIll++;}
-								if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy </color>"; nNec++;}
-								if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation </color>"; nTra++;}
-								if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
+								IPSafeAddItemProperty(oItem, ipSpellSchool, 5.0, X2_IP_ADDPROP_POLICY_KEEP_EXISTING, FALSE, FALSE);
 								SetLocalInt(oItem, "ACR_SPELLADDED", 1);
 								}
-																		
+																						
 							itemproperty ipItem = GetFirstItemProperty(oItem);
 							//Exclude creature items
 							if(((GetBaseItemType(oItem) < 69) || (GetBaseItemType(oItem) > 73))
@@ -797,91 +795,98 @@ void main()
 									int nBaseItem = GetBaseItemType(oItem);
 									string sBaseItem = IntToString(nBaseItem);
 									string sItemName = GetName(oItem);
-									if(nBaseItem == 19) {sBaseItem = "An amulet";}
-									if(nBaseItem == 16) {sBaseItem = "Armor";}
-									if((nBaseItem == 16) && (FindSubString(GetName(oItem), "Robe") != -1)) {sBaseItem = "A robe";}
-									if(nBaseItem == 20) {sBaseItem = "Arrows";}
-									if(nBaseItem == 3) {sBaseItem = "A bastard sword";}
-									if(nBaseItem == 2) {sBaseItem = "A battle axe";}
-									if(nBaseItem == 21) {sBaseItem = "A belt";}
-									if(nBaseItem == 101) {sBaseItem = "A bottle";}
-									if(nBaseItem == 25) {sBaseItem = "Bolts";}
-									if(nBaseItem == 74) {sBaseItem = "A book";}
-									if(nBaseItem == 26) {sBaseItem = "A pair of boots";}
-									if(nBaseItem == 78) {sBaseItem = "A pair of bracers";}
-									if(nBaseItem == 27) {sBaseItem = "A pouch of bullets";}
-									if(nBaseItem == 80) {sBaseItem = "A cloak";}
-									if(nBaseItem == 28) {sBaseItem = "A club";}
-									if(nBaseItem == 22) {sBaseItem = "A dagger";}
-									if(nBaseItem == 31) {sBaseItem = "A set of darts";}
-									if(nBaseItem == 33) {sBaseItem = "A double axe"; }
-									if(nBaseItem == 128) {sBaseItem = "A drum";}
-									if(nBaseItem == 108) {sBaseItem = "A dwarven war axe";}
-									if(nBaseItem == 114) {sBaseItem = "A falchion";}
-									if(nBaseItem == 116) {sBaseItem = "A flail";}
-									if(nBaseItem == 129) {sBaseItem = "A flute";}
-									if(nBaseItem == 77) {sBaseItem = "A gem";}
-									if(nBaseItem == 36) {sBaseItem = "A pair of gloves";}
-									if(nBaseItem == 18) {sBaseItem = "A great axe";}
-									if(nBaseItem == 120) {sBaseItem = "A great club";}
-									if(nBaseItem == 13) {sBaseItem = "A great sword";}
-									if(nBaseItem == 81) {sBaseItem = "A grenade";}
-									if(nBaseItem == 10) {sBaseItem = "A halberd";}
-									if(nBaseItem == 38) {sBaseItem = "A hand axe";}
-									if(nBaseItem == 6) {sBaseItem = "A heavy crossbow";}
-									if(nBaseItem == 35) {sBaseItem = "A heavy flail";}
-									if(nBaseItem == 17) {sBaseItem = "A helmet or other headgear";}
-									if((nBaseItem == 17) && (FindSubString(GetName(oItem), "Mask") != -1)) {sBaseItem = "A mask";}
-									if((nBaseItem == 17) && (FindSubString(GetName(oItem), "Headband") != -1)) {sBaseItem = "A headband";}
-									if(nBaseItem == 40) {sBaseItem = "A kama";}
-									if(nBaseItem == 41) {sBaseItem = "A katana";}
-									if(nBaseItem == 65) {sBaseItem = "A key";}
-									if(nBaseItem == 42) {sBaseItem = "A kukri";}
-									if(nBaseItem == 66) {sBaseItem = "A large box";}
-									if(nBaseItem == 56) {sBaseItem = "A large shield";}
-									if(nBaseItem == 7) {sBaseItem = "A light crossbow";}
-									if(nBaseItem == 4) {sBaseItem = "A light flail";}
-									if(nBaseItem == 37) {sBaseItem = "A light hammer";}
-									if(nBaseItem == 9) {sBaseItem = "A light mace";}
-									if(nBaseItem == 1) {sBaseItem = "A longsword";}
-									if(nBaseItem == 8) {sBaseItem = "A longbow";}
-									if(nBaseItem == 132) {sBaseItem = "A lute";}
-									if(nBaseItem == 113) {sBaseItem = "A mace";}
-									if(nBaseItem == 44) {sBaseItem = "A rod";}
-									if(nBaseItem == 45) {sBaseItem = "A staff";}
-									if(nBaseItem == 46) {sBaseItem = "A wand";}
-									if(nBaseItem == 34) {sBaseItem = "A large item";}
-									if(nBaseItem == 29) {sBaseItem = "A medium item";}
-									if(nBaseItem == 24) {sBaseItem = "A small item";}
-									if(nBaseItem == 103) {sBaseItem = "A small item";}
-									if(nBaseItem == 43) {sBaseItem = "A tall item";}
-									if(nBaseItem == 79) {sBaseItem = "A thin item";}
-									if(nBaseItem == 68) {sBaseItem = "A wide item";}
-									if(nBaseItem == 47) {sBaseItem = "A morningstar";}
-									if(nBaseItem == 49) {sBaseItem = "A potion";}
-									if(nBaseItem == 96) {sBaseItem = "A potion";}
-									if(nBaseItem == 50) {sBaseItem = "A quarterstaff";}
-									if(nBaseItem == 51) {sBaseItem = "A rapier";}
-									if(nBaseItem == 52) {sBaseItem = "A ring";}
-									if(nBaseItem == 53) {sBaseItem = "A scimitar";}
-									if(nBaseItem == 75) {sBaseItem = "A scroll";}
-									if(nBaseItem == 55) {sBaseItem = "A scythe";}
-									if(nBaseItem == 11) {sBaseItem = "A short bow";}
-									if(nBaseItem == 58) {sBaseItem = "A short spear";}
-									if(nBaseItem == 0) {sBaseItem = "A shortsword";}
-									if(nBaseItem == 59) {sBaseItem = "A set of shuriken";}
-									if(nBaseItem == 60) {sBaseItem = "A sickle";}
-									if(nBaseItem == 61) {sBaseItem = "A sling";}
-									if(nBaseItem == 14) {sBaseItem = "A small shield";}
-									if(nBaseItem == 119) {sBaseItem = "A spear";}
-									if(nBaseItem == 63) {sBaseItem = "A set of throwing axes";}
-									if(nBaseItem == 62) {sBaseItem = "A set of thieves tools";}
-									if(nBaseItem == 200) {sBaseItem = "A small item";}
-									if(nBaseItem == 72) {sBaseItem = "A small item";}
-									if(nBaseItem == 57) {sBaseItem = "A tower shield";}
-									if(nBaseItem == 5) {sBaseItem = "A war hammer";}
-									if(nBaseItem == 126) {sBaseItem = "A war mace";}
-									if(nBaseItem == 111) {sBaseItem = "A whip";}
+									
+									//If it's unidentified, say so
+									string sIdentified = " ";
+									string sIdentifiedN = " ";
+									string sIdentifiedCap = " ";
+									if(GetIdentified(oItem) == FALSE) {sIdentified = "unidentified ";sIdentifiedCap = "Unidentified ";sIdentifiedN = "n unidentified ";} 
+											
+									if(nBaseItem == 19) {sBaseItem = "An" + sIdentified + "amulet";}
+									if(nBaseItem == 16) {sBaseItem = sIdentifiedCap + "Armor";}
+									if((nBaseItem == 16) && (FindSubString(GetName(oItem), "Robe") != -1)) {sBaseItem = "A" + sIdentifiedN + "robe";}
+									if(nBaseItem == 20) {sBaseItem = sIdentifiedCap + "Arrows";}
+									if(nBaseItem == 3) {sBaseItem = "A" + sIdentifiedN + "bastard sword";}
+									if(nBaseItem == 2) {sBaseItem = "A" + sIdentifiedN + "battle axe";}
+									if(nBaseItem == 21) {sBaseItem = "A" + sIdentifiedN + "belt";}
+									if(nBaseItem == 101) {sBaseItem = "A" + sIdentifiedN + "bottle";}
+									if(nBaseItem == 25) {sBaseItem = sIdentifiedCap + "Bolts";}
+									if(nBaseItem == 74) {sBaseItem = "A" + sIdentifiedN + "book";}
+									if(nBaseItem == 26) {sBaseItem = "A" + sIdentifiedN + "pair of boots";}
+									if(nBaseItem == 78) {sBaseItem = "A" + sIdentifiedN + "pair of bracers";}
+									if(nBaseItem == 27) {sBaseItem = "A" + sIdentifiedN + "pouch of bullets";}
+									if(nBaseItem == 80) {sBaseItem = "A" + sIdentifiedN + "cloak";}
+									if(nBaseItem == 28) {sBaseItem = "A" + sIdentifiedN + "club";}
+									if(nBaseItem == 22) {sBaseItem = "A" + sIdentifiedN + "dagger";}
+									if(nBaseItem == 31) {sBaseItem = "A" + sIdentifiedN + "set of darts";}
+									if(nBaseItem == 33) {sBaseItem = "A" + sIdentifiedN + "double axe"; }
+									if(nBaseItem == 128) {sBaseItem = "A" + sIdentifiedN + "drum";}
+									if(nBaseItem == 108) {sBaseItem = "A" + sIdentifiedN + "dwarven war axe";}
+									if(nBaseItem == 114) {sBaseItem = "A" + sIdentifiedN + "falchion";}
+									if(nBaseItem == 116) {sBaseItem = "A" + sIdentifiedN + "flail";}
+									if(nBaseItem == 129) {sBaseItem = "A" + sIdentifiedN + "flute";}
+									if(nBaseItem == 77) {sBaseItem = "A" + sIdentifiedN + "gem";}
+									if(nBaseItem == 36) {sBaseItem = "A" + sIdentifiedN + "pair of gloves";}
+									if(nBaseItem == 18) {sBaseItem = "A" + sIdentifiedN + "great axe";}
+									if(nBaseItem == 120) {sBaseItem = "A" + sIdentifiedN + "great club";}
+									if(nBaseItem == 13) {sBaseItem = "A" + sIdentifiedN + "great sword";}
+									if(nBaseItem == 81) {sBaseItem = "A" + sIdentifiedN + "grenade";}
+									if(nBaseItem == 10) {sBaseItem = "A" + sIdentifiedN + "halberd";}
+									if(nBaseItem == 38) {sBaseItem = "A" + sIdentifiedN + "hand axe";}
+									if(nBaseItem == 6) {sBaseItem = "A" + sIdentifiedN + "heavy crossbow";}
+									if(nBaseItem == 35) {sBaseItem = "A" + sIdentifiedN + "heavy flail";}
+									if(nBaseItem == 17) {sBaseItem = "A" + sIdentifiedN + "helmet or other headgear";}
+									if((nBaseItem == 17) && (FindSubString(GetName(oItem), "Mask") != -1)) {sBaseItem = "A" + sIdentifiedN + "mask";}
+									if((nBaseItem == 17) && (FindSubString(GetName(oItem), "Headband") != -1)) {sBaseItem = "A" + sIdentifiedN + "headband";}
+									if(nBaseItem == 40) {sBaseItem = "A" + sIdentifiedN + "kama";}
+									if(nBaseItem == 41) {sBaseItem = "A" + sIdentifiedN + "katana";}
+									if(nBaseItem == 65) {sBaseItem = "A" + sIdentifiedN + "key";}
+									if(nBaseItem == 42) {sBaseItem = "A" + sIdentifiedN + "kukri";}
+									if(nBaseItem == 66) {sBaseItem = "A" + sIdentifiedN + "large box";}
+									if(nBaseItem == 56) {sBaseItem = "A" + sIdentifiedN + "large shield";}
+									if(nBaseItem == 7) {sBaseItem = "A" + sIdentifiedN + "light crossbow";}
+									if(nBaseItem == 4) {sBaseItem = "A" + sIdentifiedN + "light flail";}
+									if(nBaseItem == 37) {sBaseItem = "A" + sIdentifiedN + "light hammer";}
+									if(nBaseItem == 9) {sBaseItem = "A" + sIdentifiedN + "light mace";}
+									if(nBaseItem == 1) {sBaseItem = "A" + sIdentifiedN + "longsword";}
+									if(nBaseItem == 8) {sBaseItem = "A" + sIdentifiedN + "longbow";}
+									if(nBaseItem == 132) {sBaseItem = "A" + sIdentifiedN + "lute";}
+									if(nBaseItem == 113) {sBaseItem = "A" + sIdentifiedN + "mace";}
+									if(nBaseItem == 44) {sBaseItem = "A" + sIdentifiedN + "rod";}
+									if(nBaseItem == 45) {sBaseItem = "A" + sIdentifiedN + "staff";}
+									if(nBaseItem == 46) {sBaseItem = "A" + sIdentifiedN + "wand";}
+									if(nBaseItem == 34) {sBaseItem = "A" + sIdentifiedN + "large item";}
+									if(nBaseItem == 29) {sBaseItem = "A" + sIdentifiedN + "medium item";}
+									if(nBaseItem == 24) {sBaseItem = "A" + sIdentifiedN + "small item";}
+									if(nBaseItem == 103) {sBaseItem = "A" + sIdentifiedN + "small item";}
+									if(nBaseItem == 43) {sBaseItem = "A" + sIdentifiedN + "tall item";}
+									if(nBaseItem == 79) {sBaseItem = "A" + sIdentifiedN + "thin item";}
+									if(nBaseItem == 68) {sBaseItem = "A" + sIdentifiedN + "wide item";}
+									if(nBaseItem == 47) {sBaseItem = "A" + sIdentifiedN + "morningstar";}
+									if(nBaseItem == 49) {sBaseItem = "A" + sIdentifiedN + "potion";}
+									if(nBaseItem == 96) {sBaseItem = "A" + sIdentifiedN + "potion";}
+									if(nBaseItem == 50) {sBaseItem = "A" + sIdentifiedN + "quarterstaff";}
+									if(nBaseItem == 51) {sBaseItem = "A" + sIdentifiedN + "rapier";}
+									if(nBaseItem == 52) {sBaseItem = "A" + sIdentifiedN + "ring";}
+									if(nBaseItem == 53) {sBaseItem = "A" + sIdentifiedN + "scimitar";}
+									if(nBaseItem == 75) {sBaseItem = "A" + sIdentifiedN + "scroll";}
+									if(nBaseItem == 55) {sBaseItem = "A" + sIdentifiedN + "scythe";}
+									if(nBaseItem == 11) {sBaseItem = "A" + sIdentifiedN + "short bow";}
+									if(nBaseItem == 58) {sBaseItem = "A" + sIdentifiedN + "short spear";}
+									if(nBaseItem == 0) {sBaseItem = "A" + sIdentifiedN + "shortsword";}
+									if(nBaseItem == 59) {sBaseItem = "A" + sIdentifiedN + "set of shuriken";}
+									if(nBaseItem == 60) {sBaseItem = "A" + sIdentifiedN + "sickle";}
+									if(nBaseItem == 61) {sBaseItem = "A" + sIdentifiedN + "sling";}
+									if(nBaseItem == 14) {sBaseItem = "A" + sIdentifiedN + "small shield";}
+									if(nBaseItem == 119) {sBaseItem = "A" + sIdentifiedN + "spear";}
+									if(nBaseItem == 63) {sBaseItem = "A" + sIdentifiedN + "set of throwing axes";}
+									if(nBaseItem == 62) {sBaseItem = "A" + sIdentifiedN + "set of thieves tools";}
+									if(nBaseItem == 200) {sBaseItem = "A" + sIdentifiedN + "small item";}
+									if(nBaseItem == 72) {sBaseItem = "A" + sIdentifiedN + "small item";}
+									if(nBaseItem == 57) {sBaseItem = "A" + sIdentifiedN + "tower shield";}
+									if(nBaseItem == 5) {sBaseItem = "A" + sIdentifiedN + "war hammer";}
+									if(nBaseItem == 126) {sBaseItem = "A" + sIdentifiedN + "war mace";}
+									if(nBaseItem == 111) {sBaseItem = "A" + sIdentifiedN + "whip";}
 									
 									//Start looping through item properties on each item
 									while (GetIsItemPropertyValid(ipItem)) {
@@ -961,11 +966,99 @@ void main()
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
-											//Reset this so non SpellSchool added Cast Uniques register correctly in next ip loops	
-											if(GetLocalInt(oItem, "ACR_SPELLADDED") == 1) {SetLocalInt(oItem, "ACR_SPELLADDED", 0); } 
+											//SpellSchool variables for the Cast Unique property added before the loop	
+											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 1) &&  (sItemSubType == "335")) {
+												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
+												int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
+												string sACRSubSchool = GetLocalString(oItem, "ACR_SUBSCHOOL");
+												if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration " + sACRSubSchool + "</color>"; nAbj++;}
+												if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration " + sACRSubSchool + "</color>"; nCon++;}
+												if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination " + sACRSubSchool + "</color>"; nDiv++;}
+												if(nACRSpellSchool == 4) {sSchool = " of <color=magenta>Enchantment " + sACRSubSchool + "</color>"; nEnc++;}
+												if(nACRSpellSchool == 5) {sSchool = " of <color=red>Evocation " + sACRSubSchool + "</color>"; nEvo++;}
+												if(nACRSpellSchool == 6) {sSchool = " of <color=purple>Illusion " + sACRSubSchool + "</color>"; nIll++;}
+												if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy " + sACRSubSchool + "</color>"; nNec++;}
+												if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation " + sACRSubSchool + "</color>"; nTra++;}
+												if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool + "</color>"; nGen++;}
+												int nACRSpellSchool2 = GetLocalInt(oItem, "ACR_SPELLSCHOOL2");
+												int nAuraPower2 = GetLocalInt(oItem, "ACR_SPELLPOWER2");
+												string sACRSubSchool2 = GetLocalString(oItem, "ACR_SUBSCHOOL2");
+												if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration " + sACRSubSchool2 + "</color>"; nAbj++;}
+												if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration " + sACRSubSchool2 + "</color>"; nCon++;}
+												if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination " + sACRSubSchool2 + "</color>"; nDiv++;}
+												if(nACRSpellSchool2 == 4) {sSchool2 = " of <color=magenta>Enchantment " + sACRSubSchool2 + "</color>"; nEnc++;}
+												if(nACRSpellSchool2 == 5) {sSchool2 = " of <color=red>Evocation " + sACRSubSchool2 + "</color>"; nEvo++;}
+												if(nACRSpellSchool2 == 6) {sSchool2 = " of <color=purple>Illusion " + sACRSubSchool2 + "</color>"; nIll++;}
+												if(nACRSpellSchool2 == 7) {sSchool2 = " of <color=white>Necromancy " + sACRSubSchool2 + "</color>"; nNec++;}
+												if(nACRSpellSchool2 == 8) {sSchool2 = " of <color=orange>Transmutation " + sACRSubSchool2 + "</color>"; nTra++;}
+												if(nACRSpellSchool2 == 9) {sSchool2 = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool2 + "</color>"; nGen++;}
+												int nACRSpellSchool3 = GetLocalInt(oItem, "ACR_SPELLSCHOOL3");
+												int nAuraPower3 = GetLocalInt(oItem, "ACR_SPELLPOWER3");
+												string sACRSubSchool3 = GetLocalString(oItem, "ACR_SUBSCHOOL3");
+												if(nACRSpellSchool3 == 1) {sSchool3 = " of <color=lightblue>Abjuration " + sACRSubSchool3 + "</color>"; nAbj++;}
+												if(nACRSpellSchool3 == 2) {sSchool3 = " of <color=tan>Conjuration " + sACRSubSchool3 + "</color>"; nCon++;}
+												if(nACRSpellSchool3 == 3) {sSchool3 = " of <color=green>Divination " + sACRSubSchool3 + "</color>"; nDiv++;}
+												if(nACRSpellSchool3 == 4) {sSchool3 = " of <color=magenta>Enchantment " + sACRSubSchool3 + "</color>"; nEnc++;}
+												if(nACRSpellSchool3 == 5) {sSchool3 = " of <color=red>Evocation " + sACRSubSchool3 + "</color>"; nEvo++;}
+												if(nACRSpellSchool3 == 6) {sSchool3 = " of <color=purple>Illusion " + sACRSubSchool3 + "</color>"; nIll++;}
+												if(nACRSpellSchool3 == 7) {sSchool3 = " of <color=white>Necromancy " + sACRSubSchool3 + "</color>"; nNec++;}
+												if(nACRSpellSchool3 == 8) {sSchool3 = " of <color=orange>Transmutation " + sACRSubSchool3 + "</color>"; nTra++;}
+												if(nACRSpellSchool3 == 9) {sSchool3 = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool3 + "</color>"; nGen++;}
 												
-											//If it's unidentified or in a closed container, no soup for you.
-											if(GetIdentified(oItem) == FALSE) {nSomething++; }//sBaseItem = sSpot; 
+												if(nAuraPower > 0) {sAuraStrength = "faint";}
+												if(nAuraPower > 3) {sAuraStrength = "moderate";}
+												if(nAuraPower > 6) {sAuraStrength = "strong";}
+												if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+												if(nAuraPower2 > 0) {sAuraStrength2 = "faint";}
+												if(nAuraPower2 > 3) {sAuraStrength2 = "moderate";}
+												if(nAuraPower2 > 6) {sAuraStrength2 = "strong";}
+												if(nAuraPower2 > 9) {sAuraStrength2 = "overwhelming";}
+												if(nAuraPower3 > 0) {sAuraStrength3 = "faint";}
+												if(nAuraPower3 > 3) {sAuraStrength3 = "moderate";}
+												if(nAuraPower3 > 6) {sAuraStrength3 = "strong";}
+												if(nAuraPower3 > 9) {sAuraStrength3 = "overwhelming";}
+												
+												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												if(nAuraPower > nAuraPowerHigh) {
+													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+								    				}
+												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												if(nAuraPower2 > nAuraPowerHigh) {
+													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower2);
+													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength2);
+								    				}
+												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												if(nAuraPower3 > nAuraPowerHigh) {
+													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower3);
+													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
+								    				}	
+												
+												//Extra SpellSchool reports for items with more than one set of SpellSchool variables.
+												//If the caster gets a Round 3, most objects report at 24 seconds into the report.
+												float fDelay = 22.1;
+												//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
+										 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
+												if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+												//Only report equipped items for Creatures.
+												if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
+													//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
+													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
+														if(nACRSpellSchool2 > 0) {
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
+															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength2 + " aura" + sSchool2));
+															}
+														if(nACRSpellSchool3 > 0) {
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
+															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength3 + " aura" + sSchool3));
+															}
+														}
+													}
+													
+												SetLocalInt(oItem, "ACR_SPELLADDED", 0); 
+												} 
+											
+											//If it's in a closed container, no soup for you.
 											if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)&& (GetIsOpen(oDetected) == FALSE)) {sBaseItem = "Something"; nSomething++;}
 												
 											if(sSchool == "A") {sSchool = " of <color=lightblue>Abjuration </color>"; nAbj++;}
@@ -979,7 +1072,7 @@ void main()
 											if(sSchool == "G") {sSchool = " of <color=#FFFF00>Universal arcanity</color>"; nGen++;}
 											
 											//If caster fails Spellcraft, no school for you, either.
-											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
+											if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";sSchool2 = "";sSchool3 = "";}
 											
 											if(nAuraPower > 0) {sAuraStrength = "faint";}
 											if(nAuraPower > 3) {sAuraStrength = "moderate";}

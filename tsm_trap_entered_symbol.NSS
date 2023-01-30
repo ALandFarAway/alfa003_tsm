@@ -57,6 +57,7 @@ void main()
 if((GetTag(OBJECT_SELF) == "trg_symbol_pers_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
 	{
 	object oGlyphWP = GetNearestObjectByTag("plc_symbol_pers_wp", OBJECT_SELF, 1);
+	object oGlyphTrg = GetNearestObjectByTag("trg_symbol_pers", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 31, FALSE))
@@ -64,6 +65,8 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_pers_det") && (GetIsPC(GetEnteringObject(
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_pers", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     SetLocalInt(OBJECT_SELF, "Fired", 1);
+		 DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 SetLocalObject(oGlyphTrg, "oMyGlyph", oGlyph);
 		}
 	}
 	
@@ -72,9 +75,12 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_pers") && (GetIsPC(GetEnteringObject())))
 	object oPC = GetEnteringObject();
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_pers", GetLocation(oGlyphWP));
-			 DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
-		     SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
+	        {object oGlyph = GetLocalObject(OBJECT_SELF, "oMyGlyph");
+			 if(GetLocalObject(OBJECT_SELF, "oMyGlyph") == OBJECT_INVALID) {
+				oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_pers", GetLocation(oGlyphWP));
+			 	DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 		}
+			 SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
 		     DestroyObject(oGlyph, 6000.0);
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
 			 SetLocalInt(OBJECT_SELF, "Ticking", 1);
@@ -84,11 +90,11 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_pers") && (GetIsPC(GetEnteringObject())))
 		 if((GetLocalInt(OBJECT_SELF, "Ticking") == 1) && (GetLocalString(OBJECT_SELF, GetName(oPC)) != GetName(oPC))) {
 		 	SetLocalString(OBJECT_SELF, GetName(oPC), GetName(oPC));
 			if(WillSave(oPC,17, SAVING_THROW_TYPE_MIND_SPELLS, OBJECT_SELF))
-				{SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. A moment later that joy fades, as if you'd turned and against that certainty, found no familiar face." );
+				{SendMessageToPC(oPC, "A strange sensation passes through you, a feeling of being charmed by a foe, but it passes." );
 				}
 			else 
 				{SendMessageToAllDMs(GetName(oPC) + " is charmed by " + GetName(OBJECT_SELF));
-				  SendMessageToPC(oPC, "A strange sensation passes through you, the absolute certainty of a friend's voice heard unexpectedly, or a familiar profile caught out of the corner of your eye. You *feel* an upwelling of warmth for this friend, a connection based on trust and unshakable loyalty. You can't bring the face of this person to mind immediately, but it doesn't matter. You know him or her on the inside, and will know him or her when you meet again." );
+				 SendMessageToPC(oPC, "A strange sensation passes through you, a feeling of being being charmed by somebody you had *thought* was a foe." );
 				 }
 			}	 	
 	}
@@ -96,6 +102,7 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_pers") && (GetIsPC(GetEnteringObject())))
 if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
 	{
 	object oGlyphWP = GetNearestObjectByTag("plc_symbol_sleep_wp", OBJECT_SELF, 1);
+	object oGlyphTrg = GetNearestObjectByTag("trg_symbol_sleep", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	
 	
@@ -104,6 +111,8 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_sleep", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     SetLocalInt(OBJECT_SELF, "Fired", 1);
+		 DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 SetLocalObject(oGlyphTrg, "oMyGlyph", oGlyph);
 		}
 	}
 	
@@ -112,7 +121,11 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject
 	object oPC = GetEnteringObject();
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_sleep", GetLocation(oGlyphWP));
+	        {object oGlyph = GetLocalObject(OBJECT_SELF, "oMyGlyph");
+			 if(GetLocalObject(OBJECT_SELF, "oMyGlyph") == OBJECT_INVALID) {
+				oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_sleep", GetLocation(oGlyphWP));
+			 	DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 		}
 			 SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
 		     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
 		     DestroyObject(oGlyph, 6000.0);
@@ -142,6 +155,7 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_sleep_det") && (GetIsPC(GetEnteringObject
 if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
 	{
 	object oGlyphWP = GetNearestObjectByTag("plc_symbol_fear_wp", OBJECT_SELF, 1);
+	object oGlyphTrg = GetNearestObjectByTag("trg_symbol_fear", OBJECT_SELF, 1);
 	object oPC = GetEnteringObject();
 	
 	
@@ -150,6 +164,8 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 		 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_fear", GetLocation(oGlyphWP));
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     SetLocalInt(OBJECT_SELF, "Fired", 1);
+		 DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 SetLocalObject(oGlyphTrg, "oMyGlyph", oGlyph);
 		}
 	}
 	
@@ -158,7 +174,11 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 	object oPC = GetEnteringObject();
 	
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0)
-	        {object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_fear", GetLocation(oGlyphWP));
+	        {object oGlyph = GetLocalObject(OBJECT_SELF, "oMyGlyph");
+			 if(GetLocalObject(OBJECT_SELF, "oMyGlyph") == OBJECT_INVALID) {
+				oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_symbol_fear", GetLocation(oGlyphWP));
+			 	DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 		}
 			 SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
 		     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
 		     DestroyObject(oGlyph, 15*600.0);
@@ -184,8 +204,8 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 	
 	if((GetTag(OBJECT_SELF) == "trg_glyph_warding_det") && (GetIsPC(GetEnteringObject()))  && (GetLocalInt(OBJECT_SELF, "Fired") != 1)) 
 	{object oGlyphWP = GetNearestObjectByTag("plc_glyph_warding_wp", OBJECT_SELF, 1);
+	 object oGlyphTrg = GetNearestObjectByTag("trg_glyph_warding", OBJECT_SELF, 1);
 	 object oPC = GetEnteringObject();
-	//SendMessageToPC(oPC, "Entered Detect");
 		
 	if(GetIsSkillSuccessful(oPC, SKILL_SEARCH, 28, FALSE))
 		{SendMessageToPC(oPC, "Your careful searching reveals an arcane design on the ground.");
@@ -193,14 +213,20 @@ if((GetTag(OBJECT_SELF) == "trg_symbol_fear_det") && (GetIsPC(GetEnteringObject(
 		 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCircle, oGlyph, 5.0));
 	     DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
 		 SetLocalInt(OBJECT_SELF, "Fired", 1);
+		 DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 SetLocalObject(oGlyphTrg, "oMyGlyph", oGlyph);
 		}	
 	}
 	
 	if((GetTag(OBJECT_SELF) == "trg_glyph_warding") && (GetIsPC(GetEnteringObject()))) 
-	{object oGlyphWP = GetNearestObjectByTag("plc_glyph_warding_wp", OBJECT_SELF, 1);
-	 object oPC = GetEnteringObject();
-	 object oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_glyph_ward_flr", GetLocation(oGlyphWP));
-	 SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
+		{object oGlyphWP = GetNearestObjectByTag("plc_glyph_warding_wp", OBJECT_SELF, 1);
+		 object oPC = GetEnteringObject();
+		 object oGlyph = GetLocalObject(OBJECT_SELF, "oMyGlyph");
+		 if(GetLocalObject(OBJECT_SELF, "oMyGlyph") == OBJECT_INVALID) {
+			oGlyph = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_glyph_ward_flr", GetLocation(oGlyphWP));
+			DelayCommand(2.0, SetUseableFlag(oGlyph, TRUE));
+		 	}
+		SetLocalObject(oGlyph, "MyTrigger", OBJECT_SELF);
 		     
 	 if(GetLocalInt(OBJECT_SELF, "Fired") == 0) 
 	        {DelayCommand(1.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eSonicImplode, GetLocation(oGlyph), 3.0));
