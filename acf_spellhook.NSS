@@ -759,6 +759,7 @@ void main()
 								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED", 1);}
 								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED2", 1);}
 								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED3", 1);}
+								SendMessageToAllDMs("Before IP loop: SpellSchool = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL")) + ", SpellSchool2 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL2")) + ", SpellSchool3 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL3")) );
 								int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 								int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 								itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
@@ -960,13 +961,15 @@ void main()
 											//Otherwise if the item property is one of the Cast Spell: Unique Powers, 
 											//assume that the event script contains something more complicated than casting a simple spell.
 											//Even if it doesn't, we can't know what it is, except in certain specific cases called out here. 
+											SendMessageToAllDMs("Inside IP loop: SpellSchool = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL")) + ", SpellSchool2 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL2")) + ", SpellSchool3 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL3")) );
+											SendMessageToAllDMs("Inside IP loop: SpellAdded = " + IntToString(GetLocalInt(oItem, "ACR_SPELLADDED")) + ", ItemSubtype = " + sItemSubType);
 											
 											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 0) && ((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335"))) 
 												{sSchool = " of arcanity too complex to unravel ";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
-											//SpellSchool variables for the Cast Unique property added before the loop	
+											//SpellSchool variables for the Cast Unique property that was added before the loop	
 											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 1) &&  (sItemSubType == "335")) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 												int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
