@@ -971,6 +971,7 @@ void main()
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 												int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
 												string sACRSubSchool = GetLocalString(oItem, "ACR_SUBSCHOOL");
+												if(sACRSubSchool != "") {sACRSubSchool = "(" + sACRSubSchool + ")";}
 												if(nACRSpellSchool == 1) {sSchool = " of <color=lightblue>Abjuration " + sACRSubSchool + "</color>"; nAbj++;}
 												if(nACRSpellSchool == 2) {sSchool = " of <color=tan>Conjuration " + sACRSubSchool + "</color>"; nCon++;}
 												if(nACRSpellSchool == 3) {sSchool = " of <color=green>Divination " + sACRSubSchool + "</color>"; nDiv++;}
@@ -983,6 +984,7 @@ void main()
 												int nACRSpellSchool2 = GetLocalInt(oItem, "ACR_SPELLSCHOOL2");
 												int nAuraPower2 = GetLocalInt(oItem, "ACR_SPELLPOWER2");
 												string sACRSubSchool2 = GetLocalString(oItem, "ACR_SUBSCHOOL2");
+												if(sACRSubSchool2 != "") {sACRSubSchool2 = "(" + sACRSubSchool2 + ")";}
 												if(nACRSpellSchool2 == 1) {sSchool2 = " of <color=lightblue>Abjuration " + sACRSubSchool2 + "</color>"; nAbj++;}
 												if(nACRSpellSchool2 == 2) {sSchool2 = " of <color=tan>Conjuration " + sACRSubSchool2 + "</color>"; nCon++;}
 												if(nACRSpellSchool2 == 3) {sSchool2 = " of <color=green>Divination " + sACRSubSchool2 + "</color>"; nDiv++;}
@@ -995,6 +997,7 @@ void main()
 												int nACRSpellSchool3 = GetLocalInt(oItem, "ACR_SPELLSCHOOL3");
 												int nAuraPower3 = GetLocalInt(oItem, "ACR_SPELLPOWER3");
 												string sACRSubSchool3 = GetLocalString(oItem, "ACR_SUBSCHOOL3");
+												if(sACRSubSchool3 != "") {sACRSubSchool3 = "(" + sACRSubSchool3 + ")";}
 												if(nACRSpellSchool3 == 1) {sSchool3 = " of <color=lightblue>Abjuration " + sACRSubSchool3 + "</color>"; nAbj++;}
 												if(nACRSpellSchool3 == 2) {sSchool3 = " of <color=tan>Conjuration " + sACRSubSchool3 + "</color>"; nCon++;}
 												if(nACRSpellSchool3 == 3) {sSchool3 = " of <color=green>Divination " + sACRSubSchool3 + "</color>"; nDiv++;}
@@ -1045,10 +1048,12 @@ void main()
 													//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
 													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
 														if(nACRSpellSchool2 > 0) {
+															nAuraCount++;
 															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength2 + " aura" + sSchool2));
 															}
 														if(nACRSpellSchool3 > 0) {
+															nAuraCount++;
 															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength3 + " aura" + sSchool3));
 															}
