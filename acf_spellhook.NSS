@@ -1107,7 +1107,7 @@ void main()
 											//Only report equipped items for Creatures.
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
-												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0) && (!(GetLocalInt(oDetected, "ACR_SPELLADDED") == 1) && (sItemSubType == "335"))) {
+												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0) && !((GetLocalInt(oDetected, "ACR_SPELLADDED") == 1) && (sItemSubType == "335"))) {
 													DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 													DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 													}
