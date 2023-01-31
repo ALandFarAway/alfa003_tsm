@@ -955,7 +955,6 @@ void main()
 										if(nItemProperty == 71) {sItemProperty = "True Seeing"; sSchool = "T"; nAuraPower = 5;}
 										
 										if(sItemProperty != "") {
-											nAuraCount++;
 											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {SetLocalInt(oCaster, "nItemCount", 1);}
 											//SpellSchool Variables have already set properties for Spellschool loop on items
 											//Otherwise if the item property is one of the Cast Spell: Unique Powers, 
@@ -965,7 +964,7 @@ void main()
 											SendMessageToAllDMs("Inside IP loop: SpellAdded = " + IntToString(GetLocalInt(oItem, "ACR_SPELLADDED")) + ", ItemSubtype = " + sItemSubType);
 											
 											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 0) && ((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335"))) 
-												{sSchool = " of arcanity too complex to unravel ";
+												{sSchool = " of complex arcanity "; nAuraPower = 0; sAuraStrength = "";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
@@ -1108,10 +1107,12 @@ void main()
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible and it wasn't sent as a SpellSchool message before this
 												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0) && (GetLocalInt(oDetected, "ACR_SPELLADDED") == 0)) {
-													DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-													DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
+													if((nItemSubType != 335) || ((nItemSubType == 335) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") == 0))) {
+														nAuraCount++;
+														DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+														DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
+														}
 													}
-													
 												SetLocalInt(oItem, "ACR_SPELLADDED", 0); 
 												
 												}
