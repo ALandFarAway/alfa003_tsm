@@ -971,7 +971,7 @@ void main()
 												}
 											//SpellSchool variables for the Cast Unique property that was added before the loop	
 											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 1) &&  (sItemSubType == "335")) {
-												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
+												/*int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 												int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
 												string sACRSubSchool = GetLocalString(oItem, "ACR_SUBSCHOOL");
 												if(sACRSubSchool != "") {sACRSubSchool = "(" + sACRSubSchool + ")";}
@@ -984,6 +984,7 @@ void main()
 												if(nACRSpellSchool == 7) {sSchool = " of <color=white>Necromancy " + sACRSubSchool + "</color>"; nNec++;}
 												if(nACRSpellSchool == 8) {sSchool = " of <color=orange>Transmutation " + sACRSubSchool + "</color>"; nTra++;}
 												if(nACRSpellSchool == 9) {sSchool = " of <color=#FFFF00>Universal arcanity" + sACRSubSchool + "</color>"; nGen++;}
+												*/
 												int nACRSpellSchool2 = GetLocalInt(oItem, "ACR_SPELLSCHOOL2");
 												int nAuraPower2 = GetLocalInt(oItem, "ACR_SPELLPOWER2");
 												string sACRSubSchool2 = GetLocalString(oItem, "ACR_SUBSCHOOL2");
@@ -1103,7 +1104,7 @@ void main()
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
 												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
-													DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+													DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 													DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 													}
 												}
