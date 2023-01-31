@@ -19,12 +19,12 @@ void main()
 	object oArea = GetArea(OBJECT_SELF);
 	object oWhistle = GetLocalObject(OBJECT_SELF, "oWhistle");
 	
-	if(GetLocalInt(oStudent, "HarpyMsg")==2) {
-		if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetIsSkillSuccessful(OBJECT_SELF, SKILL_SPOT,20,TRUE))) {
+	if(GetLocalInt(oStudent, "HarpyMsg")==2)  {
+		if(((FindSubString(GetTag(oArea), "_ext_") != -1) || (FindSubString(GetTag(oArea), "_xyz") != -1) || (FindSubString(GetTag(oArea), "_ferry") != -1)) && (GetIsSkillSuccessful(OBJECT_SELF, SKILL_SPOT,20,TRUE))) {
 			SendMessageToPC(oStudent, "The sense of coming doom continues to grow. You feel marked. Far, far off over the northern horizon, specks pepper the sky. Too small for even the best eyes to make out, perhaps even your imagination.");	  
 			SetLocalInt(oStudent, "HarpySpot", 1);
 			}
-		else if(FindSubString(GetTag(oArea), "_int_") != -1)  {
+		else if((FindSubString(GetTag(oArea), "_int_") != -1) || (FindSubString(GetTag(oArea), "travel_") != -1)) {
 			SendMessageToPC(oStudent, "The sense of coming doom continues to grow. You feel marked.");	  
 			}
 		}

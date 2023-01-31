@@ -24,7 +24,7 @@ void main()
 	else {
 	SendMessageToAllDMs(sName + " just used the Whistle of Discord to summon harpies in area " + GetName(oArea));					 
     AssignCommand(oStudent, ActionSpeakString(sName + " blows a shrieking, discordant blast on the whistle. It sets teeth on edge and grates in your bones. Somewhere, in the back of your mind, you seem to hear a startled squawk, and then an inaudible blast of pure rage.", TALKVOLUME_TALK));	 
-	AssignCommand(oStudent, ActionSpeakString("*Audible laughter suddenly rolls in the air around all present, and Xavier's voice says:* Ladies and gentlemen! Children of all ages! Welcome to the spectacle! *Changes to a confiding stage whisper* My new bobcat sends his regards. Now. ON WITH THE SHOW!", TALKVOLUME_TALK));	 
+	AssignCommand(oItem, ActionSpeakString("*Audible laughter suddenly rolls in the air around all present, and Xavier's voice says:* Ladies and gentlemen! Children of all ages! Welcome to the spectacle! *Changes to a confiding stage whisper* My new crown is so much fun, and my new bobcat sends his regards. Now. ON WITH THE SHOW!", TALKVOLUME_TALK));	 
 		
 	object oStudent = GetFirstPC(TRUE);
 	string sPCName = GetName(oStudent);
