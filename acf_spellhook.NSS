@@ -970,7 +970,7 @@ void main()
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
 											//SpellSchool variables for the Cast Unique property that was added before the loop	
-											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 1) &&  (sItemSubType == "335")) {
+											if(GetLocalInt(oItem, "ACR_SPELLADDED") == 1) {
 												int nACRSpellSchool = GetLocalInt(oItem, "ACR_SPELLSCHOOL");
 												int nAuraPower = GetLocalInt(oItem, "ACR_SPELLPOWER");
 												string sACRSubSchool = GetLocalString(oItem, "ACR_SUBSCHOOL");
@@ -1053,17 +1053,17 @@ void main()
 													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
 														if(nACRSpellSchool > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 															}
 														if(nACRSpellSchool2 > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
+															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength2 + " aura" + sSchool2));
 															}
 														if(nACRSpellSchool3 > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
+															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength3 + " aura" + sSchool3));
 															}
 														}
