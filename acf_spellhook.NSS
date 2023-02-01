@@ -378,7 +378,6 @@ void main()
 				
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
-					//if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sName = "Something";}
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + sSchool2 + sSchool3));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 						}
@@ -752,14 +751,7 @@ void main()
 							
 							//First, check the item for SpellSchool variables. 	
 							//If found, assign a temporary item property that gives it a ticket into the item property loop below. 
-							//SetLocalInt(oItem, "ACR_SPELLADDED", 0);
-							//SetLocalInt(oItem, "ACR_SPELLADDED2", 0);
-							//SetLocalInt(oItem, "ACR_SPELLADDED3", 0);
 							if((GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0)|| (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) || (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0)) { 
-								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED", 1);}
-								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL2") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED2", 1);}
-								//if(GetLocalInt(oItem, "ACR_SPELLSCHOOL3") > 0) {SetLocalInt(oItem, "ACR_SPELLADDED3", 1);}
-								SendMessageToAllDMs("Before IP loop: SpellSchool = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL")) + ", SpellSchool2 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL2")) + ", SpellSchool3 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL3")) );
 								int nSpell = IP_CONST_CASTSPELL_UNIQUE_POWER_SELF_ONLY;
 								int nNumberUses = IP_CONST_CASTSPELL_NUMUSES_1_USE_PER_DAY;
 								itemproperty ipSpellSchool = ItemPropertyCastSpell(nSpell, nNumberUses);
@@ -956,15 +948,9 @@ void main()
 										
 										if(sItemProperty != "") {
 											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {SetLocalInt(oCaster, "nItemCount", 1);}
-											//SpellSchool Variables have already set properties for Spellschool loop on items
-											//Otherwise if the item property is one of the Cast Spell: Unique Powers, 
-											//assume that the event script contains something more complicated than casting a simple spell.
-											//Even if it doesn't, we can't know what it is, except in certain specific cases called out here. 
-											SendMessageToAllDMs("Inside IP loop: SpellSchool = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL")) + ", SpellSchool2 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL2")) + ", SpellSchool3 = " + IntToString(GetLocalInt(oItem, "ACR_SPELLSCHOOL3")) );
-											SendMessageToAllDMs("Inside IP loop: SpellAdded = " + IntToString(GetLocalInt(oItem, "ACR_SPELLADDED")) + ", ItemSubtype = " + sItemSubType);
-											
+											//If no SpellSchool variables on Cast Unique subtypes
 											if((GetLocalInt(oItem, "ACR_SPELLADDED") == 0) && ((sItemSubType == "125") || (sItemSubType == "329") || (sItemSubType == "335"))) 
-												{sSchool = " of complex arcanity "; nAuraPower = 0; sAuraStrength = "";
+												{sSchool = " of complex arcanity "; nAuraPower = 0; sAuraStrength = "magic";
 												if(GetTag(oItem) == "abr_it_holysymbol") {sSchool = "A"; nAuraPower = 1;}
 												if(GetTag(oItem) == "abr_it_scry_kit") {sSchool = "G"; nAuraPower = 1;}
 												}
@@ -1040,15 +1026,14 @@ void main()
 													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
 								    				}	
 												
-												//Extra SpellSchool reports for items with more than one set of SpellSchool variables.
-												//If the caster gets a Round 3, most objects report at 24 seconds into the report.
+												//Extra reports for items with SpellSchool variables.
 												float fDelay = 22.1;
 												//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
 										 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
 												if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 												//Only report equipped items for Creatures.
 												if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-													//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible
+													//Queue up SpellSchool reports to caster if Round 3 achieved and creature is not invisible
 													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
 														if(nACRSpellSchool > 0) {
 															nAuraCount++;
