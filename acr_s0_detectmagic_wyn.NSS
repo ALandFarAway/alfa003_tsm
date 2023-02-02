@@ -18,6 +18,8 @@
 #include "acr_skills_i"
 #include "x2_inc_itemprop"
 #include "x0_i0_position"
+#include "acr_spells_i"
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
@@ -104,6 +106,10 @@ void main()
 	Strong = 7-9
 	Overwhelming = 10+
 	*/
+	if ( !ACR_PrecastEvent() ) {
+		return;
+	}
+	
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
 		float fDur = TurnsToSeconds( GetCasterLevel(oCaster ));
@@ -134,6 +140,8 @@ void main()
 		//Begin looping through all objects in the spellcone
 		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 		while (GetIsObjectValid(oDetected)) {
+		SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+		
 		//Zero out variables common to all objects, for each valid oDetected loop iteration.
 		string sAuraPower = "";
 		int nAuraPower = 0;

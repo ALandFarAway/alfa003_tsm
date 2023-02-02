@@ -1525,6 +1525,7 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 
 //Arcane Mark
 if(GetSpellId() == 3066) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oMarked = GetSpellTargetObject();
 	effect eMark = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
@@ -1532,9 +1533,10 @@ if(GetSpellId() == 3066) {
  
 //Summon Instrument
 if(GetSpellId() == 3071) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oScryer = OBJECT_SELF;
 	location lTarget = GetLocation(oScryer);
-	object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+	/*object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
 	string sPlaceableTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sPlaceableTag = GetTag(oScry);
@@ -1544,11 +1546,40 @@ if(GetSpellId() == 3071) {
 				SendMessageToPC(oScryer, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
 			 }
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
-			}		
+			}*/		
 }
+
+//Create Water
+if(GetSpellId() == 3068) {
+	object oScryer = OBJECT_SELF;
+	int nCasterType = GetLastSpellCastClass();
+	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
+	SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
+	location lTarget = GetLocation(oScryer);
+	if(nCasterType == CLASS_TYPE_DRUID) {
+		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		string sTriggerTag = GetTag(oScry);
+		while(oScry != OBJECT_INVALID) {
+			sTriggerTag = GetTag(oScry);
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
+				SignalEvent(oScry, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
+				SetFirstName(oFocus, "Scrying Droplet");
+				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
+			    SetItemIcon(oFocus, 1896);
+				return;
+				}
+			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+			}
+		}
+	 	
+	CreateItemOnObject("abr_it_food_water", oScryer, 1);
+	SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
+	}
 
 // NonDetection
 if(GetSpellId() == 3092) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	object oTarget = GetSpellTargetObject();
 	int nCL = GetCasterLevel(OBJECT_SELF);
@@ -1568,6 +1599,7 @@ if(GetSpellId() == 3092) {
 		
 // Mage's Private Sanctum
 if(GetSpellId() == 3157) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	float fDuration = 24 * 60.0 * 60.0;
 	effect eIcon = EffectEffectIcon(52);
@@ -1580,6 +1612,7 @@ if(GetSpellId() == 3157) {
 
 //Detect Scrying
 if(GetSpellId() == 3058) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	SetLocalInt(OBJECT_SELF, "abr_sp_detectScry", 1);
     float fDuration = 24 * 60.0 * 60.0;
 	effect eIcon = EffectEffectIcon(54);
@@ -1640,47 +1673,11 @@ if(GetSpellId() == 3058) {
 		}
 	}
 	 
-//Create Water
-if(GetSpellId() == 3068) {
-	object oScryer = OBJECT_SELF;
-	int nCasterType = GetLastSpellCastClass();
-	object oTarget = GetSpellTargetObject();
-	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
-	//SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
-	object oScry;
-	if((GetObjectType(oTarget) != OBJECT_TYPE_PLACEABLE) && (nCasterType == CLASS_TYPE_DRUID)) {
-		location lTarget = GetLocation(oScryer);
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-		string sTriggerTag = GetTag(oScry);
-		while(oScry != OBJECT_INVALID) {
-			sTriggerTag = GetTag(oScry);
-			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
-				SetLocalInt(oScryer, "abr_scry_trig", 1);
-				SetFirstName(oFocus, "Scrying Droplet");
-				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
-			    SetItemIcon(oFocus, 1896);
-				return;
-				}
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-			}
-		}
-	else if((GetObjectType(oTarget) == OBJECT_TYPE_PLACEABLE) && ((nCasterType == CLASS_TYPE_DRUID) || (nCasterType == CLASS_TYPE_CLERIC)) && (FindSubString(GetTag(oTarget), "_SCRY_") != -1)) 
-		{SetLocalInt(oScryer, "abr_scry_trig", 1);}
-		
-			
-	if(GetLocalInt(oScryer, "abr_scry_trig") == 0){
-		CreateItemOnObject("abr_it_food_water", oScryer, 1);
-		SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
-	 	}	
-		
-	SetLocalInt(oScryer, "abr_scry_trig", 0);
-					
-}
 
 //Scrying and Greater Scrying
 if((GetSpellId() == 3056) || (GetSpellId() == 3057))
-	{//Define Scryer and Scrying Object
+	{SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+	//Define Scryer and Scrying Object
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
 	 int nCasterType = GetLastSpellCastClass();
