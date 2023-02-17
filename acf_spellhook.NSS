@@ -25,6 +25,9 @@
 #include "acr_scry_i"
 #include "NW_I0_SPELLS"    
 #include "x2_inc_itemprop"
+#include "x2_inc_toollib"
+#include "acr_db_persist_i"
+
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -1525,39 +1528,113 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 
 //Arcane Mark
 if(GetSpellId() == 3066) {
-	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oMarked = GetSpellTargetObject();
-	effect eMark = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);	
+	if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
+	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
 	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
-}
+	int nExpire = 0;
+	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
+	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
+	else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
+	else {ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
+	}   
+	
+//Erase
+if(GetSpellId() == 3137) {
+	object oMarked = GetSpellTargetObject();
+	location lMarked = GetSpellTargetLocation();
+	if(oMarked == OBJECT_INVALID) {oMarked = GetNearestObjectToLocation(OBJECT_TYPE_ALL, lMarked, 1);}
+	SendMessageToAllDMs("Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	effect eMark = EffectVisualEffect(VFX_DUR_CESSATE_POSITIVE, FALSE);	
+	effect eGlow = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, FALSE);	
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow, oMarked, 5.0);
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 3.0));
+	ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 3.0);
+	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
+		SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
+		ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
+		}
+	int nCasterLevel = GetCasterLevel(oCaster);
+	int nCLRoll = d20(1);
+	SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
+	if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
+	if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
+		if((FindSubString(GetTag(oMarked), "glyph_ward") != -1) || (FindSubString(GetResRef(oMarked), "glyph_ward") != -1)) {
+			SendMessageToPC(oCaster, "You fail, activating the " + GetName(oMarked) + "!");
+			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_WAYPOINT) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("1 " + GetTag(oMarked)); AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
+			if((GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("2 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
+			if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToAllDMs("3 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
+			}
+			
+		}	
+	else {
+		if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {DestroyObject(oMarked, 1.0); }
+		if(GetBaseItemType(oMarked) == 54 | 75 | 105) {
+			SetFirstName(oMarked, "Erased Scroll");
+			SetDescription(oMarked, "This scroll has been erased.");
+			itemproperty ipRemove = GetFirstItemProperty(oMarked);
+			while (GetIsItemPropertyValid(ipRemove)) {
+				RemoveItemProperty(oMarked, ipRemove);
+				ipRemove = GetNextItemProperty(oMarked);
+				} 
+			}
+	
+		SendMessageToPC(oCaster, "You have successfully erased " + GetName(oMarked)); 
+		}
+		
+	}
  
 //Summon Instrument
 if(GetSpellId() == 3071) {
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
-	object oScryer = OBJECT_SELF;
+	object oCaster = OBJECT_SELF;
+	effect eBardSong = EffectVisualEffect(VFX_DUR_BARD_SONG, 0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardSong, oCaster, 3.0);
+	ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
+	int nPerform = ACR_GetHighestPerformSkill(oCaster, FALSE);
+	SendMessageToAllDMs("nPerform =" + IntToString(nPerform));
+	string sPerform = "abr_it_msc_lute";
+	string sPerformScry = "lute";
+	if(nPerform == 60) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
+	if(nPerform == 62) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
+	object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
+	DelayCommand(2.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
+	int nBardLevel = GetCasterLevel(oCaster);
+	float nDuration = nBardLevel * 60.0;
+	DestroyObject(oPerform, nDuration);
+	
+	object oScryer = oCaster;
 	location lTarget = GetLocation(oScryer);
-	/*object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+	object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
 	string sPlaceableTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sPlaceableTag = GetTag(oScry);
 			if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
 				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
 				SetFirstName(oFocus, "Scrying Shard");
-				SendMessageToPC(oScryer, "A shard shaped like your instrument of choice shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
+				SendMessageToPC(oScryer, "A shard shaped like a " + sPerformScry + " shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
 			 }
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
-			}*/		
+			}	
 }
 
 //Create Water
 if(GetSpellId() == 3068) {
+	ActionPlayAnimation(ANIMATION_LOOPING_WORSHIP, 1.0, 3.0);
 	object oScryer = OBJECT_SELF;
+	effect eCreateWater = EffectVisualEffect(VFX_DUR_PROT_PREMONITION, 0);
+	effect eCreateWater2 = EffectVisualEffect(VFX_IMP_MAGIC_PROTECTION, 0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCreateWater, oScryer, 3.0);
+	DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
+	TLChangeAreaGroundTiles(GetArea(oScryer), 401,3,3,1.5);
 	int nCasterType = GetLastSpellCastClass();
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
+	object oScry = GetSpellTargetObject();
 	location lTarget = GetLocation(oScryer);
 	if(nCasterType == CLASS_TYPE_DRUID) {
-		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
+		lTarget = GetSpellTargetLocation();
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		string sTriggerTag = GetTag(oScry);
 		while(oScry != OBJECT_INVALID) {
 			sTriggerTag = GetTag(oScry);
@@ -1573,8 +1650,10 @@ if(GetSpellId() == 3068) {
 			}
 		}
 	 	
-	CreateItemOnObject("abr_it_food_water", oScryer, 1);
-	SendMessageToPC(oScryer, "You conjure wholesome, drinkable water into an empty bottle.");
+	if(GetTag(oScry) != "ACR_SCRY_OBJECT") 
+		{CreateItemOnObject("abr_it_food_water", oScryer, 1);
+		 SendMessageToPC(oScryer, "Water vapor forms in the air around you, and condenses into a small bottle you have ready for it.");
+		}
 	}
 
 // NonDetection
