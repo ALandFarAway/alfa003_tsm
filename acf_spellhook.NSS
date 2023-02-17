@@ -1545,6 +1545,7 @@ if(GetSpellId() == 3066) {
 if(GetSpellId() == 3003) {
 	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster));
 	while(oMarked != OBJECT_INVALID) {
+		SendMessageToPC(oCaster, "oMarked = " + GetName(oMarked));
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, GetName(oMarked) + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK"));}
 		GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster));
 		}
