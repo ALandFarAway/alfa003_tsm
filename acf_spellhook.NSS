@@ -198,6 +198,8 @@ void main()
 		//Begin looping through all objects in the spellcone
 		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 		while (GetIsObjectValid(oDetected)) {
+		SignalEvent( oDetected, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+		
 		//Zero out variables common to all objects, for each valid oDetected loop iteration.
 		string sAuraPower = "";
 		int nAuraPower = 0;
@@ -1531,29 +1533,19 @@ if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
 	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
-	ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 3.0);
 	int nExpire = 0;
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
 	else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
-	else {ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
+	else {SendMessageToPC(oCaster, "This object now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
 	}   
 	
 //Erase
 if(GetSpellId() == 3137) {
-	object oMarked = GetSpellTargetObject();
-	location lMarked = GetSpellTargetLocation();
-	if(oMarked == OBJECT_INVALID) {oMarked = GetNearestObjectToLocation(OBJECT_TYPE_ALL, lMarked, 1);}
+	object oMarked = GetNearestObject(OBJECT_TYPE_ALL, oCaster, 1);
+	location lMarked = GetLocation(oMarked);
 	SendMessageToAllDMs("Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-	effect eMark = EffectVisualEffect(VFX_DUR_CESSATE_POSITIVE, FALSE);	
-	effect eGlow = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, FALSE);	
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow, oMarked, 5.0);
-	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 3.0));
-	ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 3.0);
-	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
-		SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
-		ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
-		}
 	int nCasterLevel = GetCasterLevel(oCaster);
 	int nCLRoll = d20(1);
 	SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
@@ -1568,8 +1560,18 @@ if(GetSpellId() == 3137) {
 			
 		}	
 	else {
-		if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {DestroyObject(oMarked, 1.0); }
-		if(GetBaseItemType(oMarked) == 54 | 75 | 105) {
+		effect eMark = EffectVisualEffect(VFX_DUR_CESSATE_POSITIVE, FALSE);	
+		effect eGlow = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, FALSE);	
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow, oMarked, 5.0);
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 3.0));
+		ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 3.0);
+		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
+			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
+			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
+			}
+		else if (GetBaseItemType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToPC(oCaster, "There is nothing to erase on this object.");}
+		
+		if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
 			SetFirstName(oMarked, "Erased Scroll");
 			SetDescription(oMarked, "This scroll has been erased.");
 			itemproperty ipRemove = GetFirstItemProperty(oMarked);

@@ -140,7 +140,7 @@ void main()
 		//Begin looping through all objects in the spellcone
 		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 		while (GetIsObjectValid(oDetected)) {
-		SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+		SignalEvent( oDetected, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 		
 		//Zero out variables common to all objects, for each valid oDetected loop iteration.
 		string sAuraPower = "";
