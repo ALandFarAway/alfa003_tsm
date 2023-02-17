@@ -1541,9 +1541,18 @@ if(GetSpellId() == 3066) {
 	else {SendMessageToPC(oCaster, "This object now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
 	}   
 	
+//Read Magic
+if(GetSpellId() == 3003) {
+	object oMarked = GetSpellTargetObject();
+	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK"));}
+}
 //Erase
 if(GetSpellId() == 3137) {
-	object oMarked = GetNearestObject(OBJECT_TYPE_ALL, oCaster, 1);
+	object oMarkedPLC = GetNearestObject(OBJECT_TYPE_PLACEABLE, oCaster, 1);
+	object oMarkedItem = GetNearestObject(OBJECT_TYPE_ITEM, oCaster, 1);
+	object oMarked = oMarkedPLC;
+	if(GetDistanceBetween(oCaster, oMarkedPLC) > GetDistanceBetween(oCaster, oMarkedItem)) {oMarked = oMarkedItem;}
+	
 	location lMarked = GetLocation(oMarked);
 	SendMessageToAllDMs("Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	int nCasterLevel = GetCasterLevel(oCaster);
@@ -1569,7 +1578,7 @@ if(GetSpellId() == 3137) {
 			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
 			}
-		else if (GetBaseItemType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToPC(oCaster, "There is nothing to erase on this object.");}
+		else {SendMessageToPC(oCaster, "Your spell finds no arcane marks to erase on this object.");}
 		
 		if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
 			SetFirstName(oMarked, "Erased Scroll");
@@ -1580,10 +1589,7 @@ if(GetSpellId() == 3137) {
 				ipRemove = GetNextItemProperty(oMarked);
 				} 
 			}
-	
-		SendMessageToPC(oCaster, "You have successfully erased " + GetName(oMarked)); 
 		}
-		
 	}
  
 //Summon Instrument
