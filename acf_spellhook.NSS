@@ -1552,9 +1552,10 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	//if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
-	effect eGlyph = EffectVisualEffect(445);	
+	
+	ActionCastFakeSpellAtLocation(SPELL_GLYPH_OF_WARDING, GetLocation(oMarked), PROJECTILE_PATH_TYPE_DEFAULT);
+	effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
 	effect eGlyph2 = EffectVisualEffect(VFX_IMP_GOOD_HELP);	
-	effect eGlyph3 = EffectVisualEffect(VFX_IMP_EVIL_HELP);	
 	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oCaster);
 	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oCaster, 3.0);
@@ -1565,7 +1566,7 @@ if(GetSpellId() == 3066) {
 	DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oMarked), 3.0));
 	
 	
-	DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph2, GetLocation(oMarked), 3.0));
+	//DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph2, GetLocation(oMarked), 3.0));
 	DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph2, GetLocation(oMarked)));
 	int nExpire = 0;
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
@@ -1608,16 +1609,16 @@ if(GetSpellId() == 3137) {
 	else {
 		effect eGlow = EffectVisualEffect(VFX_HIT_SPELL_ABJURATION);	
 		effect eGlow2 = EffectVisualEffect(VFX_FNF_LOS_NORMAL_10);	
-		effect eGlow3 = EffectVisualEffect(VFX_FNF_DISPEL);	
+		effect eGlow3 = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_2);	
 		//ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oMarked);
 		//ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oCaster);
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
+		//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
 		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oCaster));
-		DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oMarked)));
-		DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oCaster)));
-		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oMarked, 3.0));
-		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oCaster, 3.0));
-		DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oMarked), 3.0));
+		//DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oMarked)));
+		//DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oCaster)));
+		//DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oMarked, 3.0));
+		//DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oCaster, 3.0));
+		//DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oMarked), 3.0));
 		DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oCaster), 3.0));
 		DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oMarked));
 		DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oCaster));
