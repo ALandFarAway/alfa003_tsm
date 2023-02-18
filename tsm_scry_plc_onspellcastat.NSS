@@ -40,8 +40,8 @@ void main() {
 	 string sTag = GetTag(OBJECT_SELF);
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 
-	 SendMessageToAllDMs("plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
-	 SendMessageToAllDMs("plc oncastat: nLastSpell = " + IntToString(nLastSpell));
+	 //SendMessageToAllDMs("plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
+	 //SendMessageToAllDMs("plc oncastat: nLastSpell = " + IntToString(nLastSpell));
 	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
