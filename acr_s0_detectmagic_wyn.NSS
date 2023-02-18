@@ -341,7 +341,27 @@ void main()
 					}
 				}
 		
-			//Multi-type objects with standardized tags, like portals, and glyph and symbol traps 
+			//Multi-type objects with standardized tags or variables
+			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
+				//Arcane Mark
+				if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK") != "") {
+				    nAuraCount++;
+					nAuraPower = 1;
+					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+					sAuraStrength = "faint";
+					
+					//Flag Round 1 Message 	
+					SetLocalInt(oCaster, "nMessage1", 1);
+				
+					//Queue up report to caster if Round 3 achieved
+					if(nConcentration > 13) {
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						}
+					}
+				}
+				
+			//Portals
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
 				//If they are tagged as per the line below, DM is automatic for them and they will register as Moderate Conjuration.
 				 if(FindSubString(GetTag(oDetected), "_portal")!= -1) {
@@ -360,9 +380,9 @@ void main()
 						}
 					}
 				
-				//Another specific use case are the placeables spawned by glyph and symbol traps after they've fired, and the triggers that fire them.
-				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
-				/*
+			//Glyph and symbol traps after they've fired, and the triggers that fire them.
+			//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
+			/*
 				Glyph of Warding = Faint Abjuration
 				Symbol of Pain = Moderate Necromancy
 				Symbol of Sleep = Moderate Enchantment
