@@ -1552,7 +1552,8 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY,EffectVisualEffect(445),oCaster,6.0f);
+	effect eGlyph = EffectVisualEffect(VFX_IMP_GOOD_HELP, FALSE);	
+	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
 	int nExpire = 0;
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
@@ -1562,14 +1563,14 @@ if(GetSpellId() == 3066) {
 	
 //Read Magic
 if(GetSpellId() == 3003) {
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
+	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
 	while(oMarked != OBJECT_INVALID) {
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, GetName(oMarked) + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK"));}
 		float fDistance = GetDistanceBetween(oMarked, oCaster);
 		int nDistance = FloatToInt(fDistance);
 		string sDistance = IntToString(nDistance);
-		SendMessageToPC(oCaster, "oMarked = " + GetName(oMarked) + " is " + sDistance + "m away" );
-		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
+		//SendMessageToPC(oCaster, "oMarked = " + GetName(oMarked) + " is " + sDistance + "m away" );
+		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
 		}
 	}
 
@@ -1593,8 +1594,8 @@ if(GetSpellId() == 3137) {
 			}
 		}	
 	else {
-		effect eGlow = EffectVisualEffect(VFX_DUR_GHOST_SMOKE_2, FALSE);	
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow, oMarked, 5.0);
+		effect eGlow = EffectVisualEffect(VFX_IMP_DISPEL, FALSE);	
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oMarked);
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
 			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
