@@ -1551,9 +1551,16 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 //Arcane Mark
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
-	if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
-	effect eGlyph = EffectVisualEffect(VFX_IMP_GOOD_HELP, FALSE);	
+	//if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
+	effect eGlyph = EffectVisualEffect(VFX_IMP_GOOD_HELP, TRUE);	
+	effect eGlyph2 = EffectVisualEffect(VFX_IMP_GOOD_HELP);	
+	effect eGlyph3 = EffectVisualEffect(VFX_IMP_GOOD_HELP, FALSE);	
+	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oCaster);
 	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph2, oCaster));
+	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph2, oMarked));
+	DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph3, oCaster));
+	DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph3, oMarked));
 	int nExpire = 0;
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
@@ -1569,7 +1576,6 @@ if(GetSpellId() == 3003) {
 		float fDistance = GetDistanceBetween(oMarked, oCaster);
 		int nDistance = FloatToInt(fDistance);
 		string sDistance = IntToString(nDistance);
-		//SendMessageToPC(oCaster, "oMarked = " + GetName(oMarked) + " is " + sDistance + "m away" );
 		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
 		}
 	}
@@ -1594,8 +1600,15 @@ if(GetSpellId() == 3137) {
 			}
 		}	
 	else {
-		effect eGlow = EffectVisualEffect(VFX_IMP_DISPEL, FALSE);	
+		effect eGlow = EffectVisualEffect(VFX_IMP_DISPEL);	
+		effect eGlow2 = EffectVisualEffect(VFX_IMP_DISPEL, TRUE);	
+		effect eGlow3 = EffectVisualEffect(VFX_IMP_DISPEL, FALSE);	
 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oMarked);
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oCaster);
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oCaster));
+		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oMarked));
+		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oCaster));
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
 			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
@@ -1603,6 +1616,7 @@ if(GetSpellId() == 3137) {
 		else {SendMessageToPC(oCaster, "Your spell finds no arcane marks to erase on this object.");}
 		
 		if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
+			SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from a " + GetName(oMarked) + ".");
 			SetFirstName(oMarked, "Erased Scroll");
 			SetDescription(oMarked, "This scroll has been erased.");
 			itemproperty ipRemove = GetFirstItemProperty(oMarked);
