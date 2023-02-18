@@ -1552,9 +1552,7 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
-	effect eMark = EffectVisualEffect(VFX_DUR_GLYPH_OF_WARDING, FALSE);	
-	//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eMark, GetLocation(oMarked), 3.0);
-	ApplyEffectToObject(DURATION_TYPE_INSTANT, eMark, oMarked);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY,EffectVisualEffect(445),oMarked,6.0f);
 	int nExpire = 0;
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
@@ -1564,11 +1562,14 @@ if(GetSpellId() == 3066) {
 	
 //Read Magic
 if(GetSpellId() == 3003) {
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster));
+	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetSpellTargetLocation());
 	while(oMarked != OBJECT_INVALID) {
-		SendMessageToPC(oCaster, "oMarked = " + GetName(oMarked));
+		float fDistance = GetDistanceBetween(oMarked, oCaster);
+		int nDistance = FloatToInt(fDistance);
+		string sDistance = IntToString(nDistance);
+		SendMessageToPC(oCaster, "oMarked = " + GetName(oMarked) + " is " + sDistance + "m away" );
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, GetName(oMarked) + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK"));}
-		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster));
+		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetSpellTargetLocation());
 		}
 	}
 
@@ -1594,7 +1595,7 @@ if(GetSpellId() == 3137) {
 		}	
 	else {
 		effect eMark = EffectVisualEffect(VFX_DUR_CESSATE_POSITIVE, FALSE);	
-		effect eGlow = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE, FALSE);	
+		effect eGlow = EffectVisualEffect(VFX_CAST_SPELL_SPIRIT_EMERGE_GOOD, FALSE);	
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow, oMarked, 5.0);
 		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eMark, oMarked, 3.0));
 		ActionPlayAnimation(ANIMATION_FIREFORGET_READ, 1.0, 3.0);
