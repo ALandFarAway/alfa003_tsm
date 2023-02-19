@@ -1562,9 +1562,9 @@ if(GetSpellId() == 3066) {
 		else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
 		else {SendMessageToPC(oCaster, "This " + sName + " now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
 		ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
-		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
-		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 3.0);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oMarked, 3.0);
+		//ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
+		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 3.0);
+		//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oMarked, 3.0);
 		}
 	else {
 		sName = "location"; 
