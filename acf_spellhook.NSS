@@ -1591,11 +1591,8 @@ if(GetSpellId() == 3137) {
 			}
 		}	
 	else {
-		effect eGlow = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_2);	
-		effect eGlow2 = EffectVisualEffect(VFX_IMP_SLOW);	
-		effect eGlow3 = EffectVisualEffect(VFX_IMP_EVIL_HELP);	
-		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oMarked);
-		DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow3, GetLocation(oMarked), 3.0));
+		effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);	
+		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, GetLocation(oMarked), 3.0);
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
 			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
