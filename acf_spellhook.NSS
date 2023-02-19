@@ -1555,7 +1555,7 @@ if(GetSpellId() == 3066) {
 	
 	effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
 	ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, GetLocation(oMarked));
-	effect eGlow2 = EffectVisualEffect(VFX_IMP_GOOD_HELP);	
+	effect eGlow2 = EffectVisualEffect(VFX_IMP_HASTE);	
 		
 	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
 		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oCaster));
@@ -1603,8 +1603,8 @@ if(GetSpellId() == 3137) {
 		}	
 	else {
 		effect eGlow = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_2);	
-		effect eGlow2 = EffectVisualEffect(VFX_IMP_BREACH);	
-		effect eGlow3 = EffectVisualEffect(VFX_IMP_DISPEL);	
+		effect eGlow2 = EffectVisualEffect(VFX_IMP_UNSUMMON);	
+		effect eGlow3 = EffectVisualEffect(VFX_IMP_MAGIC_RESISTANCE_USE);	
 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oMarked);
 		
 		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
