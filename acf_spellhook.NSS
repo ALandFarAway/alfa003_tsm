@@ -1553,14 +1553,14 @@ if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	//if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
 	
-	ActionCastFakeSpellAtLocation(SPELL_GLYPH_OF_WARDING, GetLocation(oMarked), PROJECTILE_PATH_TYPE_DEFAULT);
+	//ActionCastFakeSpellAtLocation(SPELL_GLYPH_OF_WARDING, GetLocation(oMarked), PROJECTILE_PATH_TYPE_DEFAULT);
 	effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
 	effect eGlyph2 = EffectVisualEffect(VFX_IMP_GOOD_HELP);	
 	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oCaster);
-	ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oCaster, 3.0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oMarked, 3.0);
-	DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, GetLocation(oCaster)));
+	//ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
+	//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oCaster, 3.0);
+	//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oMarked, 3.0);
+	//DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, GetLocation(oCaster)));
 	DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, GetLocation(oMarked)));
 	DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oCaster), 3.0));
 	DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, GetLocation(oMarked), 3.0));
