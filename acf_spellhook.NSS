@@ -413,8 +413,8 @@ void main()
 				
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 						}
 					}
 				}
@@ -1552,14 +1552,42 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	//if(GetTag(oMarked) != "ACR_SCRY_OBJECT") {SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );}
-	
-	effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
-	ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, GetLocation(oMarked));
+	string sName = GetName(oMarked);
+	location lMarked = GetLocation(oMarked);
+	effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	int nExpire = 0;
-	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
-	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
-	else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
-	else {SendMessageToPC(oCaster, "This object now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
+	if(oMarked != OBJECT_INVALID) {
+		if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
+		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
+		else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
+		else {SendMessageToPC(oCaster, "This " + sName + " now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
+		ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
+		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 3.0);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oMarked, 3.0);
+		}
+	else {
+		sName = "location"; 
+		lMarked = GetSpellTargetLocation();
+		location lAMLoc = GetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", oCaster);
+		string sAMLoc = ACR_LocationToString(lAMLoc);
+		float fDistance = GetDistanceBetweenLocations(lMarked, lAMLoc);
+		SendMessageToAllDMs("sAMLoc = " + sAMLoc);
+		SendMessageToAllDMs("fDistance = " + IntToString(FloatToInt(fDistance)));
+		if((GetIsLocationValid(lMarked)== TRUE) && (sAMLoc == "")) {
+			SendMessageToPC(oCaster, "This location now bears your arcane mark.");
+			ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
+			SetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", lMarked, oCaster);
+			}
+		else if((sAMLoc != "") && (fDistance <= 5.0)) {
+			SendMessageToPC(oCaster, "This location already bears your arcane mark.");
+			ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lAMLoc);
+			}
+		else if((sAMLoc != "") && (fDistance > 5.0)) {
+			SendMessageToPC(oCaster, "You may arcanely mark as many discreet objects as you wish, but you may have only one location-based arcane mark at a time. You must Erase an existing location-based arcane mark before casting another.");
+			}
+		
+		}
 	}   
 	
 //Read Magic
@@ -1574,8 +1602,11 @@ if(GetSpellId() == 3003) {
 //Erase
 if(GetSpellId() == 3137) {
 	object oMarked = GetSpellTargetObject();
-	if(oMarked == oCaster) {oMarked = GetNearestObject(OBJECT_TYPE_PLACEABLE, oCaster, 1);}
 	location lMarked = GetLocation(oMarked);
+	string sName = GetName(oMarked);
+	object oNearest = GetNearestObject(OBJECT_TYPE_PLACEABLE, oCaster, 1);
+	float fDistance = GetDistanceBetween(oCaster, oNearest);
+	if((oMarked == oCaster) && (fDistance > 5.0)) {lMarked = GetSpellTargetLocation();}
 	//SendMessageToAllDMs("Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	int nCasterLevel = GetCasterLevel(oCaster);
 	int nCLRoll = d20(1);
@@ -1591,23 +1622,49 @@ if(GetSpellId() == 3137) {
 			}
 		}	
 	else {
+		effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
 		effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);	
-		ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, GetLocation(oMarked), 3.0);
-		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
-			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
-			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
+		if(oMarked != OBJECT_INVALID) {
+			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
+				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 1.0);
+				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+				SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
+				ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
+				}
+			else {SendMessageToPC(oCaster, "Your spell finds no arcane marks to erase on " + sName + ".");}
+			
+			if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
+				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+				SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from a " + sName + ".");
+				SetFirstName(oMarked, "Erased Scroll");
+				SetDescription(oMarked, "This scroll has been erased.");
+				itemproperty ipRemove = GetFirstItemProperty(oMarked);
+				while (GetIsItemPropertyValid(ipRemove)) {
+					RemoveItemProperty(oMarked, ipRemove);
+					ipRemove = GetNextItemProperty(oMarked);
+					} 
+				}
 			}
-		else {SendMessageToPC(oCaster, "Your spell finds no arcane marks to erase on this object.");}
-		
-		if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
-			SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from a " + GetName(oMarked) + ".");
-			SetFirstName(oMarked, "Erased Scroll");
-			SetDescription(oMarked, "This scroll has been erased.");
-			itemproperty ipRemove = GetFirstItemProperty(oMarked);
-			while (GetIsItemPropertyValid(ipRemove)) {
-				RemoveItemProperty(oMarked, ipRemove);
-				ipRemove = GetNextItemProperty(oMarked);
-				} 
+		else {
+			sName = "location"; 
+			lMarked = GetSpellTargetLocation();
+			location lAMLoc = GetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", oCaster);
+			fDistance = GetDistanceBetweenLocations(lMarked, lAMLoc);
+			string sAMLoc = ACR_LocationToString(lAMLoc);
+			SendMessageToAllDMs("sAMLoc = " + sAMLoc);
+			SendMessageToAllDMs("fDistance = " + IntToString(FloatToInt(fDistance)));
+			if((sAMLoc != "") && (fDistance <= 5.0)) {
+				SendMessageToPC(oCaster, "You have erased your arcane mark from this location.");
+				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 1.0);
+				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+				SetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", ACR_StringToLocation(""), oCaster);
+				lAMLoc = GetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", oCaster);
+				sAMLoc = ACR_LocationToString(lAMLoc);
+				SendMessageToAllDMs("sAMLoc = " + sAMLoc);
+				}
+			else if((sAMLoc != "") && (fDistance > 5.0)) {
+				SendMessageToPC(oCaster, "To erase a location-based arcane mark, you must be close enough to touch it.");
+				}
 			}
 		}
 	}
