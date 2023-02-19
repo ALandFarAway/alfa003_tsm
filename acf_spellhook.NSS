@@ -1562,31 +1562,28 @@ if(GetSpellId() == 3066) {
 		else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
 		else {SendMessageToPC(oCaster, "This " + sName + " now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
 		ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
-		//ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlyph, oMarked);
-		//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 3.0);
-		//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlyph, oMarked, 3.0);
 		}
 	else {
 		sName = "location"; 
 		lMarked = GetSpellTargetLocation();
 		location lAMLoc = GetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", oCaster);
 		string sAMLoc = ACR_LocationToString(lAMLoc);
-		int nInitial = FindSubString(sAMLoc, "X#0.000000000#Y#0.000000000#Z#0.000000000", 0);
+		int nNowhere = FindSubString(sAMLoc, "X#0.000000000#Y#0.000000000#Z#0.000000000", 0);
 		float fDistance = GetDistanceBetweenLocations(lMarked, lAMLoc);
 		SendMessageToAllDMs("sAMLoc = " + sAMLoc);
-		SendMessageToAllDMs("nInitial = " + IntToString(nInitial));
+		SendMessageToAllDMs("nNowhere = " + IntToString(nNowhere));
 		SendMessageToAllDMs("fDistance = " + IntToString(FloatToInt(fDistance)));
-		if((sAMLoc == "") || (nInitial != -1)) {
+		if(nNowhere != -1) {
 			SendMessageToPC(oCaster, "This location now bears your arcane mark.");
 			ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
 			SetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", lMarked, oCaster);
 			}
-		else if((sAMLoc != "") && (fDistance >= 0.0) && (fDistance <= 5.0)) {
+		else if((nNowhere == -1) && (fDistance >= 0.0) && (fDistance <= 5.0)) {
 			SendMessageToPC(oCaster, "This location already bears your arcane mark.");
 			ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lAMLoc);
 			}
-		else if(sAMLoc != "") {
-			SendMessageToPC(oCaster, "You may arcanely mark as many discreet objects as you wish, but you may have only one location-based arcane mark at a time. You must Erase an existing location-based arcane mark before casting another.");
+		else if(nNowhere == -1) {
+			SendMessageToPC(oCaster, "You may have only one location-based arcane mark at a time. You must Erase any existing location-based arcane mark before casting another.");
 			}
 		
 		}
@@ -1621,19 +1618,19 @@ if(GetSpellId() == 3137) {
 			}
 		}	
 	else {
-		effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
+		effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 		effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);	
 		if(oMarked == oCaster) {
 			sName = "location"; 
 			location lAMLoc = GetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", oCaster);
 			float fDistance = GetDistanceBetweenLocations(lMarked, lAMLoc);
 			string sAMLoc = ACR_LocationToString(lAMLoc);
-			int nInitial = FindSubString(sAMLoc, "X#0.000000000#Y#0.000000000#Z#0.000000000", 0);
+			int nNowhere = FindSubString(sAMLoc, "X#0.000000000#Y#0.000000000#Z#0.000000000", 0);
 			SendMessageToAllDMs("sAMLoc = " + sAMLoc);
-			SendMessageToAllDMs("nInitial = " + IntToString(nInitial));
+			SendMessageToAllDMs("nNowhere = " + IntToString(nNowhere));
 			SendMessageToAllDMs("fDistance = " + IntToString(FloatToInt(fDistance)));
-			if((nInitial != -1) || (sAMLoc == "")) {SendMessageToPC(oCaster, "You have no active location-based arcane marks to erase.");}
-			else if((sAMLoc != "") && (fDistance >= 0.0) && (fDistance <= 5.0)) {
+			if(nNowhere != -1) {SendMessageToPC(oCaster, "You have no active location-based arcane marks to erase.");}
+			else if((nNowhere == -1) && (fDistance >= 0.0) && (fDistance <= 5.0)) {
 				SendMessageToPC(oCaster, "You have erased your arcane mark from this location.");
 				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 1.0);
 				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
@@ -1642,7 +1639,7 @@ if(GetSpellId() == 3137) {
 				sAMLoc = ACR_LocationToString(lAMLoc);
 				SendMessageToAllDMs("sAMLoc = " + sAMLoc);
 				}
-			else if(sAMLoc != "") {
+			else if(nNowhere == -1) {
 				SendMessageToPC(oCaster, "To erase a location-based arcane mark, you must be close enough to touch it.");
 				}
 			}
