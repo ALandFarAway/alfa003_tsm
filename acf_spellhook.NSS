@@ -1555,17 +1555,6 @@ if(GetSpellId() == 3066) {
 	
 	effect eGlyph = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_3);	
 	ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, GetLocation(oMarked));
-	effect eGlow2 = EffectVisualEffect(VFX_IMP_DIVINE_STRIKE_HOLY);	
-		
-	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
-		//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oCaster));
-		DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oMarked)));
-		//DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oCaster)));
-		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oMarked, 3.0));
-		//DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oCaster, 3.0));
-		DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oMarked), 3.0));
-		//DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oCaster), 3.0));
-		
 	int nExpire = 0;
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
@@ -1605,25 +1594,8 @@ if(GetSpellId() == 3137) {
 		effect eGlow = EffectVisualEffect(VFX_FNF_SUMMON_MONSTER_2);	
 		effect eGlow2 = EffectVisualEffect(VFX_IMP_SLOW);	
 		effect eGlow3 = EffectVisualEffect(VFX_IMP_EVIL_HELP);	
-		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow, oMarked);
-		
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oMarked));
-		//DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow2, oCaster));
-		DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oMarked)));
-		//DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow2, GetLocation(oCaster)));
-		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oMarked, 3.0));
-		//DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow2, oCaster, 3.0));
-		DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oMarked), 3.0));
-		//DelayCommand(10.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow2, GetLocation(oCaster), 3.0));
-		
-		DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oMarked));
-		//DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oCaster));
-		DelayCommand(15.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow3, GetLocation(oMarked)));
-		//DelayCommand(15.0, ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlow3, GetLocation(oCaster)));
-		DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow3, oMarked, 3.0));
-		//DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eGlow3, oCaster, 3.0));
-		DelayCommand(20.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow3, GetLocation(oMarked), 3.0));
-		//DelayCommand(20.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow3, GetLocation(oCaster), 3.0));
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eGlow3, oMarked);
+		DelayCommand(5.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlow3, GetLocation(oMarked), 3.0));
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {
 			SendMessageToPC(oCaster, "You have erased an arcane mark drawn on this object.");
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK", "", 0);
