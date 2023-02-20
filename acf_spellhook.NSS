@@ -1561,7 +1561,7 @@ if(GetSpellId() == 3066) {
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") == GetName(oCaster)) {SendMessageToPC(oCaster, "This object already bears your arcane mark.");}
 		else if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK") != "") {SendMessageToPC(oCaster, "This object already bears an arcane mark. Read Magic may tell you who made it. Erase will remove it.");}
 		else {SendMessageToPC(oCaster, "This " + sName + " now bears your arcane mark."); ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK",GetName(oCaster), nExpire);}
-		ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
+		//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
 		}
 	else {
 		sName = "location"; 
@@ -1575,12 +1575,12 @@ if(GetSpellId() == 3066) {
 		SendMessageToAllDMs("fDistance = " + IntToString(FloatToInt(fDistance)));
 		if(nNowhere != -1) {
 			SendMessageToPC(oCaster, "This location now bears your arcane mark.");
-			ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
+			//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
 			SetCampaignLocation("ACR_ARCANEMARK", "AM_Loc", lMarked, oCaster);
 			}
 		else if((nNowhere == -1) && (fDistance >= 0.0) && (fDistance <= 5.0)) {
 			SendMessageToPC(oCaster, "This location already bears your arcane mark.");
-			ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lAMLoc);
+			//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lAMLoc);
 			}
 		else if(nNowhere == -1) {
 			SendMessageToPC(oCaster, "You may have only one location-based arcane mark at a time. You must Erase any existing location-based arcane mark before casting another.");
