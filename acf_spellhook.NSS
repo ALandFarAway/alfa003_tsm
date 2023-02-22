@@ -1693,7 +1693,9 @@ if(GetSpellId() == 3137) {
 			while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-					if(lMarked != GetLocation(oMarked)) {sName = "a location.";}
+					SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
+				
+					if(lMarked != GetLocation(oMarked)) {sName = "a location";}
 					if((lMarked == GetLocation(oMarked)) || ((lMarked != GetLocation(oMarked)) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
 						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
