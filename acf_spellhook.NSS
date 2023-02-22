@@ -1609,7 +1609,7 @@ if(GetSpellId() == 3066) {
 	
 //Read Magic
 if(GetSpellId() == 3003) {
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
+	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_ALL);
 	string sName = GetName(oMarked);
 	effect eMark = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	while(oMarked != OBJECT_INVALID) {
@@ -1631,7 +1631,7 @@ if(GetSpellId() == 3003) {
 				}
 			nAM ++;
 			}
-		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
+		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_ALL);
 	}
 	 oMarked = GetArea(oCaster);
 	 int nAM = 1;
