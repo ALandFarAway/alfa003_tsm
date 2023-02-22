@@ -1614,7 +1614,8 @@ if(GetSpellId() == 3003) {
 				}
 			nAM ++;
 			}
-		}
+		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM);
+	}
 	 oMarked = GetArea(oCaster);
 	 int nAM = 1;
 	 while (nAM < 5) {
