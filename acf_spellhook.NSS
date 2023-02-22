@@ -1622,15 +1622,16 @@ if(GetSpellId() == 3003) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 				SendMessageToPC(oCaster, "ACR_ARCANEMARKLoc = " + ACR_LocationToString(ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM))));
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+				SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
 				if(lMarked != GetLocation(oMarked)) {sName = "A nearby location";}
 				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
 				int nDistance = FloatToInt(fDistance);
 				string sDistance = IntToString(nDistance);
 				float fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
-				SendMessageToPC(oCaster, GetName(oMarked) + " " + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-				object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
-				DestroyObject(oMark, 10.0, TRUE);
+				SendMessageToPC(oCaster, GetName(oMarked) + "Arcane Mark " + IntToString(nAM) + " " + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
+				//object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
+				//DestroyObject(oMark, 10.0, TRUE);
 				}
 			nAM++;
 			}
@@ -1646,8 +1647,8 @@ if(GetSpellId() == 3003) {
 			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 			sName = "A nearby location";
 			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
-			DestroyObject(oMark, 10.0, TRUE);
+			//object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
+			//DestroyObject(oMark, 10.0, TRUE);
 			}
 		nAM++;
 		}
