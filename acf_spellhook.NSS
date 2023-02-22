@@ -1627,9 +1627,9 @@ if(GetSpellId() == 3003) {
 				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
 				int nDistance = FloatToInt(fDistance);
 				string sDistance = IntToString(nDistance);
-				float fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
+				float fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
-				SendMessageToPC(oCaster, sName + " Arcane Mark " + IntToString(nAM) + " " + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
+				SendMessageToPC(oCaster, GetName(oMarked) +  " " + sName + " (" + sDistance + "m to the " + sAngle + ") bears: Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
 				//object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
 				//DestroyObject(oMark, 10.0, TRUE);
 				}
@@ -1693,11 +1693,14 @@ if(GetSpellId() == 3137) {
 			while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-					ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-					SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
-					ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
-					ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
-					nErased++;
+					if(lMarked != GetLocation(oMarked)) {sName = "a location.";}
+					if((lMarked == GetLocation(oMarked)) || ((lMarked != GetLocation(oMarked)) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
+						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
+						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
+						ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
+						nErased++;
+						}
 					}
 				nAM++;
 				}
