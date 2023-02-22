@@ -1574,19 +1574,20 @@ if(GetSpellId() == 3066) {
 	//effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	int nExpire = 0;
 	if(oMarked == OBJECT_INVALID) {
-		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 2.5, lMarked, FALSE, OBJECT_TYPE_ALL); 
+		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_ALL); 
+		SendMessageToAllDMs("AM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		lMarked = GetSpellTargetLocation();
 		sName = "This location";
 		while(oMarked != OBJECT_INVALID) {
-			SendMessageToAllDMs("AM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+			SendMessageToAllDMs("AM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oMarked) == OBJECT_TYPE_DOOR) ||  (GetObjectType(oMarked) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oMarked) == OBJECT_TYPE_WAYPOINT)) {break;} 
-			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 2.5, lMarked, FALSE, OBJECT_TYPE_ALL); 
+			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_ALL); 
 			}
 		}
 	if(oMarked == OBJECT_INVALID) {
 		oMarked = GetArea(oCaster);
 		}
-	SendMessageToAllDMs("AM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	SendMessageToAllDMs("AM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	int nAM = 1;
