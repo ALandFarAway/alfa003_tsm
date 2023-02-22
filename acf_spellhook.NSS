@@ -1574,9 +1574,9 @@ if(GetSpellId() == 3066) {
 	//effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	int nExpire = 0;
 	if(oMarked == OBJECT_INVALID) {
+		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_ALL); 
 		SendMessageToAllDMs("AM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-		lMarked = GetSpellTargetLocation();
 		sName = "This location";
 		while(oMarked != OBJECT_INVALID) {
 			SendMessageToAllDMs("AM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
@@ -1613,11 +1613,12 @@ if(GetSpellId() == 3066) {
 	
 //Read Magic
 if(GetSpellId() == 3003) {
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_ALL);
+	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL);
+	SendMessageToAllDMs("RM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	string sName = GetName(oMarked);
 	//effect eMark = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	while(oMarked != OBJECT_INVALID) {
-		SendMessageToAllDMs("Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+		SendMessageToAllDMs("RM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		/*int nAM = 1;
 		while (nAM < 5) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
@@ -1639,6 +1640,8 @@ if(GetSpellId() == 3003) {
 		}
 		
 	 oMarked = GetArea(oCaster);
+	 SendMessageToAllDMs("RM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+		
 	 int nAM = 1;
 	 while (nAM < 5) {
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
@@ -1651,6 +1654,8 @@ if(GetSpellId() == 3003) {
 			}
 		nAM ++;
 		}
+	SendMessageToAllDMs("RM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+		
 	}
 	
 //Erase
