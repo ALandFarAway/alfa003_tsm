@@ -1629,12 +1629,12 @@ if(GetSpellId() == 3003) {
 				float fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
 				SendMessageToPC(oCaster, GetName(oMarked) + " " + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-				object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
-				DestroyObject(oMark, 10.0, TRUE);
+				//object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
+				//DestroyObject(oMark, 10.0, TRUE);
 				}
 			nAM++;
 			}
-		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_ALL);
+		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_ALL);
 		}
 		
 	 oMarked = GetArea(oCaster);
