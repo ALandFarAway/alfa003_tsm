@@ -1620,6 +1620,7 @@ if(GetSpellId() == 3003) {
 		int nAM = 1;
 		while (nAM < 5) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+				SendMessageToPC(oCaster, "ACR_ARCANEMARKLoc = " + ACR_LocationToString(ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM))));
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 				if(lMarked != GetLocation(oMarked)) {sName = "A nearby location";}
 				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
@@ -1627,11 +1628,11 @@ if(GetSpellId() == 3003) {
 				string sDistance = IntToString(nDistance);
 				float fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
-				SendMessageToPC(oCaster, GetName(oMarked) + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
+				SendMessageToPC(oCaster, GetName(oMarked) + " " + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
 				object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
 				DestroyObject(oMark, 10.0, TRUE);
 				}
-			nAM ++;
+			nAM++;
 			}
 		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_ALL);
 		}
@@ -1648,7 +1649,7 @@ if(GetSpellId() == 3003) {
 			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
 			DestroyObject(oMark, 10.0, TRUE);
 			}
-		nAM ++;
+		nAM++;
 		}
 	SendMessageToAllDMs("RM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		
