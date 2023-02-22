@@ -1673,7 +1673,7 @@ if(GetSpellId() == 3137) {
 	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
 	SendMessageToAllDMs("Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	if(oMarked != OBJECT_INVALID) {
-		int nCasterLevel = GetCasterLevel(oCaster);
+		int nCasterLevel = GetCasterLevel(oCaster) + 5; 
 		int nCLRoll = d20(1);
 		SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
 		if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
@@ -1693,10 +1693,16 @@ if(GetSpellId() == 3137) {
 			while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-					SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
+					string sMarked = ACR_LocationToString(lMarked);
+					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+					int nXStart = FindSubString(sMarked, "#X#", 0);
+					string sXYMarked = GetSubString(sMarked, nXStart, 30);
+					string sXYMarkedProxy = GetSubString(sMarked, nXStart, 30);
+					SendMessageToPC(oCaster, "Does " + sMarked + " = " + sMarkedProxy + "?");
+					SendMessageToPC(oCaster, "Does " + sXYMarked + " = " + sXYMarkedProxy + "?");
 				
-					if(lMarked != GetLocation(oMarked)) {sName = "a location";}
-					if((lMarked == GetLocation(oMarked)) || ((lMarked != GetLocation(oMarked)) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
+					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
+					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
 						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
 						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
