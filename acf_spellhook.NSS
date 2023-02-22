@@ -1666,7 +1666,11 @@ if(GetSpellId() == 3137) {
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 		sName = "a nearby location";
 		while (oMarked != OBJECT_INVALID) {
-			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK1") != "") {break;} 
+			 int nAM = 1;
+			 while (nAM < 5) {
+				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {break;}
+				nAM++;
+				}
 			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 			}
 		}
@@ -1697,7 +1701,7 @@ if(GetSpellId() == 3137) {
 					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
 					int nXStart = FindSubString(sMarked, "#X#", 0);
 					string sXYMarked = GetSubString(sMarked, nXStart, 30);
-					string sXYMarkedProxy = GetSubString(sMarked, nXStart, 30);
+					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 					SendMessageToPC(oCaster, "Does " + sMarked + " = " + sMarkedProxy + "?");
 					SendMessageToPC(oCaster, "Does " + sXYMarked + " = " + sXYMarkedProxy + "?");
 				
