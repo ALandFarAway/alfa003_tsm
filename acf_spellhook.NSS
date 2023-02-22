@@ -1571,7 +1571,6 @@ if(GetSpellId() == 3066) {
 	string sName = GetName(oMarked);
 	location lMarked = GetLocation(oMarked);
 	SendMessageToAllDMs("AM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-	//effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	int nExpire = 0;
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
@@ -1600,7 +1599,6 @@ if(GetSpellId() == 3066) {
 			SendMessageToPC(oCaster, sName + " now bears your arcane mark."); 
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), GetName(oCaster), nExpire);
 			ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), lMarked, nExpire);
-			//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
 			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
 			DestroyObject(oMark, 10.0, TRUE);
 			return;
@@ -1613,13 +1611,13 @@ if(GetSpellId() == 3066) {
 	
 //Read Magic
 if(GetSpellId() == 3003) {
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL);
+	object oTarget = GetSpellTargetObject();
+	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_ALL);
 	SendMessageToAllDMs("RM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	string sName = GetName(oMarked);
-	//effect eMark = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 	while(oMarked != OBJECT_INVALID) {
 		SendMessageToAllDMs("RM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-		/*int nAM = 1;
+		int nAM = 1;
 		while (nAM < 5) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
@@ -1630,12 +1628,11 @@ if(GetSpellId() == 3003) {
 				float fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
 				SendMessageToPC(oCaster, GetName(oMarked) + sDistance + "m to the " + sAngle + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-				//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
 				object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
 				DestroyObject(oMark, 10.0, TRUE);
 				}
 			nAM ++;
-			}*/
+			}
 		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oCaster), FALSE, OBJECT_TYPE_ALL);
 		}
 		
@@ -1648,7 +1645,6 @@ if(GetSpellId() == 3003) {
 			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 			sName = "A nearby location";
 			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-			//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eMark, lMarked);
 			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
 			DestroyObject(oMark, 10.0, TRUE);
 			}
@@ -1665,11 +1661,11 @@ if(GetSpellId() == 3137) {
 	string sName = GetName(oMarked);
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
-		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
+		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 		sName = "a nearby location";
 		while (oMarked != OBJECT_INVALID) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK1") != "") {break;} 
-			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
+			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, FALSE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 			}
 		}
 	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
@@ -1689,13 +1685,12 @@ if(GetSpellId() == 3137) {
 				}
 			}
 		else {
-			effect eGlyph = EffectVisualEffect(VFX_DUR_SPELL_GLYPH_WARDING);	
 			effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
 			int nAM = 1;
 			int nErased = 0;
 			while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-					//ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eGlyph, lMarked, 1.0);
+					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 					ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
 					SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
 					ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
