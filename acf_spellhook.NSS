@@ -1650,6 +1650,7 @@ if(GetSpellId() == 3003) {
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			sName = "A nearby location";
+			CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
 			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 			}
 		}
