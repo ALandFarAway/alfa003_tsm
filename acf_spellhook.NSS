@@ -1570,15 +1570,15 @@ if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	string sName = GetName(oMarked);
 	location lMarked = GetLocation(oMarked);
-	SendMessageToAllDMs("AM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	//SendMessageToAllDMs("AM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	int nExpire = 0;
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_ALL); 
-		SendMessageToAllDMs("AM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+		//SendMessageToAllDMs("AM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		sName = "This location";
 		while(oMarked != OBJECT_INVALID) {
-			SendMessageToAllDMs("AM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+			//SendMessageToAllDMs("AM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oMarked) == OBJECT_TYPE_DOOR) ||  (GetObjectType(oMarked) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oMarked) == OBJECT_TYPE_WAYPOINT)) {break;} 
 			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_ALL); 
 			}
@@ -1586,7 +1586,7 @@ if(GetSpellId() == 3066) {
 	if(oMarked == OBJECT_INVALID) {
 		oMarked = GetArea(oCaster);
 		}
-	SendMessageToAllDMs("AM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	//SendMessageToAllDMs("AM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	int nAM = 1;
@@ -1613,10 +1613,11 @@ if(GetSpellId() == 3066) {
 if(GetSpellId() == 3003) {
 	object oTarget = GetSpellTargetObject();
 	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_ALL);
-	SendMessageToAllDMs("RM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-	string sName = GetName(oMarked);
+	string sName;
+	//SendMessageToAllDMs("RM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	while(oMarked != OBJECT_INVALID) {
-		SendMessageToAllDMs("RM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+		sName = GetName(oMarked);
+		//SendMessageToAllDMs("RM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		int nAM = 1;
 		while (nAM < 5) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
@@ -1629,9 +1630,7 @@ if(GetSpellId() == 3003) {
 				string sDistance = IntToString(nDistance);
 				float fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
-				SendMessageToPC(oCaster, GetName(oMarked) +  " " + sName + " (" + sDistance + "m to the " + sAngle + ") bears: Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-				//object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
-				//DestroyObject(oMark, 10.0, TRUE);
+				SendMessageToPC(oCaster, sName + " (" + sDistance + "m to the " + sAngle + ") bears: Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
 				}
 			nAM++;
 			}
@@ -1639,7 +1638,7 @@ if(GetSpellId() == 3003) {
 		}
 		
 	 oMarked = GetArea(oCaster);
-	 SendMessageToAllDMs("RM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	 //SendMessageToAllDMs("RM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		
 	 int nAM = 1;
 	 while (nAM < 5) {
@@ -1647,12 +1646,10 @@ if(GetSpellId() == 3003) {
 			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 			sName = "A nearby location";
 			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
-			//object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
-			//DestroyObject(oMark, 10.0, TRUE);
 			}
 		nAM++;
 		}
-	SendMessageToAllDMs("RM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	//SendMessageToAllDMs("RM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		
 	}
 	
@@ -1660,15 +1657,15 @@ if(GetSpellId() == 3003) {
 if(GetSpellId() == 3137) {
 	object oMarked = GetSpellTargetObject();
 	location lMarked = GetLocation(oMarked);
-	SendMessageToAllDMs("E 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	//SendMessageToAllDMs("E 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
-		SendMessageToAllDMs("E 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+		//SendMessageToAllDMs("E 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		//sName = "a nearby location";
 		int nMarked = 0;
 		while (oMarked != OBJECT_INVALID) {
-			 SendMessageToAllDMs("E 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+			 //SendMessageToAllDMs("E 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 			 int nAM = 1;
 			 while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {nMarked = 1; break;}
@@ -1679,7 +1676,7 @@ if(GetSpellId() == 3137) {
 			}
 		}
 	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
-	SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	//SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(oMarked != OBJECT_INVALID) {
 		int nCasterLevel = GetCasterLevel(oCaster) + 5; 
@@ -1708,8 +1705,8 @@ if(GetSpellId() == 3137) {
 					int nXStart = FindSubString(sMarked, "#X#", 0);
 					string sXYMarked = GetSubString(sMarked, nXStart, 30);
 					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
-					SendMessageToPC(oCaster, "Does " + sMarked + " = " + sMarkedProxy + "?");
-					SendMessageToPC(oCaster, "Does " + sXYMarked + " = " + sXYMarkedProxy + "?");
+					//SendMessageToPC(oCaster, "Does " + sMarked + " = " + sMarkedProxy + "?");
+					//SendMessageToPC(oCaster, "Does " + sXYMarked + " = " + sXYMarkedProxy + "?");
 				
 					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
 					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
