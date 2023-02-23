@@ -406,7 +406,12 @@ void main()
 				while (nAM < 5) {
 					if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 						location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-						if(lMarked != GetLocation(oDetected)) {
+						string sMarked = ACR_LocationToString(lMarked);
+						string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
+						int nXStart = FindSubString(sMarked, "#X#", 0);
+						string sXYMarked = GetSubString(sMarked, nXStart, 30);
+						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
+						if(sXYMarked != sXYMarkedProxy) {
 							sName = "A nearby location";
 							fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
 							nDistance = FloatToInt(fDistance);
@@ -414,11 +419,9 @@ void main()
 							fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
 							sAngle = GetCompassDirectionOfAngle(fAngle);
 							}
-							
-						//ApplyEffectAtLocation(DURATION_TYPE_INSTANT, eGlyph, lMarked);
-						object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
-						DestroyObject(oMark, 10.0, TRUE);
-			
+								
+						CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, FALSE);
+						
 						nAuraCount++;
 						nAuraPower = 1;
 						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
@@ -1600,7 +1603,7 @@ if(GetSpellId() == 3066) {
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), GetName(oCaster), nExpire);
 			ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), lMarked, nExpire);
 			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
-			DestroyObject(oMark, 10.0, TRUE);
+			//DestroyObject(oMark, 10.0, TRUE);
 			return;
 			}
 		nAM ++;
@@ -1635,6 +1638,7 @@ if(GetSpellId() == 3003) {
 				string sDistance = IntToString(nDistance);
 				float fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
+				CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
 				SendMessageToPC(oCaster, sName + " (" + sDistance + "m to the " + sAngle + ") has Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
 				}
 			nAM++;
@@ -1699,6 +1703,7 @@ if(GetSpellId() == 3137) {
 			}
 		else {
 			effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
+			object oMark = GetNearestObjectByTag("ipoint_arcane_mark", oMarked, 1);
 			int nAM = 1;
 			int nErased = 0;
 			while (nAM < 5) {
@@ -1716,6 +1721,7 @@ if(GetSpellId() == 3137) {
 					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
 					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+						if(GetDistanceBetween(oMark, oMarked) < 1.0) {DestroyObject(oMark);}
 						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
 						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
 						ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
