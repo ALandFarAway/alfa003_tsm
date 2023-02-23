@@ -1586,7 +1586,7 @@ if(GetSpellId() == 3066) {
 	if(oMarked == OBJECT_INVALID) {
 		oMarked = GetArea(oCaster);
 		}
-	//SendMessageToAllDMs("AM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	SendMessageToAllDMs("AM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	int nAM = 1;
@@ -1624,13 +1624,18 @@ if(GetSpellId() == 3003) {
 				//SendMessageToPC(oCaster, "ACR_ARCANEMARKLoc = " + ACR_LocationToString(ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM))));
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 				//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
-				if(lMarked != GetLocation(oMarked)) {sName = "A nearby location";}
+				string sMarked = ACR_LocationToString(lMarked);
+				string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+				int nXStart = FindSubString(sMarked, "#X#", 0);
+				string sXYMarked = GetSubString(sMarked, nXStart, 30);
+				string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
+				if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
 				int nDistance = FloatToInt(fDistance);
 				string sDistance = IntToString(nDistance);
 				float fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
 				string sAngle = GetCompassDirectionOfAngle(fAngle);
-				SendMessageToPC(oCaster, sName + " (" + sDistance + "m to the " + sAngle + ") bears: Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
+				SendMessageToPC(oCaster, sName + " (" + sDistance + "m to the " + sAngle + ") has Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
 				}
 			nAM++;
 			}
@@ -1676,10 +1681,10 @@ if(GetSpellId() == 3137) {
 			}
 		}
 	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
-	//SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(oMarked != OBJECT_INVALID) {
-		int nCasterLevel = GetCasterLevel(oCaster) + 5; 
+		int nCasterLevel = GetCasterLevel(oCaster); 
 		int nCLRoll = d20(1);
 		SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
 		if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
