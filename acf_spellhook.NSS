@@ -1660,13 +1660,12 @@ if(GetSpellId() == 3003) {
 if(GetSpellId() == 3137) {
 	object oMarked = GetSpellTargetObject();
 	location lMarked = GetLocation(oMarked);
-	string sName = GetName(oMarked);
 	SendMessageToAllDMs("E 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 		SendMessageToAllDMs("E 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-		sName = "a nearby location";
+		//sName = "a nearby location";
 		int nMarked = 0;
 		while (oMarked != OBJECT_INVALID) {
 			 SendMessageToAllDMs("E 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
@@ -1703,6 +1702,7 @@ if(GetSpellId() == 3137) {
 			while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+					string sName = GetName(oMarked);
 					string sMarked = ACR_LocationToString(lMarked);
 					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
 					int nXStart = FindSubString(sMarked, "#X#", 0);
@@ -1726,7 +1726,7 @@ if(GetSpellId() == 3137) {
 			
 			if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
 				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-				SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from a " + sName + ".");
+				SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from " + GetName(oMarked) + ".");
 				SetFirstName(oMarked, "Erased Scroll");
 				SetDescription(oMarked, "This scroll has been erased.");
 				itemproperty ipRemove = GetFirstItemProperty(oMarked);
