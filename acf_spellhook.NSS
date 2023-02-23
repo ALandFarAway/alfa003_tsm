@@ -1722,7 +1722,7 @@ if(GetSpellId() == 3137) {
 					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
 					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-						if(GetDistanceBetween(oMark, oMarked) < 1.0) {DestroyObject(oMark);}
+						if(GetDistanceBetween(oMark, oMarked) < 2.5) {DestroyObject(oMark);}
 						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
 						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
 						ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
