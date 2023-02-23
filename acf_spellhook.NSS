@@ -1704,6 +1704,7 @@ if(GetSpellId() == 3137) {
 		else {
 			effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
 			object oMark = GetNearestObjectByTag("ipoint_arcane_mark", oMarked, 1);
+			if(oMarked == GetArea(oCaster)) {oMark = GetNearestObjectByTag("ipoint_arcane_mark", oCaster, 1);}
 			int nAM = 1;
 			int nErased = 0;
 			while (nAM < 5) {
