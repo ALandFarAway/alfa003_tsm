@@ -1615,7 +1615,7 @@ if(GetSpellId() == 3066) {
 //Read Magic
 if(GetSpellId() == 3003) {
 	object oTarget = GetSpellTargetObject();
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_ALL);
+	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT);
 	string sName;
 	//SendMessageToAllDMs("RM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	while(oMarked != OBJECT_INVALID) {
@@ -1625,20 +1625,21 @@ if(GetSpellId() == 3003) {
 		while (nRM < 5) {
 			nRM++;
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
-				//SendMessageToPC(oCaster, "ACR_ARCANEMARKLoc = " + ACR_LocationToString(ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM))));
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
-				//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
+				CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
 				string sMarked = ACR_LocationToString(lMarked);
 				string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+				//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
 				int nXStart = FindSubString(sMarked, "#X#", 0);
 				string sXYMarked = GetSubString(sMarked, nXStart, 30);
 				string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 				if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
-				CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
 				SendMessageToPC(oCaster, sName + " has Arcane Mark " + IntToString(nRM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
 			}
-		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_ALL);
+		if(oMarked != GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT))
+			{oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT);}
+		else {break;}
 		}
 		
 	 oMarked = GetArea(oCaster);
