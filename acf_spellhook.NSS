@@ -1621,11 +1621,12 @@ if(GetSpellId() == 3003) {
 	while(oMarked != OBJECT_INVALID) {
 		sName = GetName(oMarked);
 		//SendMessageToAllDMs("RM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-		int nAM = 1;
-		while (nAM < 5) {
-			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+		int nRM = 0;
+		while (nRM < 5) {
+			nRM++;
+			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 				//SendMessageToPC(oCaster, "ACR_ARCANEMARKLoc = " + ACR_LocationToString(ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM))));
-				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 				//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
 				string sMarked = ACR_LocationToString(lMarked);
 				string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
@@ -1633,15 +1634,9 @@ if(GetSpellId() == 3003) {
 				string sXYMarked = GetSubString(sMarked, nXStart, 30);
 				string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 				if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
-				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
-				int nDistance = FloatToInt(fDistance);
-				string sDistance = IntToString(nDistance);
-				float fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
-				string sAngle = GetCompassDirectionOfAngle(fAngle);
 				CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
-				SendMessageToPC(oCaster, sName + " (" + sDistance + "m to the " + sAngle + ") has Arcane Mark " + IntToString(nAM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
+				SendMessageToPC(oCaster, sName + " has Arcane Mark " + IntToString(nRM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
-			nAM++;
 			}
 		oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_ALL);
 		}
@@ -1649,14 +1644,14 @@ if(GetSpellId() == 3003) {
 	 oMarked = GetArea(oCaster);
 	 //SendMessageToAllDMs("RM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		
-	 int nAM = 1;
-	 while (nAM < 5) {
-		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+	 int nRM = 0;
+	 while (nRM < 5) {
+		nRM++;
+		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
+			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			sName = "A nearby location";
-			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
+			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 			}
-		nAM++;
 		}
 	//SendMessageToAllDMs("RM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		
@@ -1722,7 +1717,7 @@ if(GetSpellId() == 3137) {
 					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
 					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-						if(GetDistanceBetween(oMark, oMarked) < 2.5) {DestroyObject(oMark);}
+						if(GetDistanceBetween(oMark, oMarked) <= 2.5) {DestroyObject(oMark, 2.0);}
 						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
 						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
 						ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
