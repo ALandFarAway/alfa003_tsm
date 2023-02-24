@@ -402,8 +402,9 @@ void main()
 			//Multi-type objects with standardized tags or variables
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
-				int nAM = 1;
+				int nAM = 0;
 				while (nAM < 5) {
+					nAM++;
 					if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 						location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 						string sMarked = ACR_LocationToString(lMarked);
@@ -1635,7 +1636,7 @@ if(GetSpellId() == 3003) {
 				string sXYMarked = GetSubString(sMarked, nXStart, 30);
 				string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 				if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
-				SendMessageToPC(oCaster, sName + " has Arcane Mark " + IntToString(nRM) + " which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
+				SendMessageToPC(oCaster, sName + " bears an Arcane Mark which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
 			}
 		if(oMarked != GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT))
