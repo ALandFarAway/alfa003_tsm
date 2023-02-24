@@ -419,27 +419,29 @@ void main()
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
-							CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
 							float fDistance = GetDistanceBetweenLocations(lMarked, lFacing);
 							int nDistance = FloatToInt(fDistance);
 							string sDistance = IntToString(nDistance);
 							SendMessageToAllDMs("sDistance = " + sDistance);
-							sName = "A nearby location";
-							object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
-							if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
-							
-							nAuraCount++;
-							nAuraPower = 1;
-							if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
-							sAuraStrength = "faint";
+							if(fDistance < 5.0) {
+								CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
+								sName = "A nearby location";
+								object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+								if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 								
-							//Flag Round 1 Message 	
-							SetLocalInt(oCaster, "nMessage1", 1);
-							
-							//Queue up report to caster if Round 3 achieved
-							if(nConcentration > 13) {
-								DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-								DelayCommand(21.0, SendMessageToPC(oCaster, sName + " to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+								nAuraCount++;
+								nAuraPower = 1;
+								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+								sAuraStrength = "faint";
+									
+								//Flag Round 1 Message 	
+								SetLocalInt(oCaster, "nMessage1", 1);
+								
+								//Queue up report to caster if Round 3 achieved
+								if(nConcentration > 13) {
+									DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+									DelayCommand(21.0, SendMessageToPC(oCaster, sName + " to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+									}
 								}
 							}
 						}
@@ -1670,16 +1672,18 @@ if(GetSpellId() == 3003) {
 			nRM++;
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
-				object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
-				if(GetTag(oMark) != "ipoint_arcane_mark") {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
-				string sMarked = ACR_LocationToString(lMarked);
-				string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
-				//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
-				int nXStart = FindSubString(sMarked, "#X#", 0);
-				string sXYMarked = GetSubString(sMarked, nXStart, 30);
-				string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
-				if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
-				SendMessageToPC(oCaster, sName + " bears an Arcane Mark which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
+				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
+					object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+					if(GetTag(oMark) != "ipoint_arcane_mark") {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+					string sMarked = ACR_LocationToString(lMarked);
+					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+					//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
+					int nXStart = FindSubString(sMarked, "#X#", 0);
+					string sXYMarked = GetSubString(sMarked, nXStart, 30);
+					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
+					if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
+					SendMessageToPC(oCaster, sName + " bears an Arcane Mark which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
+					}
 				}
 			}
 		if(oMarked != GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT))
