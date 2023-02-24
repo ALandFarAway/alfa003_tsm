@@ -407,14 +407,15 @@ void main()
 				if(nArcaneMark != 1) {
 					nArcaneMark = 1;
 					object oMarked = GetArea(oCaster);
-					 //SendMessageToAllDMs("DM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+					 SendMessageToAllDMs("DM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 						
 					 while (nAM < 5) {
 						nAM++;
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 							sName = "A nearby location";
-							CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
+							object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+							if(GetTag(oMark) != "ipoint_arcane_mark") {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 							SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)));
 							}
 						}
@@ -429,6 +430,7 @@ void main()
 						int nXStart = FindSubString(sMarked, "#X#", 0);
 						string sXYMarked = GetSubString(sMarked, nXStart, 30);
 						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
+						sName = GetName(oDetected);
 						if(sXYMarked != sXYMarkedProxy) {
 							sName = "A nearby location";
 							fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
@@ -1670,6 +1672,8 @@ if(GetSpellId() == 3003) {
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			sName = "A nearby location";
+			object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+			if(GetTag(oMark) != "ipoint_arcane_mark") {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 			CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
 			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 			}
