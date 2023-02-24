@@ -418,8 +418,8 @@ void main()
 						nAM++;
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-							location lFacing = GetAheadLocation(oCaster, 10.0);
-							CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_beam", lFacing);
+							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
+							CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
 							float fDistance = GetDistanceBetweenLocations(lMarked, lFacing);
 							int nDistance = FloatToInt(fDistance);
 							string sDistance = IntToString(nDistance);
@@ -438,8 +438,8 @@ void main()
 							
 							//Queue up report to caster if Round 3 achieved
 							if(nConcentration > 13) {
-								DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-								DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+								DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+								DelayCommand(21.0, SendMessageToPC(oCaster, sName + " to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 								}
 							}
 						}
