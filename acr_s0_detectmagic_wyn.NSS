@@ -77,8 +77,13 @@ string GetCompassDirectionOfAngle(float fAngle)
     return GetCompassDirectionOfBearing(-fAngle + 90.0);
 }
 
+void ActionCreatePlaceable(string sPlaceable, location lLocPlaceable)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
+}
+
 void main()
-{	/*Detect Magic
+{		/*Detect Magic
 	
 	A caster can detect the magical auras of objects within a spellcone. 
 	The information learned is based on a Concentration Check for the Caster and individual Spellcraft Checks against every magical item in range.
@@ -106,10 +111,8 @@ void main()
 	Strong = 7-9
 	Overwhelming = 10+
 	*/
-	if ( !ACR_PrecastEvent() ) {
-		return;
-	}
 	
+		
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
 		float fDur = TurnsToSeconds( GetCasterLevel(oCaster ));
@@ -133,10 +136,11 @@ void main()
 			}
 		SendMessageToAllDMs(GetName(oCaster) + "'s Concentration = " + IntToString(nConcentration) + " earns" + sRounds);
 		
-		//Declare the loop variables	
+		//Declare loop variables	
 		int nAuraCount;
 		int nCreatureCount;
 		int nItemCounted;
+		int nArcaneMark;
 		//Begin looping through all objects in the spellcone
 		object oDetected = GetFirstObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 		while (GetIsObjectValid(oDetected)) {
@@ -342,33 +346,92 @@ void main()
 				}
 		
 			//Multi-type objects with standardized tags or variables
-			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)) {
+			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
-				if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK") != "") {
-				    nAuraCount++;
-					nAuraPower = 1;
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
-					sAuraStrength = "faint";
-					
-					//Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
+				int nAM = 0;
+				if(nArcaneMark != 1) {
+					nArcaneMark = 1;
+					object oMarked = GetArea(oCaster);
+					while (nAM < 5) {
+						nAM++;
+						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
+							float fDistance = GetDistanceBetweenLocations(lMarked, lFacing);
+							int nDistance = FloatToInt(fDistance);
+							string sDistance = IntToString(nDistance);
+							SendMessageToAllDMs("sDistance = " + sDistance);
+							if(fDistance < 5.0) {
+								CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
+								sName = "A nearby location";
+								object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+								if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+								
+								nAuraCount++;
+								nAuraPower = 1;
+								sAuraStrength = "faint";
+								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+									
+								//Flag Round 1 Message 	
+								SetLocalInt(oCaster, "nMessage1", 1);
+								
+								//Queue up report to caster if Round 3 achieved
+								if(nConcentration > 13) {
+									DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+									DelayCommand(21.0, SendMessageToPC(oCaster, sName + " to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+									}
+								}
+							}
+						}
+					}
 				
-					//Queue up report to caster if Round 3 achieved
-					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
+				nAM = 0;
+				while (nAM < 5) {
+					nAM++;
+					if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+						location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+						string sMarked = ACR_LocationToString(lMarked);
+						string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
+						int nXStart = FindSubString(sMarked, "#X#", 0);
+						string sXYMarked = GetSubString(sMarked, nXStart, 30);
+						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
+						sName = GetName(oDetected);
+						if(sXYMarked != sXYMarkedProxy) {
+							sName = "A nearby location";
+							fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
+							nDistance = FloatToInt(fDistance);
+							sDistance = IntToString(nDistance);
+							fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
+							sAngle = GetCompassDirectionOfAngle(fAngle);
+							}
+						object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+						if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+						
+						nAuraCount++;
+						nAuraPower = 1;
+						sAuraStrength = "faint";
+						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
+							
+						//Flag Round 1 Message 	
+						SetLocalInt(oCaster, "nMessage1", 1);
+						
+						//Queue up report to caster if Round 3 achieved
+						if(nConcentration > 13) {
+							DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+							}
 						}
 					}
 				}
-				
+			
 			//Portals
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
-				//If they are tagged as per the line below, DM is automatic for them and they will register as Moderate Conjuration.
+				//If they are tagged as per the line below, DM is automatic for them and they will register as Strong Conjuration.
 				 if(FindSubString(GetTag(oDetected), "_portal")!= -1) {
 				    nAuraCount++;
 					nAuraPower = 7;
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					sAuraStrength = "strong";
+					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
@@ -380,9 +443,9 @@ void main()
 						}
 					}
 				
-			//Glyph and symbol traps after they've fired, and the triggers that fire them.
-			//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
-			/*
+				//Glyph and symbol traps after they've fired, and the triggers that fire them.
+				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
+				/*
 				Glyph of Warding = Faint Abjuration
 				Symbol of Pain = Moderate Necromancy
 				Symbol of Sleep = Moderate Enchantment
@@ -407,7 +470,7 @@ void main()
 					if(nAuraPower > 3) {sAuraStrength = "moderate";}
 					if(nAuraPower > 6) {sAuraStrength = "strong";}
 					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
-									
+					
 					//Does the caster learn the school?
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 					
@@ -442,7 +505,7 @@ void main()
 					DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					}
 				}
-			
+					
 			//Specific Waypoint use cases include traps 		
 			if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 				//Traps, if placed, already have the ACR_TRAP_SPELL_ID on them. If spawned, they do not.
@@ -499,7 +562,7 @@ void main()
 						}
 					}
 				}
-				
+					
 				//Creatures are the most complicated use case. Creatures can have innate magic, and effects, and inventory.
 				if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) {
 					int nRace = GetRacialType(oDetected);
@@ -658,6 +721,12 @@ void main()
 				SetLocalInt(oDetected, "nEffectSchoolHigh_T", 0);
 				SetLocalInt(oDetected, "nEffectSchoolHigh_G", 0);
 					
+				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+				if(nAuraPower > nAuraPowerHigh) {
+					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+					}
+				
 				//Creature race and effects done.
 				//Zero out variables needed for this creature's items, which are about to be determined.
 				sSchool = "";
@@ -1162,7 +1231,7 @@ void main()
 						nAuraPower = 0;
 					}
 				}
-				
+					
 				if(nAuraPower > 0) {sAuraStrength = "a faint";}
 				if(nAuraPower > 3) {sAuraStrength = "a moderate";}
 				if(nAuraPower > 6) {sAuraStrength = "a strong";}
@@ -1183,7 +1252,8 @@ void main()
 			DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 			SetLocalInt(oCaster, "nMessage1", 2);
 			}
-												
+		
+															
 		//We've had Round 1 reported by whichever of the objects had the first magic aura detected.
 		//Now see what we've got stored as the strongest aura for Round 2
 		int nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
@@ -1259,4 +1329,5 @@ void main()
 		SetLocalInt(oCaster, "nAuraPowerHigh", 0);
 		SetLocalString(oCaster, "sAuraPowerHigh", "");
 		SetLocalInt(oCaster, "nSummary", 0);
+		
 }				

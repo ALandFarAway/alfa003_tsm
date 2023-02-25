@@ -408,29 +408,26 @@ void main()
 			//Multi-type objects with standardized tags or variables
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
-				SendMessageToAllDMs("0a. " + IntToString(nAuraPower));
-				SendMessageToAllDMs("0a. " + sAuraStrength);
-					
 				int nAM = 0;
 				if(nArcaneMark != 1) {
 					nArcaneMark = 1;
 					object oMarked = GetArea(oCaster);
-					SendMessageToAllDMs("DM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-					
+					int nMarked = 0;
 					while (nAM < 5) {
 						nAM++;
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
 							float fDistance = GetDistanceBetweenLocations(lMarked, lFacing);
-							int nDistance = FloatToInt(fDistance);
-							string sDistance = IntToString(nDistance);
-							SendMessageToAllDMs("sDistance = " + sDistance);
+							//int nDistance = FloatToInt(fDistance);
+							//string sDistance = IntToString(nDistance);
+							//SendMessageToAllDMs("sDistance = " + sDistance);
 							if(fDistance < 5.0) {
-								CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
+								//CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
 								sName = "A nearby location";
 								object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
-								if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+								SendMessageToAllDMs("oMark = " + GetTag(oMark));
+								if((GetTag(oMark) != "ipoint_arcane_mark") && (nMarked != 1)) {nMarked = 1; DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 								
 								nAuraCount++;
 								nAuraPower = 1;
@@ -449,8 +446,7 @@ void main()
 							}
 						}
 					}
-				SendMessageToAllDMs("0b. " + IntToString(nAuraPower));
-				SendMessageToAllDMs("0b. " + sAuraStrength);
+				
 				nAM = 0;
 				while (nAM < 5) {
 					nAM++;
@@ -489,9 +485,7 @@ void main()
 						}
 					}
 				}
-			SendMessageToAllDMs("0c. " + IntToString(nAuraPower));
-			SendMessageToAllDMs("0c. " + sAuraStrength);
-					
+			
 			//Portals
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
 				//If they are tagged as per the line below, DM is automatic for them and they will register as Strong Conjuration.
@@ -500,8 +494,7 @@ void main()
 					nAuraPower = 7;
 					sAuraStrength = "strong";
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
-					SendMessageToAllDMs("1. " + IntToString(nAuraPower));
-					SendMessageToAllDMs("1. " + sAuraStrength);
+					
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
@@ -540,9 +533,6 @@ void main()
 					if(nAuraPower > 6) {sAuraStrength = "strong";}
 					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
 					
-					SendMessageToAllDMs("2. " + IntToString(nAuraPower));
-					SendMessageToAllDMs("2. " + sAuraStrength);
-									
 					//Does the caster learn the school?
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
 					
@@ -577,10 +567,7 @@ void main()
 					DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has a " + sAuraStrength + " aura" + sSchool));
 					}
 				}
-			
-				SendMessageToAllDMs("3. " + IntToString(nAuraPower));
-					SendMessageToAllDMs("3. " + sAuraStrength);
-						
+					
 			//Specific Waypoint use cases include traps 		
 			if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 				//Traps, if placed, already have the ACR_TRAP_SPELL_ID on them. If spawned, they do not.
@@ -637,8 +624,6 @@ void main()
 						}
 					}
 				}
-				SendMessageToAllDMs("4. " + IntToString(nAuraPower));
-					SendMessageToAllDMs("4. " + sAuraStrength);
 					
 				//Creatures are the most complicated use case. Creatures can have innate magic, and effects, and inventory.
 				if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) {
@@ -797,11 +782,6 @@ void main()
 				SetLocalInt(oDetected, "nEffectSchoolHigh_N", 0);
 				SetLocalInt(oDetected, "nEffectSchoolHigh_T", 0);
 				SetLocalInt(oDetected, "nEffectSchoolHigh_G", 0);
-					
-				
-				
-				SendMessageToAllDMs("5. " + IntToString(nAuraPower));
-				SendMessageToAllDMs("5. " + sAuraStrength);
 					
 				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 				if(nAuraPower > nAuraPowerHigh) {
@@ -1172,9 +1152,7 @@ void main()
 													}
 													
 												} 
-											SendMessageToAllDMs("6. " + IntToString(nAuraPower));
-											SendMessageToAllDMs("6. " + sAuraStrength);
-					
+											
 											//If it's in a closed container, no soup for you.
 											if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)&& (GetIsOpen(oDetected) == FALSE)) {sBaseItem = "Something"; nSomething++;}
 												
@@ -1315,8 +1293,6 @@ void main()
 						nAuraPower = 0;
 					}
 				}
-				SendMessageToAllDMs("7. " + IntToString(nAuraPower));
-				SendMessageToAllDMs("7. " + sAuraStrength);
 					
 				if(nAuraPower > 0) {sAuraStrength = "a faint";}
 				if(nAuraPower > 3) {sAuraStrength = "a moderate";}
@@ -1328,8 +1304,6 @@ void main()
 					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 					}
-				SendMessageToAllDMs("8. " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")));
-				SendMessageToAllDMs("8. " + GetLocalString(oCaster, "sAuraPowerHigh"));
 				
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 			}
@@ -1639,8 +1613,6 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 			nRunningTab = 0;
 			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
 			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-			//SendMessageToPC(oCaster, "nRunningTab discharges to zero: " + IntToString(nRunningTab));
-			//SendMessageToPC(oCaster, "You discharge CrystalCon with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
 			SendMessageToAllDMs(GetName(oCaster) + " CrysCon is at " + IntToString(nRunningTab));
 			
 		}
@@ -1653,15 +1625,12 @@ if(GetSpellId() == 3066) {
 	object oMarked = GetSpellTargetObject();
 	string sName = GetName(oMarked);
 	location lMarked = GetLocation(oMarked);
-	//SendMessageToAllDMs("AM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	int nExpire = 0;
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 2.5, lMarked, TRUE, OBJECT_TYPE_ALL); 
-		//SendMessageToAllDMs("AM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		sName = "This location";
 		while(oMarked != OBJECT_INVALID) {
-			//SendMessageToAllDMs("AM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oMarked) == OBJECT_TYPE_DOOR) ||  (GetObjectType(oMarked) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oMarked) == OBJECT_TYPE_WAYPOINT)) {break;} 
 			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 2.5, lMarked, TRUE, OBJECT_TYPE_ALL); 
 			}
@@ -1683,7 +1652,6 @@ if(GetSpellId() == 3066) {
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), GetName(oCaster), nExpire);
 			ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), lMarked, nExpire);
 			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
-			//DestroyObject(oMark, 10.0, TRUE);
 			return;
 			}
 		nAM ++;
@@ -1708,6 +1676,7 @@ if(GetSpellId() == 3003) {
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 					object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+					SendMessageToAllDMs("oMark = " + GetTag(oMark));
 					if(GetTag(oMark) != "ipoint_arcane_mark") {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 					string sMarked = ACR_LocationToString(lMarked);
 					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
@@ -1752,7 +1721,6 @@ if(GetSpellId() == 3137) {
 		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 		//SendMessageToAllDMs("E 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-		//sName = "a nearby location";
 		int nMarked = 0;
 		while (oMarked != OBJECT_INVALID) {
 			 //SendMessageToAllDMs("E 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
