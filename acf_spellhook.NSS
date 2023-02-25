@@ -426,11 +426,13 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									SendMessageToAllDMs("oMark = " + GetTag(oMark));
 									if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
-									oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
+										oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+										}
+									else {break;}
 									}
-								if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 								nAuraCount++;
 								nAuraPower = 1;
@@ -470,11 +472,13 @@ void main()
 							}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
-							SendMessageToAllDMs("oMark = " + GetTag(oMark));
 							if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
-							oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
+								oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+								}
+							else {break;}
 							}
-						if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 						nAuraCount++;
 						nAuraPower = 1;
@@ -1672,10 +1676,8 @@ if(GetSpellId() == 3003) {
 	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT);
 	int nMarked = 0;
 	string sName;
-	//SendMessageToAllDMs("RM 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	while(oMarked != OBJECT_INVALID) {
 		sName = GetName(oMarked);
-		//SendMessageToAllDMs("RM 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		int nRM = 0;
 		while (nRM < 5) {
 			nRM++;
@@ -1684,14 +1686,12 @@ if(GetSpellId() == 3003) {
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 					object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					while (oMark != OBJECT_INVALID) {
-						SendMessageToAllDMs("oMark = " + GetTag(oMark));
 						if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 						oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						}
 					if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 					string sMarked = ACR_LocationToString(lMarked);
 					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
-					//SendMessageToPC(oCaster, "Does " + ACR_LocationToString(lMarked) + " = " + ACR_LocationToString(GetLocation(oMarked)) + "?");
 					int nXStart = FindSubString(sMarked, "#X#", 0);
 					string sXYMarked = GetSubString(sMarked, nXStart, 30);
 					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
@@ -1706,8 +1706,7 @@ if(GetSpellId() == 3003) {
 		}
 	 nMarked = 0;	
 	 oMarked = GetArea(oCaster);
-	 //SendMessageToAllDMs("RM 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
-		
+	 	
 	 int nRM = 0;
 	 while (nRM < 5) {
 		nRM++;
@@ -1716,7 +1715,6 @@ if(GetSpellId() == 3003) {
 			sName = "A nearby location";
 			object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 			while (oMark != OBJECT_INVALID) {
-				SendMessageToAllDMs("oMark = " + GetTag(oMark));
 				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 				oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				}
@@ -1730,14 +1728,11 @@ if(GetSpellId() == 3003) {
 if(GetSpellId() == 3137) {
 	object oMarked = GetSpellTargetObject();
 	location lMarked = GetLocation(oMarked);
-	//SendMessageToAllDMs("E 1. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	if(oMarked == OBJECT_INVALID) {
 		lMarked = GetSpellTargetLocation();
 		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
-		//SendMessageToAllDMs("E 2. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 		int nMarked = 0;
 		while (oMarked != OBJECT_INVALID) {
-			 //SendMessageToAllDMs("E 3. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 			 int nAM = 1;
 			 while (nAM < 5) {
 				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {nMarked = 1; break;}
@@ -1748,7 +1743,6 @@ if(GetSpellId() == 3137) {
 			}
 		}
 	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
-	//SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(oMarked != OBJECT_INVALID) {
 		int nCasterLevel = GetCasterLevel(oCaster); 
@@ -1779,9 +1773,7 @@ if(GetSpellId() == 3137) {
 					int nXStart = FindSubString(sMarked, "#X#", 0);
 					string sXYMarked = GetSubString(sMarked, nXStart, 30);
 					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
-					//SendMessageToPC(oCaster, "Does " + sMarked + " = " + sMarkedProxy + "?");
-					//SendMessageToPC(oCaster, "Does " + sXYMarked + " = " + sXYMarkedProxy + "?");
-				
+					
 					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
 					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
