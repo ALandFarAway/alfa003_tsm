@@ -419,9 +419,7 @@ void main()
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
 							float fDistanceFace = GetDistanceBetweenLocations(lMarked, lFacing);
-							fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
-							sAngle = GetCompassDirectionOfAngle(fAngle);
-			
+							
 							if(fDistanceFace < 5.0) {
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -444,8 +442,8 @@ void main()
 								
 								//Queue up report to caster if Round 3 achieved
 								if(nConcentration > 13) {
-									DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-									DelayCommand(21.0, SendMessageToPC(oCaster, sName + " to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+									DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+									DelayCommand(21.0, SendMessageToPC(oCaster, sName + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 									}
 								}
 							}
@@ -464,12 +462,7 @@ void main()
 						string sXYMarked = GetSubString(sMarked, nXStart, 30);
 						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 						sName = GetName(oDetected);
-						if(sXYMarked != sXYMarkedProxy) {
-							sName = "A nearby location";
-							fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
-							fAngle = GetAngleBetweenLocations(GetLocation(oCaster), lMarked);
-							sAngle = GetCompassDirectionOfAngle(fAngle);
-							}
+						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
 							if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
@@ -490,8 +483,8 @@ void main()
 						
 						//Queue up report to caster if Round 3 achieved
 						if(nConcentration > 13) {
-							DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+							DelayCommand(21.0, SendMessageToAllDMs(sName + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 							}
 						}
 					}
