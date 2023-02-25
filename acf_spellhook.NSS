@@ -408,12 +408,15 @@ void main()
 			//Multi-type objects with standardized tags or variables
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
+				SendMessageToAllDMs("Arcane Mark");
 				int nMarked = 0;
 				int nAM = 0;
 				if(nArcaneMark != 1) {
 					nArcaneMark = 1;
 					object oMarked = GetArea(oCaster);
 					while (nAM < 5) {
+					SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMarked));
+				
 						nAM++;
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
@@ -454,17 +457,21 @@ void main()
 				nAM = 0;
 				while (nAM < 5) {
 					nAM++;
-					if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-						location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+					SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oDetected));
+				    if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+						SendMessageToAllDMs(IntToString(nAM) + " " + ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)));
+				    	location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 						string sMarked = ACR_LocationToString(lMarked);
-						string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
+						SendMessageToAllDMs(IntToString(nAM) + " " + sMarked);
+				    	string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
 						int nXStart = FindSubString(sMarked, "#X#", 0);
 						string sXYMarked = GetSubString(sMarked, nXStart, 30);
 						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 						sName = GetName(oDetected);
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
-						while (oMark != OBJECT_INVALID) {
+						SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMark));
+				    	while (oMark != OBJECT_INVALID) {
 							if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -1705,14 +1712,16 @@ if(GetSpellId() == 3003) {
 		nRM++;
 		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
-			sName = "A nearby location";
-			object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
-			while (oMark != OBJECT_INVALID) {
-				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
-				oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+			if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
+				sName = "A nearby location";
+				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+				while (oMark != OBJECT_INVALID) {
+					if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+					oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+					}
+				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
-			if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
-			SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
 			}
 		}
 	}
