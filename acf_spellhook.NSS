@@ -798,9 +798,16 @@ void main()
 				SetLocalInt(oDetected, "nEffectSchoolHigh_T", 0);
 				SetLocalInt(oDetected, "nEffectSchoolHigh_G", 0);
 					
+				
+				
 				SendMessageToAllDMs("5. " + IntToString(nAuraPower));
-					SendMessageToAllDMs("5. " + sAuraStrength);
+				SendMessageToAllDMs("5. " + sAuraStrength);
 					
+				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+				if(nAuraPower > nAuraPowerHigh) {
+					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
+					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
+					}
 				
 				//Creature race and effects done.
 				//Zero out variables needed for this creature's items, which are about to be determined.
