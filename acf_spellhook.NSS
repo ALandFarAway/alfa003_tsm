@@ -408,6 +408,9 @@ void main()
 			//Multi-type objects with standardized tags or variables
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
+				SendMessageToAllDMs("0a. " + IntToString(nAuraPower));
+				SendMessageToAllDMs("0a. " + sAuraStrength);
+					
 				int nAM = 0;
 				if(nArcaneMark != 1) {
 					nArcaneMark = 1;
@@ -431,8 +434,8 @@ void main()
 								
 								nAuraCount++;
 								nAuraPower = 1;
-								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 								sAuraStrength = "faint";
+								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 									
 								//Flag Round 1 Message 	
 								SetLocalInt(oCaster, "nMessage1", 1);
@@ -446,6 +449,8 @@ void main()
 							}
 						}
 					}
+				SendMessageToAllDMs("0b. " + IntToString(nAuraPower));
+				SendMessageToAllDMs("0b. " + sAuraStrength);
 				nAM = 0;
 				while (nAM < 5) {
 					nAM++;
@@ -470,8 +475,8 @@ void main()
 						
 						nAuraCount++;
 						nAuraPower = 1;
-						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 						sAuraStrength = "faint";
+						if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 							
 						//Flag Round 1 Message 	
 						SetLocalInt(oCaster, "nMessage1", 1);
@@ -484,16 +489,19 @@ void main()
 						}
 					}
 				}
-				
+			SendMessageToAllDMs("0c. " + IntToString(nAuraPower));
+			SendMessageToAllDMs("0c. " + sAuraStrength);
+					
 			//Portals
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
-				//If they are tagged as per the line below, DM is automatic for them and they will register as Moderate Conjuration.
+				//If they are tagged as per the line below, DM is automatic for them and they will register as Strong Conjuration.
 				 if(FindSubString(GetTag(oDetected), "_portal")!= -1) {
 				    nAuraCount++;
 					nAuraPower = 7;
-					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
 					sAuraStrength = "strong";
-					
+					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=tan>Conjuration</color>";}
+					SendMessageToAllDMs("1. " + IntToString(nAuraPower));
+					SendMessageToAllDMs("1. " + sAuraStrength);
 					//Flag Round 1 Message 	
 					SetLocalInt(oCaster, "nMessage1", 1);
 				
@@ -531,6 +539,9 @@ void main()
 					if(nAuraPower > 3) {sAuraStrength = "moderate";}
 					if(nAuraPower > 6) {sAuraStrength = "strong";}
 					if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
+					
+					SendMessageToAllDMs("2. " + IntToString(nAuraPower));
+					SendMessageToAllDMs("2. " + sAuraStrength);
 									
 					//Does the caster learn the school?
 					if(!GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)){sSchool = "";}
@@ -567,6 +578,9 @@ void main()
 					}
 				}
 			
+				SendMessageToAllDMs("3. " + IntToString(nAuraPower));
+					SendMessageToAllDMs("3. " + sAuraStrength);
+						
 			//Specific Waypoint use cases include traps 		
 			if(GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)  {
 				//Traps, if placed, already have the ACR_TRAP_SPELL_ID on them. If spawned, they do not.
@@ -623,7 +637,9 @@ void main()
 						}
 					}
 				}
-				
+				SendMessageToAllDMs("4. " + IntToString(nAuraPower));
+					SendMessageToAllDMs("4. " + sAuraStrength);
+					
 				//Creatures are the most complicated use case. Creatures can have innate magic, and effects, and inventory.
 				if((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (GetIsDM(oDetected) == FALSE)) {
 					int nRace = GetRacialType(oDetected);
@@ -782,6 +798,10 @@ void main()
 				SetLocalInt(oDetected, "nEffectSchoolHigh_T", 0);
 				SetLocalInt(oDetected, "nEffectSchoolHigh_G", 0);
 					
+				SendMessageToAllDMs("5. " + IntToString(nAuraPower));
+					SendMessageToAllDMs("5. " + sAuraStrength);
+					
+				
 				//Creature race and effects done.
 				//Zero out variables needed for this creature's items, which are about to be determined.
 				sSchool = "";
@@ -1145,7 +1165,9 @@ void main()
 													}
 													
 												} 
-											
+											SendMessageToAllDMs("6. " + IntToString(nAuraPower));
+											SendMessageToAllDMs("6. " + sAuraStrength);
+					
 											//If it's in a closed container, no soup for you.
 											if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)&& (GetIsOpen(oDetected) == FALSE)) {sBaseItem = "Something"; nSomething++;}
 												
@@ -1286,7 +1308,9 @@ void main()
 						nAuraPower = 0;
 					}
 				}
-				
+				SendMessageToAllDMs("7. " + IntToString(nAuraPower));
+				SendMessageToAllDMs("7. " + sAuraStrength);
+					
 				if(nAuraPower > 0) {sAuraStrength = "a faint";}
 				if(nAuraPower > 3) {sAuraStrength = "a moderate";}
 				if(nAuraPower > 6) {sAuraStrength = "a strong";}
@@ -1297,6 +1321,8 @@ void main()
 					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 					}
+				SendMessageToAllDMs("8. " + IntToString(GetLocalInt(oCaster, "nAuraPowerHigh")));
+				SendMessageToAllDMs("8. " + GetLocalString(oCaster, "sAuraPowerHigh"));
 				
 				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
 			}
@@ -1307,7 +1333,8 @@ void main()
 			DelayCommand(6.0, SendMessageToPC(oCaster, "You concentrate for one round and learn that there is magic within range."));
 			SetLocalInt(oCaster, "nMessage1", 2);
 			}
-												
+		
+															
 		//We've had Round 1 reported by whichever of the objects had the first magic aura detected.
 		//Now see what we've got stored as the strongest aura for Round 2
 		int nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");

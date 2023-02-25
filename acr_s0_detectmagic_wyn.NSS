@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  System Name : ALFA Core Rules
-//     Filename : acr_s0_analyzeportal.nss
+//     Filename : acr_s0_detectmagic.nss
 //    $Revision:: 1        $ current version of the file
 //        $Date:: 2023-01-30 date the file was created or modified
 //       Author : Wynna 
