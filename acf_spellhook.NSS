@@ -427,7 +427,8 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+									SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMark));
+				    				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 										}
@@ -470,9 +471,9 @@ void main()
 						sName = GetName(oDetected);
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+						while (oMark != OBJECT_INVALID) {
 						SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMark));
-				    	while (oMark != OBJECT_INVALID) {
-							if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								}
