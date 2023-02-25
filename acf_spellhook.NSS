@@ -418,14 +418,13 @@ void main()
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
-							float fDistance = GetDistanceBetweenLocations(lMarked, lFacing);
-							//int nDistance = FloatToInt(fDistance);
-							//string sDistance = IntToString(nDistance);
-							//SendMessageToAllDMs("sDistance = " + sDistance);
-							if(fDistance < 5.0) {
-								//CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
+							float fDistanceFace = GetDistanceBetweenLocations(lMarked, lFacing);
+							fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
+							sAngle = GetCompassDirectionOfAngle(fAngle);
+			
+							if(fDistanceFace < 5.0) {
 								sName = "A nearby location";
-								object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+								object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 0);
 								SendMessageToAllDMs("oMark = " + GetTag(oMark));
 								if((GetTag(oMark) != "ipoint_arcane_mark") && (nMarked != 1)) {nMarked = 1; DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 								
@@ -1638,7 +1637,6 @@ if(GetSpellId() == 3066) {
 	if(oMarked == OBJECT_INVALID) {
 		oMarked = GetArea(oCaster);
 		}
-	SendMessageToAllDMs("AM 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
 	int nAM = 1;
@@ -1675,7 +1673,7 @@ if(GetSpellId() == 3003) {
 			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
-					object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
+					object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 0);
 					SendMessageToAllDMs("oMark = " + GetTag(oMark));
 					if(GetTag(oMark) != "ipoint_arcane_mark") {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 					string sMarked = ACR_LocationToString(lMarked);
@@ -1734,7 +1732,7 @@ if(GetSpellId() == 3137) {
 			}
 		}
 	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
-	SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
+	//SendMessageToAllDMs("E 4. Name = " + GetName(oMarked) + ", Tag = " + GetTag(oMarked) + ", ResRef = " + GetResRef(oMarked));
 	
 	if(oMarked != OBJECT_INVALID) {
 		int nCasterLevel = GetCasterLevel(oCaster); 
