@@ -427,7 +427,7 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMark));
+									SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
 				    				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -472,7 +472,7 @@ void main()
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
-						SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMark));
+						SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
 				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -1417,223 +1417,17 @@ void main()
 		}
 	}
 	
-	//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
-	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
-	if(GetTag(oArmor) == "003_it_arm_breastplt_petr") {
-	   int nCastSize = Random(20);
-	   if(nCastSize==1)	{
-		  SendMessageToPC(oTarget, "The concentric growth rings of your armor suddenly shrink. For a moment it is horribly tight...and then fits again.");
-	      AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_REDUCE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-		  }		
-		else if(nCastSize==2)	{
-		  SendMessageToPC(oTarget, "The concentric growth rings of your armor suddenly dilate. For a moment you feel yourself falling out through the bottom of it...and then it fits again.");
-	      AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_ENLARGE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-		  }
-		  
-		if(GetLocalInt(oTarget, "Piezo")!= 1) {
-		 SetLocalInt(oTarget, "Piezo", 1);
-		 SendMessageToPC(oTarget, "You suddenly have more understanding blossom in your awareness:");
-		 SendMessageToPC(oTarget, "Like all magic armor, it shrinks or expands as necessary to fit the size of its wearer. This was a prototype, and has a small design flaw when the wearer is targeted by magics...either offensive or defensive.");
-		 SendMessageToPC(oTarget, "Although the armor is made of crystal tuned to absorb magical attacks, it unfortunately sometimes discharges that power in a piezoarcane reaction. There is a small, random chance that the growth rings on the armor will either suddenly dilate or shrink down, followed a moment later by its wearer performing the same enlargement or reduction.");
-		}
-	}
+
 	
-//Campaign consequences for DeanSphinx 2021
-
-object oOlivusCast;
-if(FindSubString(GetName(oCaster), "Olivu") != -1)
-	{oOlivusCast = oCaster;}
-	
-//object oJhessiCast;
-//if(FindSubString(GetName(oCaster), "Jhess") != -1)
-//	{oJhessiCast = oCaster;}
-
-object oOlivusTarget;
-if(FindSubString(GetName(oTarget), "Olivu") != -1)
-	{oOlivusTarget = oTarget;}
-//object oJhessiTarget;
-//if(FindSubString(GetName(oTarget), "Jhess") != -1)
-//	{oJhessiTarget = oTarget;}
-
-if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {	
-	//SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
-	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
-	//SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
-	int nFail = Random(6);
-	//SendMessageToPC(oCaster, "nFail is " + IntToString(nFail));
-	int nSpellLevel = GetSpellLevel(nSpellId);
-	//SendMessageToPC(oCaster, "nSpellLevel is " + IntToString(nSpellLevel));
-	int nDC = d20(1) + nSpellcraft;
-	//SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
-	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-	//SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
-	if(oCaster == oOlivusCast) {
-	int nCrystalCast = GetCampaignInt("DeanSphinx", "CrystalCast", oCaster);
-	if((nFail == 1)&& (nCrystalCast == 0) && (nSpellId != 32)&& (nSpellId != 33)&& (nSpellId != 31)&& (nSpellId != 34)&& (nSpellId != 35)&& (nSpellId != 1020)&& (nSpellId != 1021)&& (nSpellId != 1)&& (nSpellId != 6)&& (nSpellId != 189)&& (nSpellId != 431)&& (nSpellId != 154)&& (nSpellId != 146)&& (nSpellId != 414)&& (nSpellId != 148)&& (nSpellId != 3159)&& (nSpellId != 3160)&& (nSpellId != 449)&& (nSpellId != 450)&& (nSpellId != 432)&& (nSpellId != 418)) {
-		SetModuleOverrideSpellScriptFinished();
-		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
-		nRunningTab = nRunningTab + nSpellLevel;
-		SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
-		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-		//SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
-		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of SpellID " + IntToString(nSpellId) + " a level " + IntToString(nSpellLevel) + " spell. CrysCon charges to " + IntToString(nRunningTab));
-	    //SendMessageToAllDMs(GetName(oCaster) + " CrysCon charges to " + );
-	   //SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
-	   }
-	SetCampaignInt("DeanSphinx", "CrystalCast", 0, oCaster);			
-		   
-	if(nRunningTab >= 6) {
-		int nSpell;
-		SetModuleOverrideSpellScriptFinished();
-		SendMessageToPC(oCaster, "The power of the Weave recoils within you, then lashes out in an unintended spell!");
-		if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, nDC, TRUE)) {
-			SendMessageToPC(oCaster, "Your facility with Spellcraft allows you to clamp down on your own casting and avoid loosing the unintended spell...this time.");
-			}
-		else {SendMessageToPC(oCaster, "You are unable to stop your own casting of the unintended spell!");
-			
-			int nSpellOne;
-			int nSpellTwo;
-			int nSpellThree;
-			int nSpellFour;
-			int nSpellFive;
-			int nSpellSix;
-			int nSpellSeven;
-			int nSpellEight;	
-			int nSpellNine;
-			int nSpellTen;
-			
-			
-		if (nSpellLevel == 1) {
-					nSpellOne = SPELL_LESSER_ORB_OF_ACID;
-					nSpellTwo = SPELL_LESSER_ORB_OF_COLD;
-					nSpellThree = SPELL_LESSER_ORB_OF_ELECTRICITY;
-					nSpellFour = SPELL_LESSER_ORB_OF_FIRE;
-					nSpellFive = SPELL_LESSER_ORB_OF_SOUND;
-					nSpellSix = SPELL_MAGE_ARMOR;
-					nSpellSeven = SPELL_BLADES_OF_FIRE;
-					nSpellEight = SPELL_GREASE;
-					nSpellNine = SPELL_SUMMON_CREATURE_I;
-					nSpellTen = SPELL_SUMMON_CREATURE_I;
-				}
-				else if(nSpellLevel==2) {
-					nSpellOne = SPELL_SUMMON_CREATURE_II;
-					nSpellTwo = SPELL_MELFS_ACID_ARROW;
-					nSpellThree = SPELL_SUMMON_CREATURE_II;
-					nSpellFour = SPELL_WEB;
-					nSpellFive = SPELL_SUMMON_CREATURE_II;
-					nSpellSix = SPELL_SUMMON_CREATURE_II;
-					nSpellSeven = SPELL_MELFS_ACID_ARROW;
-					nSpellEight = SPELL_SUMMON_CREATURE_II;
-					nSpellNine = SPELL_WEB;
-					nSpellTen = SPELL_SUMMON_CREATURE_II;
-					}	
-				else if(nSpellLevel==3) {
-					nSpellOne = SPELL_FLAME_ARROW;
-					nSpellTwo = SPELL_STINKING_CLOUD;
-					nSpellThree = SPELL_IMPROVED_MAGE_ARMOR;
-					nSpellFour = SPELL_MESTILS_ACID_BREATH;
-					nSpellFive = SPELL_SUMMON_CREATURE_III;
-					nSpellSix = SPELL_FLAME_ARROW;
-					nSpellSeven = SPELL_STINKING_CLOUD;
-					nSpellEight = SPELL_IMPROVED_MAGE_ARMOR;
-					nSpellNine = SPELL_MESTILS_ACID_BREATH;
-					nSpellTen = SPELL_SUMMON_CREATURE_III;
-					}
-				else {
-					nSpellOne = SPELL_EVARDS_BLACK_TENTACLES;
-					nSpellTwo = 3026;
-					nSpellThree = SPELL_ORB_OF_SOUND;
-					nSpellFour = SPELL_SUMMON_CREATURE_IV;
-					nSpellFive = SPELL_ORB_OF_COLD;
-					nSpellSix = SPELL_ORB_OF_ELECTRICITY;
-					nSpellSeven = SPELL_ORB_OF_FIRE;
-					nSpellEight = SPELL_ORB_OF_ACID;
-					nSpellNine = SPELL_SUMMON_CREATURE_IV;
-					nSpellTen = SPELL_SUMMON_CREATURE_IV;
-					
-				}
-				
-				switch(Random(10)) {
-		        case 0:
-		            nSpell = nSpellTen;
-					break;
-				case 1:
-		            nSpell = nSpellOne;
-					break;
-				case 2:
-		            nSpell = nSpellTwo;
-					break;
-				case 3:
-		            nSpell = nSpellThree;
-					break;
-				case 4:
-		            nSpell = nSpellFour;
-					break;
-				case 5:
-		            nSpell = nSpellFive;
-					break;
-				case 6:
-		            nSpell = nSpellSix;
-					break;
-				case 7:
-		            nSpell = nSpellSeven;
-					break;
-				case 8:
-		            nSpell = nSpellEight;
-					break;
-				case 9:
-		            nSpell = nSpellNine;
-					break;
-				}
-		
-			if((nSpell == SPELL_MAGE_ARMOR) || (nSpell == SPELL_IMPROVED_MAGE_ARMOR) || (nSpell == 3026)) {
-				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oCaster, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			}
-			else if((nSpell == SPELL_GREASE)|| (nSpell == SPELL_WEB) || (nSpell == SPELL_STINKING_CLOUD)|| (nSpell == SPELL_EVARDS_BLACK_TENTACLES)|| (nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
-				AssignCommand(oCaster, ActionCastSpellAtLocation(nSpell, GetLocation(oCaster), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			}
-			else {
-				int nRandomTarget = Random(3);
-				if(nRandomTarget == 0) 
-					{oTarget = oCaster;}
-				if((nRandomTarget == 1) && (oTarget != OBJECT_INVALID)) 
-					{oTarget = oTarget;}
-				if((nRandomTarget == 1) && (oTarget == OBJECT_INVALID)) 
-					{oTarget = oCaster;}
-				if(nRandomTarget == 2) 
-					{object oRandomCreature = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
-					 int nCount = 0;
-					 while ((oRandomCreature != OBJECT_INVALID) && (nCount < 10)) {
-					 	 //SendMessageToPC(oCaster, "oRandomCreature = " + IntToString(nCount) + " is " + GetName(oRandomCreature));
-						 oRandomCreature = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
-						 nCount = nCount +1;
-						 }
-					 oTarget = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, Random(nCount));
-					}
-				
-				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-				if((nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
-				DelayCommand(5.0, AssignCommand(GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster, 1), ActionSpeakString("*Shakes its head in confusion*", TALKVOLUME_TALK)));
-				DelayCommand(5.0, ChangeToStandardFaction(GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster, 1), STANDARD_FACTION_HOSTILE));
-				}
-			}
-			
-			SetCampaignInt("DeanSphinx", "CrystalCast", 1, oCaster);			
-			SendMessageToAllDMs(GetName(oCaster) + " discharges a crystal based conjuration spell with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
-			}
-			
-			nRunningTab = 0;
-			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
-			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-			SendMessageToAllDMs(GetName(oCaster) + " CrysCon is at " + IntToString(nRunningTab));
-			
-		}
-	
-	} 
-}
-
 //Arcane Mark
 if(GetSpellId() == 3066) {
+
+	if (!X2PreSpellCastCode())
+    {
+		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
+        return;
+    }
+
 	object oMarked = GetSpellTargetObject();
 	string sName = GetName(oMarked);
 	location lMarked = GetLocation(oMarked);
@@ -1669,65 +1463,120 @@ if(GetSpellId() == 3066) {
 		}
 			
 	SendMessageToPC(oCaster, "This " + sName + " cannot hold any more arcane marks.");
-	}   
+	} 
+	  
+//Glyph of Warding 
+if(GetSpellId() == 549) {
+
+	if (!X2PreSpellCastCode())
+    {
+		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
+        return;
+    }
+	
+	
+	
+}
 	
 //Read Magic
 if(GetSpellId() == 3003) {
+
+	if (!X2PreSpellCastCode())
+    {
+		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
+        return;
+    }
 	object oTarget = GetSpellTargetObject();
-	object oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT);
+	object oReadMagic = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);
 	int nMarked = 0;
 	string sName;
-	while(oMarked != OBJECT_INVALID) {
-		sName = GetName(oMarked);
+	while(oReadMagic != OBJECT_INVALID) {
+		sName = GetName(oReadMagic);
 		int nRM = 0;
+		
+		//Read Magic: Glyph of Warding
+		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
+		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
+		SendMessageToAllDMs("AOESpell = " + IntToString(nAOESpell));
+		if(nAOESpell == 549) {
+			if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
+				object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
+				int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
+				if (nGlyphCasterLvl > 10){nGlyphCasterLvl = 10;}
+				SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
+				int nDam = d8(nGlyphCasterLvl /2 );
+				nDam = ApplyMetamagicVariableMods(nDam, 40);
+				nDam = GetReflexAdjustedDamage(nDam, oCaster, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oGlyphCaster);
+				int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
+				string sAlignDmg = "Divine";
+				if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
+				else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
+				else {sAlignDmg = "Sonic";}
+				SendMessageToPC(oCaster, sName + " is a Blasting Glyph of Warding that will do " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
+				}
+			else {SendMessageToPC(oCaster, "There is a glyph on the ground.");}
+			}
+		}
+		//Read Magic: Arcane Mark directly on an object or on the object as a proxy for a location
 		while (nRM < 5) {
 			nRM++;
-			if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
-				location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
+			if(ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
+				location lMarked = ACR_GetPersistentLocation(oReadMagic, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 					object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					while (oMark != OBJECT_INVALID) {
-						if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+						SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
+				    	if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 						oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						}
 					if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 					string sMarked = ACR_LocationToString(lMarked);
-					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+					string sMarkedProxy = ACR_LocationToString(GetLocation(oReadMagic));
 					int nXStart = FindSubString(sMarked, "#X#", 0);
 					string sXYMarked = GetSubString(sMarked, nXStart, 30);
 					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 					if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
-					SendMessageToPC(oCaster, sName + " bears an Arcane Mark which reads " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
+					SendMessageToPC(oCaster, sName + " bears an Arcane Mark which reads " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
 					}
 				}
 			}
-		if(oMarked != GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT))
-			{oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT);}
+		if(oReadMagic != GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT))
+			{oReadMagic = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);}
 		else {break;}
 		}
+	
+	//Read Magic: Arcane Mark on the area as a proxy for a location	
 	 nMarked = 0;	
-	 oMarked = GetArea(oCaster);
+	 oReadMagic = GetArea(oCaster);
 	 	
 	 int nRM = 0;
 	 while (nRM < 5) {
 		nRM++;
-		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
-			location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nRM));
+		if(ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
+			location lMarked = ACR_GetPersistentLocation(oReadMagic, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 				sName = "A nearby location";
 				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
-					if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+					SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
+				    if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 					oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
 				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
-				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nRM)));
+				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
 			}
 		}
 	}
 	
 //Erase
+
+if (!X2PreSpellCastCode())
+    {
+		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
+        return;
+    }
+
 if(GetSpellId() == 3137) {
 	object oMarked = GetSpellTargetObject();
 	location lMarked = GetLocation(oMarked);
@@ -2323,6 +2172,221 @@ if((FindSubString(GetTag(GetArea(oCaster)), "5f_") != -1) || (FindSubString(GetT
 			  }
 	
 		
+		//Targeting a set of armor that absorbs magic and spits it out in unexpected ways.
+	object oArmor = GetItemInSlot(INVENTORY_SLOT_CHEST, oTarget);
+	if(GetTag(oArmor) == "003_it_arm_breastplt_petr") {
+	   int nCastSize = Random(20);
+	   if(nCastSize==1)	{
+		  SendMessageToPC(oTarget, "The concentric growth rings of your armor suddenly shrink. For a moment it is horribly tight...and then fits again.");
+	      AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_REDUCE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		  }		
+		else if(nCastSize==2)	{
+		  SendMessageToPC(oTarget, "The concentric growth rings of your armor suddenly dilate. For a moment you feel yourself falling out through the bottom of it...and then it fits again.");
+	      AssignCommand(oTarget, ActionCastSpellAtObject(SPELL_ENLARGE_PERSON, oTarget, METAMAGIC_NONE, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+		  }
+		  
+		if(GetLocalInt(oTarget, "Piezo")!= 1) {
+		 SetLocalInt(oTarget, "Piezo", 1);
+		 SendMessageToPC(oTarget, "You suddenly have more understanding blossom in your awareness:");
+		 SendMessageToPC(oTarget, "Like all magic armor, it shrinks or expands as necessary to fit the size of its wearer. This was a prototype, and has a small design flaw when the wearer is targeted by magics...either offensive or defensive.");
+		 SendMessageToPC(oTarget, "Although the armor is made of crystal tuned to absorb magical attacks, it unfortunately sometimes discharges that power in a piezoarcane reaction. There is a small, random chance that the growth rings on the armor will either suddenly dilate or shrink down, followed a moment later by its wearer performing the same enlargement or reduction.");
+		}
+	}
+	
+//Campaign consequences for DeanSphinx 2021
+
+object oOlivusCast;
+if(FindSubString(GetName(oCaster), "Olivu") != -1)
+	{oOlivusCast = oCaster;}
+	
+//object oJhessiCast;
+//if(FindSubString(GetName(oCaster), "Jhess") != -1)
+//	{oJhessiCast = oCaster;}
+
+object oOlivusTarget;
+if(FindSubString(GetName(oTarget), "Olivu") != -1)
+	{oOlivusTarget = oTarget;}
+//object oJhessiTarget;
+//if(FindSubString(GetName(oTarget), "Jhess") != -1)
+//	{oJhessiTarget = oTarget;}
+
+if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {	
+	//SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
+	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
+	//SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
+	int nFail = Random(6);
+	//SendMessageToPC(oCaster, "nFail is " + IntToString(nFail));
+	int nSpellLevel = GetSpellLevel(nSpellId);
+	//SendMessageToPC(oCaster, "nSpellLevel is " + IntToString(nSpellLevel));
+	int nDC = d20(1) + nSpellcraft;
+	//SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
+	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
+	//SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
+	if(oCaster == oOlivusCast) {
+	int nCrystalCast = GetCampaignInt("DeanSphinx", "CrystalCast", oCaster);
+	if((nFail == 1)&& (nCrystalCast == 0) && (nSpellId != 32)&& (nSpellId != 33)&& (nSpellId != 31)&& (nSpellId != 34)&& (nSpellId != 35)&& (nSpellId != 1020)&& (nSpellId != 1021)&& (nSpellId != 1)&& (nSpellId != 6)&& (nSpellId != 189)&& (nSpellId != 431)&& (nSpellId != 154)&& (nSpellId != 146)&& (nSpellId != 414)&& (nSpellId != 148)&& (nSpellId != 3159)&& (nSpellId != 3160)&& (nSpellId != 449)&& (nSpellId != 450)&& (nSpellId != 432)&& (nSpellId != 418)) {
+		SetModuleOverrideSpellScriptFinished();
+		SendMessageToPC(oCaster, "Your spell fizzles. You feel the arcane power of the Weave dissipate as if spent, but without apparent effect.");
+		nRunningTab = nRunningTab + nSpellLevel;
+		SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
+		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
+		//SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
+		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of SpellID " + IntToString(nSpellId) + " a level " + IntToString(nSpellLevel) + " spell. CrysCon charges to " + IntToString(nRunningTab));
+	    //SendMessageToAllDMs(GetName(oCaster) + " CrysCon charges to " + );
+	   //SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
+	   }
+	SetCampaignInt("DeanSphinx", "CrystalCast", 0, oCaster);			
+		   
+	if(nRunningTab >= 6) {
+		int nSpell;
+		SetModuleOverrideSpellScriptFinished();
+		SendMessageToPC(oCaster, "The power of the Weave recoils within you, then lashes out in an unintended spell!");
+		if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, nDC, TRUE)) {
+			SendMessageToPC(oCaster, "Your facility with Spellcraft allows you to clamp down on your own casting and avoid loosing the unintended spell...this time.");
+			}
+		else {SendMessageToPC(oCaster, "You are unable to stop your own casting of the unintended spell!");
+			
+			int nSpellOne;
+			int nSpellTwo;
+			int nSpellThree;
+			int nSpellFour;
+			int nSpellFive;
+			int nSpellSix;
+			int nSpellSeven;
+			int nSpellEight;	
+			int nSpellNine;
+			int nSpellTen;
+			
+			
+		if (nSpellLevel == 1) {
+					nSpellOne = SPELL_LESSER_ORB_OF_ACID;
+					nSpellTwo = SPELL_LESSER_ORB_OF_COLD;
+					nSpellThree = SPELL_LESSER_ORB_OF_ELECTRICITY;
+					nSpellFour = SPELL_LESSER_ORB_OF_FIRE;
+					nSpellFive = SPELL_LESSER_ORB_OF_SOUND;
+					nSpellSix = SPELL_MAGE_ARMOR;
+					nSpellSeven = SPELL_BLADES_OF_FIRE;
+					nSpellEight = SPELL_GREASE;
+					nSpellNine = SPELL_SUMMON_CREATURE_I;
+					nSpellTen = SPELL_SUMMON_CREATURE_I;
+				}
+				else if(nSpellLevel==2) {
+					nSpellOne = SPELL_SUMMON_CREATURE_II;
+					nSpellTwo = SPELL_MELFS_ACID_ARROW;
+					nSpellThree = SPELL_SUMMON_CREATURE_II;
+					nSpellFour = SPELL_WEB;
+					nSpellFive = SPELL_SUMMON_CREATURE_II;
+					nSpellSix = SPELL_SUMMON_CREATURE_II;
+					nSpellSeven = SPELL_MELFS_ACID_ARROW;
+					nSpellEight = SPELL_SUMMON_CREATURE_II;
+					nSpellNine = SPELL_WEB;
+					nSpellTen = SPELL_SUMMON_CREATURE_II;
+					}	
+				else if(nSpellLevel==3) {
+					nSpellOne = SPELL_FLAME_ARROW;
+					nSpellTwo = SPELL_STINKING_CLOUD;
+					nSpellThree = SPELL_IMPROVED_MAGE_ARMOR;
+					nSpellFour = SPELL_MESTILS_ACID_BREATH;
+					nSpellFive = SPELL_SUMMON_CREATURE_III;
+					nSpellSix = SPELL_FLAME_ARROW;
+					nSpellSeven = SPELL_STINKING_CLOUD;
+					nSpellEight = SPELL_IMPROVED_MAGE_ARMOR;
+					nSpellNine = SPELL_MESTILS_ACID_BREATH;
+					nSpellTen = SPELL_SUMMON_CREATURE_III;
+					}
+				else {
+					nSpellOne = SPELL_EVARDS_BLACK_TENTACLES;
+					nSpellTwo = 3026;
+					nSpellThree = SPELL_ORB_OF_SOUND;
+					nSpellFour = SPELL_SUMMON_CREATURE_IV;
+					nSpellFive = SPELL_ORB_OF_COLD;
+					nSpellSix = SPELL_ORB_OF_ELECTRICITY;
+					nSpellSeven = SPELL_ORB_OF_FIRE;
+					nSpellEight = SPELL_ORB_OF_ACID;
+					nSpellNine = SPELL_SUMMON_CREATURE_IV;
+					nSpellTen = SPELL_SUMMON_CREATURE_IV;
+					
+				}
+				
+				switch(Random(10)) {
+		        case 0:
+		            nSpell = nSpellTen;
+					break;
+				case 1:
+		            nSpell = nSpellOne;
+					break;
+				case 2:
+		            nSpell = nSpellTwo;
+					break;
+				case 3:
+		            nSpell = nSpellThree;
+					break;
+				case 4:
+		            nSpell = nSpellFour;
+					break;
+				case 5:
+		            nSpell = nSpellFive;
+					break;
+				case 6:
+		            nSpell = nSpellSix;
+					break;
+				case 7:
+		            nSpell = nSpellSeven;
+					break;
+				case 8:
+		            nSpell = nSpellEight;
+					break;
+				case 9:
+		            nSpell = nSpellNine;
+					break;
+				}
+		
+			if((nSpell == SPELL_MAGE_ARMOR) || (nSpell == SPELL_IMPROVED_MAGE_ARMOR) || (nSpell == 3026)) {
+				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oCaster, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			}
+			else if((nSpell == SPELL_GREASE)|| (nSpell == SPELL_WEB) || (nSpell == SPELL_STINKING_CLOUD)|| (nSpell == SPELL_EVARDS_BLACK_TENTACLES)|| (nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
+				AssignCommand(oCaster, ActionCastSpellAtLocation(nSpell, GetLocation(oCaster), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			}
+			else {
+				int nRandomTarget = Random(3);
+				if(nRandomTarget == 0) 
+					{oTarget = oCaster;}
+				if((nRandomTarget == 1) && (oTarget != OBJECT_INVALID)) 
+					{oTarget = oTarget;}
+				if((nRandomTarget == 1) && (oTarget == OBJECT_INVALID)) 
+					{oTarget = oCaster;}
+				if(nRandomTarget == 2) 
+					{object oRandomCreature = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+					 int nCount = 0;
+					 while ((oRandomCreature != OBJECT_INVALID) && (nCount < 10)) {
+					 	 //SendMessageToPC(oCaster, "oRandomCreature = " + IntToString(nCount) + " is " + GetName(oRandomCreature));
+						 oRandomCreature = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+						 nCount = nCount +1;
+						 }
+					 oTarget = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, Random(nCount));
+					}
+				
+				AssignCommand(oCaster, ActionCastSpellAtObject(nSpell, oTarget, METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+				if((nSpell == SPELL_SUMMON_CREATURE_I)|| (nSpell == SPELL_SUMMON_CREATURE_II)|| (nSpell == SPELL_SUMMON_CREATURE_III)|| (nSpell == SPELL_SUMMON_CREATURE_IV)) {
+				DelayCommand(5.0, AssignCommand(GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster, 1), ActionSpeakString("*Shakes its head in confusion*", TALKVOLUME_TALK)));
+				DelayCommand(5.0, ChangeToStandardFaction(GetAssociate(ASSOCIATE_TYPE_SUMMONED, oCaster, 1), STANDARD_FACTION_HOSTILE));
+				}
+			}
+			
+			SetCampaignInt("DeanSphinx", "CrystalCast", 1, oCaster);			
+			SendMessageToAllDMs(GetName(oCaster) + " discharges a crystal based conjuration spell with a wild casting of " + IntToString(nSpell) + " on " + GetName(oTarget));
+			}
+			
+			nRunningTab = 0;
+			SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
+			nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
+			SendMessageToAllDMs(GetName(oCaster) + " CrysCon is at " + IntToString(nRunningTab));
+			
+		}
+	
+	} 
+}
+
 	//Standard Evocation	 
 	 if((GetTag(GetArea(oCaster)) == "6d_int_silvy_ladycol_class_lvl") && (nSpellId == SPELL_FLARE) && (GetTag(oTarget) == "slv_evo200_poisoncircle"))
 	 	   {object oMyPoisonCircle = GetObjectByTag("slv_evo200_poisoncircle");
