@@ -1478,12 +1478,7 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		
-		//Read Magic: Glyph of Warding
-		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
-		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
-		if(nAOESpell == 549) {
-			int nVarCount = GetVariableCount(oReadMagic);
+		int nVarCount = GetVariableCount(oReadMagic);
 			int nVar = 0;
 			while(nVar <= nVarCount) {
 			SendMessageToAllDMs("VarName = " + GetVariableName(oReadMagic, nVar));
@@ -1496,6 +1491,11 @@ if(GetSpellId() == 3003) {
 			
 			nVar++;
 			}
+		//Read Magic: Glyph of Warding
+		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
+		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
+		if(nAOESpell == 549) {
+			
 			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
 			if(nReadGlyph != 1) {
 				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
