@@ -1422,11 +1422,6 @@ void main()
 //Arcane Mark
 if(GetSpellId() == 3066) {
 
-	if (!X2PreSpellCastCode())
-    {
-		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
-        return;
-    }
 
 	object oMarked = GetSpellTargetObject();
 	string sName = GetName(oMarked);
@@ -1466,7 +1461,7 @@ if(GetSpellId() == 3066) {
 	} 
 	  
 //Glyph of Warding 
-if(GetSpellId() == 549) {
+/*if(GetSpellId() == 549) {
 
 	if (!X2PreSpellCastCode())
     {
@@ -1475,49 +1470,49 @@ if(GetSpellId() == 549) {
     }
 	
 	
-	
 }
+	*/
 	
 //Read Magic
 if(GetSpellId() == 3003) {
 
-	if (!X2PreSpellCastCode())
-    {
-		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
-        return;
-    }
 	object oTarget = GetSpellTargetObject();
 	object oReadMagic = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);
 	int nMarked = 0;
+	int nGlyph = 0;
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		int nRM = 0;
 		
 		//Read Magic: Glyph of Warding
 		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
 		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
 		SendMessageToAllDMs("AOESpell = " + IntToString(nAOESpell));
 		if(nAOESpell == 549) {
-			if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
-				object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
-				int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
-				if (nGlyphCasterLvl > 10){nGlyphCasterLvl = 10;}
-				SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
-				int nDam = d8(nGlyphCasterLvl /2 );
-				nDam = ApplyMetamagicVariableMods(nDam, 40);
-				nDam = GetReflexAdjustedDamage(nDam, oCaster, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oGlyphCaster);
-				int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
-				string sAlignDmg = "Divine";
-				if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
-				else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
-				else {sAlignDmg = "Sonic";}
-				SendMessageToPC(oCaster, sName + " is a Blasting Glyph of Warding that will do " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
+			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
+			if(nReadGlyph != 1) {
+				nReadGlyph = 1; 
+				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
+					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
+					int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
+					if (nGlyphCasterLvl > 10){nGlyphCasterLvl = 10;}
+					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
+					int nDam = d8(nGlyphCasterLvl /2 );
+					nDam = ApplyMetamagicVariableMods(nDam, 40);
+					nDam = GetReflexAdjustedDamage(nDam, oCaster, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oGlyphCaster);
+					int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
+					string sAlignDmg = "Divine";
+					if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
+					else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
+					else {sAlignDmg = "Sonic";}
+					SendMessageToPC(oCaster, sName + " is a Blasting Glyph of Warding that will do " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
+					}
+				else {SendMessageToPC(oCaster, "There is a glyph on the ground.");}
 				}
-			else {SendMessageToPC(oCaster, "There is a glyph on the ground.");}
 			}
 		}
 		//Read Magic: Arcane Mark directly on an object or on the object as a proxy for a location
+		int nRM = 0;
 		while (nRM < 5) {
 			nRM++;
 			if(ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
@@ -1570,12 +1565,6 @@ if(GetSpellId() == 3003) {
 	}
 	
 //Erase
-
-if (!X2PreSpellCastCode())
-    {
-		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
-        return;
-    }
 
 if(GetSpellId() == 3137) {
 	object oMarked = GetSpellTargetObject();
