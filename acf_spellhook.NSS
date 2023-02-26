@@ -1491,11 +1491,13 @@ if(GetSpellId() == 3003) {
 		if(nAOESpell == 549) {
 			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
 			if(nReadGlyph != 1) {
-				nReadGlyph = 1; 
+				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
+				CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_jungle_ray_1", GetLocation(oReadMagic), TRUE);
 				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
 					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
 					int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
-					if (nGlyphCasterLvl > 10){nGlyphCasterLvl = 10;}
+					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
+					if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
 					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
 					int nDam = d8(nGlyphCasterLvl /2 );
 					nDam = ApplyMetamagicVariableMods(nDam, 40);
