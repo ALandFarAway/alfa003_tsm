@@ -1461,17 +1461,12 @@ if(GetSpellId() == 3066) {
 	} 
 	  
 //Glyph of Warding 
-/*if(GetSpellId() == 549) {
+if(GetSpellId() == 549) {
 
-	if (!X2PreSpellCastCode())
-    {
-		// If code within the PreSpellCastHook (i.e. UMD) reports FALSE, do not run this spell
-        return;
-    }
 	
 	
 }
-	*/
+	
 	
 //Read Magic
 if(GetSpellId() == 3003) {
@@ -1487,27 +1482,23 @@ if(GetSpellId() == 3003) {
 		//Read Magic: Glyph of Warding
 		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
 		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
-		SendMessageToAllDMs("AOESpell = " + IntToString(nAOESpell));
 		if(nAOESpell == 549) {
 			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
 			if(nReadGlyph != 1) {
 				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
-				CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_jungle_ray_1", GetLocation(oReadMagic), TRUE);
 				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
 					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
-					int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
+					int nGlyphCasterLvl = GetLevelByClass(CLASS_TYPE_CLERIC, oGlyphCaster);
 					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
 					if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
 					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
 					int nDam = d8(nGlyphCasterLvl /2 );
-					nDam = ApplyMetamagicVariableMods(nDam, 40);
-					nDam = GetReflexAdjustedDamage(nDam, oCaster, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oGlyphCaster);
 					int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
 					string sAlignDmg = "Divine";
 					if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
 					else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
 					else {sAlignDmg = "Sonic";}
-					SendMessageToPC(oCaster, sName + " is a Blasting Glyph of Warding that will do " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
+					SendMessageToPC(oCaster, sName + " is a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
 					}
 				else {SendMessageToPC(oCaster, "There is a glyph on the ground.");}
 				}
