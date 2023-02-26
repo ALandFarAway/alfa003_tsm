@@ -1483,16 +1483,28 @@ if(GetSpellId() == 3003) {
 		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
 		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
 		if(nAOESpell == 549) {
+			int nVarCount = GetVariableCount(oReadMagic);
+			int nVar = 0;
+			while(nVar <= nVarCount) {
+			SendMessageToAllDMs("VarName = " + GetVariableName(oReadMagic, nVar));
+			SendMessageToAllDMs("VarType = " + IntToString(GetVariableType(oReadMagic, nVar)));
+			SendMessageToAllDMs("StringValue = " + GetVariableValueString(oReadMagic, nVar));
+			SendMessageToAllDMs("IntValue = " + IntToString(GetVariableValueInt(oReadMagic, nVar)));
+			SendMessageToAllDMs("FloatValue = " + FloatToString(GetVariableValueFloat(oReadMagic, nVar)));
+			SendMessageToAllDMs("LocValue = " + ACR_LocationToString(GetVariableValueLocation(oReadMagic, nVar)));
+			SendMessageToAllDMs("ObjValue = " + GetName(GetVariableValueObject(oReadMagic, nVar)));
+			
+			nVar++;
+			}
 			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
 			if(nReadGlyph != 1) {
 				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
 				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
 					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
 					int nGlyphCasterLvl = GetLevelByClass(CLASS_TYPE_CLERIC, oGlyphCaster);
-					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
 					if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
 					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
-					int nDam = d8(nGlyphCasterLvl /2 );
+					int nDam = 8 * (nGlyphCasterLvl /2 );
 					int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
 					string sAlignDmg = "Divine";
 					if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
