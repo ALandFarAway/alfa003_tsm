@@ -389,6 +389,7 @@ void main()
 				
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
+						if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {sName = "Something";}
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + sSchool2 + sSchool3));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 						}
@@ -408,14 +409,14 @@ void main()
 			//Multi-type objects with standardized tags or variables
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
-				SendMessageToAllDMs("Arcane Mark");
+				//SendMessageToAllDMs("Arcane Mark");
 				int nMarked = 0;
 				int nAM = 0;
 				if(nArcaneMark != 1) {
 					nArcaneMark = 1;
 					object oMarked = GetArea(oCaster);
 					while (nAM < 5) {
-					SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMarked));
+					//SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMarked));
 				
 						nAM++;
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
@@ -427,7 +428,7 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
+									//SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
 				    				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -458,12 +459,12 @@ void main()
 				nAM = 0;
 				while (nAM < 5) {
 					nAM++;
-					SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oDetected));
+					//SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oDetected));
 				    if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-						SendMessageToAllDMs(IntToString(nAM) + " " + ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)));
+						//SendMessageToAllDMs(IntToString(nAM) + " " + ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)));
 				    	location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 						string sMarked = ACR_LocationToString(lMarked);
-						SendMessageToAllDMs(IntToString(nAM) + " " + sMarked);
+						//SendMessageToAllDMs(IntToString(nAM) + " " + sMarked);
 				    	string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
 						int nXStart = FindSubString(sMarked, "#X#", 0);
 						string sXYMarked = GetSubString(sMarked, nXStart, 30);
@@ -472,7 +473,7 @@ void main()
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
-						SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
+						//SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
 				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -1480,13 +1481,6 @@ if(GetSpellId() == 3066) {
 	SendMessageToPC(oCaster, "This " + sName + " cannot hold any more arcane marks.");
 	} 
 	  
-//Glyph of Warding 
-if(GetSpellId() == 549) {
-
-	
-	
-}
-	
 	
 //Read Magic
 if(GetSpellId() == 3003) {
@@ -1530,7 +1524,7 @@ if(GetSpellId() == 3003) {
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 					object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					while (oMark != OBJECT_INVALID) {
-						SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
+						//SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
 				    	if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 						oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						}
@@ -1563,7 +1557,7 @@ if(GetSpellId() == 3003) {
 				sName = "A nearby location";
 				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
-					SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
+					//SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
 				    if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 					oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
