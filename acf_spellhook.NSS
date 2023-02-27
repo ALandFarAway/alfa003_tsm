@@ -1486,7 +1486,7 @@ if(GetSpellId() == 3066) {
 if(GetSpellId() == 3003) {
 
 	object oTarget = GetSpellTargetObject();
-	object oReadMagic = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);
+	object oReadMagic = GetFirstObjectInShape(SHAPE_SPHERE, 6.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);
 	int nMarked = 0;
 	int nGlyph = 0;
 	string sName;
@@ -1501,7 +1501,7 @@ if(GetSpellId() == 3003) {
 				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
 				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
 					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
-					int nGlyphCasterLvl = GetLevelByClass(CLASS_TYPE_CLERIC, oGlyphCaster);
+					int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
 					if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
 					int nDam = 8 * (nGlyphCasterLvl /2 );
 					int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
@@ -1509,9 +1509,10 @@ if(GetSpellId() == 3003) {
 					if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
 					else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
 					else {sAlignDmg = "Sonic";}
-					SendMessageToPC(oCaster, sName + " is a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
+					if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) { sName = "A nearby location";}
+					SendMessageToPC(oCaster, sName + " bears a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
 					}
-				else {SendMessageToPC(oCaster, "There is a glyph on the ground.");}
+				else {SendMessageToPC(oCaster, sName + " has a glyph on it.");}
 				}
 			}
 		}
@@ -1539,8 +1540,8 @@ if(GetSpellId() == 3003) {
 					}
 				}
 			}
-		if(oReadMagic != GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT))
-			{oReadMagic = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);}
+		if(oReadMagic != GetNextObjectInShape(SHAPE_SPHERE, 6.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT))
+			{oReadMagic = GetNextObjectInShape(SHAPE_SPHERE, 6.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);}
 		else {break;}
 		}
 	
