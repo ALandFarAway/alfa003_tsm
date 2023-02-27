@@ -217,8 +217,8 @@ void main()
 		string sSchool = "";
 		string sSchool2 = "";
 		string sSchool3 = "";
-		//Let's only look at Creatures, Doors, Items, Placeables, Placed Effects, Waypoints 
-			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)|| (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)  || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
+		//Let's look at Creatures, Doors, Items, Placeables, Placed Effects, Waypoints, Area of Effect Objects 
+			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)|| (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_AREA_OF_EFFECT)  || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 			
 			//Distance and direction per detected object
 			string sName = GetName(oDetected);
@@ -498,6 +498,26 @@ void main()
 					}
 				}
 			
+		//Detect Magic: Glyph of Warding
+		if(GetObjectType(oDetected) == OBJECT_TYPE_AREA_OF_EFFECT) {
+			int nAOESpell = GetAreaOfEffectSpellId(oDetected);
+			if(nAOESpell == 549) {
+				nAuraCount++;
+				nAuraPower = 3;
+				sAuraStrength = "faint";
+				if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=lightblue>Abjuration</color>";}
+										
+				//Flag Round 1 Message 	
+				SetLocalInt(oCaster, "nMessage1", 1);
+									
+				//Queue up report to caster if Round 3 achieved
+				if(nConcentration > 13) {
+					DelayCommand(21.0, SendMessageToAllDMs("A nearby location has a glyph that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+					DelayCommand(21.0, SendMessageToPC(oCaster, "A nearby location has a glyph that glows with a " + sAuraStrength + " aura" + sSchool));
+					}
+				}
+			}
+				
 			//Portals
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
 				//If they are tagged as per the line below, DM is automatic for them and they will register as Strong Conjuration.
@@ -1478,24 +1498,10 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		int nVarCount = GetVariableCount(oReadMagic);
-			int nVar = 0;
-			while(nVar <= nVarCount) {
-			SendMessageToAllDMs("VarName = " + GetVariableName(oReadMagic, nVar));
-			SendMessageToAllDMs("VarType = " + IntToString(GetVariableType(oReadMagic, nVar)));
-			SendMessageToAllDMs("StringValue = " + GetVariableValueString(oReadMagic, nVar));
-			SendMessageToAllDMs("IntValue = " + IntToString(GetVariableValueInt(oReadMagic, nVar)));
-			SendMessageToAllDMs("FloatValue = " + FloatToString(GetVariableValueFloat(oReadMagic, nVar)));
-			SendMessageToAllDMs("LocValue = " + ACR_LocationToString(GetVariableValueLocation(oReadMagic, nVar)));
-			SendMessageToAllDMs("ObjValue = " + GetName(GetVariableValueObject(oReadMagic, nVar)));
-			
-			nVar++;
-			}
 		//Read Magic: Glyph of Warding
 		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
 		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
 		if(nAOESpell == 549) {
-			
 			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
 			if(nReadGlyph != 1) {
 				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
@@ -1503,7 +1509,6 @@ if(GetSpellId() == 3003) {
 					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
 					int nGlyphCasterLvl = GetLevelByClass(CLASS_TYPE_CLERIC, oGlyphCaster);
 					if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
-					SendMessageToAllDMs("oGlyphCaster = " + GetName(oGlyphCaster) + "; nGlyphCasterLvl = " + IntToString(nGlyphCasterLvl));
 					int nDam = 8 * (nGlyphCasterLvl /2 );
 					int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
 					string sAlignDmg = "Divine";
