@@ -1658,15 +1658,11 @@ if(GetSpellId() == 3071) {
 	int nPerformStr = GetSkillRank(48, oCaster, FALSE);
 	int nPerformWind = GetSkillRank(62, oCaster, FALSE);
 	int nPerformDrum = GetSkillRank(60, oCaster, FALSE);
-	SendMessageToAllDMs("nPerformStr =" + IntToString(nPerformStr));
-	SendMessageToPC(oCaster, "nPerformStr =" + IntToString(nPerformStr));
-	SendMessageToAllDMs("nPerformWind =" + IntToString(nPerformWind));
-	SendMessageToPC(oCaster, "nPerformWind =" + IntToString(nPerformWind));
-	SendMessageToAllDMs("nPerformDrum =" + IntToString(nPerformDrum));
-	SendMessageToPC(oCaster, "nPerformDrum =" + IntToString(nPerformDrum));
 	string sPerform = "abr_it_msc_lute";
 	string sPerformScry = "lute";
-		
+	if((nPerformWind >= nPerformStr) && (nPerformStr >= nPerformDrum)) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
+	if((nPerformDrum >= nPerformStr) && (nPerformStr >= nPerformWind)) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
+			
 	if((GetDistanceBetween(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1), oCaster) <= 5.0) && (FindSubString(GetName(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1)), "Mirror") != -1)) {
 		object oScryer = oCaster;
 		location lTarget = GetLocation(oScryer);
@@ -1685,8 +1681,6 @@ if(GetSpellId() == 3071) {
 	else {		
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardSong, oCaster, 3.0);
 		ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
-		if((nPerformWind >= nPerformStr) && (nPerformStr >= nPerformDrum)) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
-		if((nPerformDrum >= nPerformStr) && (nPerformStr >= nPerformWind)) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
 		object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
 		DelayCommand(1.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
 		int nBardLevel = GetCasterLevel(oCaster);
@@ -1707,6 +1701,7 @@ if(GetSpellId() == 3068) {
 	int nCasterType = GetLastSpellCastClass();
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
+	SendMessageToPC(oCaster, "Spellhook: nSpellCasterType = " + IntToString(nCasterType));
 	object oScry = GetSpellTargetObject();
 	location lTarget = GetLocation(oScryer);
 	if(nCasterType == CLASS_TYPE_DRUID) {
