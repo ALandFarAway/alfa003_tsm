@@ -1655,35 +1655,45 @@ if(GetSpellId() == 3071) {
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	effect eBardSong = EffectVisualEffect(VFX_DUR_BARD_SONG, 0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardSong, oCaster, 3.0);
-	ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
-	int nPerform = ACR_GetHighestPerformSkill(oCaster, FALSE);
-	SendMessageToAllDMs("nPerform =" + IntToString(nPerform));
-	SendMessageToPC(oCaster, "nPerform =" + IntToString(nPerform));
+	int nPerformStr = GetSkillRank(48, oCaster, FALSE);
+	int nPerformWind = GetSkillRank(62, oCaster, FALSE);
+	int nPerformDrum = GetSkillRank(60, oCaster, FALSE);
+	SendMessageToAllDMs("nPerformStr =" + IntToString(nPerformStr));
+	SendMessageToPC(oCaster, "nPerformStr =" + IntToString(nPerformStr));
+	SendMessageToAllDMs("nPerformWind =" + IntToString(nPerformWind));
+	SendMessageToPC(oCaster, "nPerformWind =" + IntToString(nPerformWind));
+	SendMessageToAllDMs("nPerformDrum =" + IntToString(nPerformDrum));
+	SendMessageToPC(oCaster, "nPerformDrum =" + IntToString(nPerformDrum));
 	string sPerform = "abr_it_msc_lute";
 	string sPerformScry = "lute";
-	if(nPerform == 60) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
-	if(nPerform == 62) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
-	object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
-	DelayCommand(1.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
-	int nBardLevel = GetCasterLevel(oCaster);
-	float nDuration = nBardLevel * 60.0;
-	DestroyObject(oPerform, nDuration);
-	
-	object oScryer = oCaster;
-	location lTarget = GetLocation(oScryer);
-	object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
-	string sPlaceableTag = GetTag(oScry);
-		while(oScry != OBJECT_INVALID) {
-			sPlaceableTag = GetTag(oScry);
-			if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
-				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
-				SetFirstName(oFocus, "Scrying Shard");
-				SendMessageToPC(oScryer, "A shard shaped like a " + sPerformScry + " shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
-			 }
-			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
-			}	
-}
+		
+	if(GetDistanceBetween(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1), oCaster) <= 5.0) {
+		object oScryer = oCaster;
+		location lTarget = GetLocation(oScryer);
+		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+		string sPlaceableTag = GetTag(oScry);
+			while(oScry != OBJECT_INVALID) {
+				sPlaceableTag = GetTag(oScry);
+				if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
+					object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
+					SetFirstName(oFocus, "Scrying Shard");
+					SendMessageToPC(oScryer, "A shard shaped like a " + sPerformScry + " shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
+				 }
+				oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
+				}
+	}
+	else {		
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardSong, oCaster, 3.0);
+		ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
+		if((nPerformWind >= nPerformStr) && (nPerformStr >= nPerformDrum)) {sPerform = "abr_it_msc_flute"; sPerformScry = "drum";}
+		if((nPerformDrum >= nPerformStr) && (nPerformStr >= nPerformWind)) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
+		object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
+		DelayCommand(1.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
+		int nBardLevel = GetCasterLevel(oCaster);
+		float nDuration = nBardLevel * 60.0;
+		DestroyObject(oPerform, nDuration);
+		}
+	}
 
 //Create Water
 if(GetSpellId() == 3068) {
