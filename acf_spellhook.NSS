@@ -1168,17 +1168,17 @@ void main()
 													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
 														if(nACRSpellSchool > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 															}
 														if(nACRSpellSchool2 > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength2 + " aura" + sSchool2));
 															}
 														if(nACRSpellSchool3 > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength3 + " aura" + sSchool3));
 															}
 														}
@@ -1214,7 +1214,7 @@ void main()
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
 												
-											//If the caster gets a Round 3, most objects report at 24 seconds into the report.
+											//If the caster gets a Round 3, most objects report at 22 seconds into the report.
 											float fDelay = 22.0;
 											//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
 									 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
@@ -1225,7 +1225,7 @@ void main()
 												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0) && (GetLocalInt(oDetected, "ACR_SPELLADDED") == 0)) {
 													if((GetLocalInt(oItem, "ACR_SPELLSCHOOL") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") == 0)) {
 														nAuraCount++;
-														DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+														DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 														DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 														}
 													}
@@ -1659,12 +1659,13 @@ if(GetSpellId() == 3071) {
 	ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
 	int nPerform = ACR_GetHighestPerformSkill(oCaster, FALSE);
 	SendMessageToAllDMs("nPerform =" + IntToString(nPerform));
+	SendMessageToPC(oCaster, "nPerform =" + IntToString(nPerform));
 	string sPerform = "abr_it_msc_lute";
 	string sPerformScry = "lute";
 	if(nPerform == 60) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
 	if(nPerform == 62) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
 	object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
-	DelayCommand(2.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
+	DelayCommand(1.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
 	int nBardLevel = GetCasterLevel(oCaster);
 	float nDuration = nBardLevel * 60.0;
 	DestroyObject(oPerform, nDuration);
