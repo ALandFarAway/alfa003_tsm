@@ -47,7 +47,7 @@ void main() {
 	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
-		SendMessageToPC(oCaster, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oTarget) + ".");
+		SendMessageToPC(oCaster, "PLC: You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oTarget) + ".");
 	    SetItemIcon(oFocus, 1896);
 		}
 	 

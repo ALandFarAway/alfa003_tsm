@@ -1714,7 +1714,7 @@ if(GetSpellId() == 3068) {
 				SignalEvent(oScry, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
 				SetFirstName(oFocus, "Scrying Droplet");
-				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
+				SendMessageToPC(oScryer, "Spellhook: You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
 			    SetItemIcon(oFocus, 1896);
 				return;
 				}
