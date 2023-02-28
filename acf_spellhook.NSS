@@ -1667,14 +1667,14 @@ if(GetSpellId() == 3071) {
 	string sPerform = "abr_it_msc_lute";
 	string sPerformScry = "lute";
 		
-	if(GetDistanceBetween(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1), oCaster) <= 5.0) {
+	if((GetDistanceBetween(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1), oCaster) <= 5.0) && (FindSubString(GetName(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1)), "Mirror") != -1)) {
 		object oScryer = oCaster;
 		location lTarget = GetLocation(oScryer);
 		object oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
-		string sPlaceableTag = GetTag(oScry);
-			while(oScry != OBJECT_INVALID) {
-				sPlaceableTag = GetTag(oScry);
-				if(FindSubString(sPlaceableTag, "_SCRY_") != -1) {
+		while(oScry != OBJECT_INVALID) {
+				string sPlaceableTag = GetTag(oScry);
+				string sPlaceableName = GetName(oScry);
+				if((FindSubString(sPlaceableTag, "_SCRY_") != -1) && (FindSubString(sPlaceableName, "Mirror") != -1)) {
 					object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
 					SetFirstName(oFocus, "Scrying Shard");
 					SendMessageToPC(oScryer, "A shard shaped like a " + sPerformScry + " shimmers into your hand, out of the " + GetName(oScry) + ", leaving the glass unblemished.");
@@ -1685,7 +1685,7 @@ if(GetSpellId() == 3071) {
 	else {		
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardSong, oCaster, 3.0);
 		ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
-		if((nPerformWind >= nPerformStr) && (nPerformStr >= nPerformDrum)) {sPerform = "abr_it_msc_flute"; sPerformScry = "drum";}
+		if((nPerformWind >= nPerformStr) && (nPerformStr >= nPerformDrum)) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
 		if((nPerformDrum >= nPerformStr) && (nPerformStr >= nPerformWind)) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
 		object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
 		DelayCommand(1.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
