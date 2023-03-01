@@ -45,16 +45,17 @@ void main() {
 	 SendMessageToAllDMs("plc oncastat: nLastSpell = " + IntToString(nLastSpell));
 	 SendMessageToPC(oCaster, "plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
 	 SendMessageToPC(oCaster, "plc oncastat: nLastSpell = " + IntToString(nLastSpell));
-	 object oArea = GetArea(oCaster);
+	 object oArea = GetArea(OBJECT_SELF);
 	//if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
 	    //{
 	        // Cover a 3x3 square with knee-high water: the square starts in the
 	        // area's bottom left corner and extends x columns right and y rows up.
 	        // NOTE: the water tile has a built in z-offset of -1m, so to make it
 	        // it knee-high for a human (about 0.5m) we have to raise it by 1.5m.
-	        TLChangeAreaGroundTiles(oArea, X2_TL_GROUNDTILE_WATER, 8, 8, -2.4);
+	        TLChangeAreaGroundTiles(oArea,401, 8, 8, -2.4);
 			//TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oCaster), 3, 0.1f, 6.0, -2.0);
-	        TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oCaster), 5, 0.0, 0.5, 1.0);// Set a variable to indicate the tilemagic exists.
+	        TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oTarget), 5, 0.0, 0.5, 1.0);
+			// Set a variable to indicate the tilemagic exists.
 	        //SetLocalInt(oArea, "TILEMAGIC_APPLIED", TRUE);
 	    //}
 	if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {

@@ -1696,11 +1696,9 @@ if(GetSpellId() == 3068) {
 	effect eCreateWater = EffectVisualEffect(VFX_DUR_PROT_PREMONITION, 0);
 	effect eCreateWater2 = EffectVisualEffect(VFX_IMP_MAGIC_PROTECTION, 0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCreateWater, oScryer, 3.0);
-	//DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
+	DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
 	int nCasterType = GetLastSpellCastClass();
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
-	//SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
-	//SendMessageToPC(oCaster, "Spellhook: nSpellCasterType = " + IntToString(nCasterType));
 	object oScry = GetSpellTargetObject();
 	location lTarget = GetLocation(oScryer);
 	if((nCasterType == CLASS_TYPE_DRUID) && (GetTag(oScry) != "ACR_SCRY_OBJECT")) {
@@ -1708,9 +1706,7 @@ if(GetSpellId() == 3068) {
 		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, TRUE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			string sTriggerTag = GetTag(oScry);
-			//SendMessageToPC(oScryer, "Spellhook: sTriggerTag = " + sTriggerTag);
-		 	if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				//SignalEvent(oScry, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
 				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
 				SetFirstName(oFocus, "Scrying Droplet");
 				SendMessageToPC(oScryer, "You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
