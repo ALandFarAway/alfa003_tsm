@@ -1696,8 +1696,19 @@ if(GetSpellId() == 3068) {
 	effect eCreateWater = EffectVisualEffect(VFX_DUR_PROT_PREMONITION, 0);
 	effect eCreateWater2 = EffectVisualEffect(VFX_IMP_MAGIC_PROTECTION, 0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCreateWater, oScryer, 3.0);
-	DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
-	TLChangeAreaGroundTiles(GetArea(oScryer), 401,3,3,1.5);
+	//DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
+	object oArea = GetArea(OBJECT_SELF);
+	//if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
+	    //{
+	        // Cover a 3x3 square with knee-high water: the square starts in the
+	        // area's bottom left corner and extends x columns right and y rows up.
+	        // NOTE: the water tile has a built in z-offset of -1m, so to make it
+	        // it knee-high for a human (about 0.5m) we have to raise it by 1.5m.
+	        TLChangeAreaGroundTiles(oArea, X2_TL_GROUNDTILE_WATER, 8, 8, -2.7);
+			TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oCaster), 3, 0.1f, 6.0, -2.0);
+	        // Set a variable to indicate the tilemagic exists.
+	        //SetLocalInt(oArea, "TILEMAGIC_APPLIED", TRUE);
+	    //}
 	int nCasterType = GetLastSpellCastClass();
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	SendMessageToAllDMs("Spellhook: nSpellCasterType = " + IntToString(nCasterType));
