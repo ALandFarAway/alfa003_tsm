@@ -48,7 +48,7 @@ void main() {
 	 object oArea = GetArea(OBJECT_SELF);
 	if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
 	    {
-	        TLChangeAreaGroundTiles(oArea,15, 8, 8, 0.0);
+	        TLChangeAreaGroundTiles(oArea,15, 8, 8, -2.0);
 			//TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oCaster), 3, 0.1f, 6.0, -2.0);
 	        //TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oTarget), 5, 0.0, 0.5, 1.0);
 			// Set a variable to indicate the tilemagic exists.
