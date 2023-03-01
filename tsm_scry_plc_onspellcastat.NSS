@@ -46,18 +46,19 @@ void main() {
 	 SendMessageToPC(oCaster, "plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
 	 SendMessageToPC(oCaster, "plc oncastat: nLastSpell = " + IntToString(nLastSpell));
 	 object oArea = GetArea(OBJECT_SELF);
-	//if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
-	    //{
-	        // Cover a 3x3 square with knee-high water: the square starts in the
-	        // area's bottom left corner and extends x columns right and y rows up.
-	        // NOTE: the water tile has a built in z-offset of -1m, so to make it
-	        // it knee-high for a human (about 0.5m) we have to raise it by 1.5m.
-	        TLChangeAreaGroundTiles(oArea,401, 8, 8, -2.4);
+	if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
+	    {
+	        TLChangeAreaGroundTiles(oArea,406, 8, 8, 0.0);
 			//TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oCaster), 3, 0.1f, 6.0, -2.0);
-	        TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oTarget), 5, 0.0, 0.5, 1.0);
+	        //TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oTarget), 5, 0.0, 0.5, 1.0);
 			// Set a variable to indicate the tilemagic exists.
-	        //SetLocalInt(oArea, "TILEMAGIC_APPLIED", TRUE);
-	    //}
+	        SetLocalInt(oArea, "TILEMAGIC_APPLIED", TRUE);
+	    }
+	else if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == TRUE)
+	    {
+	        TLResetAreaGroundTiles(oArea, 8, 8);
+			SetLocalInt(oArea, "TILEMAGIC_APPLIED", FALSE);
+	    }
 	if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
