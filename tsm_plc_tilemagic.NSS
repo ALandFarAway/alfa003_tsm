@@ -30,14 +30,17 @@ void main() {
 	//while(oUse != OBJECT_INVALID) {
 		int nGTCurrent = GetLocalInt(oUse, "GTCurrent");
 		int nGTChange;
-		if(nGTCurrent < 346) {nGTChange = 346;}
-		else if((nGTCurrent >= 346) && (nGTCurrent <= 350)) {nGTChange = nGTCurrent +1;}
-		else if(nGTCurrent == 350) {nGTChange = 401;}
-		else if(nGTCurrent == 401) {nGTChange = 402;}
-		else if(nGTCurrent == 402) {nGTChange = 406;}
-		else if(nGTCurrent == 406) {nGTChange = 426;}
-		else if((nGTCurrent >= 426) && (nGTCurrent <= 460)) {nGTChange = nGTCurrent +1;}
-		else if(nGTCurrent == 461) {nGTChange = 346;}
+		if(nGTCurrent == 0) {nGTChange = 869;}
+		else if(nGTCurrent == 869) {nGTChange = 984;}
+		else if(nGTCurrent == 984) {nGTChange = 985;}
+		else if(nGTCurrent == 985) {nGTChange = 1021;}
+		else if(nGTCurrent == 1021) {nGTChange = 1022;}
+		else if(nGTCurrent == 1022) {nGTChange = 1028;}
+		else if(nGTCurrent == 1028) {nGTChange = 921;}
+		else if(nGTCurrent == 921) {nGTChange = 625;}
+		else if(nGTCurrent == 625) {nGTChange = 881;}
+		
+		else if(nGTCurrent == 881) {nGTChange = 0;}
 		SetLocalInt(oUse, "GTCurrent", nGTChange);
 		SendMessageToAllDMs("nGTCurrent = " + IntToString(nGTCurrent) + "; nGTChange = " + IntToString(nGTChange));
 		
