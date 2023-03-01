@@ -31,7 +31,7 @@ void main() {
 		int nGTCurrent = GetLocalInt(oUse, "GTCurrent");
 		int nGTChange;
 		if(nGTCurrent < 346) {nGTChange = 346;}
-		else if((nGTCurrent == 346) && (nGTCurrent <= 350)) {nGTChange = nGTCurrent +1;}
+		else if((nGTCurrent >= 346) && (nGTCurrent <= 350)) {nGTChange = nGTCurrent +1;}
 		else if(nGTCurrent == 350) {nGTChange = 401;}
 		else if(nGTCurrent == 401) {nGTChange = 402;}
 		else if(nGTCurrent == 402) {nGTChange = 406;}
