@@ -41,25 +41,8 @@ void main() {
 	 string sTag = GetTag(OBJECT_SELF);
 	 string sResRef = GetResRef(OBJECT_SELF);
 	 
-	 SendMessageToAllDMs("plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
-	 SendMessageToAllDMs("plc oncastat: nLastSpell = " + IntToString(nLastSpell));
-	 SendMessageToPC(oCaster, "plc oncastat: nSpellCasterType = " + IntToString(nCasterType));
-	 SendMessageToPC(oCaster, "plc oncastat: nLastSpell = " + IntToString(nLastSpell));
 	 object oArea = GetArea(OBJECT_SELF);
-	if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
-	    {
-	        TLChangeAreaGroundTiles(oArea,15, 8, 8, -2.0);
-			//TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oCaster), 3, 0.1f, 6.0, -2.0);
-	        //TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oTarget), 5, 0.0, 0.5, 1.0);
-			// Set a variable to indicate the tilemagic exists.
-	        SetLocalInt(oArea, "TILEMAGIC_APPLIED", TRUE);
-	    }
-	else if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == TRUE)
-	    {
-	        TLResetAreaGroundTiles(oArea, 8, 8);
-			SetLocalInt(oArea, "TILEMAGIC_APPLIED", FALSE);
-	    }
-	if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {
+	 if((nLastSpell == 3068) && (sResRef == "abr_pl_so_holyfont") && ((nCasterType == CLASS_TYPE_CLERIC) || (nCasterType == CLASS_TYPE_INVALID))) {
 	 	object oFocus = CreateItemOnObject("abr_it_scry_focus", oCaster, 1);
 		SetFirstName(oFocus, "Scrying Droplet");
 		SendMessageToPC(oCaster, "PLC: You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oTarget) + ".");
