@@ -1693,8 +1693,8 @@ if(GetSpellId() == 3071) {
 if(GetSpellId() == 3068) {
 	ActionPlayAnimation(ANIMATION_LOOPING_WORSHIP, 1.0, 3.0);
 	object oScryer = OBJECT_SELF;
-	effect eCreateWater = EffectVisualEffect(VFX_DUR_PROT_PREMONITION, 0);
-	effect eCreateWater2 = EffectVisualEffect(VFX_IMP_MAGIC_PROTECTION, 0);
+	effect eCreateWater = EffectVisualEffect(VFX_DUR_SPELL_SHROUDING_FOG, 0);
+	effect eCreateWater2 = EffectVisualEffect(VFX_HIT_DROWN, 0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCreateWater, oScryer, 3.0);
 	DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
 	int nCasterType = GetLastSpellCastClass();
