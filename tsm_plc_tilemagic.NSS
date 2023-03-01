@@ -26,8 +26,8 @@
 void main() {
  
 	 
-	object oUse = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
-	while(oUse != OBJECT_INVALID) {
+	object oUse = OBJECT_SELF;
+	//while(oUse != OBJECT_INVALID) {
 		int nGTCurrent = GetLocalInt(oUse, "GTCurrent");
 		int nGTChange;
 		if(nGTCurrent <= 346) {nGTChange = 346;}
@@ -37,7 +37,8 @@ void main() {
 		else if(nGTCurrent == 402) {nGTChange = 406;}
 		else if(nGTCurrent == 406) {nGTChange = 426;}
 		else if((nGTCurrent >= 426) && (nGTCurrent <= 460)) {nGTChange = nGTCurrent +1;}
-		else if(nGTCurrent == 461) {nGTChange = 40;}
+		else if(nGTCurrent == 461) {nGTChange = 346;}
+		SendMessageToAllDMs("nGTCurrent = " + IntToString(nGTCurrent) + "; nGTChange = " + IntToString(nGTChange));
 		
 		effect eTM = GetFirstEffect(oUse);
 		int nETM = GetEffectType(eTM);
@@ -46,9 +47,11 @@ void main() {
 			eTM = GetNextEffect(oUse);
 			nETM = GetEffectType(eTM);
 			}
+			
+		
 		ApplyEffectToObject(DURATION_TYPE_PERMANENT, EffectVisualEffect(nGTChange), oUse);
-		oUse = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
-	}
+		//oUse = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
+	//}
 	
 	
 }
