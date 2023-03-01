@@ -1697,16 +1697,16 @@ if(GetSpellId() == 3068) {
 	effect eCreateWater2 = EffectVisualEffect(VFX_IMP_MAGIC_PROTECTION, 0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCreateWater, oScryer, 3.0);
 	//DelayCommand(3.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
-	object oArea = GetArea(OBJECT_SELF);
+	object oArea = GetArea(oScryer);
 	//if(GetLocalInt(oArea, "TILEMAGIC_APPLIED") == FALSE)
 	    //{
 	        // Cover a 3x3 square with knee-high water: the square starts in the
 	        // area's bottom left corner and extends x columns right and y rows up.
 	        // NOTE: the water tile has a built in z-offset of -1m, so to make it
 	        // it knee-high for a human (about 0.5m) we have to raise it by 1.5m.
-	        TLChangeAreaGroundTiles(oArea, X2_TL_GROUNDTILE_WATER, 8, 8, -2.7);
-			TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oCaster), 3, 0.1f, 6.0, -2.0);
-	        // Set a variable to indicate the tilemagic exists.
+	        TLChangeAreaGroundTiles(oArea, X2_TL_GROUNDTILE_WATER, 8, 8, -0.4);
+			TLVFXPillar(VFX_IMP_FROST_S, GetLocation(oScryer), 3, 0.1f, 6.0, -2.0);
+	        TLVFXPillar(VFX_DUR_SPELLTURNING, GetLocation(oScryer), 5, 0.0, 0.5, 1.0);// Set a variable to indicate the tilemagic exists.
 	        //SetLocalInt(oArea, "TILEMAGIC_APPLIED", TRUE);
 	    //}
 	int nCasterType = GetLastSpellCastClass();
@@ -1715,14 +1715,14 @@ if(GetSpellId() == 3068) {
 	SendMessageToPC(oCaster, "Spellhook: nSpellCasterType = " + IntToString(nCasterType));
 	object oScry = GetSpellTargetObject();
 	location lTarget = GetLocation(oScryer);
-	if(nCasterType == CLASS_TYPE_DRUID) {
+	if((nCasterType == CLASS_TYPE_DRUID) && (GetTag(oScry) != "ACR_SCRY_OBJECT")) {
 		lTarget = GetSpellTargetLocation();
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
-		string sTriggerTag = GetTag(oScry);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, TRUE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
-			sTriggerTag = GetTag(oScry);
-			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
-				SignalEvent(oScry, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+			string sTriggerTag = GetTag(oScry);
+			SendMessageToPC(oScryer, "Spellhook: sTriggerTag = " + sTriggerTag);
+		 	if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
+				//SignalEvent(oScry, EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 				object oFocus = CreateItemOnObject("abr_it_scry_focus", oScryer, 1);
 				SetFirstName(oFocus, "Scrying Droplet");
 				SendMessageToPC(oScryer, "Spellhook: You call forth a droplet of water vapor, catching it in a vial as it rises from the " + GetName(oScry) + ".");
