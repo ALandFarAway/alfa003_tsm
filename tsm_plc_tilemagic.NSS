@@ -25,7 +25,7 @@
 
 void main() {
  
-	 
+	 ACR_PlaceableOnUsed();
 	object oUse = OBJECT_SELF;
 	//while(oUse != OBJECT_INVALID) {
 		int nGTCurrent = GetLocalInt(oUse, "GTCurrent");
@@ -38,6 +38,7 @@ void main() {
 		else if(nGTCurrent == 406) {nGTChange = 426;}
 		else if((nGTCurrent >= 426) && (nGTCurrent <= 460)) {nGTChange = nGTCurrent +1;}
 		else if(nGTCurrent == 461) {nGTChange = 346;}
+		SetLocalInt(oUse, "GTCurrent", nGTChange);
 		SendMessageToAllDMs("nGTCurrent = " + IntToString(nGTCurrent) + "; nGTChange = " + IntToString(nGTChange));
 		
 		effect eTM = GetFirstEffect(oUse);
