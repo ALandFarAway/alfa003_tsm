@@ -33,7 +33,7 @@ void main()
 		eEffect = GetNextEffect(oExiter);
 		}
 			
-	SendMessageToPC(oExiter, "You exit an area that had been physically and mentally cloaking you.");
+	SendMessageToPC(oExiter, "You exit an area that cloaks sensory communication and extra-sensory prying.");
  	SetLocalInt(oExiter, "abr_sp_sanctum", 0);
 	
 	

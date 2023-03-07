@@ -28,7 +28,7 @@ void main()
 	float fDuration = 24 * 60.0 * 60.0;
 	
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oEnterer, fDuration);
-	SendMessageToPC(oEnterer, "You enter an area that cloaks sensory and extra-sensory communication.");
+	SendMessageToPC(oEnterer, "You enter an area that cloaks sensory communication and extra-sensory prying.");
  	SetLocalInt(oEnterer, "abr_sp_sanctum", 1);
 	
 }

@@ -1737,7 +1737,7 @@ if(GetSpellId() == 3092) {
 		nDC = 11 + nCL;
 		}
 	SetLocalInt(oTarget, "abr_sp_nondetect", nDC);
-	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external prying.");
+	SendMessageToPC(OBJECT_SELF, "You feel protections cloaking your mind from external discovery.");
 	effect eSanctuary = EffectVisualEffect(VFX_DUR_SANCTUARY, TRUE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSanctuary, oTarget, 5.0);
 	DelayCommand(fDuration, SetLocalInt(OBJECT_SELF, "abr_sp_nondetect", 0));
@@ -1752,8 +1752,7 @@ if(GetSpellId() == 3157) {
 	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
     ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oCaster, fDuration);
-	SendMessageToPC(oCaster, "You feel protections physically and mentally cloaking this area.");
- 	SetLocalInt(oCaster, "abr_sp_sanctum", 1);
+	SetLocalInt(oCaster, "abr_sp_sanctum", 1);
 	}
 
 //Detect Scrying
@@ -1829,7 +1828,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 int nCasterType = GetLastSpellCastClass();
 	 //SendMessageToPC(oScryer, "nCasterType = " + IntToString(nCasterType));
 	 SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
-	 object oTarget = GetSpellTargetObject();
+	 //object oTarget = GetSpellTargetObject();
 	 //object oScry;
 	 //if(nCasterType != CLASS_TYPE_DRUID) {
 	 float fDistancePlc = 0.0;
