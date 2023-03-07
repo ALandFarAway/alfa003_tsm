@@ -1442,10 +1442,10 @@ void main()
 	
 //Arcane Mark
 if(GetSpellId() == 3066) {
-
-
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oMarked = GetSpellTargetObject();
 	string sName = GetName(oMarked);
+	SendMessageToPC(oCaster, "ResRef = " + GetResRef(oMarked));
 	location lMarked = GetLocation(oMarked);
 	int nExpire = 0;
 	if(oMarked == OBJECT_INVALID) {
