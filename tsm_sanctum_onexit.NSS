@@ -33,7 +33,7 @@ void main()
 		eEffect = GetNextEffect(oExiter);
 		}
 			
-	SendMessageToPC(oExiter, "You feel the ending of protections that had been cloaking your mind.");
+	SendMessageToPC(oExiter, "You exit an area that had been physically and mentally cloaking you.");
  	SetLocalInt(oExiter, "abr_sp_sanctum", 0);
 	
 	

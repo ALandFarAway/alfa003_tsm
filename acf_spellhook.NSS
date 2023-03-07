@@ -1752,7 +1752,7 @@ if(GetSpellId() == 3157) {
 	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
     ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oCaster, fDuration);
-	//SendMessageToPC(oCaster, "You feel protections cloaking your mind from external prying.");
+	SendMessageToPC(oCaster, "You feel protections physically and mentally cloaking this area.");
  	SetLocalInt(oCaster, "abr_sp_sanctum", 1);
 	}
 
