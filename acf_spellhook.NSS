@@ -140,7 +140,8 @@ void main()
 	string sArea = GetTag(GetArea(oCaster));
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
-	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + sSpellID + " in " + sArea + " at " + sTarget);
+	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
+	SendMessageToPC(oCaster, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
 	
 	/*Detect Magic
 	
@@ -1441,7 +1442,7 @@ void main()
 
 	
 //Arcane Mark
-if(GetSpellId() == 3066) {
+/*if(GetSpellId() == 3066) {
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oMarked = GetSpellTargetObject();
 	string sName = GetName(oMarked);
@@ -1480,7 +1481,7 @@ if(GetSpellId() == 3066) {
 			
 	SendMessageToPC(oCaster, "This " + sName + " cannot hold any more arcane marks.");
 	} 
-	  
+*/	  
 	
 //Read Magic
 if(GetSpellId() == 3003) {
@@ -1492,6 +1493,7 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
+		SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
 		//Read Magic: Glyph of Warding
 		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
 		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
