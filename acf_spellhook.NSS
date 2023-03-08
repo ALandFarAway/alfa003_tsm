@@ -141,7 +141,7 @@ void main()
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
-	SendMessageToPC(oCaster, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
+	//SendMessageToPC(oCaster, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
 	
 	/*Detect Magic
 	

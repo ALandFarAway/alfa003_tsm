@@ -713,11 +713,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								DestroyObject(oScrySelf, fAway);
 								// Follow the target UNTIL the spell expires - THIS MUST BE DONE LAST!
 								DelayCommand(4.0, FadeToBlack(oScryer, FADE_SPEED_SLOWEST, 5.0));
-								//DelayCommand(10.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								//DelayCommand(20.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								//DelayCommand(30.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								//DelayCommand(40.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
-								//DelayCommand(50.0, AssignCommand(oScryer, ActionJumpToLocation(GetLocation(oScried))));
 									    
 								// Jump to the target
 								DelayCommand(5.0, AssignCommand(oScryer, JumpToLocation(lThere)));
@@ -826,14 +821,14 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
-								object oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_WP", oScried, 1);
-								SendMessageToAllDMs("SubArea = " + GetName(oScriedSubArea));
-								SendMessageToAllDMs("SubArea description = " + GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC"));
-								float fSubArea = GetLocalFloat(oScriedSubArea, "ACR_SUBAREA_RADIUS");
+								//object oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_WP", oScried, 1);
+								//SendMessageToAllDMs("SubArea = " + GetName(oScriedSubArea));
+								//SendMessageToAllDMs("SubArea description = " + GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC"));
+								//float fSubArea = GetLocalFloat(oScriedSubArea, "ACR_SUBAREA_RADIUS");
 								string sSubjectArea = GetLocalString(oScried, "ACR_SCRY_AREA_DESC");
-								if((sSubjectArea == "") && (GetIsObjectValid(oScriedSubArea)) && (GetDistanceBetween(oScried, oScriedSubArea) <= fSubArea)) {
-									sSubjectArea = GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC");
-									}
+								//if((sSubjectArea == "") && (GetIsObjectValid(oScriedSubArea)) && (GetDistanceBetween(oScried, oScriedSubArea) <= fSubArea)) {
+								//	sSubjectArea = GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC");
+								//	}
 								if(sSubjectArea == "") {
 									sSubjectArea = GetLocalString(oArea, "ACR_AREA_DESC");
 									}

@@ -10,7 +10,7 @@
 //  Description
 //  Arcane Mark as per FRCS.  Additionally, Arcane Mark cast on a Scrying Object
 //  by a Sorceror or Wizard will call forth a scrying focus as part of the
-//	ALFA Scrying System.
+//	ALFA Scrying System, but that is handled in the Scrying Object's on castat script.
 //  
 //////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +26,11 @@
 
 void main()
 {		
+	if (!ACR_PrecastEvent())
+    {
+        return;
+    }
+
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, 3066, FALSE ) );
 	object oCaster = OBJECT_SELF;
 	//Did we click on an object to mark?

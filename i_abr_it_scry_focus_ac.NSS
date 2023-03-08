@@ -32,6 +32,9 @@ void main()
 	string sTargetName = GetName(oTarget);
 	object oFocus = GetItemActivated();
 	string sFocusName = GetFirstName(oFocus);
+	if((sFocusName != "Scrying Shard") && (sFocusName != "Scrying Droplet")) {
+		sFocusName = "Scrying Focus";
+		}
 	int nDCRoll = 10+ d10(1);
 	float fDCAbility = (GetAbilityModifier(ABILITY_CHARISMA, oTarget) + GetAbilityModifier(ABILITY_CONSTITUTION, oTarget) + GetAbilityModifier(ABILITY_DEXTERITY, oTarget) + GetAbilityModifier(ABILITY_INTELLIGENCE, oTarget) + GetAbilityModifier(ABILITY_STRENGTH, oTarget) + GetAbilityModifier(ABILITY_WISDOM, oTarget))/6.0 ;
 	fDCAbility = pow(fDCAbility, 2.0);
@@ -88,7 +91,7 @@ void main()
 				}
 			}
 	
-	
+		
 	//Imbuing your own essence, or DMs possessing an NPC automatically succeed to Familiar level. PCs who got this far must make a concentration check vs. a DC based on a d20 + the averaged ability modifiers of the target squared to go to lesser Firsthand Knowledge level			
 	if((oTarget==oScryer) || ((GetIsDMPossessed(oScryer)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE))  || ((GetIsSkillSuccessful(oScryer, SKILL_CONCENTRATION, nDC, TRUE)) && (GetObjectType(oTarget) == OBJECT_TYPE_CREATURE)))  {
 		if(oTarget==oScryer) {
