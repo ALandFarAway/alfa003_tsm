@@ -265,7 +265,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
-			SendMessageToAllDMs("Speak: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
 			
 			int nGoHome = 0;
 			while(nGoHome < 9) {
@@ -302,7 +302,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					lHere = GetLocalLocation(oScry, "lViewerH");
 					}
 				
-				SendMessageToAllDMs("Speak: End Scry oViewer = " + GetName(oScryer));
+				//SendMessageToAllDMs("Speak: End Scry oViewer = " + GetName(oScryer));
 												
 				//Bring your people home
 				effect eEffect = GetFirstEffect(oScryer);
@@ -406,7 +406,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
 				 			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
 							string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
-							SendMessageToAllDMs("sScriedArea for " + sScriedName + " = " + sScriedArea);
+							//SendMessageToAllDMs("sScriedArea for " + sScriedName + " = " + sScriedArea);
 							int nWillSaveBase = GetWillSavingThrow(oScried);
 							SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 							object oScriedSubArea;
@@ -735,7 +735,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 								while((nViewer < 15) && (oViewer != OBJECT_INVALID)) {
 									if((oViewer != oScryer) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerA"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerB"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerC"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerD"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerE"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerF"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerG"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerH"))) && (GetName(oViewer) != GetName(oScried)) && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
-										SendMessageToAllDMs("oViewer = " + GetName(oViewer));
+										//SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
 										SetLocalLocation(oViewer, "lHere", lViewer);
 										if(nViewer == 1) {
