@@ -1862,7 +1862,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			SendMessageToAllDMs("2. oScryTrg Name = " + GetName(oScryTrg));
+			//SendMessageToAllDMs("2. oScryTrg Name = " + GetName(oScryTrg));
 			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);
