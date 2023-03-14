@@ -1537,9 +1537,12 @@ if(GetSpellId() == 3137) {
 	object oCaster = OBJECT_SELF;
 	object oMarked = GetSpellTargetObject();
 	location lMarked = GetLocation(oMarked);
-	object oGlyph = GetNearestObjectToLocation(OBJECT_TYPE_AREA_OF_EFFECT, GetSpellTargetLocation(), 1);
-	location lGlyph = GetLocation(oGlyph);
-	if(GetDistanceBetweenLocations(lMarked, lGlyph) < 5.0) {oMarked = oGlyph;}
+	object oGlyphPLC = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, GetSpellTargetLocation(), 1);
+	location lGlyphPLC = GetLocation(oGlyphPLC);
+	object oGlyphAOE = GetNearestObjectToLocation(OBJECT_TYPE_AREA_OF_EFFECT, GetSpellTargetLocation(), 1);
+	location lGlyphAOE = GetLocation(oGlyphAOE);
+	if((oMarked == OBJECT_INVALID) && (GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC) < 5.0)) {oMarked = oGlyphPLC; lMarked = lGlyphPLC;}
+	else if((oMarked == OBJECT_INVALID) && (GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE) < 5.0)) {oMarked = oGlyphAOE; lMarked = lGlyphAOE;}
 	int nCasterLevel = GetCasterLevel(oCaster); 
 	int nCLRoll = d20(1);
 	//Run a CL check to see if oMarked is erased. DC is always 15.
@@ -1548,14 +1551,19 @@ if(GetSpellId() == 3137) {
 	if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
 	if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
 		SendMessageToPC(oCaster, "Your Erase spell fails.");
-		//oCaster failed on a glyph of warding. Oops. Boom.
-		if((FindSubString(GetTag(oMarked), "glyph_ward") != -1) || (GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT))  {
+		//oCaster failed on a Glyph of Warding. Oops. Boom.
+		if((FindSubString(GetTag(oMarked), "glyph_ward") != -1) || (FindSubString(GetTag(oMarked), "PER_GLYPH") != -1))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
-			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("1 " + GetTag(oMarked)); AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
-			if(GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT)  {SendMessageToAllDMs("2a AOE = " + GetTag(oMarked)); 
-				SignalEvent( oMarked, EventUserDefined( 2000) );
+			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {
+				SendMessageToAllDMs("1 " + GetTag(oMarked)); 
+				AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+				DestroyObject(oMarked);
+			}
+			if((GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT)  && (FindSubString(GetTag(oMarked), "PER_GLYPH") != -1)) {
+				SendMessageToAllDMs("2a AOE = " + GetTag(oMarked)); 
+				AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+				DestroyObject(oMarked);
 				}
-			//if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToAllDMs("3 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
 			}
 		return;
 		}
@@ -1574,16 +1582,19 @@ if(GetSpellId() == 3137) {
 				RemoveItemProperty(oMarked, ipRemove);
 					ipRemove = GetNextItemProperty(oMarked);
 				} 
+			return;
 			}
 		
-		//Is this a Glyph of Warding?
-		if(GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT)  {
-				SendMessageToAllDMs("2b AOE = " + GetTag(oMarked)); 
+		//Is this a Glyph of Warding AOE?
+		if(((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) || ((GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT)  && (FindSubString(GetTag(oMarked), "PER_GLYPH") != -1))) {
+				SendMessageToAllDMs("2b = " + GetTag(oMarked)); 
+				SendMessageToPC(oCaster, "You successfully erase a Glyph of Warding.");
 				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
 				DestroyObject(oMarked);
+				return;
 				}	
-						
-		//Looking for Arcane Marks. First, do any exist on objects within radius 5.0 of target location?
+		
+		//Looking for Arcane Marks now. Do any exist on objects within radius 5.0 of target location?
 		if(oMarked == OBJECT_INVALID) {
 			lMarked = GetSpellTargetLocation();
 			oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
@@ -1623,7 +1634,7 @@ if(GetSpellId() == 3137) {
 						if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
 							ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
 							if(GetDistanceBetween(oMark, oMarked) <= 2.5) {DestroyObject(oMark, 1.0);}
-							SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
+							SendMessageToPC(oCaster, "You have erased an Arcane Mark drawn on " + sName + ".");
 							ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
 							ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
 							nErased++;
@@ -1633,10 +1644,8 @@ if(GetSpellId() == 3137) {
 					}
 					
 				//oCaster passed their check, but no Marks existed to be erased.
-				if(nErased == 0) {SendMessageToPC(oCaster, "You found no arcane marks to erase.");}
-				
+				if(nErased == 0) {SendMessageToPC(oCaster, "You found nothing to erase.");}
 			}
-			
 		}
 	}
  
