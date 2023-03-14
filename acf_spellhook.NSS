@@ -1538,27 +1538,20 @@ if(GetSpellId() == 3137) {
 	//Set Default oMarked, look for a possible unclickable Glyph of Warding plc and a possible Glyph of Warding AOE
 	object oErase = GetSpellTargetObject();
 	location lErase = GetLocation(oErase);
-	object oGlyphPLC = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, GetSpellTargetLocation(), 1);
-	if(FindSubString(GetTag(oGlyphPLC), "glyph_ward") == -1) {
-		object oGlyphPLC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
-		while (oGlyphPLC != OBJECT_INVALID) {
-			if(FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) {break;}
-			oGlyphPLC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
-			}
+	object oGlyphPLC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
+	while (oGlyphPLC != OBJECT_INVALID) {
+		if(FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) {break;}
+		oGlyphPLC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
 		}
 	location lGlyphPLC = GetLocation(oGlyphPLC);
 	float fGlyphPLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC);
 	SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
-	object oGlyphAOE = GetNearestObjectToLocation(OBJECT_TYPE_AREA_OF_EFFECT, GetSpellTargetLocation(), 1);
+	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 	object oGlyphAOE_PLC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
-	location lGlyphAOE_PLC = GetLocation(oGlyphPLC);
-	float fGlyphAOE_PLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE_PLC);
-	if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") == -1) {
-		object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
-		while (oGlyphAOE != OBJECT_INVALID) {
-			if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) {
+	while (oGlyphAOE != OBJECT_INVALID) {
+		if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) {
 			while (oGlyphAOE_PLC != OBJECT_INVALID) {
-				SendMessageToAllDMs("oGlyphAOE_PLC = " + GetTag(oGlyphAOE_PLC) + " at distance " + IntToString(FloatToInt(fGlyphAOE_PLC)));
+				SendMessageToAllDMs("oGlyphAOE_PLC = " + GetTag(oGlyphAOE_PLC));
 				if(GetLocalInt(oGlyphAOE_PLC, "X2_PLC_GLYPH_INIT") == 1); {break;}
 				oGlyphAOE_PLC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
 				}
@@ -1566,11 +1559,14 @@ if(GetSpellId() == 3137) {
 			}
 			oGlyphAOE = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 			}
-		}
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
+	location lGlyphAOE_PLC = GetLocation(oGlyphAOE_PLC);
+	float fGlyphAOE_PLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE_PLC);
 	SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
+	SendMessageToAllDMs("oGlyphAOE_PLC = " + GetTag(oGlyphAOE_PLC) + " at distance " + IntToString(FloatToInt(fGlyphAOE_PLC)));
 	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
+	else if((oErase == OBJECT_INVALID) && (oGlyphAOE_PLC != OBJECT_INVALID) && (fGlyphAOE_PLC < 5.0)) {oErase = oGlyphAOE_PLC; lErase = lGlyphAOE_PLC;SendMessageToAllDMs("oErase = oGlyphAOE_PLC = " + GetTag(oErase));}
 	else if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
 		
 	//Run a CL check to see if oErase is erased later in script. DC is always 15.
@@ -1585,9 +1581,8 @@ if(GetSpellId() == 3137) {
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (FindSubString(GetTag(oErase), "PER_GLYPH") != -1))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
 			SendMessageToAllDMs("2a = " + GetTag(oErase)); 
-			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {oErase = oGlyphAOE_PLC;}
 			AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			DestroyObject(oErase, 5.0);
+			DestroyObject(oErase, 3.0);
 			}
 		return;
 		}
