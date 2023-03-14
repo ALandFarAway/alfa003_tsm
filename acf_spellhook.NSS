@@ -1560,8 +1560,8 @@ if(GetSpellId() == 3137) {
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
 	SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
-	if((oErase == OBJECT_INVALID) && (oGlyphPLC != OBJECT_INVALID) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;}
-	else if((oErase == OBJECT_INVALID) && (oGlyphAOE != OBJECT_INVALID) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;}
+	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") == -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
+	else if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") == -1) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
 		
 	//Run a CL check to see if oErase is erased later in script. DC is always 15.
 	int nCasterLevel = GetCasterLevel(oCaster); 
@@ -1576,7 +1576,7 @@ if(GetSpellId() == 3137) {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
 			SendMessageToAllDMs("2a = " + GetTag(oErase)); 
 			AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
-			DestroyObject(oErase);
+			DestroyObject(oErase, 5.0);
 			}
 		return;
 		}
