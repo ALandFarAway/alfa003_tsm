@@ -1560,8 +1560,8 @@ if(GetSpellId() == 3137) {
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
 	SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
-	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") == -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
-	else if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") == -1) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
+	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
+	else if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
 		
 	//Run a CL check to see if oErase is erased later in script. DC is always 15.
 	int nCasterLevel = GetCasterLevel(oCaster); 
