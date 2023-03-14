@@ -1550,10 +1550,20 @@ if(GetSpellId() == 3137) {
 	float fGlyphPLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC);
 	SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
 	object oGlyphAOE = GetNearestObjectToLocation(OBJECT_TYPE_AREA_OF_EFFECT, GetSpellTargetLocation(), 1);
+	object oGlyphAOE_PLC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
+	location lGlyphAOE_PLC = GetLocation(oGlyphPLC);
+	float fGlyphAOE_PLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE_PLC);
 	if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") == -1) {
 		object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 		while (oGlyphAOE != OBJECT_INVALID) {
-			if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) {break;}
+			if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) {
+			while (oGlyphAOE_PLC != OBJECT_INVALID) {
+				SendMessageToAllDMs("oGlyphAOE_PLC = " + GetTag(oGlyphAOE_PLC) + " at distance " + IntToString(FloatToInt(fGlyphAOE_PLC)));
+				if(GetLocalInt(oGlyphAOE_PLC, "X2_PLC_GLYPH_INIT") == 1); {break;}
+				oGlyphAOE_PLC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
+				}
+			break;
+			}
 			oGlyphAOE = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 			}
 		}
@@ -1575,6 +1585,7 @@ if(GetSpellId() == 3137) {
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (FindSubString(GetTag(oErase), "PER_GLYPH") != -1))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
 			SendMessageToAllDMs("2a = " + GetTag(oErase)); 
+			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {oErase = oGlyphAOE_PLC;}
 			AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
 			DestroyObject(oErase, 5.0);
 			}
