@@ -1,14 +1,17 @@
 //
 //  System Name : Scrying
-//     Filename : tsm_scry_trg_onenter
+//     Filename : acf_scry_plc_onspellcastat
 //      Version : 0.1
 //         Date : 7/8/22
 //       Author : Wynna
 //
 //  Description
-//  This script handles on enter actions of a trigger used in the scrying system. 
+//  This script handles on use actions of placeables used in the scrying system. 
 //  It provides a spoken update by the scrying object to the scryer on the scrying target.
-//  This should be in the On Enter Script slot of the trigger around a terrain painted scrying pool: 
+//  This should be in the On Use Script slot of placeables in the _ALFA_Scrying Category: 
+//	Mirror
+//	Holy Water Font
+//	Natural Pool of Water
 //	It is not updated in ACR updates.
 //
 //  Revision History
@@ -18,7 +21,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
-#include "acr_trigger_i"
+
+#include "acr_placeable_i"
 #include "acr_scry_i"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -110,25 +114,28 @@ string GetCompassDirectionOfAngle(float fAngle)
     return GetCompassDirectionOfBearing(-fAngle + 90.0);
 }
 
-void main()
-{
-    ACR_TriggerOnEnter();
-	object oEnterer = GetEnteringObject();
+void main() {
+ 	if (!GetIsObjectValid(OBJECT_SELF))
+		return;
+
+	ACR_PlaceableOnUsed();
+	//Get oUser and existing local objects
+ 	object oUser = GetLastUsedBy();
 	object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-				
+	int nSecret = GetLocalInt(OBJECT_SELF, "SCRY_SECRET");			
 	//Has Scry been successfully cast?
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == "")) {
-			SendMessageToPC(oEnterer, "The scrying object requires the casting of the Scry spell.");
+	if((nSecret == 0) && ((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == ""))) {
+			SendMessageToPC(oUser, "The scrying object requires the casting of the Scry spell.");
 		}
 	//If so, was it cast by oUser?
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oEnterer != oScryer) && (!GetIsDM(oEnterer))&& (!GetIsDMPossessed(oEnterer))) {
-		SendMessageToPC(oEnterer, "The scrying object is under the command of someone else.");
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oUser != oScryer) && (!GetIsDM(oUser))&& (!GetIsDMPossessed(oUser))) {
+		SendMessageToPC(oUser, "The scrying object is under the command of someone else.");
 		}
 		
 	//If Scry has been successfully cast, then oScried exists	
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (GetName(GetLocalObject(OBJECT_SELF, "oScried")) != "") && ((oEnterer == oScryer) || (GetIsDM(oEnterer)) || (GetIsDMPossessed(oEnterer)))) {
+	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (GetName(GetLocalObject(OBJECT_SELF, "oScried")) != "") && ((oUser == oScryer) || (GetIsDM(oUser)) || (GetIsDMPossessed(oUser)))) {
 	object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 	//Check area information about oScried
 	object oArea = GetArea(oScried);
@@ -318,6 +325,9 @@ void main()
 				{sSubjectArea = "inside a huge hollow tree, judging by the look of the curving walls.";}
 			else if(FindSubString(sAreaTag, "int_highforest_olostin", 0) != -1)
 				{sSubjectArea = "inside a richly-appointed but martial keep.";}
+			else if(FindSubString(sAreaTag, "8e_int_highforest_cntrl_fort", 0) != -1)
+				{sSubjectArea = "inside a dim ruin, walls crumbling.";}
+				
 			else if((FindSubString(sAreaTag, "_int_", 0) != -1) && (FindSubString(sAreaTag, "interior", 0) != -1)) 
 				{sSubjectArea = "inside, though nothing uniquely identifiable is visible.";}
 			else if(FindSubString(sAreaTag, "_ext_", 0) != -1)
@@ -401,7 +411,7 @@ void main()
 			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
-			ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK);
+			//ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK);
 			
 			ActionSpeakString( "********************", TALKVOLUME_TALK);
 			ActionSpeakString( "", TALKVOLUME_TALK);
@@ -409,4 +419,5 @@ void main()
 			 
 		}	
 	
+		
 }

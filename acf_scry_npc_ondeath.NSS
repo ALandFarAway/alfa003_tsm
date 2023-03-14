@@ -1,6 +1,6 @@
 //
 //  System Name : Scrying
-//     Filename : tsm_scry_npc_ondeath
+//     Filename : acf_scry_npc_ondeath
 //      Version : 0.1
 //         Date : 7/8/22
 //       Author : Wynna

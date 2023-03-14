@@ -31,7 +31,7 @@ void main()
         return;
     }
 
-	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, 3066, FALSE ) );
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	//Did we click on an object to mark?
 	object oMarked = GetSpellTargetObject();
@@ -79,4 +79,7 @@ void main()
 		}
 			
 	SendMessageToPC(oCaster, "This " + sName + " cannot hold any more arcane marks.");
-}				
+
+	// Post-cast event.
+	ACR_PostcastEvent();
+	}				

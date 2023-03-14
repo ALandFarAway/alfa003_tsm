@@ -1441,47 +1441,6 @@ void main()
 	
 
 	
-//Arcane Mark
-/*if(GetSpellId() == 3066) {
-	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
-	object oMarked = GetSpellTargetObject();
-	string sName = GetName(oMarked);
-	SendMessageToPC(oCaster, "Spellhook: ResRef = " + GetResRef(oMarked));
-	location lMarked = GetLocation(oMarked);
-	int nExpire = 0;
-	if(oMarked == OBJECT_INVALID) {
-		lMarked = GetSpellTargetLocation();
-		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 2.5, lMarked, TRUE, OBJECT_TYPE_ALL); 
-		sName = "This location";
-		while(oMarked != OBJECT_INVALID) {
-			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oMarked) == OBJECT_TYPE_DOOR) ||  (GetObjectType(oMarked) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oMarked) == OBJECT_TYPE_WAYPOINT)) {break;} 
-			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 2.5, lMarked, TRUE, OBJECT_TYPE_ALL); 
-			}
-		}
-	if(oMarked == OBJECT_INVALID) {
-		oMarked = GetArea(oCaster);
-		}
-	
-	if(GetObjectType(oMarked) == OBJECT_TYPE_CREATURE) {nExpire = 30;}
-	int nAM = 1;
-	while (nAM < 5) {
-		if((ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) == GetName(oCaster)) && (ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM)) == lMarked)) {
-			SendMessageToPC(oCaster, sName + " already bears your arcane mark."); 
-			return;
-			}
-		if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) == "") {
-			SendMessageToPC(oCaster, sName + " now bears your arcane mark."); 
-			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), GetName(oCaster), nExpire);
-			ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), lMarked, nExpire);
-			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
-			return;
-			}
-		nAM ++;
-		}
-			
-	SendMessageToPC(oCaster, "This " + sName + " cannot hold any more arcane marks.");
-	} 
-*/	  
 	
 //Read Magic
 if(GetSpellId() == 3003) {
@@ -1493,7 +1452,7 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
+		//SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
 		//Read Magic: Glyph of Warding
 		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
 		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
@@ -1574,89 +1533,120 @@ if(GetSpellId() == 3003) {
 //Erase
 
 if(GetSpellId() == 3137) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+	object oCaster = OBJECT_SELF;
 	object oMarked = GetSpellTargetObject();
 	location lMarked = GetLocation(oMarked);
-	if(oMarked == OBJECT_INVALID) {
-		lMarked = GetSpellTargetLocation();
-		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
-		int nMarked = 0;
-		while (oMarked != OBJECT_INVALID) {
-			 int nAM = 1;
-			 while (nAM < 5) {
-				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {nMarked = 1; break;}
-				nAM++;
+	object oGlyph = GetNearestObjectToLocation(OBJECT_TYPE_AREA_OF_EFFECT, GetSpellTargetLocation(), 1);
+	location lGlyph = GetLocation(oGlyph);
+	if(GetDistanceBetweenLocations(lMarked, lGlyph) < 5.0) {oMarked = oGlyph;}
+	int nCasterLevel = GetCasterLevel(oCaster); 
+	int nCLRoll = d20(1);
+	//Run a CL check to see if oMarked is erased. DC is always 15.
+	SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
+	//oCaster failed their check.
+	if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
+	if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
+		SendMessageToPC(oCaster, "Your Erase spell fails.");
+		//oCaster failed on a glyph of warding. Oops. Boom.
+		if((FindSubString(GetTag(oMarked), "glyph_ward") != -1) || (GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT))  {
+			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
+			if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("1 " + GetTag(oMarked)); AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
+			if(GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT)  {SendMessageToAllDMs("2a AOE = " + GetTag(oMarked)); 
+				SignalEvent( oMarked, EventUserDefined( 2000) );
 				}
-			if(nMarked == 1) {break;}
-			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
+			//if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToAllDMs("3 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
 			}
+		return;
 		}
-	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
-	
-	if(oMarked != OBJECT_INVALID) {
-		int nCasterLevel = GetCasterLevel(oCaster); 
-		int nCLRoll = d20(1);
-		SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
-		if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
-		if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
-			SendMessageToPC(oCaster, "Your Erase spell fails.");
-			if((FindSubString(GetTag(oMarked), "glyph_ward") != -1) || (FindSubString(GetResRef(oMarked), "glyph_ward") != -1)) {
-				SendMessageToPC(oCaster, "You activate the " + GetName(oMarked) + "!");
-				if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_WAYPOINT) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("1 " + GetTag(oMarked)); AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
-				if((GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("2 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
-				if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToAllDMs("3 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
-				}
+		
+	//oCaster passed their check. Hooray.	
+	else {
+		effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
+		//Magic scrolls that have been Erased are demagic-ified
+		if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
+			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+			SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from " + GetName(oMarked) + ".");
+			SetFirstName(oMarked, "Erased Scroll");
+			SetDescription(oMarked, "This scroll has been erased.");
+			itemproperty ipRemove = GetFirstItemProperty(oMarked);
+			while (GetIsItemPropertyValid(ipRemove)) {
+				RemoveItemProperty(oMarked, ipRemove);
+					ipRemove = GetNextItemProperty(oMarked);
+				} 
 			}
-		else {
-			effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
-			object oMark = GetNearestObjectByTag("ipoint_arcane_mark", oMarked, 1);
-			if(oMarked == GetArea(oCaster)) {oMark = GetNearestObjectByTag("ipoint_arcane_mark", oCaster, 1);}
-			int nAM = 1;
-			int nErased = 0;
-			while (nAM < 5) {
-				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-					string sName = GetName(oMarked);
-					string sMarked = ACR_LocationToString(lMarked);
-					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
-					int nXStart = FindSubString(sMarked, "#X#", 0);
-					string sXYMarked = GetSubString(sMarked, nXStart, 30);
-					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
-					
-					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
-					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
-						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-						if(GetDistanceBetween(oMark, oMarked) <= 2.5) {DestroyObject(oMark, 1.0);}
-						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
-						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
-						ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
-						nErased++;
-						}
-					}
-				nAM++;
-				}
-			if(nErased == 0) {SendMessageToPC(oCaster, "You found no arcane marks to erase.");}
-			
-			if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
+		
+		//Is this a Glyph of Warding?
+		if(GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT)  {
+				SendMessageToAllDMs("2b AOE = " + GetTag(oMarked)); 
 				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-				SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from " + GetName(oMarked) + ".");
-				SetFirstName(oMarked, "Erased Scroll");
-				SetDescription(oMarked, "This scroll has been erased.");
-				itemproperty ipRemove = GetFirstItemProperty(oMarked);
-				while (GetIsItemPropertyValid(ipRemove)) {
-					RemoveItemProperty(oMarked, ipRemove);
-						ipRemove = GetNextItemProperty(oMarked);
-					} 
+				DestroyObject(oMarked);
+				}	
+						
+		//Looking for Arcane Marks. First, do any exist on objects within radius 5.0 of target location?
+		if(oMarked == OBJECT_INVALID) {
+			lMarked = GetSpellTargetLocation();
+			oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
+			int nMarked = 0;
+			while (oMarked != OBJECT_INVALID) {
+				 int nAM = 1;
+				 while (nAM < 5) {
+					if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {nMarked = 1; break;}
+					nAM++;
+					}
+				if(nMarked == 1) {break;}
+				oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 				}
 			}
+		
+		//If none of the objects within radius are Marked, then we check the area, as a proxy for Marks that were placed without an object within 5.0 of the location they were placed.	
+		//This is a technical end-around for mechanical limitations.
+		if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
+		
+		if(oMarked != OBJECT_INVALID)  {
+				object oMark = GetNearestObjectByTag("ipoint_arcane_mark", oMarked, 1);
+				if(oMarked == GetArea(oCaster)) {oMark = GetNearestObjectByTag("ipoint_arcane_mark", oCaster, 1);}
+				int nAM = 1;
+				int nErased = 0;
+				//Do the actual erasing. Sometimes the (non-persistant) mark itself is actually a little bit away from the (persistant) proxy object storing its information.
+				while (nAM < 5) {
+					if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+						lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+						string sName = GetName(oMarked);
+						string sMarked = ACR_LocationToString(lMarked);
+						string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+						int nXStart = FindSubString(sMarked, "#X#", 0);
+						string sXYMarked = GetSubString(sMarked, nXStart, 30);
+						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
+						
+						if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
+						if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
+							ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
+							if(GetDistanceBetween(oMark, oMarked) <= 2.5) {DestroyObject(oMark, 1.0);}
+							SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
+							ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
+							ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
+							nErased++;
+							}
+						}
+					nAM++;
+					}
+					
+				//oCaster passed their check, but no Marks existed to be erased.
+				if(nErased == 0) {SendMessageToPC(oCaster, "You found no arcane marks to erase.");}
+				
+			}
+			
 		}
 	}
  
 		
 //Summon Instrument
 if(GetSpellId() == 3071) {
-	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+		SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	effect eBardSong = EffectVisualEffect(VFX_DUR_BARD_SONG, 0);
+	//Try to determine what instrument the PC favors by what they've put the most skill points into
 	int nPerformStr = GetSkillRank(48, oCaster, FALSE);
 	int nPerformWind = GetSkillRank(62, oCaster, FALSE);
 	int nPerformDrum = GetSkillRank(60, oCaster, FALSE);
@@ -1664,7 +1654,8 @@ if(GetSpellId() == 3071) {
 	string sPerformScry = "lute";
 	if((nPerformWind >= nPerformStr) && (nPerformStr >= nPerformDrum)) {sPerform = "abr_it_msc_flute"; sPerformScry = "flute";}
 	if((nPerformDrum >= nPerformStr) && (nPerformStr >= nPerformWind)) {sPerform = "abr_it_msc_drum"; sPerformScry = "drum";}
-			
+		
+	//Scrying hook. If they're close enough to a scrying mirror, they get a scrying shard.	
 	if((GetDistanceBetween(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1), oCaster) <= 5.0) && (FindSubString(GetName(GetNearestObjectByTag("ACR_SCRY_OBJECT", oCaster, 1)), "Mirror") != -1)) {
 		object oScryer = oCaster;
 		location lTarget = GetLocation(oScryer);
@@ -1680,10 +1671,13 @@ if(GetSpellId() == 3071) {
 				oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_PLACEABLE);
 				}
 	}
+	
+	//Otherwise, they just want to play, so give them a temporary instrument.
 	else {		
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBardSong, oCaster, 3.0);
 		ActionPlayAnimation(ANIMATION_FIREFORGET_BARDSONG, 1.0, 3.0);
 		object oPerform = CreateItemOnObject(sPerform, oCaster, 1);
+		SetPlotFlag(oPerform, TRUE);
 		DelayCommand(1.0, ActionEquipItem(oPerform, INVENTORY_SLOT_RIGHTHAND)); 
 		int nBardLevel = GetCasterLevel(oCaster);
 		float nDuration = nBardLevel * 60.0;
@@ -1693,12 +1687,16 @@ if(GetSpellId() == 3071) {
 
 //Create Water
 if(GetSpellId() == 3068) {
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	ActionPlayAnimation(ANIMATION_LOOPING_WORSHIP, 1.0, 3.0);
 	object oScryer = OBJECT_SELF;
 	effect eCreateWater = EffectVisualEffect(VFX_DUR_SPELL_SHROUDING_FOG, 0);
 	effect eCreateWater2 = EffectVisualEffect(VFX_HIT_DROWN, 0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eCreateWater, oScryer, 3.0);
 	DelayCommand(4.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eCreateWater2, oScryer));
+	
+	//Because Druids use triggers as well as objects for scrying we have to do some scripting gymnastics.
+	//If a Druid casts this within 5.0 radius of a trigger-based scrying pool, they get a scrying droplet.
 	int nCasterType = GetLastSpellCastClass();
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	object oScry = GetSpellTargetObject();
@@ -1718,7 +1716,8 @@ if(GetSpellId() == 3068) {
 			oScry = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 			}
 		}
-	 	
+	
+	//If anybody, Druid or not, cast this on anything but a trigger-based scrying pool, give 'em a drink already.		
 	if(GetTag(oScry) != "ACR_SCRY_OBJECT") 
 		{CreateItemOnObject("abr_it_food_water", oScryer, 1);
 		 SendMessageToPC(oScryer, "Water vapor forms in the air around you, and condenses into a small bottle you have ready for it.");
@@ -1751,7 +1750,7 @@ if(GetSpellId() == 3157) {
 	object oCaster = OBJECT_SELF;
 	float fDuration = 24 * 60.0 * 60.0;
 	effect eIcon = EffectEffectIcon(52);
-	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "tsm_sanctum_onenter", "tsm_sanctum_onhb", "tsm_sanctum_onexit", "aoe_sanctum");
+	effect eAOE = EffectAreaOfEffect(AOE_PER_GLYPH_OF_WARDING, "acr_s0_mpsanctum_onenter", "acr_s0_mpsanctum_onhb", "acr_s0_mpsanctum_onexit", "aoe_mpsanctum");
     ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eAOE, GetLocation(oCaster), fDuration);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIcon, oCaster, fDuration);
 	SetLocalInt(oCaster, "abr_sp_sanctum", 1);
@@ -1789,22 +1788,6 @@ if(GetSpellId() == 3058) {
 		  	SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell best the defences of the caster of the scrying sensor.");
 			SendMessageToPC(OBJECT_SELF, "You get a visual image of the scryer. They look like " + GetName(oScryer));
 			SendMessageToPC(OBJECT_SELF, "You know that this person is located at the direction and distance of " + sScryerArea );
-			SendMessageToPC(OBJECT_SELF, "A moment later, the scrying sensor vanishes.");
-			SetLocalObject(oScry, "oScried", OBJECT_INVALID);
-			SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
-			SetLocalObject(oScry, "oScryer", OBJECT_INVALID);
-			SetLocalObject(oScry, "oScrySend", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScried", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScrySend", OBJECT_INVALID);
-			SetLocalObject(oScryer, "oScry", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScrySpeak", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScryer", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScry", OBJECT_INVALID);
-			SetLocalObject(OBJECT_SELF, "oScrySend", OBJECT_INVALID);
-			SetLocalInt(oScry, "nScryActive", 0);
-			DestroyObject(oScrySpeak, 2.0);		
-			DestroyObject(oSensor, 6.0);
 			}
 		 else {SendMessageToPC(OBJECT_SELF, "You feel your Detect Scrying spell attempt to identify the person scrying you, but fail.");}
 		 effect eEffect = GetFirstEffect(oSensor);
@@ -1957,7 +1940,11 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		}
 	}
 	
-	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 
+	
+	
+	
+	
+if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 
 	{//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " is in Aquatic Cave");
 	 object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
