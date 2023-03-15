@@ -1586,7 +1586,7 @@ if(GetSpellId() == 3137) {
 	SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
 	//oCaster failed their check.
 	if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
-	if((nCasterLevel + nCLRoll < 10) || (nCLRoll <= 2)) {
+	if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
 		SendMessageToPC(oCaster, "Your Erase spell fails.");
 		//oCaster failed on a Glyph of Warding. Oops. Boom.
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (GetAreaOfEffectSpellId(oGlyphAOE) == 549))  {
