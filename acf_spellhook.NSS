@@ -436,7 +436,7 @@ void main()
 									else {break;}
 									}
 								//SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
-				    			if(nMarked != 1) {nMarked = 0; DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+				    			if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 								nAuraCount++;
 								nAuraPower = 1;
@@ -482,8 +482,8 @@ void main()
 							else {break;}
 							}
 							
-						SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
-				    	if(nMarked != 1) {SendMessageToAllDMs("DM" + IntToString(nAM) + " creating new mark at lMarked"); nMarked = 0; DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+						//SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
+				    	if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 						nAuraCount++;
 						nAuraPower = 1;
@@ -1546,7 +1546,7 @@ if(GetSpellId() == 3003) {
 					
 				//SendMessageToAllDMs("RM" + IntToString(nRM) + " nMarked = " + IntToString(nMarked));
 				    	
-				if(nMarked != 1) {nMarked = 0; CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
 			}
