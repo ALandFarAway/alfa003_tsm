@@ -1569,10 +1569,43 @@ if(GetSpellId() == 3137) {
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (FindSubString(GetTag(oErase), "PER_GLYPH") != -1))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
 			SendMessageToAllDMs("2a = " + GetTag(oErase));
+			
 			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {
-				ExecuteScript("x2_s0_glphwarda", oErase);
+				object oAOECaster = GetAreaOfEffectCreator(oErase);
+			    int nAOECasterLevel = GetCasterLevel(oAOECaster);
+			    int nAlign = GetAlignmentGoodEvil( oAOECaster );
+				
+			    //Limit caster level for purposes of damage
+			    if (nAOECasterLevel > 10){nAOECasterLevel = 10;}
+			    
+				//VFX   
+				effect eGoodVis = EffectVisualEffect( VFX_HIT_SPELL_HOLY );
+				effect eEvilVis = EffectVisualEffect( VFX_HIT_SPELL_EVIL );
+				effect eNeutVis = EffectVisualEffect( VFX_HIT_SPELL_SONIC );
+				
+				if (spellsIsTarget( oCaster, SPELL_TARGET_STANDARDHOSTILE, oAOECaster)){
+					if (!MyResistSpell(oAOECaster, oCaster)){
+						//Damage
+						int nDam = d8(nAOECasterLevel /2 );
+						nDam = ApplyMetamagicVariableMods(nDam, 40);
+						nDam = GetReflexAdjustedDamage(nDam, oCaster, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oAOECaster);
+					
+						effect eGoodDam = EffectDamage( nDam, DAMAGE_TYPE_DIVINE );
+						effect eEvilDam = EffectDamage( nDam, DAMAGE_TYPE_NEGATIVE );
+						effect eNeutDam = EffectDamage( nDam, DAMAGE_TYPE_SONIC );
+						
+						//Link VFX to Damage
+						effect eGoodLink = EffectLinkEffects( eGoodVis, eGoodDam );
+						effect eEvilLink = EffectLinkEffects( eEvilVis, eEvilDam );
+						effect eNeutLink = EffectLinkEffects( eNeutVis, eNeutDam );
+					
+						if ( nAlign == ALIGNMENT_GOOD) {ApplyEffectToObject( DURATION_TYPE_INSTANT, eGoodLink, oCaster );}
+						else if ( nAlign == ALIGNMENT_EVIL ) {ApplyEffectToObject( DURATION_TYPE_INSTANT, eEvilLink, oCaster );}
+						else {ApplyEffectToObject( DURATION_TYPE_INSTANT, eNeutLink, oCaster );}
+						}
+					}
 				}
-			AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			else {AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
 			DestroyObject(oErase, 3.0);
 			}
 		return;
