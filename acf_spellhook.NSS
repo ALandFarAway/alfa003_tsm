@@ -1564,16 +1564,16 @@ if(GetSpellId() == 3137) {
 	location lGlyphPLC = GetLocation(oGlyphPLC);
 	float fGlyphPLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC);
 	SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
-	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
+	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 7.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 	while (oGlyphAOE != OBJECT_INVALID) {
 		if(GetAreaOfEffectSpellId(oErase) == 549) {break;}
-		oGlyphAOE = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
+		oGlyphAOE = GetNextObjectInShape(SHAPE_SPHERE, 7.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 		}
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
 	SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
 	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
-	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oErase) == 549) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
+	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oErase) == 549) && (fGlyphAOE < 7.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
 		
 	//Run a CL check to see if oErase is erased later in script. DC is always 15.
 	int nCasterLevel = GetCasterLevel(oCaster); 
