@@ -1470,14 +1470,13 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		//SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
+		SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
 		//Read Magic: Glyph of Warding
-		if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {
-		int nAOESpell = GetAreaOfEffectSpellId(oReadMagic);
-		if(nAOESpell == 549) {
-			int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
-			if(nReadGlyph != 1) {
-				SetLocalInt(oReadMagic, "nReadGlyph", 1); 
+		if(((GetObjectType(oReadMagic) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oReadMagic), "glyph_ward") != -1)) || ((GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oReadMagic) == 549))) {
+		//if(nAOESpell == 549) {
+			//int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
+			//if(nReadGlyph != 1) {
+				//SetLocalInt(oReadMagic, "nReadGlyph", 1); 
 				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
 					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
 					int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
@@ -1489,11 +1488,11 @@ if(GetSpellId() == 3003) {
 					else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
 					else {sAlignDmg = "Sonic";}
 					if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) { sName = "A nearby location";}
-					SendMessageToPC(oCaster, sName + " bears a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who enters it.");
+					SendMessageToPC(oCaster, sName + " bears a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who disturbs it.");
 					}
 				else {SendMessageToPC(oCaster, sName + " has a glyph on it.");}
-				}
-			}
+			//	}
+			//}
 		}
 		//Read Magic: Arcane Mark directly on an object or on the object as a proxy for a location
 		int nRM = 0;
@@ -1534,12 +1533,14 @@ if(GetSpellId() == 3003) {
 		if(ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)) != "") {
 			location lMarked = ACR_GetPersistentLocation(oReadMagic, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
-				sName = "A nearby location";
-				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
+				
+				sName = "A nearby location at " + IntToString(FloatToInt(fDistance)) + " ";
+				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
-					//SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
+					SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
 				    if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
-					oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+					oMark = GetNextObjectInShape(SHAPE_SPHERE, 2.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
 				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
@@ -1585,46 +1586,18 @@ if(GetSpellId() == 3137) {
 		SendMessageToPC(oCaster, "Your Erase spell fails.");
 		//oCaster failed on a Glyph of Warding. Oops. Boom.
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (GetAreaOfEffectSpellId(oGlyphAOE) == 549))  {
+			object oAOECaster = GetAreaOfEffectCreator(oErase);
+		    string sResRef = GetResRef(oAOECaster);
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
 			SendMessageToAllDMs("2a = " + GetTag(oErase));
-			//Code from x2_s0_glphwarda AOE onenter script applying damage to oCaster instead of entering object
+			
 			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {
-				object oAOEProxy = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_glyph_ward_flr", lErase);
-				DelayCommand(2.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-				/*SpawnSpellProjectile(oAOEProxy, oCaster, lErase, GetLocation(oCaster), 549, PROJECTILE_PATH_TYPE_DEFAULT);
-				object oAOECaster = GetAreaOfEffectCreator(oErase);
-			    int nAOECasterLevel = GetCasterLevel(oAOECaster);
-			    int nAlign = GetAlignmentGoodEvil( oAOECaster );
-				
-			    //Limit caster level for purposes of damage
-			    if (nAOECasterLevel > 10){nAOECasterLevel = 10;}
-			    
-				//VFX   
-				effect eGoodVis = EffectVisualEffect( VFX_HIT_SPELL_HOLY );
-				effect eEvilVis = EffectVisualEffect( VFX_HIT_SPELL_EVIL );
-				effect eNeutVis = EffectVisualEffect( VFX_HIT_SPELL_SONIC );
-				
-				if (spellsIsTarget( oCaster, SPELL_TARGET_STANDARDHOSTILE, oAOECaster)){
-					if (!MyResistSpell(oAOECaster, oCaster)){
-						//Damage
-						int nDam = d8(nAOECasterLevel /2 );
-						nDam = ApplyMetamagicVariableMods(nDam, 40);
-						nDam = GetReflexAdjustedDamage(nDam, oCaster, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oAOECaster);
-					
-						effect eGoodDam = EffectDamage( nDam, DAMAGE_TYPE_DIVINE );
-						effect eEvilDam = EffectDamage( nDam, DAMAGE_TYPE_NEGATIVE );
-						effect eNeutDam = EffectDamage( nDam, DAMAGE_TYPE_SONIC );
-						
-						//Link VFX to Damage
-						effect eGoodLink = EffectLinkEffects( eGoodVis, eGoodDam );
-						effect eEvilLink = EffectLinkEffects( eEvilVis, eEvilDam );
-						effect eNeutLink = EffectLinkEffects( eNeutVis, eNeutDam );
-					
-						if ( nAlign == ALIGNMENT_GOOD) {ApplyEffectToObject( DURATION_TYPE_INSTANT, eGoodLink, oCaster );}
-						else if ( nAlign == ALIGNMENT_EVIL ) {ApplyEffectToObject( DURATION_TYPE_INSTANT, eEvilLink, oCaster );}
-						else {ApplyEffectToObject( DURATION_TYPE_INSTANT, eNeutLink, oCaster );}
-						}
-					}*/
+				effect eFreeze = EffectCutsceneImmobilize();
+				effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+				object oAOEProxy = CreateObject(OBJECT_TYPE_CREATURE, sResRef, lErase);
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oAOEProxy, HoursToSeconds(100));
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oAOEProxy, HoursToSeconds(100));
+				DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				DestroyObject(oAOEProxy, 3.0);
 				}
 			else {AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
@@ -1652,7 +1625,7 @@ if(GetSpellId() == 3137) {
 			}
 		
 		//Is this a Glyph of Warding?
-		if(((GetObjectType(oErase) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oErase), "glyph_ward") != -1)) || ((GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT)  && (FindSubString(GetTag(oErase), "PER_GLYPH") != -1))) {
+		if(((GetObjectType(oErase) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oErase), "glyph_ward") != -1)) || ((GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oErase) == 549))) {
 			SendMessageToAllDMs("2b = " + GetTag(oErase)); 
 			SendMessageToPC(oCaster, "You successfully erase a Glyph of Warding.");
 			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lErase, 3.0);
