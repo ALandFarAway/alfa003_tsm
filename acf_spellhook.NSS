@@ -428,15 +428,15 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
+									//SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
 				    				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 										}
 									else {break;}
 									}
-								SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
-				    			if(nMarked != 1) {SendMessageToAllDMs("DM" + IntToString(nAM) + " creating new mark at lMarked"); nMarked = 0; DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+								//SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
+				    			if(nMarked != 1) {nMarked = 0; DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 								nAuraCount++;
 								nAuraPower = 1;
@@ -1536,17 +1536,17 @@ if(GetSpellId() == 3003) {
 			location lMarked = ACR_GetPersistentLocation(oReadMagic, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
-				sName = "A nearby location at " + IntToString(FloatToInt(fDistance)) + " ";
+				sName = "A nearby location";
 				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
-					SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
+					//SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
 				    if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 					oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
 					
-				SendMessageToAllDMs("RM" + IntToString(nRM) + " nMarked = " + IntToString(nMarked));
+				//SendMessageToAllDMs("RM" + IntToString(nRM) + " nMarked = " + IntToString(nMarked));
 				    	
-				if(nMarked != 1) {SendMessageToAllDMs("RM" + IntToString(nRM) + " creating new mark at lMarked"); nMarked = 0; CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+				if(nMarked != 1) {nMarked = 0; CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
 			}
@@ -1568,7 +1568,7 @@ if(GetSpellId() == 3137) {
 		}
 	location lGlyphPLC = GetLocation(oGlyphPLC);
 	float fGlyphPLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC);
-	SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
+	//SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
 	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 7.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 	while (oGlyphAOE != OBJECT_INVALID) {
 		if(GetAreaOfEffectSpellId(oGlyphAOE) == 549) {break;}
@@ -1576,7 +1576,7 @@ if(GetSpellId() == 3137) {
 		}
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
-	SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
+	//SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
 	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
 	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oGlyphAOE) == 549) && (fGlyphAOE < 7.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
 		
@@ -1591,19 +1591,20 @@ if(GetSpellId() == 3137) {
 		//oCaster failed on a Glyph of Warding. Oops. Boom.
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (GetAreaOfEffectSpellId(oGlyphAOE) == 549))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
-			SendMessageToAllDMs("2a = " + GetTag(oErase));
+			//SendMessageToAllDMs("2a = " + GetTag(oErase));
 			string sResRef = "";
 			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {sResRef = GetResRef(GetAreaOfEffectCreator(oErase));}
 			else {sResRef = GetLocalString(oErase, "ACR_CASTER_RESREF");}
 			effect eFreeze = EffectCutsceneImmobilize();
 			effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 			object oAOEProxy = CreateObject(OBJECT_TYPE_CREATURE, sResRef, lErase);
+			SetFirstName(oAOEProxy, "Glyph of");
+			SetLastName(oAOEProxy, "Warding");
+			ChangeToStandardFaction(oAOEProxy, STANDARD_FACTION_MERCHANT);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oAOEProxy, HoursToSeconds(100));
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oAOEProxy, HoursToSeconds(100));
-			SetFirstName(oAOEProxy, "Glyph of Warding");
-			DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			DestroyObject(oAOEProxy, 3.0);
-			AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			DestroyObject(oErase, 3.0);
 			DestroyObject(oAOEProxy, 5.0);
 			}
@@ -1629,7 +1630,7 @@ if(GetSpellId() == 3137) {
 		
 		//Is this a Glyph of Warding?
 		if(((GetObjectType(oErase) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oErase), "glyph_ward") != -1)) || ((GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oErase) == 549))) {
-			SendMessageToAllDMs("2b = " + GetTag(oErase)); 
+			//SendMessageToAllDMs("2b = " + GetTag(oErase)); 
 			SendMessageToPC(oCaster, "You successfully erase a Glyph of Warding.");
 			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lErase, 3.0);
 			DestroyObject(oErase);
