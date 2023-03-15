@@ -1590,7 +1590,7 @@ if(GetSpellId() == 3137) {
 			//Code from x2_s0_glphwarda AOE onenter script applying damage to oCaster instead of entering object
 			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {
 				object oAOEProxy = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_glyph_ward_flr", lErase);
-				DelayCommand(1.0, AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+				DelayCommand(2.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				/*SpawnSpellProjectile(oAOEProxy, oCaster, lErase, GetLocation(oCaster), 549, PROJECTILE_PATH_TYPE_DEFAULT);
 				object oAOECaster = GetAreaOfEffectCreator(oErase);
 			    int nAOECasterLevel = GetCasterLevel(oAOECaster);
