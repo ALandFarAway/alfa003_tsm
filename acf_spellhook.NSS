@@ -427,12 +427,12 @@ void main()
 							
 							if(fDistanceFace < 5.0) {
 								sName = "A nearby location";
-								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									//SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
+									SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
 				    				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
-									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
-										oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
+										oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 										}
 									else {break;}
 									}
@@ -1470,7 +1470,7 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
+		//SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
 		//Read Magic: Glyph of Warding
 		if(((GetObjectType(oReadMagic) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oReadMagic), "glyph_ward") != -1)) || ((GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oReadMagic) == 549))) {
 		//if(nAOESpell == 549) {
@@ -1534,13 +1534,12 @@ if(GetSpellId() == 3003) {
 			location lMarked = ACR_GetPersistentLocation(oReadMagic, "ACR_ARCANEMARKLoc" + IntToString(nRM));
 			if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 				float fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
-				
 				sName = "A nearby location at " + IntToString(FloatToInt(fDistance)) + " ";
-				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 2.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
 					SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
 				    if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
-					oMark = GetNextObjectInShape(SHAPE_SPHERE, 2.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+					oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
 				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
@@ -1597,6 +1596,7 @@ if(GetSpellId() == 3137) {
 				object oAOEProxy = CreateObject(OBJECT_TYPE_CREATURE, sResRef, lErase);
 				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oAOEProxy, HoursToSeconds(100));
 				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oAOEProxy, HoursToSeconds(100));
+				SetFirstName(oAOEProxy, "Glyph of Warding");
 				DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				DestroyObject(oAOEProxy, 3.0);
 				}
