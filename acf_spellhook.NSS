@@ -500,10 +500,9 @@ void main()
 					}
 				}
 			
-		//Detect Magic: Glyph of Warding
+		//Detect Magic: Glyph of Warding AOE
 		if(GetObjectType(oDetected) == OBJECT_TYPE_AREA_OF_EFFECT) {
-			int nAOESpell = GetAreaOfEffectSpellId(oDetected);
-			if(nAOESpell == 549) {
+			if(GetAreaOfEffectSpellId(oDetected) == 549) {
 				nAuraCount++;
 				nAuraPower = 3;
 				sAuraStrength = "faint";
@@ -516,6 +515,25 @@ void main()
 				if(nConcentration > 13) {
 					DelayCommand(21.0, SendMessageToAllDMs("A nearby location has a glyph that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 					DelayCommand(21.0, SendMessageToPC(oCaster, "A nearby location has a glyph that glows with a " + sAuraStrength + " aura" + sSchool));
+					}
+				}
+			}
+			
+		//Detect Magic: Glyph of Warding Placeable
+		if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {
+			if(FindSubString(GetTag(oDetected), "glyph_ward") != -1) {
+				nAuraCount++;
+				nAuraPower = 3;
+				sAuraStrength = "faint";
+				if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=lightblue>Abjuration</color>";}
+										
+				//Flag Round 1 Message 	
+				SetLocalInt(oCaster, "nMessage1", 1);
+									
+				//Queue up report to caster if Round 3 achieved
+				if(nConcentration > 13) {
+					DelayCommand(21.0, SendMessageToAllDMs("A nearby glyph glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+					DelayCommand(21.0, SendMessageToPC(oCaster, "A nearby glyph glows with a " + sAuraStrength + " aura" + sSchool));
 					}
 				}
 			}
@@ -1548,14 +1566,14 @@ if(GetSpellId() == 3137) {
 	SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
 	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 	while (oGlyphAOE != OBJECT_INVALID) {
-		if(FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) {break;}
+		if(GetAreaOfEffectSpellId(oErase) == 549) {break;}
 		oGlyphAOE = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 		}
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
 	SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
 	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
-	else if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphAOE), "PER_GLYPH") != -1) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
+	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oErase) == 549) && (fGlyphAOE < 5.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
 		
 	//Run a CL check to see if oErase is erased later in script. DC is always 15.
 	int nCasterLevel = GetCasterLevel(oCaster); 
@@ -1566,11 +1584,13 @@ if(GetSpellId() == 3137) {
 	if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
 		SendMessageToPC(oCaster, "Your Erase spell fails.");
 		//oCaster failed on a Glyph of Warding. Oops. Boom.
-		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (FindSubString(GetTag(oErase), "PER_GLYPH") != -1))  {
+		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (GetAreaOfEffectSpellId(oErase) == 549))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
 			SendMessageToAllDMs("2a = " + GetTag(oErase));
-			
+			//Code from x2_s0_glphwarda AOE onenter script applying damage to oCaster instead of entering object
 			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {
+				object oAOEProxy = CreateObject(OBJECT_TYPE_PLACEABLE, "plc_glyph_ward_flr", lErase);
+				SpawnSpellProjectile(oAOEProxy, oCaster, lErase, GetLocation(oCaster), 549, PROJECTILE_PATH_TYPE_DEFAULT);
 				object oAOECaster = GetAreaOfEffectCreator(oErase);
 			    int nAOECasterLevel = GetCasterLevel(oAOECaster);
 			    int nAlign = GetAlignmentGoodEvil( oAOECaster );
@@ -1604,6 +1624,7 @@ if(GetSpellId() == 3137) {
 						else {ApplyEffectToObject( DURATION_TYPE_INSTANT, eNeutLink, oCaster );}
 						}
 					}
+				DestroyObject(oAOEProxy, 3.0);
 				}
 			else {AssignCommand(oErase, ActionCastSpellAtLocation(549, lErase, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
 			DestroyObject(oErase, 3.0);
