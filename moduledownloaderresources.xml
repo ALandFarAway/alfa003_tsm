@@ -170,7 +170,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0EB77410D998CB04CBF51044830BBEDB303F0EE4" downloadHash="F078B8020D47CA14146A42650898664F57219847" name="6c_int_hh_angler's_inn.trx" dlsize="49962" size="50130" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="174C41B5098172DD11E714405353FEF158EFFF56" downloadHash="6EFE9884E7214679AF697CFDFD152C980E8AA1CB" name="6c_int_hh_angler's_inn.trx" dlsize="48602" size="48729" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1220,7 +1220,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="47246B6DA75315248670E74CC88C1656A627B889" downloadHash="04B3A4FF4D3B83E9F5018E25BD8AABB9768F40DF" name="003_quests_lab.trx" dlsize="125903" size="312205" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D257D99047469FCDAB2CCBADDBC0D364D682B90A" downloadHash="1978260A2EC4476BDF23D8C853EA7260C26D86D9" name="003_quests_lab.trx" dlsize="128467" size="314202" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

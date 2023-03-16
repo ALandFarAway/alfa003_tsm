@@ -141,8 +141,7 @@ void main()
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
-	//SendMessageToPC(oCaster, GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
-	
+
 	/*Detect Magic
 	
 	A caster can detect the magical auras of objects within a spellcone. 
@@ -416,8 +415,6 @@ void main()
 					nArcaneMark = 1;
 					object oMarked = GetArea(oCaster);
 					while (nAM < 5) {
-					//SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oMarked));
-				
 						nAM++;
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
@@ -428,15 +425,13 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									//SendMessageToAllDMs("DM" + IntToString(nAM) + " " + GetTag(oMark));
-				    				if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+									if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 										}
 									else {break;}
 									}
-								//SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
-				    			if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 								nAuraCount++;
 								nAuraPower = 1;
@@ -460,13 +455,10 @@ void main()
 				nAM = 0;
 				while (nAM < 5) {
 					nAM++;
-					//SendMessageToAllDMs(IntToString(nAM) + " " + GetTag(oDetected));
-				    if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-						//SendMessageToAllDMs(IntToString(nAM) + " " + ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)));
-				    	location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+					if(ACR_GetPersistentString(oDetected, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+						location lMarked = ACR_GetPersistentLocation(oDetected, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 						string sMarked = ACR_LocationToString(lMarked);
-						//SendMessageToAllDMs(IntToString(nAM) + " " + sMarked);
-				    	string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
+						string sMarkedProxy = ACR_LocationToString(GetLocation(oDetected));
 						int nXStart = FindSubString(sMarked, "#X#", 0);
 						string sXYMarked = GetSubString(sMarked, nXStart, 30);
 						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
@@ -482,8 +474,7 @@ void main()
 							else {break;}
 							}
 							
-						//SendMessageToAllDMs("DM" + IntToString(nAM) + " nMarked = " + IntToString(nMarked));
-				    	if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
 			
 						nAuraCount++;
 						nAuraPower = 1;
@@ -1472,29 +1463,32 @@ if(GetSpellId() == 3003) {
 	string sName;
 	while(oReadMagic != OBJECT_INVALID) {
 		sName = GetName(oReadMagic);
-		//SendMessageToPC(oCaster, "oReadMagic sName = " + sName);
 		//Read Magic: Glyph of Warding
 		if(((GetObjectType(oReadMagic) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oReadMagic), "glyph_ward") != -1)) || ((GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oReadMagic) == 549))) {
-		//if(nAOESpell == 549) {
-			//int nReadGlyph = GetLocalInt(oReadMagic, "nReadGlyph");
-			//if(nReadGlyph != 1) {
-				//SetLocalInt(oReadMagic, "nReadGlyph", 1); 
-				if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
-					object oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);
-					int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
-					if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
-					int nDam = 8 * (nGlyphCasterLvl /2 );
-					int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
-					string sAlignDmg = "Divine";
-					if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
-					else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
-					else {sAlignDmg = "Sonic";}
-					if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) { sName = "A nearby location";}
-					SendMessageToPC(oCaster, sName + " bears a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who disturbs it.");
-					}
-				else {SendMessageToPC(oCaster, sName + " has a glyph on it.");}
-			//	}
-			//}
+			if(ACR_SkillCheck(SKILL_SPELLCRAFT, oCaster, 13, TRUE)) {
+				object oGlyphCaster;
+				if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) {oGlyphCaster = GetAreaOfEffectCreator(oReadMagic);}
+				else {string sResRef = GetLocalString(oReadMagic, "ACR_CASTER_RESREF"); 
+					oGlyphCaster = CreateObject(OBJECT_TYPE_CREATURE, sResRef, GetLocation(oReadMagic));
+					effect eFreeze = EffectCutsceneParalyze();
+					effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+					ChangeToStandardFaction(oGlyphCaster, STANDARD_FACTION_MERCHANT);
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oGlyphCaster, HoursToSeconds(100));
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oGlyphCaster, HoursToSeconds(100));
+					DestroyObject(oGlyphCaster, 2.0);
+					}	
+				int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
+				if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
+				int nDam = 8 * (nGlyphCasterLvl /2 );
+				int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
+				string sAlignDmg = "Divine";
+				if (nAlign == ALIGNMENT_GOOD) {sAlignDmg = "Divine";}
+				else if (nAlign == ALIGNMENT_EVIL) {sAlignDmg = "Negative";}
+				else {sAlignDmg = "Sonic";}
+				if(GetObjectType(oReadMagic) == OBJECT_TYPE_AREA_OF_EFFECT) { sName = "A nearby location";}
+				SendMessageToPC(oCaster, sName + " bears a Blasting Glyph of Warding that will do up to " + IntToString(nDam) + " points of " + sAlignDmg + " damage to anybody who disturbs it.");
+				}
+			else {SendMessageToPC(oCaster, sName + " has a glyph on it.");}
 		}
 		//Read Magic: Arcane Mark directly on an object or on the object as a proxy for a location
 		int nRM = 0;
@@ -1505,8 +1499,7 @@ if(GetSpellId() == 3003) {
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 					object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					while (oMark != OBJECT_INVALID) {
-						//SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
-				    	if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+						if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 						oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						}
 					if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
@@ -1539,13 +1532,10 @@ if(GetSpellId() == 3003) {
 				sName = "A nearby location";
 				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
-					//SendMessageToAllDMs("RM" + IntToString(nRM) + " " + GetTag(oMark));
-				    if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+					if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 					oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
 					
-				//SendMessageToAllDMs("RM" + IntToString(nRM) + " nMarked = " + IntToString(nMarked));
-				    	
 				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
 				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
@@ -1568,7 +1558,6 @@ if(GetSpellId() == 3137) {
 		}
 	location lGlyphPLC = GetLocation(oGlyphPLC);
 	float fGlyphPLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC);
-	//SendMessageToAllDMs("oGlyphPLC = " + GetTag(oGlyphPLC) + " at distance " + IntToString(FloatToInt(fGlyphPLC)));
 	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 7.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
 	while (oGlyphAOE != OBJECT_INVALID) {
 		if(GetAreaOfEffectSpellId(oGlyphAOE) == 549) {break;}
@@ -1576,9 +1565,8 @@ if(GetSpellId() == 3137) {
 		}
 	location lGlyphAOE = GetLocation(oGlyphAOE);
 	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
-	//SendMessageToAllDMs("oGlyphAOE = " + GetTag(oGlyphAOE) + " at distance " + IntToString(FloatToInt(fGlyphAOE)));
-	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;SendMessageToAllDMs("oErase = oGlyphPLC = " + GetTag(oErase));}
-	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oGlyphAOE) == 549) && (fGlyphAOE < 7.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;SendMessageToAllDMs("oErase = oGlyphAOE = " + GetTag(oErase));}
+	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;}
+	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oGlyphAOE) == 549) && (fGlyphAOE < 7.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;}
 		
 	//Run a CL check to see if oErase is erased later in script. DC is always 15.
 	int nCasterLevel = GetCasterLevel(oCaster); 
@@ -1591,7 +1579,6 @@ if(GetSpellId() == 3137) {
 		//oCaster failed on a Glyph of Warding. Oops. Boom.
 		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (GetAreaOfEffectSpellId(oGlyphAOE) == 549))  {
 			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
-			//SendMessageToAllDMs("2a = " + GetTag(oErase));
 			string sResRef = "";
 			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {sResRef = GetResRef(GetAreaOfEffectCreator(oErase));}
 			else {sResRef = GetLocalString(oErase, "ACR_CASTER_RESREF");}
@@ -1630,7 +1617,6 @@ if(GetSpellId() == 3137) {
 		
 		//Is this a Glyph of Warding?
 		if(((GetObjectType(oErase) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oErase), "glyph_ward") != -1)) || ((GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oErase) == 549))) {
-			//SendMessageToAllDMs("2b = " + GetTag(oErase)); 
 			SendMessageToPC(oCaster, "You successfully erase a Glyph of Warding.");
 			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lErase, 3.0);
 			DestroyObject(oErase);
@@ -1864,32 +1850,21 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	 object oScryer = OBJECT_SELF;
 	 object oArea = GetArea(oScryer);
 	 int nCasterType = GetLastSpellCastClass();
-	 //SendMessageToPC(oScryer, "nCasterType = " + IntToString(nCasterType));
 	 SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
-	 //object oTarget = GetSpellTargetObject();
-	 //object oScry;
-	 //if(nCasterType != CLASS_TYPE_DRUID) {
 	 float fDistancePlc = 0.0;
 	 object oScryPlc = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
-	 	//SendMessageToPC(oScryer, "0. sScry Name = " + GetName(oScryPlc));
-		while(oScryPlc != OBJECT_INVALID) {
+	 	while(oScryPlc != OBJECT_INVALID) {
 	 	   if(FindSubString(GetTag(oScryPlc), "_SCRY") != -1){
 			    string sPlcTag = GetTag(oScryPlc);
-				//SendMessageToPC(oScryer, "1. sScryPlc Name = " + GetName(oScryPlc));
-				//SendMessageToPC(oScryer, "1. sPlcTag = " + sPlcTag);
-			    SetLocalObject(oArea, "oScryPlc", oScryPlc);
+				SetLocalObject(oArea, "oScryPlc", oScryPlc);
 			    fDistancePlc = GetDistanceBetween(oScryer, oScryPlc);
-				//SendMessageToPC(oScryer, "Distance to oScryPlc = " + FloatToString(fDistancePlc));
 				}
 		  oScryPlc = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(oScryer), FALSE, OBJECT_TYPE_PLACEABLE);
 	   	}
-	//}
 	oScryPlc = GetLocalObject(oArea, "oScryPlc");
 	object oScry = GetLocalObject(oArea, "oScryPlc");
 	SetLocalObject(oArea, "oScry", oScry);
-	//SendMessageToAllDMs("1. sScry ResRefPlc = " + GetResRef(oScryPlc));
 	int nObjectTypePlc = GetObjectType(oScryPlc);
-	//SendMessageToAllDMs("1. nObjectTypePlc = " + IntToString(nObjectTypePlc));
 	SetLocalObject(oArea, "oScryPlc", OBJECT_INVALID);
 			   
 	float fDistanceTrg = 0.0;		
@@ -1898,12 +1873,9 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 		location lTarget = GetLocation(oScryer);
 		while(oScryTrg != OBJECT_INVALID) {
 			string sTriggerTagTrg = GetTag(oScryTrg);
-			//SendMessageToAllDMs("2. oScryTrg Name = " + GetName(oScryTrg));
-			//SendMessageToPC(oScryer, "2. sTriggerTagTrg = " + sTriggerTagTrg);
 			if(FindSubString(sTriggerTagTrg, "_SCRY_") != -1) {
 				 SetLocalObject(oArea, "oScryTrg", oScryTrg);
 				 fDistanceTrg = GetDistanceBetween(oScryer, oScryTrg);
-				 //SendMessageToPC(oScryer, "Distance to oScryTrg = " + FloatToString(fDistanceTrg));
 				 if(((fDistanceTrg > 0.0) && (fDistanceTrg < fDistancePlc)) ||(oScryPlc == OBJECT_INVALID))
 				 	{oScry = oScryTrg;
 					 SetLocalObject(oArea, "oScry", oScryTrg);
@@ -1916,15 +1888,8 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	
 	oScry = GetLocalObject(oArea, "oScry");
 		 
-	//SendMessageToPC(oScryer, "2. sScry ResRefTrg = " + GetResRef(oScryTrg));
 	int nObjectTypeTrg = GetObjectType(oScryTrg);
-	//SendMessageToPC(oScryer, "2. nObjectTypeTrg = " + IntToString(nObjectTypeTrg));
-	
-	//SendMessageToPC(oScryer, "3. sScry ResRef = " + GetResRef(oScry));
 	int nObjectType = GetObjectType(oScry);
-	//SendMessageToPC(oScryer, "3. nObjectType = " + IntToString(nObjectType));
-	
-	
 			
 	 //Usage, range, and class restrictions
 	 if(GetLocalInt(oScry, "nScryActive") == 1) {
@@ -1973,7 +1938,6 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
             	SetLocalObject(oScry, "oScrySpeak", oScrySpeak);
 				}
 				
-			//SendMessageToPC(oScryer, "oScrySpeak = " + GetName(oScrySpeak));
 			//Set all objects on each other
 			SetLocalObject(oScrySpeak, "oScry", oScry);
 			SetLocalObject(oScrySpeak, "oScryer", oScryer);
@@ -1998,12 +1962,10 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	
 	
 if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 
-	{//SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " is in Aquatic Cave");
-	 object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
+	{object oSwimTrg = GetNearestObject(OBJECT_TYPE_TRIGGER, oCaster, 1);
 	 string sTrgTag = GetTag(oSwimTrg);
 	 if((FindSubString(sTrgTag, "Walkmesh") == -1) && (FindSubString(sTrgTag, "archive") == -1)) {
-	 //SendMessageToAllDMs(sTrgTag + " is the nearest trigger. Spell ID is " + IntToString(nSpellId));
-	
+	 
 	   if(nSpellId == 1199 ||nSpellId == 1208 || nSpellId == SPELL_COMBUST || nSpellId ==  SPELL_DELAYED_BLAST_FIREBALL  || nSpellId == SPELL_ELEMENTAL_SHIELD || nSpellId == SPELL_FIRE_STORM || nSpellId == SPELL_FLAME_ARROW || nSpellId == SPELL_FLAME_LASH || nSpellId == SPELL_FLAME_WEAPON || nSpellId == SPELL_FIREBALL || nSpellId == SPELL_FIREBRAND || nSpellId == SPELL_FIREBURST 
 		|| nSpellId == SPELL_BURNING_HANDS || nSpellId == SPELL_FLAME_STRIKE || nSpellId == SPELL_GREATER_FIREBURST  || nSpellId == SPELL_INCENDIARY_CLOUD ||nSpellId == SPELL_INFERNO || nSpellId == SPELL_INFINITE_RANGE_FIREBALL 
 		|| nSpellId == 1056 || nSpellId == 1057 || nSpellId == SPELL_METEOR_SWARM || nSpellId == SPELL_METEOR_SWARM_TARGET_CREATURE || nSpellId == SPELL_METEOR_SWARM_TARGET_LOCATION || nSpellId == SPELL_METEOR_SWARM_TARGET_SELF
@@ -2235,29 +2197,17 @@ object oOlivusCast;
 if(FindSubString(GetName(oCaster), "Olivu") != -1)
 	{oOlivusCast = oCaster;}
 	
-//object oJhessiCast;
-//if(FindSubString(GetName(oCaster), "Jhess") != -1)
-//	{oJhessiCast = oCaster;}
 
 object oOlivusTarget;
 if(FindSubString(GetName(oTarget), "Olivu") != -1)
 	{oOlivusTarget = oTarget;}
-//object oJhessiTarget;
-//if(FindSubString(GetName(oTarget), "Jhess") != -1)
-//	{oJhessiTarget = oTarget;}
 
 if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {	
-	//SendMessageToPC(oCaster, "oCaster is " + GetName(oCaster));
 	int nSpellcraft = GetSkillRank(SKILL_SPELLCRAFT, oCaster);
-	//SendMessageToPC(oCaster, "nSpellcraft is " + IntToString(nSpellcraft));
 	int nFail = Random(6);
-	//SendMessageToPC(oCaster, "nFail is " + IntToString(nFail));
 	int nSpellLevel = GetSpellLevel(nSpellId);
-	//SendMessageToPC(oCaster, "nSpellLevel is " + IntToString(nSpellLevel));
 	int nDC = d20(1) + nSpellcraft;
-	//SendMessageToPC(oCaster, "nDC is " + IntToString(nDC));
 	int nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-	//SendMessageToPC(oCaster, "nRunningTab is " + IntToString(nRunningTab));
 	if(oCaster == oOlivusCast) {
 	int nCrystalCast = GetCampaignInt("DeanSphinx", "CrystalCast", oCaster);
 	if((nFail == 1)&& (nCrystalCast == 0) && (nSpellId != 32)&& (nSpellId != 33)&& (nSpellId != 31)&& (nSpellId != 34)&& (nSpellId != 35)&& (nSpellId != 1020)&& (nSpellId != 1021)&& (nSpellId != 1)&& (nSpellId != 6)&& (nSpellId != 189)&& (nSpellId != 431)&& (nSpellId != 154)&& (nSpellId != 146)&& (nSpellId != 414)&& (nSpellId != 148)&& (nSpellId != 3159)&& (nSpellId != 3160)&& (nSpellId != 449)&& (nSpellId != 450)&& (nSpellId != 432)&& (nSpellId != 418)) {
@@ -2266,10 +2216,7 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 		nRunningTab = nRunningTab + nSpellLevel;
 		SetCampaignInt("DeanSphinx", "CrystalCharge", nRunningTab, oCaster);			
 		nRunningTab = GetCampaignInt("DeanSphinx", "CrystalCharge", oCaster);
-		//SendMessageToPC(oCaster, GetName(oCaster) + " charges to CrystalCon " + IntToString(nRunningTab));
 		SendMessageToAllDMs(GetName(oCaster) + " crystal failed a casting of SpellID " + IntToString(nSpellId) + " a level " + IntToString(nSpellLevel) + " spell. CrysCon charges to " + IntToString(nRunningTab));
-	    //SendMessageToAllDMs(GetName(oCaster) + " CrysCon charges to " + );
-	   //SendMessageToPC(oCaster, "New nRunningTab is " + IntToString(nRunningTab));
 	   }
 	SetCampaignInt("DeanSphinx", "CrystalCast", 0, oCaster);			
 		   
@@ -2395,8 +2342,7 @@ if((oCaster == oOlivusCast) || (oTarget == oOlivusTarget)) {
 					{object oRandomCreature = GetFirstObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
 					 int nCount = 0;
 					 while ((oRandomCreature != OBJECT_INVALID) && (nCount < 10)) {
-					 	 //SendMessageToPC(oCaster, "oRandomCreature = " + IntToString(nCount) + " is " + GetName(oRandomCreature));
-						 oRandomCreature = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
+					 	 oRandomCreature = GetNextObjectInShape(SHAPE_SPHERE, 30.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_CREATURE);
 						 nCount = nCount +1;
 						 }
 					 oTarget = GetNearestCreature(CREATURE_TYPE_IS_ALIVE, CREATURE_ALIVE_BOTH, oCaster, Random(nCount));
