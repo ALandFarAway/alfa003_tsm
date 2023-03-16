@@ -8,7 +8,7 @@
 //
 //
 //  Description
-//  Erase as per FRCS. Looks for Arcane Marks to erase first, then checks to 
+//  Erase as per SRD. Looks for Arcane Marks and Glyphs of Warding, checks to 
 //	see if oTarget is a magic scroll, and removes its item properties if so.
 //////////////////////////////////////////////////////////////////////////////
 

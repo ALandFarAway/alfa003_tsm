@@ -8,7 +8,7 @@
 //
 //
 //  Description
-//  Read Magic as per FRCS. Reads and reveals Arcane Marks and Glyphs of Warding.
+//  Read Magic as per SRD. Reads and reveals Arcane Marks and Glyphs of Warding.
 //
 //
 //////////////////////////////////////////////////////////////////////////////
