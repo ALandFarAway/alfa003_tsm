@@ -1075,11 +1075,11 @@ void main()
 												
 												//Extra reports for items with SpellSchool variables.
 												float fDelay = 7.1;
-												//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
-										 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 27.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+												//If this is part of a Creature message stack, that takes longer, with more messages spread over a longer period.
+										 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 18.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 												//Only report equipped items for Creatures.
 												if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-													//Queue up SpellSchool reports to caster if Round 3 achieved and creature is not invisible
+													//Queue up SpellSchool reports to caster if creature is not invisible
 													if(GetLocalInt(oDetected, "nInvis") == 0) {
 														if(nACRSpellSchool > 0) {
 															nAuraCount++;
@@ -1132,7 +1132,7 @@ void main()
 											//Most objects report at 7 seconds into the report.
 											float fDelay = 7.0;
 											//If this is part of a Creature message stack, that takes longer, with more messages spread over a longer period.
-									 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 28.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+									 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 18.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 											//Only report equipped items for Creatures.
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												//Queue up Detail Equipped report to caster if creature is not invisible and it wasn't sent as a SpellSchool message before this
@@ -1201,10 +1201,10 @@ void main()
 								if(nSomething>0) {DelayCommand(fSumDelay + 1.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs(sName + " -- " + GetName(oDetected) + "-- : " + sSomething + " auras you can't classify"));}
 								
 								if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)){
-									DelayCommand(fSumDelay + 2.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
-									DelayCommand(fSumDelay + 2.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
-									DelayCommand(fSumDelay + 2.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
-									DelayCommand(25.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
+									DelayCommand(fSumDelay + 3.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
+									DelayCommand(fSumDelay + 3.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
+									DelayCommand(fSumDelay + 3.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
+									DelayCommand(30.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
 									}
 								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(25.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
 								 
@@ -1227,9 +1227,9 @@ void main()
 										DelayCommand(fSumDelay + 3.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
 										DelayCommand(fSumDelay + 3.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
 										DelayCommand(fSumDelay + 3.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
-										DelayCommand(25.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
+										DelayCommand(30.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
 										}
-									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(25.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
+									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(30.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
 								}
 							
 						
