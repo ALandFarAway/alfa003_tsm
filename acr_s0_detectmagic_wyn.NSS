@@ -157,8 +157,8 @@ void main()
 		string sSchool = "";
 		string sSchool2 = "";
 		string sSchool3 = "";
-		//Let's only look at Creatures, Doors, Items, Placeables, Placed Effects, Waypoints 
-			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)|| (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)  || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
+		//Let's look at Creatures, Doors, Items, Placeables, Placed Effects, Waypoints, Area of Effect Objects 
+			if((oDetected != oCaster) && ((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) || (GetObjectType(oDetected) == OBJECT_TYPE_DOOR)  || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE)|| (GetObjectType(oDetected) == OBJECT_TYPE_PLACED_EFFECT) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_AREA_OF_EFFECT)  || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT))){
 			
 			//Distance and direction per detected object
 			string sName = GetName(oDetected);
@@ -329,6 +329,7 @@ void main()
 				
 					//Queue up report to caster if Round 3 achieved
 					if(nConcentration > 13) {
+						if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {sName = "Something";}
 						DelayCommand(21.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + sSchool2 + sSchool3));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 						}
@@ -348,6 +349,7 @@ void main()
 			//Multi-type objects with standardized tags or variables
 			if((GetObjectType(oDetected) == OBJECT_TYPE_DOOR) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM) || (GetObjectType(oDetected) == OBJECT_TYPE_CREATURE)|| (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {
 				//Arcane Mark
+				int nMarked = 0;
 				int nAM = 0;
 				if(nArcaneMark != 1) {
 					nArcaneMark = 1;
@@ -357,16 +359,20 @@ void main()
 						if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
 							location lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
 							location lFacing = GetAheadLocation(oCaster, GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)));
-							float fDistance = GetDistanceBetweenLocations(lMarked, lFacing);
-							int nDistance = FloatToInt(fDistance);
-							string sDistance = IntToString(nDistance);
-							SendMessageToAllDMs("sDistance = " + sDistance);
-							if(fDistance < 5.0) {
-								CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_glyph", lFacing);
+							float fDistanceFace = GetDistanceBetweenLocations(lMarked, lFacing);
+							
+							if(fDistanceFace < 5.0) {
 								sName = "A nearby location";
-								object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
-								if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
-								
+								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+								while (oMark != OBJECT_INVALID) {
+									if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
+										oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+										}
+									else {break;}
+									}
+								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+			
 								nAuraCount++;
 								nAuraPower = 1;
 								sAuraStrength = "faint";
@@ -377,14 +383,15 @@ void main()
 								
 								//Queue up report to caster if Round 3 achieved
 								if(nConcentration > 13) {
-									DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-									DelayCommand(21.0, SendMessageToPC(oCaster, sName + " to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+									DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+									DelayCommand(21.0, SendMessageToPC(oCaster, sName + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 									}
 								}
 							}
 						}
 					}
-				
+					
+				nMarked = 0;
 				nAM = 0;
 				while (nAM < 5) {
 					nAM++;
@@ -396,17 +403,19 @@ void main()
 						string sXYMarked = GetSubString(sMarked, nXStart, 30);
 						string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 						sName = GetName(oDetected);
-						if(sXYMarked != sXYMarkedProxy) {
-							sName = "A nearby location";
-							fDistance = GetDistanceBetweenLocations(lMarked, GetLocation(oCaster));
-							nDistance = FloatToInt(fDistance);
-							sDistance = IntToString(nDistance);
-							fAngle = GetAngleBetweenLocations(lMarked, GetLocation(oCaster));
-							sAngle = GetCompassDirectionOfAngle(fAngle);
+						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
+						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+						while (oMark != OBJECT_INVALID) {
+						SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
+				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
+								oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
+								}
+							else {break;}
 							}
-						object oMark = GetNearestObjectToLocation(OBJECT_TYPE_PLACEABLE, lMarked, 1);
-						if(GetTag(oMark) != "ipoint_arcane_mark") {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
-						
+							
+						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+			
 						nAuraCount++;
 						nAuraPower = 1;
 						sAuraStrength = "faint";
@@ -417,13 +426,51 @@ void main()
 						
 						//Queue up report to caster if Round 3 achieved
 						if(nConcentration > 13) {
-							DelayCommand(21.0, SendMessageToAllDMs(sName + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+							DelayCommand(21.0, SendMessageToAllDMs(sName + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+							DelayCommand(21.0, SendMessageToPC(oCaster, sName + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 							}
 						}
 					}
 				}
 			
+		//Detect Magic: Glyph of Warding AOE
+		if(GetObjectType(oDetected) == OBJECT_TYPE_AREA_OF_EFFECT) {
+			if(GetAreaOfEffectSpellId(oDetected) == 549) {
+				nAuraCount++;
+				nAuraPower = 3;
+				sAuraStrength = "faint";
+				if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=lightblue>Abjuration</color>";}
+										
+				//Flag Round 1 Message 	
+				SetLocalInt(oCaster, "nMessage1", 1);
+									
+				//Queue up report to caster if Round 3 achieved
+				if(nConcentration > 13) {
+					DelayCommand(21.0, SendMessageToAllDMs("A nearby location has a glyph that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+					DelayCommand(21.0, SendMessageToPC(oCaster, "A nearby location has a glyph that glows with a " + sAuraStrength + " aura" + sSchool));
+					}
+				}
+			}
+			
+		//Detect Magic: Glyph of Warding Placeable
+		if(GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) {
+			if(FindSubString(GetTag(oDetected), "glyph_ward") != -1) {
+				nAuraCount++;
+				nAuraPower = 3;
+				sAuraStrength = "faint";
+				if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=lightblue>Abjuration</color>";}
+										
+				//Flag Round 1 Message 	
+				SetLocalInt(oCaster, "nMessage1", 1);
+									
+				//Queue up report to caster if Round 3 achieved
+				if(nConcentration > 13) {
+					DelayCommand(21.0, SendMessageToAllDMs("A nearby glyph glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+					DelayCommand(21.0, SendMessageToPC(oCaster, "A nearby glyph glows with a " + sAuraStrength + " aura" + sSchool));
+					}
+				}
+			}
+				
 			//Portals
 			if((GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER)) {
 				//If they are tagged as per the line below, DM is automatic for them and they will register as Strong Conjuration.
@@ -481,7 +528,7 @@ void main()
 					string sSymbolName = GetName(oDetected);	
 					if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sSymbolName = "Something";}		
 					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs(sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
@@ -1073,17 +1120,17 @@ void main()
 													if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0)) {
 														if(nACRSpellSchool > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 															}
 														if(nACRSpellSchool2 > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength2 + " --" + IntToString(nAuraPower2) + "-- aura" + sSchool2));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength2 + " aura" + sSchool2));
 															}
 														if(nACRSpellSchool3 > 0) {
 															nAuraCount++;
-															DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
+															DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength3 + " --" + IntToString(nAuraPower3) + "-- aura" + sSchool3));
 															DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength3 + " aura" + sSchool3));
 															}
 														}
@@ -1119,7 +1166,7 @@ void main()
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
 												
-											//If the caster gets a Round 3, most objects report at 24 seconds into the report.
+											//If the caster gets a Round 3, most objects report at 22 seconds into the report.
 											float fDelay = 22.0;
 											//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
 									 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
@@ -1130,7 +1177,7 @@ void main()
 												if((nConcentration > 13) && (GetLocalInt(oDetected, "nInvis") == 0) && (GetLocalInt(oDetected, "ACR_SPELLADDED") == 0)) {
 													if((GetLocalInt(oItem, "ACR_SPELLSCHOOL") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") == 0)) {
 														nAuraCount++;
-														DelayCommand(fDelay, SendMessageToAllDMs("ItemSubtype = " + sItemSubType + ", " + GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+														DelayCommand(fDelay, SendMessageToAllDMs(GetName(oItem) + ", " + sBaseItem  +  " " + sSlot + ", gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
 														DelayCommand(fDelay, SendMessageToPC(oCaster, sBaseItem  +  " " + sSlot + " gives off a " + sAuraStrength + " aura" + sSchool));
 														}
 													}

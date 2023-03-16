@@ -31,94 +31,135 @@ void main()
 
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
-	object oMarked = GetSpellTargetObject();
-	location lMarked = GetLocation(oMarked);
-	//Looking for Arcane Marks. First, do any exist on objects within radius 5.0 of target location
-	if(oMarked == OBJECT_INVALID) {
-		lMarked = GetSpellTargetLocation();
-		oMarked = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
-		int nMarked = 0;
-		while (oMarked != OBJECT_INVALID) {
-			 int nAM = 1;
-			 while (nAM < 5) {
-				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {nMarked = 1; break;}
-				nAM++;
-				}
-			if(nMarked == 1) {break;}
-			oMarked = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
-			}
+	//Set Default oMarked, look for a possible unclickable Glyph of Warding plc and a possible Glyph of Warding AOE
+	object oErase = GetSpellTargetObject();
+	location lErase = GetLocation(oErase);
+	object oGlyphPLC = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
+	while (oGlyphPLC != OBJECT_INVALID) {
+		if(FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) {break;}
+		oGlyphPLC = GetNextObjectInShape(SHAPE_SPHERE, 5.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_PLACEABLE);
 		}
-	
-	//If none of the objects within radius are Marked, then we check the area, as a proxy for Marks that were placed without an object within 5.0 of the location they were placed.	
-	//This is a technical end-around for mechanical limitations.
-	if(oMarked == OBJECT_INVALID) {oMarked = GetArea(oCaster);}
-	
-	//Now that we have an oMarked object, we run a CL check to see if the Mark (if any) is revealed to oCaster
-	//DC is always 15.
-	if(oMarked != OBJECT_INVALID) {
-		int nCasterLevel = GetCasterLevel(oCaster); 
-		int nCLRoll = d20(1);
-		SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
-		if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
-		//oCaster failed their check.
-		if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
-			SendMessageToPC(oCaster, "Your Erase spell fails.");
-			//oCaster *really* failed, on a glyph of warding. Oops. Boom.
-			if((FindSubString(GetTag(oMarked), "glyph_ward") != -1) || (FindSubString(GetResRef(oMarked), "glyph_ward") != -1)) {
-				SendMessageToPC(oCaster, "You activate the " + GetName(oMarked) + "!");
-				if((GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_WAYPOINT) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("1 " + GetTag(oMarked)); AssignCommand(oMarked, ActionCastSpellAtLocation(549, lMarked, METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));}
-				if((GetObjectType(oMarked) == OBJECT_TYPE_AREA_OF_EFFECT) && (FindSubString(GetTag(oMarked), "glyph_ward") != -1)) {SendMessageToAllDMs("2 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
-				if(GetObjectType(oMarked) == OBJECT_TYPE_PLACEABLE) {SendMessageToAllDMs("3 " + GetTag(oMarked)); SignalEvent( oMarked, EventUserDefined( 2000) );}
+	location lGlyphPLC = GetLocation(oGlyphPLC);
+	float fGlyphPLC = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphPLC);
+	object oGlyphAOE = GetFirstObjectInShape(SHAPE_SPHERE, 7.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
+	while (oGlyphAOE != OBJECT_INVALID) {
+		if(GetAreaOfEffectSpellId(oGlyphAOE) == 549) {break;}
+		oGlyphAOE = GetNextObjectInShape(SHAPE_SPHERE, 7.0, GetSpellTargetLocation(), FALSE, OBJECT_TYPE_AREA_OF_EFFECT);
+		}
+	location lGlyphAOE = GetLocation(oGlyphAOE);
+	float fGlyphAOE = GetDistanceBetweenLocations(GetSpellTargetLocation(), lGlyphAOE);
+	if((oErase == OBJECT_INVALID) && (FindSubString(GetTag(oGlyphPLC), "glyph_ward") != -1) && (fGlyphPLC < 5.0)) {oErase = oGlyphPLC; lErase = lGlyphPLC;}
+	else if((oErase == OBJECT_INVALID) && (GetAreaOfEffectSpellId(oGlyphAOE) == 549) && (fGlyphAOE < 7.0)) {oErase = oGlyphAOE; lErase = lGlyphAOE;}
+		
+	//Run a CL check to see if oErase is erased later in script. DC is always 15.
+	int nCasterLevel = GetCasterLevel(oCaster); 
+	int nCLRoll = d20(1);
+	SendMessageToPC(oCaster, "Caster level check: " + IntToString(nCLRoll) + " + " + IntToString(nCasterLevel) + " = " + IntToString(nCLRoll + nCasterLevel) + " vs DC15");
+	//oCaster failed their check.
+	if(nCLRoll <= 2) {SendMessageToPC(oCaster, "A natural 1 or 2 is always a failure on erasing magical writing.");}
+	if((nCasterLevel + nCLRoll < 15) || (nCLRoll <= 2)) {
+		SendMessageToPC(oCaster, "Your Erase spell fails.");
+		//oCaster failed on a Glyph of Warding. Oops. Boom.
+		if((FindSubString(GetTag(oErase), "glyph_ward") != -1) || (GetAreaOfEffectSpellId(oGlyphAOE) == 549))  {
+			SendMessageToPC(oCaster, "You activate a Glyph of Warding!");
+			string sResRef = "";
+			if(GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT) {sResRef = GetResRef(GetAreaOfEffectCreator(oErase));}
+			else {sResRef = GetLocalString(oErase, "ACR_CASTER_RESREF");}
+			effect eFreeze = EffectCutsceneImmobilize();
+			effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+			object oAOEProxy = CreateObject(OBJECT_TYPE_CREATURE, sResRef, lErase);
+			SetFirstName(oAOEProxy, "Glyph of");
+			SetLastName(oAOEProxy, "Warding");
+			ChangeToStandardFaction(oAOEProxy, STANDARD_FACTION_MERCHANT);
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oAOEProxy, HoursToSeconds(100));
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oAOEProxy, HoursToSeconds(100));
+			DestroyObject(oAOEProxy, 3.0);
+			DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			DestroyObject(oErase, 3.0);
+			DestroyObject(oAOEProxy, 5.0);
+			}
+		return;
+		}
+	//oCaster passed their check. Hooray.	
+	else {
+		effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
+		
+		//Magic scrolls that have been Erased are demagic-ified
+		if((GetBaseItemType(oErase) == 54) || (GetBaseItemType(oErase) == 75) || (GetBaseItemType(oErase) == 105)) {
+			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lErase, 3.0);
+			SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from " + GetName(oErase) + ".");
+			SetFirstName(oErase, "Erased Scroll");
+			SetDescription(oErase, "This scroll has been erased.");
+			itemproperty ipRemove = GetFirstItemProperty(oErase);
+			while (GetIsItemPropertyValid(ipRemove)) {
+				RemoveItemProperty(oErase, ipRemove);
+					ipRemove = GetNextItemProperty(oErase);
+				} 
+			return;
+			}
+		
+		//Is this a Glyph of Warding?
+		if(((GetObjectType(oErase) == OBJECT_TYPE_PLACEABLE)  && (FindSubString(GetTag(oErase), "glyph_ward") != -1)) || ((GetObjectType(oErase) == OBJECT_TYPE_AREA_OF_EFFECT)  && (GetAreaOfEffectSpellId(oErase) == 549))) {
+			SendMessageToPC(oCaster, "You successfully erase a Glyph of Warding.");
+			ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lErase, 3.0);
+			DestroyObject(oErase);
+			return;
+			}	
+		
+		//Looking for Arcane Marks now. Do any exist on objects within radius 5.0 of target location?
+		if(oErase == OBJECT_INVALID) {
+			lErase = GetSpellTargetLocation();
+			oErase = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lErase, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
+			int nMarked = 0;
+			while (oErase != OBJECT_INVALID) {
+				 int nAM = 1;
+				 while (nAM < 5) {
+					if(ACR_GetPersistentString(oErase, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {nMarked = 1; break;}
+					nAM++;
+					}
+				if(nMarked == 1) {break;}
+				oErase = GetNextObjectInShape(SHAPE_SPHERE, 5.0, lErase, TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT); 
 				}
 			}
-		//oCaster passed their check. Hooray.
-		else {
-			effect eErase = EffectVisualEffect(VFX_IMP_EVIL_HELP);
-			object oMark = GetNearestObjectByTag("ipoint_arcane_mark", oMarked, 1);
-			if(oMarked == GetArea(oCaster)) {oMark = GetNearestObjectByTag("ipoint_arcane_mark", oCaster, 1);}
+		
+		//If none of the objects within radius are Marked, then we check the area, as a proxy for Marks that were placed without an object within 5.0 of the location they were placed.	
+		//This is a technical end-around for mechanical limitations.
+		if(oErase == OBJECT_INVALID) {oErase = GetArea(oCaster);}
+		
+		if(oErase != OBJECT_INVALID)  {
+			object oMark = GetNearestObjectByTag("ipoint_arcane_mark", oErase, 1);
+			if(oErase == GetArea(oCaster)) {oMark = GetNearestObjectByTag("ipoint_arcane_mark", oCaster, 1);}
 			int nAM = 1;
 			int nErased = 0;
-			//Do the actual erasing. 
+			//Do the actual erasing. Sometimes the (non-persistant) mark itself is actually a little bit away from the (persistant) proxy object storing its information.
 			while (nAM < 5) {
-				if(ACR_GetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
-					lMarked = ACR_GetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM));
-					string sName = GetName(oMarked);
-					string sMarked = ACR_LocationToString(lMarked);
-					string sMarkedProxy = ACR_LocationToString(GetLocation(oMarked));
+				if(ACR_GetPersistentString(oErase, "ACR_ARCANEMARK" + IntToString(nAM)) != "") {
+					lErase = ACR_GetPersistentLocation(oErase, "ACR_ARCANEMARKLoc" + IntToString(nAM));
+					string sName = GetName(oErase);
+					string sMarked = ACR_LocationToString(lErase);
+					string sMarkedProxy = ACR_LocationToString(GetLocation(oErase));
 					int nXStart = FindSubString(sMarked, "#X#", 0);
 					string sXYMarked = GetSubString(sMarked, nXStart, 30);
 					string sXYMarkedProxy = GetSubString(sMarkedProxy, nXStart, 30);
 					
 					if(sXYMarked != sXYMarkedProxy) {sName = "a location";}
 					if((sXYMarked == sXYMarkedProxy) || ((sXYMarked != sXYMarkedProxy) && (GetSpellTargetObject() == OBJECT_INVALID))) { 
-						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-						if(GetDistanceBetween(oMark, oMarked) <= 2.5) {DestroyObject(oMark, 1.0);}
-						SendMessageToPC(oCaster, "You have erased an arcane mark drawn on " + sName + ".");
-						ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
-						ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
+						ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lErase, 3.0);
+						if(GetDistanceBetween(oMark, oErase) <= 2.5) {DestroyObject(oMark, 1.0);}
+						else if((oErase == GetArea(oCaster)) && (GetDistanceBetween(oMark, oCaster) <= 2.5)){DestroyObject(oMark, 1.0);}
+						SendMessageToPC(oCaster, "You have erased an Arcane Mark drawn on " + sName + ".");
+						ACR_SetPersistentString(oErase, "ACR_ARCANEMARK" + IntToString(nAM), "", 0);
+						ACR_SetPersistentLocation(oErase, "ACR_ARCANEMARKLoc" + IntToString(nAM), ACR_StringToLocation(""), 0);
 						nErased++;
 						}
 					}
 				nAM++;
 				}
-				
+					
 			//oCaster passed their check, but no Marks existed to be erased.
-			if(nErased == 0) {SendMessageToPC(oCaster, "You found no arcane marks to erase.");}
-			
-			//Magic scrolls that have been Erased are demagic-ified
-			if((GetBaseItemType(oMarked) == 54) || (GetBaseItemType(oMarked) == 75) || (GetBaseItemType(oMarked) == 105)) {
-				ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eErase, lMarked, 3.0);
-				SendMessageToPC(oCaster, "Both magic and the writing that had encoded it fade from " + GetName(oMarked) + ".");
-				SetFirstName(oMarked, "Erased Scroll");
-				SetDescription(oMarked, "This scroll has been erased.");
-				itemproperty ipRemove = GetFirstItemProperty(oMarked);
-				while (GetIsItemPropertyValid(ipRemove)) {
-					RemoveItemProperty(oMarked, ipRemove);
-						ipRemove = GetNextItemProperty(oMarked);
-					} 
-				}
-			}
+			if(nErased == 0) {SendMessageToPC(oCaster, "You found nothing to erase.");}
 		}
+	}
 	// Post-cast event.
 	ACR_PostcastEvent();
 	}				

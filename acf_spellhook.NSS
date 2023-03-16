@@ -588,7 +588,7 @@ void main()
 					string sSymbolName = GetName(oDetected);	
 					if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sSymbolName = "Something";}		
 					if(nConcentration > 13) {
-						DelayCommand(21.0, SendMessageToAllDMs("Glyph or Symbol " + sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
+						DelayCommand(21.0, SendMessageToAllDMs(sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
 						DelayCommand(21.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 						}
 					}
@@ -1953,7 +1953,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			
 			SetLocalObject(oArea, "oScry", OBJECT_INVALID);
 	
-			//Over to ScrySpeaker's onspawn: tsm_scry_npc_onspawn
+			//Over to ScrySpeaker's onspawn: acf_scry_npc_onspawn
 		}
 	}
 	

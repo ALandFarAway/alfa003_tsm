@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  System Name : ALFA Core Rules
-//     Filename : acr_s0_scrying.nss
+//     Filename : acr_s0_scryinggr.nss
 //    $Revision:: 1        $ current version of the file
 //        $Date:: 2023-03-15 date the file was created or modified
 //       Author : Wynna 
