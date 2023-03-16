@@ -1255,7 +1255,7 @@ void main()
 					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 					}
 				
-				oDetected = GetNextObjectInShape( SHAPE_SPELLCONE, 10.0, GetSpellTargetLocation(), TRUE, OBJECT_TYPE_ALL );
+				oDetected = GetNextObjectInShape( SHAPE_SPHERE, 120.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL );
 			}
 			
 		
