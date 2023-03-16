@@ -457,11 +457,11 @@ void main()
 				nAuraCount++;
 				nAuraPower = 3;
 				sAuraStrength = "faint";
+				sName = "A glyph ";
 				if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=lightblue>Abjuration</color>";}
 										
-				DelayCommand(6.0, SendMessageToAllDMs("A nearby glyph glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-				DelayCommand(6.0, SendMessageToPC(oCaster, "A nearby glyph glows with a " + sAuraStrength + " aura" + sSchool));
-					
+				DelayCommand(6.0, SendMessageToAllDMs(sName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
+				DelayCommand(6.0, SendMessageToPC(oCaster, sName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
 				}
 			}
 				
@@ -479,10 +479,9 @@ void main()
 						
 					}
 				
-				//Glyph and symbol traps after they've fired, and the triggers that fire them.
+				//Symbol traps after they've fired, and the triggers that fire them.
 				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
 				/*
-				Glyph of Warding = Faint Abjuration
 				Symbol of Pain = Moderate Necromancy
 				Symbol of Sleep = Moderate Enchantment
 				Symbol of Fear = Moderate Necromancy
@@ -493,9 +492,8 @@ void main()
 				Symbol of Insanity = Strong Enchantment
 				*/
 				
-				 if(((FindSubString(GetTag(oDetected), "_glyph_ward") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
+				 if((FindSubString(GetTag(oDetected), "_symbol_") != -1) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					nAuraCount++;
-					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}
@@ -514,7 +512,6 @@ void main()
 					if(GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) {sSymbolName = "Something";}		
 						DelayCommand(6.0, SendMessageToAllDMs(sSymbolName + " --" + GetName(oDetected) + "-- centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura " + sSchool));
 						DelayCommand(6.0, SendMessageToPC(oCaster, sSymbolName + " centered on a spot " + sDistance + "m " + sAngle + " of " + GetName(oCaster) + " gives off a " + sAuraStrength + " aura " + sSchool));
-						
 					}
 				}	
 						
@@ -576,7 +573,7 @@ void main()
 					string sSeparate = IntToString(nSeparate);
 					float fAngleSeparate = GetAngleBetweenObjects(oDetected, oOrigin);
 					string sAngleSeparate = GetCompassDirectionOfAngle(fAngleSeparate);
-					string sSeparated = " and a circle centered on a spot" + sSeparate + "m " + sAngleSeparate + " of " + GetName(oOrigin);
+					string sSeparated = " and a circle centered on a spot " + sSeparate + "m " + sAngleSeparate + " of " + GetName(oOrigin);
 					if(nDistance = 0) {sSeparated = "";}
 					
 					//If there is a valid Origin placeable and the caster earned a Round 3, queue up the report.
@@ -1079,8 +1076,7 @@ void main()
 												//Extra reports for items with SpellSchool variables.
 												float fDelay = 7.1;
 												//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
-										 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
-												if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+										 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 27.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 												//Only report equipped items for Creatures.
 												if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 													//Queue up SpellSchool reports to caster if Round 3 achieved and creature is not invisible
@@ -1133,14 +1129,13 @@ void main()
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
 												
-											//If the caster gets a Round 3, most objects report at 22 seconds into the report.
+											//Most objects report at 7 seconds into the report.
 											float fDelay = 7.0;
-											//If this is part of a Creature message stack, that takes longer, with more messages spread over a minute.
-									 		//Due to the magic of fDelay, this message stack arrives in the chat window after Round 2 and its own Round 3 Headers
-											if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 42.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+											//If this is part of a Creature message stack, that takes longer, with more messages spread over a longer period.
+									 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 28.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 											//Only report equipped items for Creatures.
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
-												//Queue up Detail Equipped report to caster if Round 3 achieved and creature is not invisible and it wasn't sent as a SpellSchool message before this
+												//Queue up Detail Equipped report to caster if creature is not invisible and it wasn't sent as a SpellSchool message before this
 												if((GetLocalInt(oDetected, "nInvis") == 0) && (GetLocalInt(oDetected, "ACR_SPELLADDED") == 0)) {
 													if((GetLocalInt(oItem, "ACR_SPELLSCHOOL") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL2") == 0) && (GetLocalInt(oItem, "ACR_SPELLSCHOOL3") == 0)) {
 														nAuraCount++;
@@ -1229,9 +1224,9 @@ void main()
 									if(nSomething>0) {DelayCommand(fSumDelay + 1.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, sName + ": " + sSomething + " auras you can't classify"));}
 								 	if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 										SetLocalInt(oCaster, "nSummary",1);
-										DelayCommand(fSumDelay + 2.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
-										DelayCommand(fSumDelay + 2.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
-										DelayCommand(fSumDelay + 2.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
+										DelayCommand(fSumDelay + 3.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
+										DelayCommand(fSumDelay + 3.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
+										DelayCommand(fSumDelay + 3.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
 										DelayCommand(25.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
 										}
 									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(25.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
@@ -1826,7 +1821,7 @@ void main()
 					string sSeparate = IntToString(nSeparate);
 					float fAngleSeparate = GetAngleBetweenObjects(oDetected, oOrigin);
 					string sAngleSeparate = GetCompassDirectionOfAngle(fAngleSeparate);
-					string sSeparated = " and a circle centered on a spot" + sSeparate + "m " + sAngleSeparate + " of " + GetName(oOrigin);
+					string sSeparated = " and a circle centered on a spot " + sSeparate + "m " + sAngleSeparate + " of " + GetName(oOrigin);
 					if(nDistance = 0) {sSeparated = "";}
 					
 					//If there is a valid Origin placeable and the caster earned a Round 3, queue up the report.
