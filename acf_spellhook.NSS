@@ -156,11 +156,6 @@ void main()
 			}
 		
 		ActionSpeakString("*Eyes glow blue", TALKVOLUME_TALK);
-		string sList = ACR_GetSpellList(oCaster, 0);
-		SendMessageToAllDMs("sList = " + sList);
-		string sList1 = ACR_GetSpellList(oCaster, 1);
-		SendMessageToAllDMs("sList1 = " + sList1);
-		if(GetSpellTargetObject() != oCaster) {}
 		//Declare loop variables	
 		int nAuraCount;
 		int nCreatureCount;
@@ -1299,6 +1294,14 @@ void main()
 		SetLocalInt(oCaster, "nAuraPowerHigh", 0);
 		SetLocalString(oCaster, "sAuraPowerHigh", "");
 		SetLocalInt(oCaster, "nSummary", 0);
+		
+		if(GetSpellTargetObject() != oCaster) {
+			string sList = ACR_GetSpellList(GetSpellTargetObject(), 0);
+			string sLeft = GetStringLeft(sList, 10);
+			SendMessageToAllDMs("sLeft = " + sLeft);
+			string sLevel = GetStringRight(sLeft, 7);
+			SendMessageToAllDMs("sLevel = " + sLevel);
+			}
 		
 	}
 	
