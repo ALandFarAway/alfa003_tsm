@@ -156,7 +156,10 @@ void main()
 			}
 		
 		ActionSpeakString("*Eyes glow blue", TALKVOLUME_TALK);
-		ACR_GetSpellList(oCaster, 1);
+		string sList = ACR_GetSpellList(oCaster, 0);
+		SendMessageToAllDMs("sList = " + sList);
+		string sList1 = ACR_GetSpellList(oCaster, 1);
+		SendMessageToAllDMs("sList1 = " + sList1);
 		if(GetSpellTargetObject() != oCaster) {}
 		//Declare loop variables	
 		int nAuraCount;
@@ -1201,7 +1204,7 @@ void main()
 									DelayCommand(fSumDelay + 3.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
 									DelayCommand(30.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
 									}
-								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(25.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
+								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(30.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
 								 
 									if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 										DelayCommand(fSumDelay, SendMessageToPC(oCaster, " "));
