@@ -169,8 +169,8 @@ void main()
 		//Zero out variables common to all objects, for each valid oDetected loop iteration.
 		string sAuraPower = "";
 		int nAuraPower = 0;
-		int nAuraPowerHigh = 0;
-		string sAuraPowerHigh = "";
+	//	int nAuraPowerHigh = 0;
+		//string sAuraPowerHigh = "";
 		string sAuraStrength = "";
 		string sAuraStrength2 = "";
 		string sAuraStrength3 = "";
@@ -322,7 +322,7 @@ void main()
 					if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE) == FALSE) {sSchool = "";}
 					
 					//Are any of the three pairs of variables the highest power aura encountered thus far? If so, store it.	
-					nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+					/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 					if(nAuraPower > nAuraPowerHigh) {
 						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
@@ -337,7 +337,7 @@ void main()
 						SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower3);
 						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
 						}
-					
+					*/
 					if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {sName = "Something";}
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + sSchool2 + sSchool3));
 						DelayCommand(6.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
@@ -661,7 +661,7 @@ void main()
 								if(nAuraPower > 9) {sEffectStrength = "an overwhelming";}
 									
 								//Store highest aura, total and by school
-								nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+								/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 								if(nAuraPower > nAuraPowerHigh) {
 									SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 									SetLocalString(oCaster, "sAuraPowerHigh", sEffectStrength);
@@ -671,7 +671,7 @@ void main()
 									SetLocalInt(oDetected, "nEffectSchoolHigh_" + sEffectSchool, nAuraPower);
 									SetLocalString(oDetected, "sEffectStrength_" + sEffectSchool, sEffectStrength);
 									}
-									
+								*/
 								//Keep track of all active spells by school for DM information, just because we can	
 								SetLocalString(oDetected, "sEffectSpell_" + sEffectSchool, GetLocalString(oDetected, "sEffectSpell_" + sEffectSchool) + ", " + sEffect);
 										
@@ -725,12 +725,12 @@ void main()
 				SetLocalInt(oDetected, "nEffectSchoolHigh_T", 0);
 				SetLocalInt(oDetected, "nEffectSchoolHigh_G", 0);
 					
-				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+			/*	nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 				if(nAuraPower > nAuraPowerHigh) {
 					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 					}
-				
+				*/
 				//Creature race and effects done.
 				//Zero out variables needed for this creature's items, which are about to be determined.
 				sSchool = "";
@@ -1050,7 +1050,7 @@ void main()
 												if(nAuraPower3 > 6) {sAuraStrength3 = "strong";}
 												if(nAuraPower3 > 9) {sAuraStrength3 = "overwhelming";}
 												
-												nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+												/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 												if(nAuraPower > nAuraPowerHigh) {
 													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
@@ -1065,11 +1065,11 @@ void main()
 													SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower3);
 													SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
 								    				}	
-												
+												*/
 												//Extra reports for items with SpellSchool variables.
 												float fDelay = 7.1;
 												//If this is part of a Creature message stack, that takes longer, with more messages spread over a longer period.
-										 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 18.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+										 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 14.1 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 												//Only report equipped items for Creatures.
 												if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 													//Queue up SpellSchool reports to caster if creature is not invisible
@@ -1116,16 +1116,16 @@ void main()
 											if(nAuraPower > 9) {sAuraStrength = "overwhelming";}
 											
 											//Is this the highest power aura encountered thus far? If so, store it.	
-											nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+											/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 											if(nAuraPower > nAuraPowerHigh) {
 												SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 												SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 							    				}
-												
+											*/	
 											//Most objects report at 7 seconds into the report.
 											float fDelay = 7.0;
 											//If this is part of a Creature message stack, that takes longer, with more messages spread over a longer period.
-									 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 18.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
+									 		if(GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) {fDelay = 14.0 + IntToFloat(nSlot/10) +IntToFloat(nCreatureCount * 2);}
 											//Only report equipped items for Creatures.
 											if(((GetObjectType(oDetected) == OBJECT_TYPE_CREATURE) && (nSlot > 0) && (nSlot <= 13)) || (GetObjectType(oDetected) == OBJECT_TYPE_PLACEABLE) || (GetObjectType(oDetected) == OBJECT_TYPE_ITEM)){
 												//Queue up Detail Equipped report to caster if creature is not invisible and it wasn't sent as a SpellSchool message before this
@@ -1197,9 +1197,9 @@ void main()
 									DelayCommand(fSumDelay + 3.1 + IntToFloat(nCreatureCount), SendMessageToAllDMs(" "));
 									DelayCommand(fSumDelay + 3.2 + IntToFloat(nCreatureCount), SendMessageToAllDMs("**********"));
 									DelayCommand(fSumDelay + 3.3 + IntToFloat(nCreatureCount), SendMessageToAllDMs("EQUIPPED DETAIL: "));
-									DelayCommand(30.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
+									DelayCommand(25.0 + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs(" "));
 									}
-								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(30.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
+								if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(25.1 + IntToFloat(nCreatureCount *2 ), SendMessageToAllDMs("The rest of the auras on " + sName + " are in inventory."));}
 								 
 									if((GetLocalInt(oCaster, "nSummary") == 0) && (GetLocalInt(oDetected, "nInvis")== 0)) {
 										DelayCommand(fSumDelay, SendMessageToPC(oCaster, " "));
@@ -1220,9 +1220,9 @@ void main()
 										DelayCommand(fSumDelay + 3.1 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, " "));
 										DelayCommand(fSumDelay + 3.2 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "**********"));
 										DelayCommand(fSumDelay + 3.3 + IntToFloat(nCreatureCount), SendMessageToPC(oCaster, "EQUIPPED DETAIL: "));
-										DelayCommand(30.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
+										DelayCommand(25.0 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, " "));
 										}
-									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(30.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
+									if(GetLocalInt(oDetected, "nInvis")== 0) {DelayCommand(25.1 + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "The rest of the auras on " + sName + " are in inventory."));}
 								}
 							
 						
@@ -1237,12 +1237,12 @@ void main()
 				if(nAuraPower > 6) {sAuraStrength = "a strong";}
 				if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 					
-				nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
+				/*nAuraPowerHigh = GetLocalInt(oCaster, "nAuraPowerHigh");
 				if(nAuraPower > nAuraPowerHigh) {
 					SetLocalInt(oCaster, "nAuraPowerHigh", nAuraPower);
 					SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength);
 					}
-				
+				*/
 				oDetected = GetNextObjectInShape( SHAPE_SPHERE, 120.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL );
 			}
 			
@@ -1267,7 +1267,7 @@ void main()
 			float fDelay = 11.0;
 			nItemCounted = GetLocalInt(oCaster, "nItemCount");
 			int nInvis = GetLocalInt(oDetected, "nInvis");
-			if((nItemCounted == 1)&& (nInvis== 0)) {fDelay = 45.0;}
+			if((nItemCounted == 1)&& (nInvis== 0)) {fDelay = 35.0;}
 			DelayCommand(4.0, SendMessageToAllDMs("**********"));
 			DelayCommand(4.1, SendMessageToAllDMs(GetName(oCaster) + " learns:"));
 			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2), SendMessageToAllDMs("**********"));
@@ -1297,10 +1297,9 @@ void main()
 		
 		if(GetSpellTargetObject() == oCaster) {
 			string sList = ACR_GetSpellList(GetSpellTargetObject(), 0);
-			string sLeft = GetStringLeft(sList, 10);
-			DelayCommand(50.0, SendMessageToAllDMs("sLeft = " + sLeft));
-			string sLevel = GetStringRight(sLeft, 7);
-			DelayCommand(50.0, SendMessageToAllDMs("sLevel = " + sLevel));
+			string sLeft = GetStringLeft(sList, 12);
+			string sLevel = GetStringRight(sLeft, 8);
+			DelayCommand(40.0, SendMessageToAllDMs("sLevel = " + sLevel));
 			}
 		
 	}
