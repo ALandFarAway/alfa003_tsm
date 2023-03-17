@@ -156,7 +156,7 @@ void main()
 			}
 		
 		ActionSpeakString("*Eyes glow blue", TALKVOLUME_TALK);
-		ACR_GetSpellList(oCaster, 0);
+		ACR_GetSpellList(oCaster, 1);
 		if(GetSpellTargetObject() != oCaster) {}
 		//Declare loop variables	
 		int nAuraCount;
@@ -340,11 +340,7 @@ void main()
 						SetLocalString(oCaster, "sAuraPowerHigh", sAuraStrength3);
 						}
 					
-					//Flag Round 1 Message 	
-					SetLocalInt(oCaster, "nMessage1", 1);
-				
-					//Queue up report to caster if Round 3 achieved
-						if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {sName = "Something";}
+					if((GetObjectType(oDetected) == OBJECT_TYPE_TRIGGER) || (GetObjectType(oDetected) == OBJECT_TYPE_WAYPOINT)) {sName = "Something";}
 						DelayCommand(6.0, SendMessageToAllDMs(GetName(oDetected) + " --" +sName + "-- " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool + sSchool2 + sSchool3));
 						DelayCommand(6.0, SendMessageToPC(oCaster, sName + " " + sDistance + "m to the " + sAngle + " has " + sAuraStrength + " aura" + sSchool + sSchool2 + sSchool3));
 						
@@ -392,12 +388,8 @@ void main()
 								sAuraStrength = "faint";
 								if(GetIsSkillSuccessful(oCaster, SKILL_SPELLCRAFT, 15 + nAuraPower, FALSE)) {sSchool = " of <color=#FFFF00>Universal arcanity</color>";}
 									
-								//Flag Round 1 Message 	
-								SetLocalInt(oCaster, "nMessage1", 1);
-								
-								//Queue up report to caster if Round 3 achieved
-									DelayCommand(6.0, SendMessageToAllDMs(sName + " --" +sName + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
-									DelayCommand(6.0, SendMessageToPC(oCaster, sName + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
+								DelayCommand(6.0, SendMessageToAllDMs(sName + " --" +sName + " has an arcane mark that glows with a " + sAuraStrength + " --" + IntToString(nAuraPower) + "-- aura" + sSchool));
+								DelayCommand(6.0, SendMessageToPC(oCaster, sName + " has an arcane mark that glows with a " + sAuraStrength + " aura" + sSchool));
 								
 								}
 							}
@@ -419,7 +411,7 @@ void main()
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
-						SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
+						//SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
 				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
@@ -629,7 +621,7 @@ void main()
 						if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 						
 							DelayCommand(6.0, SendMessageToAllDMs(sName + " has a " + sAuraStrength + " lingering aura of " + sSchool));
-							DelayCommand(6.1, SendMessageToPC(oCaster, sName + " has a " + sAuraStrength + " lingering aura" + sSchool));
+							DelayCommand(6.0, SendMessageToPC(oCaster, sName + " has a " + sAuraStrength + " lingering aura" + sSchool));
 							
 						}
 					
