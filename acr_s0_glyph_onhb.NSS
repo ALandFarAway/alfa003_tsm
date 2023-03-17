@@ -21,9 +21,11 @@
 */
 
 #include "acr_spells_i"
+#include "acr_trigger_i"
 
 void main () {
 
+ACR_TriggerOnHeartbeat();
 string sCaster = GetLocalString(OBJECT_SELF, "ACR_CASTER_RESREF");
 SendMessageToAllDMs("sCaster = " + sCaster);
 		

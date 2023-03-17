@@ -51,9 +51,11 @@
 
 #include "x2_inc_switches"
 #include "acr_spells_i"
+#include "acr_placeable_i"
+
 void main()
 {
-
+	ACR_PlaceableOnHeartbeat();
     int bSetup = GetLocalInt(OBJECT_SELF,"ACR_PLC_GLYPH_INIT");
     if (bSetup == 0)
     {

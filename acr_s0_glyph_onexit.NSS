@@ -18,6 +18,9 @@
 // Includes ////////////////////////////////////////////////////////////////////
 #include "acr_trigger_i"
 
-/* Dummy onexit for glyph of warding object
+// Dummy onexit for glyph of warding object
 
-*/
+void main () {
+
+	ACR_TriggerOnHeartbeat();
+}
