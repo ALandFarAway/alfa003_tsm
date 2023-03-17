@@ -27,6 +27,7 @@
 #include "x2_inc_itemprop"
 #include "x2_inc_toollib"
 #include "acr_db_persist_i"
+#include "acr_spells_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -155,6 +156,8 @@ void main()
 			}
 		
 		ActionSpeakString("*Eyes glow blue", TALKVOLUME_TALK);
+		ACR_GetSpellList(oCaster, 0);
+		if(GetSpellTargetObject() != oCaster) {}
 		//Declare loop variables	
 		int nAuraCount;
 		int nCreatureCount;
