@@ -1295,12 +1295,12 @@ void main()
 		SetLocalString(oCaster, "sAuraPowerHigh", "");
 		SetLocalInt(oCaster, "nSummary", 0);
 		
-		if(GetSpellTargetObject() != oCaster) {
+		if(GetSpellTargetObject() == oCaster) {
 			string sList = ACR_GetSpellList(GetSpellTargetObject(), 0);
 			string sLeft = GetStringLeft(sList, 10);
-			SendMessageToAllDMs("sLeft = " + sLeft);
+			DelayCommand(50.0, SendMessageToAllDMs("sLeft = " + sLeft));
 			string sLevel = GetStringRight(sLeft, 7);
-			SendMessageToAllDMs("sLevel = " + sLevel);
+			DelayCommand(50.0, SendMessageToAllDMs("sLevel = " + sLevel));
 			}
 		
 	}
