@@ -66,7 +66,8 @@ void main()
         
         effect eAOE = EffectAreaOfEffect(38, "acr_s0_glyph_onenter", "acr_s0_glyph_onhb", "acr_s0_glyph_onexit", "alfa_glyph_warding");
         ApplyEffectAtLocation(DURATION_TYPE_PERMANENT, eAOE, GetLocation(OBJECT_SELF));
-		DelayCommand(3.0, SetLocalString(GetNearestObjectByTag("alfa_glyph_warding", OBJECT_SELF, 1), "ACR_CASTER_RESREF", sCaster));
+		DelayCommand(2.0, SetLocalString(GetNearestObjectByTag("alfa_glyph_warding", OBJECT_SELF, 1), "ACR_CASTER_RESREF", sCaster));
+		DelayCommand(2.0, SetLocalObject(GetNearestObjectByTag("alfa_glyph_warding", OBJECT_SELF, 1), "ACR_GLYPH_PLC", OBJECT_SELF));
 		}
     else
     {

@@ -43,7 +43,6 @@ void main()
     effect eFreeze = EffectCutsceneImmobilize();
 	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 	object oCaster = CreateObject(OBJECT_TYPE_CREATURE, sCaster, lTarget);
-	SendMessageToAllDMs("acf_plc_glyph_ward_onenter sCaster = " + sCaster);
 	SetFirstName(oCaster, "Glyph of");
 	SetLastName(oCaster, "Warding");
 	ChangeToStandardFaction(oCaster, STANDARD_FACTION_MERCHANT);
@@ -52,6 +51,8 @@ void main()
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oCaster, HoursToSeconds(100));
 	int nCasterLevel = GetCasterLevel(oCaster);
     int nAlign = GetAlignmentGoodEvil(oCaster );
+	SendMessageToAllDMs("acf_plc_glyph_ward_onenter sCaster = " + sCaster + "; CL = " + IntToString(nCasterLevel) + "; nAlign = " + IntToString(nAlign));
+	object oPLC = GetLocalObject(OBJECT_SELF, "ACR_GLYPH_PLC");
 	DestroyObject(oCaster, 3.0);
 	
     //Limit caster level for purposes of damage
@@ -71,6 +72,7 @@ void main()
 	{
 	//Damage
 	int nDam = d8(nCasterLevel /2 );
+	SendMessageToAllDMs("nDam = " + IntToString(nDam));
 	nDam = ApplyMetamagicVariableMods(nDam, 40);
 	nDam = GetReflexAdjustedDamage(nDam, oTarget, GetSpellSaveDC(), SAVING_THROW_TYPE_SPELL, oCaster);
 
@@ -98,6 +100,7 @@ void main()
 			ApplyEffectToObject( DURATION_TYPE_INSTANT, eNeutLink, oTarget );
 		}
 	} //still fires off glyph for resisted targets
+		DestroyObject( oPLC, 3.0 );
 		DestroyObject( OBJECT_SELF, 3.1 );
 	}
 }
