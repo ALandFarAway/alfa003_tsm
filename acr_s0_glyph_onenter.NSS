@@ -5,7 +5,7 @@
 //    
 //  Description
 //  This script handles on enter actions for the area of effect created by 
-//	placeable Glyphs of Warding. It is not updated in ACR updates.
+//	ALFA custom placeable Glyphs of Warding. It is not updated in ACR updates.
 //
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,6 +43,7 @@ void main()
     effect eFreeze = EffectCutsceneImmobilize();
 	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 	object oCaster = CreateObject(OBJECT_TYPE_CREATURE, sCaster, lTarget);
+	SendMessageToAllDMs("acf_plc_glyph_ward_onenter sCaster = " + sCaster);
 	SetFirstName(oCaster, "Glyph of");
 	SetLastName(oCaster, "Warding");
 	ChangeToStandardFaction(oCaster, STANDARD_FACTION_MERCHANT);

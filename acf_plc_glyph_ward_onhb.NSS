@@ -58,9 +58,10 @@ void main()
 	ACR_PlaceableOnHeartbeat();
     int bSetup = GetLocalInt(OBJECT_SELF,"ACR_PLC_GLYPH_INIT");
     if (bSetup == 0)
-    {
-        SetLocalInt(OBJECT_SELF,"ACR_PLC_GLYPH_INIT",1);
+    {   
+		SetLocalInt(OBJECT_SELF,"ACR_PLC_GLYPH_INIT",1);
         string sCaster = GetLocalString(OBJECT_SELF, "ACR_CASTER_RESREF");
+		SendMessageToAllDMs("acf_plc_glyph_ward_onhb sCaster = " + sCaster);
 		ApplyEffectToObject(DURATION_TYPE_PERMANENT,EffectVisualEffect(445),OBJECT_SELF);
         
         effect eAOE = EffectAreaOfEffect(38, "acr_s0_glyph_onenter", "acr_s0_glyph_onhb", "acr_s0_glyph_onexit", "alfa_glyph_warding");

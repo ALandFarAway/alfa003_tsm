@@ -4,8 +4,8 @@
 //  Filename : acr_s0_glyph_hb
 //    
 //  Description
-//  This script handles on heartbeat actions for the placeable Glyph of Warding.
-//  It is not updated in ACR updates.
+//  This script handles on heartbeat actions for the area of effect created by 
+//	ALFA custom placeable Glyphs of Warding. It is not updated in ACR updates.
 //
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
@@ -27,6 +27,6 @@ void main () {
 
 ACR_TriggerOnHeartbeat();
 string sCaster = GetLocalString(OBJECT_SELF, "ACR_CASTER_RESREF");
-SendMessageToAllDMs("sCaster = " + sCaster);
+SendMessageToAllDMs("acr_s0_glyph_onhb sCaster = " + sCaster);
 		
 }
