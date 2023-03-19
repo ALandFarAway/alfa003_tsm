@@ -25,8 +25,6 @@
 
 void main () {
 
-ACR_TriggerOnHeartbeat();
-string sCaster = GetLocalString(OBJECT_SELF, "ACR_CASTER_RESREF");
-SendMessageToAllDMs("acr_s0_glyph_onhb sCaster = " + sCaster);
+	ACR_TriggerOnHeartbeat();
 		
 }

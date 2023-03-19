@@ -1656,10 +1656,9 @@ void main()
 						}
 					}
 				
-				//Glyph and symbol traps after they've fired, and the triggers that fire them.
+				//Symbol traps after they've fired, and the triggers that fire them.
 				//If they are tagged correctly as below, DM is automatic for them. They will report as follows:
 				/*
-				Glyph of Warding = Faint Abjuration
 				Symbol of Pain = Moderate Necromancy
 				Symbol of Sleep = Moderate Enchantment
 				Symbol of Fear = Moderate Necromancy
@@ -1670,9 +1669,8 @@ void main()
 				Symbol of Insanity = Strong Enchantment
 				*/
 				
-				 if(((FindSubString(GetTag(oDetected), "_glyph_ward") != -1) || (FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
+				 if(((FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					nAuraCount++;
-					if(FindSubString(GetTag(oDetected), "_glyph_") != -1) {sSchool = "of Abjuration"; nAuraPower = 3;}
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1)) {nAuraPower = 5;}

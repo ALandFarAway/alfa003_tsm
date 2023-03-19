@@ -49,7 +49,7 @@ void main()
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oCaster);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oCaster, HoursToSeconds(100));
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oCaster, HoursToSeconds(100));
-	int nCasterLevel = GetCasterLevel(oCaster);
+	int nCasterLevel = GetLevelByClass(CLASS_TYPE_CLERIC, oCaster);
     int nAlign = GetAlignmentGoodEvil(oCaster );
 	SendMessageToAllDMs("acf_plc_glyph_ward_onenter sCaster = " + sCaster + "; CL = " + IntToString(nCasterLevel) + "; nAlign = " + IntToString(nAlign));
 	object oPLC = GetLocalObject(OBJECT_SELF, "ACR_GLYPH_PLC");
