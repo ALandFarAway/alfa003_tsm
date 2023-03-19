@@ -2577,11 +2577,13 @@ if(GetSpellId() == 3003) {
 					effect eFreeze = EffectCutsceneParalyze();
 					effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 					ChangeToStandardFaction(oGlyphCaster, STANDARD_FACTION_MERCHANT);
+					SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oGlyphCaster);
+					SetStandardFactionReputation(STANDARD_FACTION_DEFENDER, 50, oGlyphCaster);
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oGlyphCaster, HoursToSeconds(100));
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oGlyphCaster, HoursToSeconds(100));
 					DestroyObject(oGlyphCaster, 2.0);
 					}	
-				int nGlyphCasterLvl = GetCasterLevel(oGlyphCaster);
+				int nGlyphCasterLvl = GetLevelByClass(CLASS_TYPE_CLERIC, oGlyphCaster);
 				if(nGlyphCasterLvl >= 10){nGlyphCasterLvl = 10;}
 				int nDam = 8 * (nGlyphCasterLvl /2 );
 				int nAlign = GetAlignmentGoodEvil(oGlyphCaster);
@@ -2693,11 +2695,12 @@ if(GetSpellId() == 3137) {
 			SetLastName(oAOEProxy, "Warding");
 			ChangeToStandardFaction(oAOEProxy, STANDARD_FACTION_MERCHANT);
 			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oCaster);
+			SetStandardFactionReputation(STANDARD_FACTION_DEFENDER, 50, oCaster);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oAOEProxy, HoursToSeconds(100));
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oAOEProxy, HoursToSeconds(100));
 			DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-			DestroyObject(oErase, 3.0);
-			DestroyObject(oAOEProxy, 5.0);
+			DestroyObject(oErase, 2.0);
+			DestroyObject(oAOEProxy, 3.0);
 			}
 		return;
 		}

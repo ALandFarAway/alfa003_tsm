@@ -47,13 +47,14 @@ void main()
 	SetLastName(oCaster, "Warding");
 	ChangeToStandardFaction(oCaster, STANDARD_FACTION_MERCHANT);
 	SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oCaster);
+	SetStandardFactionReputation(STANDARD_FACTION_DEFENDER, 50, oCaster);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oCaster, HoursToSeconds(100));
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oCaster, HoursToSeconds(100));
 	int nCasterLevel = GetLevelByClass(CLASS_TYPE_CLERIC, oCaster);
     int nAlign = GetAlignmentGoodEvil(oCaster );
 	SendMessageToAllDMs("acf_plc_glyph_ward_onenter sCaster = " + sCaster + "; CL = " + IntToString(nCasterLevel) + "; nAlign = " + IntToString(nAlign));
 	object oPLC = GetLocalObject(OBJECT_SELF, "ACR_GLYPH_PLC");
-	DestroyObject(oCaster, 3.0);
+	DestroyObject(oCaster, 2.0);
 	
     //Limit caster level for purposes of damage
     if (nCasterLevel > 10)
