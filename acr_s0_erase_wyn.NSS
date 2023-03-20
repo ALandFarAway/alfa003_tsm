@@ -29,7 +29,7 @@ void main()
         return;
     }
 
-	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	//Set Default oMarked, look for a possible unclickable Glyph of Warding plc and a possible Glyph of Warding AOE
 	object oErase = GetSpellTargetObject();
@@ -71,12 +71,13 @@ void main()
 			SetFirstName(oAOEProxy, "Glyph of");
 			SetLastName(oAOEProxy, "Warding");
 			ChangeToStandardFaction(oAOEProxy, STANDARD_FACTION_MERCHANT);
+			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oCaster);
+			SetStandardFactionReputation(STANDARD_FACTION_DEFENDER, 50, oCaster);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oAOEProxy, HoursToSeconds(100));
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oAOEProxy, HoursToSeconds(100));
-			DestroyObject(oAOEProxy, 3.0);
 			DelayCommand(1.0, AssignCommand(oAOEProxy, ActionCastSpellAtLocation(549, GetLocation(oCaster), METAMAGIC_ANY, TRUE, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-			DestroyObject(oErase, 3.0);
-			DestroyObject(oAOEProxy, 5.0);
+			DestroyObject(oErase, 2.0);
+			DestroyObject(oAOEProxy, 3.0);
 			}
 		return;
 		}

@@ -155,7 +155,6 @@ void main()
 			fDur = HoursToSeconds( 24 );
 			}
 		
-		ActionSpeakString("*Eyes glow blue", TALKVOLUME_TALK);
 		//Declare loop variables	
 		int nAuraCount;
 		int nCreatureCount;
@@ -2555,8 +2554,7 @@ void main()
 	}
 	
 
-	
-	
+
 //Read Magic
 if(GetSpellId() == 3003) {
 

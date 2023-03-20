@@ -21,7 +21,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
-
 #include "acr_placeable_i"
 #include "acr_scry_i"
 
@@ -411,13 +410,8 @@ void main() {
 			if(fDistanceMoved != 0.0) {
 					sMoving = "moving " + sDirection + ".";
 				}
-			//ActionSpeakString(GetName(oScried) + " is " + sMoving, TALKVOLUME_TALK);
 			
 			ActionSpeakString( "********************", TALKVOLUME_TALK);
 			ActionSpeakString( "", TALKVOLUME_TALK);
-			
-			 
 		}	
-	
-		
 }

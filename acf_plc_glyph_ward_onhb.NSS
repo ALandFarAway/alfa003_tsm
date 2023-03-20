@@ -18,8 +18,6 @@
 /*
     Heartbeat for glyph of warding object
 
-    Short rundown:
-
     Place a glyph of warding object from the palette and manually add 
 	ACR_CASTER_RESREF as a string with the resref of the creature you  
 	want to be its 'caster' through the toolset.
@@ -32,19 +30,7 @@
     dispelled or removed, and the glyph will terminate itself.
 
     Also on the first heartbeat, this object creates an AOE object
-    around itself, which, when getting the OnEnter Event will signal 
-    User Defined Event 2000 to the glyph placeable which will fire
-    the spell stored on a variable on itself on the intruder
-
-    Note that not all spells might work because this is a placeable
-    object casting them, but the more popular ones are working.
-
-    The default spell cast is id 549, which is the script for
-    the standard glyph of warding.
-
-    Check the comments on the Glyph of Warding object on the palette
-    for more information
-
+    around itself
 */
 
 // Includes //////////////////////////////////////
