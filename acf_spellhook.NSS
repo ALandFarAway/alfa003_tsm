@@ -142,6 +142,7 @@ void main()
 	effect eSpellFail = EffectSpellFailure(100, SPELL_SCHOOL_GENERAL);
 	
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
+	SendMessageToAllDMs("DM_Spam = " + IntToString(GetLocalInt(GetModule(), "DM_Spam")));
 
 	//Arcane Sight
 	if(GetSpellId() == 3108) {
@@ -1265,6 +1266,11 @@ void main()
 			string sList = ACR_GetSpellList(oTarget, 0);
 			string sLeft = GetStringLeft(sList, 11);
 			string sLevel = GetStringRight(sLeft, 7);
+			if(FindSubString(sList, " try ", 1) != -1) {
+				int nLevel = ACR_GetHighestCasterLevel(oTarget);
+				float fLevel = nLevel/2.0;
+				sLevel = "around Level " + IntToString(FloatToInt(fLevel));
+				}
 			int nDivine = 0;
 			int nArcane = 0;
 			if((GetLevelByClass(CLASS_TYPE_CLERIC, oTarget) != 0) || (GetLevelByClass(CLASS_TYPE_DRUID, oTarget) != 0) || (GetLevelByClass(CLASS_TYPE_PALADIN, oTarget) != 0)  || (GetLevelByClass(CLASS_TYPE_RANGER, oTarget) != 0)) {
