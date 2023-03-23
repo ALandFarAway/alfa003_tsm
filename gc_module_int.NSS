@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  System Name : ALFA Core Rules
-//     Filename : ga_plc_set_use.nss
+//     Filename : ga_module_int.nss
 //    $Revision:: 1        $ current version of the file
 //        $Date:: 2023-03-20 date the file was created or modified
 //       Author : Wynna 
@@ -22,9 +22,8 @@ int StartingConditional(string sVariable, string sCheck)
 {
     
     int nValue = GetLocalInt(GetModule(), sVariable);
-    int iRet = CompareInts(nValue, sCheck);
-
-    PrintString ("gc_module_int: nValue = " + IntToString(nValue) + ",  sCheck = " + sCheck + " -- return val: " + IntToString(iRet));
-    SendMessageToAllDMs("gc_module_int: nValue = " + IntToString(nValue) + ",  sCheck = " + sCheck + " -- return val: " + IntToString(iRet));
-	return (iRet);
+     
+    PrintString ("gc_module_int: nValue = " + IntToString(nValue));
+    SendMessageToAllDMs("gc_module_int: nValue = " + IntToString(nValue));
+	return (nValue);
 }
