@@ -66,7 +66,9 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 				if(nGoHome == 0) {			
 					AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 					SendMessageToPC(oScryer, "The scry spell ends.");		
-					SendMessageToAllDMs("Send: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+					if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+						SendMessageToAllDMs("Send: " + GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+						}
 					}
 				if(nGoHome == 1) {
 					oScryer = GetLocalObject(oScry, "oViewerA");
@@ -101,7 +103,6 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 					lHere = GetLocalLocation(oScry, "lViewerH");
 					}
 				
-				//SendMessageToAllDMs("Send:  End Scry oViewer = " + GetName(oScryer));
 												
 				//Bring your people home
 				effect eEffect = GetFirstEffect(oScryer);
@@ -265,8 +266,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						
 			AssignCommand(oScry, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			SendMessageToPC(oScryer, "The scry spell ends.");		
-			SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
-			
+			if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+				SendMessageToAllDMs(GetName(oScryer) + "'s scry spell is cancelled and the images in the " + sScryName + " fade.");		
+				}
 			int nGoHome = 0;
 			while(nGoHome < 9) {
 				if(nGoHome == 1) {
@@ -302,7 +304,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					lHere = GetLocalLocation(oScry, "lViewerH");
 					}
 				
-				//SendMessageToAllDMs("Speak: End Scry oViewer = " + GetName(oScryer));
 												
 				//Bring your people home
 				effect eEffect = GetFirstEffect(oScryer);
@@ -449,7 +450,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							int nCLRoll = d20(1);
 							int nNDDC = GetLocalInt(oScried, "abr_sp_nondetect");
 							SendMessageToPC(oScryer, GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
-							SendMessageToAllDMs(GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
+							if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+								SendMessageToAllDMs(GetName(oScried) + " has Non-Detection active. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC" + IntToString(nNDDC) + ".");
+								}
 							if(nCL + nCLRoll <  nNDDC) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
@@ -466,7 +469,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							}
 							
 						else if(GetLocalInt(oScried, "abr_sp_sanctum") != 0) {
-							SendMessageToAllDMs(GetName(oScried) + " has Mage's Private Sanctum active.");
+							if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+								SendMessageToAllDMs(GetName(oScried) + " has Mage's Private Sanctum active.");
+								}
 							SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 							SendMessageToPC(oScried, "You have a sensation as of somebody's attention passing over you without detecting your presence.");
 							SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
@@ -480,8 +485,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
 							int nCLRoll = d20(1);
 							SendMessageToPC(oScryer, GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
-							SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
-								
+							if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+								SendMessageToAllDMs(GetName(oScried) + " is wearing an amulet of non-detection. " + GetName(oScryer) + " rolled a " + IntToString(nCLRoll) + " + " + IntToString(nCL) + " = " + IntToString(nCLRoll + nCL) + "CL Check vs. DC19.");
+								}
 							if(nCL + nCLRoll < 19) {
 								SendMessageToPC(oScryer, "There is no result to your spell. As soon as you finish casting it, its power simply ends.");
 								SendMessageToPC(oScried, "Your amulet warms against your throat. You feel it warding off a divination attempt.");
@@ -606,12 +612,16 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							nWillSave = nDC-1;
 						}
 						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
-						SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
+						if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+							SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
+							}
 						if(nWillSave >= nDC){
 							    SendMessageToPC(oScryer, "You feel your spell fail.");
 								SetLocalObject(oScry, "oScrySpeak", OBJECT_INVALID);
 								SetLocalObject(oScryer, "oScrySpeak", OBJECT_INVALID);
-								SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
+								if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+									SendMessageToAllDMs(GetName(oScried) + " saved and will not be scried by " + GetName(oScryer));
+								}
 								if(nWillSave >= nDC + 10){
 									SendMessageToPC(oScried, "You have a momentary sense of being watched...but it passes.");
 									}
@@ -633,7 +643,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SetLocalLocation(oScryer, "ACR_SCRY_LOCATION", lHere);
 								SetLocalLocation(oScry, "ACR_SCRY_LOCATION", lHere);
 								//Notify oScryer and DMs that Scry was successful and set the Scrying Object as active
-								SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
+								if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+									SendMessageToAllDMs(GetName(oScried) + " failed and is being scried by " + GetName(oScryer) + " for the next " + FloatToString(fScryTimer, 2, 0) + " seconds."); 
+									}
 								SendMessageToPC(oScryer, "You feel your spell overcome " + sScriedName + "'s willpower.");
 								SendMessageToPC(oScryer, "Your scrying will last " + FloatToString(fScryTimer, 2, 0) + " seconds.");
 								if(GetObjectType(oScry) == OBJECT_TYPE_PLACEABLE) {
@@ -805,7 +817,9 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										DestroyObject(oDupeView, fAway);
 										
 										SetLocalLocation(oViewer, "lScryView", GetLocation(oViewer));
-										SendMessageToAllDMs("Scryer " + GetName(oScryer) + " jumping to " + GetName(GetAreaFromLocation(lThere)));
+										if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+											SendMessageToAllDMs("Scryer " + GetName(oScryer) + " jumping to " + GetName(GetAreaFromLocation(lThere)));
+											}
 										DelayCommand(4.0, FadeToBlack(oViewer, FADE_SPEED_SLOWEST, 5.0));
 										DelayCommand(5.0, AssignCommand(oViewer, JumpToLocation(lThere)));
 										DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eVFX, oViewer, fAway));
