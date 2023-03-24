@@ -8,7 +8,7 @@
 //
 //
 //  Description
-//  Arcane Mark as per FRCS.  Additionally, Arcane Mark cast on a Scrying Object
+//  Arcane Mark as per SRD.  Additionally, Arcane Mark cast on a Scrying Object
 //  by a Sorceror or Wizard will call forth a scrying focus as part of the
 //	ALFA Scrying System, but that is handled in the Scrying Object's on castat script.
 //  

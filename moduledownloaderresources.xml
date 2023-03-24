@@ -965,7 +965,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1CEB4E1C15B9AA6D2815E8AC6D8A5F660A727798" downloadHash="5DBE247AF52ED54FB1B4A67E2342B100C8A5A9F9" name="cave .trx" dlsize="1423994" size="1770923" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1226D40EF54A5D6417B9176C3B4C4C7E21DAE937" downloadHash="D181654E5BC836214F545A91D5B3996BAC1052E0" name="cave .trx" dlsize="1481214" size="1830975" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1585,7 +1585,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="68E64865390626AA8B954851AE207F776F02A19B" downloadHash="808294DB764F1148336C8BCE4B40AF5493992866" name="6e_ext_nether_slopes_new.trx" dlsize="3080812" size="17349271" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="0A1935EBF23F299978562048B577B9C2F0BED348" downloadHash="019C98A47E70F05F2CA087EA305A8E9F9DEBB7FF" name="6e_ext_nether_slopes_new.trx" dlsize="3076541" size="17351601" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

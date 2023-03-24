@@ -26,7 +26,7 @@ void main()
 	
  // Custom code goes here.
  object oPC = GetEnteringObject();
- if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && ((GetIsPC(GetEnteringObject())) || (FindSubString(GetName(GetEnteringObject()), "Bert") != -1) || (FindSubString(GetName(GetEnteringObject()), "Sae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bae") != -1) || (FindSubString(GetName(GetEnteringObject()), "Jhes") != -1) || (FindSubString(GetName(GetEnteringObject()), "Bell") != -1)|| (GetIsDMPossessed(GetEnteringObject())))) {
+ if((GetLocalInt(OBJECT_SELF, "RUN_ONCE") != 1) && ((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject())))) {
  	SendMessageToAllDMs(GetName(oPC) + " triggering " + GetName(OBJECT_SELF));
     SetLocalInt(OBJECT_SELF, "RUN_ONCE", 1);
 	int nAppearance = GetLocalInt(OBJECT_SELF, "Appearance");

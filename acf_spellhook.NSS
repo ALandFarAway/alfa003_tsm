@@ -145,7 +145,7 @@ void main()
 	
 	//Arcane Sight
 	if(GetSpellId() == 3108) {
-	object oCaster = OBJECT_SELF;
+		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
 		float fDur = TurnsToSeconds( GetCasterLevel(oCaster ));
 		if ( nMetaMagic == METAMAGIC_EXTEND ) {
@@ -1264,7 +1264,7 @@ void main()
 		SetLocalInt(oCaster, "nSummary", 0);
 		
 		//Get oTarget has arcane or divine magic, and highest level spell memorized by target
-		//if(GetSpellTargetObject() == oCaster) {
+		 
 			object oTarget = GetSpellTargetObject();
 			string sList = ACR_GetSpellList(oTarget, 0);
 			string sLeft = GetStringLeft(sList, 11);
@@ -1296,8 +1296,7 @@ void main()
 					}
 				DelayCommand(50.0, SendMessageToPC(oCaster, GetName(oTarget) + "'s highest powered spell or spellability is " + sLevel));
 				}
-			//}
-	}
+		}
 	
 	
 	/*Detect Magic
