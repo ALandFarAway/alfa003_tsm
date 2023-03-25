@@ -1585,7 +1585,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="0D1B49B629BE0C5ACD8A2E1B71354ED5A171624A" downloadHash="81980ACF5D874E1B464B8F0C8C3C7670D0BAABDB" name="6e_ext_nether_slopes_new.trx" dlsize="3087332" size="17352990" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="8ECBC2A001A4C66829E3171F77083BC900C79678" downloadHash="BC0A2314EED98459AD1E1EC27E90144DEC6A3878" name="6e_ext_nether_slopes_new.trx" dlsize="3188842" size="17467661" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
