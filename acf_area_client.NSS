@@ -136,6 +136,8 @@ void main() {
     object oEnterer = GetEnteringObject();
 	object oArea = GetArea(oEnterer);
 	
+	SendMessageToAllDMs("acf_area_client firing on " + GetName(oEnterer));
+	
 	if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetLocalInt(oEnterer, "HarpyMsg") == 5)) {
 		DelayCommand(20.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));
 		DelayCommand(30.0, SetLocalInt(oEnterer, "HarpyMsg", 6));
@@ -432,13 +434,6 @@ void main() {
 		SetFirstName(oScrySend, "Scrying Sensor");
 		SetLocalInt(oScrySend, "nCasterLevel", 11);
 	
-		if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
-			SendMessageToPC(oEnterer, "A. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
-			SendMessageToPC(oEnterer, "A. oScried = " + GetName(oEnterer));
-			SendMessageToPC(oEnterer, "A. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
-			SendMessageToPC(oEnterer, "A. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
-			SendMessageToPC(oEnterer, "A. nWillSave = " + IntToString(nWillSaveRoll) + " + " + IntToString(nWillSaveBase) + " = " + IntToString(nWillSaveRoll));
-			}	
 		DelayCommand(2.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
 		}
 	
@@ -491,14 +486,7 @@ void main() {
 			if((FindSubString(GetTag(GetArea(oEnterer)), "6d_int_silvy") != -1)  || (FindSubString(GetTag(GetArea(oEnterer)), "6d_ext_silv") != -1))
 				{SendMessageToPC(oEnterer, "You abruptly know that you are being scried.");}
 			
-				if(FindSubString(GetName(oEnterer), "Wynna") != -1) {
-				SendMessageToPC(oEnterer, "B. oScryer = " + GetName(GetLocalObject(oEnterer, "oScryer")));
-				SendMessageToPC(oEnterer, "B. oScried = " + GetName(oEnterer));
-				SendMessageToPC(oEnterer, "B. oScrySend = " + GetName(GetLocalObject(oEnterer, "oScrySend")));
-				SendMessageToPC(oEnterer, "B. oScry = " + GetName(GetLocalObject(oEnterer, "oScry")));
-				SendMessageToPC(oEnterer, "B. The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
-				SendMessageToPC(oEnterer, "B. " + GetName(oScried) + " is " + sMoving);
-				}	
+					
 		
 		}
 		
