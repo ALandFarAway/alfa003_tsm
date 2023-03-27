@@ -137,7 +137,7 @@ void main() {
 	object oArea = GetArea(oEnterer);
 	object oDM = GetLocalObject(GetModule(), "OmegaDM");
 	
-	SendMessageToAllDMs("acf_area_client firing. oDM = " + GetName(oEnterer));
+	SendMessageToAllDMs("acf_area_client firing. oDM = " + GetName(oDM));
 	
 	if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetLocalInt(oEnterer, "HarpyMsg") == 5)) {
 		DelayCommand(20.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));
