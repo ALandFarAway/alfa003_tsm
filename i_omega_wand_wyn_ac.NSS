@@ -12,7 +12,9 @@ void main()
 {   SendMessageToPC(GetItemActivator(), "Leave area after NPC possession to refresh Omega Wand abilities.");
     ExecuteScript("acf_area_onexit", GetItemActivator());
 	ExecuteScript("acf_area_client", GetItemActivator());
-	
+	if(GetIsDM(GetItemActivator())) {SendMessageToPC(GetItemActivator(), "Is a DM");}
+	else {SendMessageToPC(GetItemActivator(), "Is not a DM");}
+	SendMessageToPC(GetItemActivator(), "Master = " + GetName(GetMaster(GetItemActivator())));
 	SetLocalObject(GetModule(), "OmegaDM", GetItemActivator());
 	SendMessageToAllDMs("omegaDM = " + GetName(GetLocalObject(GetModule(), "OmegaDM")));
 	SendMessageToPC(GetLocalObject(GetModule(), "OmegaDM"), "omegaDM = " + GetName(GetLocalObject(GetModule(), "OmegaDM")));
