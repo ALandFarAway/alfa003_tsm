@@ -2933,7 +2933,7 @@ if(GetSpellId() == 3071) {
 
 //Create Water
 if(GetSpellId() == 3068) {
-	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+	//SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	ActionPlayAnimation(ANIMATION_LOOPING_WORSHIP, 1.0, 3.0);
 	object oScryer = OBJECT_SELF;
 	effect eCreateWater = EffectVisualEffect(VFX_DUR_SPELL_SHROUDING_FOG, 0);
@@ -2947,9 +2947,9 @@ if(GetSpellId() == 3068) {
 	SetLocalInt(oScryer, "nSpellCasterType", nCasterType);
 	object oScry = GetSpellTargetObject();
 	location lTarget = GetLocation(oScryer);
-	if((nCasterType == CLASS_TYPE_DRUID) && (GetTag(oScry) != "ACR_SCRY_OBJECT")) {
+	if(nCasterType == CLASS_TYPE_DRUID)  {
 		lTarget = GetSpellTargetLocation();
-		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, TRUE, OBJECT_TYPE_TRIGGER);
+		oScry = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, lTarget, FALSE, OBJECT_TYPE_TRIGGER);
 		while(oScry != OBJECT_INVALID) {
 			string sTriggerTag = GetTag(oScry);
 			if(FindSubString(sTriggerTag, "_SCRY_") != -1) {
