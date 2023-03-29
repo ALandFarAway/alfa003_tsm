@@ -32,7 +32,9 @@ void main()
 		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		location lHere = GetLocalLocation(oScry, "ACR_SCRY_LOCATION");
-		SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
+		if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+			SendMessageToAllDMs(GetName(GetLastKiller()) + " strikes down " + GetName(oScryer) + "'s scrying sensor and the scrying ends.");
+			}
 		AssignCommand(oScrySpeak, ActionSpeakString("You see " + GetName(GetLastKiller()) + " strike down the scrying sensor and the images in the " + GetName(oScry) + " vanish.", TALKVOLUME_TALK));
 		 		
 		int nGoHome = 0;
@@ -71,7 +73,7 @@ void main()
 				}
 				
 			SendMessageToPC(oScryer, "You see " + GetName(GetLastKiller()) + " strike down your scrying sensor and the scrying ends.");
-				//Bring your people home
+			//Bring your people home
 			effect eEffect = GetFirstEffect(oScryer);
 				int nRep = 0;
 				while ((GetIsEffectValid(eEffect)) && (nRep < 10)) { 

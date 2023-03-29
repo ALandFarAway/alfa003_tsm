@@ -1,25 +1,35 @@
 //
-//  System Name : Scrying
-//     Filename : acf_scry_trg_onenter
+//  System Name : ACR Configuration File
+//     Filename : acf_area_client.nss
 //      Version : 0.1
-//         Date : 7/8/22
-//       Author : Wynna
+//         Date : 7/25/06
+//       Author : Ronan
+//
+//  Dependencies external of nwscript:
 //
 //  Description
-//  This script handles on enter actions of a trigger used in the scrying system. 
-//  It provides a spoken update by the scrying object to the scryer on the scrying target.
-//  This should be in the On Enter Script slot of the trigger around a terrain painted scrying pool: 
-//	It is not updated in ACR updates.
+//  This script calls the ACR's OnAreaOnClientEnter code, and any custom code a
+//  server may need. It is not updated in ACR updates.
 //
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
 
-//	Wynna - 7/8/2022
+//	Wynna - 7/8/2022 : Added check to get sensor scrying on N/PC and make it jump to them
 
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
-#include "acr_trigger_i"
-#include "acr_scry_i"
+
+#include "acr_area_i"
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Structures //////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Global Variables ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -29,35 +39,28 @@
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void main() {
-	if (!GetIsObjectValid(OBJECT_SELF))
-		return;
+void main();
 
-    ACR_TriggerOnEnter();
-	//Get oEnterer and existing local objects
- 	object oEnterer = GetEnteringObject();
-	object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
-	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
-	object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
-				
-	//Has Scry been successfully cast?
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 0)  || (GetName(GetLocalObject(OBJECT_SELF, "oScried")) == "")) {
-			SendMessageToPC(oEnterer, "The scrying object requires the casting of the Scry spell.");
-		}
-	//If so, was it cast by oUser?
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (oEnterer != oScryer) && (!GetIsDM(oEnterer))&& (!GetIsDMPossessed(oEnterer))) {
-		SendMessageToPC(oEnterer, "The scrying object is under the command of someone else.");
-		}
-		
-	//If Scry has been successfully cast, then oScried exists	
-	if((GetLocalInt(OBJECT_SELF, "nScryActive") == 1) && (GetName(GetLocalObject(OBJECT_SELF, "oScried")) != "") && ((oEnterer == oScryer) || (GetIsDM(oEnterer)) || (GetIsDMPossessed(oEnterer)))) {
-	object oScried = GetLocalObject(OBJECT_SELF, "oScried");
-	//Check area information about oScried
-	object oArea = GetArea(oScried);
+////////////////////////////////////////////////////////////////////////////////
+// Function Definitions ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void main() {
+    ACR_AreaOnClientEnter();
+
+    object oEnterer = GetEnteringObject();
+	object oArea = GetArea(oEnterer);
+	
+	//Is Scrying active on this PC
+	object oScrySend = GetLocalObject(oEnterer, "oScrySend");
+	object oScried =  GetLocalObject(oEnterer, "oScried");
+	object oScryer = GetLocalObject(oEnterer, "oScryer");
+	object oScry = GetLocalObject(oEnterer, "oScry");
+	object oScrySpeak = GetLocalObject(oEnterer, "oScrySpeak");
 	string sSubjectArea = GetName(oArea);
 	string sAreaTag = GetTag(oArea);
 	
-				//General area descriptors
+	//General area descriptors
 			if(FindSubString(sAreaTag, "caravan", 0) != -1) 
 				{sSubjectArea = "inside a caravan.";}
 			else if(FindSubString(sAreaTag, "ferry", 0) != -1)
@@ -87,7 +90,7 @@ void main() {
 			else if(FindSubString(sAreaTag, "_ext_", 0) != -1)
 				{sSubjectArea = "outside, though nothing uniquely identifiable is visible.";}
 			else {sSubjectArea = "somewhere where you can see no identifying details of the surroundings.";}	
-			
+				
 			//Check weather information in oScried's area				
 			int nWeatherRain = GetWeather(oArea, WEATHER_TYPE_RAIN);
 			string sWeatherRain = "";
@@ -96,8 +99,10 @@ void main() {
 								
 			if(FindSubString(sAreaTag, "ext", 1) != -1)
 				{if(nWeatherSnow < 1) {
-					if(nWeatherRain == 0)  
-						{sWeatherRain = "The sun is shining. ";}
+					if((nWeatherRain == 0) && (GetIsDay()))
+						{sWeatherRain = "The sun is shining.";}
+					if((nWeatherRain == 0) && (GetIsNight()))
+						{sWeatherRain = "The night is clear.";}
 					if(nWeatherRain == 1)  
 						{sWeatherRain = "It is drizzling rain. ";}
 					if(nWeatherRain == 2)  
@@ -110,8 +115,6 @@ void main() {
 						{sWeatherRain = "A storm rages. ";}
 				}						
 				 
-				if(nWeatherSnow == 0)  
-					{sWeatherSnow = "The sky is clear. ";}
 				if(nWeatherSnow == 1)  
 					{sWeatherSnow = "A few flakes of snow are falling. ";}
 				if(nWeatherSnow == 2)  
@@ -124,6 +127,7 @@ void main() {
 					{sWeatherSnow = "A blizzard rages. ";}
 				}
 			
+			//string sFacing = GetCompassDirectionOfAngle(GetFacing(oScried));
 			string sGenderNoun = "He";
 			string sGenderAdj = "him";
 			if(GetGender(oScried) == GENDER_FEMALE) {
@@ -131,15 +135,25 @@ void main() {
 				sGenderAdj = "her";
 				}
 				
-			//Speak area and weather info  	
-			ActionSpeakString( "", TALKVOLUME_TALK);
-			ActionSpeakString( "********************", TALKVOLUME_TALK);
-			ActionSpeakString("The " + GetName(OBJECT_SELF) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK);
+	if((oScrySend != OBJECT_INVALID) && (oScried == oEnterer)) {
+	    AssignCommand(oScrySend, ClearAllActions(TRUE));
+		DelayCommand(1.0 , AssignCommand(oScrySend, ActionJumpToObject(oEnterer, TRUE)));
+		DelayCommand(3.0, AssignCommand(oScrySend, ActionForceFollowObject(oEnterer, 0.5f, 0)));
+		
+			//Make oScrySpeak speak area and weather info  	
+			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow, TALKVOLUME_TALK));
 			
-			//Speak oScried's detailed object information 					 	
+			if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+				SendMessageToAllDMs(GetName(oScryer) + " is scrying " + GetName(oScried) + " in " + GetName(oScry));
+				SendMessageToAllDMs("The " + GetName(oScry) + " shows that " + GetName(oScried) + " is " + sSubjectArea + " " + sWeatherRain + sWeatherSnow);
+				}
+				
+			//Make oScrySpeak speak oScried's detailed object information 					 	
 			object oObject = GetFirstObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 			if(oObject != OBJECT_INVALID) {
-				ActionSpeakString("The " + GetName(OBJECT_SELF) + " also shows that: ", TALKVOLUME_TALK); 
+				AssignCommand(oScrySpeak, ActionSpeakString("The " + GetName(OBJECT_SELF) + " also shows that: ", TALKVOLUME_TALK)); 
 				string sObjectName = GetName(oObject);
 				float fDistance = GetDistanceBetween(oScried, oObject);
 				int nInc = 1;
@@ -149,13 +163,18 @@ void main() {
 						sObjectName = GetName(oObject);
 						fDistance = GetDistanceBetween(oScried, oObject);
 						if((sObjectName != GetName(oScried)) && (sObjectName != "") && (sObjectName != sObjectPrevious)) {
-							ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet away.", TALKVOLUME_TALK);
+							AssignCommand(oScrySpeak, ActionSpeakString(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet away.", TALKVOLUME_TALK));
+							if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+								SendMessageToAllDMs(sObjectName + " is " + FloatToString(fDistance, 2, 0) + " feet away.");
+								}
 							}
 						nInc++;
 					}
 				}
+			
+			AssignCommand(oScrySpeak, ActionSpeakString( "********************", TALKVOLUME_TALK));
+			AssignCommand(oScrySpeak, ActionSpeakString( "", TALKVOLUME_TALK));
+			}
+}		
+	
 		
-			ActionSpeakString( "********************", TALKVOLUME_TALK);
-			ActionSpeakString( "", TALKVOLUME_TALK);
-		}	
-}

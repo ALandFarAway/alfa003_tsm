@@ -138,16 +138,19 @@ void main()
 			 SetListening(OBJECT_SELF, TRUE);
 		}
 	
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_send")  {
+		if((GetTag(OBJECT_SELF)== "003_cr_scry_send") || (GetTag(OBJECT_SELF)== "003_cr_scry_send_xavier")) {
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target
 			 //Detect Scrying or See Invisibility will reveal it IC
+			 //Silverymoon's mythal reveals all scrying sensors
 			 SetListenPattern(OBJECT_SELF, "**End Scry**", 6040);
 			 SetListenPattern(OBJECT_SELF, "**", 6041);
 			 SetListening(OBJECT_SELF, TRUE);
 			 object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 			 ActionForceFollowObject(oScried, 0.5f, 0);
-			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);
-			 
+			 if((FindSubString(GetTag(GetArea(OBJECT_SELF)), "6d_int_silvy") == -1)  && (FindSubString(GetTag(GetArea(OBJECT_SELF)), "6d_ext_silv") == -1))
+				{ApplyEffectToObject(DURATION_TYPE_PERMANENT, eInvis, OBJECT_SELF);}
+			 else {SendMessageToPC(oScried, "You abruptly know that you are being scried.");}
+			
 			 object oDetector = GetFirstObjectInShape(SHAPE_SPHERE, 40.0, GetLocation(OBJECT_SELF), FALSE, OBJECT_TYPE_CREATURE);
 			 while (oDetector != OBJECT_INVALID) {
 				if(GetLocalInt(oDetector, "abr_sp_detectScry") == 1) {

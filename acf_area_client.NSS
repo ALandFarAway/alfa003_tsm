@@ -135,9 +135,6 @@ void main() {
 
     object oEnterer = GetEnteringObject();
 	object oArea = GetArea(oEnterer);
-	object oDM = GetLocalObject(GetModule(), "OmegaDM");
-	
-	SendMessageToAllDMs("acf_area_client firing. oDM = " + GetName(oDM));
 	
 	if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetLocalInt(oEnterer, "HarpyMsg") == 5)) {
 		DelayCommand(20.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));
@@ -152,32 +149,10 @@ void main() {
 	object oScrySpeak = GetLocalObject(oEnterer, "oScrySpeak");
 	string sSubjectArea = GetName(oArea);
 	string sAreaTag = GetTag(oArea);
-	if(FindSubString(sAreaTag, "caravan", 0) != -1) 
-				{sSubjectArea = "inside a caravan.";}
-			else if(FindSubString(sAreaTag, "ferry", 0) != -1)
-				{sSubjectArea = "on a ferry.";}
-			else if(FindSubString(sAreaTag, "int_highforest_cave_aq", 0) != -1)
-				{sSubjectArea = "inside a darkened ruin in which the sound of water runs all around.";}
-			else if((FindSubString(sAreaTag, "cave", 0) != -1) || (FindSubString(sAreaTag, "cavern", 0) != -1))
-				{sSubjectArea = "inside a natural cave.";}
-			else if((FindSubString(sAreaTag, "tavern", 0) != -1) || (FindSubString(sAreaTag, "brightblade", 0) != -1) || (FindSubString(sAreaTag, "angler", 0) != -1)  || (FindSubString(sAreaTag, "flagon", 0) != -1) )
-				{sSubjectArea = "inside a tavern, tables and a long bar visible.";}
-			else if((FindSubString(sAreaTag, "crypt", 0) != -1) || (FindSubString(sAreaTag, "mausoleum", 0) != -1)  || (FindSubString(sAreaTag, "tomb", 0) != -1)|| (FindSubString(sAreaTag, "catacomb", 0) != -1) )
-				{sSubjectArea = "inside a crypt, surrounded by the bones of the dead.";}
-			else if(FindSubString(sAreaTag, "mine", 0) != -1)
-				{sSubjectArea = "inside hand-carved tunnels, with the tracks of a minecart visible.";}
-			else if(FindSubString(sAreaTag, "ruins", 0) != -1)
-				{sSubjectArea = "inside crumbling ruins.";}
-			else if(FindSubString(sAreaTag, "sewer", 0) != -1)
-				{sSubjectArea = "inside a fetid sewer.";}
-			else if(FindSubString(sAreaTag, "stable", 0) != -1)
-				{sSubjectArea = "inside a stable, horses in their stalls.";}
-			else if((FindSubString(sAreaTag, "ext_highway", 0) != -1) || (FindSubString(sAreaTag, "ext_river_road", 0) != -1))
-				{sSubjectArea = "outside, on a well-travelled highway beside a major river.";}
-			else if((FindSubString(sAreaTag, "temple", 0) != -1) || (FindSubString(sAreaTag, "chapel", 0) != -1)  || (FindSubString(sAreaTag, "lathander", 0) != -1))
-				{sSubjectArea = "inside a temple, judging by the decor and the sound of prayer.";}
-			else if((FindSubString(sAreaTag, "_inn", 0) != -1) || (FindSubString(sAreaTag, "griffon_up", 0) != -1) || (FindSubString(sAreaTag, "troll", 0) != -1))
-				{sSubjectArea = "inside a cosy inn room.";}
+	
+		//TSM specific area descriptors
+		if(FindSubString(sAreaTag, "int_highforest_cave_aq", 0) != -1)
+			{sSubjectArea = "inside a darkened ruin in which the sound of water runs all around.";}
 			else if(FindSubString(sAreaTag, "_argent", 0) != -1)
 				{sSubjectArea = "inside an argent legion outpost, the arms and insignia of the military all around.";}
 			else if(FindSubString(sAreaTag, "bigtp", 0) != -1)
@@ -243,7 +218,7 @@ void main() {
 				{sSubjectArea = "outside, in mountainous terrain, with immensely tall peaks rising all around.";}
 			else if(FindSubString(sAreaTag, "int_nether_dt", 0) != -1)
 				{sSubjectArea = "inside a gloomy ruin.";}
-			else if(FindSubString(sAreaTag, "ext_fellbar", 0) != -1)
+			else if(FindSubString(sAreaTag, "ext_felbar", 0) != -1)
 				{sSubjectArea = "outside in icy heights, among the dwarven bastions of Felbarr.";}
 			else if(FindSubString(sAreaTag, "ext_silvypass_east_auv", 0) != -1)
 				{sSubjectArea = "outside, with a mountain road winding up to the walls of Auvendell visible.";}
@@ -337,6 +312,32 @@ void main() {
 				{sSubjectArea = "inside a richly-appointed but martial keep.";}
 			else if(FindSubString(sAreaTag, "oh_apple", 0) != -1)
 				{sSubjectArea = "inside a cosy cottage of wood and stained glass windows.";}
+					
+	//General area descriptors
+			else if(FindSubString(sAreaTag, "caravan", 0) != -1) 
+				{sSubjectArea = "inside a caravan.";}
+			else if(FindSubString(sAreaTag, "ferry", 0) != -1)
+				{sSubjectArea = "on a ferry.";}
+			else if((FindSubString(sAreaTag, "cave", 0) != -1) || (FindSubString(sAreaTag, "cavern", 0) != -1))
+				{sSubjectArea = "inside a natural cave.";}
+			else if((FindSubString(sAreaTag, "tavern", 0) != -1) || (FindSubString(sAreaTag, "brightblade", 0) != -1) || (FindSubString(sAreaTag, "angler", 0) != -1)  || (FindSubString(sAreaTag, "flagon", 0) != -1) )
+				{sSubjectArea = "inside a tavern, tables and a long bar visible.";}
+			else if((FindSubString(sAreaTag, "crypt", 0) != -1) || (FindSubString(sAreaTag, "mausoleum", 0) != -1)  || (FindSubString(sAreaTag, "tomb", 0) != -1)|| (FindSubString(sAreaTag, "catacomb", 0) != -1) )
+				{sSubjectArea = "inside a crypt, surrounded by the bones of the dead.";}
+			else if(FindSubString(sAreaTag, "mine", 0) != -1)
+				{sSubjectArea = "inside hand-carved tunnels, with the tracks of a minecart visible.";}
+			else if(FindSubString(sAreaTag, "ruins", 0) != -1)
+				{sSubjectArea = "inside crumbling ruins.";}
+			else if(FindSubString(sAreaTag, "sewer", 0) != -1)
+				{sSubjectArea = "inside a fetid sewer.";}
+			else if(FindSubString(sAreaTag, "stable", 0) != -1)
+				{sSubjectArea = "inside a stable, horses in their stalls.";}
+			else if((FindSubString(sAreaTag, "ext_highway", 0) != -1) || (FindSubString(sAreaTag, "ext_river_road", 0) != -1))
+				{sSubjectArea = "outside, on a well-travelled highway beside a major river.";}
+			else if((FindSubString(sAreaTag, "temple", 0) != -1) || (FindSubString(sAreaTag, "chapel", 0) != -1)  || (FindSubString(sAreaTag, "lathander", 0) != -1))
+				{sSubjectArea = "inside a temple, judging by the decor and the sound of prayer.";}
+			else if((FindSubString(sAreaTag, "_inn", 0) != -1) || (FindSubString(sAreaTag, "griffon_up", 0) != -1) || (FindSubString(sAreaTag, "troll", 0) != -1))
+				{sSubjectArea = "inside a cosy inn room.";}
 			else if((FindSubString(sAreaTag, "_int_", 0) != -1) && (FindSubString(sAreaTag, "interior", 0) != -1)) 
 				{sSubjectArea = "inside, though nothing uniquely identifiable is visible.";}
 			else if(FindSubString(sAreaTag, "_ext_", 0) != -1)
@@ -367,9 +368,6 @@ void main() {
 						{sWeatherRain = "A storm rages. ";}
 				}						
 				 
-				if(nWeatherSnow == 0)  
-					{//sWeatherSnow = "The sky is clear. ";
-					}
 				if(nWeatherSnow == 1)  
 					{sWeatherSnow = "A few flakes of snow are falling. ";}
 				if(nWeatherSnow == 2)  

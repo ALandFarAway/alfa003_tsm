@@ -382,19 +382,15 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 			}
 			
 		string sPTargetRes = GetLocalString(oScry, sMatch);
-		//SendMessageToAllDMs("scrySpeak sPTargetRes = " + sPTargetRes);
 					 
 		if((nMatch >= 6020) && (nMatch < 6040)) {
 		  
 		//oScryer must speak the full name of the PC or Nickname of the allowable NPC he/she wishes to Scry	
-		//if(nMatch >= 6020) {
 				int nIncA = 6020;
 	         	object oScried = GetFirstPC(FALSE);
 				while ((oScried != OBJECT_INVALID) && (nIncA < 6040)) {
 					string sScriedName = GetName(oScried);
-					//SendMessageToPC(oScryer, "1. sScriedName = " + sScriedName);
 					string sScriedNickStored = GetLocalString(oScryer, sScriedName);
-					//SendMessageToPC(oScryer, "1. sScriedNickStored = " + sScriedNickStored);
 										
 					//First, if the spoken name matches a stored NPC's nickname or full name, then spawn the associated resref and grab some variables off it, then get rid of it again
 					if(nIncA == 6020) {
@@ -407,7 +403,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 				 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eEthereal, oScried);
 				 			SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, oScried);
 							string sScriedArea = GetLocalString(oScried, "ACR_SCRY_AREA_TAG");
-							//SendMessageToAllDMs("sScriedArea for " + sScriedName + " = " + sScriedArea);
 							int nWillSaveBase = GetWillSavingThrow(oScried);
 							SetLocalInt(OBJECT_SELF, "oScriedWSBase", nWillSaveBase);
 							object oScriedSubArea;
@@ -422,16 +417,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									object oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC); 
 									while (oNPC != OBJECT_INVALID) {
 										if(sScriedName == GetName(oNPC)) {
-											 //SendMessageToAllDMs("sScriedName = " + sScriedName);
 											 oScried = oNPC;
-											 //oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_TRG", oScried, 1);
-											 //sScriedSubArea = GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC");
 											 break;
 											}
 										oNPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, oFirst, nNPC);
 										nNPC++;
 										}
-									//SendMessageToAllDMs("No NPC was found in " + sScriedArea + " by the name " + sScriedName);
 									break;
 									}
 								oScriedArea = GetNextArea();
@@ -441,9 +432,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 					 
 					 /*If the spoken name matches the name of one of the keyed NPCs or PCs currently logged in
 					   give that potential oScried a WillSave vs oScryer's DC*/
-					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sMatch = " + sMatch);
-					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedName = " + sScriedName);
-					 //SendMessageToPC(oScryer, IntToString(nIncA) + ": sScriedNickStored = " + sScriedNickStored);
 					 if(((TestStringAgainstPattern("**" + sScriedName + "**", sMatch)) || (TestStringAgainstPattern("**" + sScriedNickStored + "**", sMatch))) && (nScryActive == 0))
 						{if(GetLocalInt(oScried, "abr_sp_nondetect") != 0) {
 							int nCL = GetLocalInt(OBJECT_SELF, "nCasterLevel");
@@ -519,14 +507,11 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 							string sLTargetName = GetLocalString(oToken, "sTargetName");
 							int nPosMatch = FindSubString(sMatch, "'", 0);
 							if(((FindSubString(sTokenTag, "abr_it_scry_", 0) != -1) || ((sPTargetName == sScriedName) || (sPTargetName == SpliceString(sMatch, nPosMatch, 1)) || (sLTargetName == sScriedName) || (sLTargetName == SpliceString(sMatch, nPosMatch, 1)) )) && (sPTargetName != "") && (sTokenTag != "abr_it_scry_kit")) {
-								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetName = " + sPTargetName);
 								string sPTargetNick = ACR_GetPersistentString(oToken, "sPTargetNick");
 								string sLTargetNick = GetLocalString(oToken, "sTargetNick");
-								//SendMessageToPC(oScryer, GetName(oToken) + ": sPTargetNick = " + sPTargetNick);
 								string sScryerName = GetName(oScryer);
 								string sPScryerName = ACR_GetPersistentString(oToken, "sPScryerName");
 								string sLScryerName = GetLocalString(oToken, "sScryerName");
-								//SendMessageToPC(oScryer, GetName(oToken) + ": sPScryerName = " + sPScryerName);
 								int nPosScryer = FindSubString(sScryerName, "'", 0);
 								int nScryer = 0; 
 								if((sScryerName == sPScryerName) || (sPScryerName == SpliceString(sScryerName, nPosScryer, 1))) {
@@ -611,7 +596,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						if(oScryer == oScried) {
 							nWillSave = nDC-1;
 						}
-						//SendMessageToPC(oScryer, "nWillSave was " + IntToString(nWillSave) + " vs DC" + IntToString(nDC));
 						if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
 							SendMessageToAllDMs(GetName(oScried) + " rolled a " + IntToString(nWillSave) + " vs DC " + IntToString(nDC) + " against " + GetName(oScryer) + " scrying them."); 
 							}
@@ -666,7 +650,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								//Detect Scrying or See Invisible will reveal it
 								location lThere = GetLocation(oScried);
 								SetLocalLocation(oScry, "lThere", lThere);
-								//SendMessageToAllDMs("oScried's area = " + GetName(GetArea(oScried)));
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
 									if(GetName(oScryer)== "Xavier") {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
@@ -747,7 +730,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								object oViewer = GetFirstObjectInShape(SHAPE_SPHERE, 5.0, GetLocation(OBJECT_SELF), TRUE, OBJECT_TYPE_CREATURE); 	
 								while((nViewer < 15) && (oViewer != OBJECT_INVALID)) {
 									if((oViewer != oScryer) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerA"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerB"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerC"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerD"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerE"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerF"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerG"))) && (GetName(oViewer) != GetName(GetLocalObject(oScry, "oViewerH"))) && (GetName(oViewer) != GetName(oScried)) && (oViewer != OBJECT_SELF) && (oViewer != oScried) && (oViewer != oScrySend) && (oViewer != oScrySelf)) {
-										//SendMessageToAllDMs("oViewer = " + GetName(oViewer));
 										location lViewer = GetLocation(oViewer);
 										SetLocalLocation(oViewer, "lHere", lViewer);
 										if(nViewer == 1) {
@@ -835,14 +817,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									
 								//Find out information about oScried's area and area weather
 								object oArea = GetArea(oScried);
-								//object oScriedSubArea = GetNearestObjectByTag("ACR_SUBAREA_WP", oScried, 1);
-								//SendMessageToAllDMs("SubArea = " + GetName(oScriedSubArea));
-								//SendMessageToAllDMs("SubArea description = " + GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC"));
-								//float fSubArea = GetLocalFloat(oScriedSubArea, "ACR_SUBAREA_RADIUS");
 								string sSubjectArea = GetLocalString(oScried, "ACR_SCRY_AREA_DESC");
-								//if((sSubjectArea == "") && (GetIsObjectValid(oScriedSubArea)) && (GetDistanceBetween(oScried, oScriedSubArea) <= fSubArea)) {
-								//	sSubjectArea = GetLocalString(oScriedSubArea, "ACR_SUBAREA_DESC");
-								//	}
 								if(sSubjectArea == "") {
 									sSubjectArea = GetLocalString(oArea, "ACR_AREA_DESC");
 									}
@@ -1072,9 +1047,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									if(nWeatherRain == 5)  
 										{sWeatherRain = "A storm rages. ";}
 										
-									if(nWeatherSnow == 0)  
-										{//sWeatherSnow = "The sky is clear. ";
-										}
 									if(nWeatherSnow == 1)  
 										{sWeatherSnow = "A few flakes of snow are falling. ";}
 									if(nWeatherSnow == 2)  
@@ -1107,12 +1079,31 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								string sObjectName = GetName(oObject);
 								float fDistance = GetDistanceBetween(oScried, oObject);
 								int nInc = 1;
-								while ((oObject != OBJECT_INVALID) && (nInc <= 12)){
+								string sNextTo;
+								string sFurther;
+								string sOther;
+								while //(
+								(oObject != OBJECT_INVALID) 
+									//&& (nInc <= 12))
+									{
 									oObject = GetNextObjectInShape(SHAPE_SPHERE, 10.0, GetLocation(oScried), FALSE, OBJECT_TYPE_CREATURE | OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM | OBJECT_TYPE_PLACED_EFFECT | OBJECT_TYPE_DOOR);
 								    sObjectName = GetName(oObject);
 									fDistance = GetDistanceBetween(oScried, oObject);
 									if((sObjectName != GetName(oScried)) && (sObjectName != "")) {
-								    	if(nInc == 1) {
+									
+											//string sObjectNameA = GetName(oObject);
+											//float fDistanceA = GetDistanceBetween(oScried, oObject);
+											sNextTo = GetLocalString(OBJECT_SELF, "sNextTo");
+											sFurther = GetLocalString(OBJECT_SELF, "sFurther");
+											sOther = GetLocalString(OBJECT_SELF, "sOther");
+											int nObjectType = GetObjectType(oObject);
+											if((nObjectType == OBJECT_TYPE_CREATURE) && (fDistance < 3.0))
+												{SetLocalString(OBJECT_SELF, "sNextTo",  sNextTo + " and " + sObjectName);}
+											else if(nObjectType == OBJECT_TYPE_CREATURE)
+												{SetLocalString(OBJECT_SELF, "sFurther", sFurther + " and " + sObjectName);}
+											else {SetLocalString(OBJECT_SELF, "sOther",  sOther + " and " + sObjectName);}
+									
+								    	/*if(nInc == 1) {
 											string sObjectNameA = GetName(oObject);
 											float fDistanceA = GetDistanceBetween(oScried, oObject);
 											int nObjectTypeA = GetObjectType(oObject);
@@ -1231,13 +1222,13 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 											else if(nObjectTypeL == OBJECT_TYPE_CREATURE)
 												{SetLocalString(OBJECT_SELF, "sFurtherL", sObjectNameL);}
 											else {SetLocalString(OBJECT_SELF, "sOtherL", sObjectNameL);}
-											}
+											}*/
 											
 										}
-									nInc++;
+									//nInc++;
 									}
 								
-								string sNextTo;
+								/*string sNextTo;
 								string sFurther;
 								string sOther;
 								
@@ -1396,7 +1387,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									{sOther = GetLocalString(OBJECT_SELF, "sOther") + " and " + GetLocalString(OBJECT_SELF, "sOtherL");
 									 SetLocalString(OBJECT_SELF, "sOther", sOther);
 									}	
-								
+								*/
 								sNextTo = GetLocalString(OBJECT_SELF, "sNextTo");
 								if(FindSubString(GetStringLeft(sNextTo, 4), "and") != -1)
 									{int nStrLgthN = GetStringLength(sNextTo);
@@ -1426,18 +1417,27 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 									}
 									
 								//Now that creatures and objects are prioritized by distance from oScried, tell oScryer
-								if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
+								
+								if(GetLocalString(OBJECT_SELF, "sNextTo") != "")
+									{ActionSpeakString(sGenderNoun + " is standing next to " + sNextTo + ".", TALKVOLUME_TALK);}
+								if(GetLocalString(OBJECT_SELF, "sFurther") != "") 
+									{ActionSpeakString(sFurther + " can be seen nearby.", TALKVOLUME_TALK);}
+								if(GetLocalString(OBJECT_SELF, "sOther") != "") 
+									{ActionSpeakString("Within view: " + sOther, TALKVOLUME_TALK );}
+								
+								/*if((GetLocalString(OBJECT_SELF, "sNextToA") != "") || (GetLocalString(OBJECT_SELF, "sNextToB") != "") || (GetLocalString(OBJECT_SELF, "sNextToC") != "") || (GetLocalString(OBJECT_SELF, "sNextToD") != "") || (GetLocalString(OBJECT_SELF, "sNextToE") != "") || (GetLocalString(OBJECT_SELF, "sNextToF") != "") || (GetLocalString(OBJECT_SELF, "sNextToG") != "") || (GetLocalString(OBJECT_SELF, "sNextToH") != "") || (GetLocalString(OBJECT_SELF, "sNextToI") != "") || (GetLocalString(OBJECT_SELF, "sNextToJ") != "") || (GetLocalString(OBJECT_SELF, "sNextToK") != "") || (GetLocalString(OBJECT_SELF, "sNextToL") != ""))	
 									{ActionSpeakString(sGenderNoun + " is standing next to " + sNextTo + ".", TALKVOLUME_TALK);}
 								if((GetLocalString(OBJECT_SELF, "sFurtherA") != "") || (GetLocalString(OBJECT_SELF, "sFurtherB") != "") || (GetLocalString(OBJECT_SELF, "sFurtherC") != "") || (GetLocalString(OBJECT_SELF, "sFurtherD") != "") || (GetLocalString(OBJECT_SELF, "sFurtherE") != "") || (GetLocalString(OBJECT_SELF, "sFurtherF") != "") || (GetLocalString(OBJECT_SELF, "sFurtherG") != "") || (GetLocalString(OBJECT_SELF, "sFurtherH") != "") || (GetLocalString(OBJECT_SELF, "sFurtherI") != "") || (GetLocalString(OBJECT_SELF, "sFurtherJ") != "") || (GetLocalString(OBJECT_SELF, "sFurtherK") != "") || (GetLocalString(OBJECT_SELF, "sFurtherL") != ""))	
 									{ActionSpeakString(sFurther + " can be seen nearby.", TALKVOLUME_TALK);}
 								if((GetLocalString(OBJECT_SELF, "sOtherA") != "") || (GetLocalString(OBJECT_SELF, "sOtherB") != "") || (GetLocalString(OBJECT_SELF, "sOtherC") != "") || (GetLocalString(OBJECT_SELF, "sOtherD") != "") || (GetLocalString(OBJECT_SELF, "sOtherE") != "") || (GetLocalString(OBJECT_SELF, "sOtherF") != "") || (GetLocalString(OBJECT_SELF, "sOtherG") != "") || (GetLocalString(OBJECT_SELF, "sOtherH") != "") || (GetLocalString(OBJECT_SELF, "sOtherI") != "") || (GetLocalString(OBJECT_SELF, "sOtherJ") != "") || (GetLocalString(OBJECT_SELF, "sOtherK") != "") || (GetLocalString(OBJECT_SELF, "sOtherL") != ""))	
 									{ActionSpeakString("Within view: " + sOther, TALKVOLUME_TALK );}
-								
+								*/
 								//Notify oScryer and DMs of the end of the spell
 								DelayCommand(fScryTimer - 5.0, ActionSpeakString("*The images in the " + sScryName + " fade.", TALKVOLUME_TALK));		
 			 					DelayCommand(fScryTimer - 1.0, SendMessageToPC(oScryer, "The scry spell ends."));		
-			 					DelayCommand(fScryTimer - 5.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
-			 					
+			 					if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
+									DelayCommand(fScryTimer - 5.0, SendMessageToAllDMs(GetName(oScryer) + "'s scry spell ends and the images in the " + sScryName + " fade."));		
+			 						}
 								//Unset ALL local objects at the end of the successful spell
 								//Destroy Scrying Sensor and ScryListen
 								//Backup in tsm_scry_npc_onspawn in case this successful branch doesn't fire
@@ -1491,10 +1491,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 						 nIncA++;
 						 oScried = GetNextPC(FALSE);
 					}	
-			//}
-			
-		//else {SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that name.");}	
-		}
+			}
 	else {if((nMatch == 6041) && (GetLocalInt(oScry, "nScryActive") == 0))  {
 			SendMessageToPC(oScryer, "Your scrying spell fails to show you anyone by that nickname. This " + GetName(oScry) + " is not keyed under that name with their identity from an imbued scrying focus. Your spell is still active and you may speak a different name.");}	
 		}
@@ -1509,10 +1506,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 	object oScrySpeak = GetLocalObject(oScryer, "oScrySpeak");
 	string sTargetRes = GetLocalString(OBJECT_SELF, "sPTargetRes");
 	string sTargetName = GetLocalString(OBJECT_SELF, "sPTargetName");
-	//SendMessageToAllDMs("Namer: sTargetName = " + sTargetName);
-	//SendMessageToAllDMs( "Namer: sPTargetName = " + ACR_GetPersistentString(oFocus, "sPTargetName"));
-	//SendMessageToAllDMs("Namer: sTargetRes = " + sTargetRes);
-	//SendMessageToAllDMs( "Namer: sPTargetRes = " + ACR_GetPersistentString(oFocus, "sPTargetRes"));
 	location lTarget = GetLocation(oTarget);
 	effect eDivAOE = EffectVisualEffect(VFX_HIT_AOE_DIVINATION, FALSE);
 	int nMatch = GetListenPatternNumber();
@@ -1523,7 +1516,6 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 		SetLocalString(oScryer, sTargetName, sMatch);
 		SetListenPattern(oScrySpeak, "**" + sMatch + "**", 6039);
 				 
-				 			
 		string sScryTargetA = GetLocalString(oTarget, "sScryTargetA");
 		string sScryTargetB = GetLocalString(oTarget, "sScryTargetB");
 		string sScryTargetC = GetLocalString(oTarget, "sScryTargetC");
@@ -1571,22 +1563,10 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 		while(oToken != OBJECT_INVALID) {
 			if((FindSubString(GetTag(oToken), "abr_it_scry_", 0) != -1) && (GetTag(oToken) != "abr_it_scry_kit")) {
 				string sPTokenRes = ACR_GetPersistentString(oToken, "sPTargetRes");
-				//SendMessageToAllDMs("Namer onconvo sPTokenRes is" + sPTokenRes);
-				
 				string sPTokenName = ACR_GetPersistentString(oToken, "sPTargetName");
-				
-				if(sPTokenName == sTargetName) {
-					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
-					//SendMessageToAllDMs("1. sPTargetNick set to " + sMatch + " on " + GetName(oToken));
-					}
-				if((sPTokenName == "") && (ACR_GetPersistentString(oToken, "sPTargetNick") == sMatch)){
-					ACR_SetPersistentString(oToken, "sPTargetName", sMatch);
-					//SendMessageToAllDMs("sPTargetName set to " + sMatch + " on " + GetName(oToken));
-					}
-				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "") && (sPTokenName == sMatch)){
-					ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);
-					//SendMessageToAllDMs( "2. sPTargetNick set to " + sMatch + " on " + GetName(oToken));
-					}
+				if(sPTokenName == sTargetName) {ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);}
+				if((sPTokenName == "") && (ACR_GetPersistentString(oToken, "sPTargetNick") == sMatch)){ACR_SetPersistentString(oToken, "sPTargetName", sMatch);}
+				if((ACR_GetPersistentString(oToken, "sPTargetNick") == "") && (sPTokenName == sMatch)){ACR_SetPersistentString(oToken, "sPTargetNick", sMatch);}
 				}	
 			oToken = GetNextItemInInventory(oScryer);
 			}
@@ -1675,17 +1655,12 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 			return;
 		}
 		
-		
 		else if(nMatch == 6041) {
 			string sSpokenBy = GetName(GetLastSpeaker());
 			SetFirstName(oScrySpeak, sSpokenBy);
 			if(GetLastSpeaker() != oScrySpeak)  {
 				DelayCommand(1.0, AssignCommand(oScrySpeak, ActionSpeakString(sRelay, TALKVOLUME_TALK)));
 			}
-			//Scrying Sensor won't force follow across ATs, so here it checks to make sure oScried hasn't left the area and jumps to oScried if so
-			//if(GetArea(OBJECT_SELF) != GetArea(oScried)) {
-			//	ActionJumpToObject(oScried, TRUE);
-		//	}
 		}
 	}	 
 
@@ -1699,5 +1674,4 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 			SendMessageToPC(oScryer, sSpokenBy + " says: " + sRelay);
 		}
 	}	 
-			 	   	 
 }

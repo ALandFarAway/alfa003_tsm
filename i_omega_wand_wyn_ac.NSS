@@ -10,15 +10,7 @@
 
 void main()
 {   SendMessageToPC(GetItemActivator(), "Leave area after NPC possession to refresh Omega Wand abilities.");
-    ExecuteScript("acf_area_onexit", GetItemActivator());
-	ExecuteScript("acf_area_client", GetItemActivator());
-	if(GetIsDM(GetItemActivator())) {SendMessageToPC(GetItemActivator(), "Is a DM");}
-	else {SendMessageToPC(GetItemActivator(), "Is not a DM");}
-	SendMessageToPC(GetItemActivator(), "Master = " + GetName(GetMaster(GetItemActivator())));
-	SetLocalObject(GetModule(), "OmegaDM", GetItemActivator());
-	SendMessageToAllDMs("omegaDM = " + GetName(GetLocalObject(GetModule(), "OmegaDM")));
-	SendMessageToPC(GetLocalObject(GetModule(), "OmegaDM"), "omegaDM = " + GetName(GetLocalObject(GetModule(), "OmegaDM")));
-	object oObject = GetItemActivatedTarget();
+    object oObject = GetItemActivatedTarget();
 	location lTarget = GetItemActivatedTargetLocation();
 	SetLocalLocation(GetItemActivator(), "lCreate", lTarget);
 	int nTargetType = GetObjectType(oObject);
@@ -30,5 +22,5 @@ void main()
 		SetLocalObject(GetItemActivator(), "Object_Target", oObject);
 		}
 		
-	AssignCommand(GetLocalObject(GetModule(), "OmegaDM"), ActionStartConversation(GetLocalObject(GetModule(), "OmegaDM"), "omega_wand_wyn", TRUE, TRUE, TRUE, TRUE ));
+	AssignCommand(GetItemActivator(), ActionStartConversation(GetItemActivator(), "omega_wand_wyn", TRUE, TRUE, TRUE, TRUE ));
    	}
