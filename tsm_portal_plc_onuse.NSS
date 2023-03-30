@@ -49,19 +49,21 @@ void main() {
     effect eCessate = EffectVisualEffect(VFX_DUR_CESSATE_NEUTRAL);
     
 		
-	if(oMask != OBJECT_INVALID) {
-		if(sMask == sKeyTag){oMyWaypoint = GetWaypointByTag(sMyTarget);}
-		else if(sMask == sKeyTagTwo){oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
-		else if(sMask == sKeyTagThree){oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
-		else if(sMask == sKeyTagFour){oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
-		else if(sMask == sKeyTagFive){oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
-		else if(sMask == sKeyTagSix){oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
-			
-		SendMessageToAllDMs(GetName(oTraveller) + " is wearing " + sMask + " and is jumping to " + GetTag(oMyWaypoint));
-		ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
-	    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
-   		DelayCommand(2.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));
-		}
+	if((oMask != OBJECT_INVALID) && 
+		((sMask == sKeyTag) || (sMask == sKeyTagTwo) || (sMask == sKeyTagThree) || (sMask == sKeyTagFour) || (sMask == sKeyTagFive) || (sMask == sKeyTagSix)))	{
+		
+			if(sMask == sKeyTag){oMyWaypoint = GetWaypointByTag(sMyTarget);}
+			else if(sMask == sKeyTagTwo){oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
+			else if(sMask == sKeyTagThree){oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
+			else if(sMask == sKeyTagFour){oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
+			else if(sMask == sKeyTagFive){oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
+			else if(sMask == sKeyTagSix){oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
+				
+			SendMessageToAllDMs(GetName(oTraveller) + " is wearing " + sMask + " and is jumping to " + GetTag(oMyWaypoint));
+			ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+		    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
+	   		DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));
+			}
 	else {SendMessageToPC(oTraveller, "Nothing happens.");
 		if((d20(1) + GetAbilityModifier(ABILITY_WISDOM, oTraveller)) >= 15) {
 			SendMessageToPC(oTraveller, "You sense the potential power in this object");
