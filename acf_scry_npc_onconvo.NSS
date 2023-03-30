@@ -44,7 +44,7 @@ void main()
 	effect eEthereal = EffectEthereal();
 	    
 //Actions for scrying sensor in response to substrings set on it at spawn
-if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalObject(OBJECT_SELF, "oScryer")))
+if((FindSubString(GetTag(OBJECT_SELF), "abr_cr_scry_sen")!= -1) && (GetLastSpeaker() == GetLocalObject(OBJECT_SELF, "oScryer")))
 		{string sMatch = GetMatchedSubstring(1);
 		int nMatch = GetListenPatternNumber();
 		//6040 will end an ongoing scrying session
@@ -176,7 +176,7 @@ if((GetTag(OBJECT_SELF) == "003_cr_scry_send") && (GetLastSpeaker() == GetLocalO
 
 }
 	
-if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
+if((FindSubString(GetTag(OBJECT_SELF), "abr_cr_scry_sen")!= -1) && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerA")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerB")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerC")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerD")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerE")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerF")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerG")) || (GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oViewerH")))) 
 	{object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
 	 object oDupe = GetLocalObject(GetLastSpeaker(), "oDupe");
 	 location lHere;
@@ -227,7 +227,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_send") && ((GetLastSpeaker()== GetLocalOb
 	}
 	
 //Action queue for OOC Scrying Speaker that handles most Scrying interaction
-if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) 
+if((GetTag(OBJECT_SELF)== "abr_cr_scry_speak") && ((GetLastSpeaker()== GetLocalObject(OBJECT_SELF, "oScryer")) || (GetLocalObject(OBJECT_SELF, "oScryer") == OBJECT_INVALID))) 
 	{
 		//Get existing local objects set by Spellhook
 		object oScry = GetLocalObject(OBJECT_SELF, "oScry");
@@ -652,8 +652,8 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								SetLocalLocation(oScry, "lThere", lThere);
 								object oScrySend = GetLocalObject(OBJECT_SELF, "oScrySend");
 								if(oScrySend == OBJECT_INVALID) {
-									if(GetName(oScryer)== "Xavier") {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", lThere);}
-									else {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send", lThere);}
+									if(GetName(oScryer)== "Xavier") {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_send_xavier", lThere);}
+									else {oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_send", lThere);}
 					            	SetLocalObject(oScry, "oScrySend", oScrySend);
 									SetLocalObject(OBJECT_SELF, "oScrySend", oScrySend);
 									SetLocalObject(oScryer, "oScrySend", oScrySend);
@@ -684,7 +684,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								// Dupe the PC to leave Dupe behind. Possessed NPC Dupes can't be destroyed, so don't do that?
 								object oDupe;
 								if(!GetIsDMPossessed(oScryer)) {
-									oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "003_cr_scry_dupe");
+									oDupe = CopyObject(oScryer, GetLocation(oScryer), OBJECT_INVALID, "abr_cr_scry_dupe");
 									ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oScryer, fAway);
 									}
 								else {
@@ -698,7 +698,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 								DelayCommand(fAway - 1.5, SetLocalObject(oScryer, "oDupe", OBJECT_INVALID));
 								DestroyObject(oDupe, fAway);
 											
-								oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_self", GetLocation(oScry));
+								oScrySelf = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_self", GetLocation(oScry));
 								SetLocalObject(oScrySelf, "oScryer", oScryer);
 								SetLocalObject(oScrySelf, "oScried", oScried);
 								SetLocalObject(oScrySend, "oScrySelf", oScrySelf);
@@ -784,7 +784,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 										object oDupeView;
 										if(GetTag(oViewer) != GetTag(oScried)) {
 											if(!GetIsDMPossessed(oViewer)) {
-												oDupeView = CopyObject(oViewer, GetLocation(oViewer), OBJECT_INVALID, "003_cr_scry_dupe");
+												oDupeView = CopyObject(oViewer, GetLocation(oViewer), OBJECT_INVALID, "abr_cr_scry_dupe");
 												}
 											else {
 												string sDupeResView = GetResRef(oViewer);
@@ -1499,7 +1499,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_speak") && ((GetLastSpeaker()== GetLocalO
 	
 	
 //The Scrying Namer is only called by activating an imbued shard on a scrying object. Any time the Scrying Namer hears spoken words, it assigns them to the scrying object as a nickname associated with a ResRef
-if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalObject(OBJECT_SELF, "oScryer"))) {
+if((GetTag(OBJECT_SELF)== "abr_cr_scry_namer") && (GetLastSpeaker() == GetLocalObject(OBJECT_SELF, "oScryer"))) {
 	object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 	object oTarget = GetLocalObject(OBJECT_SELF, "oTarget");
 	object oFocus = GetLocalObject(OBJECT_SELF, "oFocus");
@@ -1576,7 +1576,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 	}	
 
 	//Any time the Scrying Sensor hears spoken words, it relays them to the OOC ScryListener and reinforces its directive to follow oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
+	if((FindSubString(GetTag(OBJECT_SELF), "abr_cr_scry_send") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "abr_cr_scry_speak")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		object oScried = GetLocalObject(OBJECT_SELF, "oScried");
 		object oScrySpeak = GetLocalObject(OBJECT_SELF, "oScrySpeak");
@@ -1665,7 +1665,7 @@ if((GetTag(OBJECT_SELF)== "003_cr_scry_namer") && (GetLastSpeaker() == GetLocalO
 	}	 
 
 	//A listener feeds any conversation to oScryer while oScryer is with oScried
-	if((FindSubString(GetTag(OBJECT_SELF), "003_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "003_cr_scry_speak")) {
+	if((FindSubString(GetTag(OBJECT_SELF), "abr_cr_scry_self") != -1) && (GetLastSpeaker() != OBJECT_SELF)  && (GetTag(GetLastSpeaker()) != "abr_cr_scry_speak")) {
 		object oScryer = GetLocalObject(OBJECT_SELF, "oScryer");
 		int nMatch = GetListenPatternNumber();
 		if(nMatch == 6031) {

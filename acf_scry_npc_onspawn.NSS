@@ -34,7 +34,7 @@ void main()
 	effect eGhost = EffectCutsceneGhost();	 	 		     	      
     SetStandardFactionReputation(STANDARD_FACTION_HOSTILE, 50, OBJECT_SELF);
 	  
- 		if(GetTag(OBJECT_SELF)== "003_cr_scry_speak") {
+ 		if(GetTag(OBJECT_SELF)== "abr_cr_scry_speak") {
 			 //Initialize OOC undetectable Scrying Listener that receives information from the Scrying Sensor	 
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
@@ -127,7 +127,7 @@ void main()
 			 
 		}  
 		
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_namer") {
+		if(GetTag(OBJECT_SELF)== "abr_cr_scry_namer") {
 			 //Initialize Invisible Listener that will facilitate setting a Roster Name for an NPC scrying target
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
@@ -138,7 +138,7 @@ void main()
 			 SetListening(OBJECT_SELF, TRUE);
 		}
 	
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_send")  {
+		if(FindSubString(GetTag(OBJECT_SELF), "abr_cr_scry_sen")!= -1) {
 			 //Initialize Invisible Scrying Sensor that relays words spoken by or to the scrying target
 			 //Detect Scrying or See Invisibility will reveal it IC
 			 SetListenPattern(OBJECT_SELF, "**End Scry**", 6040);
@@ -204,7 +204,7 @@ void main()
 				
 		}
 		
-		if(GetTag(OBJECT_SELF)== "003_cr_scry_self") {
+		if(GetTag(OBJECT_SELF)== "abr_cr_scry_self") {
 			 //Initialize duplicate oScryer at scrying object that will feed local conversation to PC Scryer while PC Scryer is with oScried
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, OBJECT_SELF);
 			 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);

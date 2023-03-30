@@ -76,7 +76,7 @@ void main()
 				SetLocalInt(oStudent, "HarpySpot", 1);
 			 	}
 			
-			DelayCommand(2.0, ActionCreateCreature("003_cr_scry_send_xavier", lStudent));
+			DelayCommand(2.0, ActionCreateCreature("abr_cr_scry_send_xavier", lStudent));
 			DelayCommand(7.0, ActionCreateCreature("003_slv_dq_h_creature", GetLocation(GetNearestObject(OBJECT_TYPE_CREATURE, oStudent, 1))));
 			DelayCommand(10.0, ActionCreateCreature("003_slv_dq_h_creature", lStudent));
 	 		DelayCommand(15.0, SetLocalInt(oStudent, "HarpyMsg", 6));

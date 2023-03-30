@@ -406,7 +406,7 @@ void main() {
 		    SendMessageToPC(oScried, "You have a sense of being watched.");
 			}
 			
-		oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_send_xavier", GetLocation(oEnterer));
+		oScrySend = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_send_xavier", GetLocation(oEnterer));
 		int nCasterLevel = GetLocalInt(oScrySend, "nCasterLevel");
 		
 		SetLocalObject(oEnterer, "oScrySend", oScrySend);

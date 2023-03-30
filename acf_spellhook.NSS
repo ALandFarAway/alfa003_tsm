@@ -589,7 +589,7 @@ void main()
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "<color=orange> Transmutation</color>";}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "<color=white> Necromancy</color>";}
 					//Scrying sensors are creatures. They spawn invisible, but when detected, become visible.
-					if(FindSubString(GetTag(oDetected), "003_cr_scry_sen") != -1) {sName = "A scrying sensor"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";
+					if(FindSubString(GetTag(oDetected), "abr_cr_scry_sen") != -1) {sName = "A scrying sensor"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";
 						effect eEffect = GetFirstEffect(oDetected);
 						int nRep = 0;
 						int nInvis = 0;
@@ -1860,7 +1860,7 @@ void main()
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "<color=orange> Transmutation</color>";}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "<color=white> Necromancy</color>";}
 					//Scrying sensors are creatures. They spawn invisible, but when detected, become visible.
-					if(FindSubString(GetTag(oDetected), "003_cr_scry_sen") != -1) {sName = "A scrying sensor"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";
+					if(FindSubString(GetTag(oDetected), "abr_cr_scry_sen") != -1) {sName = "A scrying sensor"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";
 						effect eEffect = GetFirstEffect(oDetected);
 						int nRep = 0;
 						int nInvis = 0;
@@ -3141,7 +3141,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 			//Create undetectable OOC Scrying Speaker at location of Scrying Object to receive scrying information about future scrying target
 			object oScrySpeak = GetLocalObject(oScry, "oScrySpeak");
 			if(oScrySpeak == OBJECT_INVALID) {
-				oScrySpeak = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_speak", lHere);
+				oScrySpeak = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_speak", lHere);
             	SetLocalObject(oScry, "oScrySpeak", oScrySpeak);
 				}
 				

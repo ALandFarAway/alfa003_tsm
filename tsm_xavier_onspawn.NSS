@@ -5,7 +5,7 @@
  
 void main()
 {
-	object oSensor = GetObjectByTag("003_cr_scry_send", 0);
+	object oSensor = GetObjectByTag("abr_cr_scry_send_xavier", 0);
 	IdentifyEquippedItems();
     IdentifyInventory();
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
@@ -14,6 +14,4 @@ void main()
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_GOOD, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_GREATER_INVISIBILITY, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-	
-	
-   }
+	}

@@ -637,7 +637,7 @@ void main()
 					if(nRace == 23) {sRace = "Shapechanger"; sSchool = "<color=orange> Transmutation</color>";}
 					if(nRace == 24) {sRace = "Undead"; sSchool = "<color=white> Necromancy</color>";}
 					//Scrying sensors are creatures. They spawn invisible, but when detected, become visible.
-					if(FindSubString(GetTag(oDetected), "003_cr_scry_sen") != -1) {sName = "A scrying sensor"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";
+					if(FindSubString(GetTag(oDetected), "abr_cr_scry_sen") != -1) {sName = "A scrying sensor"; sRace = "Scrying Sensor"; sSchool = "<color=green>Divination</color>";
 						effect eEffect = GetFirstEffect(oDetected);
 						int nRep = 0;
 						int nInvis = 0;

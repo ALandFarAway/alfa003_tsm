@@ -120,7 +120,7 @@ void main()
 			//Create undetectable OOC Scrying Speaker at location of Scrying Object to receive scrying information about future scrying target
 			object oScrySpeak = GetLocalObject(oScry, "oScrySpeak");
 			if(oScrySpeak == OBJECT_INVALID) {
-				oScrySpeak = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_speak", lHere);
+				oScrySpeak = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_speak", lHere);
             	SetLocalObject(oScry, "oScrySpeak", oScrySpeak);
 				}
 				

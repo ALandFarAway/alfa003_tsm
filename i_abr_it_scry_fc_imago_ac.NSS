@@ -106,7 +106,7 @@ void main()
 				//Create undetectable OOC Scrying Namer at location of Scrying Object to receive nickname for stored scrying target
 			    object oScryNamer = GetLocalObject(oTarget, "oScryNamer");
 				if(oScryNamer == OBJECT_INVALID) {
-					oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_scry_namer", GetLocation(oTarget));
+					oScryNamer = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_namer", GetLocation(oTarget));
 		            SetLocalObject(oScryNamer, "oScryer", oScryer);
 					SetLocalObject(oScryNamer, "oFocus", oFocus);
 					SetLocalObject(oScryNamer, "oTarget", oTarget);
