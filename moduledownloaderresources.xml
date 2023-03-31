@@ -965,7 +965,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="D6E7ADD79D46C1E7C7BFAA5A19E71B81B596F3B8" downloadHash="5570787DB3812E62BFF39036770E99BEC31706DA" name="cave .trx" dlsize="1481674" size="1830982" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="676C65AE19E39BECB5C8FEF50D85FCFBD564D6DB" downloadHash="A86596D402557BEAD815E85A1F242A07A27E9DC7" name="cave .trx" dlsize="1385701" size="1733806" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

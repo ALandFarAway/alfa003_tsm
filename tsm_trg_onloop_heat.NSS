@@ -76,7 +76,7 @@ if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_IN
 			 if(nRepHeat == 0) {SendMessageToPC(oPC, "Your ability to survive in the wilderness keeps you from succumbing to the worst of the heat.");
 				}
 			}
-		if((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
+		if((!GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) && (!GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF))&& (!GetHasSpellEffect(SPELL_ENERGY_IMMUNITY_FIRE, OBJECT_SELF)))
 			{int nSurvival = GetLocalInt(oPC, "Survival");
 			 int nDC = 15 + nRepHeat - nSurvival;
 			 if(nRepHeat > 0) {
@@ -87,8 +87,8 @@ if((GetLocalInt(oPC, "HeatLoop") == 1) && (nRepHeat < 100)  && (oPC != OBJECT_IN
 				 }
 				}
 			}
-			else if((GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) || (GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))|| (GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF)))
-				{SendMessageToPC(oPC, "You feel your elemental protection spell keeping the worst of the Heat at bay.");
+			else if((GetHasSpellEffect(SPELL_ENDURE_ELEMENTS, oPC)) || (GetHasSpellEffect(SPELL_RESIST_ENERGY, OBJECT_SELF))|| (GetHasSpellEffect(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF))|| (!GetHasSpellEffect(SPELL_ENERGY_IMMUNITY_FIRE, OBJECT_SELF)))
+				{SendMessageToPC(oPC, "You feel your elemental protection spell keeping the worst of the heat at bay.");
 				}
 					
 			SetLocalInt(oPC, "Survival", 0);

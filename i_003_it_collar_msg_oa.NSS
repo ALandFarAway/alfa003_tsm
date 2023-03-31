@@ -29,6 +29,7 @@ void main()
 	DelayCommand(55.0, AssignCommand(oXavier, ActionSpeakString("Until then, I'll enjoy this act. Two out of six. *Gestures slightly off to the side of the portal* I do hope those who went before choose one of the entertaining journeys. Until next time. Ta-ta!", TALKVOLUME_TALK)));
 	DestroyObject(oXavier, 57.0);			  		  		 
 	DestroyObject(oSpotlight, 60.0);
+	DelayCommand(62.0, AssignCommand(oPC, ActionSpeakString("*Watches as the collar crumbles to dust.", TALKVOLUME_TALK)));
 	DelayCommand(62.0, SendMessageToPC(oPC, "The collar crumbles to dust."));
 	DestroyObject(OBJECT_SELF, 65.0);
 					 
