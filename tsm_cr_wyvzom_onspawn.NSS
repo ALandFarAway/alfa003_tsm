@@ -55,7 +55,6 @@ void main() {
 				object oWallDWP = GetWaypointByTag("cave_bridge_walld_wp");
 				effect eExplode = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION, FALSE);
 				effect eShrapnel = EffectVisualEffect(VFX_COM_CHUNK_STONE_MEDIUM, FALSE);
-				//object OBJECT_SELF = CreateObject(OBJECT_TYPE_CREATURE, "abr_un_wyv_twisted", GetLocation(oWyvSpawn));
 				object oSpeaker = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_voice_xyz", GetLocation(oInvisSpawn));
 				SetFirstName(oSpeaker, "Twisted Wyvern");
 				SetLastName(oSpeaker, "Zombie");

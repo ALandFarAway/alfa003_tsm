@@ -25,6 +25,10 @@ void ActionCreateWynPlaceable(string sPlaceable, location lLocPlaceable)
     CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
 }
 
+void ActionCreateWynPlacedEff(string sEffect, location lLocEffect)
+{
+    CreateObject(OBJECT_TYPE_PLACED_EFFECT, sEffect, lLocEffect);
+}
 void main() {
  
 	if (!GetIsObjectValid(OBJECT_SELF))
@@ -155,15 +159,19 @@ void main() {
 			    DelayCommand(58.0, AssignCommand(oSpeaker, ActionSpeakString("*Roars and folds wings, swooping out of sight into the chasm.", TALKVOLUME_TALK)));
 				DestroyObject(oWyvern, 60.0);
 				
+				DelayCommand(75.0, ActionCreateWynPlacedEff("tsm_ffx_1303_rockslide_dust", GetLocation(oWyvSpawnC)));
+				DelayCommand(75.0, ActionCreateWynPlacedEff("tsm_ffx_dust_hit", GetLocation(oWyvSpawnC)));
 				
 				DelayCommand(75.0, AssignCommand(oSpeaker, ActionSpeakString("*The bridge explodes upwards!", TALKVOLUME_TALK)));
-				DelayCommand(76.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShrapnel, oExplosionWP, 5.0));
-				DelayCommand(76.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eShrapnel, GetLocation(oExplosionWP), 5.0));
-				DelayCommand(77.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode, oExplosionWP, 5.0));
-				DelayCommand(77.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eExplode, GetLocation(oExplosionWP), 5.0));
+				DelayCommand(76.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShrapnel, oWyvSpawnC, 5.0));
+				DelayCommand(76.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eShrapnel, GetLocation(oWyvSpawnC), 5.0));
+				DelayCommand(77.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode, oWyvSpawnC, 5.0));
+				DelayCommand(77.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eExplode, GetLocation(oWyvSpawnC), 5.0));
 				
 				DelayCommand(80.0, ActionCreateWynCreature("abr_un_wyv_twisted", GetLocation(oWyvSpawnC)));
 				DelayCommand(80.0, AssignCommand(oSpeaker, ActionSpeakString("*Shrapnel flies as the wyvern bursts through the bridge from below.", TALKVOLUME_TALK)));
+				DelayCommand(81.0, DestroyObject(GetObjectByTag("tsm_ffx_dust_hit", 0)));
+				DelayCommand(81.0, DestroyObject(GetObjectByTag("tsm_ffx_1303_rockslide_dust", 0)));
 				
 				DelayCommand(81.0, ActionCreateWynPlaceable("cave_bridge_blackout", GetLocation(oBlackWP)));
 				DelayCommand(81.0, ActionCreateWynPlaceable("cave_bridge_blackoutb", GetLocation(oBlackBWP)));
