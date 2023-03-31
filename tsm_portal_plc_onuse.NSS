@@ -59,8 +59,17 @@ void main() {
     effect eCessate = EffectVisualEffect(VFX_DUR_CESSATE_NEUTRAL);
     
 	
+	SendMessageToAllDMs("Tag = " + GetTag(OBJECT_SELF));
+	SendMessageToAllDMs("nActivated = " + IntToString(GetLocalInt(OBJECT_SELF, "Activated")));
+	SendMessageToAllDMs("sMask = " + sMask);
+	SendMessageToAllDMs("sKey1 = " + sKeyTag);
+	SendMessageToAllDMs("sKey2 = " + sKeyTagTwo);
+	SendMessageToAllDMs("sKey3 = " + sKeyTagThree);
+	SendMessageToAllDMs("sKey4 = " + sKeyTagFour);
+	SendMessageToAllDMs("sKey5 = " + sKeyTagFive);
+	SendMessageToAllDMs("sKey6 = " + sKeyTagSix);
 	
-	if((FindSubString(GetTag(OBJECT_SELF), "wyv") != -1) && (oMask != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1) && 
+	if((oMask != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1) && 
 		((sMask == sKeyTag) || (sMask == sKeyTagTwo) || (sMask == sKeyTagThree) || (sMask == sKeyTagFour) || (sMask == sKeyTagFive) || (sMask == sKeyTagSix)))	{
 		
 			if(sMask == sKeyTag){oMyWaypoint = GetWaypointByTag(sMyTarget);}
@@ -74,7 +83,7 @@ void main() {
 			ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
 		    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
 	   		DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));
-			if(GetLocalInt(OBJECT_SELF, "Activated") == 0) {
+			if((GetLocalInt(OBJECT_SELF, "Activated") == 0) && (FindSubString(GetTag(OBJECT_SELF), "wyv") != -1))  {
 				SetLocalInt(OBJECT_SELF, "Activated", 1);
 				object oExpWP = GetWaypointByTag("cave_explosion_wp");
 				object oWyvSpawn = GetWaypointByTag("cave_wyvern_spawn_wp");
