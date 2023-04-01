@@ -44,24 +44,22 @@ void main() {
 	object oMoveC = GetWaypointByTag("wyvern_movec_wp");
 	object oExplosionWP = GetWaypointByTag("cave_explosion_wp");
 				
-	object oBlackWP = GetWaypointByTag("cave_bridge_black_wp");
-	object oBlackBWP = GetWaypointByTag("cave_bridge_blackb_wp");
-	object oRubbleWP = GetWaypointByTag("cave_bridge_rubble_wp");
-	object oRubbleBWP = GetWaypointByTag("cave_bridge_rubbleb_wp");
-	object oRubbleCWP = GetWaypointByTag("cave_bridge_rubblec_wp");
-	object oRubbleDWP = GetWaypointByTag("cave_bridge_rubbled_wp");
-	object oWallWP = GetWaypointByTag("cave_bridge_wall_wp");
-	object oWallBWP = GetWaypointByTag("cave_bridge_wallb_wp");
-	object oWallCWP = GetWaypointByTag("cave_bridge_wallc_wp");
-	object oWallDWP = GetWaypointByTag("cave_bridge_walld_wp");
+	object oBlackWP = GetWaypointByTag("bridge_black_wp");
+	object oBlackBWP = GetWaypointByTag("bridge_blackb_wp");
+	object oRubbleWP = GetWaypointByTag("bridge_rubble_wp");
+	object oRubbleBWP = GetWaypointByTag("bridge_rubbleb_wp");
+	object oRubbleCWP = GetWaypointByTag("bridge_rubblec_wp");
+	object oRubbleDWP = GetWaypointByTag("bridge_rubbled_wp");
+	object oWallWP = GetWaypointByTag("bridge_wall_wp");
+	object oWallBWP = GetWaypointByTag("cbridge_wallb_wp");
+	object oWallCWP = GetWaypointByTag("bridge_wallc_wp");
+	object oWallDWP = GetWaypointByTag("bridge_walld_wp");
 	effect eExplode = EffectVisualEffect(VFX_IMP_DUST_EXPLOSION, FALSE);
 	effect eShrapnel = EffectVisualEffect(VFX_COM_CHUNK_STONE_MEDIUM, FALSE);
 	
 	effect eCutScene = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY);
 	effect eFreeze = EffectCutsceneImmobilize();
-	effect eLight = EffectVisualEffect(VFX_DUR_LIGHT_RED_5);
-	effect eLightB = EffectVisualEffect(VFX_DUR_LIGHT_RED_10);
-	effect eLightC = EffectVisualEffect(VFX_DUR_LIGHT_RED_15);
+	effect eLight = EffectVisualEffect(VFX_DUR_LIGHT_RED_20);
 	
 	object oRedLight = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_scry_send_xavier", GetLocation(oWyvern));
 	SetFirstName(oRedLight, "Red");
@@ -69,9 +67,9 @@ void main() {
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze,oRedLight);
     	 		
 	SetScale(oWyvern, 0.1, 0.1, 0.1);
-	ActionSpeakString("*Over the bridge, the light filtering through cracks in the ceiling dims and goes out, dirt and pebbles trickling through at first, then that ceasing, as the light is closed off.", TALKVOLUME_TALK);
-	
 	float fDelay = 30.0;	
+	DelayCommand(fDelay-28.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Over the bridge, the light filtering through cracks in the ceiling dims and goes out, dirt and pebbles trickling through at first, then that ceasing, as the light is closed off.", TALKVOLUME_TALK)));
+	
 	DestroyObject(oCaveLightA);
 	DestroyObject(oCaveLightB, fDelay-20.0);
 				
@@ -107,7 +105,7 @@ void main() {
 		 		
 	DelayCommand(1.0 + fDelay, SetFirstName(OBJECT_SELF, "Twisted Wyvern"));
 	DelayCommand(1.0 + fDelay, ChangeToStandardFaction(oWyvern, STANDARD_FACTION_HOSTILE));
-	DelayCommand(2.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLight, oWyvern, 10.0));
+	DelayCommand(2.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, oWyvern));
 				
 	DelayCommand(2.0 + fDelay, SetScale(oWyvern, 0.15, 0.15, 0.15));
 	DelayCommand(3.0 + fDelay, SetScale(oWyvern, 0.2, 0.2, 0.2));
@@ -124,8 +122,7 @@ void main() {
 		eRemove = GetNextEffect(oWyvern);
 		}
 	DelayCommand(10.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("al_mg_crystalev1", FALSE)));
-	DelayCommand(10.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Large enough to see detail as it swoops out of the darkness and banks past you, the creature is a twisted wyvern...but different even from those befouled creatures. Raw flesh and bone glisten in its red aura. It is undead, and suffused in magic.", TALKVOLUME_TALK)));
-	DelayCommand(10.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLightB, oWyvern, 10.0));
+	DelayCommand(10.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Large enough to see detail as it swoops out of the darkness and banks past you, the creature is a twisted wyvern...but different even from those befouled creatures. Raw flesh and bone glisten in its red aura. It is undead, and suffused in magic. A black gem adheres to its brow ridge, glinting with an internal fire.", TALKVOLUME_TALK)));
 	DelayCommand(10.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
 	DelayCommand(10.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(10.0 + fDelay, SetScale(oWyvern, 0.55, 0.55, 0.55));
@@ -134,7 +131,6 @@ void main() {
 	DelayCommand(11.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror2", FALSE)));
 	DelayCommand(11.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror2", FALSE)));
 	
-	DelayCommand(20.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eLightC, oWyvern, 40.0));
 	DelayCommand(20.0 + fDelay, AssignCommand(OBJECT_SELF, ActionForceMoveToLocation(GetLocation(oMoveB), TRUE, 5.0)));
 	DelayCommand(21.0 + fDelay, SetScale(oWyvern, 0.6, 0.6, 0.6));
 	DelayCommand(22.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
@@ -161,7 +157,14 @@ void main() {
 				 
 	DelayCommand(60.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oWyvern));
 	DelayCommand(60.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze,oWyvern));
-    	 		 
+    eRemove = GetFirstEffect(oWyvern);
+	while (GetIsEffectValid(eRemove) != FALSE) {
+		DelayCommand(60.0 + fDelay, RemoveEffect(oWyvern, eRemove));
+		eRemove = GetNextEffect(oWyvern);
+		}
+	DelayCommand(60.0 + fDelay, ChangeToStandardFaction(oWyvern, STANDARD_FACTION_COMMONER));
+		
+		 		 
 	DelayCommand(75.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*The bridge explodes upwards!", TALKVOLUME_TALK)));
 	DelayCommand(76.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShrapnel, oWyvSpawnC, 5.0));
 	DelayCommand(76.0 + fDelay, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eShrapnel, GetLocation(oWyvSpawnC), 5.0));
@@ -182,5 +185,7 @@ void main() {
 	DelayCommand(83.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_wallc", GetLocation(oWallCWP)));
 	DelayCommand(83.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_walld", GetLocation(oWallDWP)));
 	DelayCommand(85.0 + fDelay, SetLocalInt(oPortal, "Activated", 2));
+	
+	DestroyObject(OBJECT_SELF, 90.0);
 				
 }
