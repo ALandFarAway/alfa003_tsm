@@ -48,17 +48,22 @@ void main()
 	//Zombie creatures spill parasitic moths
 	
 		if(GetTag(OBJECT_SELF) == "abr_un_dragon_wyvern_twisted")
-		{object oMothOne = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));
+		{object oWyvSpawnC = GetWaypointByTag("cave_wyvern_spawnc_wp");
+		 location lSpawn;
+		 object oPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
+		 if(GetDistanceBetween(oPC, OBJECT_SELF) < 10.0) {lSpawn = GetLocation(oWyvSpawnC);}
+		 if(GetDistanceBetween(oPC, OBJECT_SELF) < 5.0) {lSpawn = GetLocation(OBJECT_SELF);}
+		 object oMothOne = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));
 		 if(Random(2)==1) {object oMothTwo = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
 		 if(Random(2)==1) {object oMothThree = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
-		 if(Random(2)==1) {object oMothFour = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", GetLocation(OBJECT_SELF));}
-		 if(Random(2)==1) {object oMothFive = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", GetLocation(OBJECT_SELF));}
-		 if(Random(2)==1) {object oMothSix = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", GetLocation(OBJECT_SELF));}
+		 if(Random(2)==1) {object oMothFour = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
+		 if(Random(2)==1) {object oMothFive = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
+		 if(Random(2)==1) {object oMothSix = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(2)==1) {object oMothSeven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
 		 if(Random(2)==1) {object oMothEight = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth", GetLocation(OBJECT_SELF));}
-		 if(Random(2)==1) {object oMothNine = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", GetLocation(OBJECT_SELF));}
-		 if(Random(2)==1) {object oMothTen = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", GetLocation(OBJECT_SELF));}
-		 if(Random(2)==1) {object oMothEleven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", GetLocation(OBJECT_SELF));}
+		 if(Random(2)==1) {object oMothNine = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
+		 if(Random(2)==1) {object oMothTen = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
+		 if(Random(2)==1) {object oMothEleven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));
 		 effect eChunk = EffectVisualEffect(VFX_COM_CHUNK_RED_MEDIUM, FALSE);
 		 effect eFlies = EffectVisualEffect(VFX_DUR_FLIES, FALSE);

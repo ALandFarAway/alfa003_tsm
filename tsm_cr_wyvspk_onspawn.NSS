@@ -33,6 +33,7 @@ void main() {
 	object oCaveLightA = GetObjectByTag("cave_light_a", 0);
 	object oCaveLightB = GetObjectByTag("cave_light_b", 0);
 	object oCaveLightC = GetObjectByTag("cave_light_c", 0);
+	object oCaveLightD = GetObjectByTag("abr_afx_ror_player_soul_01", 0);
 	
 	object oExpWP = GetWaypointByTag("cave_explosion_wp");
 	object oWyvSpawn = GetWaypointByTag("cave_wyvern_spawn_wp");
@@ -85,9 +86,10 @@ void main() {
 		}
 				
 	DestroyObject(oCaveLightC, fDelay-10.0);
-	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*A small cross-shape, backlit in silhouette against a red light, becomes visible down and to the east.", TALKVOLUME_TALK)));
+	DestroyObject(oCaveLightD, fDelay-10.0);
+	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*In the utter blackness, a small cross-shape, backlit in silhouette against a red light, becomes visible down and to the east.", TALKVOLUME_TALK)));
 	
-	DelayCommand(fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*The wings flap again, the creature that is flying out of the revealed distances, clearly draconic in shape.", TALKVOLUME_TALK)));
+	DelayCommand(fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*A creature, flying out of the revealed distances, draconic in shape but lumpy with outgrowths.", TALKVOLUME_TALK)));
 	DestroyObject(oRedLight, fDelay);
 				
 	effect eRemove = GetFirstEffect(oWyvern);
@@ -121,6 +123,7 @@ void main() {
 		if(GetEffectType(eRemove) == EFFECT_TYPE_CUTSCENEIMMOBILIZE) {DelayCommand(fDelay + 10.0, RemoveEffect(oWyvern, eRemove));}
 		eRemove = GetNextEffect(oWyvern);
 		}
+		
 	DelayCommand(10.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("al_mg_crystalev1", FALSE)));
 	DelayCommand(10.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Large enough to see detail as it swoops out of the darkness and banks past you, the creature is a twisted wyvern...but different even from those befouled creatures. Raw flesh and bone glisten in its red aura. It is undead, and suffused in magic. A black gem adheres to its brow ridge, glinting with an internal fire.", TALKVOLUME_TALK)));
 	DelayCommand(10.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
@@ -150,20 +153,14 @@ void main() {
 	DelayCommand(35.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 	DelayCommand(35.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				
+	DelayCommand(50.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oWyvSpawnB), TRUE, 5.0)));
 				
 				  
 	DelayCommand(57.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror1", FALSE)));
 	DelayCommand(58.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Roars and folds wings, swooping out of sight into the chasm.", TALKVOLUME_TALK)));
+	
+	DestroyObject(oWyvern, 60.0 + fDelay);
 				 
-	DelayCommand(60.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene, oWyvern));
-	DelayCommand(60.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze,oWyvern));
-    eRemove = GetFirstEffect(oWyvern);
-	while (GetIsEffectValid(eRemove) != FALSE) {
-		DelayCommand(60.0 + fDelay, RemoveEffect(oWyvern, eRemove));
-		eRemove = GetNextEffect(oWyvern);
-		}
-	DelayCommand(60.0 + fDelay, ChangeToStandardFaction(oWyvern, STANDARD_FACTION_COMMONER));
-		
 		 		 
 	DelayCommand(75.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*The bridge explodes upwards!", TALKVOLUME_TALK)));
 	DelayCommand(76.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShrapnel, oWyvSpawnC, 5.0));
@@ -171,9 +168,13 @@ void main() {
 	DelayCommand(77.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplode, oWyvSpawnC, 5.0));
 	DelayCommand(77.0 + fDelay, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eExplode, GetLocation(oWyvSpawnC), 5.0));
 				
+	DelayCommand(80.0 + fDelay, SetFirstName(OBJECT_SELF, ""));
+	DelayCommand(80.0 + fDelay, SetLastName(OBJECT_SELF, ""));
 	DelayCommand(80.0 + fDelay, ActionCreateWynCreature("abr_un_wyv_twisted", GetLocation(oWyvSpawnC)));
 	DelayCommand(80.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Shrapnel flies as the wyvern bursts through the bridge from below.", TALKVOLUME_TALK)));
-				
+	DelayCommand(82.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1)));
+		
+			
 	DelayCommand(81.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_blackout", GetLocation(oBlackWP)));
 	DelayCommand(81.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_blackoutb", GetLocation(oBlackBWP)));
 	DelayCommand(81.5 + fDelay, ActionCreateWynPlaceable("cave_bridge_rubble", GetLocation(oRubbleWP)));
@@ -186,6 +187,5 @@ void main() {
 	DelayCommand(83.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_walld", GetLocation(oWallDWP)));
 	DelayCommand(85.0 + fDelay, SetLocalInt(oPortal, "Activated", 2));
 	
-	DestroyObject(OBJECT_SELF, 90.0);
 				
 }
