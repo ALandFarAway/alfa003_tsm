@@ -47,7 +47,7 @@ void main()
 	
 	//Zombie creatures spill parasitic moths
 	
-		if(GetTag(OBJECT_SELF) == "abr_un_dragon_wyvern_twisted")
+		if(GetTag(OBJECT_SELF) == "abr_un_wyv_twisted")
 		{object oWyvSpawnC = GetWaypointByTag("cave_wyvern_spawnc_wp");
 		 location lSpawn;
 		 object oPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);

@@ -100,8 +100,6 @@ void main() {
 		eRemove = GetNextEffect(oWyvern);
 		}
 	
-	DelayCommand(fDelay+10.0, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-	DelayCommand(fDelay+10.0, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				
 	DelayCommand(fDelay+10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze,oWyvern, 10.0));
     DelayCommand(11.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("al_mg_crystalev1", FALSE)));
@@ -126,8 +124,7 @@ void main() {
 		eRemove = GetNextEffect(oWyvern);
 		}
 		
-	DelayCommand(20.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("al_mg_crystalev1", FALSE)));
-	DelayCommand(30.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Large enough to see detail as it swoops out of the darkness and banks past you, the creature is a twisted wyvern...but different even from those befouled creatures. Raw flesh and bone glisten in its red aura. It is undead, and suffused in magic. A black gem adheres to its brow ridge, glinting with an internal fire.", TALKVOLUME_TALK)));
+	DelayCommand(30.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Large enough to see detail as it flies out of the darkness and banks past you, the creature is a twisted wyvern...but different even from those befouled creatures. Raw flesh and bone glisten in a red aura. It is undead, and suffused in magic.", TALKVOLUME_TALK)));
 	DelayCommand(30.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetScale(oWyvern, 0.55, 0.55, 0.55));
@@ -136,6 +133,7 @@ void main() {
 	DelayCommand(31.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror2", FALSE)));
 	DelayCommand(31.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror2", FALSE)));
 	
+	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck, a magnificent collar made of crystal glints.", TALKVOLUME_TALK)));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionForceMoveToLocation(GetLocation(oMoveB), TRUE, 5.0)));
 	DelayCommand(51.0 + fDelay, SetScale(oWyvern, 0.6, 0.6, 0.6));
 	DelayCommand(52.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
@@ -154,6 +152,7 @@ void main() {
 	DelayCommand(72.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oMoveC), TRUE, 5.0)));
 	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				
 	DelayCommand(80.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oWyvSpawnB), TRUE, 5.0)));
 				
@@ -176,7 +175,11 @@ void main() {
 	DelayCommand(110.0 + fDelay, SetLastName(OBJECT_SELF, ""));
 	DelayCommand(110.0 + fDelay, ActionCreateWynCreature("abr_un_wyv_twisted", GetLocation(oWyvSpawnC)));
 	DelayCommand(110.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Shrapnel flies as the wyvern bursts through the bridge from below.", TALKVOLUME_TALK)));
-	DelayCommand(112.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1)));
+	DelayCommand(111.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1)));
+	DelayCommand(112.0 + fDelay, AssignCommand(GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), ClearAllActions(TRUE)));
+	DelayCommand(112.5 + fDelay, AssignCommand(GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE))) ;
+	DelayCommand(112.5 + fDelay, AssignCommand(GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE))) ;
+	DelayCommand(112.5 + fDelay, AssignCommand(GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, GetNearestObjectByTag("abr_un_wyv_twisted", OBJECT_SELF, 1), METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE))) ;
 		
 			
 	DelayCommand(111.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_blackout", GetLocation(oBlackWP)));
