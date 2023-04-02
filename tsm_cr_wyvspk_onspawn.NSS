@@ -197,5 +197,13 @@ void main() {
 	DelayCommand(113.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_walld", GetLocation(oWallEWP)));
 	DelayCommand(115.0 + fDelay, SetLocalInt(oPortal, "Activated", 2));
 	
+	DelayCommand(120.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*The portal flashes, and creatures begin to appear upon it!", TALKVOLUME_TALK)));
+	DelayCommand(120.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orc_twisted", GetLocation(oPortal)));
+	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oPortal)));
+	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oPortal)));
+	DelayCommand(130.0 + fDelay, ActionCreateWynCreature("abr_cr_un_skeleton_harpy", GetLocation(oPortal)));
+	DelayCommand(130.0 + fDelay, ActionCreateWynCreature("abr_cr_un_skeleton_harpy", GetLocation(oPortal)));
+	DelayCommand(130.0 + fDelay, ActionCreateWynCreature("abr_cr_un_skeleton_harpy", GetLocation(oPortal)));
+	DelayCommand(135.0 + fDelay, ActionCreateWynCreature("009_cr_mhg_minotaur_twisted", GetLocation(oPortal)));
 				
 }

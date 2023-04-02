@@ -64,7 +64,7 @@ void main()
 		 if(Random(2)==1) {object oMothNine = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(2)==1) {object oMothTen = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(2)==1) {object oMothEleven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
-		 DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));
+		 if(Random(4) == 1) {DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));}
 		 effect eChunk = EffectVisualEffect(VFX_COM_CHUNK_RED_MEDIUM, FALSE);
 		 effect eFlies = EffectVisualEffect(VFX_DUR_FLIES, FALSE);
 		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFlies, OBJECT_SELF, 5.0);

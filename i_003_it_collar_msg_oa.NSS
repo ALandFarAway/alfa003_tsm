@@ -32,10 +32,11 @@ void main()
 	DelayCommand(70.0, AssignCommand(oXavier, ActionSpeakString("*Bony finger suddenly to his lips, he stage whispers* I have a secret. When I remake this wondrous diadem...the Marches will answer to the Mazelord.", TALKVOLUME_TALK)));
 	DelayCommand(85.0, AssignCommand(oXavier, ActionSpeakString("Until then, I'll enjoy this act. Two out of six. *Gestures slightly off to the side of the portal* I do hope those who went before choose one of the entertaining journeys. Until next time. Ta-ta!", TALKVOLUME_TALK)));
 	DelayCommand(100.0, AssignCommand(oXavier, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
+	DelayCommand(100.0, SetImmortal(oXavier, FALSE));
 	DestroyObject(oXavier, 102.0);			  		  		 
 	DelayCommand(102.0, AssignCommand(oPC, ActionSpeakString("*Watches as the collar crumbles to dust.", TALKVOLUME_TALK)));
 	DelayCommand(102.0, SendMessageToPC(oPC, "The collar crumbles to dust."));
 	DestroyObject(oSpotlight, 104.0);
 	DestroyObject(OBJECT_SELF, 105.0);
-					 
+	 				 
 }			  

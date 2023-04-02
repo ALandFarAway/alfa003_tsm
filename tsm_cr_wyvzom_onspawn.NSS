@@ -56,9 +56,7 @@ void main() {
 	     ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
-		 DelayCommand(19.0, ClearAllActions(TRUE));
-		 DelayCommand(19.0, ActionSpeakString("*Launches up and over the group, landing at the rear.", TALKVOLUME_TALK));
-		 DelayCommand(20.0, ClearAllActions(TRUE));
-		 DelayCommand(20.0, ActionJumpToLocation(GetLocation(oMoveD)));      
+		 ActionSpeakString("*Launches up and over the group, landing at the rear.", TALKVOLUME_TALK);
+		 ActionJumpToLocation(GetLocation(oMoveD));      
 	}		
 }
