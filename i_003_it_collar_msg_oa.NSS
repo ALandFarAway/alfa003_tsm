@@ -8,6 +8,8 @@ void main()
 {	
 	object oPC = GetModuleItemAcquiredBy();
 	object oItem = GetModuleItemAcquired();
+	effect eFreeze = EffectCutsceneImmobilize();
+	object oPortal = GetObjectByTag("alfa_portal_plc_wyv", 0);
 	
 	int nWillSave = WillSave(oPC, 18, SAVING_THROW_TYPE_MIND_SPELLS, oItem);
 	SetIdentified(oItem, TRUE);
@@ -15,8 +17,10 @@ void main()
 	effect eIllusion = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eIllusion, oPC, 5.0);
 	effect eTransparent = EffectVisualEffect(VFX_DUR_GHOST_TRANSPARENT, FALSE);
-	object oXavier = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_firegen_xavier_test", GetLocation(oPC));
+	object oXavier = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_firegen_xavier_test", GetLocation(oPortal));
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eTransparent, oXavier);
+	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze, oXavier);
+	ChangeToStandardFaction(oXavier, STANDARD_FACTION_COMMONER);
 	object oSpotlight = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "circus_fx_spotlight", GetLocation(oXavier));
 	SetLocalObject(oXavier, "oSpotlight", oSpotlight);
 	DelayCommand(2.0, AssignCommand(oXavier, ActionSpeakString("Tah-DAH!", TALKVOLUME_TALK)));
@@ -28,7 +32,7 @@ void main()
 	DelayCommand(70.0, AssignCommand(oXavier, ActionSpeakString("*Bony finger suddenly to his lips, he stage whispers* I have a secret. When I remake this wondrous diadem...the Marches will answer to the Mazelord.", TALKVOLUME_TALK)));
 	DelayCommand(85.0, AssignCommand(oXavier, ActionSpeakString("Until then, I'll enjoy this act. Two out of six. *Gestures slightly off to the side of the portal* I do hope those who went before choose one of the entertaining journeys. Until next time. Ta-ta!", TALKVOLUME_TALK)));
 	DelayCommand(100.0, AssignCommand(oXavier, ActionSpeakString("*Vanishes", TALKVOLUME_TALK)));
-	DestroyObject(oXavier, 101.0);			  		  		 
+	DestroyObject(oXavier, 102.0);			  		  		 
 	DelayCommand(102.0, AssignCommand(oPC, ActionSpeakString("*Watches as the collar crumbles to dust.", TALKVOLUME_TALK)));
 	DelayCommand(102.0, SendMessageToPC(oPC, "The collar crumbles to dust."));
 	DestroyObject(oSpotlight, 104.0);
