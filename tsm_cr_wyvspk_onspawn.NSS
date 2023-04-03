@@ -96,7 +96,6 @@ void main() {
 	DestroyObject(oCaveLightD, fDelay-10.0);
 	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*In the darkness, a red light becomes visible down and to the east, its distance revealing how far the chasm extends underground. It silhouettes a far-away winged shape, speeding this way.", TALKVOLUME_TALK)));
 	
-	DelayCommand(fDelay, ActionCreateWynPlacedEffect("tsm_afx_area_fog_red", GetLocation(oWyvSpawnC)));			
 	DestroyObject(oRedLight, fDelay + 11.0);
 				
 	effect eRemove = GetFirstEffect(oWyvern);
@@ -122,7 +121,6 @@ void main() {
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
 	
-	DelayCommand(40.0 + fDelay, ActionCreateWynPlaceable("tsm_afx_dthgod_lt_red", GetLocation(oMoveA)));			
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It swoops in and out of sight. Around its neck glints a magnificent collar of crystal.", TALKVOLUME_TALK)));
 	DelayCommand(59.0 + fDelay, ClearAllActions(TRUE));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveB, TRUE)));
