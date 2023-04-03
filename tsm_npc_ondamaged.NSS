@@ -87,9 +87,8 @@ void main()
 			AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveH)));
 			object oBluePortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));				
 		    object oBae = CreateObject(OBJECT_TYPE_CREATURE, "003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
-			effect eAura = EffectVisualEffect(VFX_DUR_SPELL_AURA_OF_GLORY, FALSE);
+			effect eAura = EffectVisualEffect(VFX_DUR_LIGHT_WHITE_20, FALSE);
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAura, oBae);
-			CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_ffx_feat_divinemight", GetLocation(OBJECT_SELF));
 			AssignCommand(oBae, ActionSpeakString("*Appears in a flash of light, slamming into the wyvern.", TALKVOLUME_TALK));
 			AssignCommand(oBae, ActionAttack(OBJECT_SELF));
 			ClearAllActions(TRUE);
