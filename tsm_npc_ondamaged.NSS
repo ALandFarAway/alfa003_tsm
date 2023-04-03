@@ -40,7 +40,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
+void ActionCreateWynItem(string sItem, location lLocCItem)
+{
+    CreateObject(OBJECT_TYPE_ITEM, sItem, lLocCItem);
+}
 void main()
 {
     ACR_CreatureOnDamaged();
@@ -48,7 +51,20 @@ void main()
 	//Zombie creatures spill parasitic moths
 	
 		if(GetTag(OBJECT_SELF) == "abr_un_wyv_twisted")
-		{object oPortal = GetObjectByTag("alfa_portal_plc_wyv");
+		{int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
+		 int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
+		 object oPortal = GetObjectByTag("alfa_portal_plc_wyv");
+		 object oMoveA = GetWaypointByTag("wyvern_movea_wp");
+	     object oMoveB = GetWaypointByTag("wyvern_moveb_wp");
+	     object oMoveC = GetWaypointByTag("wyvern_movec_wp");
+	     object oMoveD = GetWaypointByTag("wyvern_moved_wp");
+	     object oMoveE = GetWaypointByTag("wyvern_movee_wp");
+	     object oMoveF = GetWaypointByTag("wyvern_movef_wp");
+	     object oMoveG = GetWaypointByTag("wyvern_moveg_wp");
+	     object oMoveH = GetWaypointByTag("wyvern_moveh_wp");
+	     object oCreateA = GetWaypointByTag("cave_wyvern_spawn_wp");
+		 object oCreateB = GetWaypointByTag("cave_wyvern_spawnb_wp");
+		 object oCreateC = GetWaypointByTag("cave_wyvern_spawnc_wp");
 		 location lSpawn;
 		 object oPC = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1);
 		 if(GetDistanceBetween(oPC, OBJECT_SELF) < 5.0) {lSpawn = GetLocation(oPortal);}
@@ -65,6 +81,29 @@ void main()
 		 if(Random(3)==1) {object oMothTen = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(3)==1) {object oMothEleven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(8) == 1) {DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));}
+		 
+		 if(nCurrentHP < nMaxHP/5) {
+		 	ActionSpeakString("*Roars and leaps into the air, swooping around for an attack.", TALKVOLUME_TALK);
+			AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveH)));
+			object oBluePortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));				
+		    object oBae = CreateObject(OBJECT_TYPE_CREATURE, "003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
+			effect eAura = EffectVisualEffect(VFX_DUR_SPELL_AURA_OF_GLORY, FALSE);
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAura, oBae);
+			CreateObject(OBJECT_TYPE_PLACED_EFFECT, "tsm_ffx_feat_divinemight", GetLocation(OBJECT_SELF));
+			AssignCommand(oBae, ActionSpeakString("*Appears in a flash of light, slamming into the wyvern.", TALKVOLUME_TALK));
+			AssignCommand(oBae, ActionAttack(OBJECT_SELF));
+			ClearAllActions(TRUE);
+			ActionAttack(oBae, FALSE);
+			DelayCommand(6.0, ActionSpeakString("*Screeches in rage and whips around in mid-air, tail lashing at Bae'ithra.", TALKVOLUME_TALK));
+			DelayCommand(20.0, AssignCommand(oBae, ActionSpeakString("*Darts across the wyvern's back and lands astride its neck.", TALKVOLUME_TALK)));
+			DelayCommand(30.0, AssignCommand(oBae, ActionSpeakString("*Using a dagger hilt, hammers at the crystal collar around the wyvern's neck until it breaks off in his hand.", TALKVOLUME_TALK)));
+			DestroyObject(oBluePortal, 30.0);	
+			DelayCommand(40.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Swings jaws around, snatching its own collar from Bae's hand, and flinging it away, then sets wings and dives, with Bae on his back.", TALKVOLUME_TALK)));
+			DelayCommand(45.0, ActionCreateWynItem("003_it_collar_msg", GetLocation(oMoveF)));
+			DelayCommand(50.0, AssignCommand(oBae, ActionSpeakString("*As he rides the wyvern down into the depths, he shouts: 'Flee, my friends!'", TALKVOLUME_TALK)));
+			DestroyObject(oBae, 60.0);
+			DestroyObject(OBJECT_SELF, 65.0);
+			}
 		 if(GetDistanceBetween(OBJECT_SELF, GetLastDamager(OBJECT_SELF)) < 5.0) {
 		 	ClearAllActions(TRUE);
 			object oDamager = GetLastDamager(OBJECT_SELF);
@@ -79,19 +118,7 @@ void main()
 				int nAttackFoe = d20(1);
 				int nWyvGrapple = nAttack + nGrapple;
 				int nFoeGrapple = nAttackFoe + nBABFoe + nStrFoe;
-				object oMoveA = GetWaypointByTag("wyvern_movea_wp");
-	      		object oMoveB = GetWaypointByTag("wyvern_moveb_wp");
-	      		object oMoveC = GetWaypointByTag("wyvern_movec_wp");
-	      		object oMoveD = GetWaypointByTag("wyvern_moved_wp");
-	      		object oMoveE = GetWaypointByTag("wyvern_movee_wp");
-	      		object oMoveF = GetWaypointByTag("wyvern_movef_wp");
-	      		object oMoveG = GetWaypointByTag("wyvern_moveg_wp");
-	      		object oMoveH = GetWaypointByTag("wyvern_moveh_wp");
-	      		object oCreateA = GetWaypointByTag("cave_wyvern_spawn_wp");
-				object oCreateB = GetWaypointByTag("cave_wyvern_spawnb_wp");
-				object oCreateC = GetWaypointByTag("cave_wyvern_spawnc_wp");
-				object oPortal = GetObjectByTag("alfa_portal_plc_wyv", 0);
-	      		effect eKnockdown = EffectKnockdown();
+				effect eKnockdown = EffectKnockdown();
 				int nFallDmg = d6(4);
 				effect eFallDmg = EffectDamage(nFallDmg, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 				SendMessageToAllDMs("Wyvern: " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " = " + IntToString(nWyvGrapple));

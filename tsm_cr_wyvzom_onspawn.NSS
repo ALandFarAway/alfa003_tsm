@@ -58,8 +58,8 @@ void main() {
 		 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ActionCastSpellAtObject(SPELL_REGENERATE, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ClearAllActions(TRUE);
-		 DelayCommand(5.0, ActionSpeakString("*Launches up and over the group, landing at the rear.", TALKVOLUME_TALK));
-		 DelayCommand(5.0, ActionJumpToLocation(GetLocation(oMoveE)));   
+		 DelayCommand(6.0, ActionSpeakString("*Launches up and over the group, landing at the rear.", TALKVOLUME_TALK));
+		 DelayCommand(6.0, ActionJumpToLocation(GetLocation(oMoveE)));   
 		    
 	}		
 }
