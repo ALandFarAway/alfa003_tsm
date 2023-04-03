@@ -114,18 +114,18 @@ void main() {
 	DelayCommand(11.0 + fDelay, SetFirstName(OBJECT_SELF, "Twisted Wyvern"));
 	DelayCommand(11.0 + fDelay, ChangeToStandardFaction(oWyvern, STANDARD_FACTION_HOSTILE));
 	
-	DelayCommand(20.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveB, TRUE)));
+	DelayCommand(20.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveB, TRUE, 0.5, 5.0)));
 			
 	DelayCommand(30.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It soars out of the darkness, a twisted wyvern...but different. Raw flesh and bone glisten. It is undead, and suffused in magic.", TALKVOLUME_TALK)));
 	DelayCommand(30.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
-	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
+	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE, 0.5, 5.0)));
 	
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It swoops in and out of sight. Around its neck glints a magnificent collar of crystal.", TALKVOLUME_TALK)));
-	DelayCommand(59.0 + fDelay, ClearAllActions(TRUE));
-	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveB))));
-	DelayCommand(50.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
-	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveC))));
+	DelayCommand(50.0 + fDelay, ClearAllActions(TRUE));
+	DelayCommand(51.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveB))));
+	DelayCommand(52.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
+	DelayCommand(59.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveC))));
 	DelayCommand(60.0 + fDelay, SetScale(oWyvern, 0.75, 0.75, 0.75));
 	
 				
