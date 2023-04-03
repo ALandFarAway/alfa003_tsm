@@ -15,50 +15,48 @@ void main()
 if(FindSubString(GetTag(OBJECT_SELF), "_portal") != -1)
 	{
 	object oTraveller = GetEnteringObject();
-    string sKeyTag = GetLocalString(OBJECT_SELF, "PORTAL_KEY");
+    
+	string sKeyTag = GetLocalString(OBJECT_SELF, "PORTAL_KEY");
 	string sKeyTagTwo = GetLocalString(OBJECT_SELF, "PORTAL_KEY_2");
 	string sKeyTagThree = GetLocalString(OBJECT_SELF, "PORTAL_KEY_3");
 	string sKeyTagFour = GetLocalString(OBJECT_SELF, "PORTAL_KEY_4");
 	string sKeyTagFive = GetLocalString(OBJECT_SELF, "PORTAL_KEY_5");
 	string sKeyTagSix = GetLocalString(OBJECT_SELF, "PORTAL_KEY_6");
-	string sMyTarget = GetLocalString(OBJECT_SELF, "PORTAL_TARGET");
-	string sMyTargetTwo = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_2");
-	string sMyTargetThree = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_3");
-	string sMyTargetFour = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_4");
-	string sMyTargetFive = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_5");
-	string sMyTargetSix = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_6");
+	
+	string sMyTarget = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP");
+	string sMyTargetTwo = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP2");
+	string sMyTargetThree = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP3");
+	string sMyTargetFour = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP4");
+	string sMyTargetFive = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP5");
+	string sMyTargetSix = GetLocalString(OBJECT_SELF, "PORTAL_TARGET_WP6");
+	
+	object oMask = GetItemInSlot(INVENTORY_SLOT_HEAD, oTraveller);
+	string sMask = GetTag(oMask);
+	
 	object oMyWaypoint = GetWaypointByTag(sMyTarget);
+	effect eVis = EffectVisualEffect(VFX_IMP_TORNADO);
+    effect eAoe = EffectVisualEffect(VFX_HIT_AOE_CONJURATION);
+    effect eCessate = EffectVisualEffect(VFX_DUR_CESSATE_NEUTRAL);
+    
 	
+	SendMessageToAllDMs("nActivated = " + IntToString(GetLocalInt(OBJECT_SELF, "Activated")));
 	
-	if((sKeyTag != "") && (GetLocalInt(OBJECT_SELF, "Activated") == 0)) {
-		if((((((GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID) || (GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)))))) {
-		 SetLocalInt(OBJECT_SELF, "Activated", 1);
-		 if(GetItemPossessedBy(oTraveller, sKeyTag) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTarget);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagTwo) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagThree) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagFour) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagFive) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
-		 else if(GetItemPossessedBy(oTraveller, sKeyTagSix) != OBJECT_INVALID)
-		 	{oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
+	if((oMask != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1) && 
+		((sMask == sKeyTag) || (sMask == sKeyTagTwo) || (sMask == sKeyTagThree) || (sMask == sKeyTagFour) || (sMask == sKeyTagFive) || (sMask == sKeyTagSix)))	{
 		
-		 SetLocalObject(OBJECT_SELF, "sCurrent_WP", oMyWaypoint);
-		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
-		 DelayCommand(60.0, SetLocalInt(OBJECT_SELF, "Activated", 0));
-		
+			if(sMask == sKeyTag){oMyWaypoint = GetWaypointByTag(sMyTarget);}
+			else if(sMask == sKeyTagTwo){oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
+			else if(sMask == sKeyTagThree){oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
+			else if(sMask == sKeyTagFour){oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
+			else if(sMask == sKeyTagFive){oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
+			else if(sMask == sKeyTagSix){oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
+				
+			SendMessageToAllDMs(GetName(oTraveller) + " is wearing " + sMask + " and is jumping to " + GetTag(oMyWaypoint));
+			ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+		    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
+	   		if(GetIsDM(oTraveller) == FALSE) {DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));}
+			 
 		}
-	}
-	if(GetLocalInt(OBJECT_SELF, "Activated")==1)
-		{oMyWaypoint = GetLocalObject(OBJECT_SELF, "sCurrent_WP");
-		 AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint));
-		 }
-	
-	}	
-	
 
-		
+	}	
 }

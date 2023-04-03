@@ -82,27 +82,52 @@ void main()
 				int nAttackFoe = d20(1);
 				int nWyvGrapple = nAttack + nGrapple;
 				int nFoeGrapple = nAttackFoe + nBABFoe + nStrFoe;
-				object oMoveC = GetWaypointByTag("wyvern_movec_wp");
+				object oMoveA = GetWaypointByTag("wyvern_movea_wp");
+	      		object oMoveB = GetWaypointByTag("wyvern_moveb_wp");
+	      		object oMoveC = GetWaypointByTag("wyvern_movec_wp");
 	      		object oMoveD = GetWaypointByTag("wyvern_moved_wp");
 	      		object oMoveE = GetWaypointByTag("wyvern_movee_wp");
-	      		object oCreateC = GetWaypointByTag("cave_wyvern_spawnc_wp");
+	      		object oMoveF = GetWaypointByTag("wyvern_movef_wp");
+	      		object oMoveG = GetWaypointByTag("wyvern_moveg_wp");
+	      		object oMoveH = GetWaypointByTag("wyvern_moveh_wp");
+	      		object oCreateA = GetWaypointByTag("cave_wyvern_spawn_wp");
+				object oCreateB = GetWaypointByTag("cave_wyvern_spawnb_wp");
+				object oCreateC = GetWaypointByTag("cave_wyvern_spawnc_wp");
 				object oPortal = GetObjectByTag("alfa_portal_plc_wyv", 0);
 	      		effect eKnockdown = EffectKnockdown();
 				int nFallDmg = d6(4);
 				effect eFallDmg = EffectDamage(nFallDmg, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
-				SendMessageToPC(oDamager, "Opposed Grapple Rolls:");
+				SendMessageToAllDMs("Wyvern: " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " = " + IntToString(nWyvGrapple));
+				SendMessageToAllDMs(GetName(oDamager) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
+			    SendMessageToPC(oDamager, "Opposed Grapple Rolls:");
 				SendMessageToPC(oDamager, "Wyvern: " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " = " + IntToString(nWyvGrapple));
 				SendMessageToPC(oDamager, GetName(oDamager) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
 			    if(nFoeGrapple > nWyvGrapple) {SendMessageToPC(oDamager, "You break free!");}
 				if(nWyvGrapple > nFoeGrapple) {
 					SendMessageToPC(oDamager, "You are grappled!");
 					ActionSpeakString("*Launches into the air with " + GetName(oDamager) + " in its claws and drops " + GetName(oDamager) + " from a height!", TALKVOLUME_TALK);
-					AssignCommand(oDamager, ActionJumpToLocation(GetLocation(oPortal)));
-					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oPortal)));
-					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oCreateC)));
-					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveC)));
+					int nRandomLoc = Random(5);
+					object oRandom = oPortal;
+					if(nRandomLoc == 1) {oRandom = oMoveE;}
+					else if(nRandomLoc == 2) {oRandom = oMoveF;}
+					else if(nRandomLoc == 3) {oRandom = oMoveG;}
+					int nRandomFlight = Random(5);
+					object oRandomFlight = oMoveC;
+					object oDistance = oMoveA;
+					if(nRandomLoc == 1) {oRandom = oMoveA;}
+					else if(nRandomLoc == 2) {oRandom = oMoveB;}
+					else if(nRandomLoc == 3) {oRandom = oCreateA;}
+					else if(nRandomLoc == 4) {oRandom = oCreateB; oDistance = oMoveD;}
+					else if(nRandomLoc == 4) {oRandom = oMoveH; oDistance = oMoveD;}
+					AssignCommand(oDamager, ActionJumpToLocation(GetLocation(oRandom)));
+					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oDamager)));
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oDamager, 10.0);
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFallDmg, oDamager, 10.0);
+					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oRandomFlight)));
+					AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oDistance));
+					AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oRandomFlight));
+					AssignCommand(OBJECT_SELF, ActionJumpToObject(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1)));
+					
 					}
 				}
 		 	}

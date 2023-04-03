@@ -34,8 +34,6 @@ void main() {
 	object oCaveLightB = GetObjectByTag("cave_light_b", 0);
 	object oCaveLightC = GetObjectByTag("cave_light_c", 0);
 	object oCaveLightD = GetObjectByTag("abr_afx_ror_player_soul_01", 0);
-	
-	object oExpWP = GetWaypointByTag("cave_explosion_wp");
 	object oWyvSpawn = GetWaypointByTag("cave_wyvern_spawn_wp");
 	object oWyvSpawnB = GetWaypointByTag("cave_wyvern_spawnb_wp");
 	object oWyvSpawnC = GetWaypointByTag("cave_wyvern_spawnc_wp");
@@ -45,6 +43,8 @@ void main() {
 	object oMoveC = GetWaypointByTag("wyvern_movec_wp");
 	object oMoveD = GetWaypointByTag("wyvern_moved_wp");
 	object oExplosionWP = GetWaypointByTag("cave_explosion_wp");
+	object oOrcWP = GetWaypointByTag("cave_orc_spawn");
+	
 				
 	object oBlackWP = GetWaypointByTag("bridge_black_wp");
 	object oBlackBWP = GetWaypointByTag("bridge_blackb_wp");
@@ -196,7 +196,13 @@ void main() {
 	DelayCommand(113.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_walld", GetLocation(oWallEWP)));
 	DelayCommand(115.0 + fDelay, SetLocalInt(oPortal, "Activated", 2));
 	
-	
-	
-			
+	DelayCommand(120.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*There is movement on the other side of the shattered bridge, creatures moving out of the shadows.", TALKVOLUME_TALK)));
+	DelayCommand(120.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orc_twisted", GetLocation(oOrcWP)));
+	DelayCommand(120.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orc_twisted", GetLocation(oOrcWP)));
+	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oOrcWP)));
+	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oOrcWP)));
+	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oOrcWP)));
+	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oOrcWP)));
+	DelayCommand(135.0 + fDelay, ActionCreateWynCreature("009_cr_mhg_minotaur_twisted", GetLocation(oOrcWP)));
+				
 }

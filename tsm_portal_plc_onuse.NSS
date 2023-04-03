@@ -63,15 +63,7 @@ void main() {
     effect eCessate = EffectVisualEffect(VFX_DUR_CESSATE_NEUTRAL);
     
 	
-	//SendMessageToAllDMs("Tag = " + GetTag(OBJECT_SELF));
 	SendMessageToAllDMs("nActivated = " + IntToString(GetLocalInt(OBJECT_SELF, "Activated")));
-	//SendMessageToAllDMs("sMask = " + sMask);
-	//SendMessageToAllDMs("sKey1 = " + sKeyTag);
-	//SendMessageToAllDMs("sKey2 = " + sKeyTagTwo);
-	//SendMessageToAllDMs("sKey3 = " + sKeyTagThree);
-	//SendMessageToAllDMs("sKey4 = " + sKeyTagFour);
-	//SendMessageToAllDMs("sKey5 = " + sKeyTagFive);
-	//SendMessageToAllDMs("sKey6 = " + sKeyTagSix);
 	
 	if((oMask != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1) && 
 		((sMask == sKeyTag) || (sMask == sKeyTagTwo) || (sMask == sKeyTagThree) || (sMask == sKeyTagFour) || (sMask == sKeyTagFive) || (sMask == sKeyTagSix)))	{
@@ -91,7 +83,7 @@ void main() {
 				SetLocalInt(OBJECT_SELF, "Activated", 1);
 				DelayCommand(180.0, SetLocalInt(OBJECT_SELF, "Activated", 2));
 				}
-			}
+		}
 	else {SendMessageToPC(oTraveller, "Nothing happens.");
 		if((d20(1) + GetAbilityModifier(ABILITY_WISDOM, oTraveller)) >= 15) {
 			SendMessageToPC(oTraveller, "You sense the potential power in this object");
