@@ -26,6 +26,10 @@ void ActionCreateWynPlaceable(string sPlaceable, location lLocPlaceable)
 {
     CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
 }
+void ActionCreateWynLight(string sLight, location lLocLight)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sLight, lLocLight);
+}
 
 void main() {
 	object oWyvern = GetLocalObject(OBJECT_SELF, "oWyvern");
@@ -93,7 +97,6 @@ void main() {
 	DestroyObject(oCaveLightD, fDelay-10.0);
 	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*In the darkness, a small cross-shape, backlit in silhouette against a red light, becomes visible down and to the east.", TALKVOLUME_TALK)));
 	
-	DelayCommand(10.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*A creature, flying out of the revealed distances, is draconic in shape but lumpy with outgrowths.", TALKVOLUME_TALK)));
 	DestroyObject(oRedLight, fDelay + 10.0);
 				
 	effect eRemove = GetFirstEffect(oWyvern);
@@ -111,7 +114,6 @@ void main() {
 		 		
 	DelayCommand(11.0 + fDelay, SetFirstName(OBJECT_SELF, "Twisted Wyvern"));
 	DelayCommand(11.0 + fDelay, ChangeToStandardFaction(oWyvern, STANDARD_FACTION_HOSTILE));
-				
 	
 	DelayCommand(20.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveB, TRUE)));
 			
@@ -119,10 +121,8 @@ void main() {
 	DelayCommand(30.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
-				
-	DelayCommand(31.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror2", FALSE)));
-	DelayCommand(31.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror2", FALSE)));
 	
+	DelayCommand(40.0 + fDelay, ActionCreateWynLight("lt_red", GetLocation(oWyvern)));			
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck glints a magnificent collar made of crystal.", TALKVOLUME_TALK)));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveB, TRUE)));
 	DelayCommand(59.0 + fDelay, SetScale(oWyvern, 1.0, 1.0, 1.0));

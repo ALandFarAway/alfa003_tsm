@@ -87,20 +87,23 @@ void main()
 			AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveH)));
 			object oBluePortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));				
 		    object oBae = CreateObject(OBJECT_TYPE_CREATURE, "003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
-			effect eAura = EffectVisualEffect(VFX_DUR_LIGHT_WHITE_20, FALSE);
+			effect eLight = EffectVisualEffect(VFX_DUR_LIGHT_WHITE_20, FALSE);
+			effect eAura = EffectVisualEffect(VFX_DUR_BLAZING_AURA, FALSE);
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAura, oBae);
-			AssignCommand(oBae, ActionSpeakString("*Appears in a flash of light, slamming into the wyvern.", TALKVOLUME_TALK));
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, oBae);
+			AssignCommand(oBae, ActionSpeakString("*Appears in a flash of light above the wyvern, slamming into its back feet-first.", TALKVOLUME_TALK));
 			AssignCommand(oBae, ActionAttack(OBJECT_SELF));
 			ClearAllActions(TRUE);
 			ActionAttack(oBae, FALSE);
 			DelayCommand(6.0, ActionSpeakString("*Screeches in rage and whips around in mid-air, tail lashing at Bae'ithra.", TALKVOLUME_TALK));
-			DelayCommand(20.0, AssignCommand(oBae, ActionSpeakString("*Darts across the wyvern's back and lands astride its neck.", TALKVOLUME_TALK)));
-			DelayCommand(30.0, AssignCommand(oBae, ActionSpeakString("*Using a dagger hilt, hammers at the crystal collar around the wyvern's neck until it breaks off in his hand.", TALKVOLUME_TALK)));
+			DelayCommand(15.0, AssignCommand(oBae, ActionSpeakString("*Darts across the wyvern's back and lands astride its neck.", TALKVOLUME_TALK)));
+			DelayCommand(25.0, AssignCommand(oBae, ActionSpeakString("*Using a dagger hilt, hammers at the crystal collar around the wyvern's neck until it breaks off in his hand.", TALKVOLUME_TALK)));
 			DestroyObject(oBluePortal, 30.0);	
-			DelayCommand(40.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Swings jaws around, snatching its own collar from Bae's hand, and flinging it away, then sets wings and dives, with Bae on his back.", TALKVOLUME_TALK)));
+			DelayCommand(35.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Swings jaws around, snatching its own collar from Bae's hand and flinging it away, then sets wings and dives, with Bae on his back.", TALKVOLUME_TALK)));
 			DelayCommand(45.0, ActionCreateWynItem("003_it_collar_msg", GetLocation(oMoveF)));
 			DelayCommand(50.0, AssignCommand(oBae, ActionSpeakString("*As he rides the wyvern down into the depths, he shouts: 'Flee, my friends!'", TALKVOLUME_TALK)));
 			DestroyObject(oBae, 60.0);
+			DestroyObject(GetObjectByTag("lt_red", 1), 64.0);
 			DestroyObject(OBJECT_SELF, 65.0);
 			}
 		 if(GetDistanceBetween(OBJECT_SELF, GetLastDamager(OBJECT_SELF)) < 5.0) {
@@ -128,7 +131,8 @@ void main()
 			    if(nFoeGrapple > nWyvGrapple) {SendMessageToPC(oDamager, "You break free!");}
 				if(nWyvGrapple > nFoeGrapple) {
 					SendMessageToPC(oDamager, "You are grappled!");
-					ActionSpeakString("*Launches into the air with " + GetName(oDamager) + " in its claws and drops " + GetName(oDamager) + " from a height!", TALKVOLUME_TALK);
+					ClearAllActions(TRUE);
+					SpeakString("*Launches into the air with " + GetName(oDamager) + " in its claws and drops " + GetName(oDamager) + " from a height!", TALKVOLUME_TALK);
 					int nRandomLoc = Random(5);
 					object oRandom = oPortal;
 					if(nRandomLoc == 1) {oRandom = oMoveE;}
