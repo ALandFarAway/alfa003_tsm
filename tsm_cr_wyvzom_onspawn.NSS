@@ -52,11 +52,13 @@ void main() {
 		SetLocalObject(oSpeaker, "oWyvern", OBJECT_SELF);
 		}
 	 else{
-		 object oMoveD = GetWaypointByTag("wyvern_moved_wp");
+		 object oMoveE = GetWaypointByTag("wyvern_movee_wp");
 	     ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
+		 ActionCastSpellAtObject(SPELL_REGENERATE, OBJECT_SELF, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 		 ActionSpeakString("*Launches up and over the group, landing at the rear.", TALKVOLUME_TALK);
-		 ActionJumpToLocation(GetLocation(oMoveD));      
+		 ActionJumpToLocation(GetLocation(oMoveE));   
+		    
 	}		
 }

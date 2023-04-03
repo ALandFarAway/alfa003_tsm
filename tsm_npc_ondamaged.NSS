@@ -64,11 +64,48 @@ void main()
 		 if(Random(2)==1) {object oMothNine = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(2)==1) {object oMothTen = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(2)==1) {object oMothEleven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
-		 if(Random(4) == 1) {DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));}
+		 if(Random(8) == 1) {DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));}
 		 effect eChunk = EffectVisualEffect(VFX_COM_CHUNK_RED_MEDIUM, FALSE);
 		 effect eFlies = EffectVisualEffect(VFX_DUR_FLIES, FALSE);
 		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFlies, OBJECT_SELF, 5.0);
-		 DelayCommand(2.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eChunk, OBJECT_SELF));
+		 if(GetDistanceBetween(OBJECT_SELF, GetLastDamager(OBJECT_SELF)) < 5.0) {
+		 	ClearAllActions(TRUE);
+			object oDamager = GetLastDamager(OBJECT_SELF);
+			ActionSpeakString("*Lunges at " + GetName(oDamager), TALKVOLUME_TALK);
+			int nGrapple = 15;
+			int nBABFoe = GetTRUEBaseAttackBonus(oDamager);
+			int nStrFoe = GetAbilityModifier(ABILITY_STRENGTH, oDamager);
+			AssignCommand(oDamager, ActionSpeakString("*Attack of Opportunity on Wyvern Zombie", TALKVOLUME_TALK));
+			AssignCommand(oDamager, ActionAttack(OBJECT_SELF, FALSE));
+			if(TouchAttackMelee(oDamager, TRUE, 0) > 0) {
+				int nAttack = d20(1);
+				int nAttackFoe = d20(1);
+				int nWyvGrapple = nAttack + nGrapple;
+				int nFoeGrapple = nAttackFoe + nBABFoe + nStrFoe;
+				object oMoveC = GetWaypointByTag("wyvern_movec_wp");
+	      		object oMoveD = GetWaypointByTag("wyvern_moved_wp");
+	      		object oMoveE = GetWaypointByTag("wyvern_movee_wp");
+	      		object oCreateC = GetWaypointByTag("cave_wyvern_spawnc_wp");
+				object oPortal = GetObjectByTag("alfa_portal_plc_wyv", 0);
+	      		effect eKnockdown = EffectKnockdown();
+				int nFallDmg = d6(4);
+				effect eFallDmg = EffectDamage(nFallDmg, DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
+				SendMessageToPC(oDamager, "Opposed Grapple Rolls:");
+				SendMessageToPC(oDamager, "Wyvern: " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " = " + IntToString(nWyvGrapple));
+				SendMessageToPC(oDamager, GetName(oDamager) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
+			    if(nFoeGrapple > nWyvGrapple) {SendMessageToPC(oDamager, "You break free!");}
+				if(nWyvGrapple > nFoeGrapple) {
+					SendMessageToPC(oDamager, "You are grappled!");
+					ActionSpeakString("*Launches into the air with " + GetName(oDamager) + " in its claws and drops " + GetName(oDamager) + " from a height!", TALKVOLUME_TALK);
+					AssignCommand(oDamager, ActionJumpToLocation(GetLocation(oPortal)));
+					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oPortal)));
+					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oCreateC)));
+					AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveC)));
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oDamager, 10.0);
+					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFallDmg, oDamager, 10.0);
+					}
+				}
+		 	}
 		 }	
 	
 	//Drowned monsters regenerate speakstring

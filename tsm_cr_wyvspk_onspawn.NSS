@@ -43,6 +43,7 @@ void main() {
 	object oMoveA = GetWaypointByTag("wyvern_movea_wp");
 	object oMoveB = GetWaypointByTag("wyvern_moveb_wp");
 	object oMoveC = GetWaypointByTag("wyvern_movec_wp");
+	object oMoveD = GetWaypointByTag("wyvern_moved_wp");
 	object oExplosionWP = GetWaypointByTag("cave_explosion_wp");
 				
 	object oBlackWP = GetWaypointByTag("bridge_black_wp");
@@ -70,7 +71,7 @@ void main() {
 	SetLastName(oRedLight, "Light");
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze,oRedLight);
     	 		
-	SetScale(oWyvern, 0.1, 0.1, 0.1);
+	SetScale(oWyvern, 0.5, 0.5, 0.5);
 	float fDelay = 30.0;	
 	DelayCommand(fDelay-28.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Over the bridge, the light filtering through cracks in the ceiling dims and goes out, dirt and pebbles trickling through at first, then that ceasing, as the light is closed off.", TALKVOLUME_TALK)));
 	
@@ -102,33 +103,29 @@ void main() {
 		}
 	
 	DelayCommand(10.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, oWyvern));
+	DelayCommand(10.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+	DelayCommand(10.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+	DelayCommand(10.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+	DelayCommand(10.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_REGENERATE, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				
 		 		
 	DelayCommand(11.0 + fDelay, SetFirstName(OBJECT_SELF, "Twisted Wyvern"));
 	DelayCommand(11.0 + fDelay, ChangeToStandardFaction(oWyvern, STANDARD_FACTION_HOSTILE));
 				
-	DelayCommand(12.0 + fDelay, SetScale(oWyvern, 0.15, 0.15, 0.15));
-	DelayCommand(13.0 + fDelay, SetScale(oWyvern, 0.2, 0.2, 0.2));
-	DelayCommand(14.0 + fDelay, SetScale(oWyvern, 0.25, 0.25, 0.25));
-	DelayCommand(15.0 + fDelay, SetScale(oWyvern, 0.3, 0.35, 0.3));
-	DelayCommand(16.0 + fDelay, SetScale(oWyvern, 0.35, 0.35, 0.35));
-	DelayCommand(17.0 + fDelay, SetScale(oWyvern, 0.4, 0.4, 0.4));
-	DelayCommand(18.0 + fDelay, SetScale(oWyvern, 0.45, 0.45, 0.45));
-	DelayCommand(19.0 + fDelay, SetScale(oWyvern, 0.5, 0.5, 0.5));
 	
-	DelayCommand(20.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oMoveB), TRUE)));
+	DelayCommand(20.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveB, TRUE)));
 			
 	DelayCommand(30.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Large enough to see detail as it flies out of the darkness and banks past you, the creature is a twisted wyvern...but different even from those befouled creatures. Raw flesh and bone glisten in a red aura. It is undead, and suffused in magic.", TALKVOLUME_TALK)));
 	DelayCommand(30.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetScale(oWyvern, 0.55, 0.55, 0.55));
-	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oMoveA), TRUE)));
+	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
 				
 	DelayCommand(31.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror2", FALSE)));
 	DelayCommand(31.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror2", FALSE)));
 	
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck, a magnificent collar made of crystal glints.", TALKVOLUME_TALK)));
-	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionForceMoveToLocation(GetLocation(oMoveB), TRUE)));
+	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oMoveB, TRUE)));
 	DelayCommand(51.0 + fDelay, SetScale(oWyvern, 0.6, 0.6, 0.6));
 	DelayCommand(52.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
 	DelayCommand(53.0 + fDelay, SetScale(oWyvern, 0.7, 0.7, 0.7));
@@ -138,15 +135,17 @@ void main() {
 	DelayCommand(57.0 + fDelay, SetScale(oWyvern, 0.9, 0.9, 0.9));
 	DelayCommand(58.0 + fDelay, SetScale(oWyvern, 0.95, 0.95, 0.95));
 	DelayCommand(59.0 + fDelay, SetScale(oWyvern, 1.0, 1.0, 1.0));
+	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oMoveC, TRUE)));
 				
 	DelayCommand(70.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Its true size finally apparent, it banks again, diving beneath the bridge and briefly out of sight before soaring up on the other side, trailing the smell of rotting flesh.", TALKVOLUME_TALK)));
 	DelayCommand(70.0 + fDelay, AssignCommand(oWyvern, ActionJumpToLocation(GetLocation(oWyvSpawnB))));      
 	DelayCommand(71.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror3", FALSE)));
 	DelayCommand(71.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror3", FALSE)));
-	DelayCommand(72.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oMoveC), TRUE)));
+	DelayCommand(72.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oMoveD), TRUE)));
 	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ENERGY, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_REGENERATE, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				
 	DelayCommand(80.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oWyvSpawnB), TRUE)));
 				
@@ -197,13 +196,7 @@ void main() {
 	DelayCommand(113.0 + fDelay, ActionCreateWynPlaceable("cave_bridge_walld", GetLocation(oWallEWP)));
 	DelayCommand(115.0 + fDelay, SetLocalInt(oPortal, "Activated", 2));
 	
-	DelayCommand(120.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*The portal flashes, and creatures begin to appear upon it!", TALKVOLUME_TALK)));
-	DelayCommand(120.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orc_twisted", GetLocation(oPortal)));
-	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oPortal)));
-	DelayCommand(125.0 + fDelay, ActionCreateWynCreature("abr_cr_hu_orcminer", GetLocation(oPortal)));
-	DelayCommand(130.0 + fDelay, ActionCreateWynCreature("abr_cr_un_skeleton_harpy", GetLocation(oPortal)));
-	DelayCommand(130.0 + fDelay, ActionCreateWynCreature("abr_cr_un_skeleton_harpy", GetLocation(oPortal)));
-	DelayCommand(130.0 + fDelay, ActionCreateWynCreature("abr_cr_un_skeleton_harpy", GetLocation(oPortal)));
-	DelayCommand(135.0 + fDelay, ActionCreateWynCreature("009_cr_mhg_minotaur_twisted", GetLocation(oPortal)));
-				
+	
+	
+			
 }

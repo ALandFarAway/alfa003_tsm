@@ -49,6 +49,8 @@ void main()
 	object oAttacker = GetLastDamager(OBJECT_SELF);
 	int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
+	effect eHeal = EffectHeal(nMaxHP - nCurrentHP);
+	if(GetTag(OBJECT_SELF) == "003_cr_firegen_xavier_test") {ApplyEffectToObject(DURATION_TYPE_INSTANT, eHeal, OBJECT_SELF);}
 	int nCLWMem = GetHasSpell(SPELL_CURE_LIGHT_WOUNDS, OBJECT_SELF);
 	int nCMWMem = GetHasSpell(SPELL_CURE_MODERATE_WOUNDS, OBJECT_SELF);
 	int nCSWMem = GetHasSpell(SPELL_CURE_SERIOUS_WOUNDS, OBJECT_SELF);

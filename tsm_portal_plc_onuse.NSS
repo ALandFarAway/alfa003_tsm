@@ -89,7 +89,7 @@ void main() {
 	   		if(GetIsDM(oTraveller) == FALSE) {DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));}
 			if(((GetIsDM(oTraveller)) || (GetLocalInt(OBJECT_SELF, "Activated") == 0)) && (FindSubString(GetTag(OBJECT_SELF), "wyv") != -1))  {
 				SetLocalInt(OBJECT_SELF, "Activated", 1);
-				DelayCommand(105.0, SetLocalInt(OBJECT_SELF, "Activated", 2));
+				DelayCommand(180.0, SetLocalInt(OBJECT_SELF, "Activated", 2));
 				}
 			}
 	else {SendMessageToPC(oTraveller, "Nothing happens.");
