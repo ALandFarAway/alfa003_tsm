@@ -82,29 +82,28 @@ void main()
 		 if(Random(3)==1) {object oMothEleven = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_mb_deathmoth_lva", lSpawn);}
 		 if(Random(8) == 1) {DelayCommand(3.0, AssignCommand(oMothOne, ActionSpeakString("Squirming larvae and moths with markings like skulls spill out of a wound.", TALKVOLUME_TALK)));}
 		 
-		 if(nCurrentHP < nMaxHP/5) {
-		 	ActionSpeakString("*Roars and leaps into the air, swooping around for an attack.", TALKVOLUME_TALK);
+		 if((nCurrentHP < nMaxHP/5) && (GetLocalInt(GetModule(), "BaeCreate") != 1)) {
+		 	SetLocalInt(GetModule(), "BaeCreate", 1);
+			ActionSpeakString("*Leaps into the air, swooping around for an attack.", TALKVOLUME_TALK);
 			AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveH)));
 			object oBluePortal = CreateObject(OBJECT_TYPE_PLACED_EFFECT, "003_fx_portal_blue_lrg", GetLocation(OBJECT_SELF));				
 		    object oBae = CreateObject(OBJECT_TYPE_CREATURE, "003_pc_bae'ithra_drg", GetLocation(OBJECT_SELF));
-			effect eLight = EffectVisualEffect(VFX_DUR_LIGHT_WHITE_20, FALSE);
-			effect eAura = EffectVisualEffect(VFX_DUR_BLAZING_AURA, FALSE);
-			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAura, oBae);
+			effect eLight = EffectVisualEffect(VFX_DUR_GLOW_WHITE, FALSE);
 			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLight, oBae);
-			AssignCommand(oBae, ActionSpeakString("*Appears in a flash of light above the wyvern, slamming into its back feet-first.", TALKVOLUME_TALK));
+			AssignCommand(oBae, ActionSpeakString("*Appears in a flash of light above the wyvern, slamming into its back feet first, sending it tumbling.", TALKVOLUME_TALK));
 			AssignCommand(oBae, ActionAttack(OBJECT_SELF));
 			ClearAllActions(TRUE);
 			ActionAttack(oBae, FALSE);
-			DelayCommand(6.0, ActionSpeakString("*Screeches in rage and whips around in mid-air, tail lashing at Bae'ithra.", TALKVOLUME_TALK));
-			DelayCommand(15.0, AssignCommand(oBae, ActionSpeakString("*Darts across the wyvern's back and lands astride its neck.", TALKVOLUME_TALK)));
-			DelayCommand(25.0, AssignCommand(oBae, ActionSpeakString("*Using a dagger hilt, hammers at the crystal collar around the wyvern's neck until it breaks off in his hand.", TALKVOLUME_TALK)));
+			DelayCommand(10.0, ActionSpeakString("*Screeches in rage and whips around in mid-air, tail lashing at Bae'ithra, a surprise entrant into the fight.", TALKVOLUME_TALK));
+			DelayCommand(20.0, AssignCommand(oBae, ActionSpeakString("*Darts across the wyvern's back and lands astride its neck.", TALKVOLUME_TALK)));
+			DelayCommand(35.0, AssignCommand(oBae, ActionSpeakString("*Using a dagger hilt, hammers at the crystal collar around the wyvern's neck until it breaks off in his hand.", TALKVOLUME_TALK)));
 			DestroyObject(oBluePortal, 30.0);	
-			DelayCommand(35.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Swings jaws around, snatching its own collar from Bae's hand and flinging it away, then sets wings and dives, with Bae on his back.", TALKVOLUME_TALK)));
-			DelayCommand(45.0, ActionCreateWynItem("003_it_collar_msg", GetLocation(oMoveF)));
-			DelayCommand(50.0, AssignCommand(oBae, ActionSpeakString("*As he rides the wyvern down into the depths, he shouts: 'Flee, my friends!'", TALKVOLUME_TALK)));
-			DestroyObject(oBae, 60.0);
-			DestroyObject(GetObjectByTag("lt_red", 1), 64.0);
-			DestroyObject(OBJECT_SELF, 65.0);
+			DelayCommand(50.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Swings jaws around, snatching its own collar from Bae's hand and flinging it away, then sets wings and dives, with Bae on his back.", TALKVOLUME_TALK)));
+			DelayCommand(55.0, ActionCreateWynItem("003_it_collar_msg", GetLocation(oMoveF)));
+			DelayCommand(65.0, AssignCommand(oBae, ActionSpeakString("*As he rides the wyvern down into the depths and out of sight, he shouts: 'Get out of here, my friends!'", TALKVOLUME_TALK)));
+			DestroyObject(oBae, 70.0);
+			DestroyObject(GetObjectByTag("lt_red", 1), 74.0);
+			DestroyObject(OBJECT_SELF, 75.0);
 			}
 		 if(GetDistanceBetween(OBJECT_SELF, GetLastDamager(OBJECT_SELF)) < 5.0) {
 		 	ClearAllActions(TRUE);

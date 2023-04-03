@@ -95,9 +95,9 @@ void main() {
 				
 	DestroyObject(oCaveLightC, fDelay-10.0);
 	DestroyObject(oCaveLightD, fDelay-10.0);
-	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*In the darkness, a small cross-shape, backlit in silhouette against a red light, becomes visible down and to the east.", TALKVOLUME_TALK)));
+	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*In the darkness, a red light becomes visible down and to the east, its distance revealing how far the chasm extends underground. It silhouettes a far-away winged shape, speeding this way.", TALKVOLUME_TALK)));
 	
-	DestroyObject(oRedLight, fDelay + 10.0);
+	DestroyObject(oRedLight, fDelay + 11.0);
 				
 	effect eRemove = GetFirstEffect(oWyvern);
 	while (GetIsEffectValid(eRemove) != FALSE) {
@@ -117,21 +117,22 @@ void main() {
 	
 	DelayCommand(20.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveB, TRUE)));
 			
-	DelayCommand(30.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It flies out of the darkness, a twisted wyvern...but different. Raw flesh and bone glisten. It is undead, and suffused in magic.", TALKVOLUME_TALK)));
+	DelayCommand(30.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It soars out of the darkness, a twisted wyvern...but different. Raw flesh and bone glisten. It is undead, and suffused in magic.", TALKVOLUME_TALK)));
 	DelayCommand(30.0 + fDelay, SetLastName(OBJECT_SELF, "Zombie"));
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
 	
-	DelayCommand(40.0 + fDelay, ActionCreateWynLight("lt_red", GetLocation(oWyvern)));			
+	DelayCommand(40.0 + fDelay, ActionCreateWynLight("lt_red", GetLocation(oMoveA)));			
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck glints a magnificent collar made of crystal.", TALKVOLUME_TALK)));
+	DelayCommand(59.0 + fDelay, ClearAllActions(TRUE));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveB, TRUE)));
-	DelayCommand(59.0 + fDelay, SetScale(oWyvern, 1.0, 1.0, 1.0));
+	DelayCommand(50.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
 	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveC, TRUE)));
+	DelayCommand(60.0 + fDelay, SetScale(oWyvern, 0.75, 0.75, 0.75));
 				
 	DelayCommand(70.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It dives beneath the bridge and briefly out of sight before soaring up on the other side, trailing the smell of rotting flesh.", TALKVOLUME_TALK)));
 	DelayCommand(70.0 + fDelay, AssignCommand(oWyvern, ActionJumpToLocation(GetLocation(oWyvSpawnB))));      
-	DelayCommand(71.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror3", FALSE)));
-	DelayCommand(71.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror3", FALSE)));
+	DelayCommand(70.0 + fDelay, SetScale(oWyvern, 1.0, 1.0, 1.0));
 	DelayCommand(72.0, ClearAllActions(TRUE));
 	DelayCommand(72.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oMoveD), TRUE)));
 	DelayCommand(75.0 + fDelay, AssignCommand(oWyvern, ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, oWyvern, METAMAGIC_PERMANENT, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
@@ -142,7 +143,6 @@ void main() {
 	DelayCommand(80.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToLocation(GetLocation(oWyvSpawnB), TRUE)));
 				
 				  
-	DelayCommand(87.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror1", FALSE)));
 	DelayCommand(88.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Roars and folds wings, swooping out of sight into the chasm.", TALKVOLUME_TALK)));
 	
 	DestroyObject(oWyvern, 90.0 + fDelay);
@@ -152,20 +152,25 @@ void main() {
 	DelayCommand(106.0 + fDelay, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eShake, GetLocation(oWyvSpawnC), 5.0));
 	DelayCommand(107.0 + fDelay, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eQuake, GetLocation(oWyvSpawnC), 5.0));
 				
-	DelayCommand(110.0 + fDelay, SetFirstName(OBJECT_SELF, ""));
-	DelayCommand(110.0 + fDelay, SetLastName(OBJECT_SELF, ""));
+	DelayCommand(108.0 + fDelay, SetFirstName(OBJECT_SELF, ""));
+	DelayCommand(108.0 + fDelay, SetLastName(OBJECT_SELF, ""));
 	DelayCommand(110.0 + fDelay, ActionCreateWynCreature("abr_un_wyv_twisted", GetLocation(oWyvSpawnC)));
 	DelayCommand(110.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*Shrapnel flies as the wyvern bursts through the bridge from below.", TALKVOLUME_TALK)));
 	 
 	oPC = GetFirstObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oPortal), FALSE, OBJECT_TYPE_CREATURE);
-	int nStones = Random(3);
+	int nStones = Random(4);
 	effect eDamage = EffectDamage(d6(nStones), DAMAGE_TYPE_BLUDGEONING, DAMAGE_POWER_NORMAL, FALSE);
 	effect eKnockdown = EffectKnockdown();
 	while(oPC != OBJECT_INVALID) {
 		if(ReflexSave(oPC, 15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
-			DelayCommand(110.0 + fDelay, SendMessageToPC(oPC, "You are struck by " + IntToString(nStones) + " pieces of flying debris!"));
-			DelayCommand(110.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC));
-			DelayCommand(110.0 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 5.0));
+			DelayCommand(111.0 + fDelay, SendMessageToPC(oPC, "You are struck by " + IntToString(nStones) + " pieces of flying debris!"));
+			DelayCommand(111.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC));
+			DelayCommand(111.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 5.0));
+			}
+		if(GetDistanceBetween(oWyvSpawnC, oPC) < 2.0) {
+			DelayCommand(112.0 + fDelay, SendMessageToPC(oPC, "You are thrown backwards!"));
+			DelayCommand(112.5 + fDelay, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oPortal))));
+			DelayCommand(112.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 10.0));
 			}
 		oPC = GetNextObjectInShape(SHAPE_SPHERE, 20.0, GetLocation(oPortal), FALSE, OBJECT_TYPE_CREATURE);
 		}
