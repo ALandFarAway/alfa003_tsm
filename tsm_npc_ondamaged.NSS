@@ -95,14 +95,19 @@ void main()
 			ClearAllActions(TRUE);
 			ActionAttack(oBae, FALSE);
 			DelayCommand(10.0, ActionSpeakString("*Screeches in rage and whips around in mid-air, tail lashing at Bae'ithra, a surprise entrant into the fight.", TALKVOLUME_TALK));
+			DelayCommand(19.0, AssignCommand(oBae, ActionJumpToLocation(GetLocation(OBJECT_SELF))));
 			DelayCommand(20.0, AssignCommand(oBae, ActionSpeakString("*Darts across the wyvern's back and lands astride its neck.", TALKVOLUME_TALK)));
+			DelayCommand(34.0, AssignCommand(oBae, ActionJumpToLocation(GetLocation(OBJECT_SELF))));
 			DelayCommand(35.0, AssignCommand(oBae, ActionSpeakString("*Using a dagger hilt, hammers at the crystal collar around the wyvern's neck until it breaks off in his hand.", TALKVOLUME_TALK)));
 			DestroyObject(oBluePortal, 30.0);	
+			DelayCommand(49.0, AssignCommand(oBae, ActionJumpToLocation(GetLocation(OBJECT_SELF))));
 			DelayCommand(50.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*Swings jaws around, snatching its own collar from Bae's hand and flinging it away, then sets wings and dives, with Bae on his back.", TALKVOLUME_TALK)));
 			DelayCommand(55.0, ActionCreateWynItem("003_it_collar_msg", GetLocation(oMoveF)));
+			DelayCommand(64.0, AssignCommand(oBae, ActionJumpToLocation(GetLocation(OBJECT_SELF))));
 			DelayCommand(65.0, AssignCommand(oBae, ActionSpeakString("*As he rides the wyvern down into the depths and out of sight, he shouts: 'Get out of here, my friends!'", TALKVOLUME_TALK)));
 			DestroyObject(oBae, 70.0);
-			DestroyObject(GetObjectByTag("lt_red", 1), 74.0);
+			DestroyObject(GetObjectByTag("ipoint_red_light", 1), 74.0);
+			DestroyObject(GetObjectByTag("ipoint_red_fog", 1), 74.0);
 			DestroyObject(OBJECT_SELF, 75.0);
 			}
 		 if(GetDistanceBetween(OBJECT_SELF, GetLastDamager(OBJECT_SELF)) < 5.0) {

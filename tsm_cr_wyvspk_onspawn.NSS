@@ -26,10 +26,6 @@ void ActionCreateWynPlaceable(string sPlaceable, location lLocPlaceable)
 {
     CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
 }
-void ActionCreateWynLight(string sLight, location lLocLight)
-{
-    CreateObject(OBJECT_TYPE_PLACEABLE, sLight, lLocLight);
-}
 
 void main() {
 	object oWyvern = GetLocalObject(OBJECT_SELF, "oWyvern");
@@ -122,13 +118,15 @@ void main() {
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
 	
-	DelayCommand(40.0 + fDelay, ActionCreateWynLight("lt_red", GetLocation(oMoveA)));			
+	DelayCommand(40.0 + fDelay, ActionCreateWynPlaceable("ipoint_red_light", GetLocation(oMoveA)));			
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck glints a magnificent collar made of crystal.", TALKVOLUME_TALK)));
 	DelayCommand(59.0 + fDelay, ClearAllActions(TRUE));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveB, TRUE)));
 	DelayCommand(50.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
 	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveC, TRUE)));
 	DelayCommand(60.0 + fDelay, SetScale(oWyvern, 0.75, 0.75, 0.75));
+	
+	DelayCommand(70.0 + fDelay, ActionCreateWynPlaceable("ipoint_red_fog", GetLocation(oWyvSpawnC)));			
 				
 	DelayCommand(70.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It dives beneath the bridge and briefly out of sight before soaring up on the other side, trailing the smell of rotting flesh.", TALKVOLUME_TALK)));
 	DelayCommand(70.0 + fDelay, AssignCommand(oWyvern, ActionJumpToLocation(GetLocation(oWyvSpawnB))));      

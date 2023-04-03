@@ -30,6 +30,7 @@ void ActionCreateWynPlaceable(string sPlaceable, location lLocPlaceable)
 void main() {
 	if(GetLocalInt(GetModule(), "WyvernSpawned") != 1) {
 		SetLocalInt(GetModule(), "WyvernSpawned", 1);
+		DelayCommand(360.0, SetLocalInt(GetModule(), "WyvernSpawned", 0));
 		object oWyvSpawn = GetWaypointByTag("cave_wyvern_spawn_wp");
 		ActionJumpToLocation(GetLocation(oWyvSpawn));      
 		object oPortal = GetObjectByTag("alfa_portal_plc_wyv", 0);
