@@ -123,9 +123,9 @@ void main() {
 	
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It swoops in and out of sight. Around its neck glints a magnificent collar of crystal.", TALKVOLUME_TALK)));
 	DelayCommand(59.0 + fDelay, ClearAllActions(TRUE));
-	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveB, TRUE)));
+	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveB))));
 	DelayCommand(50.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
-	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveC, TRUE)));
+	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToLocation(GetLocation(oMoveC))));
 	DelayCommand(60.0 + fDelay, SetScale(oWyvern, 0.75, 0.75, 0.75));
 	
 				
