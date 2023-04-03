@@ -124,7 +124,7 @@ void main() {
 	DelayCommand(31.0 + fDelay, AssignCommand(oWyvern, PlaySound("as_an_dragonror2", FALSE)));
 	DelayCommand(31.0 + fDelay, AssignCommand(OBJECT_SELF, PlaySound("as_an_dragonror2", FALSE)));
 	
-	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck, a magnificent collar made of crystal glints.", TALKVOLUME_TALK)));
+	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck, glints a magnificent collar made of crystal.", TALKVOLUME_TALK)));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionForceMoveToObject(oMoveB, TRUE)));
 	DelayCommand(51.0 + fDelay, SetScale(oWyvern, 0.6, 0.6, 0.6));
 	DelayCommand(52.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
