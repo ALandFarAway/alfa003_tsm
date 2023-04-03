@@ -26,7 +26,10 @@ void ActionCreateWynPlaceable(string sPlaceable, location lLocPlaceable)
 {
     CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
 }
-
+void ActionCreateWynPlacedEffect(string sPlaceable, location lLocPlaceable)
+{
+    CreateObject(OBJECT_TYPE_PLACEABLE, sPlaceable, lLocPlaceable);
+}
 void main() {
 	object oWyvern = GetLocalObject(OBJECT_SELF, "oWyvern");
 	object oPortal = GetObjectByTag("alfa_portal_plc_wyv", 0);
@@ -93,6 +96,7 @@ void main() {
 	DestroyObject(oCaveLightD, fDelay-10.0);
 	DelayCommand(fDelay-10.0, AssignCommand(OBJECT_SELF, ActionSpeakString("*In the darkness, a red light becomes visible down and to the east, its distance revealing how far the chasm extends underground. It silhouettes a far-away winged shape, speeding this way.", TALKVOLUME_TALK)));
 	
+	DelayCommand(fDelay, ActionCreateWynPlacedEffect("tsm_afx_area_fog_red", GetLocation(oWyvSpawnC)));			
 	DestroyObject(oRedLight, fDelay + 11.0);
 				
 	effect eRemove = GetFirstEffect(oWyvern);
@@ -118,15 +122,14 @@ void main() {
 	DelayCommand(30.0 + fDelay, SetLastName(oWyvern, "Zombie"));
 	DelayCommand(30.0 + fDelay, AssignCommand(oWyvern, ActionForceMoveToObject(oMoveA, TRUE)));
 	
-	DelayCommand(40.0 + fDelay, ActionCreateWynPlaceable("ipoint_red_light", GetLocation(oMoveA)));			
-	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It banks and swoops in and out of sight. Around its neck glints a magnificent collar made of crystal.", TALKVOLUME_TALK)));
+	DelayCommand(40.0 + fDelay, ActionCreateWynPlaceable("tsm_afx_dthgod_lt_red", GetLocation(oMoveA)));			
+	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It swoops in and out of sight. Around its neck glints a magnificent collar of crystal.", TALKVOLUME_TALK)));
 	DelayCommand(59.0 + fDelay, ClearAllActions(TRUE));
 	DelayCommand(50.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveB, TRUE)));
 	DelayCommand(50.0 + fDelay, SetScale(oWyvern, 0.65, 0.65, 0.65));
 	DelayCommand(60.0 + fDelay, AssignCommand(OBJECT_SELF, ActionJumpToObject(oMoveC, TRUE)));
 	DelayCommand(60.0 + fDelay, SetScale(oWyvern, 0.75, 0.75, 0.75));
 	
-	DelayCommand(70.0 + fDelay, ActionCreateWynPlaceable("ipoint_red_fog", GetLocation(oWyvSpawnC)));			
 				
 	DelayCommand(70.0 + fDelay, AssignCommand(OBJECT_SELF, ActionSpeakString("*It dives beneath the bridge and briefly out of sight before soaring up on the other side, trailing the smell of rotting flesh.", TALKVOLUME_TALK)));
 	DelayCommand(70.0 + fDelay, AssignCommand(oWyvern, ActionJumpToLocation(GetLocation(oWyvSpawnB))));      
@@ -165,7 +168,7 @@ void main() {
 			DelayCommand(111.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC));
 			DelayCommand(111.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 5.0));
 			}
-		if(GetDistanceBetween(oWyvSpawnC, oPC) < 2.0) {
+		if(GetDistanceBetween(oWyvSpawnC, oPC) < 5.0) {
 			DelayCommand(112.0 + fDelay, SendMessageToPC(oPC, "You are thrown backwards!"));
 			DelayCommand(112.5 + fDelay, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oPortal))));
 			DelayCommand(112.5 + fDelay, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oPC, 10.0));

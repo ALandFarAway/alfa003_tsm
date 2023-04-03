@@ -106,8 +106,8 @@ void main()
 			DelayCommand(64.0, AssignCommand(oBae, ActionJumpToLocation(GetLocation(OBJECT_SELF))));
 			DelayCommand(65.0, AssignCommand(oBae, ActionSpeakString("*As he rides the wyvern down into the depths and out of sight, he shouts: 'Get out of here, my friends!'", TALKVOLUME_TALK)));
 			DestroyObject(oBae, 70.0);
-			DestroyObject(GetObjectByTag("ipoint_red_light", 1), 74.0);
-			DestroyObject(GetObjectByTag("ipoint_red_fog", 1), 74.0);
+			DestroyObject(GetObjectByTag("tsm_afx_area_fog_red", 1), 73.0);
+			DestroyObject(GetObjectByTag("tsm_afx_dthgod_lt_red", 1), 73.0);
 			DestroyObject(OBJECT_SELF, 75.0);
 			}
 		 if(GetDistanceBetween(OBJECT_SELF, GetLastDamager(OBJECT_SELF)) < 5.0) {
