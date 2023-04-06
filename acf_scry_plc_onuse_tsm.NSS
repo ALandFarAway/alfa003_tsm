@@ -60,6 +60,7 @@ void main() {
 	string sSubjectArea = GetName(oArea);
 	string sAreaTag = GetTag(oArea);
 	
+			//General area descriptors
 			if(FindSubString(sAreaTag, "caravan", 0) != -1) 
 				{sSubjectArea = "inside a caravan.";}
 			else if(FindSubString(sAreaTag, "ferry", 0) != -1)
