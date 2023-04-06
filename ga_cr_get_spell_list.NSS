@@ -21,6 +21,6 @@
 void main() {
  
 	object oTarget = GetItemActivatedTarget();
-	string sList = ACR_GetSpellList(oTarget, 0);
+	string sList = ACR_GetSpellList(oTarget, 1);
 	SendMessageToAllDMs(sList);		
 }

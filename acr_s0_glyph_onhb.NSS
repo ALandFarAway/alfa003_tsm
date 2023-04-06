@@ -5,7 +5,11 @@
 //    
 //  Description
 //  This script handles on heartbeat actions for the area of effect created by 
-//	ALFA custom placeable Glyphs of Warding. It is not updated in ACR updates.
+//	ALFA custom placeable Glyphs of Warding. Note: THIS IS NOT FOR THE SPELL
+//	CAST IN GAME. This is called only by a placeable placed either in toolset
+//	or by the DM ingame. This should not be on the placeable.
+//	The placeable casts an Area of Effect that does have this script on it.
+//	It is not updated in ACR updates. 
 //
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
-    Dummy heartbeat for glyph of warding object
+    Dummy heartbeat. 
 
 */
 

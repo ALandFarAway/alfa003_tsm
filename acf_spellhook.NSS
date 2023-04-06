@@ -28,6 +28,7 @@
 #include "x2_inc_toollib"
 #include "acr_db_persist_i"
 #include "acr_spells_i"
+#include "acr_spelltrack_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants ///////////////////////////////////////////////////////////////////
@@ -1276,14 +1277,14 @@ void main()
 				}
 			int nDivine = 0;
 			int nArcane = 0;
-			if((GetLevelByClass(CLASS_TYPE_CLERIC, oTarget) != 0) || (GetLevelByClass(CLASS_TYPE_DRUID, oTarget) != 0) || (GetLevelByClass(CLASS_TYPE_PALADIN, oTarget) != 0)  || (GetLevelByClass(CLASS_TYPE_RANGER, oTarget) != 0)) {
+			if(ACR_HasCasterClass(oTarget, "DIVINE")) {
 				nDivine = 1;
 				if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
 					DelayCommand(49.0, SendMessageToAllDMs(GetName(oTarget) + " has divine spellcasting abilities."));
 					}
 				DelayCommand(49.0, SendMessageToPC(oCaster, GetName(oTarget) + " has divine spellcasting abilities."));
 				}
-			if((GetLevelByClass(CLASS_TYPE_WIZARD, oTarget) != 0) || (GetLevelByClass(CLASS_TYPE_SORCERER, oTarget) != 0)) {
+			if(ACR_HasCasterClass(oTarget, "ARCANE")) {
 				nArcane = 1;
 				if(GetLocalInt(GetModule(), "DM_Spam") == 0) {
 					DelayCommand(49.0, SendMessageToAllDMs(GetName(oTarget) + " has arcane spellcasting abilities."));

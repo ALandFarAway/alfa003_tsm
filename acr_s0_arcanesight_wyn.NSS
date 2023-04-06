@@ -34,6 +34,7 @@
 #include "x2_inc_itemprop"
 #include "x0_i0_position"
 #include "acr_spells_i"
+#include "acr_spelltrack_i"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -310,13 +311,13 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+									if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 										}
 									else {break;}
 									}
-								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("abr_plc_ipoint_arcane_mark", lMarked));}
 			
 								nAuraCount++;
 								nAuraPower = 1;
@@ -348,15 +349,14 @@ void main()
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
-						//SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
-				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+							if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								}
 							else {break;}
 							}
 							
-						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("abr_plc_ipoint_arcane_mark", lMarked));}
 			
 						nAuraCount++;
 						nAuraPower = 1;
@@ -1163,11 +1163,6 @@ void main()
 					}
 				}
 					
-				/*if(nAuraPower > 0) {sAuraStrength = "a faint";}
-				if(nAuraPower > 3) {sAuraStrength = "a moderate";}
-				if(nAuraPower > 6) {sAuraStrength = "a strong";}
-				if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
-				*/
 				oDetected = GetNextObjectInShape( SHAPE_SPHERE, 120.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL );
 			}
 			

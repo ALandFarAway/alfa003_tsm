@@ -11,6 +11,12 @@
 //  Arcane Mark as per SRD.  Additionally, Arcane Mark cast on a Scrying Object
 //  by a Sorceror or Wizard will call forth a scrying focus as part of the
 //	ALFA Scrying System, but that is handled in the Scrying Object's on castat script.
+
+//	When Arcane Mark is cast, it creates an invisible iPoint with a VFX. That iPoint
+//	is found in the DetectMagic group of the Placeables pallet. It will persist 
+//	past server reset. It will vanish with reset, but when Detect Magic
+//	or Arcane Sight or Read Magic is cast upon its location, those spells will
+//	recreate it in place and report its maker to the caster of those divinatory spells.
 //  
 //////////////////////////////////////////////////////////////////////////////
 
@@ -72,7 +78,7 @@ void main()
 			SendMessageToPC(oCaster, sName + " now bears your arcane mark."); 
 			ACR_SetPersistentString(oMarked, "ACR_ARCANEMARK" + IntToString(nAM), GetName(oCaster), nExpire);
 			ACR_SetPersistentLocation(oMarked, "ACR_ARCANEMARKLoc" + IntToString(nAM), lMarked, nExpire);
-			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);
+			object oMark = CreateObject(OBJECT_TYPE_PLACEABLE, "abr_plc_ipoint_arcane_mark", lMarked, TRUE);
 			return;
 			}
 		nAM ++;

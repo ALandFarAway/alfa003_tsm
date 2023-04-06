@@ -30,7 +30,7 @@ void main()
         return;
     }
 
-	//SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
+	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	ActionPlayAnimation(ANIMATION_LOOPING_WORSHIP, 1.0, 3.0);
 	object oScryer = OBJECT_SELF;
 	effect eCreateWater = EffectVisualEffect(VFX_DUR_SPELL_SHROUDING_FOG, 0);

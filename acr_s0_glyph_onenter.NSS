@@ -4,8 +4,20 @@
 //  Filename : acr_s0_glyph_enter
 //    
 //  Description
-//  This script handles on enter actions for the area of effect created by 
-//	ALFA custom placeable Glyphs of Warding. It is not updated in ACR updates.
+//  This script handles on enter actions for the AREA OF EFFECT created by 
+//	ALFA custom placeable Glyphs of Warding. Note: THIS IS NOT FOR THE SPELL
+//	CAST IN GAME. This is called only by a placeable placed either in toolset
+//	or by the DM ingame. This should not be on the placeable.
+//	The placeable casts an Area of Effect that does have this script on it.
+//	It is not updated in ACR updates.
+
+//	Sample Glyph of Warding placeable may be found in the pallet in the
+//	_ALFA_Trap_Symbol group. The glyph must be a placeable and it must be
+//	tagged with "glyph_ward" as PART of the tag, but it can have any model
+//	or vfx on it. The glyph must have the string ACR_CASTER_RESREF filled in
+//	with the ResRef of the NPC caster that "cast" it, or it will not fire.
+//	Evil, Good, and Neutral casters will cause different damage types.
+//	 
 //
 //  Revision History
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +64,7 @@ void main()
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eInvis, oCaster, HoursToSeconds(100));
 	int nCasterLevel = GetLevelByClass(CLASS_TYPE_CLERIC, oCaster);
     int nAlign = GetAlignmentGoodEvil(oCaster );
-	SendMessageToAllDMs("acf_plc_glyph_ward_onenter sCaster = " + sCaster + "; CL = " + IntToString(nCasterLevel) + "; nAlign = " + IntToString(nAlign));
+	
 	object oPLC = GetLocalObject(OBJECT_SELF, "ACR_GLYPH_PLC");
 	DestroyObject(oCaster, 2.0);
 	

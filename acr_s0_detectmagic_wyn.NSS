@@ -17,6 +17,29 @@
 	7-13 = 2 Rounds: The number of auras and the power of the strongest aura.
 	14+ = 3 Rounds: The location of each aura and a Spellcraft Check against the magic item's power to determine the school of magic.
 	
+	Placeables, items, creatures, doors, waypoints and triggers may 
+	have the following matched variable sets placed on them to report to Detect Magic:
+	If you place a SpellSchool variable, you must also place its matching SpellPower
+	variable. The SubSchool variable is optional. See below.
+	
+	Sample placeables may be found in the pallet in the _ALFA_Detect_Magic group.
+	These placeables hold sample variables. Any placeable, item, creature, door,
+	waypoint or trigger with any model, name, tag, ResRef, VFX may be used, 
+	as long as it has the variables.
+	  
+	
+	ACR_SPELLSCHOOL = 
+	ACR_SPELLPOWER = 
+	ACR_SUBSCHOOL = 
+	
+	ACR_SPELLSCHOOL2 =
+	ACR_SPELLPOWER2 = 
+	ACR_SUBSCHOOL2 = 
+	
+	ACR_SPELLSCHOOL3 =
+	ACR_SPELLPOWER3 = 
+	ACR_SUBSCHOOL3 = 
+	
 	School of Magic = Integer
 	Abjuration = 1
 	Conjuration = 2
@@ -33,6 +56,12 @@
 	Moderate = 4-6
 	Strong = 7-9
 	Overwhelming = 10+
+	
+	SubSchool (optional) = string 
+	This allows the builder to place any tag desired here. For instance, 
+	if ACR_SPELLSCHOOL is Evocation, the builder may make ACR_SUBSCHOOL = Sonic or
+	= Cold to give the caster a better hint. Or leave it blank, to provide no hints.
+				
 	*/
 	
 ////////////////////////////////////////////////////////////////////////////////
@@ -365,13 +394,13 @@ void main()
 								sName = "A nearby location";
 								object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								while (oMark != OBJECT_INVALID) {
-									if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+									if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 									if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 										oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 										}
 									else {break;}
 									}
-								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+								if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("abr_plc_ipoint_arcane_mark", lMarked));}
 			
 								nAuraCount++;
 								nAuraPower = 1;
@@ -409,14 +438,14 @@ void main()
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
 						SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
-				    		if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+				    		if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 								}
 							else {break;}
 							}
 							
-						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("ipoint_arcane_mark", lMarked));}
+						if(nMarked != 1) {DelayCommand(6.0, ActionCreatePlaceable("abr_plc_ipoint_arcane_mark", lMarked));}
 			
 						nAuraCount++;
 						nAuraPower = 1;

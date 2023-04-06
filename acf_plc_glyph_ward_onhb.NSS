@@ -18,7 +18,7 @@
 /*
     Heartbeat for glyph of warding object
 
-    Place a glyph of warding object from the palette and manually add 
+    Place a glyph of warding object from the pallet and manually add 
 	ACR_CASTER_RESREF as a string with the resref of the creature you  
 	want to be its 'caster' through the toolset.
 
@@ -30,7 +30,14 @@
     dispelled or removed, and the glyph will terminate itself.
 
     Also on the first heartbeat, this object creates an AOE object
-    around itself
+    around itself.
+	
+	Sample Glyph of Warding placeable may be found in the pallet in the
+	_ALFA_Trap_Symbol group. The glyph must be a placeable and it must be
+	tagged with "glyph_ward" as PART of the tag, but it can have any model
+	or vfx on it. The glyph must have the string ACR_CASTER_RESREF filled in
+	with the ResRef of the NPC caster that "cast" it, or it will not fire.
+	Evil, Good, and Neutral casters will cause different damage types.
 */
 
 // Includes //////////////////////////////////////

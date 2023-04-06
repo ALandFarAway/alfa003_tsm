@@ -79,10 +79,10 @@ void main() {
 				if(GetDistanceBetweenLocations(lMarked, GetLocation(oCaster)) < 5.0) {
 					object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					while (oMark != OBJECT_INVALID) {
-						if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+						if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 						oMark = GetNextObjectInShape(SHAPE_SPHERE, 1.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						}
-					if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+					if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "abr_plc_ipoint_arcane_mark", lMarked, TRUE);}
 					string sMarked = ACR_LocationToString(lMarked);
 					string sMarkedProxy = ACR_LocationToString(GetLocation(oReadMagic));
 					int nXStart = FindSubString(sMarked, "#X#", 0);
@@ -112,11 +112,11 @@ void main() {
 				sName = "A nearby location";
 				object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 				while (oMark != OBJECT_INVALID) {
-					if(GetTag(oMark) == "ipoint_arcane_mark") {nMarked = 1;}
+					if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 					oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 					}
 					
-				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "ipoint_arcane_mark", lMarked, TRUE);}
+				if(nMarked != 1) {CreateObject(OBJECT_TYPE_PLACEABLE, "abr_plc_ipoint_arcane_mark", lMarked, TRUE);}
 				SendMessageToPC(oCaster, sName + " bears an arcane mark that reads: " + ACR_GetPersistentString(oReadMagic, "ACR_ARCANEMARK" + IntToString(nRM)));
 				}
 			}
