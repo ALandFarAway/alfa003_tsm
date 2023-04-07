@@ -235,7 +235,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4879BFFB8888372E0534ADE83AFCEFE1415E24BE" downloadHash="71BBFC39F5F7D2553E475DE99C69AA69778E7078" name="5f_ext_nether_deckon_thar.trx" dlsize="1025698" size="8737315" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C3380E165CCE0CDA14B864791371BCEBFF66E21F" downloadHash="AC0CB75E137FD35D8E0CFFA8B5B143715E0D38C6" name="5f_ext_nether_deckon_thar.trx" dlsize="1058950" size="8769404" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
