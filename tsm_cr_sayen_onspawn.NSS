@@ -27,19 +27,34 @@ void main() {
 
 	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	object oSayen = OBJECT_SELF;
-	object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
+	/*object oInvisoCaster = GetObjectByTag("003_cr_invis_caster", 0);
 	object oOrb = GetObjectByTag("phalorm_orb_black", 0);
 	int nHP = GetCurrentHitPoints(oOrb);
 	object oMoveTo = GetWaypointByTag("rr_sayen_move_wp");
 	object oOrbGlow = GetObjectByTag("fx_okku_mound_rr", 0);
+	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
+	effect eAOE = EffectAreaOfEffect(AOE_MOB_UNNATURAL);
+    */
 	effect eLight = EffectVisualEffect(VFX_DUR_LIGHT_RED_20, FALSE);
 	effect eFreeze = EffectCutsceneImmobilize();
-	effect eInvis = EffectVisualEffect(VFX_DUR_CUTSCENE_INVISIBILITY, FALSE);
 	effect eAppear = EffectVisualEffect(VFX_HIT_AOE_ILLUSION, FALSE);
-	effect eGhost = EffectVisualEffect(VFX_DUR_SPELL_ETHEREALNESS, FALSE);
 	effect eEthereal = EffectEthereal();
-	effect eAOE = EffectAreaOfEffect(AOE_MOB_UNNATURAL);
-    object oPC = GetFirstPC(TRUE);
+	effect eAOE = EffectAreaOfEffect(AOE_MOB_FEAR);
+	effect eAnti = EffectVisualEffect(VFX_DUR_ANTI_LIGHT_10);
+	effect eDoom = EffectVisualEffect(VFX_DUR_AOE_CREEPING_DOOM);
+	effect eGhost = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE);
+	effect eSmoke = EffectVisualEffect(VFX_DUR_GHOST_SMOKE);
+	
+	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
+	
+	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAOE, OBJECT_SELF);
+	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
+	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eDoom, OBJECT_SELF);
+	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAnti, OBJECT_SELF);
+	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eSmoke, OBJECT_SELF);
+	ClearAllActions(TRUE);
+	
+	object oPC = GetFirstPC(TRUE);
 	object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
 	object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
 	object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
@@ -71,7 +86,6 @@ void main() {
 	oPC = GetNextPC(TRUE);
 	}
 	 
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAOE, OBJECT_SELF, HoursToSeconds(100));
 	ActionCastSpellAtObject(SPELL_GLOBE_OF_INVULNERABILITY, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_PROTECTION_FROM_ARROWS, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_ENERGY_IMMUNITY_FIRE, OBJECT_SELF, METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);

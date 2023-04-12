@@ -6,6 +6,12 @@ void main() {
 		    ACR_GrantLanguage(oUser, LNG_MULHORANDI);
 			SendMessageToPC(oUser, "The hieroglyphs resolve into meaning in your thoughts, and you find yourself able to speak and read Mulhorandi...but with no need, as a voice speaks the words you can now read.");
 	 		}
+	
+		if((GetTag(OBJECT_SELF) == "dt_altar_sacrifice") && (ACR_IsLanguageKnown(oUser, LNG_ORC))) {
+		    SendMessageToPC(oUser, "Your knowledge of the orcish language allows you to make some sense of the original inscriptions on this altar. Although they have been defaced and hacked out, they were simple, and repeated over and over. Enough remains that you are able to read: 'De-Khan-Thar' which means 'The Khan will Return'.");
+	 		}
+			
+			
       if(ACR_IsLanguageKnown(oUser, GetLocalString(oPlaceable, "SJC_PLC_LANG"))) 
 	 	 {SendMessageToPC( oUser, GetLocalString( oPlaceable, "SJC_TRANSLATED_TEXT" ));
       	  if((GetTag(OBJECT_SELF) == "rr_plc_book_hieroglyph") && (GetLocalInt(OBJECT_SELF, "PlayOnce") == 0)) {

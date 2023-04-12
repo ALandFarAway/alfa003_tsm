@@ -1720,7 +1720,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A3C48E2F4763CE2A821F23A6DD06D72D842E6312" downloadHash="960080F8AE64B9C01CFE0F92000C1CBB036DF188" name="5f_int_nether_dt_nobles.trx" dlsize="527450" size="533804" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="739D243E6DA8C346689FB281C9941F1641152DFB" downloadHash="0AEFD41504F02877F7310D92A5FFAC7E3BDA444B" name="5f_int_nether_dt_nobles.trx" dlsize="519002" size="524733" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

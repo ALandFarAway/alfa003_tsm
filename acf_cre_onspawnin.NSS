@@ -59,12 +59,7 @@ void main()
 		DelayCommand(fRand,ExecuteScript("dpss_ambient_anim",OBJECT_SELF));
 		}
 		
-	//Temp. Remove after session
-	if(GetTag(OBJECT_SELF) == "abr_cr_hu_orc_illus") {
-		//Subdual toggle
-		ACR_ToggleNLDMode(OBJECT_SELF);
-	}
-		
+	
 	//Hydra's extra attacks
 	if(GetTag(OBJECT_SELF) == "abr_cr_mb_hydra5") {
 	SetBaseAttackBonus(5, OBJECT_SELF);
@@ -72,7 +67,7 @@ void main()
 	}
 	
 	//Unhallowed Turn Resistance Increase
-	if(FindSubString(GetTag(GetArea(OBJECT_SELF)), "rauvin_ruins") != -1) {
+	if(FindSubString(GetTag(GetArea(OBJECT_SELF)), "5f_int_nether_dt") != -1) {
 		if((GetRacialType(OBJECT_SELF) == RACIAL_TYPE_UNDEAD) || (GetSubRace(OBJECT_SELF) == RACIAL_SUBTYPE_UNDEAD)) {
 		 effect eTurnInc = EffectTurnResistanceIncrease(4);
 		 int nBefore = GetTurnResistanceHD(OBJECT_SELF);

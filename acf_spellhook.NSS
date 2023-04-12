@@ -2646,15 +2646,33 @@ void main()
 				
 	
 		 
-	//Stopping summons by non Banites in a Banite UnHallowed Area
-	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "rauvin_ruins") != -1) {
-		if((nSpellId == SPELL_SUMMON_CREATURE_I) || (nSpellId == SPELL_SUMMON_CREATURE_II) || (nSpellId == SPELL_SUMMON_CREATURE_III) || (nSpellId == SPELL_SUMMON_CREATURE_IV) || (nSpellId == SPELL_SUMMON_CREATURE_V) || (nSpellId == SPELL_SUMMON_CREATURE_VI))
-			{SetModuleOverrideSpellScriptFinished();
-			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
-			 SendMessageToPC(oCaster, "You feel something harsh and evil suppress your summoning spell.");
-			 SendMessageToAllDMs(GetName(oCaster) + "'s Summons  spell fizzled in " + sArea + ".");		
+	//Stopping summons in Set UnHallowed Area
+	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "5f_int_nether_dt") != -1) {
+		if(GetIsPC(oCaster)) {
+			if((nSpellId == SPELL_SUMMON_CREATURE_I) || (nSpellId == SPELL_SUMMON_CREATURE_II) || (nSpellId == SPELL_SUMMON_CREATURE_III) || (nSpellId == SPELL_SUMMON_CREATURE_IV) || (nSpellId == SPELL_SUMMON_CREATURE_V) || (nSpellId == SPELL_SUMMON_CREATURE_VI))
+				{SetModuleOverrideSpellScriptFinished();
+				 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
+				 SendMessageToPC(oCaster, "You feel something harsh and evil suppress your summoning spell.");
+				 SendMessageToAllDMs(GetName(oCaster) + "'s Summons  spell fizzled in " + sArea + ".");	
+				 }	
+			if((nSpellId == SPELL_CREATE_UNDEAD) || (nSpellId == SPELL_CREATE_GREATER_UNDEAD))
+				{SetModuleOverrideSpellScriptFinished();
+				 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
+				 SendMessageToPC(oCaster, "You feel something harsh and evil taking over your undead summons!");
+				 SendMessageToAllDMs(GetName(oCaster) + "'s Create Undead  spell turned against them in " + sArea + ".");
+				 CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_un_skeleton_tg_orc", GetLocation(oCaster), FALSE);		
+				}
+			if((nSpellId == SPELL_GATE) || (nSpellId == SPELL_LESSER_PLANAR_BINDING)|| (nSpellId == SPELL_PLANAR_ALLY)|| (nSpellId == SPELL_PLANAR_BINDING)|| (nSpellId == SPELL_GREATER_PLANAR_BINDING))
+				{SetModuleOverrideSpellScriptFinished();
+				 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
+				 if(WillSave(oCaster, 15, SAVING_THROW_TYPE_DIVINE, GetArea(oCaster))) {SendMessageToPC(oCaster, "You feel something trying to take over your planar spell, but your willpower manages to maintain control of the spell!");}
+				 else {
+				 	SendMessageToPC(oCaster, "You feel something fiery and evil taking over your planar spell!");
+				 	SendMessageToAllDMs(GetName(oCaster) + "'s Planar spell turned against them in " + sArea + ".");
+				 	CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_ou_efreet_lord", GetLocation(oCaster), FALSE);}
+				}
+			}
 		}
-	}
 	
 
 

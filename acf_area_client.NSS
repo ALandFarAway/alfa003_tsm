@@ -23,6 +23,7 @@
 // Includes ////////////////////////////////////////////////////////////////////
 
 #include "acr_area_i"
+#include "acr_spells_i"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -135,6 +136,12 @@ void main() {
 
     object oEnterer = GetEnteringObject();
 	object oArea = GetArea(oEnterer);
+	
+	
+	if((FindSubString(GetTag(oArea), "5f_int_nether_dt") != -1) && (GetLocalInt(oEnterer, "Unhallow") != 1)) {
+		DelayCommand(5.0, SetLocalInt(oEnterer, "Unhallow", 1));
+		if(ACR_HasCasterClass(oEnterer, "DIVINE")) {SendMessageToPC(oEnterer, "You feel the deathly chill of unhallowed ground.");}
+	}
 	
 	if((FindSubString(GetTag(oArea), "_ext_") != -1) && (GetLocalInt(oEnterer, "HarpyMsg") == 5)) {
 		DelayCommand(20.0, ExecuteScript("slv_static_voice_harpy_create", oEnterer));

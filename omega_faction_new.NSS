@@ -34,6 +34,7 @@ void main()
 	if(nFaction == 1) {nStandard = STANDARD_FACTION_COMMONER;sStandard = "Commoner";}
 	if(nFaction == 2) {nStandard = STANDARD_FACTION_DEFENDER;sStandard = "Defender";}
 	if(nFaction == 3) {nStandard = STANDARD_FACTION_HOSTILE;sStandard = "Hostile";}
+	if(nFaction == 4) {nStandard = STANDARD_FACTION_MERCHANT;sStandard = "Merchant";}
 	int nRadius = GetLocalInt(oDM, "Omega_Radius");
 	int	nArea = GetLocalInt(oDM, "Omega_Area");
 	float fRadius = IntToFloat(nRadius);
