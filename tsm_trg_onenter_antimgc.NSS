@@ -61,7 +61,7 @@ void main()
     // Get who to effect
     
     // Must NOT be a DM or plot-flagged creature
-    if(GetIsDM(oTarget)) return;
+    if((GetIsDM(oTarget)) || (GetTag(oTarget) == "003_cr_bane_bp_elthonds") ||  (GetTag(oTarget) == "abr_cr_hu_orc_twisted") ) {return;}
 
     // Remove effects which are magical
     effect eCheck = GetFirstEffect(oTarget);

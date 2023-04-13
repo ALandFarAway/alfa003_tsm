@@ -90,7 +90,7 @@ void main()
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcPriest, 10.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcSphinx, 10.0));
 			 DelayCommand(10.0, AssignCommand(oCrystal, ActionCastSpellAtLocation(SPELL_CIRCLE_OF_DEATH, GetLocation(oTworcAnkh), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-			 DelayCommand(15.0, AssignCommand(oSayen, ActionSpeakString("You are reborn. Into the portal! *A red light flares. There is a sound like a great fire suddenly alighting, and a wash of cool air that smells of stone and dust.", TALKVOLUME_TALK)));
+			 DelayCommand(15.0, AssignCommand(oSayen, ActionSpeakString("You are reborn in crystal. Into the portal! *A red light flares. There is a sound like a great fire suddenly alighting, and a wash of cool air that smells of stone and dust.", TALKVOLUME_TALK)));
 			 DelayCommand(15.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcAnkh)));
 			 DelayCommand(16.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcCobra)));
 			 DelayCommand(17.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcPriest)));
