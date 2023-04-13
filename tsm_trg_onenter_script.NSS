@@ -103,7 +103,7 @@ void main()
 			 DestroyObject(oTworcSphinx, 20.0);
 			 DelayCommand(21.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 1), ActionSpeakString("*Floats toward the crystal.", TALKVOLUME_TALK)));
 			 DelayCommand(22.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 2), ActionSpeakString("*Drifts into the portal.", TALKVOLUME_TALK)));
-			 DelayCommand(23.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), ActionSpeakString("*Moans* Liar...lord Khan...", TALKVOLUME_TALK)));
+			 DelayCommand(23.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), ActionSpeakString("*Moans in what sounds like Mulhorandi* ", TALKVOLUME_TALK)));
 			 DelayCommand(24.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 4), ActionSpeakString("*Floats toward the crystal.", TALKVOLUME_TALK)));
 			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 1), 25.0);
 			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 2), 26.0);
