@@ -145,7 +145,7 @@ void main()
 	SendMessageToAllDMs(GetName(GetLastSpellCaster()) + " casting " + IntToString(nSpellId) + " / " +  sSpellID + " in " + sArea + " at " + sTarget);
 	
 	//Arcane Sight
-	if(GetSpellId() == 3108) {
+/*	if(GetSpellId() == 3108) {
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
 		float fDur = TurnsToSeconds( GetCasterLevel(oCaster ));
@@ -479,7 +479,7 @@ void main()
 				Symbol of Insanity = Strong Enchantment
 				*/
 				
-				 if((FindSubString(GetTag(oDetected), "_symbol_") != -1) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
+/*				 if((FindSubString(GetTag(oDetected), "_symbol_") != -1) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					nAuraCount++;
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
@@ -921,7 +921,7 @@ void main()
 											Weapons or offensive items = Evocation
 											Bonus to ability score, on skill check, etc. = Transmutation
 											*/
-										if(nItemProperty == 0) {sItemProperty = "Ability Bonus"; sSchool = "T"; nAuraPower = nItemCost;}
+	/*									if(nItemProperty == 0) {sItemProperty = "Ability Bonus"; sSchool = "T"; nAuraPower = nItemCost;}
 										if((nItemProperty >= 1) && (nItemProperty <=5)) {sItemProperty = "AC Bonus"; sSchool = "A"; nAuraPower = nItemCost;}
 										if((nItemProperty >= 56) && (nItemProperty <=59)) {sItemProperty = "Attack Bonus"; sSchool = "V"; nAuraPower = nItemCost;}
 										if(nItemProperty == 12) {sItemProperty = "Bonus Feat"; sSchool = "T"; nAuraPower = 2;}
@@ -1215,7 +1215,7 @@ void main()
 				if(nAuraPower > 6) {sAuraStrength = "a strong";}
 				if(nAuraPower > 9) {sAuraStrength = "an overwhelming";}
 				*/
-				oDetected = GetNextObjectInShape( SHAPE_SPHERE, 120.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL );
+/*				oDetected = GetNextObjectInShape( SHAPE_SPHERE, 120.0, GetLocation(oCaster), TRUE, OBJECT_TYPE_ALL );
 			}
 			
 		//In general how many auras has the caster detected?					
@@ -1329,7 +1329,7 @@ void main()
 	Overwhelming = 10+
 	*/
 	
-	if(GetSpellId() == 3004) {
+/*	if(GetSpellId() == 3004) {
 		
 		object oCaster = OBJECT_SELF;
 		int nMetaMagic = GetMetaMagicFeat();
@@ -1737,7 +1737,7 @@ void main()
 				Symbol of Insanity = Strong Enchantment
 				*/
 				
-				 if(((FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
+/*				 if(((FindSubString(GetTag(oDetected), "_symbol_") != -1)) && (FindSubString(GetTag(oDetected), "_det") == -1) && (GetLocalInt(oDetected, "Fired") != 1)) {
 					nAuraCount++;
 					if((FindSubString(GetTag(oDetected), "_symbol_fear") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pers") != -1) || (FindSubString(GetTag(oDetected), "_symbol_sleep") != -1) || (FindSubString(GetTag(oDetected), "_symbol_stun") != -1)) {sSchool = " of <color=magenta>Enchantment</color>";}
 					if((FindSubString(GetTag(oDetected), "_symbol_weakness") != -1) || (FindSubString(GetTag(oDetected), "_symbol_pain") != -1) || (FindSubString(GetTag(oDetected), "_symbol_death") != -1)) {sSchool = " of <color=white>Necromancy</color>";}
@@ -2220,7 +2220,7 @@ void main()
 											Weapons or offensive items = Evocation
 											Bonus to ability score, on skill check, etc. = Transmutation
 											*/
-										if(nItemProperty == 0) {sItemProperty = "Ability Bonus"; sSchool = "T"; nAuraPower = nItemCost;}
+/*										if(nItemProperty == 0) {sItemProperty = "Ability Bonus"; sSchool = "T"; nAuraPower = nItemCost;}
 										if((nItemProperty >= 1) && (nItemProperty <=5)) {sItemProperty = "AC Bonus"; sSchool = "A"; nAuraPower = nItemCost;}
 										if((nItemProperty >= 56) && (nItemProperty <=59)) {sItemProperty = "Attack Bonus"; sSchool = "V"; nAuraPower = nItemCost;}
 										if(nItemProperty == 12) {sItemProperty = "Bonus Feat"; sSchool = "T"; nAuraPower = 2;}
@@ -2615,7 +2615,7 @@ void main()
 			*/
 			
 			//The last thing sent, after Round 3 equipped details finish. 
-			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "**********"));
+/*			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2), SendMessageToPC(oCaster, "**********"));
 			DelayCommand(fDelay + IntToFloat(nCreatureCount * 2) + 0.1, SendMessageToPC(oCaster, "That is all you learn."));
 			SetLocalInt(oCaster, "nItemCount", 0);
 			}
@@ -2644,7 +2644,7 @@ void main()
 		SetLocalInt(oCaster, "nSummary", 0);
 		}
 				
-	
+	*/
 		 
 	//Stopping summons in Set UnHallowed Area
 	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "5f_int_nether_dt") != -1) {
@@ -2677,7 +2677,7 @@ void main()
 
 
 //Read Magic
-if(GetSpellId() == 3003) {
+/*if(GetSpellId() == 3003) {
 
 	object oTarget = GetSpellTargetObject();
 	object oReadMagic = GetFirstObjectInShape(SHAPE_SPHERE, 6.0, GetLocation(oTarget), TRUE, OBJECT_TYPE_PLACEABLE | OBJECT_TYPE_ITEM |OBJECT_TYPE_DOOR | OBJECT_TYPE_TRIGGER | OBJECT_TYPE_WAYPOINT | OBJECT_TYPE_AREA_OF_EFFECT);
@@ -3184,7 +3184,7 @@ if((GetSpellId() == 3056) || (GetSpellId() == 3057))
 	}
 	
 	
-	
+*/	
 	
 	
 if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "nw_cave_aq") != -1) 

@@ -109,7 +109,8 @@ void main()
 			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 2), 26.0);
 			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), 27.0);
 			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 4), 28.0);
-			 DestroyObject(GetNearestObjectByTag("fx_demon_portal", oCrystal, 1), 30.0);
+			 DelayCommand(30.0, DestroyObject(GetNearestObjectByTag("fx_demon_portal", oCrystal, 1)));
+			 DelayCommand(30.0, DestroyObject(GetNearestObject(OBJECT_TYPE_PLACED_EFFECT, oCrystal, 1)));
 			 
 			 }
 	    

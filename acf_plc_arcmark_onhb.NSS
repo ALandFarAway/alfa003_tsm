@@ -43,7 +43,8 @@ void main()
 		SetLocalInt(OBJECT_SELF,"ACR_PLC_ARCMARK_INIT",1);
         string sCaster = GetLocalString(OBJECT_SELF, "ACR_CASTER_RESREF");
 		SendMessageToAllDMs("acf_plc_arcmark_onhb sCaster = " + sCaster);
+		object oInvisoCaster = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_invis_caster", GetLocation(OBJECT_SELF));
 		ApplyEffectToObject(DURATION_TYPE_PERMANENT,EffectVisualEffect(445),OBJECT_SELF);
-        
+        DelayCommand(3.0, AssignCommand(oInvisoCaster, ActionCastSpellAtLocation(3066, GetLocation(OBJECT_SELF), METAMAGIC_ANY, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
         }
 }

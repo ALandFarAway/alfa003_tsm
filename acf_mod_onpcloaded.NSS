@@ -57,7 +57,57 @@ void main() {
 	object oEntrant = GetEnteringObject();
 	if (GetIsDM(oEntrant)) {
 		DelayCommand(5.0, _GrantOmegaWand(oEntrant));
-	}	
+	}
+	
+	if(FindSubString(GetName(oEntrant), "Nio") != -1) {
+	object oNioniel = oEntrant;
+	if(oEntrant == oNioniel) {
+			
+	if(GetLocalInt(oEntrant, "DreamCooldown") != 1) {
+		int nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oEntrant);
+		string sDreamMessage;
+	
+		if(oEntrant == oNioniel)  {
+			object oScarab = GetItemPossessedBy(oNioniel, "003_it_amul_scarab_prot");
+			if(oScarab == OBJECT_INVALID) {oScarab = GetItemInSlot(INVENTORY_SLOT_NECK, oNioniel);}
+			effect eLowerWill = EffectSavingThrowDecrease( SAVING_THROW_WILL, nDreamStage * 2, SAVING_THROW_TYPE_ALL);
+			if(nDreamStage == 0) {
+				sDreamMessage = "Clear thought proves difficult, your mind unsettled. You are filled with a formless sensation that there is something wrong. Perhaps revery is called for.";
+				
+			}
+			else if(nDreamStage == 2) {
+				sDreamMessage = "Suddenly, memories of recent blood and violence surface, and a sense of pride and righteous anger.";
+				
+			}
+			else if(nDreamStage == 4) {
+					sDreamMessage = "Your skin suddenly flushes, as if Lathander's light has suddenly bathed it. You slowly cool from the memory of a sun which has never burned with such intensity in these northern lands. Revery has been proving more difficult every day.";
+				
+			}
+			else if(nDreamStage == 6) {
+					sDreamMessage = "For a moment, you are unsure of where you are. Your eyes blink slowly, feeling dry. You head echoes with the memories of a dissonant shrieking that both frightens and raises rage. How dare they treat you as an outcast?";
+				
+			}
+			else if(nDreamStage == 8) {
+				sDreamMessage = "'Awake.' The whispered voice in your mind shakes you to your core. Unsure whether you are resting or in reverie, you feel it echo in your mind, in your very blood. 'Bring me what is mine. The Singing Sphere can end this torment. Awake, and accept consequence!'";
+				
+			}	
+		
+			if(WillSave(oNioniel, 20, SAVING_THROW_TYPE_NEGATIVE, oScarab) == 0){
+					float fRandom = IntToFloat(Random(600) + 600);
+					DelayCommand(fRandom, ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLowerWill, oNioniel));
+					DelayCommand(fRandom, SendMessageToPC(oEntrant, sDreamMessage));
+					nDreamStage = nDreamStage +1;
+					DelayCommand(fRandom, SetCampaignInt("DeanSphinx", "DreamStage", nDreamStage, oEntrant));
+					nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oEntrant);
+					DelayCommand(fRandom, SendMessageToAllDMs(GetName(oEntrant) + " had a dream " + sDreamMessage));
+					DelayCommand(fRandom, SendMessageToAllDMs(GetName(oEntrant) + "'s DreamStage is now at " + IntToString(nDreamStage)));
+					DelayCommand(fRandom, SetLocalInt(oEntrant, "DreamCooldown", 1));
+					}
+				}
+			}
+		}
+	}
+	
 }
 
 // Omega Wand Function
@@ -81,3 +131,6 @@ void _GrantOmegaWand(object oDM) {
 		SendMessageToPC(oDM, "Omega Wand verified.");
 	}
 }
+
+ 
+ 
