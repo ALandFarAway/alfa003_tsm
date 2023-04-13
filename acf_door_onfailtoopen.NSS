@@ -52,10 +52,7 @@ void main() {
     ACR_DoorOnFailToOpen();
 	
 	object oNio = GetLastUsedBy();
-	SendMessageToAllDMs("oNio = GetLastUsedBy " + GetName(oNio));
-	if(oNio == OBJECT_INVALID) {oNio = GetClickingObject();
-	SendMessageToAllDMs("oNio = GetClickingObject " + GetName(oNio));
-	}
+	
 	
 	if(GetTag(OBJECT_SELF) == "5f_ext_dt_tombs_nobles") {
 			SendMessageToAllDMs(GetName(oNio) + " is unlocking " + GetName(OBJECT_SELF));
@@ -63,14 +60,16 @@ void main() {
 			object oScarabB = GetItemPossessedBy(oNio, "03_it_amul_scarab_prot");
 			DestroyObject(oScarab);
 			DestroyObject(oScarabB);
+			effect eLowerWill = EffectSavingThrowDecrease( SAVING_THROW_WILL, 1, SAVING_THROW_TYPE_ALL);
 			ActionSpeakString("The scarab at your neck sinks its mandibles into your carotid!", TALKVOLUME_TALK);
-			SendMessageToPC(oNio, "The scarab at your neck sinks its mandibles into your carotid!");
-			DelayCommand(10.0, ActionSpeakString("The scarab pulls its mandibles free, and spreads irridescent wings. It jumps to the doorframe and inserts its six legs and bloody mandibles into the eight holes on the door. Antennae unfurl, with small fans at their tips that settle gently into the upper indentations on the door.", TALKVOLUME_TALK));
-			DelayCommand(10.0, SendMessageToPC(oNio, "The scarab pulls its mandibles free, and spreads irridescent wings. It jumps to the doorframe and inserts its six legs and bloody mandibles into the eight holes on the door. Antennae unfurl, with small fans at their tips that settle gently into the upper indentations on the door."));
+			if(WillSave(oNio, 20, SAVING_THROW_TYPE_NEGATIVE, oScarab)) {SendMessageToPC(oNio, "You feel woozy.");}
+			else {ApplyEffectToObject(DURATION_TYPE_PERMANENT, eLowerWill, oNio);
+				SendMessageToPC(oNio, "You feel a rush of assurance. This door *will* open to you.");
+				}
+			DelayCommand(15.0, ActionSpeakString("The scarab pulls its mandibles free, and spreads irridescent wings. It jumps to the doorframe and inserts its six legs and bloody mandibles into the eight holes on the door. Antennae unfurl, with small fans at their tips that settle gently into the upper indentations on the door.", TALKVOLUME_TALK));
 			DelayCommand(19.0, ActionCreateItemOnObject("003_it_amul_scarab_prot", oNio));
-			DelayCommand(20.0, ActionSpeakString("The door unlocks. The scarab spreads wings and whirs back to your collar.", TALKVOLUME_TALK));
-			DelayCommand(20.0, SendMessageToPC(oNio, "The door unlocks. The scarab spreads wings and whirs back to your collar."));
-			DelayCommand(20.0, ActionUnlockObject(OBJECT_SELF));
+			DelayCommand(30.0, ActionSpeakString("The door unlocks. The scarab spreads wings and whirs back to your collar.", TALKVOLUME_TALK));
+			DelayCommand(30.0, ActionUnlockObject(OBJECT_SELF));
 			}
 	
 }

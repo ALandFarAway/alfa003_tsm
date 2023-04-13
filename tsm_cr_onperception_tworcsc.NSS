@@ -81,5 +81,16 @@ void main()
 			 }
 	}
  
-		    
+	
+	if(GetTag(OBJECT_SELF) == "003_cr_dragon_gold_vala") {
+		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && ((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))) 
+			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
+			 ClearAllActions(TRUE);
+			 DelayCommand(10.0, ActionSpeakString("You are wrong. I have come out of...respect, for what was. *Head tilted on long neck, saurian eyes focused on the air", TALKVOLUME_TALK));
+			 DelayCommand(25.0, ActionSpeakString("We were younger, and my consort was amused by the novelty of your plight. He suffers now because of it!", TALKVOLUME_TALK));
+			 DelayCommand(40.0, ActionSpeakString("No! *Rumbles, wings bristling, then settling* The insult you have done ended such paths!", TALKVOLUME_TALK));
+			 DelayCommand(55.0, ActionSpeakString("Look at what you have become! You have won the battle for the lich you claimed to want vengeance upon!", TALKVOLUME_TALK));
+			 DelayCommand(70.0, ActionSpeakString("RELEASE HER!  *Roars, wings flaring in a backwash of wind", TALKVOLUME_TALK));
+			 }
+			}	    
 }

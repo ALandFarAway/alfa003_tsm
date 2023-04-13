@@ -270,7 +270,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C3380E165CCE0CDA14B864791371BCEBFF66E21F" downloadHash="AC0CB75E137FD35D8E0CFFA8B5B143715E0D38C6" name="5f_ext_nether_deckon_thar.trx" dlsize="1058950" size="8769404" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C522C59D068685B582DEBFA75AC9BE914721CF43" downloadHash="17B24784A10A423F8B4A5FFDD8ECA490B0BC35DE" name="5f_ext_nether_deckon_thar.trx" dlsize="1064712" size="8775691" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1720,7 +1720,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="739D243E6DA8C346689FB281C9941F1641152DFB" downloadHash="0AEFD41504F02877F7310D92A5FFAC7E3BDA444B" name="5f_int_nether_dt_nobles.trx" dlsize="519002" size="524733" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2F8F75AE52477DA6ED15A4BFDABCEAF422A34299" downloadHash="12302C67D937DF4ED97A995B3BFA5662DA1E97B3" name="5f_int_nether_dt_nobles.trx" dlsize="533935" size="539631" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

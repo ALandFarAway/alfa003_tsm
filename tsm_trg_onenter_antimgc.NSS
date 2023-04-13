@@ -61,7 +61,7 @@ void main()
     // Get who to effect
     
     // Must NOT be a DM or plot-flagged creature
-    if(!GetIsDM(oTarget) && GetIsPC(oTarget)) return;
+    if(GetIsDM(oTarget)) return;
 
     // Remove effects which are magical
     effect eCheck = GetFirstEffect(oTarget);
@@ -79,5 +79,6 @@ void main()
     }
     // Apply effects
     ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTarget);
+	SendMessageToAllDMs("Applying anti-magic to " + GetName(oTarget));
     ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAntiMag, oTarget);   
 }

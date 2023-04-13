@@ -70,15 +70,15 @@ void main()
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcPriest, 30.0);
 	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcSphinx, 30.0);
 	SendMessageToAllDMs(GetName(oEntered) + " entered" + GetName(OBJECT_SELF));
-	if((GetLocalInt(oSayen, "Spoken") == 0) && ((GetIsPC(oEntered)) || (GetIsDMPossessed(oEntered)))) 
+	if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && ((GetIsPC(oEntered)) || (GetIsDMPossessed(oEntered)))) 
 			{SendMessageToAllDMs(GetName(OBJECT_SELF) + " firing.");
-			 SetLocalInt(oSayen, "Spoken", 1);
+			 SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 AssignCommand(oSayen, ClearAllActions(TRUE));
 			 AssignCommand(oTworcAnkh, ClearAllActions(TRUE));
 			 AssignCommand(oTworcCobra, ClearAllActions(TRUE));
 			 AssignCommand(oTworcPriest, ClearAllActions(TRUE));
 			 AssignCommand(oTworcSphinx, ClearAllActions(TRUE));
-			 DelayCommand(3.0, AssignCommand(oSayen, ActionSpeakString("Go, and return to me what is mine.", TALKVOLUME_TALK)));
+			 DelayCommand(3.0, AssignCommand(oSayen, ActionSpeakString("Go, and return to me what is mine. While I occupy her, go!", TALKVOLUME_TALK)));
 			 DelayCommand(6.0, AssignCommand(oTworcAnkh, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK)));
 			 DelayCommand(6.0, AssignCommand(oTworcPriest, ActionSpeakString("*Orcish* The Khan commands us!", TALKVOLUME_TALK)));
 			 DelayCommand(7.0, AssignCommand(oTworcCobra, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK)));
