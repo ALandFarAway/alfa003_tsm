@@ -27,8 +27,7 @@ void main()
  object oPC;
  if((GetIsPC(GetEnteringObject())) || (GetIsDMPossessed(GetEnteringObject()))){
  	oPC = GetEnteringObject();
- }
-						 
+
  if(((GetLocalInt(OBJECT_SELF, "RUN_ONCE") == 1) && (GetLocalInt(OBJECT_SELF, "RAN_ONCE") == 0)) || ((GetLocalInt(OBJECT_SELF, "RUN_ONCE") == 0) && (GetLocalInt(OBJECT_SELF, "RUN_ONCE" + GetName(oPC)) == 0)))
  		{SetLocalInt(OBJECT_SELF, "RAN_ONCE", 1);
 		 if(FindSubString(GetName(oPC), "Wynna") != -1) {
@@ -127,4 +126,5 @@ void main()
 		SetLocalInt(OBJECT_SELF, "RUN_ONCE"  + GetName(oPC), 1);			
 		}		
 	}	
+}
 }
