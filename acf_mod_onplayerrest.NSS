@@ -76,6 +76,18 @@ void main()
 	if(FindSubString(GetName(oRester), "Nio") != -1)
 	{oNioniel = oRester;}
 	
+	object oJhessi;
+	if(FindSubString(GetName(oRester), "Jhess") != -1)
+	{oJhessi = oRester;}
+	
+	object oBertilak;
+	if(FindSubString(GetName(oRester), "Bert") != -1)
+	{oBertilak = oRester;}
+	
+	object oRiki;
+	if(FindSubString(GetName(oRester), "Rik") != -1)
+	{oRiki = oRester;}
+	
 	object oSaveAgainst;
 	//if(oRester == oNioniel) {
 	//SendMessageToPC(oRester, "nLocal = " + IntToString(GetLocalInt(oRester, "DreamCooldown")));

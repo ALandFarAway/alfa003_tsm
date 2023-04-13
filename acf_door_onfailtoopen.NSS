@@ -67,7 +67,7 @@ void main() {
 				SendMessageToPC(oNio, "You feel a rush of assurance. This door *will* open to you.");
 				}
 			DelayCommand(15.0, ActionSpeakString("The scarab pulls its mandibles free, and spreads irridescent wings. It jumps to the doorframe and inserts its six legs and bloody mandibles into the eight holes on the door. Antennae unfurl, with small fans at their tips that settle gently into the upper indentations on the door.", TALKVOLUME_TALK));
-			DelayCommand(19.0, ActionCreateItemOnObject("003_it_amul_scarab_prot", oNio));
+			DelayCommand(29.0, ActionCreateItemOnObject("003_it_amul_scarab_prot", oNio));
 			DelayCommand(30.0, ActionSpeakString("The door unlocks. The scarab spreads wings and whirs back to your collar.", TALKVOLUME_TALK));
 			DelayCommand(30.0, ActionUnlockObject(OBJECT_SELF));
 			}

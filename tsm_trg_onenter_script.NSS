@@ -90,6 +90,7 @@ void main()
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcPriest, 10.0));
 			 DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcSphinx, 10.0));
 			 DelayCommand(10.0, AssignCommand(oCrystal, ActionCastSpellAtLocation(SPELL_CIRCLE_OF_DEATH, GetLocation(oTworcAnkh), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			 DelayCommand(15.0, AssignCommand(oSayen, ActionSpeakString("You are reborn. Into the portal! *A red light flares. There is a sound like a great fire suddenly alighting, and a wash of cool air that smells of stone and dust.", TALKVOLUME_TALK)));
 			 DelayCommand(15.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcAnkh)));
 			 DelayCommand(16.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcCobra)));
 			 DelayCommand(17.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcPriest)));
@@ -101,14 +102,14 @@ void main()
 			 DestroyObject(oTworcCobra, 20.0);
 			 DestroyObject(oTworcPriest, 20.0);
 			 DestroyObject(oTworcSphinx, 20.0);
-			 DelayCommand(21.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 1), ActionSpeakString("*Floats toward the crystal.", TALKVOLUME_TALK)));
+			 DelayCommand(21.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 1), ActionSpeakString("*Orcish* My...master....", TALKVOLUME_TALK)));
 			 DelayCommand(22.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 2), ActionSpeakString("*Drifts into the portal.", TALKVOLUME_TALK)));
-			 DelayCommand(23.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), ActionSpeakString("*Moans in what sounds like Mulhorandi* ", TALKVOLUME_TALK)));
+			 DelayCommand(23.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), ActionSpeakString("*Moans*", TALKVOLUME_TALK)));
 			 DelayCommand(24.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 4), ActionSpeakString("*Floats toward the crystal.", TALKVOLUME_TALK)));
-			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 1), 25.0);
-			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 2), 26.0);
-			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), 27.0);
-			 DestroyObject(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 4), 28.0);
+			 DestroyObject(GetObjectByTag("003_cr_ud_swwraith_orc", 1), 25.0);
+			 DestroyObject(GetObjectByTag("003_cr_ud_swwraith_orc", 2), 26.0);
+			 DestroyObject(GetObjectByTag("003_cr_ud_swwraith_orc", 3), 27.0);
+			 DestroyObject(GetObjectByTag("003_cr_ud_swwraith_orc", 0), 28.0);
 			 DelayCommand(30.0, DestroyObject(GetNearestObjectByTag("fx_demon_portal", oCrystal, 1)));
 			 DelayCommand(30.0, DestroyObject(GetNearestObject(OBJECT_TYPE_PLACED_EFFECT, oCrystal, 1)));
 			 
