@@ -56,21 +56,21 @@ void main()
 	effect eSummonGreen = EffectVisualEffect(VFX_DUR_ENTANGLE, FALSE);
 	   
 	effect eFreeze = EffectCutsceneImmobilize();
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 8.0);
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 30.0);
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_slv_gyasisayen") {
-		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (FindSubString(GetTag(oPerceived), "hu_orc_hiero", 0) != -1)) 
+		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && ((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))) 
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
 			 DelayCommand(3.0, ActionSpeakString("Go, and return to me what is mine.", TALKVOLUME_TALK));
-			 DelayCommand(4.0, ActionCastSpellAtLocation(SPELL_CREATE_GREATER_UNDEAD, GetLocation(oPerceived), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE));
+			 DelayCommand(4.0, ActionCastFakeSpellAtLocation(SPELL_CREATE_GREATER_UNDEAD, GetLocation(oCrystal), PROJECTILE_PATH_TYPE_DEFAULT));
 			 DelayCommand(9.0, ClearAllActions(TRUE));
 			 DestroyObject(OBJECT_SELF, 20.0);
 			 }
 	}
 	
 	if(FindSubString(GetTag(oPerceived), "hu_orc_hiero", 0) != -1) {
-		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && (GetIsPC(oPerceived))) 
+		if((GetLocalInt(OBJECT_SELF, "Spoken") == 0) && ((GetIsPC(oPerceived)) || (GetIsDMPossessed(oPerceived)))) 
 			{SetLocalInt(OBJECT_SELF, "Spoken", 1);
 			 ClearAllActions(TRUE);
 			 DelayCommand(4.0, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK));
