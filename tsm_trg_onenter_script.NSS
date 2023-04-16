@@ -65,40 +65,52 @@ void main()
 	effect eShake = EffectVisualEffect(VFX_FNF_SCREEN_SHAKE, FALSE);
 	effect eSummonGreen = EffectVisualEffect(VFX_DUR_ENTANGLE, FALSE);
 	object oOrc = GetWaypointByTag("rr_ext_orc_spawn");
+	object oGS = GetWaypointByTag("rr_ext_gs_spawn");
+	object oXav = GetWaypointByTag("rr_ext_xav_spawn");
 	effect eFreeze = EffectCutsceneParalyze();
 	effect eKnockdown = EffectKnockdown();
 	effect eDeath = EffectDeath(TRUE, TRUE, TRUE, TRUE);
 	
 	
-	SendMessageToAllDMs(GetName(oEntered) + " entered" + GetName(OBJECT_SELF));
+	//SendMessageToAllDMs(GetName(oEntered) + " entered" + GetName(OBJECT_SELF));
 	if ((GetIsPC(oEntered)) || (GetIsDMPossessed(oEntered))) {
-		object oSayen = GetNearestObjectByTag("003_cr_slv_gaysisayen", OBJECT_SELF, 1);
-		if(oSayen == OBJECT_INVALID) {
-			object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gaysisayen", GetLocation(OBJECT_SELF));
-			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oSayen, 30.0);
-			}
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShake, oEntered, 20.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eQuake, oEntered, 20.0);
-		if(ReflexSave(oEntered, 20, SAVING_THROW_TYPE_DIVINE, oSayen) == 0) {
+		if(ReflexSave(oEntered, 20, SAVING_THROW_TYPE_DIVINE, oCrystal) == 0) {
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oEntered, 20.0);
 			}
 		 		 
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0) {
 			SendMessageToAllDMs(GetName(OBJECT_SELF) + " firing.");
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
-			 DelayCommand(3.0, AssignCommand(oSayen, ClearAllActions(TRUE)));
-			 DelayCommand(3.0, AssignCommand(oSayen, ActionSpeakString("I WAS GYASI SAYEN. ALL...ALL IS LOST. ALL IS DEATH.", TALKVOLUME_TALK)));
+			 object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gyasisayen", GetLocation(oGS));
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oSayen, 30.0);
+			 SetFirstName(oCrystal, "Gyasi Sayen,");
+			 SetLastName(oCrystal, "Lich");
+			 DelayCommand(3.0, AssignCommand(oCrystal, ActionSpeakString("I WAS GYASI SAYEN. ALL...ALL IS LOST. ALL IS DEATH.", TALKVOLUME_TALK)));
 			 DelayCommand(6.0, ActionCreateWynCreature("abr_cr_hu_orc_hieroq", GetLocation(oOrc)));	   
 			 DelayCommand(7.0, ActionCreateWynCreature("abr_cr_hu_orc_hiero2",  GetLocation(oOrc)));	   
-			 DelayCommand(8.0, ActionCreateWynCreature("abr_cr_hu_orc_hiero4",  GetLocation(oOrc)));	   
-			 DelayCommand(9.0, ActionCreateWynCreature("abr_cr_hu_orc_hieron",  GetLocation(oOrc)));	   
-			 DelayCommand(15.0, AssignCommand(oSayen, ClearAllActions(TRUE)));
-			 DelayCommand(15.0, AssignCommand(oSayen, ActionSpeakString("You are reborn in crystal. I will have what is mine. The rest belongs to SET!", TALKVOLUME_TALK)));
-			 DelayCommand(15.0, ActionCreateWynEffect("tsm_afx_ajoc_black_cloud_big", GetLocation(oCrystal)));
-			 DelayCommand(20.0, AssignCommand(oCrystal, ActionSpeakString("*A green light flares then gradually fades, darkening, darkening, until it is sucking light from the surroundings instead of illuminating.", TALKVOLUME_TALK)));
-			 DelayCommand(20.0, ActionCreateWynPlaceable("abr_plc_crystal_dm_blc", GetLocation(oCrystal)));
+			 DelayCommand(7.0, ActionCreateWynCreature("abr_cr_hu_orc_twisted",  GetLocation(oOrc)));	   
+			 DelayCommand(7.0, ActionCreateWynCreature("abr_cr_hu_orc_twisted",  GetLocation(oOrc)));	   
+			 DelayCommand(6.0, SetFirstName(oCrystal, "Twisted Orc,"));
+			 DelayCommand(6.0, SetLastName(oCrystal, "Subchief"));
+			 DelayCommand(8.0, AssignCommand(oCrystal, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK)));
+			 DelayCommand(10.0, AssignCommand(oCrystal, ActionSpeakString("*Orcish* The Khan commands us!", TALKVOLUME_TALK)));
+			 DelayCommand(12.0, AssignCommand(oCrystal, ActionSpeakString("*Orcish* We die for you, great lord Khan!", TALKVOLUME_TALK)));
+			 DelayCommand(14.0, AssignCommand(oCrystal, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK)));
+			 DelayCommand(15.0, SetFirstName(oCrystal, "Gyasi Sayen,"));
+			 DelayCommand(15.0, SetLastName(oCrystal, "Lich"));
+			 
+			 DelayCommand(16.0, AssignCommand(oCrystal, ActionSpeakString("You are reborn in crystal. I will have what is mine. The rest belongs to SET!", TALKVOLUME_TALK)));
+			 DelayCommand(17.0, ActionCreateWynEffect("tsm_afx_black_fog_large", GetLocation(oCrystal)));
+			 DelayCommand(24.0, AssignCommand(oCrystal, ActionSpeakString("*A green light flares then gradually fades, darkening, darkening, until it is sucking light from the surroundings instead of illuminating.", TALKVOLUME_TALK)));
+			 DelayCommand(24.0, ActionCreateWynPlaceable("abr_plc_crystal_dm_blc", GetLocation(oCrystal)));
 			 DestroyObject(oCrystal, 25.0);
-			 DestroyObject(oSayen, 29.0);
+			 
+			 DelayCommand(26.0, ActionCreateWynCreature("003_cr_firegen_xavier", GetLocation(oXav)));	   
+			 DelayCommand(40.0, AssignCommand(oCrystal, ActionSpeakString("Giggling INFIDEL! Run from me! *Vanishes", TALKVOLUME_TALK)));
+			 
+			 DestroyObject(oSayen, 45.0);
 			 }
 	    }
 }

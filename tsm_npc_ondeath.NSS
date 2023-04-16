@@ -66,10 +66,8 @@ void main()
 		
 	if(FindSubString(GetTag(OBJECT_SELF), "cr_hu_orc_hiero") != -1)
 		{object oSwordwraith = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_ud_swwraith_orc", GetLocation(OBJECT_SELF));
-		 effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
-		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oSwordwraith, 5.0);
-		}	
-		
+		 }	
+	
 		
 	//KiS Bravery
 	
