@@ -391,23 +391,19 @@ void main()
 						 oOre = GetNextItemInInventory(OBJECT_SELF);
 			             DelayCommand(IntToFloat(nCount * 3), SendMessageToPC(oStudent, "The number " + IntToString(nCount) +" chunk of iron ore melts away."));
 			             }
-			            else if(GetTag(oOre) == "slv_tra200_alloy")
-			            {nAlloy = nAlloy +1;
-			             DestroyObject(oOre);
-						 oOre = GetNextItemInInventory(OBJECT_SELF);
-			             DelayCommand(IntToFloat(nAlloy * 3), SendMessageToPC(oStudent, "Alloy melts, adding its properties to the molten liquid."));
-			             }
-						 else if(GetTag(oOre) == "slv_tra200_rustydagger")
-			            {if(GetItemHasItemProperty(oOre, ITEM_PROPERTY_ENHANCEMENT_BONUS))
-							 {nDagger = nDagger +1;
-				              DelayCommand(IntToFloat(nAlloy * 3), SendMessageToPC(oStudent, "The rusty dagger melts, adding the enhancements it bears to the molten liquid."));
-				              }
-					     else
-						 	{DelayCommand(IntToFloat(nAlloy * 3), SendMessageToPC(oStudent, "The rusty dagger melts, sparks flying as the corrosion on it burns."));}
-						 DestroyObject(oOre);
+			        else if(GetTag(oOre) == "slv_tra200_alloy")
+				         {nAlloy = nAlloy +1;
+				          DestroyObject(oOre);
+						  oOre = GetNextItemInInventory(OBJECT_SELF);
+				          DelayCommand(IntToFloat(nAlloy * 3), SendMessageToPC(oStudent, "Alloy melts, adding its properties to the molten liquid."));
+				          }
+					else if(GetTag(oOre) == "slv_tra200_rustydagger")
+			            {nDagger = nDagger +1;
+				         DelayCommand(IntToFloat(nAlloy * 3), SendMessageToPC(oStudent, "Corrosion burns off the rusty dagger, revealing silver below, until it melts into the molten liquid."));
+				         DestroyObject(oOre);
 						 oOre = GetNextItemInInventory(OBJECT_SELF);
 			             }
-						else 
+					else 
 			            {nOther = nOther +1;
 			             DestroyObject(oOre);
 						 oOre = GetNextItemInInventory(OBJECT_SELF);
@@ -437,7 +433,7 @@ void main()
 							DelayCommand(31.0, SendMessageToPC(oStudent, "The trough now holds a recognizable bar of steel, cooling rapidly."));
 					     }
 					
-			else if((nCount != 4) || (nAlloy != 1) || (nOther != 0))
+			else if((nCount != 3) || (nAlloy != 1) || (nOther != 0))
 						{DelayCommand(30.0, SetUseableFlag(oMyTrough, TRUE));
 						 DelayCommand(31.0, SendMessageToPC(oStudent, "The trough now holds an amorphous blob of slag.  Something must have gone wrong with the transmutation!"));
 					     CreateItemOnObject("slv_tra200_slag", oMyTrough, 1);

@@ -65,30 +65,34 @@ void main()
 	effect eShake = EffectVisualEffect(VFX_FNF_SCREEN_SHAKE, FALSE);
 	effect eSummonGreen = EffectVisualEffect(VFX_DUR_ENTANGLE, FALSE);
 	object oOrc = GetWaypointByTag("rr_ext_orc_spawn");
-	object oTworcAnkh = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hieroq", GetLocation(oOrc));	   
-	object oTworcCobra = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hiero2",  GetLocation(oOrc));	   
-	object oTworcPriest = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hiero4",  GetLocation(oOrc));	   
-	object oTworcSphinx = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hieron",  GetLocation(oOrc));	   
-	object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gaysisayen", GetLocation(oOrc));
 	effect eFreeze = EffectCutsceneImmobilize();
 	effect eKnockdown = EffectKnockdown();
 	effect eDeath = EffectDeath(TRUE, TRUE, TRUE, TRUE);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oSayen, 30.0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcAnkh, 10.0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcCobra, 10.0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcPriest, 10.0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcSphinx, 10.0);
 	
 	
 	SendMessageToAllDMs(GetName(oEntered) + " entered" + GetName(OBJECT_SELF));
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShake, oEntered, 20.0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eQuake, oEntered, 20.0);
-	if(ReflexSave(oEntered, 20, SAVING_THROW_TYPE_DIVINE, oSayen) == 0) {
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oEntered, 20.0);
-		}		 
-	
-	if((GetLocalInt(OBJECT_SELF, "Fired") == 0) && ((GetIsPC(oEntered)) || (GetIsDMPossessed(oEntered)))) 
-			{SendMessageToAllDMs(GetName(OBJECT_SELF) + " firing.");
+	if ((GetIsPC(oEntered)) || (GetIsDMPossessed(oEntered))) {
+		object oSayen = GetNearestObjectByTag("003_cr_slv_gaysisayen", OBJECT_SELF, 1);
+		if(oSayen == OBJECT_INVALID) {
+			object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gaysisayen", GetLocation(OBJECT_SELF));
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oSayen, 30.0);
+			}
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eShake, oEntered, 20.0);
+		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eQuake, oEntered, 20.0);
+		if(ReflexSave(oEntered, 20, SAVING_THROW_TYPE_DIVINE, oSayen) == 0) {
+			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oEntered, 20.0);
+			}
+		 		 
+		if(GetLocalInt(OBJECT_SELF, "Fired") == 0) {
+			SendMessageToAllDMs(GetName(OBJECT_SELF) + " firing.");
+			 object oTworcAnkh = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hieroq", GetLocation(oOrc));	   
+			 object oTworcCobra = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hiero2",  GetLocation(oOrc));	   
+			 object oTworcPriest = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hiero4",  GetLocation(oOrc));	   
+			 object oTworcSphinx = CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_hu_orc_hieron",  GetLocation(oOrc));	   
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcAnkh, 10.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcCobra, 10.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcPriest, 10.0);
+			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oTworcSphinx, 10.0);
 			 SetLocalInt(OBJECT_SELF, "Fired", 1);
 			 AssignCommand(oSayen, ClearAllActions(TRUE));
 			 AssignCommand(oTworcAnkh, ClearAllActions(TRUE));
@@ -96,9 +100,9 @@ void main()
 			 AssignCommand(oTworcPriest, ClearAllActions(TRUE));
 			 AssignCommand(oTworcSphinx, ClearAllActions(TRUE));
 			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcAnkh, 20.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcCobra, 20.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcPriest, 20.0));
-			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcSphinx, 20.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcCobra, 21.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcPriest, 22.0));
+			 DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, oTworcSphinx, 23.0));
 			 DelayCommand(3.0, AssignCommand(oSayen, ActionSpeakString("I WAS GYASI SAYEN. ALL...ALL IS LOST. ALL IS DEATH.", TALKVOLUME_TALK)));
 			 DelayCommand(6.0, AssignCommand(oTworcAnkh, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK)));
 			 DelayCommand(6.0, AssignCommand(oTworcPriest, ActionSpeakString("*Orcish* The Khan commands us!", TALKVOLUME_TALK)));
@@ -108,25 +112,25 @@ void main()
 			 DelayCommand(9.0, AssignCommand(oSayen, ClearAllActions(TRUE)));
 			 DelayCommand(10.0, AssignCommand(oCrystal, ActionCastSpellAtLocation(SPELL_CIRCLE_OF_DEATH, GetLocation(oTworcAnkh), METAMAGIC_NONE, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 			 DelayCommand(15.0, AssignCommand(oSayen, ActionSpeakString("You are reborn in crystal. I will have what is mine. The rest belongs to SET!", TALKVOLUME_TALK)));
-			 DelayCommand(15.0, AssignCommand(oCrystal, ActionSpeakString("*A green light flares then gradually fades, darkening, darkening, until it is sucking light from the surroundings instead of illuminating.", TALKVOLUME_TALK)));
-			 DelayCommand(15.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcAnkh)));
 			 DelayCommand(15.0, ActionCreateWynEffect("tsm_afx_ajoc_black_cloud_big", GetLocation(oCrystal)));
-			 DelayCommand(16.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcCobra)));
-			 DelayCommand(17.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcPriest)));
-			 DelayCommand(18.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcSphinx)));
-			 DelayCommand(18.0, ActionCreateWynPlaceable("abr_plc_crystal_dm_blc", GetLocation(oCrystal)));
+			 DelayCommand(20.0, AssignCommand(oCrystal, ActionSpeakString("*A green light flares then gradually fades, darkening, darkening, until it is sucking light from the surroundings instead of illuminating.", TALKVOLUME_TALK)));
+			 DelayCommand(20.0, ActionCreateWynPlaceable("abr_plc_crystal_dm_blc", GetLocation(oCrystal)));
+			 DelayCommand(21.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcAnkh));
+			 DelayCommand(22.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcCobra));
+			 DelayCommand(23.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcPriest));
+			 DelayCommand(24.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcSphinx));
+			 DelayCommand(21.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcAnkh)));
+			 DelayCommand(22.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcCobra)));
+			 DelayCommand(23.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcPriest)));
+			 DelayCommand(24.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oTworcSphinx)));
+			 DestroyObject(oCrystal, 25.0);
 			 
-			 DestroyObject(oSayen, 20.0);
-			 
-			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcAnkh));
-			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcCobra));
-			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcPriest));
-			 DelayCommand(20.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oTworcSphinx));
-			 DelayCommand(21.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 1), ActionSpeakString("*Orcish* My...master....", TALKVOLUME_TALK)));
-			 DelayCommand(22.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 2), ActionSpeakString("*Screams a horrible shriek of realization", TALKVOLUME_TALK)));
-			 DelayCommand(23.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 3), ActionSpeakString("*Moans*", TALKVOLUME_TALK)));
-			 DelayCommand(24.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", oCrystal, 4), ActionSpeakString("*Orcish* What has...been done...to....", TALKVOLUME_TALK)));
+			 DelayCommand(25.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", OBJECT_SELF, 1), ActionSpeakString("*Orcish* My...master....", TALKVOLUME_TALK)));
+			 DelayCommand(26.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", OBJECT_SELF, 2), ActionSpeakString("*Deckon...Thar....", TALKVOLUME_TALK)));
+			 DelayCommand(27.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", OBJECT_SELF, 3), ActionSpeakString("*Moans*", TALKVOLUME_TALK)));
+			 DelayCommand(28.0, AssignCommand(GetNearestObjectByTag("003_cr_ud_swwraith_orc", OBJECT_SELF, 4), ActionSpeakString("*Orcish* What has...been done...to....", TALKVOLUME_TALK)));
+			 DestroyObject(oSayen, 29.0);
 			 
 			 }
-	    
+	    }
 }
