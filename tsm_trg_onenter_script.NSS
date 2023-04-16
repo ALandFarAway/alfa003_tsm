@@ -107,10 +107,10 @@ void main()
 			 DelayCommand(24.0, ActionCreateWynPlaceable("abr_plc_crystal_dm_blc", GetLocation(oCrystal)));
 			 DestroyObject(oCrystal, 25.0);
 			 
-			 DelayCommand(26.0, ActionCreateWynCreature("003_cr_firegen_xavier", GetLocation(oXav)));	   
-			 DelayCommand(40.0, AssignCommand(oCrystal, ActionSpeakString("Giggling INFIDEL! Run from me! *Vanishes", TALKVOLUME_TALK)));
+			 //DelayCommand(26.0, ActionCreateWynCreature("003_cr_firegen_xavier", GetLocation(oXav)));	   
+			 //DelayCommand(40.0, AssignCommand(oCrystal, ActionSpeakString("Giggling INFIDEL! Run from me! *Vanishes", TALKVOLUME_TALK)));
 			 
-			 DestroyObject(oSayen, 45.0);
+			 DestroyObject(oSayen, 26.0);
 			 }
 	    }
 }

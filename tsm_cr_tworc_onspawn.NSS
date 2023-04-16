@@ -30,16 +30,21 @@ void main() {
 	effect eFreeze = EffectCutsceneParalyze();
 	effect eDeath = EffectDeath(TRUE, TRUE, TRUE, TRUE);
 	object oTrigger = GetObjectByTag("rr_trg_onenter_script", 0);
-	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 20.0);
-	AssignCommand(OBJECT_SELF, ClearAllActions(TRUE));
-	DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, OBJECT_SELF, 20.0));
 	if(GetTag(GetArea(OBJECT_SELF)) == "7e_ext_rauvin_evld_rd") 
-		{DelayCommand(25.0, AssignCommand(oTrigger, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, OBJECT_SELF)));}
+		{ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 20.0);
+		AssignCommand(OBJECT_SELF, ClearAllActions(TRUE));
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, OBJECT_SELF, 20.0));
+		DelayCommand(25.0, AssignCommand(oTrigger, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, OBJECT_SELF)));}
 			 
 	
 	if(GetTag(OBJECT_SELF) == "003_cr_ud_swwraith_orc"){
 		 effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, OBJECT_SELF, 5.0);
 		 SpeakString("*A shape shimmers out of the dead orc", TALKVOLUME_TALK);
-		}		 		 		 		 
+		}	
+		
+	if(GetTag(OBJECT_SELF) == "003_cr_twisted_hang"){
+		 effect eParalyze = EffectCutsceneParalyze();
+		 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, OBJECT_SELF);
+  		 }		 		 		 		 
 }

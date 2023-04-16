@@ -63,7 +63,8 @@ void main()
 	object oLieDownB = GetObjectByTag("abr_cr_hu_orc_twist_fsB", 0);
 	effect eQuake = EffectVisualEffect(VFX_SPELL_HIT_EARTHQUAKE, FALSE);
 	effect eShake = EffectVisualEffect(VFX_FNF_SCREEN_SHAKE, FALSE);
-	
+	effect eParalyze = EffectCutsceneParalyze();
+		 
 	effect eKnockdown = EffectKnockdown();
 	
 	object oSayen = GetNearestObjectByTag("003_cr_invis_caster", OBJECT_SELF, 1);
@@ -85,13 +86,14 @@ void main()
 			}
 			
 		if(GetTag(OBJECT_SELF) == "tsm_trg_onenter_script_a") {
-			object oSpeared = GetObjectByTag("abr_cr_hu_orc_hieroq_a", 0);
+			object oSpeared = GetObjectByTag("003_cr_twisted_hang", 0);
 			AssignCommand(oSpeared, ActionSpeakString("*Raises head and smiles beneath bloody tusks.* De...khan...thar.... *Rams body forward onto the sword.", TALKVOLUME_TALK));
 			DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, oSpeared));
-			DelayCommand(3.0, ActionCreateWynCreature("003_cr_ud_swwraith_orc", GetLocation(oSpeared)));
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oLieDown, 60000.0);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oLieDownB, 60000.0);
-			}
+			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, oLieDown);
+  			ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, oLieDownB);
+  			}
 			
 		if(GetTag(OBJECT_SELF) == "tsm_trg_onenter_script_b") {
 			object oDedicated = GetObjectByTag("abr_cr_hu_orc_twist_fs", 0);
