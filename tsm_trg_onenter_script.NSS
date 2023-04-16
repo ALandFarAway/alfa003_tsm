@@ -133,6 +133,7 @@ void main()
 			object oZova = GetObjectByTag("003_pc_zova", 0);
 			object oRiki = GetObjectByTag("003_pc_riki", 0);
 			object oDerry = GetObjectByTag("003_pc_riki", 0);
+			object oGlaus = GetObjectByTag("003_pc_glaustigan", 0);
 			while(oPC != OBJECT_INVALID) {
 				string sPCName = GetName(oPC);
 				if(FindSubString(sPCName, "Jhess") != -1) {
@@ -160,6 +161,9 @@ void main()
 				if(FindSubString(sPCName, "Derr") != -1) {
 					oDerry = oPC;
 				}
+				if(FindSubString(sPCName, "Glaus") != -1) {
+					oGlaus = oPC;
+				}
 			oPC = GetNextPC(TRUE);
 			}
 			 
@@ -170,6 +174,7 @@ void main()
 			DelayCommand(20.0, SendMessageToPC(oZova, "You see horrible figments flickering around Sayen: Saerela screaming as she is consumed by a black fire emanating from a crystal globe; twin scimitars slitting Derry's throat; Aglaril's death in the Temple of Isis."));
 			DelayCommand(20.0, SendMessageToPC(oRiki, "You saw a figment flickering around Sayen: A coin, golden on one side and corroded on the other, flipping in slow motion. (Please roll d100 and tell Wynna the result.)"));
 			DelayCommand(20.0, SendMessageToPC(oDerry, "You saw horrible figments flickering around Sayen: Zova, with pupil-less eyes of red and hands around your neck; Riki, a corpse frozen within a block of ice; a great golden dragon battering down the keep of Olostin's Hold while townspeople scream and flee."));
+			DelayCommand(20.0, SendMessageToPC(oGlaus, "You see horrible figments flickering around Sayen: Felbarr, besieged by half-crystalized orcs; a mummy with a helmet made from the top half of a humanoid skull standing over Bertilak's disease-wracked body; Saerela, showing you the five-faceted ring so contemptuously."));
 			
 			 }
 	    }

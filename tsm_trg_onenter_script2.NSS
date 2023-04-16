@@ -142,6 +142,14 @@ void main()
 							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: A great golden dragon battering down the keep of Olostin's Hold while townspeople scream and flee."));}
 							}
 						}
+					if(FindSubString(sPCName, "Glaus") != -1) {
+						if(Random(4) == 1) {
+							int nMessage = Random(3);
+							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Felbarr, besieged by half-crystalized orcs."));}
+							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: A mummy with a helmet made from the top half of a humanoid skull standing over Bertilak's disease-wracked body."));}
+							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Saerela, showing you the five-faceted ring so contemptuously."));}
+							}
+						}
 			}
 			 
 				
