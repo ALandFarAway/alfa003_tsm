@@ -104,26 +104,17 @@ void main()
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oLieDownB, 60000.0);
 			}
 		
-		if(GetTag(OBJECT_SELF) == "tsm_trg_onenter_script_d") {
-			object oSafety = GetObjectByTag("trap_wp_custom_safety", 0);
-			object oAxes = GetObjectByTag("003_trap_custom_axe_major_plc", 0);
-			
-			
-			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oLieDown, 60000.0);
-			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oLieDownB, 60000.0);
-			}
-		
-		
+				
 		if(GetTag(OBJECT_SELF) == "tsm_trg_onenter_script_c") {
 			object oCrystal = GetObjectByTag("rauvin_crystal_black", 0);
 			effect eBeamblack = EffectBeam(VFX_BEAM_NECROMANCY, oCrystal, BODY_NODE_CHEST, FALSE);
 			string sList = ACR_GetSpellList(oEntered, 1);
 			SendMessageToAllDMs(sList);
 			DelayCommand(1.0, AssignCommand(oCrystal, ActionCastSpellAtObject(SPELL_DISPEL_MAGIC, oEntered, METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+			DelayCommand(6.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblack, oEntered, 10.0));
 			if((GetLocalInt(oEntered, "MJSaved") != 1) && (FindSubString(sList, "Protection from Evil") == -1)) {
 				if(WillSave(oEntered, 18, SAVING_THROW_TYPE_SPELL, oSayen)==0) {
 					SendMessageToPC(oEntered, "An overwhelming dizziness strikes you. Your thoughts teeter on the edge of an abyss...and then you are falling into that abyss, feeling your soul pushed out of your physical being by a malevolent force.");
-					DelayCommand(1.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamblack, oEntered, 10.0));
 					object oEvilMe = CopyObject(oEntered, GetLocation(oEntered), OBJECT_INVALID);
 					int nGold = GetGold(oEvilMe);
 					ChangeToStandardFaction(oEvilMe, STANDARD_FACTION_HOSTILE);
@@ -192,14 +183,10 @@ void main()
 				AssignCommand(oTworcSphinx, ClearAllActions(TRUE));
 				DelayCommand(1.0, AssignCommand(oTworcAnkh, ActionSpeakString("De-Khan Thar!", TALKVOLUME_TALK)));
 				DelayCommand(2.0, AssignCommand(oTworcPriest, ActionSpeakString("*Orcish* Return the Khan's property!", TALKVOLUME_TALK)));
-				DelayCommand(3.0, AssignCommand(oTworcCobra, ActionSpeakString("*Orcish* There they are! As the Khan foretold!", TALKVOLUME_TALK)));
-				DelayCommand(4.0, AssignCommand(oTworcSphinx, ActionSpeakString("*Orcish* Freed from enslavement by the Khan!", TALKVOLUME_TALK)));
-				DelayCommand(12.0, AssignCommand(oCrystal, ActionCastSpellAtObject(SPELL_BLADE_BARRIER_WALL, oDoor, METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-				DelayCommand(18.0, AssignCommand(oCrystal, ActionCastSpellAtObject(SPELL_BLADE_BARRIER_WALL, oCrystalA, METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-				DelayCommand(24.0, AssignCommand(oCrystal, ActionCastSpellAtObject(SPELL_BLADE_BARRIER_WALL, oCrystalB, METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-				DelayCommand(30.0, AssignCommand(oCrystal, ActionCastSpellAtObject(SPELL_BLADE_BARRIER_WALL, oCrystalC, METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-				DelayCommand(36.0, AssignCommand(oCrystal, ActionCastSpellAtObject(SPELL_BLADE_BARRIER_WALL, oCrystalD, METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
-			}
+				DelayCommand(3.0, AssignCommand(oTworcCobra, ActionSpeakString("*Orcish* There! As the Khan foretold! Kill them!", TALKVOLUME_TALK)));
+				DelayCommand(4.0, AssignCommand(oTworcSphinx, ActionSpeakString("*Orcish* The Khan has freed us from enslavement!", TALKVOLUME_TALK)));
+				DelayCommand(12.0, AssignCommand(oCrystal, ActionCastSpellAtLocation(SPELL_BLADE_BARRIER_WALL, GetLocation(oDoor), METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
+				}
 		}
 	}
 }

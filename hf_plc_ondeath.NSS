@@ -26,73 +26,53 @@ void main() {
     object oPCThree = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 3);
     object oPCFour = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 4);
     object oPCFive = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 5);
-    object oNPCOne = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 1);
-    object oNPCTwo = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_NOT_PC, OBJECT_SELF, 2);
+    object oPCSix = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 6);
+    object oPCSeven = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 7);
     string sCreateCr = "";
-	object oOrbCreate = GetWaypointByTag("rr_orb_create_wp");
-	object oOrbGlow = GetObjectByTag("fx_okku_mound_rr", 0);
-	object oGlobe = GetObjectByTag("phalorm_globe_black", 0);
 	
-  	if(GetTag(OBJECT_SELF)=="phalorm_orb_black") {
-		ActionCreateWynPlacedEffect("fx_demon_portal", GetLocation(oGlobe));
-		sCreateCr = "abr_cr_ou_efreet_lord";
-		object oEfreet = CreateObject(OBJECT_TYPE_CREATURE, sCreateCr, GetLocation(oOrbCreate), TRUE);
+  	if(GetTag(OBJECT_SELF)=="abr_plc_crystal_dm_blc") {
 		
-		}
-	
-	
-if(GetTag(OBJECT_SELF) == "giant_crystal_source")
-{object oForceDown = GetObjectByTag("giant_crystal_source_static", 0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eHowl, OBJECT_SELF, 5.0);
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eHowl, oForceDown, 5.0);
-		ActionSpeakString("The giant crystal's pulsing in lights both visible and aurific reaches a crescendo, for a moment blazing on all frequencies as a brilliant white. Runes composed of denser black crystal are backlit, encrusted all over the cleaner lines of shafts of crystal at the heart. For a moment, you see names, flashburned onto your retinas, names in a dozen common racial languages.  Then the giant crystal explodes in a burst of power of all types: physical, sonic, arcane, and divine.", TALKVOLUME_TALK);
-		if(GetDistanceBetween(oPCOne, OBJECT_SELF) <= 30.0) {
+		if((GetDistanceBetween(oPCOne, OBJECT_SELF) <= 30.0) && (ReflexSave(oPCOne,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCOne); 
 	    	 ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCOne, 3.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCOne, 3.0); 
 	     }
-		if(GetDistanceBetween(oPCTwo, OBJECT_SELF) <= 30.0) {
+		if((GetDistanceBetween(oPCTwo, OBJECT_SELF) <= 30.0)  && (ReflexSave(oPCTwo,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCTwo); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCTwo, 10.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCTwo, 10.0); 
 	     }
-		if(GetDistanceBetween(oPCThree, OBJECT_SELF) <= 30.0) {
+		if((GetDistanceBetween(oPCThree, OBJECT_SELF) <= 30.0)  && (ReflexSave(oPCThree,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCThree); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCThree, 10.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCThree, 10.0); 
 	     }
 		
-		if(GetDistanceBetween(oPCFour, OBJECT_SELF) <= 30.0) {
+		if((GetDistanceBetween(oPCFour, OBJECT_SELF) <= 30.0)  && (ReflexSave(oPCFour,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCFour); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCFour, 10.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCFour, 10.0); 
 	     }
-		if(GetDistanceBetween(oPCFive, OBJECT_SELF) <= 30.0) {
+		if((GetDistanceBetween(oPCFive, OBJECT_SELF) <= 30.0)  && (ReflexSave(oPCFive,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCFive); 
 	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCFive, 10.0); 
 		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCFive, 10.0); 
 	     }
-		if(GetDistanceBetween(oNPCOne, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oNPCOne); 
-	    	 ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oNPCOne, 10.0); 
-		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oNPCOne, 10.0); 
+		if((GetDistanceBetween(oPCSix, OBJECT_SELF) <= 30.0)  && (ReflexSave(oPCSix,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCSix); 
+	    	 ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCSix, 10.0); 
+		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCSix, 10.0); 
 	     }
-		if(GetDistanceBetween(oNPCTwo, OBJECT_SELF) <= 30.0) {
-			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oNPCTwo); 
-	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oNPCTwo, 10.0); 
-		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oNPCTwo, 10.0); 
+		if((GetDistanceBetween(oPCSeven, OBJECT_SELF) <= 30.0)  && (ReflexSave(oPCSeven,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
+			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCSeven); 
+	         ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eKnockdown, oPCSeven, 10.0); 
+		     ApplyEffectToObject(DURATION_TYPE_TEMPORARY,eShake, oPCSeven, 10.0); 
 	     }
 		 
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0));
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oPCOne, 5.0));
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oPCTwo, 5.0));
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oNPCOne, 5.0));
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oPCThree, 5.0));
-		DelayCommand(10.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0));
-		DelayCommand(15.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, oForceDown, 5.0));
-		DestroyObject(oForceDown, 20.0);
+		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eImplosion, OBJECT_SELF, 5.0));
+		DestroyObject(OBJECT_SELF, 10.0);
 		
 		}
 }
