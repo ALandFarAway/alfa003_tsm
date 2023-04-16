@@ -30,9 +30,7 @@ void main() {
     object oPCSeven = GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 7);
     string sCreateCr = "";
 	
-  	if(GetTag(OBJECT_SELF)=="abr_plc_crystal_dm_blc") {
-		
-		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
+  		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eExplosion, OBJECT_SELF, 5.0);
 		ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eHowl, OBJECT_SELF, 5.0);
 		if((GetDistanceBetween(oPCOne, OBJECT_SELF) <= 30.0) && (ReflexSave(oPCOne,15, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0)) {
 			 ApplyEffectToObject(DURATION_TYPE_INSTANT,eStruck, oPCOne); 
@@ -74,5 +72,5 @@ void main() {
 		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eImplosion, OBJECT_SELF, 5.0));
 		DestroyObject(OBJECT_SELF, 10.0);
 		
-		}
+		
 }

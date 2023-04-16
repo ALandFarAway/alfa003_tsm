@@ -67,7 +67,7 @@ void main()
 	}
 	
 	//Unhallowed Turn Resistance Increase
-	if(FindSubString(GetTag(GetArea(OBJECT_SELF)), "5f_int_nether_dt") != -1) {
+	if((FindSubString(GetTag(GetArea(OBJECT_SELF)), "5f_int_nether_dt") != -1)|| (FindSubString(GetTag(GetArea(OBJECT_SELF)), "7e_int_rauvin")) != -1) {
 		if((GetRacialType(OBJECT_SELF) == RACIAL_TYPE_UNDEAD) || (GetSubRace(OBJECT_SELF) == RACIAL_SUBTYPE_UNDEAD)) {
 		 effect eTurnInc = EffectTurnResistanceIncrease(4);
 		 int nBefore = GetTurnResistanceHD(OBJECT_SELF);

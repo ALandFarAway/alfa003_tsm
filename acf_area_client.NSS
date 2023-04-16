@@ -138,7 +138,8 @@ void main() {
 	object oArea = GetArea(oEnterer);
 	
 	
-	if((FindSubString(GetTag(oArea), "5f_int_nether_dt") != -1) && (GetLocalInt(oEnterer, "Unhallow") != 1)) {
+	if((((FindSubString(GetTag(GetArea(OBJECT_SELF)), "5f_int_nether_dt") != -1)|| (FindSubString(GetTag(GetArea(OBJECT_SELF)), "7e_int_rauvin"))) != -1) 
+	 && (GetLocalInt(oEnterer, "Unhallow") != 1)) {
 		DelayCommand(5.0, SetLocalInt(oEnterer, "Unhallow", 1));
 		if(ACR_HasCasterClass(oEnterer, "DIVINE")) {SendMessageToPC(oEnterer, "You feel the deathly chill of unhallowed ground.");}
 	}

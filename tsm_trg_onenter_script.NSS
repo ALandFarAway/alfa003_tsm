@@ -70,7 +70,7 @@ void main()
 	effect eFreeze = EffectCutsceneParalyze();
 	effect eKnockdown = EffectKnockdown();
 	effect eDeath = EffectDeath(TRUE, TRUE, TRUE, TRUE);
-	
+	effect eFear = EffectFrightened();
 	
 	//SendMessageToAllDMs(GetName(oEntered) + " entered" + GetName(OBJECT_SELF));
 	if ((GetIsPC(oEntered)) || (GetIsDMPossessed(oEntered))) {
@@ -79,11 +79,22 @@ void main()
 		if(ReflexSave(oEntered, 20, SAVING_THROW_TYPE_DIVINE, oCrystal) == 0) {
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oEntered, 20.0);
 			}
-		 		 
+		
+				 
 		if(GetLocalInt(OBJECT_SELF, "Fired") == 0) {
 			SendMessageToAllDMs(GetName(OBJECT_SELF) + " firing.");
-			 SetLocalInt(OBJECT_SELF, "Fired", 1);
-			 object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gyasisayen", GetLocation(oGS));
+			SetLocalInt(OBJECT_SELF, "Fired", 1);
+			object oHin = GetFirstPC();
+			while(oHin != OBJECT_INVALID) {
+			if(GetHitDice(oHin) < 5) {
+				ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFear, oHin, 30.0);
+				SendMessageToPC(oHin, "You are frightened! You turn and run.");
+				object oRunAway = GetWaypointByTag("Run_Away");
+				AssignCommand(oHin, ActionForceMoveToObject(oRunAway, TRUE, 5.0));
+				}
+			oHin = GetNextPC();
+			}
+			object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gyasisayen", GetLocation(oGS));
 			 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, oSayen, 30.0);
 			 SetFirstName(oCrystal, "Gyasi Sayen,");
 			 SetLastName(oCrystal, "Lich");
@@ -111,6 +122,55 @@ void main()
 			 //DelayCommand(40.0, AssignCommand(oCrystal, ActionSpeakString("Giggling INFIDEL! Run from me! *Vanishes", TALKVOLUME_TALK)));
 			 
 			 DestroyObject(oSayen, 26.0);
+			 
+			 object oPC = GetFirstPC(TRUE);
+			object oJhessi = GetObjectByTag("003_pc_jhessi_2", 0);
+			object oNio = GetObjectByTag("003_pc_nioniel_2", 0);;
+			object oSaerela = GetObjectByTag("003_pc_saerela_2", 0);
+			object oBertilak = GetObjectByTag("003_pc_bertilak_2", 0);
+			object oBellie = GetObjectByTag("003_pc_bellie_2", 0);
+			object oBae = GetObjectByTag("003_pc_baeithra_2", 0);
+			object oZova = GetObjectByTag("003_pc_zova", 0);
+			object oRiki = GetObjectByTag("003_pc_riki", 0);
+			object oDerry = GetObjectByTag("003_pc_riki", 0);
+			while(oPC != OBJECT_INVALID) {
+				string sPCName = GetName(oPC);
+				if(FindSubString(sPCName, "Jhess") != -1) {
+					oJhessi = oPC;
+				}
+				if(FindSubString(sPCName, "Nio") != -1) {
+					oNio = oPC;
+				}
+				if(FindSubString(sPCName, "Saerel") != -1) {
+					oSaerela = oPC;
+				}
+				if(FindSubString(sPCName, "Bert") != -1) {
+					oBertilak = oPC;
+				}
+				if(FindSubString(sPCName, "Bell") != -1) {
+					oBellie = oPC;
+				}
+				
+				if(FindSubString(sPCName, "Zov") != -1) {
+					oZova = oPC;
+				}
+				if(FindSubString(sPCName, "Rik") != -1) {
+					oRiki = oPC;
+				}
+				if(FindSubString(sPCName, "Derr") != -1) {
+					oDerry = oPC;
+				}
+			oPC = GetNextPC(TRUE);
+			}
+			 
+				
+			DelayCommand(20.0, SendMessageToPC(oJhessi, "You see horrible figments flickering around Sayen: Bertilak's flesh melting away from his face, leaving a skull with blazing eyes; Ostelle engulfed in black fire; a harpy with rotting flesh flaring her wings over a bloodied Aedelvana."));
+			DelayCommand(20.0, SendMessageToPC(oBertilak, "You see horrible figments flickering around Sayen: Jhessi chained to a wall in a Banite cell with Phaedra's hand around her throat; Lord Elthondsson upon a funeral pyre, but still alive, screaming; yourself hanging in a cage over snow, watching as a barbarian cleric brings Jhessi back to life."));
+			DelayCommand(20.0, SendMessageToPC(oSaerela, "You see horrible figments flickering around Sayen: A baelnorn's laughing reflection in a cracked mirror; Yeshelne calling down a flamestrike upon your head; Nioniel falling into an abyss."));
+			DelayCommand(20.0, SendMessageToPC(oZova, "You see horrible figments flickering around Sayen: Saerela screaming as she is consumed by a black fire emanating from a crystal globe; twin scimitars slitting Derry's throat; Aglaril's death in the Temple of Isis."));
+			DelayCommand(20.0, SendMessageToPC(oRiki, "You saw a figment flickering around Sayen: A coin, golden on one side and corroded on the other, flipping in slow motion. (Please roll d100 and tell Wynna the result.)"));
+			DelayCommand(20.0, SendMessageToPC(oDerry, "You saw horrible figments flickering around Sayen: Zova, with pupil-less eyes of red and hands around your neck; Riki, a corpse frozen within a block of ice; a great golden dragon battering down the keep of Olostin's Hold while townspeople scream and flee."));
+			
 			 }
 	    }
 }

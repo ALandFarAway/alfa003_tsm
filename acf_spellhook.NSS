@@ -2647,7 +2647,7 @@ void main()
 	*/
 		 
 	//Stopping summons in Set UnHallowed Area
-	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "5f_int_nether_dt") != -1) {
+	if((FindSubString(GetTag(GetArea(GetLastSpellCaster())), "5f_int_nether_dt") != -1) || (FindSubString(GetTag(GetArea(GetLastSpellCaster())), "7e_int_rauvin") != -1)) {
 		if(GetIsPC(oCaster)) {
 			if((nSpellId == SPELL_SUMMON_CREATURE_I) || (nSpellId == SPELL_SUMMON_CREATURE_II) || (nSpellId == SPELL_SUMMON_CREATURE_III) || (nSpellId == SPELL_SUMMON_CREATURE_IV) || (nSpellId == SPELL_SUMMON_CREATURE_V) || (nSpellId == SPELL_SUMMON_CREATURE_VI))
 				{SetModuleOverrideSpellScriptFinished();
@@ -2667,9 +2667,11 @@ void main()
 				 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eSpellFail, oCaster, 6.0);
 				 if(WillSave(oCaster, 15, SAVING_THROW_TYPE_DIVINE, GetArea(oCaster))) {SendMessageToPC(oCaster, "You feel something trying to take over your planar spell, but your willpower manages to maintain control of the spell!");}
 				 else {
-				 	SendMessageToPC(oCaster, "You feel something fiery and evil taking over your planar spell!");
+				 	SendMessageToPC(oCaster, "You feel something fiery and evil turning its attention to your planar spell...");
+				 	SendMessageToPC(oCaster, "...but its attention passes on.");
 				 	SendMessageToAllDMs(GetName(oCaster) + "'s Planar spell turned against them in " + sArea + ".");
-				 	CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_ou_efreet_lord", GetLocation(oCaster), FALSE);}
+				 	//CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_ou_efreet_lord", GetLocation(oCaster), FALSE);
+					}
 				}
 			}
 		}
