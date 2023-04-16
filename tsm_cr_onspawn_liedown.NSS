@@ -7,6 +7,8 @@
 void main()
 {
 	object oTarget = OBJECT_SELF;
-	AssignCommand(oTarget, ActionPlayAnimation(ANIMATION_FIREFORGET_LAYDOWN, 1.0, 200.0));
-					      
+	effect eKnockdown = EffectKnockdown();
+	ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, OBJECT_SELF, 60000.0);
+		 
+	 				      
    }

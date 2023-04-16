@@ -15,18 +15,22 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Includes ////////////////////////////////////////////////////////////////////
+void ActionCreateWynCreature(string sCreature, location lLocCreature)
+{
+    CreateObject(OBJECT_TYPE_CREATURE, sCreature, lLocCreature, TRUE, "janni_owlbear");
+}
 
 #include "acr_spawn_i"
 
 
 void main() {
 
-	object oOwlBear = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_mb_owlbear_cub", GetLocation(OBJECT_SELF));
-	DelayCommand(2.0, AssignCommand(oOwlBear, ActionForceFollowObject(OBJECT_SELF, 0.5)));
 	ActionCastSpellAtObject(SPELL_GREATER_INVISIBILITY, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ActionCastSpellAtObject(SPELL_ETHEREALNESS, OBJECT_SELF, METAMAGIC_EXTEND, TRUE, 10, PROJECTILE_PATH_TYPE_DEFAULT, TRUE);
 	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	
+	DelayCommand(6.0, ActionCreateWynCreature("003_cr_mb_owlbear_cub", GetLocation(OBJECT_SELF)));
+	DelayCommand(10.0, AssignCommand(GetObjectByTag("003_cr_mb_owlbear_cub", 0), ActionForceFollowObject(OBJECT_SELF, 0.5)));
 	 
 		
 	 

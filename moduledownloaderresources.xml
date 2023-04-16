@@ -1325,7 +1325,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="549B95F99D20B8E566E8204D034FB28DBBD81EF7" downloadHash="DF1CD006F47628D5150F8F0B56D7D85752657B7C" name="7e_int_rauvin_ruins.trx" dlsize="993013" size="1637246" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="93528BAEA193F73A622FB149E65B15653A20F116" downloadHash="31D67C483F1C0C86021C79CF7A3F7F9879EE621A" name="7e_int_rauvin_ruins.trx" dlsize="978207" size="1624434" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1365,7 +1365,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="B0131CBA2A3F0719B060716E83669DBC3050D844" downloadHash="61A8A93EABE720896F3E05B579A2596D8632D70C" name="003_fugue plane.trx" dlsize="1367967" size="6196100" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="083A7BAA45C6777615E719E104A99D6F613A981A" downloadHash="C025A2734CCEE6DEA45B84494F045628BF9FA45A" name="003_fugue plane.trx" dlsize="1383744" size="6213698" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

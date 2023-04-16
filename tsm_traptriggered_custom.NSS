@@ -69,10 +69,12 @@ void main()
 		
 		//Axe Traps
 		
-		if((GetTag(OBJECT_SELF)== "003_trap_custom_axe_on") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 2))
+		if(GetTag(OBJECT_SELF)== "003_trap_custom_axe_on")
 			{SendMessageToAllDMs(GetName(oVictim) + " entered axe sweep area of " + GetName(OBJECT_SELF));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
+			 object oTrapWP = GetNearestObjectByTag("trap_wp_custom_center", OBJECT_SELF, 1);
+			 object oTrapSafetyWP = GetNearestObjectByTag("trap_wp_custom_safety", OBJECT_SELF, 1);
 			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 0);
 			 int nInc;
@@ -109,32 +111,34 @@ void main()
 			}
 			
 			
-		if((GetTag(OBJECT_SELF)== "003_trap_custom_axe_major") && (GetLocalInt(OBJECT_SELF, "Trap_Readiness") == 0))
-			{sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
-			 oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
-	 		 SetLocalInt(oTrapTrg, "Trap_Readiness", 2);
-			 SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
-			 SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
-			 SendMessageToPC(oVictim, sSprung);
-			 DelayCommand(1800.0, SetLocalInt(oTrapTrg, "Trap_Readiness", 0));
+		if(GetTag(OBJECT_SELF)== "003_trap_custom_axe_major") 
+			{//sTrapTrg = GetLocalString(OBJECT_SELF, "TRAP_TRG_TAG");
+			 //oTrapTrg = GetNearestObjectByTag(sTrapTrg, OBJECT_SELF, 1);
+	 		 //SetLocalInt(oTrapTrg, "Trap_Readiness", 2);
+			 //SetLocalInt(OBJECT_SELF, "Trap_Readiness", 2);
+			 //SendMessageToAllDMs(GetName(oVictim) + " got: " + sSprung + " from " + GetName(OBJECT_SELF));
+			// SendMessageToPC(oVictim, sSprung);
+			 //DelayCommand(1800.0, SetLocalInt(oTrapTrg, "Trap_Readiness", 0));
 			 effect eTrapDamage = EffectDamage(nDamage, DAMAGE_TYPE_SLASHING, DAMAGE_POWER_NORMAL, FALSE);
 			 effect eKnockdown = EffectKnockdown();
+			 object oTrapWP = GetNearestObjectByTag("trap_wp_custom_center", OBJECT_SELF, 1);
+			 object oTrapSafetyWP = GetNearestObjectByTag("trap_wp_custom_safety", OBJECT_SELF, 1);
 			 //AssignCommand(oTrapPlc, ActionPlayAnimation(ANIMATION_PLACEABLE_OPEN, 1.0, 4.0));
 			 if(GetLocalInt(OBJECT_SELF, "Create") !=1) {
 			 	object oTrapPlc = CreateObject(OBJECT_TYPE_PLACEABLE, "003_trap_custom_axe_major_plc", GetLocation(oTrapWP), FALSE);
 			 	SetLocalInt(OBJECT_SELF, "Create", 1);
 				}
-			 DestroyObject(oTrapPlc, 1800.0); 
-			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 DestroyObject(oTrapPlc, 10.0); 
+			 object oVictimDmg = GetFirstObjectInShape(SHAPE_CUBE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 int nInc;
 			 for(nInc = 0; nInc < 20; nInc ++)  {
-			 oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
+			 //oTrapSafetyWP = GetNearestObjectByTag(sTrapSafetyWP, oVictimDmg, 1);
 			 float fDistance = GetDistanceBetween(oTrapWP, oVictimDmg);
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
 			 if(GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1) {
 				 if(nAttack < nAC) {
-						 	SendMessageToPC(oVictimDmg, sDmgSuccess);
+						 	SendMessageToPC(oVictimDmg, "You jump out of the way of an axe swinging down from the ceiling!");
 							SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 					 		AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
 							}
@@ -142,7 +146,7 @@ void main()
 					 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 					 		}
 					 else {
-							SendMessageToPC(oVictimDmg, sDmgFail);
+							SendMessageToPC(oVictimDmg, "You are struck by an axe swinging down from the ceiling!");
 							SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
 					 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
 							AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
@@ -154,12 +158,12 @@ void main()
 						  
 					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 					 }
-			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 3.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
+			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
 			 if(oVictimDmg == OBJECT_INVALID) {break;}
 			 }
 				
-			 DestroyObject(OBJECT_SELF, 6.0);		
+			 //DestroyObject(OBJECT_SELF, 6.0);		
 			}
 		
 			

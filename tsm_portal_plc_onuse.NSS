@@ -63,32 +63,40 @@ void main() {
     effect eCessate = EffectVisualEffect(VFX_DUR_CESSATE_NEUTRAL);
     
 	
-	SendMessageToAllDMs("nActivated = " + IntToString(GetLocalInt(OBJECT_SELF, "Activated")));
-	
-	if((oMask != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1) && 
-		((sMask == sKeyTag) || (sMask == sKeyTagTwo) || (sMask == sKeyTagThree) || (sMask == sKeyTagFour) || (sMask == sKeyTagFive) || (sMask == sKeyTagSix)))	{
-		
-			if(sMask == sKeyTag){oMyWaypoint = GetWaypointByTag(sMyTarget);}
-			else if(sMask == sKeyTagTwo){oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
-			else if(sMask == sKeyTagThree){oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
-			else if(sMask == sKeyTagFour){oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
-			else if(sMask == sKeyTagFive){oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
-			else if(sMask == sKeyTagSix){oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
-				
-			SendMessageToAllDMs(GetName(oTraveller) + " is wearing " + sMask + " and is jumping to " + GetTag(oMyWaypoint));
-			ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
-		    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
-	   		if(GetIsDM(oTraveller) == FALSE) {DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));}
-			if(((GetIsDM(oTraveller)) || (GetLocalInt(OBJECT_SELF, "Activated") == 0)) && (FindSubString(GetTag(OBJECT_SELF), "wyv") != -1))  {
-				SetLocalInt(OBJECT_SELF, "Activated", 1);
-				CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_an_wild_bobcat", GetLocation(OBJECT_SELF));
-				DelayCommand(180.0, SetLocalInt(OBJECT_SELF, "Activated", 2));
-				}
+	if(GetTag(OBJECT_SELF) == "rr_oh_portal") {
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+		ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
+		DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));	   		
 		}
-	else {SendMessageToPC(oTraveller, "Nothing happens.");
-		if((d20(1) + GetAbilityModifier(ABILITY_WISDOM, oTraveller)) >= 15) {
-			SendMessageToPC(oTraveller, "You sense the potential power in this object");
+	else{
+	
+		SendMessageToAllDMs("nActivated = " + IntToString(GetLocalInt(OBJECT_SELF, "Activated")));
+		
+		if((oMask != OBJECT_INVALID) && (GetLocalInt(OBJECT_SELF, "Activated") != 1) && 
+			((sMask == sKeyTag) || (sMask == sKeyTagTwo) || (sMask == sKeyTagThree) || (sMask == sKeyTagFour) || (sMask == sKeyTagFive) || (sMask == sKeyTagSix)))	{
+			
+				if(sMask == sKeyTag){oMyWaypoint = GetWaypointByTag(sMyTarget);}
+				else if(sMask == sKeyTagTwo){oMyWaypoint = GetWaypointByTag(sMyTargetTwo);}
+				else if(sMask == sKeyTagThree){oMyWaypoint = GetWaypointByTag(sMyTargetThree);}
+				else if(sMask == sKeyTagFour){oMyWaypoint = GetWaypointByTag(sMyTargetFour);}
+				else if(sMask == sKeyTagFive){oMyWaypoint = GetWaypointByTag(sMyTargetFive);}
+				else if(sMask == sKeyTagSix){oMyWaypoint = GetWaypointByTag(sMyTargetSix);}
+					
+				SendMessageToAllDMs(GetName(oTraveller) + " is wearing " + sMask + " and is jumping to " + GetTag(oMyWaypoint));
+				ApplyEffectToObject(DURATION_TYPE_INSTANT, eAoe, OBJECT_SELF);
+			    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, oTraveller);
+		   		if(GetIsDM(oTraveller) == FALSE) {DelayCommand(1.0, AssignCommand(oTraveller, ActionJumpToObject(oMyWaypoint)));}
+				if(((GetIsDM(oTraveller)) || (GetLocalInt(OBJECT_SELF, "Activated") == 0)) && (FindSubString(GetTag(OBJECT_SELF), "wyv") != -1))  {
+					SetLocalInt(OBJECT_SELF, "Activated", 1);
+					CreateObject(OBJECT_TYPE_CREATURE, "abr_cr_an_wild_bobcat", GetLocation(OBJECT_SELF));
+					DelayCommand(180.0, SetLocalInt(OBJECT_SELF, "Activated", 2));
+					}
 			}
-		} 
+		else {SendMessageToPC(oTraveller, "Nothing happens.");
+			if((d20(1) + GetAbilityModifier(ABILITY_WISDOM, oTraveller)) >= 15) {
+				SendMessageToPC(oTraveller, "You sense the potential power in this object");
+				}
+			} 
+		}
 	}
 }
