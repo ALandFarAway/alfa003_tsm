@@ -64,7 +64,7 @@ void main()
 		 DelayCommand(4.0, ApplyEffectAtLocation(DURATION_TYPE_TEMPORARY, eImplode, GetLocation(oMothOne)));
 		 }	
 		
-	if(FindSubString(GetTag(OBJECT_SELF), "cr_hu_orc_hiero") != -1)
+	if((FindSubString(GetTag(OBJECT_SELF), "cr_hu_orc_hiero") != -1) || (FindSubString(GetTag(OBJECT_SELF), "hang") != -1))
 		{object oSwordwraith = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_ud_swwraith_orc", GetLocation(OBJECT_SELF));
 		 }	
 	
