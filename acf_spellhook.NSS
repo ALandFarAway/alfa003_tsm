@@ -2647,7 +2647,7 @@ void main()
 	*/
 		 
 	//Stopping summons in Set UnHallowed Area
-	if((FindSubString(GetTag(GetArea(GetLastSpellCaster())), "5f_int_nether_dt") != -1) || (FindSubString(GetTag(GetArea(GetLastSpellCaster())), "7e_int_rauvin") != -1)) {
+	if(FindSubString(GetTag(GetArea(GetLastSpellCaster())), "5f_int_nether_dt") != -1)  {
 		if(GetIsPC(oCaster)) {
 			if((nSpellId == SPELL_SUMMON_CREATURE_I) || (nSpellId == SPELL_SUMMON_CREATURE_II) || (nSpellId == SPELL_SUMMON_CREATURE_III) || (nSpellId == SPELL_SUMMON_CREATURE_IV) || (nSpellId == SPELL_SUMMON_CREATURE_V) || (nSpellId == SPELL_SUMMON_CREATURE_VI))
 				{SetModuleOverrideSpellScriptFinished();
