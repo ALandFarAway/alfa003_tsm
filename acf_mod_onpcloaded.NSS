@@ -59,12 +59,14 @@ void main() {
 		DelayCommand(5.0, _GrantOmegaWand(oEntrant));
 	}
 	
+	int nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oEntrant);
+	DelayCommand(10.0, SendMessageToAllDMs(GetName(oEntrant) + "'s DreamStage is now at " + IntToString(nDreamStage)));
+					
 	if(FindSubString(GetName(oEntrant), "Nio") != -1) {
 	object oNioniel = oEntrant;
 	if(oEntrant == oNioniel) {
 			
 	if(GetLocalInt(oEntrant, "DreamCooldown") != 1) {
-		int nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oEntrant);
 		string sDreamMessage;
 	
 		if(oEntrant == oNioniel)  {

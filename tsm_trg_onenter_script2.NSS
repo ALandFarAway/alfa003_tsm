@@ -83,77 +83,6 @@ void main()
 			//if(ReflexSave(oEntered, 20, SAVING_THROW_TYPE_DIVINE, oSayen) == 0) {
 				//ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oEntered, 20.0);
 			//	}		 
-			}
-			
-		
-			 object oPC = oEntered;
-			if(WillSave(oPC, 25, SAVING_THROW_TYPE_FEAR, oSayen)== 0) {	
-					string sPCName = GetName(oPC);
-					if(FindSubString(sPCName, "Jhess") != -1) {
-						//if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Bertilak's flesh melting away from his face, leaving a skull with blazing eyes"));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Ostelle engulfed in black fire."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: A harpy with rotting flesh flaring her wings over a bloodied Aedelvana."));}
-						//	}
-						}
-					if(FindSubString(sPCName, "Nio") != -1) {
-						}
-					if(FindSubString(sPCName, "Saerel") != -1) {
-						//if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: A baelnorn's laughing reflection in a cracked mirror."));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Yeshelne calling down a flamestrike upon your head."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Nioniel falling into an abyss."));}
-						//	}
-						}
-					if(FindSubString(sPCName, "Bert") != -1) {
-						//if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Jhessi chained to a wall in a Banite cell with Phaedra's hand around her throat."));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "Lord Elthondsson upon a funeral pyre, but still alive, screaming."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image:  Yourself hanging in a cage over snow, watching as a barbarian cleric brings Jhessi back to life."));}
-						//	}
-						}
-					if(FindSubString(sPCName, "Bell") != -1) {
-						}
-					
-					if(FindSubString(sPCName, "Zov") != -1) {
-					//	if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Saerela screaming as she is consumed by a black fire emanating from a crystal globe."));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Twin scimitars slitting Derry's throat."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Aglaril's death in the Temple of Isis."));}
-						//	}
-						}
-					if(FindSubString(sPCName, "Rik") != -1) {
-					//	if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You see in your thoughts: A coin, golden on one side and corroded on the other, flipping in slow motion. (Please roll d100 and tell Wynna the result.)"));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image:  A laughing, fey face, gnarled like bark, leaning over your dead, icy body."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image:  Yourself, in a cage, while clowns with painted faces poke spears between the bars at you."));}
-						//	}
-						}
-					if(FindSubString(sPCName, "Derr") != -1) {
-					//	if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Zova, with pupil-less eyes of red and hands around your neck."));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Riki, a corpse frozen within a block of ice."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: A great golden dragon battering down the keep of Olostin's Hold while townspeople scream and flee."));}
-						//	}
-						}
-					if(FindSubString(sPCName, "Glaus") != -1) {
-					//	if(Random(4) == 1) {
-							int nMessage = Random(3);
-							if(nMessage == 1) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Felbarr, besieged by half-crystalized orcs."));}
-							if(nMessage == 2) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: A mummy with a helmet made from the top half of a humanoid skull standing over Bertilak's disease-wracked body."));}
-							if(nMessage == 3) {DelayCommand(IntToFloat(Random(60)+20), SendMessageToPC(oPC, "You are assailed by a fearful mental image: Saerela, showing you the five-faceted ring so contemptuously."));}
-						//	}
-						}
-			}
-			 
-				
-				
 			
 			
 		if(GetTag(OBJECT_SELF) == "tsm_trg_onenter_script_a") {
@@ -259,5 +188,6 @@ void main()
 				DelayCommand(12.0, AssignCommand(oCrystal, ActionCastSpellAtLocation(SPELL_BLADE_BARRIER_WALL, GetLocation(oDoor), METAMAGIC_EMPOWER, TRUE, 0, PROJECTILE_PATH_TYPE_DEFAULT, TRUE)));
 				}
 		}*/
+		}
 	}
 }
