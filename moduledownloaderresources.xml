@@ -1445,7 +1445,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A0DA9D785D07961B8A69214DA6238B637AB41D49" downloadHash="803216BC2377B706A079563F62826CFF0A66AF9B" name="8e_int_highforest_nw_cave_aq.trx" dlsize="731968" size="6391228" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="BF03DA2FF33FD7F639717AB07942F4B9DA0EA516" downloadHash="0CB7468263E8B5980E426D426A9B5C442286D0A2" name="8e_int_highforest_nw_cave_aq.trx" dlsize="742451" size="6752438" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>

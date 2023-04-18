@@ -439,7 +439,7 @@ void main()
 						if(sXYMarked != sXYMarkedProxy) {sName = "A nearby location";}
 						object oMark = GetFirstObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);
 						while (oMark != OBJECT_INVALID) {
-						SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
+						//SendMessageToAllDMs("DM" + IntToString(nAM) + " oDetected = " + GetTag(oDetected) + "; oMark = " + GetTag(oMark));
 				    		if(GetTag(oMark) == "abr_plc_ipoint_arcane_mark") {nMarked = 1;}
 							if(oMark != GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE)) {
 								oMark = GetNextObjectInShape(SHAPE_SPHERE, 3.0, lMarked, TRUE, OBJECT_TYPE_PLACEABLE);

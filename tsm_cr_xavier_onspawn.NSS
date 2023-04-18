@@ -6,7 +6,6 @@
 void main()
 {
 	object oSensor = GetObjectByTag("abr_cr_scry_send_xavier", 0);
-	object oSayen = CreateObject(OBJECT_TYPE_CREATURE, "003_cr_slv_gyasisayen", GetLocation(OBJECT_SELF));
 			 
 	IdentifyEquippedItems();
     IdentifyInventory();

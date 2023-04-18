@@ -45,7 +45,6 @@ void main() {
 	effect eGhost = EffectVisualEffect(VFX_DUR_GHOSTLY_PULSE);
 	effect eSmoke = EffectVisualEffect(VFX_DUR_GHOST_SMOKE);
 	
-	ExecuteScript("acf_cre_onspawnin_buffed", OBJECT_SELF);
 	
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eAOE, OBJECT_SELF);
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eGhost, OBJECT_SELF);
