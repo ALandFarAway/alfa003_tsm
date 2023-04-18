@@ -123,11 +123,11 @@ void main()
 		if(nPCTotal >= nSkillDC)
 		 	{if(oWPSuccessNear != OBJECT_INVALID) {
 				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessNear))));
-		 	 	fStage = fStage +3.0;
+		 	 	fStage = fStage;
 				}
 			 if(oWPSuccessFurther != OBJECT_INVALID) {
 				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessFurther))));
-		 	 	fStage = fStage +3.0;
+		 	 	fStage = fStage;
 				}
 				
 			 DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess))));
@@ -138,7 +138,7 @@ void main()
 	 	 else if(nPCTotal >= nSkillDC-5) 
 		 	{ if(oWPSuccessNear != OBJECT_INVALID) {
 				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessNear))));
-		 	 	fStage = fStage +3.0;
+		 	 	fStage = fStage;
 				}
 			  if(oWPSuccessFurther != OBJECT_INVALID) {
 				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessFurther))));
@@ -154,7 +154,7 @@ void main()
 		else {
 			 SendMessageToPC(oPC, sMessageFail);
 			 DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFailNear))));
-		 	 fStage = fStage +3.0;
+		 	 fStage = fStage;
 			 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
 			 	{SendMessageToPC(oPC, "Your ability to tumble keeps your on your feet and saves you from hurting yourself *too* badly.");
 			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
