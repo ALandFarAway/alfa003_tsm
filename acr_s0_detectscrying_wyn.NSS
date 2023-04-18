@@ -31,7 +31,8 @@ void main()
     {
         return;
     }
-
+	SendMessageToAllDMs("This is the detectscrying_wyn script!");
+		
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oTarget = GetSpellTargetObject();
 	//Set an int that marks the PC as actively detecting for scrying and remove it after expiration

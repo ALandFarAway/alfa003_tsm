@@ -137,6 +137,8 @@ void ActionCreatePlaceable(string sPlaceable, location lLocPlaceable)
 void main()
 {		
 		object oCaster = OBJECT_SELF;
+		
+		SendMessageToAllDMs("This is the detectmagic_wyn script!");
 		int nMetaMagic = GetMetaMagicFeat();
 		float fDur = TurnsToSeconds( GetCasterLevel(oCaster ));
 		if ( nMetaMagic == METAMAGIC_EXTEND ) {

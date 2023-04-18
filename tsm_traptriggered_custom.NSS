@@ -137,34 +137,32 @@ void main()
 			 int nAC = GetAC(oVictimDmg, 0);
 			 int nAttack = d20() + 8;
 			 if(GetLocalInt(OBJECT_SELF, GetName(oVictimDmg)) != 1) {
-				 if(nAttack < nAC) {
-						 	SendMessageToPC(oVictimDmg, "You jump out of the way of an axe swinging down from the ceiling!");
-							SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
-					 		AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
-							}
-					 else if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
+				 
+					 if((GetRacialType(oVictimDmg) == RACIAL_TYPE_INCORPOREAL) || (GetSubRace(oVictimDmg) == RACIAL_SUBTYPE_INCORPOREAL)) {
 					 		  SendMessageToAllDMs(GetName(OBJECT_SELF) + " skips attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
 					 		}
 					 else {
-							SendMessageToPC(oVictimDmg, "You are struck by an axe swinging down from the ceiling!");
-							SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
-					 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
-							AssignCommand(oVictimDmg, ActionJumpToLocation(GetLocation(oTrapSafetyWP)));
 							if(ReflexSave(oVictimDmg, nReflexDC, SAVING_THROW_TYPE_TRAP, OBJECT_SELF) == 0) {
+								SendMessageToPC(oVictimDmg, "You are struck by an axe swinging down from the ceiling!");
+								SendMessageToAllDMs(GetName(OBJECT_SELF) + " hits " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance for " + IntToString(nDamage) + ". " + IntToString(nAttack) + " vs " + IntToString(nAC));
+						 		ApplyEffectToObject(DURATION_TYPE_INSTANT, eTrapDamage, oVictimDmg); 
 								ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eKnockdown, oVictimDmg, 6.0);
-							    SendMessageToAllDMs(GetName(oVictimDmg) + " knocked down.");
-					 		    }				  
+								}
+							    	
+							else  {
+							 	SendMessageToPC(oVictimDmg, "You jump out of the way of an axe swinging down from the ceiling!");
+								SendMessageToAllDMs(GetName(OBJECT_SELF) + " fails attack on " + GetName(oVictimDmg) + " at " + FloatToString(fDistance) + " distance. " + IntToString(nAttack) + " vs " + IntToString(nAC));
+						 		}
+							}			  
 						  }
 						  
 					 SetLocalInt(OBJECT_SELF, GetName(oVictimDmg), 1);
 					 }
 			 oVictimDmg = GetNextObjectInShape(SHAPE_CUBE, 5.0, GetLocation(oTrapWP), FALSE, OBJECT_TYPE_CREATURE);
 			 SendMessageToAllDMs(GetName(oVictimDmg) + " is name oVictimDmg");
-			 if(oVictimDmg == OBJECT_INVALID) {break;}
+			 
 			 }
-				
-			 //DestroyObject(OBJECT_SELF, 6.0);		
-			}
+			
 		
 			
 		//Spike Wall Traps

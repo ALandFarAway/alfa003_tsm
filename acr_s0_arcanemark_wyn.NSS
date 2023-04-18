@@ -36,7 +36,9 @@ void main()
     {
         return;
     }
-
+	
+	SendMessageToAllDMs("This is the arcanemark_wyn script!");
+		
 	SignalEvent( GetSpellTargetObject(), EventSpellCastAt( OBJECT_SELF, GetSpellId(), FALSE ) );
 	object oCaster = OBJECT_SELF;
 	//Did we click on an object to mark?
