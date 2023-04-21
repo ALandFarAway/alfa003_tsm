@@ -1,4 +1,4 @@
-// gc_casterlevel(int nClass, string sLevelCheck, string sTarget)
+// gc_casterlevel(int nClass, string sLevelCheck, string sTarget, int nIgnoreBonusLevels)
 /*
 	This script checks to see if a character has a certain number of caster levels.
 	Parameters:
@@ -43,7 +43,7 @@ int CLASS_TYPE_FAVORED_SOUL 	= 58
 // GetCasterLevelByClass(int nClassType, object oCreature=OBJECT_SELF, int nIgnoreBonusLevels=0x0)
 // bonus levels are those from practiced spell caster, limit to total levels, and red wizards spell power for wizard spells only
 // Ignoring bonus levels is a bit mask, 0x1 is practiced spell caster 0x2 is red wizard so 0x3 would be ignore both
-int GetCasterLevelByClass(int nClassType, object oCreature=OBJECT_SELF, int nIgnoreBonusLevels=0x0)
+int GetCasterLevelByClass(int nClassType, object oCreature, int nIgnoreBonusLevels)
 {
 	int nCasterLevel = GetLevelByClass(nClassType, oCreature);
 	if (nCasterLevel < 1) return 0;
@@ -62,6 +62,10 @@ int GetCasterLevelByClass(int nClassType, object oCreature=OBJECT_SELF, int nIgn
 			string sFeatLabel = GetStringUpperCase(Get2DAString(sFeatsTable,"FeatLabel",nRow));	
 			if (FindSubString(sFeatLabel,"_SPELLCASTING_") < 0) continue;
 			if (FindSubString(sFeatLabel,sClassLabel) < 0) continue;
+			string sSpellGainTable = Get2DAString("classes","SpellGainTable",nClass);
+			int nLevelRow;
+			for(nLevelRow = GetLevelByPosition(nClassPosition,oCreature) - 1; nLevelRow >= 0; -- nLevelRow)
+				nCasterLevel += Get2DAInt(sSpellGainTable,"GrantsBonusSpellcasterLevel",nLevelRow);
 		}
 	}
 	// do not ignore practiced spell caster
@@ -87,7 +91,7 @@ int StartingConditional(int nClass, string sLevelCheck, string sTarget, int nIgn
 {
     object oTarget = GetTarget(sTarget, TARGET_PC_SPEAKER);
 
-	int nCasterLevel = GetCasterLevelByClass(nClass, oTarget);
+	int nCasterLevel = GetCasterLevelByClass(nClass, oTarget, nIgnoreBonusLevels);
 	if (sLevelCheck == "")
 		sLevelCheck = "!0";
 	
