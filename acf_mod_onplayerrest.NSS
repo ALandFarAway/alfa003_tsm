@@ -103,6 +103,7 @@ void main()
 	object oSaveAgainst = oSayen;
 			
 	int nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oRester);
+	SendMessageToAllDMs(GetName(oRester) + " is resting. Their cursed DreamStage is currently at " + IntToString(nDreamStage));
 	string sDreamMessage;
 	if(oRester == oSaerela) {
 		object oArmor = GetItemPossessedBy(oSaerela, "03_it_e1_arm_song_eaerlann");
@@ -173,8 +174,8 @@ void main()
 		if(oRester == oDerry) {
 			if(nDreamStage == 0) {sDreamMessage = "You have a bad dream: Zova, with pupil-less eyes of red and hands around your neck.";}
 			else if(nDreamStage == 2) {sDreamMessage = "You have a bad dream: Your soul torn from your body and sucked into a golden tea pot.";}
-			else if(nDreamStage == 4) {sDreamMessage = "You have a bad dream: A great golden dragon battering down the keep of Olostin's Hold while townspeople scream and flee.";}
-			else if(nDreamStage == 6) {sDreamMessage = "You have a bad dream: Riki, a corpse frozen within a block of ice.";}
+			else if(nDreamStage == 8) {sDreamMessage = "You have a bad dream: A great golden dragon battering down the keep of Olostin's Hold while townspeople scream and flee.";}
+			else if(nDreamStage == 16) {sDreamMessage = "You have a bad dream: Riki, a corpse frozen within a block of ice.";}
 			}
 		if(oRester == oGlaus)  {
 			if(nDreamStage == 0) {sDreamMessage = "You have a bad dream: Felbarr, besieged by half-crystalized orcs.";}

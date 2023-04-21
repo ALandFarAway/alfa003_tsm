@@ -47,6 +47,7 @@ void _GrantOmegaWand(object oDM);
 // Function Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+
 void main() {
     ACR_ModuleOnPCLoaded();
     
@@ -59,8 +60,9 @@ void main() {
 		DelayCommand(5.0, _GrantOmegaWand(oEntrant));
 	}
 	
+	
 	int nDreamStage = GetCampaignInt("DeanSphinx", "DreamStage", oEntrant);
-	DelayCommand(10.0, SendMessageToAllDMs(GetName(oEntrant) + "'s DreamStage is now at " + IntToString(nDreamStage)));
+	DelayCommand(10.0, SendMessageToAllDMs(GetName(oEntrant) + "has loaded the mod. Their DreamStage is now at " + IntToString(nDreamStage)));
 					
 	if(FindSubString(GetName(oEntrant), "Nio") != -1) {
 	object oNioniel = oEntrant;

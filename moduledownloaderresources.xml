@@ -550,7 +550,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4A5EE37766BEE383203C0121C6BDF840B34345A2" downloadHash="8549B86D140562A3505FAD4A03884CD4DAD7E84A" name="6b_int_evermoors_caves.trx" dlsize="1060675" size="5374109" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4100952EDC0321F36584553BFEECC099F798C029" downloadHash="CC212E68E158775289662874758252D8FBDB711F" name="6b_int_evermoors_caves.trx" dlsize="1052628" size="5374109" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1430,7 +1430,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="15FC6C3F040C0635D184015087F92AD9464383F9" downloadHash="46788EC8D0D1A6BB3000062D7F28DB40C06961BB" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5012614" size="24911284" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C47B570A367DF07C1CDE87ABDC0F120605464649" downloadHash="8B0D161778A023C73BCEF67C419E198A0DD97159" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5002388" size="24899176" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
