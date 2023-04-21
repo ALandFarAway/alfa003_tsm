@@ -550,7 +550,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="906DBF658AFFB3BB055ABDDE45636DADD1B9238C" downloadHash="451AA3E04D400D9BE9070CB345AF61703A3667CC" name="6b_int_evermoors_caves.trx" dlsize="960879" size="3643327" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4A5EE37766BEE383203C0121C6BDF840B34345A2" downloadHash="8549B86D140562A3505FAD4A03884CD4DAD7E84A" name="6b_int_evermoors_caves.trx" dlsize="1060675" size="5374109" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1400,7 +1400,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="495F13235C8EEC76C2E550DA0D5BD5DBD9BCB606" downloadHash="410FFD112C22AD8B6F82F2E72CD8E3911B044A74" name="6b_ext_evermoors_1_3.trx" dlsize="5067326" size="21835683" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1C854833E6D91C3429BE1F2E5E2E553701CAB1F0" downloadHash="673672347F54BAD4CF74E12257F0CEE6F98304B4" name="6b_ext_evermoors_1_3.trx" dlsize="5075579" size="21841673" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
