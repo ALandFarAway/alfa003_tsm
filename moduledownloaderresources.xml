@@ -290,7 +290,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4CE589B5839CBB95AB90C770ADE0AD5EA676EDCD" downloadHash="F8877AD5773FA24977A10DE3AF481C6D5646519F" name="8e_int_highforest_oh_stables.trx" dlsize="17098" size="17101" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="909520C74B1546B8C5913A9CEE30742A95EF6982" downloadHash="2D6126A10AE82FF88019AECECDECCF0ACFBD99AC" name="8e_int_highforest_oh_stables.trx" dlsize="16098" size="16108" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -470,7 +470,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="46DFF32B347F6EEC8C7C39B7C2A5305A986153AA" downloadHash="F8BE432AB8E29841DF764A0C38DC12FEDB1F347D" name="6d_ext_silverymoon_south.trx" dlsize="3594967" size="19228590" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="EE93D49B5EE947BFBDE53E991D003D98B6D21E02" downloadHash="B97EB7717FAA2A9ABEDAAB31E432D1BD85FA0521" name="6d_ext_silverymoon_south.trx" dlsize="3601120" size="19227802" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1325,7 +1325,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="24F1CE898AA2C40293499D922EEBAFAB753E00C6" downloadHash="1AC71C7F2CC84595187A55E6A2F3AE821CF1EC85" name="7e_int_rauvin_ruins.trx" dlsize="982730" size="1628763" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="A7585CF91379410DD91F4D8E5199DDA71163E672" downloadHash="88AB01D30D9451205D0D95018FF15BB6F458DC5D" name="7e_int_rauvin_ruins.trx" dlsize="974291" size="1618786" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1430,7 +1430,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A623871778F919AE9179C381E508A32C798A94BE" downloadHash="0DCB66A70A44B7C7514B9283D578029C4D315621" name="5b_ext_frosthills_fourthpeak.trx" dlsize="4955993" size="24859901" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="1CB6DEECDABE9D4E81390AB0E8C293C6D276F45F" downloadHash="3820FA13696A2BCE3C41C2777FFA25327B710B6F" name="5b_ext_frosthills_fourthpeak.trx" dlsize="5000406" size="24895600" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1510,7 +1510,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="E8170DA3E725C2936F37EAF396C8082BDC6FCEFF" downloadHash="99EDAC20FF96044F041ADAE2AF8AED574473720E" name="5b_int_settlestone_chapel.trx" dlsize="59884" size="59832" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B83E6BB9F66B0CAA0CEE86ECAB15F7A260666D66" downloadHash="7C0A86E03DE281270749F92E010E8CC4F72A6945" name="5b_int_settlestone_chapel.trx" dlsize="59709" size="59638" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
