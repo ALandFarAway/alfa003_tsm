@@ -1325,7 +1325,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="A7585CF91379410DD91F4D8E5199DDA71163E672" downloadHash="88AB01D30D9451205D0D95018FF15BB6F458DC5D" name="7e_int_rauvin_ruins.trx" dlsize="974291" size="1618786" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="2B5AAC9BEDD87024A9ABC25F4EE133ADD27EA92A" downloadHash="80AF4A9CEE7ACC77147C3FEF90B939938F454CEF" name="7e_int_rauvin_ruins.trx" dlsize="988233" size="1633524" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1430,7 +1430,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="34B0F0D1C35FB33086865CC1686FAD6701C1F9ED" downloadHash="961E244109E63C584ACE9CAF5CD41AEEBD4B51E5" name="5b_ext_frosthills_fourthpeak.trx" dlsize="4996248" size="24896321" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="FB4D25F3DECE3BD3218FAFB2ECBFC2097D5D9916" downloadHash="AFCA42EA0A72E50577EFDC437A5C0D9274D37B7D" name="5b_ext_frosthills_fourthpeak.trx" dlsize="4993881" size="24896400" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
