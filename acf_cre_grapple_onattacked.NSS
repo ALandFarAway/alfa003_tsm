@@ -139,7 +139,7 @@ void main()
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAttackPenalty, OBJECT_SELF, 7.0);
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAttackPenaltyOffhand, oAttacker, 7.0);
 					ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAttackPenaltyOffhand, OBJECT_SELF, 7.0);
-					if(GetHasFeat(1729, oAttacker, FALSE)) {
+					/*if(GetHasFeat(1729, oAttacker, FALSE)) {
 						FeatRemove(oAttacker, 1729);
 						DelayCommand(7.0, ActionFeatAdd(oAttacker, 1729));
 						}
@@ -170,7 +170,7 @@ void main()
 					if(GetHasFeat(1736, OBJECT_SELF, FALSE)) {
 						FeatRemove(OBJECT_SELF, 1736);
 						DelayCommand(7.0, ActionFeatAdd(OBJECT_SELF, 1736));
-						}
+						}*/
 					}
 				}
 		 	}

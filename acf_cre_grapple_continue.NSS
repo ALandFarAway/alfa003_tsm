@@ -65,9 +65,10 @@ void main()
 	int nLastHP = GetLocalInt(OBJECT_SELF, "nLastHP");
 	int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
 	object oGrappled = GetLocalObject(OBJECT_SELF, "ACR_Grappled");
+	object oGrappler = GetLocalObject(OBJECT_SELF, "ACR_Grappler");
 	SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_Continue called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")) + ". oGrappled = " + GetName(oGrappled));
 							
-	if(GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 1) {	 
+	if((GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 1) && (oGrappled != OBJECT_INVALID)) {	 
 		SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_continue. ACR_Grappled = " + GetName(oGrappled));
 		int nGrapple = 15;
 		int nBABFoe = GetTRUEBaseAttackBonus(oGrappled);
@@ -126,7 +127,7 @@ void main()
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAttackPenalty, OBJECT_SELF, 7.0);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAttackPenaltyOffhand, oGrappled, 7.0);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eAttackPenaltyOffhand, OBJECT_SELF, 7.0);
-			if(GetHasFeat(1729, oGrappled, FALSE)) {
+			/*if(GetHasFeat(1729, oGrappled, FALSE)) {
 				FeatRemove(oGrappled, 1729);
 				DelayCommand(7.0, ActionFeatAdd(oGrappled, 1729));
 				}
@@ -157,7 +158,7 @@ void main()
 			if(GetHasFeat(1736, OBJECT_SELF, FALSE)) {
 				FeatRemove(OBJECT_SELF, 1736);
 				DelayCommand(7.0, ActionFeatAdd(OBJECT_SELF, 1736));
-				}
+				}*/
 			}
 		 }	
 }
