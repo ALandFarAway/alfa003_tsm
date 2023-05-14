@@ -72,7 +72,7 @@ void main()
 	if((nAttackMissed == 0) && (GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 0)) {	 
 		 if(GetDistanceBetween(OBJECT_SELF, oAttacker) < 5.0) {
 		 	ClearAllActions(TRUE);
-			ActionSpeakString("*Lunges at " + GetName(oAttacker), TALKVOLUME_TALK);
+			ActionSpeakString("*Attempts to grapple " + GetName(oAttacker), TALKVOLUME_TALK);
 			AssignCommand(oAttacker, ActionSpeakString("*Attack of Opportunity on " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
 			AssignCommand(oAttacker, ActionAttack(OBJECT_SELF, FALSE));
 			if(TouchAttackMelee(oAttacker, TRUE, 0) > 0) {
