@@ -67,13 +67,15 @@ void main()
 	int nAttackMissed = 0;
 	if((nCurrentHP == nMaxHP) || (nCurrentHP == nLastHP)) {nAttackMissed = 1;}
 	SetLocalInt(OBJECT_SELF, "nLastHP", nCurrentHP);
-	object oAttacker = GetLastAttacker(OBJECT_SELF);
+	object oAttacker = GetLocalObject(OBJECT_SELF, "ACR_Grappled");
+	if(oAttacker != OBJECT_INVALID) {SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple OnAttack called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")) + ". oGrappled ongoing = " + GetName(oAttacker));}
+	else {oAttacker = GetLastAttacker(OBJECT_SELF); SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple OnAttack called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")) + ". oGrappled = oAttacker");}
 			
 	if((nAttackMissed == 0) && (GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 0)) {	 
 		 if(GetDistanceBetween(OBJECT_SELF, oAttacker) < 5.0) {
 		 	ClearAllActions(TRUE);
-			ActionSpeakString("*Attempts to grapple " + GetName(oAttacker), TALKVOLUME_TALK);
-			AssignCommand(oAttacker, ActionSpeakString("*Attack of Opportunity on " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
+			ActionSpeakString(GetName(OBJECT_SELF) + " attempts to grapple " + GetName(oAttacker), TALKVOLUME_TALK);
+		//	AssignCommand(oAttacker, ActionSpeakString((GetName(oAttacker) + " attack of Opportunity on " + GetName(OBJECT_SELF), TALKVOLUME_TALK));
 			AssignCommand(oAttacker, ActionAttack(OBJECT_SELF, FALSE));
 			if(TouchAttackMelee(oAttacker, TRUE, 0) > 0) {
 				int nGrapple = 15;
@@ -92,7 +94,7 @@ void main()
 				int nFoeGrapple = nAttackFoe + nBABFoe + nStrFoe;
 				effect eKnockdown = EffectKnockdown();
 				
-				SendMessageToAllDMs("Opposed Grapple Rolls:");
+				SendMessageToAllDMs(GetName(OBJECT_SELF) + " Opposed Grapple Rolls:");
 				SendMessageToAllDMs(GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + IntToString(nMyGrapple));
 				SendMessageToAllDMs(GetName(oAttacker) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
 			    SendMessageToPC(oAttacker, "Opposed Grapple Rolls:");
@@ -117,7 +119,7 @@ void main()
 					SetLocalInt(OBJECT_SELF, "ACR_Grappling", 1);
 					SetLocalObject(oAttacker, "ACR_Grappler", OBJECT_SELF);
 					SetLocalObject(OBJECT_SELF, "ACR_Grappled", oAttacker);
-					SendMessageToAllDMs(GetName(oAttacker) + " is grappled. Onattacked.");
+					SendMessageToAllDMs(GetName(OBJECT_SELF) + " has grappled " + GetName(oAttacker) + ". Onattacked.");
 					SendMessageToPC(oAttacker, "You are grappled!");
 					ACR_ApplyNLDDamageToCreature(oAttacker, nSubdual);
 					ActionForceMoveToObject(oAttacker, FALSE, 0.5);

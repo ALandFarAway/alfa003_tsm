@@ -64,11 +64,11 @@ void main()
 	int nMaxHP = GetMaxHitPoints(OBJECT_SELF);
 	int nLastHP = GetLocalInt(OBJECT_SELF, "nLastHP");
 	int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
-	SendMessageToAllDMs("grapple_continue called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")));
+	object oGrappled = GetLocalObject(OBJECT_SELF, "ACR_Grappled");
+	SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_Continue called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")) + ". oGrappled = " + GetName(oGrappled));
 							
 	if(GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 1) {	 
-		object oGrappled = GetLocalObject(OBJECT_SELF, "ACR_Grappled");
-		SendMessageToAllDMs("grapple_continue. ACR_Grappled = " + GetName(oGrappled));
+		SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_continue. ACR_Grappled = " + GetName(oGrappled));
 		int nGrapple = 15;
 		int nBABFoe = GetTRUEBaseAttackBonus(oGrappled);
 		int nStrFoe = GetAbilityModifier(ABILITY_STRENGTH, oGrappled);
@@ -85,9 +85,9 @@ void main()
 		int nFoeGrapple = nAttackFoe + nBABFoe + nStrFoe;
 		effect eKnockdown = EffectKnockdown();
 				
-		SendMessageToAllDMs("Grapple continue Opposed Grapple Rolls:");
-		SendMessageToAllDMs("Grapple continue " + GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + IntToString(nMyGrapple));
-		SendMessageToAllDMs("Grapple continue " + GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
+		SendMessageToAllDMs(GetName(OBJECT_SELF) + " Grapple continue Opposed Grapple Rolls:");
+		SendMessageToAllDMs(GetName(OBJECT_SELF) + " Grapple continue " + GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + IntToString(nMyGrapple));
+		SendMessageToAllDMs(GetName(OBJECT_SELF) + " Grapple continue " + GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
 		SendMessageToPC(oGrappled, "Opposed Grapple Rolls:");
 		SendMessageToPC(oGrappled, GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + " = " + IntToString(nMyGrapple));
 		SendMessageToPC(oGrappled, GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
@@ -95,7 +95,7 @@ void main()
 		SendMessageToPC(OBJECT_SELF, GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + " = " + IntToString(nMyGrapple));
 		SendMessageToPC(OBJECT_SELF, GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
 		if((nFoeGrapple > nMyGrapple) || (GetCreatureSize(OBJECT_SELF) + 2  < GetCreatureSize(oGrappled)) || ((nMyGrapple == nFoeGrapple) && (nGrapple + nSize <= nBABFoe + nStrFoe)))  {
-			SendMessageToAllDMs(GetName(oGrappled) + " breaks free. Grapple continue.");
+			SendMessageToAllDMs(GetName(OBJECT_SELF) + " loses grapple on " + GetName(oGrappled) + " who breaks free. Grapple continue.");
 			SendMessageToPC(oGrappled, "You break free of a grapple attack!");
 			SendMessageToPC(OBJECT_SELF, GetName(oGrappled) + " breaks free of your grapple attack!");
 			SetLocalInt(oGrappled, "ACR_Grappling", 0);
@@ -106,7 +106,7 @@ void main()
 			AssignCommand(oGrappled, ClearAllActions(TRUE));
 			}
 		else if((nMyGrapple > nFoeGrapple) || ((nMyGrapple == nFoeGrapple) && (nGrapple + nSize > nBABFoe + nStrFoe))) {
-			SendMessageToAllDMs(GetName(oGrappled) + " is still grappled. Grapple continue.");
+			SendMessageToAllDMs(GetName(OBJECT_SELF) + ". " + GetName(oGrappled) + " is still grappled. Grapple continue.");
 			ActionForceFollowObject(oGrappled, 0.5, 1);
 			AssignCommand(oGrappled, ActionForceFollowObject(OBJECT_SELF, 0.5, 1));
 			DelayCommand(7.0, ClearAllActions(TRUE));
