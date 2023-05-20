@@ -54,8 +54,8 @@ void ACR_ApplyNLDDamageToCreature(object oTarget, int nSubdualDamage)
     ACR_ApplyNLDEffects(oTarget, nNLDTotal);
 }
 
-void ActionFeatAdd(object oCreature, int nFeat)
-	{FeatAdd(oCreature, nFeat, FALSE, TRUE, TRUE);}
+//void ActionFeatAdd(object oCreature, int nFeat)
+//	{FeatAdd(oCreature, nFeat, FALSE, TRUE, TRUE);}
     
 void main()
 {
@@ -66,9 +66,9 @@ void main()
 	int nCurrentHP = GetCurrentHitPoints(OBJECT_SELF);
 	object oGrappled = GetLocalObject(OBJECT_SELF, "ACR_Grappled");
 	object oGrappler = GetLocalObject(OBJECT_SELF, "ACR_Grappler");
-	SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_Continue called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")) + ". oGrappled = " + GetName(oGrappled));
+	//SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_Continue called. ACR_Grappling = " + IntToString(GetLocalInt(OBJECT_SELF, "ACR_Grappling")) + ". oGrappled = " + GetName(oGrappled));
 							
-	if((GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 1) && (oGrappled != OBJECT_INVALID)) {	 
+	if(GetLocalInt(OBJECT_SELF, "ACR_Grappling") == 1) {	 
 		SendMessageToAllDMs(GetName(OBJECT_SELF) + ". Grapple_continue. ACR_Grappled = " + GetName(oGrappled));
 		int nGrapple = 15;
 		int nBABFoe = GetTRUEBaseAttackBonus(oGrappled);
@@ -80,15 +80,16 @@ void main()
 		if(nSize == CREATURE_SIZE_MEDIUM) {nSize = 0;}
 		if(nSize == CREATURE_SIZE_SMALL) {nSize = -4; nSubdual = d2(1);}
 		if(nSize == CREATURE_SIZE_TINY) {nSize = -8; nSubdual = d2(1);}
+		
 		int nAttack = d20(1);
 		int nAttackFoe = d20(1);
 		int nMyGrapple = nAttack + nGrapple + nSize;
 		int nFoeGrapple = nAttackFoe + nBABFoe + nStrFoe;
 		effect eKnockdown = EffectKnockdown();
 				
-		SendMessageToAllDMs(GetName(OBJECT_SELF) + " Grapple continue Opposed Grapple Rolls:");
-		SendMessageToAllDMs(GetName(OBJECT_SELF) + " Grapple continue " + GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + IntToString(nMyGrapple));
-		SendMessageToAllDMs(GetName(OBJECT_SELF) + " Grapple continue " + GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
+		SendMessageToAllDMs("Grapple Continue. " + GetName(OBJECT_SELF) + " Opposed Grapple Rolls:");
+		SendMessageToAllDMs("Grapple Continue. " + GetName(OBJECT_SELF) + " " + GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + IntToString(nMyGrapple));
+		SendMessageToAllDMs("Grapple Continue. " + GetName(OBJECT_SELF) + " " + GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
 		SendMessageToPC(oGrappled, "Opposed Grapple Rolls:");
 		SendMessageToPC(oGrappled, GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + " = " + IntToString(nMyGrapple));
 		SendMessageToPC(oGrappled, GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
@@ -96,7 +97,7 @@ void main()
 		SendMessageToPC(OBJECT_SELF, GetName(OBJECT_SELF) + ": " + IntToString(nAttack) + " + " + IntToString(nGrapple) + " + " + IntToString(nSize) + " = " + " = " + IntToString(nMyGrapple));
 		SendMessageToPC(OBJECT_SELF, GetName(oGrappled) + ": " + IntToString(nAttackFoe) + " + " + IntToString(nBABFoe) + " + " + IntToString(nStrFoe) + " = " + IntToString(nFoeGrapple));
 		if((nFoeGrapple > nMyGrapple) || (GetCreatureSize(OBJECT_SELF) + 2  < GetCreatureSize(oGrappled)) || ((nMyGrapple == nFoeGrapple) && (nGrapple + nSize <= nBABFoe + nStrFoe)))  {
-			SendMessageToAllDMs(GetName(OBJECT_SELF) + " loses grapple on " + GetName(oGrappled) + " who breaks free. Grapple continue.");
+			SendMessageToAllDMs("Grapple Continue. " + GetName(OBJECT_SELF) + " loses grapple on " + GetName(oGrappled) + " who breaks free.");
 			SendMessageToPC(oGrappled, "You break free of a grapple attack!");
 			SendMessageToPC(OBJECT_SELF, GetName(oGrappled) + " breaks free of your grapple attack!");
 			SetLocalInt(oGrappled, "ACR_Grappling", 0);
@@ -107,7 +108,7 @@ void main()
 			AssignCommand(oGrappled, ClearAllActions(TRUE));
 			}
 		else if((nMyGrapple > nFoeGrapple) || ((nMyGrapple == nFoeGrapple) && (nGrapple + nSize > nBABFoe + nStrFoe))) {
-			SendMessageToAllDMs(GetName(OBJECT_SELF) + ". " + GetName(oGrappled) + " is still grappled. Grapple continue.");
+			SendMessageToAllDMs("Grapple Continue. " + GetName(OBJECT_SELF) + ". " + GetName(oGrappled) + " is still grappled.");
 			ActionForceFollowObject(oGrappled, 0.5, 1);
 			AssignCommand(oGrappled, ActionForceFollowObject(OBJECT_SELF, 0.5, 1));
 			DelayCommand(7.0, ClearAllActions(TRUE));

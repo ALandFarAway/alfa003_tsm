@@ -1,11 +1,11 @@
 //
-//     Filename : tsm_cr_sayen_onspawn
+//     Filename : tsm_cr_tworc_onspawn
 //      Version : 0.1
 //         Date : 7/18/22
 //       Author : Wynna
 //
 //  Description
-//  This script handles onspawn functions for a high level necromancer.
+//  This script handles onspawn functions for twisted orcs.
 //	It is not updated in ACR updates.
 //
 //  Revision History
@@ -30,14 +30,7 @@ void main() {
 	effect eFreeze = EffectCutsceneParalyze();
 	effect eDeath = EffectDeath(TRUE, TRUE, TRUE, TRUE);
 	object oTrigger = GetObjectByTag("rr_trg_onenter_script", 0);
-	if(GetTag(GetArea(OBJECT_SELF)) == "7e_ext_rauvin_evld_rd") 
-		{ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eFreeze, OBJECT_SELF, 20.0);
-		AssignCommand(OBJECT_SELF, ClearAllActions(TRUE));
-		DelayCommand(5.0, ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eBeamGreen, OBJECT_SELF, 20.0));
 		
-		DelayCommand(25.0, AssignCommand(oTrigger, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDeath, OBJECT_SELF)));}
-			 
-	
 	if(GetTag(OBJECT_SELF) == "003_cr_ud_swwraith_orc"){
 		 effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 		 ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, OBJECT_SELF, 5.0);
@@ -47,5 +40,10 @@ void main() {
 	if(GetTag(OBJECT_SELF) == "003_cr_twisted_hang"){
 		 effect eParalyze = EffectCutsceneParalyze();
 		 ApplyEffectToObject(DURATION_TYPE_PERMANENT, eParalyze, OBJECT_SELF);
-  		 }		 		 		 		 
+  		 }		 
+		 
+	if(GetTag(OBJECT_SELF) == "003_cr_twisted_orc_kill"){
+		 effect eDamage = EffectDamage(GetCurrentHitPoints(OBJECT_SELF), DAMAGE_TYPE_MAGICAL, DAMAGE_POWER_NORMAL, TRUE);
+		 ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, OBJECT_SELF);
+  		 }			 		 		 
 }
