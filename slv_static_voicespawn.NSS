@@ -315,5 +315,23 @@ void main()
 				 }
 			 }
          
-		 
+		 if(GetTag(OBJECT_SELF)== "003_cr_slv_chest_walk") 
+        	{int iInc = GetLocalInt(OBJECT_SELF, "iInc");
+			 if(iInc == 0)
+			 	{iInc = 1;}
+			 else
+			 	{iInc ++;}
+			if(iInc < 12)
+				{SetLocalInt(OBJECT_SELF, "iInc", iInc);
+				 iInc = GetLocalInt(OBJECT_SELF, "iInc");
+				 object oWaypoint = GetWaypointByTag("WP_003_cr_slv_chest_" + IntToString(iInc));
+				 ClearAllActions(TRUE);
+				 if(iInc > 9)
+				 	{ActionJumpToLocation(GetLocation(oWaypoint));} 
+				 else
+				 	{ActionForceMoveToObject(oWaypoint, TRUE, 0.5);}
+			  	  
+				DelayCommand(5.0, ExecuteScript("slv_static_voicespawn", OBJECT_SELF));
+				 }
+			 }
         }
