@@ -97,14 +97,12 @@ void main()
 	string sSpeakFail=GetLocalString(OBJECT_SELF, "SPEAKSTRING_FAIL");
 	string sSpeakSuccess=GetLocalString(OBJECT_SELF, "SPEAKSTRING_SUCCESS");
 	string sWPSuccess=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING");
-	string sWPSuccessNear=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING_NEAR");
 	string sWPSuccessFurther=GetLocalString(OBJECT_SELF, "WP_SUCCESS_STRING_FURTHER");
-	string sWPFailNear=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING_NEAR");
+	string sWPFail=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING");
 	string sWPFailFurther=GetLocalString(OBJECT_SELF, "WP_FAIL_STRING_FURTHER");
 	object oWPSuccess = GetNearestObjectByTag(sWPSuccess);
-	object oWPSuccessNear = GetNearestObjectByTag(sWPSuccessNear);
 	object oWPSuccessFurther = GetNearestObjectByTag(sWPSuccessFurther);
-	object oWPFailNear = GetNearestObjectByTag(sWPFailNear);
+	object oWPFail = GetNearestObjectByTag(sWPFail);
 	object oWPFailFurther = GetNearestObjectByTag(sWPFailFurther);
 	int nKnockdown = GetLocalInt(OBJECT_SELF, "KNOCKDOWN");
 	effect eKnockdown = EffectKnockdown();
@@ -121,41 +119,20 @@ void main()
 			 
  		
 		if(nPCTotal >= nSkillDC)
-		 	{if(oWPSuccessNear != OBJECT_INVALID) {
-				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessNear))));
-		 	 	fStage = fStage;
-				}
-			 if(oWPSuccessFurther != OBJECT_INVALID) {
-				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessFurther))));
-		 	 	fStage = fStage;
-				}
-				
-			 DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess))));
+		 	{DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccess))));
 		 	 DelayCommand(fStage, SendMessageToPC(oPC, sMessageSuccess));
 			 DelayCommand(fStage, AssignCommand(oPC, ActionSpeakString(sSpeakSuccess)));
+			 
+			 if(oWPSuccessFurther != OBJECT_INVALID) {
+				DelayCommand(fStage *2, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessFurther))));
+		 	 	}
+				
 			 }
 			 
-	 	 else if(nPCTotal >= nSkillDC-5) 
-		 	{ if(oWPSuccessNear != OBJECT_INVALID) {
-				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessNear))));
-		 	 	fStage = fStage;
-				}
-			  if(oWPSuccessFurther != OBJECT_INVALID) {
-				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessFurther))));
-		 	 	}
-			}
-			
-		 else if(nPCTotal >= nSkillDC-10) 
-		 	{ if(oWPSuccessNear != OBJECT_INVALID) {
-				DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessNear))));
-		 	 	}
-			}
-			
-		else {
+	 	else {
 			 SendMessageToPC(oPC, sMessageFail);
-			 DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFailNear))));
-		 	 fStage = fStage;
-			 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
+			 DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFail))));
+		 	 if(GetIsSkillSuccessful(oPC, SKILL_TUMBLE, nSkillDC, TRUE))
 			 	{SendMessageToPC(oPC, "Your ability to tumble keeps your on your feet and saves you from hurting yourself *too* badly.");
 			 	 ApplyEffectToObject(DURATION_TYPE_INSTANT, eTumbleDmg, oPC);
 			     ACR_ApplyNLDDamageToCreature(oPC, d6());
@@ -169,12 +146,10 @@ void main()
 			 	     }
 					 
 				 if((nPCTotal <= 1) && (oWPFailFurther != OBJECT_INVALID)) {
-					DelayCommand(fStage -1.0, SendMessageToPC(oPC, "You hit hard, and bounce."));
-				 	DelayCommand(fStage, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFailFurther))));
-			 	 	DelayCommand(fStage + 1.0, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC));
+					DelayCommand(fStage *2 , SendMessageToPC(oPC, "You hit hard, and bounce."));
+				 	DelayCommand(fStage *2, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFailFurther))));
+			 	 	DelayCommand(fStage *2, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC));
 			     	}		
-		
-			 
 				}
 			 }   
 }
