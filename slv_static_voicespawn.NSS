@@ -321,12 +321,12 @@ void main()
 			 	{iInc = 1;}
 			 else
 			 	{iInc ++;}
-			if(iInc < 12)
+			if(iInc < 23)
 				{SetLocalInt(OBJECT_SELF, "iInc", iInc);
 				 iInc = GetLocalInt(OBJECT_SELF, "iInc");
 				 object oWaypoint = GetWaypointByTag("WP_003_cr_slv_chest_" + IntToString(iInc));
 				 ClearAllActions(TRUE);
-				 if(iInc > 9)
+				 if(((iInc >= 11) && (iInc <= 13)) || ((iInc >= 15) && (iInc <= 17)))
 				 	{ActionJumpToLocation(GetLocation(oWaypoint));} 
 				 else
 				 	{ActionForceMoveToObject(oWaypoint, TRUE, 0.5);}

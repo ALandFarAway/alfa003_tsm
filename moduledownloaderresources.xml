@@ -630,7 +630,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="7D3D0723B4EA751AFB150E487FF74B3C74D2A7A7" downloadHash="972D0EDE894E14F113A9E755DA72E281DD90C85F" name="5f_ext_nether_midrange2.trx" dlsize="4258775" size="23594023" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="417E30C0BCD2EB702145FC7AA2E3DFE84D193708" downloadHash="B2FBD9C22805C506AF8ABC5B40EFED7AE888C285" name="5f_ext_nether_midrange2.trx" dlsize="4509516" size="23661249" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
