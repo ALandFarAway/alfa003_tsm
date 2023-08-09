@@ -60,9 +60,12 @@ void main()
 				
 			effect eRise = EffectVisualEffect(VFX_FNF_SUMMON_EPIC_UNDEAD, FALSE);
 			ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eRise, oMyCorpse, 5.0);
-			DelayCommand(1.0, SetCreatureAppearanceType(oMyCreature,nAppearance));
+			float fDelay = GetLocalFloat(OBJECT_SELF, "ACR_SPAWN_DELAY");
+			if(fDelay < 1.0) {fDelay = 1.0;}
+			
+			DelayCommand(fDelay, SetCreatureAppearanceType(oMyCreature,nAppearance));
 			string sMessage = GetLocalString(OBJECT_SELF, "ACR_SPAWN_MESSAGE");
-			DelayCommand(1.5, AssignCommand(oMyCreature, ActionSpeakString(sMessage, TALKVOLUME_TALK)));
+			DelayCommand(fDelay + 1.5, AssignCommand(oMyCreature, ActionSpeakString(sMessage, TALKVOLUME_TALK)));
 			effect eEffect = GetFirstEffect(oMyCreature);
 			while(GetIsEffectValid(eEffect)) {
 				RemoveEffect(oMyCreature, eEffect);
@@ -72,7 +75,7 @@ void main()
 				DestroyObject(oMyCorpse, 2.0);
 				}
 			
-		   	DelayCommand(6.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
+		   	DelayCommand(fDelay + 2.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
 			}
 		}
 	}
