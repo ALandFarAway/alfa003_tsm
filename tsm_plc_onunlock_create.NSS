@@ -23,6 +23,8 @@ void main()
 			{nCreateType = OBJECT_TYPE_PLACEABLE;}
 		if(sCreateType == "Item")
 			{nCreateType = OBJECT_TYPE_ITEM;}
+		if(sCreateType == "Door")
+			{nCreateType = OBJECT_TYPE_DOOR;}
 		string sCreate = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE");
 		string sCreateLocation = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING");
 		object oCreateLocation = GetWaypointByTag(sCreateLocation);
@@ -81,5 +83,15 @@ void main()
 		
 		if(nDestroy == 1)
 			{DestroyObject(OBJECT_SELF, fDestroyDelay);}
+			
+		if(GetTag(OBJECT_SELF) == "5f_plc_mdr2_cave_in") {
+			DestroyObject(GetObjectByTag("mdr2_cliff_wall", 0), 1.0, FALSE);
+			DestroyObject(GetObjectByTag("mdr2_cliff_wall2", 0), 2.0, FALSE);
+			DestroyObject(GetObjectByTag("mdr2_cliff_wall3", 0), 3.0, FALSE);
+			DestroyObject(GetObjectByTag("mdr2_cliff_wall4", 0), 4.0, FALSE);
+			DestroyObject(GetObjectByTag("mdr2_cliff_wall5", 0), 5.0, FALSE);
+			DestroyObject(GetObjectByTag("mdr2_cliff_wall6", 0), 6.0, FALSE);
+			
+		}
 	}			
 }
