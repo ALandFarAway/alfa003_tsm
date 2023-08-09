@@ -123,7 +123,7 @@ void main()
 		 	 DelayCommand(fStage, SendMessageToPC(oPC, sMessageSuccess));
 			 DelayCommand(fStage, AssignCommand(oPC, ActionSpeakString(sSpeakSuccess)));
 			 
-			 if(oWPSuccessFurther != OBJECT_INVALID) {
+			 if((oWPSuccessFurther != OBJECT_INVALID) && (sWPSuccessFurther != "")) {
 				DelayCommand(fStage *2, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPSuccessFurther))));
 		 	 	}
 				
@@ -145,7 +145,7 @@ void main()
 					 SendMessageToPC(oPC, "You are knocked flat!");
 			 	     }
 					 
-				 if((nPCTotal <= 1) && (oWPFailFurther != OBJECT_INVALID)) {
+				 if((nPCTotal <= 1) && (oWPFailFurther != OBJECT_INVALID)  && (sWPFailFurther != "")) {
 					DelayCommand(fStage *2 , SendMessageToPC(oPC, "You hit hard, and bounce."));
 				 	DelayCommand(fStage *2, AssignCommand(oPC, ActionJumpToLocation(GetLocation(oWPFailFurther))));
 			 	 	DelayCommand(fStage *2, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oPC));
