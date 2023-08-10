@@ -23,8 +23,6 @@ void main()
 			{nCreateType = OBJECT_TYPE_PLACEABLE;}
 		if(sCreateType == "Item")
 			{nCreateType = OBJECT_TYPE_ITEM;}
-		if(sCreateType == "Door")
-			{nCreateType = OBJECT_TYPE_DOOR;}
 		string sCreate = GetLocalString(OBJECT_SELF, "RESREF_TO_CREATE");
 		string sCreateLocation = GetLocalString(OBJECT_SELF, "LOCATION_WP_STRING");
 		object oCreateLocation = GetWaypointByTag(sCreateLocation);
