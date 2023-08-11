@@ -37,7 +37,7 @@ void main() {
 	
 	ApplyEffectToObject(DURATION_TYPE_PERMANENT, eCutScene,OBJECT_SELF);
     ApplyEffectToObject(DURATION_TYPE_PERMANENT, eFreeze,OBJECT_SELF);
-    SetListenPattern(OBJECT_SELF, "**Deckon Thar**", 4000);
+    SetListenPattern(OBJECT_SELF, "**Tozguk Nrhah**", 4000);
     SetListening(OBJECT_SELF, TRUE);
          
 		 		
