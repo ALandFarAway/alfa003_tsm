@@ -75,7 +75,11 @@ void main()
 				DestroyObject(oMyCorpse, 2.0);
 				}
 			
-		   	DelayCommand(fDelay + 2.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
+			int nRace = GetRacialType(oMyCreature);
+			int nSubRace = GetSubRace(oMyCreature);
+			if((nRace == RACIAL_TYPE_UNDEAD) || (nSubRace = RACIAL_SUBTYPE_UNDEAD)) {
+		   		DelayCommand(fDelay + 2.0, AssignCommand(oMyCreature, ActionAttack(GetNearestCreature(CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC, OBJECT_SELF, 1), FALSE)));
+				}
 			}
 		}
 	}

@@ -49,7 +49,7 @@ void main()
 	 
 				SendMessageToAllDMs("plc ontouched create " + sCreate);
 				ActionSpeakString(sBroadcast, TALKVOLUME_TALK);
-			
+				SetUseableFlag(OBJECT_SELF, FALSE);
 				
 					object oCreate = CreateObject(nCreateType, sCreate, lCreateLocation, FALSE);
 					object oCreateTwo = CreateObject(OBJECT_TYPE_PLACEABLE, sCreateTwo, lCreateLocationTwo, FALSE);

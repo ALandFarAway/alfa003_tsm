@@ -51,10 +51,13 @@ void main() {
 	if(GetTag(OBJECT_SELF) == "003_plc_rune_warrior") {
 		object oDivine = GetObjectByTag("003_plc_rune_divine", 0);
 		object oDoor = GetObjectByTag("5f_ext_mdr_cave_in", 0);
-		object oWP = GetWaypointByTag("WP_mdr2_cliff_door");
+		object oWP = GetWaypointByTag("WP_mdr2_cliff_wall");
 
 		CreateObject(OBJECT_TYPE_PLACEABLE, "5f_plc_khan_in_war", GetLocation(oWP));
-
+		SetLocked(oDoor, FALSE);
+		DestroyObject(oDivine, 2.0);
+		DestroyObject(OBJECT_SELF, 3.0);
+		
 	}
 	
     // Custom code goes here.
