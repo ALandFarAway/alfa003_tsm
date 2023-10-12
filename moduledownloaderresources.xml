@@ -735,7 +735,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="F76CAC93BEA5117C038056D21887B935FC8ED08F" downloadHash="6E3056BA102EE0A449CE4397F756C505B509C5A5" name="6d_ext_silverymoon_surround.trx" dlsize="9958326" size="29986680" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C00DF10F63C7C62684C13D083C373DBC623427B6" downloadHash="87998D6F990254BBFEFAACA80591D9427855F759" name="6d_ext_silverymoon_surround.trx" dlsize="10013878" size="30031570" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1958,6 +1958,11 @@
     <server-ref>
       <string>1</string>
       <string>3</string>
+    </server-ref>
+  </resource>
+  <resource type="DirectoryEntry" hash="F5B7CCADDEBD420CC25D4377F9B023100D9BB500" downloadHash="90D299777B1BB2808AB36A01C4CCED15BEFF154C" name="6d_int_silverymoon_surround.trx" dlsize="128200" size="128417" critical="false" exclude="false" urlOverride="">
+    <server-ref>
+      <string>0</string>
     </server-ref>
   </resource>
 </content>
