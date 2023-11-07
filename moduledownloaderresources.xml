@@ -545,7 +545,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="16FD7BA535A4891A38DBA3FA4154390EF1ED7FEE" downloadHash="D2AE7C87BE3717DD625D83133D2293FBB12A4DEF" name="6e_ext_khelb_silvypass_west.trx" dlsize="4185299" size="16649946" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4DA6748ACB516D9376AE70DEF068A2BBCB98C22A" downloadHash="DA27B09640EA5BB8D3AD26E8B2876DE979008757" name="6e_ext_khelb_silvypass_west.trx" dlsize="4617620" size="18832551" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1355,7 +1355,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="706484F9F4124396071E697F2FE546D2B430D20D" downloadHash="D41600EF9A956B13E70760C850DDD162CEA37732" name="003_startarea.trx" dlsize="28144" size="28411" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="487D1029154A015B1D43247DA8C3C6C79398F126" downloadHash="06B14D4F075E385774C3D14FB11E0A57F923D8C8" name="003_startarea.trx" dlsize="32591" size="32869" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
