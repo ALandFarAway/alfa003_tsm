@@ -750,7 +750,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4C7A6CEF8192ECB92ADA45E82F1FE1E2EE07542F" downloadHash="9C8C388472D0E1B5C8FEE702507CC8CE522CF7ED" name="5h_int_sundabar_shops.trx" dlsize="537421" size="545499" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5F93EEF5CF237453F16BE4DF53D315390F5884E5" downloadHash="5F6E00EBC19189C9A897C6761256D0F6D3423EAA" name="5h_int_sundabar_shops.trx" dlsize="545516" size="553644" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1005,7 +1005,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="1B40788C4751861D5E7CB299B1BB0F823412FE66" downloadHash="E378682781EB45360850870E112A67AA13E73512" name="8e_ext_highforest_olostins_hold.trx" dlsize="4901574" size="24749506" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="4924BC272BD5FC75477E230EC15F8A75260CBD45" downloadHash="C0501F34D83ECF55DB59920847AD440937E5B8D6" name="8e_ext_highforest_olostins_hold.trx" dlsize="4913454" size="24753564" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1150,7 +1150,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="73AC6BF0D145483A37A70850702D85985F923F9B" downloadHash="C1B4F5F04E17489BF1D4F5960BD850B13372F9AB" name="6c_int_hh_interiors.trx" dlsize="140915" size="142038" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="DCD537D5F285218D1942AEB0048B3F659D638078" downloadHash="06732A8D9B486315C6D6808980B1ECFF75657AC4" name="6c_int_hh_interiors.trx" dlsize="142529" size="143540" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1540,7 +1540,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="C141BE6E917527BDD56BFA7D0FC01F02647553C5" downloadHash="0ACE7A383F058543F85E68850ECACA267D9BD719" name="6b_ext_rivmoot.trx" dlsize="4381301" size="21623216" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="01050D65EC34F570D135FDA58D784EDDE961EC2D" downloadHash="0C6F1E96B5613E5DF1A8F34C4EC65ABBEF1FA567" name="6b_ext_rivmoot.trx" dlsize="4397100" size="21645264" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
