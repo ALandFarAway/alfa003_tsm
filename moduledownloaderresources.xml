@@ -545,7 +545,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4DA6748ACB516D9376AE70DEF068A2BBCB98C22A" downloadHash="DA27B09640EA5BB8D3AD26E8B2876DE979008757" name="6e_ext_khelb_silvypass_west.trx" dlsize="4617620" size="18832551" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="C2BE66055367BA70621B51C1EF2438BDCEC2230E" downloadHash="D2FF58B42087C74E5B5D851C2BC23765499351FB" name="6e_ext_khelb_silvypass_west.trx" dlsize="4604864" size="18822151" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
