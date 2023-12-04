@@ -1005,7 +1005,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="4924BC272BD5FC75477E230EC15F8A75260CBD45" downloadHash="C0501F34D83ECF55DB59920847AD440937E5B8D6" name="8e_ext_highforest_olostins_hold.trx" dlsize="4913454" size="24753564" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="D9E892F0C58820F10AC3C4FC671226D8F7927A50" downloadHash="48BCDD313533CA7D737758C110CF36C9EFE19062" name="8e_ext_highforest_olostins_hold.trx" dlsize="4867652" size="24684049" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
