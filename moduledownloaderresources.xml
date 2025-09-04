@@ -1170,7 +1170,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="8C4710B7137D3654B497DB013AF91E85B770C6CB" downloadHash="5A759813CD5D8A306F7EDEFBCF83A826541E63B9" name="stone interior.trx" dlsize="249510" size="253945" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="5B5907094156D10126B3818C0C00CFDB087BE5DF" downloadHash="C355B1F3B67BBD4D06E4C17254C5E3FAB5D248DE" name="stone interior.trx" dlsize="257526" size="261961" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
