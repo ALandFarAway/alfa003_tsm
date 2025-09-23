@@ -1,5 +1,6 @@
-set HOMEDIR="%userprofile%\Documents\Neverwinter Nights 2"
-set NWN2DIR="C:\Program Files (x86)\GOG Galaxy\Games\NWN2 Complete"
+set HOMEDIR="%userprofile%\Documents\Neverwinter Nights 2" 
+
+set NWN2DIR="C:\Program Files (x86)\Atari\Neverwinter Nights 2"
 
 call set PARENT_DIR=%CD%
 set PARENT_DIR=%PARENT_DIR:\= %

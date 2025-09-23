@@ -1355,7 +1355,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="487D1029154A015B1D43247DA8C3C6C79398F126" downloadHash="06B14D4F075E385774C3D14FB11E0A57F923D8C8" name="003_startarea.trx" dlsize="32591" size="32869" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="3B78D6BD59BF29417BDDBB5A8D5B2EF2B82DC42E" downloadHash="133832B7BC5D6104A668EA513B05070AE85AA576" name="003_startarea.trx" dlsize="29169" size="29448" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
