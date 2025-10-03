@@ -1,0 +1,11 @@
+; ServerDescription
+
+Welcome to A Land Far Away (ALFA), a Persistant World Project set in the Forgotten Realms
+www.alandfaraway.info
+
+You are Preparing to log into:
+ALFA 003- The Silver Marches
+Head Dungeon Master - Wynna
+Assistant Dungeon Master - Arianna
+ACR Version 1.92
+ALFA's Silver Marches server ("TSM") includes the city of Silverymoon, the dwarven stronghold of Citadel Felbarr, the City of Sundabar, and a number of towns and villages along the Rauvin River and the surrounding lands
