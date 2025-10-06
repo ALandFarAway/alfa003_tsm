@@ -430,7 +430,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="53FB4DAD00C43FF1DECD558A4CA7F447AD9790F6" downloadHash="C10C2E826B91672186A6F051FE1A6686AF888BE9" name="5g_int_auvandell_silverlode1.trx" dlsize="76002" size="76146" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="B2EBFA4574E776E4A74113851F9B480E06405C56" downloadHash="41E257CC3E36F9CA249120726F78D0D26DA03CE8" name="5g_int_auvandell_silverlode1.trx" dlsize="79656" size="79830" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -650,7 +650,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="EDA776C2BEF8494C4A6ACFDBD706EF2122A2719C" downloadHash="E44E23F53ACAF054B5A776764F5A61E3BA5CC189" name="5g_int_auvandell_silverlode2.trx" dlsize="81304" size="81916" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="F371F519A790CC9B064AC03ED3989F28537CA47B" downloadHash="FBC51DE30F500E9195A6B691190D4C75876B476E" name="5g_int_auvandell_silverlode2.trx" dlsize="81350" size="81940" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
@@ -1085,7 +1085,7 @@
       <string>0</string>
     </server-ref>
   </resource>
-  <resource type="DirectoryEntry" hash="37424CCE68CD239B3AFAA6D0AB5FED14F09EBDDF" downloadHash="5B7B02B811C25F81FFD4CFEFA51B5E90C82DCB6D" name="5g_ext_silvypass_east_auv_tm.trx" dlsize="2790225" size="12400826" critical="false" exclude="false" urlOverride="">
+  <resource type="DirectoryEntry" hash="516578A047A89B2E3DAB5FF99DD568E4FFE8A7D1" downloadHash="D25931FF08813DA60F4CCD4DF3CE1C998CEF1D7C" name="5g_ext_silvypass_east_auv_tm.trx" dlsize="2797793" size="12411696" critical="false" exclude="false" urlOverride="">
     <server-ref>
       <string>0</string>
     </server-ref>
