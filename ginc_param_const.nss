@@ -226,7 +226,7 @@ int GetSkillConstant(int nSkill)
 	//	case 42:     // PERFORM STRINGED INSTRUMENTS
     //        nSkillVal = SKILL_"Perform(string instruments)";
     //        break;	
-		case 43:     // PERFORM SING
+		case 42:     // PERFORM SING
             nSkillVal = SKILL_PERFORM(sing);
             break;
 	//	case 44:     // PERFORM PERCUSSION
@@ -241,31 +241,31 @@ int GetSkillConstant(int nSkill)
 	//	case 47:     // PERFORM COMEDY
      //       nSkillVal = SKILL_"PERFORM(comedy)";
    //         break;
-		case 48:     // PROFESSION
+		case 43:     // PROFESSION
             nSkillVal = SKILL_PROFESSION;
             break;
-		case 49:     // SENSE MOTIVE
+		case 44:     // SENSE MOTIVE
             nSkillVal = SKILL_SENSEMOTIVE;
             break;
-		case 50:     // SPEAK LANGUAGE
+		case 45:     // SPEAK LANGUAGE
             nSkillVal = SKILL_SPEAKLANGUAGE;
             break;
-		case 51:     // SWIM
+		case 46:     // SWIM
             nSkillVal = SKILL_SWIM;
             break;
-		case 52:     // USE ROPE
+		case 47:     // USE ROPE
             nSkillVal = SKILL_USEROPE;
             break;
-		case 53:     // KNOWLEDGE GEOGRAPHY
+		case 48:     // KNOWLEDGE GEOGRAPHY
             nSkillVal = SKILL_KNOWLEDGE(geography);
             break;
-		case 54:     // KNOWLEDGE NOBILITY
+		case 49:     // KNOWLEDGE NOBILITY
             nSkillVal = SKILL_KNOWLEDGE(nobility);
             break;
-		case 55:     // KNOWLEDGE ENGINEERING
+		case 50:     // KNOWLEDGE ENGINEERING
             nSkillVal = SKILL_KNOWLEDGE(engineering);
             break;
-		case 56:     // KNOWLEDGE LOCAL
+		case 51:     // KNOWLEDGE LOCAL
             nSkillVal = SKILL_KNOWLEDGE(loca);
             break;
 	}  
