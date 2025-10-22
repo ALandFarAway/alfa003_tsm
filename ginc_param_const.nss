@@ -185,16 +185,16 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_KNOWLEDGE(dungeoneering);
             break;
 	    case 29:     // ESCAPE ARTIST
-            nSkillVal = SKILL_USE_ESCAPEARTIST;
+            nSkillVal = SKILL_USE_ESCAPE_ARTIST;
             break;
 		case 30:     // FORGERY
             nSkillVal = SKILL_FORGERY;
             break;
 	    case 31:     // GATHER INFORMATION
-            nSkillVal = SKILL_GATHERINFORMATION;
+            nSkillVal = SKILL_GATHER_INFORMATION;
             break;	
 	    case 32:     // HANDLE ANIMAL
-            nSkillVal = SKILL_HANDLEANIMAL;
+            nSkillVal = SKILL_HANDLE_ANIMAL;
             break;
 	    case 33:     // JUMP
             nSkillVal = SKILL_JUMP;
@@ -245,10 +245,10 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_PROFESSION;
             break;
 		case 44:     // SENSE MOTIVE
-            nSkillVal = SKILL_SENSEMOTIVE;
+            nSkillVal = SKILL_SENSE_MOTIVE;
             break;
 		case 45:     // SPEAK LANGUAGE
-            nSkillVal = SKILL_SPEAKLANGUAGE;
+            nSkillVal = SKILL_SPEAK_LANGUAGE;
             break;
 		case 46:     // SWIM
             nSkillVal = SKILL_SWIM;
