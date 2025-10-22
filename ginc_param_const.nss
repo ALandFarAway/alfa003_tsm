@@ -27,6 +27,7 @@
 #include "ginc_debug"
 #include "nw_i0_plot"
 #include "X0_I0_STRINGLIB"
+#include "acr_skills_i"
 
 ///////////////////////////////////////////////////////////
 // Constants & Structs
@@ -223,10 +224,10 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_PERFORM(oratory);
             break;
 		case 42:     // PERFORM STRINGED INSTRUMENTS
-            nSkillVal = SKILL_"PERFORM(string instruments)";
+            nSkillVal = SKILL_"Perform(string instruments)";
             break;	
 		case 43:     // PERFORM SING
-            nSkillVal = SKILL_PERFORM(ACT);
+            nSkillVal = SKILL_PERFORM(sing);
             break;
 		case 44:     // PERFORM PERCUSSION
             nSkillVal = SKILL_"PERFORM(percussion)";
