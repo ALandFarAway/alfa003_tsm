@@ -233,7 +233,7 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_PERFORM_PERCUSSION;
             break;	
 		case 45:     // PERFORM KEYBOARDS
-            nSkillVal = SKILL_PERFORM_KEYBOARDS;
+            nSkillVal = SKILL_PERFORM_KEY_BOARDS;
             break;
 		case 46:     // PERFORM WIND INSTRUMENTS
             nSkillVal = SKILL_PERFORM_WIND_INSTRUMENTS;
