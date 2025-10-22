@@ -232,40 +232,40 @@ int GetSkillConstant(int nSkill)
 		case 44:     // PERFORM PERCUSSION
             nSkillVal = SKILL_PERFORM_PERCUSSION;
             break;	
-		case 45:     // PERFORM KEYBOARDS
-            nSkillVal = SKILL_PERFORM_keyboards;
-            break;
-		case 46:     // PERFORM WIND INSTRUMENTS
+		//case 45:     // PERFORM KEYBOARDS
+        //    nSkillVal = SKILL_PERFORM_keyboards;
+       //     break;
+		case 45:     // PERFORM WIND INSTRUMENTS
             nSkillVal = SKILL_PERFORM_WIND_INSTRUMENTS;
             break;
-		case 47:     // PERFORM COMEDY
+		case 446:     // PERFORM COMEDY
             nSkillVal = SKILL_PERFORM_COMEDY;
             break;
-		case 48:     // PROFESSION
+		case 47:     // PROFESSION
             nSkillVal = SKILL_PROFESSION;
             break;
-		case 49:     // SENSE MOTIVE
+		case 48:     // SENSE MOTIVE
             nSkillVal = SKILL_SENSE_MOTIVE;
             break;
-		case 50:     // SPEAK LANGUAGE
+		case 49:     // SPEAK LANGUAGE
             nSkillVal = SKILL_SPEAK_LANGUAGE;
             break;
-		case 51:     // SWIM
+		case 50:     // SWIM
             nSkillVal = SKILL_SWIM;
             break;
-		case 52:     // USE ROPE
+		case 51:     // USE ROPE
             nSkillVal = SKILL_USE_ROPE;
             break;
-		case 53:     // KNOWLEDGE GEOGRAPHY
+		case 52:     // KNOWLEDGE GEOGRAPHY
             nSkillVal = SKILL_KNOWLEDGE_GEOGRAPHY;
             break;
-		case 54:     // KNOWLEDGE NOBILITY
+		case 53:     // KNOWLEDGE NOBILITY
             nSkillVal = SKILL_KNOWLEDGE_NOBILITY;
             break;
-		case 55:     // KNOWLEDGE ENGINEERING
+		case 54:     // KNOWLEDGE ENGINEERING
             nSkillVal = SKILL_KNOWLEDGE_ENGINEERING;
             break;
-		case 56:     // KNOWLEDGE LOCAL
+		case 55:     // KNOWLEDGE LOCAL
             nSkillVal = SKILL_KNOWLEDGE_LOCAL;
             break;
 	}  
