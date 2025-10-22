@@ -107,13 +107,13 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_CONCENTRATION;
             break;
         case 3:     // CRAFT ALCHEMY
-            nSkillVal = SKILL_CRAFT(Alchemy);
+            nSkillVal = SKILL_CRAFT_Alchemy;
             break;
         case 4:     // CRAFT ARMORSMITHING
-            nSkillVal = SKILL_CRAFT(Armorsmithing);
+            nSkillVal = SKILL_CRAFT_Armorsmithing;
             break;
         case 5:     // CRAFT WEAPONSMITHING
-            nSkillVal = SKILL_CRAFT(Weaponsmithing);
+            nSkillVal = SKILL_CRAFT_Weaponsmithing;
             break;
         case 6:     // DIPLOMACY
             nSkillVal = SKILL_DIPLOMACY;
@@ -266,7 +266,7 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_KNOWLEDGE(engineering);
             break;
 		case 51:     // KNOWLEDGE LOCAL
-            nSkillVal = SKILL_KNOWLEDGE(loca);
+            nSkillVal = SKILL_KNOWLEDGE(local);
             break;
 	}  
 
