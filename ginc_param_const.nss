@@ -113,7 +113,7 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_CRAFT_ARMORSMITHING;
             break;
         case 5:     // CRAFT WEAPONSMITHING
-            nSkillVal = SKILL_CRAFT_Weaponsmithing;
+            nSkillVal = SKILL_CRAFT_WEAPONSMITHING;
             break;
         case 6:     // DIPLOMACY
             nSkillVal = SKILL_DIPLOMACY;
@@ -181,11 +181,11 @@ int GetSkillConstant(int nSkill)
         case 27:     // USE MAGIC DEVICE
             nSkillVal = SKILL_USE_MAGIC_DEVICE;
             break;
-	    case 28:     // KNOWLEDGE(DUNGEONEERING)
-            nSkillVal = SKILL_KNOWLEDGE(dungeoneering);
+	    case 28:     // KNOWLEDGE DUNGEONEERING)
+            nSkillVal = SKILL_KNOWLEDGE_DUNGEONEERING;
             break;
 	    case 29:     // ESCAPE ARTIST
-            nSkillVal = SKILL_USE_ESCAPE_ARTIST;
+            nSkillVal = SKILL_ESCAPE_ARTIST;
             break;
 		case 30:     // FORGERY
             nSkillVal = SKILL_FORGERY;
@@ -200,73 +200,73 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_JUMP;
             break;
 	    case 34:     // KNOWLEDGE ARCANA
-            nSkillVal = SKILL_KNOWLEDGE(arcana);
+            nSkillVal = SKILL_KNOWLEDGE_ARCANA;
             break;
 	    case 35:     // KNOWLEDGE HISTORY
-            nSkillVal = SKILL_KNOWLEDGE(history);
+            nSkillVal = SKILL_KNOWLEDGE_HISTORY;
             break;
 		case 36:     // KNOWLEDGE NATURE
-            nSkillVal = SKILL_KNOWLEDGE(nature);
+            nSkillVal = SKILL_KNOWLEDGE_NATURE;
             break;
 		case 37:     // KNOWLEDGE RELIGION
-            nSkillVal = SKILL_KNOWLEDGE(religion);
+            nSkillVal = SKILL_KNOWLEDGE_RELIGION;
             break;
 	    case 38:     // KNOWLEDGE THE PLANES
-            nSkillVal = SKILL_KNOWLEDGE(theplanes);
+            nSkillVal = SKILL_KNOWLEDGE_THE_PLANES;
             break;
 		case 39:     // PERFORM ACTING
-            nSkillVal = SKILL_PERFORM(act);
+            nSkillVal = SKILL_PERFORM_ACT;
             break;
 	   	case 40:     // PERFORM DANCE
-            nSkillVal = SKILL_PERFORM(dance);
+            nSkillVal = SKILL_PERFORM_DANCE;
             break;
 		case 41:     // PERFORM ORATORY
-            nSkillVal = SKILL_PERFORM(oratory);
+            nSkillVal = SKILL_PERFORM_ORATORY;
             break;
-	//	case 42:     // PERFORM STRINGED INSTRUMENTS
-    //        nSkillVal = SKILL_"Perform(string instruments)";
-    //        break;	
-		case 42:     // PERFORM SING
-            nSkillVal = SKILL_PERFORM(sing);
+		case 42:     // PERFORM STRINGED INSTRUMENTS
+           nSkillVal = SKILL_PERFORM_STRINGED_INSTRUMENTS;
+           break;	
+		case 43:     // PERFORM SING
+            nSkillVal = SKILL_PERFORM_SING;
             break;
-	//	case 44:     // PERFORM PERCUSSION
-     //       nSkillVal = SKILL_"PERFORM(percussion)";
-    //        break;	
-	//	case 45:     // PERFORM KEYBOARDS
-    //        nSkillVal = SKILL_"PERFORM(keyboards)";
-    //        break;
-	//	case 46:     // PERFORM WIND INSTRUMENTS
-   //         nSkillVal = SKILL_"PERFORM(wind instruments)";
-   //         break;
-	//	case 47:     // PERFORM COMEDY
-     //       nSkillVal = SKILL_"PERFORM(comedy)";
-   //         break;
-		case 43:     // PROFESSION
+		case 44:     // PERFORM PERCUSSION
+            nSkillVal = SKILL_PERFORM_PERCUSSION;
+           break;	
+		case 45:     // PERFORM KEYBOARDS
+            nSkillVal = SKILL_PERFORM_KEYBOARDS;
+         break;
+		case 46:     // PERFORM WIND INSTRUMENTS
+            nSkillVal = SKILL_PERFORM_WIND_INSTRUMENTS;
+            break;
+		case 47:     // PERFORM COMEDY
+            nSkillVal = SKILL_PERFORM_COMEDY;
+            break;
+		case 48:     // PROFESSION
             nSkillVal = SKILL_PROFESSION;
             break;
-		case 44:     // SENSE MOTIVE
+		case 49:     // SENSE MOTIVE
             nSkillVal = SKILL_SENSE_MOTIVE;
             break;
-		case 45:     // SPEAK LANGUAGE
+		case 50:     // SPEAK LANGUAGE
             nSkillVal = SKILL_SPEAK_LANGUAGE;
             break;
-		case 46:     // SWIM
+		case 51:     // SWIM
             nSkillVal = SKILL_SWIM;
             break;
-		case 47:     // USE ROPE
+		case 52:     // USE ROPE
             nSkillVal = SKILL_USE_ROPE;
             break;
-		case 48:     // KNOWLEDGE GEOGRAPHY
-            nSkillVal = SKILL_KNOWLEDGE(geography);
+		case 53:     // KNOWLEDGE GEOGRAPHY
+            nSkillVal = SKILL_KNOWLEDGE_GEOGRAPHY;
             break;
-		case 49:     // KNOWLEDGE NOBILITY
-            nSkillVal = SKILL_KNOWLEDGE(nobility);
+		case 54:     // KNOWLEDGE NOBILITY
+            nSkillVal = SKILL_KNOWLEDGE_NOBILITY;
             break;
-		case 50:     // KNOWLEDGE ENGINEERING
-            nSkillVal = SKILL_KNOWLEDGE(engineering);
+		case 55:     // KNOWLEDGE ENGINEERING
+            nSkillVal = SKILL_KNOWLEDGE_ENGINEERING;
             break;
-		case 51:     // KNOWLEDGE LOCAL
-            nSkillVal = SKILL_KNOWLEDGE(local);
+		case 56:     // KNOWLEDGE LOCAL
+            nSkillVal = SKILL_KNOWLEDGE_LOCAL;
             break;
 	}  
 
