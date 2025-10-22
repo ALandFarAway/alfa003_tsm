@@ -224,17 +224,17 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_PERFORM_ORATORY;
             break;
 		case 42:     // PERFORM STRINGED INSTRUMENTS
-           nSkillVal = SKILL_PERFORM_STRINGED_INSTRUMENTS;
+           nSkillVal = SKILL_PERFORM_STRING_INSTRUMENTS;
            break;	
 		case 43:     // PERFORM SING
             nSkillVal = SKILL_PERFORM_SING;
             break;
 		case 44:     // PERFORM PERCUSSION
             nSkillVal = SKILL_PERFORM_PERCUSSION;
-           break;	
+            break;	
 		case 45:     // PERFORM KEYBOARDS
             nSkillVal = SKILL_PERFORM_KEYBOARDS;
-         break;
+            break;
 		case 46:     // PERFORM WIND INSTRUMENTS
             nSkillVal = SKILL_PERFORM_WIND_INSTRUMENTS;
             break;
