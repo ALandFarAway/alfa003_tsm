@@ -223,25 +223,25 @@ int GetSkillConstant(int nSkill)
             nSkillVal = SKILL_PERFORM(oratory);
             break;
 		case 42:     // PERFORM STRINGED INSTRUMENTS
-            nSkillVal = SKILL_PERFORM(string instruments);
+            nSkillVal = SKILL_"PERFORM(string instruments)";
             break;	
 		case 43:     // PERFORM SING
             nSkillVal = SKILL_PERFORM(ACT);
             break;
 		case 44:     // PERFORM PERCUSSION
-            nSkillVal = SKILL_PERFORM(percussion);
+            nSkillVal = SKILL_"PERFORM(percussion)";
             break;	
 		case 45:     // PERFORM KEYBOARDS
-            nSkillVal = SKILL_PERFORM(keyboards);
+            nSkillVal = SKILL_"PERFORM(keyboards)";
             break;
 		case 46:     // PERFORM WIND INSTRUMENTS
-            nSkillVal = SKILL_PERFORM(wind instruments);
+            nSkillVal = SKILL_"PERFORM(wind instruments)";
             break;
 		case 47:     // PERFORM COMEDY
-            nSkillVal = SKILL_PERFORM(comedy);
+            nSkillVal = SKILL_"PERFORM(comedy)";
             break;
 		case 48:     // PROFESSION
-            nSkillVal = SKILL_PERFORM(ACT);
+            nSkillVal = SKILL_PROFESSION;
             break;
 		case 49:     // SENSE MOTIVE
             nSkillVal = SKILL_SENSEMOTIVE;

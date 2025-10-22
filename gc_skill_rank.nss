@@ -1,3 +1,4 @@
+//USE THIS ONE FOR ALFA 
 // gc_skill_rank(int nSkill, int nRank)
 /*
 	Determine if PC Speaker has sufficient rank in a particular skill.
