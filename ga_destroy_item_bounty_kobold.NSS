@@ -37,9 +37,9 @@ void main( string sItemTag ) {
 	object oPC = GetPCSpeaker();
 
 	// Total GP rewarded.
-	int nGP = 0;
+	int nGP = 1;
 
-	//Kobold Tongue: 0gp, 5xp, CR 1
+	//Kobold Tongue: 1gp, 5xp, CR 1
 	nGP += ConsumeReward( oPC, "003_it_harvest_kobold_tongue", 0, 5.0f, 1.0f );
 
 
